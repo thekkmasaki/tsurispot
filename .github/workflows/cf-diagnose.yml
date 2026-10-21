@@ -46,7 +46,9 @@ jobs:
           set -e
           echo "::add-mask::$CF_ZONE_ID"
           Z="https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}"
-          U="https://tsurispot.com/catchable-now"
+          # 追試（2回目）: /fish で URL purge → 45秒待機 → それでも HIT なら prefix purge。
+          # 1回目(/catchable-now)は URL purge 直後8秒×2回 HIT → prefix purge 直後 MISS だったが、伝播遅延の可能性を潰す。
+          U="https://tsurispot.com/fish"
           probe() { # $1=label $2...=curl args
             local label="$1"; shift
             curl -s -o /dev/null -D - "$@" "$U" | tr -d '\r' | awk -v L="$label" 'BEGIN{s="";a="";n="";r=""} tolower($1)=="cf-cache-status:"{s=$2} tolower($1)=="age:"{a=$2} tolower($1)=="x-nextjs-cache:"{n=$2} tolower($1)=="cf-ray:"{r=$2} END{printf "%-14s cf-cache-status=%s age=%s x-nextjs-cache=%s ray=%s\n", L, s, a, n, r}'
@@ -59,16 +61,21 @@ jobs:
           probe "ja-lang" -H "Accept-Language: ja,en;q=0.8" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130"
           echo "== purge by URL (plain) =="
           curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data "{\"files\":[\"$U\"]}" | jq -c '{success, errors}'
-          sleep 8
-          echo "== after plain purge =="
+          sleep 45
+          echo "== after plain purge (45s) =="
           probe "curl-default"; probe "desktop-ua" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130"; probe "mobile-ua" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148 Safari/604.1"
           echo "== purge by URL with device-type headers =="
           curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" \
             --data "{\"files\":[{\"url\":\"$U\",\"headers\":{\"CF-Device-Type\":\"desktop\"}},{\"url\":\"$U\",\"headers\":{\"CF-Device-Type\":\"mobile\"}},{\"url\":\"$U\",\"headers\":{\"CF-Device-Type\":\"tablet\"}},{\"url\":\"$U\",\"headers\":{\"CF-IPCountry\":\"JP\"}},{\"url\":\"$U\",\"headers\":{\"CF-IPCountry\":\"US\"}}]}" | jq -c '{success, errors}'
-          sleep 8
-          echo "== after header purge =="
+          sleep 30
+          echo "== after header purge (30s) =="
           probe "curl-default"; probe "desktop-ua" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130"; probe "mobile-ua" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148 Safari/604.1"
           echo "== purge by prefix (requires Enterprise; expect error on free/pro) =="
-          curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data '{"prefixes":["tsurispot.com/catchable-now"]}' | jq -c '{success, errors:[.errors[]?.message]}'
+          curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data '{"prefixes":["tsurispot.com/fish"]}' | jq -c '{success, errors:[.errors[]?.message]}'
           sleep 8
           probe "after-prefix"
+          echo "== 3rd: /prefecture を URL purge のみで 90秒観測（prefix は打たない） =="
+          P="https://tsurispot.com/prefecture"
+          curl -s -o /dev/null -D - "$P" | tr -d '\r' | grep -i -E "^(cf-cache-status|age):" | tr '\n' ' '; echo
+          curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data "{\"files\":[\"$P\"]}" | jq -c '{success, errors}'
+          for t in 15 30 60 90; do sleep 15; [ "$t" = 60 ] && sleep 15; [ "$t" = 90 ] && sleep 15; printf "t=%ss " "$t"; curl -s -o /dev/null -D - "$P" | tr -d '\r' | grep -i -E "^(cf-cache-status|age):" | tr '\n' ' '; echo; done
