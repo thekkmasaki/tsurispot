@@ -73,7 +73,7 @@ function isRscRequest(req: NextRequest): boolean {
   return req.headers.has("rsc") || req.headers.has("next-router-prefetch");
 }
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // ホスト正規化: www は apex へ 308。
   // www.tsurispot.com は DNS/Cloudflare 経由で同一オリジンに到達し全ページを 200 で
   // ミラー配信していた（canonical で救済されるが、GSC「代替ページ（適切な canonical タグあり）」
