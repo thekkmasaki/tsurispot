@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>シャクリズム / EgiBeat プライバシーポリシー</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1c2733; --muted: #5b6b7a; --bg: #ffffff; --line: #e3e8ee; --accent: #0b6e8a; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e6edf3; --muted: #9fb0c0; --bg: #0f1720; --line: #253241; --accent: #5fc3e0; } }
+  body { margin: 0; padding: 24px 16px 64px; background: var(--bg); color: var(--fg); font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 26px; line-height: 1.3; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 36px 0 8px; padding-top: 16px; border-top: 1px solid var(--line); }
+  h3 { font-size: 16px; margin: 20px 0 4px; }
+  p, li { margin: 6px 0; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .lang { display: inline-block; margin: 16px 0 0; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: var(--muted); }
+  a { color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .en h1, .en h2, .en h3 { letter-spacing: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>シャクリズム プライバシーポリシー</h1>
+  <p class="meta">制定日: 2026 年 10 月 19 日 ／ 提供者: ツリスポ運営者（個人事業。<a href="https://tsurispot.com/legal">特定商取引法に基づく表記</a>）</p>
+  <p>「シャクリズム」（日本以外では「EgiBeat」。以下「本アプリ」）は、iPhone と Apple Watch 向けのエギング用アシストアプリです。本アプリにはアカウント登録がなく、広告や解析のための外部サービスも使っていません。本アプリが扱う情報と、その使い道をここに記します。</p>
+
+  <h2>1. 本アプリが扱う情報</h2>
+  <table>
+    <tr><th>情報</th><th>使い道</th><th>どこで処理するか</th></tr>
+    <tr><td>位置情報（使用中のみ）</td><td>日の出・日の入り（マズメ）の計算、最寄りの潮位観測点の選択、近くの釣り場と釣り場の指数の表示、ヒット位置の記録（設定でオンにした場合）</td><td>端末内。釣り場の指数を取得する時だけ、現在地の緯度経度を当社サーバー（tsurispot.com）に送ります</td></tr>
+    <tr><td>モーション（加速度）データ</td><td>Apple Watch でのキャスト・シャクリの自動検知、歩いて移動したかの判定、検知の調整</td><td>端末内のみ。外部には送りません</td></tr>
+    <tr><td>ヘルスケア（HealthKit）</td><td>Apple Watch で釣行を「フィッシング」のワークアウトとしてヘルスケアに記録し、心拍数を表示する</td><td>端末内のみ。ヘルスケアから読んだデータは端末の外に出しません</td></tr>
+    <tr><td>通知</td><td>シャクリの合図を振動で届ける</td><td>端末内でスケジュールします</td></tr>
+    <tr><td>釣行の記録（開始・終了時刻、合図の回数、ヒットの回数、使ったプリセット）</td><td>履歴と釣果カードの表示</td><td>端末内。iPhone と Apple Watch の間でのみ同期します</td></tr>
+  </table>
+
+  <h2>2. 位置情報の外部送信について</h2>
+  <p>近くの釣り場の「釣り場指数」を表示する時、本アプリは現在地の緯度・経度と対象の釣り場名を当社のサーバー（tsurispot.com）に送信します。この情報は指数の計算にのみ使い、氏名・メールアドレス・端末の識別子など個人を特定する情報と結び付けたり、一緒に保存したりすることはありません。サーバーの運用と安全のためのアクセスログ（IP アドレス、アクセス日時など）は、<a href="https://tsurispot.com/privacy">ツリスポのプライバシーポリシー</a>に従って扱います。</p>
+  <p>潮汐表と釣り場の一覧も当社サーバーから取得しますが、この取得に位置情報は含めません。</p>
+
+  <h2>3. ヘルスケア（HealthKit）データの扱い</h2>
+  <ul>
+    <li>ヘルスケアのデータは、ワークアウトの記録と心拍数の表示にのみ使います。</li>
+    <li>ヘルスケアのデータを広告やマーケティングに使うこと、第三者に提供すること、データブローカーに売却することはありません。</li>
+    <li>ヘルスケアへの記録を望まない場合は、ヘルスケア App の「共有」からいつでも許可を取り消せます。記録済みのワークアウトはヘルスケア App から削除できます。</li>
+  </ul>
+
+  <h2>4. 第三者への提供・外部サービス</h2>
+  <p>法令に基づく場合を除き、取得した情報を第三者に提供することはありません。本アプリは広告 SDK、解析（アナリティクス）SDK、SNS の SDK を組み込んでいません。通信先は当社サーバー（tsurispot.com）だけです。</p>
+
+  <h2>5. 保存期間と削除</h2>
+  <p>釣行の記録と設定は端末内に保存され、本アプリを削除すると消えます。Apple Watch 側の記録も同様です。ヘルスケアに記録したワークアウトはヘルスケア App から削除できます。当社サーバーには個人に紐づく情報を保存しません。</p>
+
+  <h2>6. お子さまの利用</h2>
+  <p>本アプリは 13 歳未満のお子さまを対象としていません。13 歳未満のお子さまから意図して個人情報を取得することはありません。</p>
+
+  <h2>7. 本ポリシーの変更</h2>
+  <p>扱う情報や使い道が変わる場合は、このページを更新し、必要に応じてアプリ内でお知らせします。</p>
+
+  <h2>8. お問い合わせ</h2>
+  <p>本アプリと個人情報の扱いに関するお問い合わせは、次の窓口までお願いします。</p>
+  <p>ツリスポ運営者（個人事業）<br>お問い合わせ: <a href="https://tsurispot.com/contact">ツリスポのお問い合わせフォーム</a><br>サイト: <a href="https://tsurispot.com">https://tsurispot.com</a></p>
+
+  <section class="en">
+    <span class="lang">English</span>
+    <h1 style="margin-top:12px">EgiBeat (シャクリズム) Privacy Policy</h1>
+    <p class="meta">Effective: October 19, 2026 / Provider: the operator of Tsurispot (sole proprietor, Japan)</p>
+    <p>EgiBeat ("the app"; released in Japan as シャクリズム) is an eging (squid jigging) assistant for iPhone and Apple Watch. The app has no accounts and includes no advertising or analytics SDKs. This page describes the data the app handles and why.</p>
+
+    <h2>1. Data the app handles</h2>
+    <ul>
+      <li><strong>Location (while using the app)</strong>: sunrise and sunset times, the nearest tide station, nearby fishing spots and their fishing index, and the position of a catch if you turn that on. Processed on your device. Only when fetching the fishing index, your current latitude and longitude are sent to our server (tsurispot.com).</li>
+      <li><strong>Motion (accelerometer) data</strong>: on Apple Watch, to detect casts and jerks automatically, to detect walking, and to tune detection. Processed on the device only and never sent anywhere.</li>
+      <li><strong>Health (HealthKit)</strong>: on Apple Watch, each fishing trip is recorded as a Fishing workout and your heart rate is shown. Health data never leaves the device.</li>
+      <li><strong>Notifications</strong>: used to deliver jerk cues as vibration. Scheduled on the device.</li>
+      <li><strong>Trip records</strong> (start and end time, cue and hit counts, preset): stored on the device and synced only between your iPhone and Apple Watch.</li>
+    </ul>
+
+    <h2>2. Location sent to our server</h2>
+    <p>To show the fishing index for nearby spots, the app sends your current coordinates and the spot names to our server at tsurispot.com. They are used only to compute the index and are never linked to, or stored together with, your name, email address, device identifiers or any other identifying information. Access logs kept to operate and secure the server (IP address, time of access and the like) are handled under the <a href="https://tsurispot.com/privacy">Tsurispot privacy policy</a>. Tide tables and the spot list are also downloaded from our server, without any location data.</p>
+
+    <h2>3. HealthKit data</h2>
+    <p>Health data is used only to record workouts and display heart rate. We never use HealthKit data for advertising or marketing, never share it with third parties, and never sell it to data brokers. You can revoke access at any time in the Health app, and delete recorded workouts there.</p>
+
+    <h2>4. Third parties</h2>
+    <p>We do not share data with third parties except as required by law. The app contains no advertising, analytics, or social SDKs. The only server it talks to is tsurispot.com.</p>
+
+    <h2>5. Retention and deletion</h2>
+    <p>Trip records and settings live on your devices and are removed when you delete the app. Workouts can be deleted in the Health app. Our server does not keep data tied to an individual.</p>
+
+    <h2>6. Children</h2>
+    <p>The app is not directed at children under 13, and we do not knowingly collect personal information from them.</p>
+
+    <h2>7. Changes and contact</h2>
+    <p>Changes will be posted on this page. Questions: via the <a href="https://tsurispot.com/contact">Tsurispot contact form</a>, <a href="https://tsurispot.com">https://tsurispot.com</a>.</p>
+  </section>
+
+  <section class="en" lang="ko">
+    <span class="lang">한국어</span>
+    <h1 style="margin-top:12px">EgiBeat 개인정보 처리방침</h1>
+    <p class="meta">시행일: 2026년 10월 19일 / 제공자: Tsurispot 운영자(개인 사업자, 일본)</p>
+    <p>EgiBeat(이하 "본 앱")은 iPhone과 Apple Watch용 에깅 보조 앱입니다. 본 앱에는 계정 가입이 없고, 광고나 분석을 위한 외부 서비스도 쓰지 않습니다. 본 앱이 다루는 정보와 그 용도를 여기에 적습니다.</p>
+    <h2>1. 본 앱이 다루는 정보</h2>
+    <ul>
+      <li><strong>위치 정보(앱 사용 중에만)</strong>: 일출·일몰(마즈메) 계산, 가장 가까운 조위 관측점 선택, 주변 낚시터와 출조 지수 표시, 히트 위치 기록(설정에서 켠 경우). 기기 안에서 처리합니다. 낚시터 지수를 가져올 때만 현재 위치의 위도·경도를 당사 서버(tsurispot.com)에 보냅니다.</li>
+      <li><strong>모션(가속도) 데이터</strong>: Apple Watch에서 캐스팅·샤크리 자동 감지, 걷기 판정, 감지 조정에 사용. 기기 안에서만 처리하며 외부로 보내지 않습니다.</li>
+      <li><strong>건강(HealthKit)</strong>: Apple Watch에서 출조를 "낚시" 운동으로 기록하고 심박수를 표시합니다. 건강 데이터는 기기 밖으로 나가지 않습니다.</li>
+      <li><strong>알림</strong>: 샤크리 신호를 진동으로 전달하는 데 사용. 기기 안에서 예약합니다.</li>
+      <li><strong>출조 기록</strong>(시작·종료 시각, 신호 횟수, 히트 횟수, 사용한 프리셋): 기기 안에 저장하며 iPhone과 Apple Watch 사이에서만 동기화합니다.</li>
+    </ul>
+    <h2>2. 서버로 보내는 위치 정보</h2>
+    <p>주변 낚시터의 출조 지수를 표시할 때, 본 앱은 현재 위치의 좌표와 대상 낚시터 이름을 당사 서버(tsurispot.com)에 보냅니다. 이 정보는 지수 계산에만 쓰며, 이름·이메일·기기 식별자 등 개인을 특정하는 정보와 연결하거나 함께 저장하지 않습니다. 서버 운영과 보안을 위한 접속 로그(IP 주소, 접속 일시 등)는 <a href="https://tsurispot.com/privacy">Tsurispot 개인정보 처리방침</a>에 따라 다룹니다. 조석표와 낚시터 목록도 당사 서버에서 받지만, 이때 위치 정보는 포함하지 않습니다. 낚시터와 조석 데이터는 일본 국내만 제공합니다.</p>
+    <h2>3. HealthKit 데이터</h2>
+    <p>건강 데이터는 운동 기록과 심박수 표시에만 사용합니다. HealthKit 데이터를 광고나 마케팅에 쓰거나, 제3자에게 제공하거나, 데이터 브로커에 판매하지 않습니다. 건강 앱에서 언제든 접근을 취소하고 기록된 운동을 삭제할 수 있습니다.</p>
+    <h2>4. 제3자 제공</h2>
+    <p>법령에 따른 경우를 제외하고 취득한 정보를 제3자에게 제공하지 않습니다. 본 앱에는 광고 SDK, 분석 SDK, SNS SDK가 없습니다. 통신하는 서버는 tsurispot.com뿐입니다.</p>
+    <h2>5. 보관 기간과 삭제</h2>
+    <p>출조 기록과 설정은 기기 안에 저장되며 앱을 삭제하면 사라집니다. Apple Watch의 기록도 같습니다. 건강 앱에 기록한 운동은 건강 앱에서 삭제할 수 있습니다. 당사 서버에는 개인과 연결되는 정보를 저장하지 않습니다.</p>
+    <h2>6. 어린이의 이용</h2>
+    <p>본 앱은 13세 미만 어린이를 대상으로 하지 않으며, 13세 미만 어린이의 개인정보를 의도적으로 수집하지 않습니다.</p>
+    <h2>7. 변경과 문의</h2>
+    <p>변경 사항은 이 페이지에 게시합니다. 문의: <a href="https://tsurispot.com/contact">Tsurispot 문의 양식</a>, <a href="https://tsurispot.com">https://tsurispot.com</a></p>
+  </section>
+
+  <section class="en" lang="zh-Hant">
+    <span class="lang">繁體中文</span>
+    <h1 style="margin-top:12px">EgiBeat 隱私權政策</h1>
+    <p class="meta">生效日：2026 年 10 月 19 日／提供者：Tsurispot 營運者（個人事業，日本）</p>
+    <p>EgiBeat（以下稱「本 App」）是 iPhone 與 Apple Watch 專用的木蝦釣法（eging）輔助 App。本 App 沒有帳號註冊，也不使用廣告或分析的外部服務。本頁說明本 App 處理的資訊及其用途。</p>
+    <h2>1. 本 App 處理的資訊</h2>
+    <ul>
+      <li><strong>定位（僅使用 App 期間）</strong>：計算日出日落（晨昏時段）、選擇最近的潮位觀測站、顯示附近釣點與釣況指數、記錄中魚位置（在設定中開啟時）。在裝置內處理。只有在取得釣點指數時，才會把目前位置的經緯度傳送到本公司伺服器（tsurispot.com）。</li>
+      <li><strong>動作（加速度）資料</strong>：在 Apple Watch 上自動偵測拋投與抽竿、判斷是否走動、調整偵測。僅在裝置內處理，不會傳送到外部。</li>
+      <li><strong>健康（HealthKit）</strong>：在 Apple Watch 上將釣遊記錄為「釣魚」體能訓練並顯示心率。健康資料不會離開裝置。</li>
+      <li><strong>通知</strong>：用於以震動傳遞抽竿提示。在裝置內排程。</li>
+      <li><strong>釣遊紀錄</strong>（開始與結束時間、提示次數、中魚次數、使用的預設）：儲存在裝置內，僅在 iPhone 與 Apple Watch 之間同步。</li>
+    </ul>
+    <h2>2. 傳送到伺服器的定位資訊</h2>
+    <p>顯示附近釣點的釣況指數時，本 App 會將目前位置的座標與釣點名稱傳送到本公司伺服器（tsurispot.com）。此資訊只用於計算指數，不會與姓名、電子郵件、裝置識別碼等可識別個人的資訊連結或一併儲存。為了營運與安全而保留的存取紀錄（IP 位址、存取時間等），依 <a href="https://tsurispot.com/privacy">Tsurispot 隱私權政策</a>處理。潮汐表與釣點清單也從本公司伺服器下載，但不包含定位資訊。釣點與潮汐資料僅涵蓋日本國內。</p>
+    <h2>3. HealthKit 資料</h2>
+    <p>健康資料只用於記錄體能訓練與顯示心率。我們不會將 HealthKit 資料用於廣告或行銷、提供給第三方，或出售給資料仲介。你可以隨時在「健康」App 中撤銷存取權並刪除已記錄的體能訓練。</p>
+    <h2>4. 第三方</h2>
+    <p>除法令要求外，我們不會將取得的資訊提供給第三方。本 App 不含廣告、分析或社群 SDK。唯一通訊的伺服器是 tsurispot.com。</p>
+    <h2>5. 保存期間與刪除</h2>
+    <p>釣遊紀錄與設定儲存在裝置內，刪除 App 即會消失。Apple Watch 上的紀錄亦同。記錄到「健康」的體能訓練可在「健康」App 中刪除。本公司伺服器不保存與個人連結的資訊。</p>
+    <h2>6. 兒童</h2>
+    <p>本 App 不以未滿 13 歲的兒童為對象，也不會刻意收集其個人資訊。</p>
+    <h2>7. 變更與聯絡</h2>
+    <p>變更會公布在本頁。聯絡方式：<a href="https://tsurispot.com/contact">Tsurispot 聯絡表單</a>、<a href="https://tsurispot.com">https://tsurispot.com</a></p>
+  </section>
+</main>
+</body>
+</html>
