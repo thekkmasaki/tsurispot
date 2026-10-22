@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { BLOCKED_UA_PATTERNS } from "@/middleware";
+import { BLOCKED_UA_PATTERNS } from "@/proxy";
 
 /**
  * AI検索bot 許可リストのドリフト防止

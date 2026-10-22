@@ -329,10 +329,10 @@ function readBuildId(options) {
   const candidates = [];
   if (options && options.serverDistDir)
     candidates.push(path.join(options.serverDistDir, "..", "BUILD_ID"));
-  candidates.push(path.join(process.cwd(), ".next", "BUILD_ID"));
+  candidates.push(path.resolve(/*turbopackIgnore: true*/ ".next", "BUILD_ID"));
   for (const p of candidates) {
     try {
-      const id = fs.readFileSync(p, "utf8").trim();
+      const id = fs.readFileSync(/*turbopackIgnore: true*/ p, "utf8").trim();
       if (id) return id;
     } catch {
       /* 次の候補へ */

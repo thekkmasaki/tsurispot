@@ -750,16 +750,16 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
           {data.spotInfo.managementInfo && (
             <div className="space-y-0.5 border-t pt-1 mt-1 text-[10px] text-gray-600">
               {data.spotInfo.managementInfo.openingHours && (
-                <div>\uD83D\uDD52 {data.spotInfo.managementInfo.openingHours}</div>
+                <div>{"\uD83D\uDD52"} {data.spotInfo.managementInfo.openingHours}</div>
               )}
               {data.spotInfo.managementInfo.fishingFee && (
-                <div>\uD83D\uDCB0 {data.spotInfo.managementInfo.fishingFee}</div>
+                <div>{"\uD83D\uDCB0"} {data.spotInfo.managementInfo.fishingFee}</div>
               )}
               {data.spotInfo.managementInfo.contactPhone && (
-                <div>\uD83D\uDCDE {data.spotInfo.managementInfo.contactPhone}</div>
+                <div>{"\uD83D\uDCDE"} {data.spotInfo.managementInfo.contactPhone}</div>
               )}
               {data.spotInfo.managementInfo.closedDays && (
-                <div>\uD83D\uDEAB {data.spotInfo.managementInfo.closedDays}</div>
+                <div>{"\uD83D\uDEAB"} {data.spotInfo.managementInfo.closedDays}</div>
               )}
             </div>
           )}

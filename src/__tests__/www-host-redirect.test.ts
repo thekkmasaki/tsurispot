@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { NextRequest } from "next/server";
-import { middleware } from "@/middleware";
+import { proxy } from "@/proxy";
 
 /**
  * www → apex ホスト正規化
@@ -16,7 +16,7 @@ describe("middleware: www → apex 308", () => {
     const req = new NextRequest("https://www.tsurispot.com/spots/nishizu-kou?utm=x", {
       headers: { host: "www.tsurispot.com" },
     });
-    const res = middleware(req);
+    const res = proxy(req);
     expect(res.status).toBe(308);
     expect(res.headers.get("location")).toBe(
       "https://tsurispot.com/spots/nishizu-kou?utm=x",
@@ -27,7 +27,7 @@ describe("middleware: www → apex 308", () => {
     const req = new NextRequest("https://tsurispot.com/spots/nishizu-kou", {
       headers: { host: "tsurispot.com" },
     });
-    const res = middleware(req);
+    const res = proxy(req);
     expect(res.status).toBe(200);
     expect(res.headers.get("location")).toBeNull();
   });
@@ -36,7 +36,7 @@ describe("middleware: www → apex 308", () => {
     const req = new NextRequest("https://www.tsurispot.com/", {
       headers: { host: "www.tsurispot.com", "user-agent": "GPTBot/1.1" },
     });
-    const res = middleware(req);
+    const res = proxy(req);
     expect(res.status).toBe(308);
   });
 
@@ -48,7 +48,7 @@ describe("middleware: www → apex 308", () => {
         headers: { host: "www.tsurispot.com" },
       },
     );
-    const res = middleware(req);
+    const res = proxy(req);
     expect(res.status).toBe(308);
     expect(res.headers.get("location")).toBe(
       "https://tsurispot.com/api/auth/signin/cognito",
