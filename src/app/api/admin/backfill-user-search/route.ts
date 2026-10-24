@@ -3,6 +3,7 @@ import { redis } from "@/lib/redis";
 // 現行本番のユーザー正はRedisのため、ファサードのモードに依存せず auth-redis を直接読む（migrate-redis-to-dynamoと同方針）
 import { getUserById } from "@/lib/auth-redis";
 import { updateUserSearchIndex } from "@/lib/social-store";
+import { safeEqual } from "@/lib/safe-compare";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -18,7 +19,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "ADMIN_MIGRATE_TOKEN 環境変数が未設定" }, { status: 500 });
   }
   const token = request.headers.get("authorization")?.replace(/^Bearer\s+/, "");
-  if (token !== expected) {
+  if (!safeEqual(token, expected)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

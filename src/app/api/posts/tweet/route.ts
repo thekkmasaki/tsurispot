@@ -4,6 +4,9 @@ import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { savePostMeta, addToGlobalFeed, type PostMeta } from "@/lib/social-store";
+import { rejectInactiveUser } from "@/lib/user-status";
+import { isOwnImageUrl, readJsonBody, resolveSpot, todayJst } from "@/lib/ugc-validation";
+import { isReservedName } from "@/lib/reserved-names";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 const MAX_TEXT_LENGTH = 200;
@@ -30,23 +33,37 @@ export async function POST(request: Request) {
       );
     }
 
-    // レート制限: 1IP 10分間に 10 投稿まで（釣果UGCと同水準）
-    if (!(await checkRateLimit(getClientIp(request), "TWEET", 10, 600))) {
+    const inactive = await rejectInactiveUser(tsuriId);
+    if (inactive) return inactive;
+    if (isReservedName(userName)) {
+      return NextResponse.json(
+        { error: "運営を連想させるニックネームでは投稿できません。ニックネームを変更してください" },
+        { status: 400 },
+      );
+    }
+
+    // レート制限: 1IP 10分間に 10 投稿まで（釣果UGCと同水準）＋ユーザー単位
+    if (
+      !(await checkRateLimit(getClientIp(request), "TWEET", 10, 600)) ||
+      !(await checkRateLimit(tsuriId, "TWEET_USER", 10, 600))
+    ) {
       return NextResponse.json(
         { error: "投稿が多すぎます。しばらくしてからお試しください。" },
         { status: 429 },
       );
     }
 
-    const body = await request.json().catch(() => ({}));
-    const { text, photoUrl, spotSlug, spotName, fishName, sizeCm } = body as {
+    const body = await readJsonBody<{
       text?: string;
       photoUrl?: string;
       spotSlug?: string;
-      spotName?: string;
       fishName?: string;
       sizeCm?: number;
-    };
+    }>(request);
+    if (!body) {
+      return NextResponse.json({ error: "リクエスト形式が不正です" }, { status: 400 });
+    }
+    const { text, photoUrl, spotSlug, fishName, sizeCm } = body;
 
     // バリデーション（本文のみ必須。場所・写真・釣果情報は任意添付）
     const trimmed = typeof text === "string" ? text.trim() : "";
@@ -56,11 +73,16 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-    if (photoUrl !== undefined && (typeof photoUrl !== "string" || !/^https?:\/\//.test(photoUrl))) {
+    if (photoUrl !== undefined && !isOwnImageUrl(photoUrl, "catch-reports/")) {
       return NextResponse.json({ error: "写真URLが不正です" }, { status: 400 });
     }
-    if (spotSlug !== undefined && (typeof spotSlug !== "string" || spotSlug.length > 100)) {
-      return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
+    // スポットは任意。指定された場合は形式＋実在を検証し、名称はサーバー側で slug から解決する
+    let spot: ReturnType<typeof resolveSpot> = null;
+    if (spotSlug !== undefined && spotSlug !== "") {
+      spot = resolveSpot(spotSlug);
+      if (!spot) {
+        return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
+      }
     }
     if (fishName !== undefined && (typeof fishName !== "string" || fishName.length > 30)) {
       return NextResponse.json({ error: "魚名は30文字以内で入力してください" }, { status: 400 });
@@ -76,19 +98,17 @@ export async function POST(request: Request) {
     }
 
     // 投稿日は JST の今日（つぶやきは日付指定なし）
-    const todayJst = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
-
     const postId = `tw-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const post: PostMeta = {
       id: postId,
       type: "tweet",
-      spotSlug: (spotSlug || "").trim(),
-      spotName: spotSlug ? spotName || "" : "",
+      spotSlug: spot?.slug ?? "",
+      spotName: spot?.name ?? "",
       fishName: fishName || "",
       userName,
       tsuriId,
       comment: trimmed,
-      date: todayJst,
+      date: todayJst(),
       photoUrl: photoUrl || undefined,
       sizeCm: sizeCm || undefined,
       submittedAt: new Date().toISOString(),

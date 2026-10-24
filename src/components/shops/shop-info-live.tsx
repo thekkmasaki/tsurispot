@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useEffectivePlan, type EffectivePlan } from "./use-effective-plan";
+import { sanitizeHttpUrl } from "@/lib/safe-url";
 
 interface ShopInfoLiveProps {
   shopSlug: string;
@@ -71,7 +72,8 @@ export function ShopInfoLive({
   const phone = override?.phone || staticPhone;
   const businessHours = override?.businessHours || staticHours;
   const closedDays = override?.closedDays || staticClosedDays;
-  const website = override?.website || staticWebsite;
+  // 店主入力は http(s) のみ描画（javascript: 等によるXSS/フィッシング防止）。不正なら静的データへ。
+  const website = sanitizeHttpUrl(override?.website) || sanitizeHttpUrl(staticWebsite);
   const services = override?.services && override.services.length > 0
     ? override.services
     : staticServices;

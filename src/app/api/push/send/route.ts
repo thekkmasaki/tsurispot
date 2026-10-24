@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
+import { isBearerMatch, resolveAdminToken } from "@/lib/safe-compare";
 
 /**
  * Web Push 通知を全 subscriber に送信する admin API (Phase 4)
@@ -32,10 +33,10 @@ interface PushSubscriptionJSON {
 }
 
 export async function POST(req: NextRequest) {
-  // 認可: ADMIN_RECONCILE_TOKEN
+  // 認可: ADMIN_PUSH_TOKEN（未設定時は ADMIN_RECONCILE_TOKEN にフォールバック）
   const authHeader = req.headers.get("authorization");
-  const expectedToken = process.env.ADMIN_RECONCILE_TOKEN;
-  if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
+  const expectedToken = resolveAdminToken("ADMIN_PUSH_TOKEN", "ADMIN_RECONCILE_TOKEN");
+  if (!isBearerMatch(authHeader, expectedToken)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 

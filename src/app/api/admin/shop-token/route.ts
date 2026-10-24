@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
+import { isBearerMatch } from "@/lib/safe-compare";
 
 export const runtime = "nodejs";
 
@@ -25,7 +26,7 @@ function randomToken(): string {
  */
 export async function POST(request: NextRequest) {
   const auth = request.headers.get("authorization");
-  if (!ADMIN_SECRET || auth !== `Bearer ${ADMIN_SECRET}`) {
+  if (!isBearerMatch(auth, ADMIN_SECRET)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 

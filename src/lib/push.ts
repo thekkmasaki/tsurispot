@@ -1,4 +1,5 @@
 import webpush, { type PushSubscription as WebPushSubscription } from "web-push";
+import { isAllowedPushEndpoint } from "@/lib/push-endpoint";
 
 const VAPID_PUBLIC = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || "";
 const VAPID_PRIVATE = process.env.VAPID_PRIVATE_KEY || "";
@@ -31,8 +32,12 @@ export async function sendPush(
   if (!ensureVapid()) {
     return { ok: false, error: "VAPID未設定" };
   }
+  // 過去に保存された未検証のendpointへの送信（SSRF）を防ぐ。410扱いで呼び出し側が購読を削除する
+  if (!isAllowedPushEndpoint(subscription.endpoint)) {
+    return { ok: false, status: 410, error: "許可されていないendpoint" };
+  }
   try {
-    await webpush.sendNotification(subscription, JSON.stringify(payload));
+    await webpush.sendNotification(subscription, JSON.stringify(payload), { timeout: 10_000 });
     return { ok: true };
   } catch (err) {
     const e = err as { statusCode?: number; message?: string };

@@ -127,7 +127,8 @@ function getSearchIndex(): IndexItem[] {
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
-  const q = (searchParams.get("q") || "").trim();
+  // 巨大クエリによる全件 includes 走査の CPU 濫用を防ぐ（上限超は切り詰め）
+  const q = (searchParams.get("q") || "").trim().slice(0, 100);
 
   // 空クエリは空配列
   if (!q) {

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbBatchGet, dbIncr, dbDecr } from "@/lib/dynamodb";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { readJsonBody, resolveSpot } from "@/lib/ugc-validation";
 
 // GET /api/favorites?slug=xxx or ?slugs=a,b,c (一括)
 export async function GET(request: NextRequest) {
@@ -30,12 +32,22 @@ export async function GET(request: NextRequest) {
 
 // POST /api/favorites  body: { slug, action: "increment" | "decrement" }
 export async function POST(request: NextRequest) {
-  const body = await request.json().catch(() => ({}));
-  const { slug, action } = body as { slug?: string; action?: string };
+  // 匿名で増減できるため、IP単位で濫用を抑える（DynamoDBアイテムの無限生成・人気数値の水増し対策）
+  if (!(await checkRateLimit(getClientIp(request), "FAVORITES", 60, 600))) {
+    return NextResponse.json({ error: "リクエストが多すぎます" }, { status: 429 });
+  }
 
-  if (!slug || typeof slug !== "string" || slug.length > 100) {
+  const body = await readJsonBody<{ slug?: string; action?: string }>(request, 1024);
+  if (!body) {
+    return NextResponse.json({ error: "invalid request" }, { status: 400 });
+  }
+  const { action } = body;
+  // 実在するスポットのslugのみ受け付ける（任意文字列でDynamoDBキーを作らせない）
+  const spot = resolveSpot(body.slug);
+  if (!spot) {
     return NextResponse.json({ error: "invalid slug" }, { status: 400 });
   }
+  const slug = spot.slug;
 
   if (action === "increment") {
     const count = await dbIncr(`SPOT#${slug}`, "FAVCOUNT");

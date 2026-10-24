@@ -35,16 +35,6 @@ function formatDate(dateStr: string): string {
   return `${Number(parts[0])}年${Number(parts[1])}月${Number(parts[2])}日`;
 }
 
-function getSessionId(): string {
-  const key = "tsurispot_sid";
-  let sid = sessionStorage.getItem(key);
-  if (!sid) {
-    sid = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-    sessionStorage.setItem(key, sid);
-  }
-  return sid;
-}
-
 // ── UGCシェア（バイラルループ: 訪問者が釣果を拡散→スポットページへ新規流入） ──
 const SITE_URL = "https://tsurispot.com";
 
@@ -103,21 +93,21 @@ export function CatchReportList({ spotSlug, initialReports, pioneer = null, allo
       const res = await fetch("/api/report-flag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ reportId, sessionId: getSessionId() }),
+        body: JSON.stringify({ reportId, spotSlug }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
         toast.success(data.message || "通報を受け付けました");
         setFlaggedIds((prev) => new Set(prev).add(reportId));
       } else {
-        toast.error(data.message || "通報に失敗しました。もう一度お試しください。");
+        toast.error(data.error || data.message || "通報に失敗しました。もう一度お試しください。");
       }
     } catch {
       toast.error("通報に失敗しました。もう一度お試しください。");
     }
     setSubmittingId(null);
     setConfirmingId(null);
-  }, []);
+  }, [spotSlug]);
 
   // 開拓者の常設表示（投稿本体がTTLで消えても永続レコードで残り続ける）
   const pioneerLine = pioneer ? (

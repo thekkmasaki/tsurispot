@@ -279,3 +279,22 @@ export async function dbConditionalPut(
     throw e;
   }
 }
+
+/** 条件付き削除。アイテムが存在して実際に削除できた時だけ true（いいね等の増減競合防止に使う）。 */
+export async function dbConditionalDelete(pk: string, sk: string): Promise<boolean> {
+  try {
+    await doc.send(
+      new DeleteCommand({
+        TableName: TABLE,
+        Key: { pk, sk },
+        ConditionExpression: "attribute_exists(pk)",
+      }),
+    );
+    return true;
+  } catch (e) {
+    if ((e as { name?: string })?.name === "ConditionalCheckFailedException") {
+      return false;
+    }
+    throw e;
+  }
+}

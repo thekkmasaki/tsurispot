@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isBearerMatch, resolveAdminToken } from "@/lib/safe-compare";
 
 /**
  * LINE 公式アカウント 全友だちへのブロードキャスト配信 API（リテンション 第2チャネル）
@@ -24,10 +25,10 @@ interface BroadcastPayload {
 const SITE_BASE_URL = "https://tsurispot.com";
 
 export async function POST(req: NextRequest) {
-  // 認可: ADMIN_RECONCILE_TOKEN
+  // 認可: ADMIN_LINE_TOKEN（未設定時は ADMIN_RECONCILE_TOKEN にフォールバック）
   const authHeader = req.headers.get("authorization");
-  const expectedToken = process.env.ADMIN_RECONCILE_TOKEN;
-  if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
+  const expectedToken = resolveAdminToken("ADMIN_LINE_TOKEN", "ADMIN_RECONCILE_TOKEN");
+  if (!isBearerMatch(authHeader, expectedToken)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 

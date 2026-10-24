@@ -16,6 +16,12 @@ vi.mock("@/lib/redis", () => ({
     zincrby: vi.fn(),
   },
 }));
+vi.mock("@/lib/data/spots", () => ({
+  getSpotBySlug: vi.fn((slug: string) =>
+    slug === "test-spot" ? { slug: "test-spot", name: "テストスポット" } : undefined,
+  ),
+}));
+vi.mock("@/lib/user-status", () => ({ rejectInactiveUser: vi.fn().mockResolvedValue(null) }));
 vi.mock("@/lib/auth", () => ({ auth: vi.fn().mockResolvedValue(null) }));
 vi.mock("@/lib/user-store", () => ({ incrementReportCount: vi.fn() }));
 vi.mock("@/lib/rate-limit", () => ({

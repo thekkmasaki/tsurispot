@@ -80,17 +80,14 @@ export function CommentSection({ reportId, postAuthorTsuriId, initialComments }:
       const res = await fetch("/api/report-flag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          reportId: commentId,
-          sessionId: `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
-        }),
+        body: JSON.stringify({ reportId: commentId, parentReportId: reportId }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
         toast.success(data.message || "通報を受け付けました");
         setFlaggedIds((prev) => new Set(prev).add(commentId));
       } else {
-        toast.error(data.message || "通報に失敗しました");
+        toast.error(data.error || data.message || "通報に失敗しました");
       }
     } catch {
       toast.error("通報に失敗しました");

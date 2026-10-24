@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { dbGet } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { fishingSpots } from "@/lib/data/spots";
+import { safeEqual } from "@/lib/safe-compare";
 
 interface CatchReport {
   id: string;
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
   const token = request.headers
     .get("authorization")
     ?.replace(/^Bearer\s+/, "");
-  if (token !== expected) {
+  if (!safeEqual(token, expected)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
