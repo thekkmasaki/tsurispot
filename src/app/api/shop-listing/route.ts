@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { dbIncr } from "@/lib/dynamodb";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 const GAS_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -8,14 +8,11 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-// IPベースのレート制限（1IP 1分間に5回まで）
-async function checkRateLimit(ip: string): Promise<boolean> {
-  try {
-    const count = await dbIncr(`RATELIMIT#${ip}`, "SHOPLISTING", 1, 60);
-    return count <= 5;
-  } catch {
-    return true; // DB障害時は通す
-  }
+// 任意文字列項目の検証: 未指定は ""、文字列以外/上限超過は null
+function optStr(v: unknown, max: number): string | null {
+  if (v === undefined || v === null) return "";
+  if (typeof v !== "string" || v.length > max) return null;
+  return v.trim();
 }
 
 export async function POST(request: Request) {
@@ -24,39 +21,43 @@ export async function POST(request: Request) {
   }
 
   // レート制限
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  const allowed = await checkRateLimit(ip);
+  const allowed = await checkRateLimit(getClientIp(request), "SHOPLISTING", 5, 60);
   if (!allowed) {
     return NextResponse.json({ error: "送信回数の上限に達しました。しばらくしてからお試しください。" }, { status: 429 });
   }
 
   try {
     const body = await request.json().catch(() => ({}));
-    const { type } = body as Record<string, string | undefined>;
+    const { type } = body as Record<string, unknown>;
 
     // 有料プラン問い合わせ
     if (type === "paid_inquiry_basic" || type === "paid_inquiry_pro") {
-      const { shopName, contactName, email, phone, message, plan } =
-        body as Record<string, string | undefined>;
+      const { shopName, contactName, email, phone, message } =
+        body as Record<string, unknown>;
 
       if (!shopName || typeof shopName !== "string" || shopName.length > 50) {
         return NextResponse.json({ error: "店舗名を入力してください" }, { status: 400 });
       }
-      if (!email || typeof email !== "string" || !isValidEmail(email)) {
+      if (!email || typeof email !== "string" || email.length > 100 || !isValidEmail(email)) {
         return NextResponse.json({ error: "正しいメールアドレスを入力してください" }, { status: 400 });
       }
-      if (!phone || typeof phone !== "string") {
+      if (!phone || typeof phone !== "string" || phone.length > 30) {
         return NextResponse.json({ error: "電話番号を入力してください" }, { status: 400 });
+      }
+      const contactNameClean = optStr(contactName, 50);
+      const messageClean = optStr(message, 1000);
+      if (contactNameClean === null || messageClean === null) {
+        return NextResponse.json({ error: "入力内容が長すぎます" }, { status: 400 });
       }
 
       const payload = {
         type,
         shopName: shopName.trim(),
-        contactName: (contactName || "").trim(),
+        contactName: contactNameClean,
         email: email.trim(),
         phone: phone.trim(),
-        message: (message || "").trim(),
-        plan: plan || (type === "paid_inquiry_basic" ? "basic" : "pro"),
+        message: messageClean,
+        plan: type === "paid_inquiry_basic" ? "basic" : "pro",
       };
 
       try {
@@ -78,7 +79,7 @@ export async function POST(request: Request) {
 
     // 無料掲載申請
     const { shopName, address, phone, businessHours, closedDays, services, email, nearbySpots } =
-      body as Record<string, string | undefined>;
+      body as Record<string, unknown>;
 
     if (!shopName || typeof shopName !== "string" || shopName.length > 50) {
       return NextResponse.json({ error: "店舗名を入力してください（50文字以内）" }, { status: 400 });
@@ -86,23 +87,30 @@ export async function POST(request: Request) {
     if (!address || typeof address !== "string" || address.length > 200) {
       return NextResponse.json({ error: "住所を入力してください" }, { status: 400 });
     }
-    if (!phone || typeof phone !== "string") {
+    if (!phone || typeof phone !== "string" || phone.length > 30) {
       return NextResponse.json({ error: "電話番号を入力してください" }, { status: 400 });
     }
-    if (!email || typeof email !== "string" || !isValidEmail(email)) {
+    if (!email || typeof email !== "string" || email.length > 100 || !isValidEmail(email)) {
       return NextResponse.json({ error: "正しいメールアドレスを入力してください" }, { status: 400 });
+    }
+    const hoursClean = optStr(businessHours, 100);
+    const closedClean = optStr(closedDays, 100);
+    const servicesClean = optStr(services, 300);
+    const nearbyClean = optStr(nearbySpots, 300);
+    if (hoursClean === null || closedClean === null || servicesClean === null || nearbyClean === null) {
+      return NextResponse.json({ error: "入力内容が長すぎます" }, { status: 400 });
     }
 
     const payload = {
       type: "shop_listing",
       shopName: shopName.trim(),
-      address: (address || "").trim(),
-      phone: (phone || "").trim(),
-      businessHours: (businessHours || "").trim(),
-      closedDays: (closedDays || "").trim(),
-      services: (services || "").trim(),
-      email: (email || "").trim(),
-      nearbySpots: (nearbySpots || "").trim(),
+      address: address.trim(),
+      phone: phone.trim(),
+      businessHours: hoursClean,
+      closedDays: closedClean,
+      services: servicesClean,
+      email: email.trim(),
+      nearbySpots: nearbyClean,
     };
 
     try {

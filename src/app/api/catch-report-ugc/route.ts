@@ -9,7 +9,9 @@ import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { savePostMeta, addToGlobalFeed, sanitizeTags, addTagsForPost } from "@/lib/social-store";
 import { fishSpecies } from "@/lib/data/fish";
-import { getSpotBySlug } from "@/lib/data/spots";
+import { rejectInactiveUser } from "@/lib/user-status";
+import { isReservedName, RESERVED_NAME_ERROR } from "@/lib/reserved-names";
+import { isOwnImageUrl, isRealDate, readJsonBody, resolveSpot, todayJst } from "@/lib/ugc-validation";
 import type { PostCatchResult } from "@/lib/catch-result";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
@@ -75,18 +77,25 @@ export async function POST(request: Request) {
     const session = await auth();
     const tsuriId = session?.user?.tsuriId;
 
-    // レート制限（匿名自動公開のため、スパム/荒らしによるトップ表示汚染を防ぐ）: 1IP 10分間に 10 投稿まで
-    if (!(await checkRateLimit(getClientIp(request), "CATCH_REPORT_UGC", 10, 600))) {
+    if (tsuriId) {
+      const inactive = await rejectInactiveUser(tsuriId);
+      if (inactive) return inactive;
+    }
+
+    // レート制限（匿名自動公開のため、スパム/荒らしによるトップ表示汚染を防ぐ）: 1IP 10分間に 10 投稿まで。
+    // ログイン済みはユーザー単位でも制限（IPを変えての連投対策）
+    if (
+      !(await checkRateLimit(getClientIp(request), "CATCH_REPORT_UGC", 10, 600)) ||
+      (tsuriId && !(await checkRateLimit(tsuriId, "CATCH_REPORT_UGC_USER", 20, 3600)))
+    ) {
       return NextResponse.json(
         { error: "投稿が多すぎます。しばらくしてからお試しください。" },
         { status: 429 },
       );
     }
 
-    const body = await request.json().catch(() => ({}));
-    const { spotSlug, spotName, fishName, userName, comment, date, photoUrl, sizeCm, method, weather, tags } = body as {
+    const body = await readJsonBody<{
       spotSlug?: string;
-      spotName?: string;
       fishName?: string;
       userName?: string;
       comment?: string;
@@ -96,16 +105,25 @@ export async function POST(request: Request) {
       method?: string;
       weather?: string;
       tags?: string[];
-    };
-
-    // バリデーション（スポットは任意: 未指定はタイムライン/マイページのみに載る「場所なし投稿」）
-    if (spotSlug !== undefined && (typeof spotSlug !== "string" || spotSlug.length > 100)) {
-      return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
+    }>(request);
+    if (!body) {
+      return NextResponse.json({ error: "リクエスト形式が不正です" }, { status: 400 });
     }
-    const slug = typeof spotSlug === "string" ? spotSlug.trim() : "";
+    const { spotSlug, fishName, comment, date, photoUrl, sizeCm, method, weather, tags } = body;
+
+    // バリデーション（スポットは任意: 未指定はタイムライン/マイページのみに載る「場所なし投稿」）。
+    // 指定された場合は形式＋実在を検証し、spotName は slug からサーバー側で解決する（クライアント送信値は使わない）
+    let spot: ReturnType<typeof resolveSpot> = null;
+    if (spotSlug !== undefined && spotSlug !== "") {
+      spot = resolveSpot(spotSlug);
+      if (!spot) {
+        return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
+      }
+    }
+    const slug = spot?.slug ?? "";
     // 釣り禁止スポットへの釣果報告は受け付けない。
     // UIでもフォームを出していないが、APIを直接叩かれた場合の防御。
-    if (slug && getSpotBySlug(slug)?.fishingBan?.scope === "full") {
+    if (spot?.fishingBan?.scope === "full") {
       return NextResponse.json(
         { error: "この釣り場は現在釣りが禁止されているため、釣果報告を受け付けていません。" },
         { status: 403 },
@@ -114,27 +132,32 @@ export async function POST(request: Request) {
     if (!fishName || typeof fishName !== "string" || fishName.length > 30) {
       return NextResponse.json({ error: "魚名を入力してください（30文字以内）" }, { status: 400 });
     }
+    // 表示名: ログイン済みはセッションのニックネームを強制（なりすまし防止）。匿名は入力値＋予約語禁止
+    const sessionNickname = (session?.user?.nickname ?? "").trim();
+    const userName = tsuriId && sessionNickname ? sessionNickname : body.userName;
     if (!userName || typeof userName !== "string" || userName.length > 20) {
       return NextResponse.json({ error: "ニックネームを入力してください（20文字以内）" }, { status: 400 });
+    }
+    if (isReservedName(userName)) {
+      return NextResponse.json({ error: RESERVED_NAME_ERROR }, { status: 400 });
     }
     // ひとことは任意（唯一の作文強制だったため撤廃。チップ完結の最小投稿を許す）
     if (comment !== undefined && (typeof comment !== "string" || comment.length > 100)) {
       return NextResponse.json({ error: "コメントは100文字以内で入力してください" }, { status: 400 });
     }
     const commentText = typeof comment === "string" ? comment.trim() : "";
-    if (!date || typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    if (!isRealDate(date)) {
       return NextResponse.json({ error: "日付の形式が不正です" }, { status: 400 });
     }
 
     // 未来の日付チェック（コンテナのTZはUTCのため、JSTの「今日」と文字列比較する。
     // UTC基準だとJST 0時〜9時に当日の投稿が「未来の日付」として弾かれてしまう）
-    const todayJst = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
-    if (date > todayJst) {
+    if (date > todayJst()) {
       return NextResponse.json({ error: "未来の日付は指定できません" }, { status: 400 });
     }
 
     // オプショナルフィールドのバリデーション
-    if (photoUrl !== undefined && (typeof photoUrl !== "string" || !/^https?:\/\//.test(photoUrl))) {
+    if (photoUrl !== undefined && !isOwnImageUrl(photoUrl, "catch-reports/")) {
       return NextResponse.json({ error: "写真URLが不正です" }, { status: 400 });
     }
     if (sizeCm !== undefined && (typeof sizeCm !== "number" || sizeCm < 0 || sizeCm > 300)) {
@@ -162,7 +185,7 @@ export async function POST(request: Request) {
     const reportData: CatchReport = {
       id: reportId,
       spotSlug: slug,
-      spotName: slug ? spotName || "" : "",
+      spotName: spot?.name ?? "",
       fishName,
       userName,
       tsuriId,

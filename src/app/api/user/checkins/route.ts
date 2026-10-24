@@ -8,6 +8,9 @@ import {
 } from "@/lib/user-store";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { checkNgWords } from "@/lib/moderation";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { rejectInactiveUser } from "@/lib/user-status";
+import { isRealDate, todayJst } from "@/lib/ugc-validation";
 
 export async function GET() {
   const session = await auth();
@@ -26,6 +29,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
 
+  const inactive = await rejectInactiveUser(userId);
+  if (inactive) return inactive;
+  if (!(await checkRateLimit(userId, "CHECKIN", 30, 3600))) {
+    return NextResponse.json({ error: "チェックインが多すぎます。しばらくしてからお試しください。" }, { status: 429 });
+  }
+
   const body = (await request.json().catch(() => ({}))) as {
     spotSlug?: string;
     date?: string;
@@ -40,12 +49,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "スポットが見つかりません" }, { status: 404 });
   }
 
-  if (!body.date || !/^\d{4}-\d{2}-\d{2}$/.test(body.date)) {
+  if (!isRealDate(body.date)) {
     return NextResponse.json({ error: "日付の形式が不正です（YYYY-MM-DD）" }, { status: 400 });
   }
-  const today = new Date();
-  today.setHours(23, 59, 59, 999);
-  if (new Date(body.date) > today) {
+  if (body.date > todayJst()) {
     return NextResponse.json({ error: "未来の日付は指定できません" }, { status: 400 });
   }
 

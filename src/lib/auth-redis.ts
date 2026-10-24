@@ -213,6 +213,18 @@ export async function deleteUser(userId: string): Promise<boolean> {
   await redis.del(`auth:favorites:${userId}`);
   await redis.del(`auth:user_reports:${userId}`);
   await redis.del(`auth:user_photos:${userId}`);
+  // ウィッシュ(+スポット別メモ)・チェックイン・Push購読の残存防止
+  try {
+    const wished = await redis.zrange<string[]>(`${WISHLIST_PREFIX}${userId}`, 0, -1);
+    await Promise.all(
+      (wished ?? []).map((slug) => redis.del(`${WISH_MEMO_PREFIX}${userId}:${slug}`)),
+    );
+  } catch {
+    /* 失敗しても削除は続行 */
+  }
+  await redis.del(`${WISHLIST_PREFIX}${userId}`);
+  await redis.del(`${CHECKIN_PREFIX}${userId}`);
+  await redis.del(`${PUSH_SUB_PREFIX}${userId}`);
   await redis.del(`${FOLLOWING_PREFIX}${userId}`);
   await redis.del(`${FOLLOWERS_PREFIX}${userId}`);
   return true;

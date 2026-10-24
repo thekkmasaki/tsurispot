@@ -10,6 +10,7 @@ import {
   dbDecr,
   dbBatchGet,
   dbConditionalPut,
+  dbConditionalDelete,
   dbQuery,
 } from "@/lib/dynamodb";
 
@@ -55,12 +56,22 @@ export async function isPostFlagged(reportId: string): Promise<boolean> {
   return dbExists(`REPORT#${reportId}`, "FLAGGED");
 }
 
+/** 通報で自動非表示(FLAGGED)になった投稿を除外する。id の無い要素はそのまま残す。 */
+export async function filterOutFlagged<T extends { id?: string }>(items: T[]): Promise<T[]> {
+  const withId = items.filter((it): it is T & { id: string } => typeof it.id === "string" && it.id !== "");
+  if (withId.length === 0) return items;
+  const flags = await dbBatchGet(withId.map((it) => ({ pk: `REPORT#${it.id}`, sk: "FLAGGED" })));
+  const flagged = new Set(withId.filter((_, i) => flags[i] !== null).map((it) => it.id));
+  return items.filter((it) => !(it.id && flagged.has(it.id)));
+}
+
 // ─── いいね ───
 // LIKES#{reportId}/USER#{tsuriId} を条件付きPutで冪等化し、
 // 実際に書けた時だけ REPORT#{reportId}/LIKE_COUNT を増減する（follow と同パターン）。
 
 const likesPk = (reportId: string) => `LIKES#${reportId}`;
 const reportPk = (reportId: string) => `REPORT#${reportId}`;
+const userLikesPk = (tsuriId: string) => `USERLIKES#${tsuriId}`;
 
 export async function likePost(
   reportId: string,
@@ -70,15 +81,18 @@ export async function likePost(
     ts: new Date().toISOString(),
   });
   if (created) {
+    // 退会時のカスケード用に「このユーザーがいいねした投稿」の逆引き索引を持つ
+    await dbPut(userLikesPk(tsuriId), `R#${reportId}`, { reportId }, POST_TTL_SECONDS).catch(() => {});
     return { count: await dbIncr(reportPk(reportId), "LIKE_COUNT"), created: true };
   }
   return { count: await getLikeCount(reportId), created: false };
 }
 
 export async function unlikePost(reportId: string, tsuriId: string): Promise<number> {
-  const existed = await dbExists(likesPk(reportId), `USER#${tsuriId}`);
-  if (!existed) return getLikeCount(reportId);
-  await dbDelete(likesPk(reportId), `USER#${tsuriId}`);
+  // 条件付き削除に成功した呼び出しだけがデクリメントする（二重unlikeの競合でカウントが負方向にずれるのを防ぐ）
+  const deleted = await dbConditionalDelete(likesPk(reportId), `USER#${tsuriId}`);
+  if (!deleted) return getLikeCount(reportId);
+  await dbDelete(userLikesPk(tsuriId), `R#${reportId}`).catch(() => {});
   return dbDecr(reportPk(reportId), "LIKE_COUNT");
 }
 
@@ -137,6 +151,7 @@ export interface PostComment {
 }
 
 const commentsPk = (reportId: string) => `COMMENTS#${reportId}`;
+const userCommentsPk = (tsuriId: string) => `USERCOMMENTS#${tsuriId}`;
 
 export async function addComment(
   reportId: string,
@@ -154,6 +169,13 @@ export async function addComment(
     createdAt,
   };
   await dbPut(commentsPk(reportId), `C#${createdAt}#${comment.id}`, comment, POST_TTL_SECONDS);
+  // 退会時のカスケード用の逆引き索引
+  await dbPut(
+    userCommentsPk(authorTsuriId),
+    `C#${comment.id}`,
+    { reportId, commentId: comment.id, sk: `C#${createdAt}#${comment.id}` },
+    POST_TTL_SECONDS,
+  ).catch(() => {});
   await dbIncr(`REPORT#${reportId}`, "COMMENT_COUNT");
   return comment;
 }
@@ -190,6 +212,7 @@ export async function deleteComment(
     }
   }
   await dbDelete(target.pk, target.sk);
+  await dbDelete(userCommentsPk(target.data.authorTsuriId), `C#${commentId}`).catch(() => {});
   await dbDecr(`REPORT#${reportId}`, "COMMENT_COUNT");
   return { ok: true, status: 200 };
 }
@@ -367,7 +390,9 @@ export async function repostPost(
 export async function unrepostPost(reportId: string, tsuriId: string): Promise<number> {
   const existing = await dbGet<{ ts: string }>(repostsPk(reportId), `USER#${tsuriId}`);
   if (!existing) return getRepostCount(reportId);
-  await dbDelete(repostsPk(reportId), `USER#${tsuriId}`);
+  // 条件付き削除に成功した呼び出しだけがデクリメントする
+  const deleted = await dbConditionalDelete(repostsPk(reportId), `USER#${tsuriId}`);
+  if (!deleted) return getRepostCount(reportId);
   if (existing.ts) {
     await dbDelete(userRepostsPk(tsuriId), `TS#${existing.ts}#${reportId}`);
   }
@@ -607,4 +632,76 @@ export async function getLikesBulk(
     likedIds = ids.filter((_, i) => likedVals[i] !== null);
   }
   return { counts, likedIds };
+}
+
+// ─── 退会時カスケード用 ───
+
+/** ユーザーがいいねした投稿ID（索引導入後の分のみ。旧データは列挙不能） */
+export async function getUserLikedReportIds(tsuriId: string): Promise<string[]> {
+  const items = await dbQuery<{ reportId: string }>(userLikesPk(tsuriId), { skPrefix: "R#", all: true });
+  return items.map((it) => it.data?.reportId).filter((id): id is string => Boolean(id));
+}
+
+/** ユーザーのコメント参照（索引導入後の分のみ） */
+export async function getUserCommentRefs(
+  tsuriId: string,
+): Promise<{ reportId: string; commentId: string; sk: string }[]> {
+  const items = await dbQuery<{ reportId: string; commentId: string; sk: string }>(
+    userCommentsPk(tsuriId),
+    { skPrefix: "C#", all: true },
+  );
+  return items.map((it) => it.data).filter((d) => d?.reportId && d.commentId && d.sk);
+}
+
+/** ユーザー自身のコメントを1件削除（索引・コメント本体・件数）。 */
+export async function deleteOwnCommentRef(
+  tsuriId: string,
+  ref: { reportId: string; commentId: string; sk: string },
+): Promise<void> {
+  const removed = await dbConditionalDelete(commentsPk(ref.reportId), ref.sk);
+  if (removed) await dbDecr(`REPORT#${ref.reportId}`, "COMMENT_COUNT").catch(() => {});
+  await dbDelete(userCommentsPk(tsuriId), `C#${ref.commentId}`);
+}
+
+/** ユーザーのリポスト（プロフィール用索引）を全解除 */
+export async function removeAllUserReposts(tsuriId: string): Promise<void> {
+  const items = await dbQuery<{ reportId: string; ts: string }>(userRepostsPk(tsuriId), {
+    skPrefix: "TS#",
+    all: true,
+  });
+  for (const it of items) {
+    if (it.data?.reportId) await unrepostPost(it.data.reportId, tsuriId).catch(() => {});
+    await dbDelete(it.pk, it.sk).catch(() => {});
+  }
+}
+
+/** 投稿に紐づく SNS データ（いいね・コメント・リポスト・カウンタ・通報記録）を全削除 */
+export async function purgePostSocialData(reportId: string): Promise<void> {
+  const groups = await Promise.all([
+    dbQuery(likesPk(reportId), { all: true }),
+    dbQuery(commentsPk(reportId), { all: true }),
+    dbQuery(repostsPk(reportId), { all: true }),
+    dbQuery(reportPk(reportId), { all: true }),
+  ]);
+  for (const it of groups.flat()) {
+    await dbDelete(it.pk, it.sk).catch(() => {});
+  }
+}
+
+/** ユーザー検索索引・通知・ブロック関係を全削除 */
+export async function purgeUserSocialData(tsuriId: string): Promise<void> {
+  const pointerPk = `USER#${tsuriId}`;
+  const oldSk = await dbGet<string>(pointerPk, "SEARCH_SK");
+  if (oldSk) await dbDelete(USERSEARCH_PK, oldSk).catch(() => {});
+  await dbDelete(pointerPk, "SEARCH_SK").catch(() => {});
+  await dbDelete(pointerPk, "NOTIF_UNREAD").catch(() => {});
+  const groups = await Promise.all([
+    dbQuery(notifPk(tsuriId), { all: true }),
+    dbQuery(`BLOCKS#${tsuriId}`, { all: true }),
+    dbQuery(userLikesPk(tsuriId), { all: true }),
+    dbQuery(userCommentsPk(tsuriId), { all: true }),
+  ]);
+  for (const it of groups.flat()) {
+    await dbDelete(it.pk, it.sk).catch(() => {});
+  }
 }

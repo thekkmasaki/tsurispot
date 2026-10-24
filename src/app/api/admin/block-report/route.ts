@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import { dbPut } from "@/lib/dynamodb";
 import { deleteFromS3 } from "@/lib/s3";
+import { isBearerMatch } from "@/lib/safe-compare";
 
 const ADMIN_SECRET = process.env.ADMIN_SECRET;
 
 export async function POST(request: Request) {
   // 認証チェック
   const auth = request.headers.get("Authorization");
-  if (!ADMIN_SECRET || auth !== `Bearer ${ADMIN_SECRET}`) {
+  if (!isBearerMatch(auth, ADMIN_SECRET)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

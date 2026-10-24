@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-import { dbGet } from "@/lib/dynamodb";
-import { getStripeCustomerId } from "@/lib/shop-plan";
+import { getStripeCustomerId, verifyShopToken } from "@/lib/shop-plan";
 
 export async function POST(request: NextRequest) {
   let body: { shopSlug: string; token: string };
@@ -26,8 +25,13 @@ export async function POST(request: NextRequest) {
   }
 
   // トークン認証
-  const storedToken = await dbGet<string>(`SHOP#${shopSlug}`, "TOKEN");
-  if (!storedToken || storedToken !== token) {
+  let tokenOk = false;
+  try {
+    tokenOk = typeof token === "string" && typeof shopSlug === "string" && (await verifyShopToken(shopSlug, token));
+  } catch {
+    return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
+  }
+  if (!tokenOk) {
     return NextResponse.json({ error: "認証に失敗しました" }, { status: 403 });
   }
 

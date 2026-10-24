@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { isAllowedPushEndpoint, parsePushSubscription } from "@/lib/push-endpoint";
 
 /**
  * 毎朝の釣行指数 Push の購読（案③）。認証不要（匿名 OK）。
@@ -14,13 +15,8 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 const KEY = "push:index_subs";
 const MAX_FAVORITES = 20;
 
-interface SubscriptionJSON {
-  endpoint?: string;
-  keys?: { p256dh?: string; auth?: string };
-}
-
 interface RequestBody {
-  subscription?: SubscriptionJSON;
+  subscription?: unknown;
   favorites?: unknown;
   recentSlugs?: unknown;
   location?: { lat?: unknown; lng?: unknown } | null;
@@ -37,7 +33,7 @@ function sanitizeSlugs(input: unknown, cap: number): string[] {
 
 export async function POST(request: Request) {
   // 偽subscriptionの大量登録によるHSET肥大・送信コスト増を防ぐ
-  if (!(await checkRateLimit(getClientIp(request), "PUSH_IDX_SUB", 10, 600))) {
+  if (!(await checkRateLimit(getClientIp(request), "PUSH_IDX_SUB", 10, 600, { failClosed: true }))) {
     return NextResponse.json(
       { error: "リクエストが多すぎます。しばらくしてからお試しください。" },
       { status: 429 },
@@ -51,8 +47,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "不正なリクエスト" }, { status: 400 });
   }
 
-  const sub = body.subscription;
-  if (!sub?.endpoint || !sub.keys?.p256dh || !sub.keys?.auth) {
+  const sub = parsePushSubscription(body.subscription);
+  if (!sub) {
     return NextResponse.json({ error: "subscription が不正です" }, { status: 400 });
   }
   const favorites = sanitizeSlugs(body.favorites, MAX_FAVORITES);
@@ -66,7 +62,9 @@ export async function POST(request: Request) {
   const location =
     body.location &&
     typeof body.location.lat === "number" &&
-    typeof body.location.lng === "number"
+    typeof body.location.lng === "number" &&
+    Math.abs(body.location.lat) <= 90 &&
+    Math.abs(body.location.lng) <= 180
       ? { lat: body.location.lat, lng: body.location.lng }
       : null;
 
@@ -90,8 +88,11 @@ export async function DELETE(request: Request) {
   } catch {
     return NextResponse.json({ error: "不正なリクエスト" }, { status: 400 });
   }
-  if (!body.endpoint) {
-    return NextResponse.json({ error: "endpoint が必要です" }, { status: 400 });
+  if (typeof body.endpoint !== "string" || !isAllowedPushEndpoint(body.endpoint)) {
+    return NextResponse.json({ error: "endpoint が不正です" }, { status: 400 });
+  }
+  if (!(await checkRateLimit(getClientIp(request), "PUSH_IDX_UNSUB", 30, 600))) {
+    return NextResponse.json({ error: "リクエストが多すぎます。" }, { status: 429 });
   }
   await redis.hdel(KEY, body.endpoint);
   return NextResponse.json({ ok: true });

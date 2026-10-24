@@ -7,6 +7,8 @@ import {
   type StoredPushSubscription,
 } from "@/lib/user-store";
 import { getVapidPublicKey } from "@/lib/push";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { parsePushSubscription } from "@/lib/push-endpoint";
 
 export async function GET() {
   const session = await auth();
@@ -28,22 +30,14 @@ export async function POST(request: Request) {
   if (!userId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
-  const body = (await request.json().catch(() => ({}))) as {
-    endpoint?: string;
-    keys?: { p256dh?: string; auth?: string };
-  };
-  if (
-    !body.endpoint ||
-    typeof body.endpoint !== "string" ||
-    !body.keys?.p256dh ||
-    !body.keys?.auth
-  ) {
+  if (!(await checkRateLimit(userId, "NOTIF_SUB", 20, 600))) {
+    return NextResponse.json({ error: "リクエストが多すぎます" }, { status: 429 });
+  }
+  const parsed = parsePushSubscription(await request.json().catch(() => null));
+  if (!parsed) {
     return NextResponse.json({ error: "購読データが不正です" }, { status: 400 });
   }
-  const sub: StoredPushSubscription = {
-    endpoint: body.endpoint,
-    keys: { p256dh: body.keys.p256dh, auth: body.keys.auth },
-  };
+  const sub: StoredPushSubscription = parsed;
   await savePushSubscription(userId, sub);
   return NextResponse.json({ ok: true });
 }

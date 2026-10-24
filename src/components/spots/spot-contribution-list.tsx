@@ -17,16 +17,6 @@ function formatDate(dateStr: string): string {
   return `${Number(parts[0])}年${Number(parts[1])}月${Number(parts[2])}日`;
 }
 
-function getSessionId(): string {
-  const key = "tsurispot_sid";
-  let sid = sessionStorage.getItem(key);
-  if (!sid) {
-    sid = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-    sessionStorage.setItem(key, sid);
-  }
-  return sid;
-}
-
 export function SpotContributionList({ initialContributions }: SpotContributionListProps) {
   // 投稿成功時の router.refresh() で最新が反映されるよう prop を直接使う（釣果一覧と同方針）。
   const contributions = initialContributions;
@@ -41,21 +31,24 @@ export function SpotContributionList({ initialContributions }: SpotContributionL
       const res = await fetch("/api/report-flag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ reportId: id, sessionId: getSessionId() }),
+        body: JSON.stringify({
+          reportId: id,
+          spotSlug: initialContributions.find((c) => c.id === id)?.spotSlug,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
         toast.success(data.message || "通報を受け付けました");
         setFlaggedIds((prev) => new Set(prev).add(id));
       } else {
-        toast.error(data.message || "通報に失敗しました。もう一度お試しください。");
+        toast.error(data.error || data.message || "通報に失敗しました。もう一度お試しください。");
       }
     } catch {
       toast.error("通報に失敗しました。もう一度お試しください。");
     }
     setSubmittingId(null);
     setConfirmingId(null);
-  }, []);
+  }, [initialContributions]);
 
   if (contributions.length === 0) {
     return (

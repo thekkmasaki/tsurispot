@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dbGet } from "@/lib/dynamodb";
-import { getShopSubscription } from "@/lib/shop-plan";
+import { getShopSubscription, verifyShopToken } from "@/lib/shop-plan";
 
 export async function GET(request: NextRequest) {
   const shop = request.nextUrl.searchParams.get("shop");
@@ -11,8 +10,13 @@ export async function GET(request: NextRequest) {
   }
 
   // トークン認証
-  const storedToken = await dbGet<string>(`SHOP#${shop}`, "TOKEN");
-  if (!storedToken || storedToken !== token) {
+  let tokenOk = false;
+  try {
+    tokenOk = typeof token === "string" && typeof shop === "string" && (await verifyShopToken(shop, token));
+  } catch {
+    return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
+  }
+  if (!tokenOk) {
     return NextResponse.json({ error: "認証に失敗しました" }, { status: 403 });
   }
 

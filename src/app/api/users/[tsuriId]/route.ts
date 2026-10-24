@@ -8,6 +8,7 @@ import {
   getFollowersCount,
 } from "@/lib/user-store";
 import { ALL_TIERS } from "@/lib/titles";
+import { filterOutFlagged } from "@/lib/social-store";
 
 interface CatchReport {
   id?: string;
@@ -76,7 +77,9 @@ export async function GET(
   }
 
   const allRaw = await redis.lrange(`auth:user_reports:${tsuriId}`, 0, 499);
-  const allReports = parseReports(allRaw as unknown[]);
+  // 通報で自動非表示になった投稿は他人のプロフィールに出さない（本人には残す）
+  const parsedReports = parseReports(allRaw as unknown[]);
+  const allReports = isSelf ? parsedReports : await filterOutFlagged(parsedReports);
   const recentReports = allReports.slice(0, 10);
 
   const reportCount = target.reportCount ?? allReports.length;

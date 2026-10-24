@@ -1,31 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { uploadToS3, deleteFromS3 } from "@/lib/s3";
-import { moderateImage } from "@/lib/rekognition";
+import { auth } from "@/lib/auth";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
-const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB（クライアント側で自動圧縮済み、iPhone対応）
+import { readMultipartFile, validateAndUploadImage } from "@/lib/image-upload";
+import { rejectInactiveUser } from "@/lib/user-status";
 
 export async function POST(request: NextRequest) {
-  // 非multipartボディだと formData() が throw する（未捕捉だと500になる）
-  let file: File | null = null;
-  try {
-    const formData = await request.formData();
-    file = formData.get("file") as File | null;
-  } catch {
-    return NextResponse.json({ error: "リクエスト形式が不正です" }, { status: 400 });
-  }
-
-  if (!file) {
-    return NextResponse.json({ error: "ファイルが必要です" }, { status: 400 });
-  }
-  if (!ALLOWED_TYPES.includes(file.type)) {
-    return NextResponse.json({ error: "JPG、PNG、WebPのみアップロード可能です" }, { status: 400 });
-  }
-  if (file.size > MAX_FILE_SIZE) {
-    return NextResponse.json({ error: "ファイルサイズは20MB以下にしてください" }, { status: 400 });
-  }
-
   // レート制限（S3 + Rekognition 課金の濫用防止）: 1IP 10分間に 20 枚まで
   if (!(await checkRateLimit(getClientIp(request), "CATCH_PHOTO", 20, 600))) {
     return NextResponse.json(
@@ -34,32 +13,28 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  try {
-    const ext = file.name.split(".").pop() || "jpg";
-    const filename = `catch-reports/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const url = await uploadToS3(filename, buffer, file.type);
-
-    // Rekognitionモデレーションチェック
-    try {
-      const result = await moderateImage(filename);
-      if (!result.safe) {
-        // NG画像を削除
-        await deleteFromS3(url);
-        console.warn("[catch-photo] モデレーションNG:", result.reason, result.labels);
-        return NextResponse.json(
-          { error: "この画像はアップロードできません。別の写真をお試しください。" },
-          { status: 400 },
-        );
-      }
-    } catch (err) {
-      // Rekognition障害時はスルー（可用性優先）
-      console.error("[catch-photo] Rekognitionエラー（スルー）:", err);
+  // 匿名投稿も許可するが、ログイン済みなら退会/BANを弾き、ユーザー単位でも制限する
+  const session = await auth().catch(() => null);
+  const tsuriId = session?.user?.tsuriId;
+  if (tsuriId) {
+    const inactive = await rejectInactiveUser(tsuriId);
+    if (inactive) return inactive;
+    if (!(await checkRateLimit(tsuriId, "CATCH_PHOTO_USER", 30, 600))) {
+      return NextResponse.json(
+        { error: "アップロード回数の上限に達しました。しばらくしてからお試しください。" },
+        { status: 429 },
+      );
     }
-
-    return NextResponse.json({ ok: true, url });
-  } catch (e) {
-    console.error("S3 upload error:", e);
-    return NextResponse.json({ error: "アップロードに失敗しました" }, { status: 500 });
   }
+
+  const parsed = await readMultipartFile(request);
+  if (!parsed.ok) {
+    return NextResponse.json({ error: parsed.error }, { status: parsed.status });
+  }
+
+  const result = await validateAndUploadImage(parsed.file, "catch-reports", "catch-photo");
+  if (!result.ok) {
+    return NextResponse.json({ error: result.error }, { status: result.status });
+  }
+  return NextResponse.json({ ok: true, url: result.url });
 }
