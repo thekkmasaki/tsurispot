@@ -59,8 +59,22 @@ test.describe("複数ユーザーセッション分離（旧LINE実装の『2人
     expect(visibleCookies).not.toMatch(/next-auth\.session-token/);
   });
 
-  test("/api/health/auth が AUTH_SECRET digest を返す", async ({ request }) => {
+  test("/api/health/auth は未認証だと最小レスポンスのみ（内部情報を返さない）", async ({ request }) => {
     const res = await request.get("/api/health/auth");
+    expect(res.status()).toBe(200);
+    const body = await res.json();
+    expect(body).toHaveProperty("ok", true);
+    expect(body).not.toHaveProperty("authSecretDigest");
+    expect(body).not.toHaveProperty("instance");
+  });
+
+  // 詳細診断は管理トークン（E2E_ADMIN_TOKEN）がある環境でのみ検証する
+  test("/api/health/auth が AUTH_SECRET digest を返す（管理トークン付き）", async ({ request }) => {
+    const token = process.env.E2E_ADMIN_TOKEN;
+    test.skip(!token, "E2E_ADMIN_TOKEN 未設定");
+    const res = await request.get("/api/health/auth", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     expect(res.status()).toBe(200);
     const body = await res.json();
     expect(body).toHaveProperty("authSecretDigest");

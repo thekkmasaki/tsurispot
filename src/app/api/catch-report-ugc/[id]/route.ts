@@ -5,6 +5,8 @@ import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
 import { decrementReportCount } from "@/lib/user-store";
 import { savePostMeta, deletePostMeta } from "@/lib/social-store";
+import { rejectInactiveUser } from "@/lib/user-status";
+import { SPOT_SLUG_RE } from "@/lib/ugc-validation";
 
 interface CatchReport {
   id: string;
@@ -27,27 +29,37 @@ const TTL_SECONDS = 365 * 24 * 60 * 60;
 const ALLOWED_METHODS = ["サビキ", "投げ", "ルアー", "フカセ", "エギング", "ジギング", "穴釣り", "ウキ釣り", "その他"];
 const ALLOWED_WEATHER = ["晴れ", "曇り", "雨", "風強い"];
 
-async function syncRedisItem(
-  tsuriId: string,
+async function syncRedisList(
+  listKey: string,
   id: string,
   updatedReport: CatchReport | null,
 ): Promise<void> {
   try {
-    const reports = await redis.lrange<string>(`auth:user_reports:${tsuriId}`, 0, -1);
+    const reports = await redis.lrange<string>(listKey, 0, -1);
     for (let i = 0; i < reports.length; i++) {
       const item = reports[i];
       const parsed = typeof item === "string" ? JSON.parse(item) : item;
       if (parsed?.id !== id) continue;
       if (updatedReport === null) {
-        await redis.lrem(`auth:user_reports:${tsuriId}`, 1, item);
+        await redis.lrem(listKey, 1, item);
       } else {
-        await redis.lset(`auth:user_reports:${tsuriId}`, i, JSON.stringify(updatedReport));
+        await redis.lset(listKey, i, JSON.stringify(updatedReport));
       }
       break;
     }
   } catch (err) {
     console.error("[釣果同期] Redis 同期エラー:", err);
   }
+}
+
+// マイページ用リストと、トップ「みんなの最近の釣果」(recent_reports:global) の両方に編集/削除を反映する
+async function syncRedisItem(
+  tsuriId: string,
+  id: string,
+  updatedReport: CatchReport | null,
+): Promise<void> {
+  await syncRedisList(`auth:user_reports:${tsuriId}`, id, updatedReport);
+  await syncRedisList("recent_reports:global", id, updatedReport);
 }
 
 export async function PATCH(
@@ -59,11 +71,13 @@ export async function PATCH(
   if (!tsuriId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
+  const inactive = await rejectInactiveUser(tsuriId);
+  if (inactive) return inactive;
 
   const { id } = await params;
   const { searchParams } = new URL(request.url);
   const spotSlug = searchParams.get("spotSlug");
-  if (!spotSlug) {
+  if (!spotSlug || !SPOT_SLUG_RE.test(spotSlug)) {
     return NextResponse.json({ error: "spotSlug が必要です" }, { status: 400 });
   }
 
@@ -138,11 +152,13 @@ export async function DELETE(
   if (!tsuriId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
+  const inactive = await rejectInactiveUser(tsuriId);
+  if (inactive) return inactive;
 
   const { id } = await params;
   const { searchParams } = new URL(request.url);
   const spotSlug = searchParams.get("spotSlug");
-  if (!spotSlug) {
+  if (!spotSlug || !SPOT_SLUG_RE.test(spotSlug)) {
     return NextResponse.json({ error: "spotSlug が必要です" }, { status: 400 });
   }
 

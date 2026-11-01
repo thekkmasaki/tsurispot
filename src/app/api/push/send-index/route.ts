@@ -9,6 +9,7 @@ import {
   clusterByDistance,
   pickHomeClusterIndex,
 } from "@/lib/geo/activity-cluster";
+import { isBearerMatch, resolveAdminToken } from "@/lib/safe-compare";
 
 /**
  * 毎朝の釣行指数 Push 送信（案③）。GitHub Actions (push-morning-index.yml) から毎朝叩かれる。
@@ -34,8 +35,8 @@ interface StoredSub {
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
-  const expectedToken = process.env.ADMIN_RECONCILE_TOKEN;
-  if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
+  const expectedToken = resolveAdminToken("ADMIN_PUSH_TOKEN", "ADMIN_RECONCILE_TOKEN");
+  if (!isBearerMatch(authHeader, expectedToken)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 

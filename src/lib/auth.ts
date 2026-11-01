@@ -2,6 +2,22 @@ import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
 import Cognito from "next-auth/providers/cognito";
 import { getUserByProvider, getUserById, createUser, updateAvatarUrl } from "@/lib/user-store";
+import { getUserStatus, type UserStatus } from "@/lib/user-status";
+
+// auth() は全リクエストで呼ばれるため、状態確認は60秒だけプロセス内キャッシュする
+const STATUS_CACHE_TTL_MS = 60_000;
+const STATUS_CACHE_MAX = 2000;
+const statusCache = new Map<string, { status: UserStatus; at: number }>();
+
+async function getCachedUserStatus(tsuriId: string): Promise<UserStatus> {
+  const now = Date.now();
+  const hit = statusCache.get(tsuriId);
+  if (hit && now - hit.at < STATUS_CACHE_TTL_MS) return hit.status;
+  const status = await getUserStatus(tsuriId);
+  if (statusCache.size >= STATUS_CACHE_MAX) statusCache.clear();
+  statusCache.set(tsuriId, { status, at: now });
+  return status;
+}
 
 interface CognitoProfile {
   sub: string;
@@ -121,7 +137,7 @@ const config: NextAuthConfig = {
     error: "/login",
   },
   callbacks: {
-    async jwt({ token, account, profile, trigger, session: updateData }) {
+    async jwt({ token, account, profile, trigger }) {
       if (account?.providerAccountId) {
         token.tsuriId = undefined;
         token.nickname = undefined;
@@ -220,10 +236,12 @@ const config: NextAuthConfig = {
         } catch (err) {
           console.error("[auth] jwt callback error (update):", err);
         }
-        if (updateData && typeof updateData === "object" && "nickname" in updateData) {
-          token.nickname = (updateData as { nickname: string }).nickname;
-          token.isNewUser = false;
-        }
+      }
+
+      // 退会/BAN済みユーザーのセッションを無効化（ログイン直後の呼び出しは対象外）。Redis障害時はfail-open
+      if (!account?.providerAccountId && token.tsuriId) {
+        const status = await getCachedUserStatus(token.tsuriId as string);
+        if (status !== "active") return null;
       }
       return token;
     },

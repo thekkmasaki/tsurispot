@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
-import { getEffectivePlan } from "@/lib/shop-plan";
+import { getEffectivePlan, verifyShopToken, isDemoShop } from "@/lib/shop-plan";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export interface BaitStockEntry {
   name: string;
@@ -35,6 +36,40 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ stock: fallback, shop: slug, live: false }, { headers });
 }
 
+const SHOP_SLUG_RE = /^[a-z0-9-]{1,100}$/;
+const MAX_STOCK_ITEMS = 50;
+const STATUS_VALUES = ["available", "low", "out"] as const;
+
+type StockInput = Omit<BaitStockEntry, "updatedAt">;
+
+/** stock の各要素を検証し、許可フィールドのみの新しいオブジェクトに詰め直す。不正なら null。 */
+function sanitizeStock(raw: unknown): StockInput[] | null {
+  if (!Array.isArray(raw) || raw.length > MAX_STOCK_ITEMS) return null;
+  const out: StockInput[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") return null;
+    const { name, available, status, price } = item as Record<string, unknown>;
+    if (typeof name !== "string" || name.trim().length === 0 || name.length > 50) return null;
+    if (typeof available !== "boolean") return null;
+    const entry: StockInput = { name: name.trim(), available };
+    if (status !== undefined) {
+      if (typeof status !== "string" || !(STATUS_VALUES as readonly string[]).includes(status)) return null;
+      entry.status = status as StockInput["status"];
+    }
+    if (price !== undefined) {
+      if (typeof price !== "string" || price.length > 30) return null;
+      entry.price = price;
+    }
+    out.push(entry);
+  }
+  return out;
+}
+
+function timestamp(): string {
+  const now = new Date();
+  return `${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")}`;
+}
+
 // POST /api/bait-stock
 // Body: { shop: string, token: string, stock: BaitStockEntry[] }
 export async function POST(request: NextRequest) {
@@ -45,69 +80,52 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "invalid JSON body" }, { status: 400 });
   }
 
-  const { shop, token, stock } = body as {
-    shop: string;
-    token: string;
-    stock: BaitStockEntry[];
-  };
+  const { shop, token, stock } = body as { shop?: unknown; token?: unknown; stock?: unknown };
 
-  if (!shop || !token || !stock) {
+  if (typeof shop !== "string" || !SHOP_SLUG_RE.test(shop) || typeof token !== "string" || !stock) {
     return NextResponse.json({ error: "shop, token, stock required" }, { status: 400 });
   }
-
-  // stock が配列であることを検証
-  if (!Array.isArray(stock)) {
-    return NextResponse.json({ error: "stock must be an array" }, { status: 400 });
+  if (token.length > 200) {
+    return NextResponse.json({ error: "invalid token" }, { status: 403 });
   }
 
-  // デモ店舗はトークン不要
-  const isDemo = shop === "sample-premium" || shop === "sample-basic" || shop === "sample-free";
+  const cleanStock = sanitizeStock(stock);
+  if (!cleanStock) {
+    return NextResponse.json({ error: "stock の形式が不正です" }, { status: 400 });
+  }
 
-  // 静的トークン（掲載店舗向け）
-  const STATIC_TOKENS: Record<string, string> = {
-    "barbless-karatsu": "barbless-2026",
-  };
-  const staticMatch = !!(STATIC_TOKENS[shop] && STATIC_TOKENS[shop] === token);
-  // DynamoDB障害時にも保存成功扱いにする対象
-  const isVerified = isDemo || staticMatch;
+  // トークン総当たり対策（IP単位: 10分に30回）
+  if (!(await checkRateLimit(getClientIp(request), "BAITSTOCK_AUTH", 30, 600))) {
+    return NextResponse.json({ error: "リクエストが多すぎます。しばらくしてからお試しください。" }, { status: 429 });
+  }
 
-  if (!isDemo) {
+  const stockWithTime = cleanStock.map((item) => ({ ...item, updatedAt: timestamp() }));
 
-    if (!staticMatch) {
-      // DynamoDB に保存されたトークンと照合
-      try {
-        const storedToken = await dbGet<string>(`SHOP#${shop}`, "TOKEN");
-        if (!storedToken || storedToken !== token) {
-          return NextResponse.json({ error: "invalid token" }, { status: 403 });
-        }
-      } catch {
-        return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
-      }
+  // デモ店舗: 体験用に成功を返すが、何も保存しない
+  if (isDemoShop(shop)) {
+    return NextResponse.json({ success: true, stock: stockWithTime, demo: true });
+  }
+
+  try {
+    if (!(await verifyShopToken(shop, token))) {
+      return NextResponse.json({ error: "invalid token" }, { status: 403 });
     }
+  } catch {
+    return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
   }
 
   // ショップの存在確認
-  const shopData = getShopBySlug(shop);
-  if (!shopData) {
+  if (!getShopBySlug(shop)) {
     return NextResponse.json({ error: "shop not found" }, { status: 404 });
   }
 
-  // タイムスタンプを付与
-  const now = new Date();
-  const timeStr = `${now.getMonth() + 1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")}`;
-  const stockWithTime = stock.map((item) => ({
-    ...item,
-    updatedAt: timeStr,
-  }));
-
-  // DynamoDBに保存（7日間TTL）+ レートリミット
+  // DynamoDBに保存（7日間TTL）+ 日次レートリミット。障害時は成功扱いにしない。
   try {
     const date = new Date().toISOString().slice(0, 10);
     const count = await dbIncr(`SHOP#${shop}`, `BAITLIMIT#${date}`, 1, 86400);
-    // レートリミット: 課金状態を加味した実効プランに基づいて判定
     const planLevel = await getEffectivePlan(shop);
     const dailyLimits: Record<string, number> = { free: 10, basic: 10, pro: 50 };
-    const dailyLimit = isVerified ? 100 : (dailyLimits[planLevel] ?? 10);
+    const dailyLimit = dailyLimits[planLevel] ?? 10;
     if (count > dailyLimit) {
       return NextResponse.json(
         { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。プロプラン（初年度 月額1,980円）なら1日50回まで更新できます。` },
@@ -116,10 +134,7 @@ export async function POST(request: NextRequest) {
     }
     await dbPut(`SHOP#${shop}`, "BAITSTOCK", stockWithTime, 604800);
   } catch {
-    // DynamoDB接続エラー時は認証済み店舗なら成功扱い
-    if (!isVerified) {
-      return NextResponse.json({ error: "サーバーエラーが発生しました。しばらくしてから再度お試しください。" }, { status: 500 });
-    }
+    return NextResponse.json({ error: "サーバーエラーが発生しました。しばらくしてから再度お試しください。" }, { status: 500 });
   }
 
   return NextResponse.json({ success: true, stock: stockWithTime });

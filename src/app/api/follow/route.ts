@@ -10,6 +10,8 @@ import {
 } from "@/lib/user-store";
 import { notify } from "@/lib/notifications";
 import { isBlockedBy } from "@/lib/social-store";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { rejectInactiveUser } from "@/lib/user-status";
 
 export async function POST(request: Request) {
   const session = await auth();
@@ -18,9 +20,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
 
+  const inactive = await rejectInactiveUser(viewerId);
+  if (inactive) return inactive;
+  if (!(await checkRateLimit(viewerId, "FOLLOW", 60, 600))) {
+    return NextResponse.json({ error: "操作が多すぎます。しばらくしてからお試しください。" }, { status: 429 });
+  }
+
   const body = (await request.json().catch(() => ({}))) as { tsuriId?: string };
   const targetId = body.tsuriId;
-  if (!targetId || typeof targetId !== "string") {
+  if (!targetId || typeof targetId !== "string" || targetId.length > 100) {
     return NextResponse.json({ error: "tsuriIdが必要です" }, { status: 400 });
   }
   if (targetId === viewerId) {

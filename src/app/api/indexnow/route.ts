@@ -93,10 +93,15 @@ export async function GET() {
  * Body: { urls: string[] }
  */
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const urls: string[] = body.urls;
+  let body: { urls?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ success: false, message: "不正なJSONです" }, { status: 400 });
+  }
+  const urls = body.urls as unknown[];
 
-  if (!urls || !Array.isArray(urls) || urls.length === 0) {
+  if (!urls || !Array.isArray(urls) || urls.length === 0 || urls.length > 1000) {
     return NextResponse.json(
       { success: false, message: "urlsパラメータ（文字列配列）が必要です" },
       { status: 400 }
@@ -104,7 +109,16 @@ export async function POST(request: NextRequest) {
   }
 
   // 自ドメイン(tsurispot.com)以外のURLは弾く（IndexNow送信枠の濫用防止・防御的検証）
-  const ownUrls = urls.filter((u) => typeof u === "string" && u.startsWith(BASE_URL));
+  // startsWith では https://tsurispot.com.evil.example や https://tsurispot.com@evil.example を通してしまうためホスト名で判定
+  const ownUrls = urls.filter((u): u is string => {
+    if (typeof u !== "string") return false;
+    try {
+      const parsed = new URL(u);
+      return parsed.protocol === "https:" && parsed.hostname === HOST && !parsed.username && !parsed.password;
+    } catch {
+      return false;
+    }
+  });
   if (ownUrls.length === 0) {
     return NextResponse.json(
       { success: false, message: "送信できるのは自サイト(tsurispot.com)のURLのみです" },

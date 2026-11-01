@@ -1,23 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
-import { uploadToS3, deleteFromS3 } from "@/lib/s3";
-import { moderateImage } from "@/lib/rekognition";
+import { randomBytes, timingSafeEqual } from "crypto";
+import { auth } from "@/lib/auth";
+import { deleteFromS3 } from "@/lib/s3";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { readMultipartFile, validateAndUploadImage } from "@/lib/image-upload";
+import { rejectInactiveUser } from "@/lib/user-status";
+import { indexUserSpotPhoto } from "@/lib/account-cleanup";
+import { readJsonBody, resolveSpot, SPOT_SLUG_RE } from "@/lib/ugc-validation";
 
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
-const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB（クライアント側で自動圧縮済み）
 const MAX_PHOTOS_PER_SPOT = 20;
 
 interface SpotPhotoEntry {
   url: string;
   token: string;
   uploadedAt: number;
+  uploaderId?: string;
+}
+
+function tokenMatches(actual: string, given: unknown): boolean {
+  if (typeof given !== "string" || given.length !== actual.length) return false;
+  return timingSafeEqual(Buffer.from(actual), Buffer.from(given));
 }
 
 // GET /api/spot-photo?slug=xxx
 export async function GET(request: NextRequest) {
   const slug = request.nextUrl.searchParams.get("slug");
-  if (!slug) {
+  if (!slug || !SPOT_SLUG_RE.test(slug)) {
     return NextResponse.json({ error: "slug parameter required" }, { status: 400 });
   }
 
@@ -32,29 +41,37 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/spot-photo — multipart/form-data upload
+// POST /api/spot-photo — multipart/form-data upload（ログイン必須）
 export async function POST(request: NextRequest) {
-  const formData = await request.formData();
-  const slug = formData.get("slug") as string;
-  const file = formData.get("file") as File | null;
+  const session = await auth();
+  const tsuriId = session?.user?.tsuriId;
+  if (!tsuriId) {
+    return NextResponse.json({ error: "写真の投稿にはログインが必要です" }, { status: 401 });
+  }
+  const inactive = await rejectInactiveUser(tsuriId);
+  if (inactive) return inactive;
 
-  if (!slug || !file) {
-    return NextResponse.json({ error: "slug, file required" }, { status: 400 });
-  }
-  if (!ALLOWED_TYPES.includes(file.type)) {
-    return NextResponse.json({ error: "JPG、PNG、WebPのみアップロード可能です" }, { status: 400 });
-  }
-  if (file.size > MAX_FILE_SIZE) {
-    return NextResponse.json({ error: "ファイルサイズは20MB以下にしてください" }, { status: 400 });
-  }
-
-  // レート制限（S3 + Rekognition 課金の濫用防止）: 1IP 10分間に 20 枚まで
-  if (!(await checkRateLimit(getClientIp(request), "SPOT_PHOTO", 20, 600))) {
+  // レート制限（S3 + Rekognition 課金の濫用防止）: ユーザー10分に10枚 / IP10分に20枚
+  if (
+    !(await checkRateLimit(tsuriId, "SPOT_PHOTO_USER", 10, 600)) ||
+    !(await checkRateLimit(getClientIp(request), "SPOT_PHOTO", 20, 600))
+  ) {
     return NextResponse.json(
       { error: "アップロード回数の上限に達しました。しばらくしてからお試しください。" },
       { status: 429 },
     );
   }
+
+  const parsed = await readMultipartFile(request);
+  if (!parsed.ok) {
+    return NextResponse.json({ error: parsed.error }, { status: parsed.status });
+  }
+
+  const spot = resolveSpot(parsed.formData.get("slug"));
+  if (!spot) {
+    return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
+  }
+  const slug = spot.slug;
 
   // 枚数制限チェック
   let currentPhotos: SpotPhotoEntry[] = [];
@@ -69,53 +86,45 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const result = await validateAndUploadImage(parsed.file, `spot-photos/${slug}`, "spot-photo");
+  if (!result.ok) {
+    return NextResponse.json({ error: result.error }, { status: result.status });
+  }
+
   try {
-    const ext = file.name.split(".").pop() || "jpg";
-    const filename = `spot-photos/${slug}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const url = await uploadToS3(filename, buffer, file.type);
-
-    // Rekognitionモデレーション
-    try {
-      const result = await moderateImage(filename);
-      if (!result.safe) {
-        await deleteFromS3(url);
-        console.warn("[spot-photo] モデレーションNG:", result.reason, result.labels);
-        return NextResponse.json(
-          { error: "この画像はアップロードできません。別の写真をお試しください。" },
-          { status: 400 },
-        );
-      }
-    } catch (err) {
-      console.error("[spot-photo] Rekognitionエラー（スルー）:", err);
-    }
-
-    // 削除用トークン
-    const token = Math.random().toString(36).slice(2, 14);
-
-    const entry: SpotPhotoEntry = { url, token, uploadedAt: Date.now() };
-    const updatedPhotos = [...currentPhotos, entry];
-    await dbPut(`SPOT#${slug}`, "PHOTOS", updatedPhotos);
-
-    return NextResponse.json({ ok: true, url, token });
+    // 削除用トークン（暗号論的乱数）
+    const token = randomBytes(16).toString("hex");
+    const entry: SpotPhotoEntry = { url: result.url, token, uploadedAt: Date.now(), uploaderId: tsuriId };
+    await dbPut(`SPOT#${slug}`, "PHOTOS", [...currentPhotos, entry]);
+    await indexUserSpotPhoto(tsuriId, slug, result.url).catch((err) =>
+      console.error("[spot-photo] 退会用索引の書込エラー:", err),
+    );
+    return NextResponse.json({ ok: true, url: result.url, token });
   } catch (e) {
-    console.error("S3 upload error:", e);
+    console.error("[spot-photo] 保存エラー:", e);
+    await deleteFromS3(result.url).catch(() => {});
     return NextResponse.json({ error: "アップロードに失敗しました" }, { status: 500 });
   }
 }
 
 // DELETE /api/spot-photo
 export async function DELETE(request: NextRequest) {
-  const body = await request.json();
-  const { slug, url, token } = body as { slug: string; url: string; token: string };
+  const body = await readJsonBody<{ slug?: string; url?: string; token?: string }>(request, 4 * 1024);
+  if (!body) {
+    return NextResponse.json({ error: "リクエスト形式が不正です" }, { status: 400 });
+  }
+  const { slug, url, token } = body;
 
-  if (!slug || !url || !token) {
+  if (typeof slug !== "string" || !SPOT_SLUG_RE.test(slug) || typeof url !== "string" || !token) {
     return NextResponse.json({ error: "slug, url, token required" }, { status: 400 });
+  }
+  if (!(await checkRateLimit(getClientIp(request), "SPOT_PHOTO_DELETE", 30, 600))) {
+    return NextResponse.json({ error: "リクエストが多すぎます" }, { status: 429 });
   }
 
   try {
     const currentPhotos = (await dbGet<SpotPhotoEntry[]>(`SPOT#${slug}`, "PHOTOS")) || [];
-    const target = currentPhotos.find((p) => p.url === url && p.token === token);
+    const target = currentPhotos.find((p) => p.url === url && tokenMatches(p.token, token));
     if (!target) {
       return NextResponse.json({ error: "写真が見つからないか、削除権限がありません" }, { status: 404 });
     }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import crypto from "node:crypto";
+import { isBearerMatch, resolveAdminToken } from "@/lib/safe-compare";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,8 +10,18 @@ export const dynamic = "force-dynamic";
  * Cognito Provider Configuration エラーの原因切り分け用エンドポイント。
  *
  * 値そのものは絶対に漏らさない。present/absent + 長さ + OIDC 到達性のみ返す。
+ * 認証設定の内部状態は攻撃の下見に使えるため、管理トークン（Bearer）がある場合のみ詳細を返す。
+ * 未認証は生存確認用の最小レスポンスのみ（外向き fetch も行わない）。
  */
-export async function GET() {
+export async function GET(request: Request) {
+  const adminToken = resolveAdminToken("ADMIN_HEALTH_TOKEN", "ADMIN_SECRET", "ADMIN_RECONCILE_TOKEN");
+  if (!isBearerMatch(request.headers.get("authorization"), adminToken)) {
+    return NextResponse.json(
+      { ok: true, timestamp: new Date().toISOString() },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   const secret = process.env.AUTH_SECRET;
   const cognitoIssuer = process.env.COGNITO_ISSUER;
   const cognitoClientId = process.env.COGNITO_CLIENT_ID;
@@ -60,5 +71,5 @@ export async function GET() {
         oidcIssuerEcho.replace(/\/$/, "") === cognitoIssuer.replace(/\/$/, ""),
     },
     timestamp: new Date().toISOString(),
-  });
+  }, { headers: { "Cache-Control": "no-store" } });
 }

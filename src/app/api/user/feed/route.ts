@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { redis } from "@/lib/redis";
 import { getFollowingList, getUserById } from "@/lib/user-store";
+import { filterOutFlagged } from "@/lib/social-store";
 
 interface CatchReport {
   id?: string;
@@ -68,7 +69,7 @@ export async function GET() {
     }),
   );
 
-  const items = perUserItems
+  const sorted = perUserItems
     .flat()
     .sort((a, b) => {
       const aTime = (a.createdAt || a.date || "0").localeCompare(
@@ -77,6 +78,8 @@ export async function GET() {
       return -aTime;
     })
     .slice(0, 50);
+  // 通報で自動非表示になった投稿はフォロー中フィードにも出さない
+  const items = await filterOutFlagged(sorted);
 
   return NextResponse.json({ items });
 }

@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { safeEqual } from "@/lib/safe-compare";
 
 // robots.ts と意図を一致させること。
 // AI検索bot（OAI-SearchBot / ChatGPT-User / PerplexityBot / Claude-SearchBot / Claude-User /
@@ -56,7 +57,7 @@ function checkOriginLockdown(req: NextRequest): NextResponse | null {
   if (ORIGIN_LOCKDOWN_MODE !== "log" && ORIGIN_LOCKDOWN_MODE !== "enforce") return null;
 
   const provided = req.headers.get("x-origin-verify");
-  if (provided === ORIGIN_VERIFY_SECRET) return null; // Cloudflare 経由 = 許可
+  if (safeEqual(provided, ORIGIN_VERIFY_SECRET)) return null; // Cloudflare 経由 = 許可（定数時間比較）
 
   if (ORIGIN_LOCKDOWN_MODE === "log") {
     console.warn(

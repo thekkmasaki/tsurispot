@@ -184,6 +184,20 @@ export async function deleteUser(userId: string): Promise<boolean> {
     /* 失敗しても削除は続行 */
   }
 
+  // 個人データの残存防止: ウィッシュ(+メモ)・チェックイン・Push購読・通知未読カウンタ・検索索引ポインタ
+  try {
+    const owned = await Promise.all([
+      dbQuery(wishPk(userId), { all: true }),
+      dbQuery(checkinPk(userId), { all: true }),
+      dbQuery(pushPk(userId), { all: true }),
+    ]);
+    await Promise.all(owned.flat().map((it) => dbDelete(it.pk, it.sk)));
+    await dbDelete(userPk(userId), "NOTIF_UNREAD");
+    await dbDelete(userPk(userId), "SEARCH_SK");
+  } catch {
+    /* 失敗しても削除は続行 */
+  }
+
   await dbDelete(userPk(userId), PROFILE);
   await dbDelete(providerPk(user.provider, user.providerId), "MAP");
   await dbDelete(userPk(userId), FAVORITES);

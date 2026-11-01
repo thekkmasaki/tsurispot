@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { createHmac } from "crypto";
 import { prefectures } from "@/lib/data/prefectures";
+import { safeEqual } from "@/lib/safe-compare";
 
 const CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET ?? "";
 const CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN ?? "";
@@ -26,7 +27,7 @@ function verifySignature(body: string, signature: string): boolean {
   const hash = createHmac("SHA256", CHANNEL_SECRET)
     .update(body)
     .digest("base64");
-  return hash === signature;
+  return safeEqual(hash, signature);
 }
 
 /** LINEにリプライメッセージを送信（quickReply対応） */

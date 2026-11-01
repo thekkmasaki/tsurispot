@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rejectInactiveUser } from "@/lib/user-status";
 import { auth } from "@/lib/auth";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { getUserById } from "@/lib/user-store";
@@ -15,6 +16,8 @@ export async function POST(
   if (!tsuriId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
+  const inactive = await rejectInactiveUser(tsuriId);
+  if (inactive) return inactive;
   if (!(await checkRateLimit(getClientIp(request), "REPORT_LIKE", 60, 600))) {
     return NextResponse.json({ error: "操作が多すぎます" }, { status: 429 });
   }

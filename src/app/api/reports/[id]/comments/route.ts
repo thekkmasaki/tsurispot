@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rejectInactiveUser } from "@/lib/user-status";
 import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
@@ -29,6 +30,8 @@ export async function POST(
   if (!tsuriId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
+  const inactive = await rejectInactiveUser(tsuriId);
+  if (inactive) return inactive;
   if (!(await checkRateLimit(getClientIp(request), "REPORT_COMMENT", 10, 600))) {
     return NextResponse.json(
       { error: "コメントが多すぎます。しばらくしてからお試しください。" },

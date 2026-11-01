@@ -36,13 +36,10 @@ describe("shop-auth/verify", () => {
     expect(res.status).toBe(400);
   });
 
-  it("サンプル店舗 + demo トークンで ok（DBを引かず通過）", async () => {
+  it("サンプル店舗 + 固定 demo トークンは受け付けない（403）", async () => {
     vi.mocked(dbGet).mockResolvedValue(null);
     const res = await verifyPOST(req("/api/shop-auth/verify", { shop: "sample-basic", token: "demo" }));
-    expect(res.status).toBe(200);
-    const d = await res.json();
-    expect(d.ok).toBe(true);
-    expect(d.plan).toBe("basic");
+    expect(res.status).toBe(403);
   });
 
   it("実店舗で DBトークン一致なら ok", async () => {

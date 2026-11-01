@@ -6,7 +6,9 @@ import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { incrementContributionCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import { getSpotBySlug } from "@/lib/data/spots";
+import { rejectInactiveUser } from "@/lib/user-status";
+import { isReservedName } from "@/lib/reserved-names";
+import { readJsonBody, resolveSpot } from "@/lib/ugc-validation";
 import type { SpotContribution } from "@/lib/data/spot-contributions";
 
 // TTL: 365日（釣果UGCと同じ）
@@ -31,27 +33,34 @@ export async function POST(request: Request) {
       );
     }
 
-    // レート制限: 1IP 10分間に 10 投稿まで
-    if (!(await checkRateLimit(getClientIp(request), "SPOT_CONTRIB", 10, 600))) {
+    const inactive = await rejectInactiveUser(tsuriId);
+    if (inactive) return inactive;
+
+    // レート制限: 1IP 10分間に 10 投稿まで＋ユーザー単位
+    if (
+      !(await checkRateLimit(getClientIp(request), "SPOT_CONTRIB", 10, 600)) ||
+      !(await checkRateLimit(tsuriId, "SPOT_CONTRIB_USER", 10, 3600))
+    ) {
       return NextResponse.json(
         { error: "投稿が多すぎます。しばらくしてからお試しください。" },
         { status: 429 },
       );
     }
 
-    const body = await request.json().catch(() => ({}));
-    const { spotSlug, type, text } = body as {
-      spotSlug?: string;
-      type?: string;
-      text?: string;
-    };
+    const body = await readJsonBody<{ spotSlug?: string; type?: string; text?: string }>(request);
+    if (!body) {
+      return NextResponse.json({ error: "リクエスト形式が不正です" }, { status: 400 });
+    }
+    const { type, text } = body;
 
-    // バリデーション
-    if (!spotSlug || typeof spotSlug !== "string" || spotSlug.length > 100) {
+    // バリデーション（形式＋実在。任意文字列で DynamoDB キー SPOT#{slug} を作らせない）
+    const spot = resolveSpot(body.spotSlug);
+    if (!spot) {
       return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
     }
+    const spotSlug = spot.slug;
     // 釣り禁止スポットへの投稿は受け付けない（UIでもフォームを出していない）
-    if (getSpotBySlug(spotSlug)?.fishingBan?.scope === "full") {
+    if (spot.fishingBan?.scope === "full") {
       return NextResponse.json(
         { error: "この釣り場は現在釣りが禁止されているため、投稿を受け付けていません。" },
         { status: 403 },
@@ -63,6 +72,12 @@ export async function POST(request: Request) {
     }
     if (!userName || userName.length > 20) {
       return NextResponse.json({ error: "ニックネームを設定してから投稿してください" }, { status: 400 });
+    }
+    if (isReservedName(userName)) {
+      return NextResponse.json(
+        { error: "運営を連想させるニックネームでは投稿できません。ニックネームを変更してください" },
+        { status: 400 },
+      );
     }
     // 釣り場メモは最低限の長さを要求（薄いUGCでSEO品質を下げないため）
     const trimmed = typeof text === "string" ? text.trim() : "";

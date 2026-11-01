@@ -356,7 +356,7 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/jpeg,image/png,image/webp"
+          accept="image/jpeg,image/png"
           onChange={handlePhotoUpload}
           className="hidden"
         />
@@ -381,7 +381,7 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
           )}
         </Button>
         <p className="text-xs text-muted-foreground">
-          JPG・PNG・WebP、1枚5MBまで。ベーシック3枚、プロ20枚まで。
+          JPG・PNG、1枚5MBまで。ベーシック3枚、プロ20枚まで。
         </p>
         {photoError && (
           <p className="text-xs text-red-600">{photoError}</p>

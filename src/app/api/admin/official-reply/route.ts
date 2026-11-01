@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { purgeCloudflareUrls } from "@/lib/cloudflare";
 import { getPostMeta, setOfficialReply } from "@/lib/social-store";
+import { isBearerMatch } from "@/lib/safe-compare";
 
 /**
  * UGC釣果投稿への運営公式返信を登録する管理API。
@@ -18,7 +19,7 @@ const MAX_TEXT_LENGTH = 500;
 
 export async function POST(request: Request) {
   const auth = request.headers.get("Authorization");
-  if (!ADMIN_SECRET || auth !== `Bearer ${ADMIN_SECRET}`) {
+  if (!isBearerMatch(auth, ADMIN_SECRET)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
