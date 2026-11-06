@@ -705,4 +705,26 @@ export const seaFishKaiyuu: FishSpecies[] = [
     ],
     spots: [],
   },
+  {
+    id: "f-aiburi",
+    name: "アイブリ",
+    nameKana: "アイブリ",
+    nameEnglish: "Blackbanded Trevally",
+    scientificName: "Seriolina nigrofasciata",
+    slug: "aiburi",
+    description:
+      "ブリやカンパチに近いアジ科の魚で、ブリ類より体高があり、体側に暗色の横帯が出ることがあります。水深20〜150mほどの沖合の岩礁域に暮らし、水揚げが少ないため市場に並ぶことはまれ。釣りでは船からの外道や珍客として上がることが多く、陸っぱりでの釣果は多くありません。身は白身で、刺身にすると甘みがあると言われます。",
+    category: "sea",
+    family: "アジ科",
+    difficulty: "advanced",
+    tasteRating: 4,
+    sizeCm: "30~60cm",
+    seasonMonths: [9, 10, 11, 12],
+    peakMonths: [],
+    cookingTips: ["刺身", "塩焼き", "煮付け"],
+    youtubeLinks: [
+      { label: "アイブリの釣果・さばき方", searchQuery: "アイブリ 釣り 刺身 さばき方", description: "アイブリを釣った動画や刺身にする手順を探す" },
+    ],
+    spots: [],
+  },
 ];
