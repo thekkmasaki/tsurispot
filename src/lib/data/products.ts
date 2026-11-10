@@ -621,7 +621,7 @@ export const products: Product[] = [
     priceRange: "12,000円前後",
     imageDescription: "シマノ 25ソルティーアドバンス ショアモデル エギング S83ML",
     amazonAsin: "",
-    // TODO: ユーザー提供の https://link.amazon/B0aq95SSM は404だったため、再発行され次第 amazonDirectUrl に設定
+    amazonDirectUrl: "https://link.amazon/B0aq95SSM",
     rakutenSearchQuery: "シマノ 25 ソルティーアドバンス ショアモデル エギング S83ML",
     category: "rod",
     difficulty: "beginner",
@@ -668,7 +668,7 @@ export const products: Product[] = [
     priceRange: "1,000〜1,500円",
     imageDescription: "ヤマシタ エギ王 K エギ",
     amazonAsin: "",
-    // TODO: ユーザー提供の https://link.amazon/B0ejsJWxb は404だったため、再発行され次第 amazonDirectUrl に設定
+    amazonDirectUrl: "https://link.amazon/B0ejsJWxb",
     rakutenSearchQuery: "ヤマシタ エギ王K 3.5号",
     category: "tackle",
     difficulty: "beginner",
