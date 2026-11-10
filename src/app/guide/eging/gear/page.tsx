@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronLeft } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProductList } from "@/components/affiliate/product-list";
@@ -48,6 +49,41 @@ const egis = products.filter(
   (p) => p.relatedMethods.includes("eging") && p.category === "tackle" && /エギ/.test(p.name)
 );
 
+const catchPhotos = [
+  { src: "aoriika-night-egi", alt: "エギに掛かって釣り上げられたアオリイカ（夜の堤防）", cap: "夜の堤防でエギに乗ったアオリイカ" },
+  { src: "aoriika-hanging", alt: "堤防で吊り下げたアオリイカ", cap: "堤防で釣れたアオリイカ。胴の斑点模様がはっきり出ています" },
+  { src: "aoriika-size-iphone", alt: "iPhoneとナイフの横に並べたアオリイカ", cap: "iPhoneと並べたサイズ感（胴長はスマホより少し長いくらい）" },
+  { src: "kouika", alt: "堤防に置いたコウイカ", cap: "エギには時々コウイカも掛かります" },
+];
+const foodPhotos = [
+  { src: "ika-sashimi", alt: "イカ刺し", cap: "刺身。釣りたては透明感が違います" },
+  { src: "ika-nigiri", alt: "イカの握り寿司", cap: "握りにしても甘みが際立ちます" },
+  { src: "yaki-ika", alt: "焼きイカ", cap: "炙り・焼きイカ" },
+  { src: "ika-tempura", alt: "イカの天ぷら", cap: "天ぷら" },
+  { src: "geso-ponzu", alt: "ゲソのポン酢和え", cap: "ゲソもポン酢で美味しくいただけます" },
+];
+
+function PhotoGrid({ photos }: { photos: { src: string; alt: string; cap: string }[] }) {
+  return (
+    <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+      {photos.map((p) => (
+        <figure key={p.src}>
+          <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-muted">
+            <Image
+              src={`/images/eging/${p.src}.webp`}
+              alt={p.alt}
+              fill
+              sizes="(min-width: 640px) 220px, 45vw"
+              className="object-cover"
+            />
+          </div>
+          <figcaption className="mt-1 text-xs leading-snug text-muted-foreground">{p.cap}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 function H2({ children }: { children: React.ReactNode }) {
   return <h2 className="mb-3 mt-10 text-xl font-bold sm:text-2xl">{children}</h2>;
 }
@@ -78,6 +114,12 @@ export default function EgingGearPage() {
           </ul>
         </CardContent>
       </Card>
+
+      <H2>実際に釣れたイカ</H2>
+      <p className="text-sm leading-relaxed sm:text-base">
+        ツリスポ編集部の釣行で、堤防からエギで釣れたイカたちです。サイズ感の参考にしてください。
+      </p>
+      <PhotoGrid photos={catchPhotos} />
 
       <H2>1. エギングロッドの選び方</H2>
       <p className="text-sm leading-relaxed sm:text-base">
@@ -147,6 +189,15 @@ export default function EgingGearPage() {
           pageType="guide"
         />
       </div>
+
+      <H2>釣った後はイカ料理を満喫</H2>
+      <p className="text-sm leading-relaxed sm:text-base">
+        エギングの楽しみは釣るだけではありません。刺身、握り、天ぷら、ゲソのポン酢和えなど、イカ料理のごちそうが待っています。
+        締め方や持ち帰り方は
+        <Link prefetch={false} href="/guide/eging" className="text-primary hover:underline">エギング入門ガイド</Link>
+        で解説しています。
+      </p>
+      <PhotoGrid photos={foodPhotos} />
 
       <H2>3. シャクリのリズムは「シャクリズム」で安定させる</H2>
       <p className="mb-4 text-sm leading-relaxed sm:text-base">
