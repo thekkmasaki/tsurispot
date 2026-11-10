@@ -331,7 +331,7 @@ export const additionalSpotsKinki: FishingSpot[] = [
     rating: 4.1,
     reviewCount: 267, googleRating: 3.8, googleReviewCount: 648,
     catchableFish: [
-      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング", source: "ツリスポ編集部釣行" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング", source: "ツリスポ編集部釣行" },
       { fish: fish("madai"), monthStart: 6, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "遠投カゴ釣り", source: "フィッシングマックス 垂水" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },

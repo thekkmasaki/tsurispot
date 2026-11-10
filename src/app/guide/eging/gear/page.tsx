@@ -164,10 +164,15 @@ export default function EgingGearPage() {
         最後に、シャクリのリズム作りを助けるアプリ「シャクリズム」も紹介します。
       </p>
 
+      <p className="mt-3 text-xs text-muted-foreground">
+        文：ツリスポ編集部（実釣経験をもとに執筆）｜最終更新：2026年11月10日
+      </p>
+
       <Card className="guide-summary mt-6">
         <CardContent className="pt-6 text-sm leading-relaxed">
           <p className="font-bold">3行まとめ</p>
           <ul className="mt-2 list-disc space-y-1 pl-5">
+            <li>エギングの道具は「8フィート台・ML〜Mのロッド」「3.0〜3.5号のエギ」「リーダー付きPEライン」が基本セット</li>
             <li>ロッドは「8フィート台・ML〜M」のエギング専用がまず1本目の基準</li>
             <li>エギは堤防なら3.0〜3.5号が基本。秋は小さめ、春〜冬は大きめが目安</li>
             <li>シャクリとフォールのリズムは、振動で知らせてくれるアプリで再現しやすくなる</li>
@@ -181,7 +186,7 @@ export default function EgingGearPage() {
 
       <H2>実際に釣れたイカ</H2>
       <p className="text-sm leading-relaxed sm:text-base">
-        ツリスポ編集部の釣行で、堤防からエギで釣れたイカたちです。サイズ感の参考にしてください。
+        ツリスポ編集部が2026年10月に、堤防からエギで釣ったアオリイカたちです。サイズ感の参考にしてください。
       </p>
       <PhotoGrid photos={catchPhotos} cols={4} />
       <p className="mt-4 text-sm leading-relaxed sm:text-base">
@@ -190,6 +195,43 @@ export default function EgingGearPage() {
           平磯海づり公園
         </Link>
         。全域が柵付きで足場がよく、売店・トイレもそろうので、初めてのエギングにも向いています。エギングロッドのレンタルはないため、竿は持参してください。
+      </p>
+
+      <H2>時期別の難しさ：10月は好機、11月から冬は難易度アップ</H2>
+      <p className="text-sm leading-relaxed sm:text-base">
+        上の写真は10月の釣果です。秋はアオリイカの数が多く、エギへの反応もよい、エギング入門にいちばん向いた時期です。
+        11月に入って水温が下がり始めると、イカの活性とポイントが落ち着き、冬にかけて釣るのが難しくなっていきます。
+      </p>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full min-w-[480px] border-collapse text-sm">
+          <thead>
+            <tr className="border-b bg-muted/50 text-left">
+              <th className="p-2 font-semibold">時期</th>
+              <th className="p-2 font-semibold">難易度</th>
+              <th className="p-2 font-semibold">ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              <td className="p-2">9〜10月（秋）</td>
+              <td className="p-2">やさしい</td>
+              <td className="p-2">数が出やすい。2.5〜3.0号から試す</td>
+            </tr>
+            <tr className="border-b">
+              <td className="p-2">11月〜冬</td>
+              <td className="p-2">難しくなる</td>
+              <td className="p-2">水温低下で活性ダウン。3.5号・深場やゆっくりしたフォールを意識</td>
+            </tr>
+            <tr>
+              <td className="p-2">春</td>
+              <td className="p-2">ふつう</td>
+              <td className="p-2">大型が狙える季節。3.5号中心</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        難しい時期ほど、フォールの秒数を一定にして丁寧に誘う釣りが効きます。振動でリズムを刻むアプリ「シャクリズム」は、まさにそんな場面で役立ちます。
       </p>
 
       <H2>1. エギングロッドの選び方</H2>
