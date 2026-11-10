@@ -16,12 +16,15 @@
   .meta { color: var(--muted); font-size: 14px; }
   a { color: var(--accent); }
   .lang { display: inline-block; margin: 16px 0 0; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: var(--muted); }
+  .store { display: inline-block; margin: 10px 0 4px; padding: 10px 18px; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 600; text-decoration: none; }
+  .store:hover { opacity: .9; }
 </style>
 </head>
 <body>
 <main>
   <h1>シャクリズム サポート</h1>
   <p class="meta">iPhone・Apple Watch 向け エギング用アシストアプリ ／ 提供: ツリスポ運営</p>
+  <p><a class="store" href="https://apps.apple.com/jp/app/id6825799808">App Store で入手（無料）</a><br><span class="meta">iPhone 用。Apple Watch アプリも同梱。</span></p>
   <p>シャクリズムは、底をとったら「シャクリ開始」を 1 回押すだけで、あとは振動がシャクリのリズムを刻むアプリです。フォールの秒数を数える役目をアプリに任せ、手元とラインに集中できます。</p>
 
   <h2>使い方（iPhone）</h2>
@@ -36,10 +39,11 @@
 
   <h2>使い方（Apple Watch）</h2>
   <ol>
-    <li>Watch のアプリで「スタート」。釣行はフィッシングのワークアウトとして記録されます。</li>
-    <li>キャストは手首の動きで自動検知します。検知されたら「沈下中」になり、着底まで静かに待ちます。</li>
-    <li>底をとったら「シャクリ開始」を押す（または最初のシャクリを手首で検知）。</li>
+    <li>Watch のアプリで「スタート」。</li>
+    <li>キャストは手首の動きで自動検知します。キャストしたら手首が震えて、すぐフォールを数え始めます（「キャスト」ボタンでも可）。</li>
+    <li>底をとって最初にシャクると、そのシャクリを拾ってそこから数え直します（「シャクった」ボタンでも可）。</li>
     <li>フォールが終わるたびに手首が震えます。自動検知が合わない時は、ボタンで操作してください。</li>
+    <li>Watch アプリは画面が点いている間だけ動きます。画面を消したまま手首で受けたい時は、iPhone で釣行を始めてポケットへ。iPhone がロック中なら合図の通知が Watch に転送されます。</li>
   </ol>
 
   <h2>よくある質問</h2>
@@ -53,7 +57,7 @@
   <h3>振動が弱い</h3>
   <p>アプリ内の 設定 › 合図（振動）› 強さ を「最強」にしてください。ジーンズのポケットでも届く長めの振動になります。</p>
   <h3>Apple Watch が震えない</h3>
-  <p>Watch の 設定 › プライバシーとセキュリティ › ヘルスケア でシャクリズムのワークアウト記録が許可されているか確認してください。Watch はワークアウト中だけバックグラウンドで振動できます。</p>
+  <p>Watch アプリは前面にある（画面が点いている）間だけ合図を出します。手首を下ろして画面が消えると止まります。画面を消したまま使いたい時は、iPhone で釣行を始めてポケットに入れてください。iPhone がロック中なら合図の通知が Watch に転送され、手首が震えます（iPhone の 設定 › 通知 › シャクリズム が許可されていること）。</p>
   <h3>Apple Watch がキャストやシャクリを検知しない</h3>
   <p>手首の動きの大きさは人によって違います。アプリ内の設定で検知の感度を調整できます。合わない時はボタンでの操作が確実です。</p>
   <h3>潮・マズメ・釣り場が表示されない</h3>
@@ -69,6 +73,7 @@
   <span class="lang">English</span>
   <h2 style="border:0; margin-top:8px">EgiBeat Support</h2>
   <p class="meta">Eging (squid jigging) assistant for iPhone and Apple Watch / Provider: Tsurispot (released in Japan as シャクリズム)</p>
+  <p><a class="store" href="https://apps.apple.com/jp/app/id6825799808">Get it on the App Store (free)</a></p>
   <p>Tap <strong>Start rhythm</strong> once when your jig hits the bottom. From then on the app vibrates each time the fall ends, so you jerk on rhythm without counting. Let the app count the fall and keep your eyes on the line.</p>
   <h3>How to use (iPhone)</h3>
   <ol>
@@ -81,16 +86,17 @@
   <p>You can also use the Lock Screen Live Activity and Siri ("EgiBeat start"). Siri phrases are listed under Settings › Hands-free control.</p>
   <h3>How to use (Apple Watch)</h3>
   <ol>
-    <li>Tap Start in the Watch app. The trip is recorded as a Fishing workout.</li>
-    <li>Casts are detected from wrist motion. After a cast the app shows Sinking and waits quietly for touchdown.</li>
-    <li>When the jig hits the bottom, tap Start rhythm (or just make your first jerk; the wrist detects it).</li>
+    <li>Tap Start in the Watch app.</li>
+    <li>Casts are detected from wrist motion. Your wrist buzzes on the cast and the fall count starts right away (or tap Cast).</li>
+    <li>Make your first jerk once the jig lands and the count restarts from there (or tap Jerked).</li>
     <li>Your wrist vibrates each time the fall ends. If detection doesn't match your style, use the buttons.</li>
+    <li>The Watch app runs only while its screen is on. To keep the screen off, start the trip on the iPhone and pocket it: while the iPhone is locked, cue notifications are forwarded to your Watch.</li>
   </ol>
   <h3>FAQ</h3>
   <ul>
     <li><strong>No vibration while locked or in a pocket</strong>: set iOS Settings › Sounds &amp; Haptics › Haptics to Always Play, allow notifications for EgiBeat (backup cues arrive as notification vibrations), check Focus modes, and use Settings › Cues › Test vibration while locked in the app.</li>
     <li><strong>Vibration too weak</strong>: in the app, Settings › Cues › Vibration strength › Max.</li>
-    <li><strong>Apple Watch doesn't vibrate</strong>: allow the Fishing workout under Settings › Privacy &amp; Security › Health on the Watch. The Watch can only vibrate in the background during a workout.</li>
+    <li><strong>Apple Watch doesn't vibrate</strong>: the Watch app cues only while it is in the foreground (screen on); lowering your wrist stops it. To fish with the screen off, start on the iPhone and pocket it; cue notifications are forwarded to the Watch while the iPhone is locked (notifications must be allowed for EgiBeat).</li>
     <li><strong>Watch doesn't detect casts or jerks</strong>: wrist motion differs from person to person; adjust the thresholds in the app's settings, or use the buttons.</li>
     <li><strong>No tides or spots shown</strong>: sunrise and sunset work worldwide, but tide tables and fishing spots cover Japan only (Tsurispot data). Location permission (while using) is required.</li>
     <li><strong>Where the fall times come from</strong>: sink rates are the published figures for YAMASHITA EGI-OH K by size and type, used as a starting point. Adjust by the second during a trip with Adjust rhythm.</li>
@@ -102,6 +108,7 @@
   <span class="lang">한국어</span>
   <h2 style="border:0; margin-top:8px">EgiBeat 지원</h2>
   <p class="meta">iPhone·Apple Watch용 에깅 보조 앱 / 제공: Tsurispot 운영</p>
+  <p><a class="store" href="https://apps.apple.com/jp/app/id6825799808">App Store에서 받기(무료)</a></p>
   <p>바닥을 찍으면 <strong>샤크리 시작</strong>을 한 번만 누르세요. 그다음은 폴이 끝날 때마다 진동이 오니 거기에 맞춰 샤크리하면 됩니다. 폴 초수는 앱이 세고, 당신은 라인에 집중하세요.</p>
   <h3>사용법(iPhone)</h3>
   <ol>
@@ -114,16 +121,17 @@
   <p>잠금 화면의 Live Activity와 Siri('EgiBeat 시작')로도 조작할 수 있습니다. Siri 말하는 법은 설정 › 손 쓰지 않는 조작에 있습니다.</p>
   <h3>사용법(Apple Watch)</h3>
   <ol>
-    <li>Watch 앱에서 '시작'. 출조는 낚시 운동으로 기록됩니다.</li>
-    <li>캐스팅은 손목 움직임으로 자동 감지합니다. 감지되면 '침강 중'이 되고 착저까지 조용히 기다립니다.</li>
-    <li>바닥을 찍으면 '샤크리 시작'을 누르세요(또는 첫 샤크리를 손목으로 감지).</li>
+    <li>Watch 앱에서 '시작'.</li>
+    <li>캐스팅은 손목 움직임으로 자동 감지합니다. 캐스팅하면 손목이 진동하고 바로 폴을 세기 시작합니다('캐스팅' 버튼도 가능).</li>
+    <li>바닥을 찍고 첫 샤크리를 하면 그 샤크리를 감지해 거기서부터 다시 셉니다('샤크리함' 버튼도 가능).</li>
     <li>폴이 끝날 때마다 손목이 진동합니다. 자동 감지가 맞지 않으면 버튼으로 조작하세요.</li>
+    <li>Watch 앱은 화면이 켜져 있는 동안만 동작합니다. 화면을 끈 채 손목으로 받으려면 iPhone에서 출조를 시작해 주머니에 넣으세요. iPhone이 잠금 상태이면 신호 알림이 Watch로 전달됩니다.</li>
   </ol>
   <h3>자주 묻는 질문</h3>
   <ul>
     <li><strong>잠금 중·주머니 속에서 진동하지 않음</strong>: iOS 설정 › 사운드 및 햅틱 › 햅틱을 '항상 재생'으로, 설정 › 알림에서 EgiBeat 알림을 허용(예비 신호는 알림 진동으로 옵니다), 집중 모드를 확인하세요. 앱의 설정 › 신호(진동) › '잠금 중 진동 테스트'로 확인할 수 있습니다.</li>
     <li><strong>진동이 약함</strong>: 앱의 설정 › 신호(진동) › 진동 세기를 '최강'으로.</li>
-    <li><strong>Apple Watch가 진동하지 않음</strong>: Watch의 설정 › 개인정보 보호 및 보안 › 건강에서 낚시 운동 기록을 허용하세요. Watch는 운동 중에만 백그라운드에서 진동할 수 있습니다.</li>
+    <li><strong>Apple Watch가 진동하지 않음</strong>: Watch 앱은 앞에 떠 있는(화면이 켜진) 동안만 신호를 냅니다. 손목을 내려 화면이 꺼지면 멈춥니다. 화면을 끈 채 쓰려면 iPhone에서 시작해 주머니에 넣으세요. iPhone이 잠금 상태이면 신호 알림이 Watch로 전달되어 손목이 진동합니다(EgiBeat 알림 허용 필요).</li>
     <li><strong>Watch가 캐스팅·샤크리를 감지하지 않음</strong>: 손목 움직임의 크기는 사람마다 다릅니다. 앱 설정에서 임계값을 조정하거나 버튼으로 조작하세요.</li>
     <li><strong>물때·낚시터가 표시되지 않음</strong>: 일출·일몰은 전 세계에서 동작하지만, 조석표와 낚시터는 일본 국내만 제공합니다(Tsurispot 데이터). 위치 정보 허용(사용 중)이 필요합니다.</li>
     <li><strong>폴 초수의 근거</strong>: 에기의 침강 속도는 YAMASHITA 에기왕 K의 공표값(호수·타입별)을 참고값으로 씁니다. 실제 조류와 바람에 따라 다르니 출조 중 '리듬 조정'에서 1초씩 바꾸세요.</li>
@@ -135,6 +143,7 @@
   <span class="lang">繁體中文</span>
   <h2 style="border:0; margin-top:8px">EgiBeat 支援</h2>
   <p class="meta">iPhone・Apple Watch 專用木蝦釣法輔助 App／提供：Tsurispot 營運</p>
+  <p><a class="store" href="https://apps.apple.com/jp/app/id6825799808">到 App Store 下載（免費）</a></p>
   <p>著底後只要按一次<strong>開始抽竿</strong>。之後每次沉降結束都會震動，跟著震動抽竿就好。沉降秒數交給 App 數，你專心看母線。</p>
   <h3>使用方式（iPhone）</h3>
   <ol>
@@ -147,16 +156,17 @@
   <p>也可從鎖定畫面的即時動態和 Siri（「EgiBeat 開始」）操作。Siri 的說法見 設定 › 免手操作。</p>
   <h3>使用方式（Apple Watch）</h3>
   <ol>
-    <li>在 Watch App 按「開始」。釣遊會記錄為「釣魚」體能訓練。</li>
-    <li>拋投以手腕動作自動偵測。偵測到後顯示「下沉中」，安靜等待著底。</li>
-    <li>著底後按「開始抽竿」（或直接做第一次抽竿，手腕會偵測）。</li>
+    <li>在 Watch App 按「開始」。</li>
+    <li>拋投以手腕動作自動偵測。拋投後手腕會震動，並立刻開始計算沉降（也可按「拋投」）。</li>
+    <li>著底後做第一次抽竿，App 會偵測到並從那裡重新計算（也可按「已抽竿」）。</li>
     <li>每次沉降結束手腕都會震動。自動偵測不合用時，請用按鈕操作。</li>
+    <li>Watch App 只在螢幕亮著時運作。想關著螢幕用手腕接收提示，就在 iPhone 開始釣遊並放進口袋；iPhone 鎖定時提示通知會轉送到 Watch。</li>
   </ol>
   <h3>常見問題</h3>
   <ul>
     <li><strong>鎖定中或放口袋時不震動</strong>：把 iOS 設定 › 聲音與觸覺回饋 › 觸覺回饋 設為「永遠播放」、在 設定 › 通知 允許 EgiBeat 的通知（備用提示以通知震動送達）、確認專注模式。可用 App 內的 設定 › 提示（震動） › 「鎖定中震動測試」確認。</li>
     <li><strong>震動太弱</strong>：App 內 設定 › 提示（震動） › 震動強度 設為「最強」。</li>
-    <li><strong>Apple Watch 不震動</strong>：在 Watch 的 設定 › 隱私權與安全性 › 健康 允許「釣魚」體能訓練。Watch 只有在體能訓練期間才能於背景震動。</li>
+    <li><strong>Apple Watch 不震動</strong>：Watch App 只在前景（螢幕亮著）時提示，放下手腕螢幕關閉就會停止。想關著螢幕使用，請在 iPhone 開始並放進口袋；iPhone 鎖定時提示通知會轉送到 Watch 並震動手腕（需允許 EgiBeat 的通知）。</li>
     <li><strong>Watch 偵測不到拋投或抽竿</strong>：每個人手腕動作幅度不同。可在 App 設定中調整門檻，或改用按鈕。</li>
     <li><strong>沒有顯示潮汐或釣點</strong>：日出日落全球可用，但潮汐表與釣點僅涵蓋日本（Tsurispot 資料）。需要定位權限（使用 App 期間）。</li>
     <li><strong>沉降秒數的依據</strong>：木蝦下沉速度採用 YAMASHITA 餌木王 K 的公布值（依號數與類型）作為起點。實際會因潮流與風而異，釣遊中可用「調整節奏」逐秒調整。</li>
