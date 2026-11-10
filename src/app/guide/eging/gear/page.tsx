@@ -53,7 +53,7 @@ const catchPhotos = [
   { src: "aoriika-night-egi", alt: "エギに掛かって釣り上げられたアオリイカ（夜の堤防）", cap: "夜の堤防でエギに乗ったアオリイカ" },
   { src: "aoriika-hanging", alt: "堤防で吊り下げたアオリイカ", cap: "堤防で釣れたアオリイカ。胴の斑点模様がはっきり出ています" },
   { src: "aoriika-size-iphone", alt: "iPhoneとナイフの横に並べたアオリイカ", cap: "iPhoneと並べたサイズ感（胴長はスマホより少し長いくらい）" },
-  { src: "kouika", alt: "堤防に置いたコウイカ", cap: "エギには時々コウイカも掛かります" },
+  { src: "aoriika-ground", alt: "堤防に置いたアオリイカ", cap: "昼間に釣れたアオリイカ。胴の斑点と大きなヒレが特徴です" },
 ];
 const foodPhotos = [
   { src: "ika-sashimi", alt: "イカ刺し", cap: "刺身。釣りたては透明感が違います" },
@@ -63,9 +63,9 @@ const foodPhotos = [
   { src: "geso-ponzu", alt: "ゲソのポン酢和え", cap: "ゲソもポン酢で美味しくいただけます" },
 ];
 
-function PhotoGrid({ photos }: { photos: { src: string; alt: string; cap: string }[] }) {
+function PhotoGrid({ photos, cols = 3 }: { photos: { src: string; alt: string; cap: string }[]; cols?: 3 | 4 }) {
   return (
-    <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <div className={`mt-4 grid grid-cols-2 gap-3 ${cols === 4 ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}>
       {photos.map((p) => (
         <figure key={p.src}>
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-muted">
@@ -126,7 +126,7 @@ export default function EgingGearPage() {
       <p className="text-sm leading-relaxed sm:text-base">
         ツリスポ編集部の釣行で、堤防からエギで釣れたイカたちです。サイズ感の参考にしてください。
       </p>
-      <PhotoGrid photos={catchPhotos} />
+      <PhotoGrid photos={catchPhotos} cols={4} />
       <p className="mt-4 text-sm leading-relaxed sm:text-base">
         釣れた場所は、兵庫県神戸市の
         <Link prefetch={false} href="/spots/hiraiso-fishing-park" className="font-semibold text-primary hover:underline">
