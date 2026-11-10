@@ -1,4 +1,4 @@
-// 自動生成: scripts/build-tide-data.mjs（気象庁 潮位表 掲載地点一覧 2026年版より）
+// 自動生成: scripts/build-tide-data.mjs（気象庁 潮位表 掲載地点一覧 2027年版より）
 // 手動編集禁止。更新は node scripts/build-tide-data.mjs --year <year> を実行すること。
 export interface TideStation {
   code: string;
