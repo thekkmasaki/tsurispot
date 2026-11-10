@@ -23,6 +23,7 @@ import { getUserById } from "@/lib/user-store";
 import { isSitemapEligible } from "@/lib/seo-quality";
 import { monthLastModified } from "@/lib/sitemap-dates";
 import { STATION_SLUGS } from "@/lib/tide/station-slugs";
+import { SPOT_FEATURES, getFeaturePrefCombos } from "@/lib/data/spot-features";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -520,6 +521,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       return spotTypePrefCombos;
     })().map(c => ({
       url: `${baseUrl}/spot-type/${c.type}/${c.prefSlug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    })),
+
+    // ===== 特徴から探す（設備・ルール × 都道府県） =====
+    { url: `${baseUrl}/spot-feature`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.7 },
+    ...SPOT_FEATURES.map((f) => ({
+      url: `${baseUrl}/spot-feature/${f.slug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
+    ...getFeaturePrefCombos().map((c) => ({
+      url: `${baseUrl}/spot-feature/${c.feature}/${c.prefecture}`,
       lastModified: dynamicDate,
       changeFrequency: "weekly" as const,
       priority: 0.6,
