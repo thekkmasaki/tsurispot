@@ -10,6 +10,7 @@ import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { ProductList } from "@/components/affiliate/product-list";
+import { ShakurhythmPromo } from "@/components/promo/shakurhythm-promo";
 import { getProductsByMethod } from "@/lib/data/products";
 
 export const metadata: Metadata = {
@@ -785,6 +786,16 @@ export default function EgingGuidePage() {
             description="アオリイカ狙いのエギング入門に。まずはこのあたりから揃えるのがおすすめです。"
             pageType="guide"
           />
+          <p className="mt-3 text-sm">
+            <Link prefetch={false} href="/guide/eging/gear" className="text-primary hover:underline">
+              ロッド・エギの選び方を詳しく見る →
+            </Link>
+          </p>
+        </section>
+
+        {/* ツリスポ公式アプリ */}
+        <section className="mt-8 sm:mt-10">
+          <ShakurhythmPromo source="eging" />
         </section>
 
         {/* 関連ガイド */}
