@@ -120,6 +120,13 @@ export default function EgingGearPage() {
         ツリスポ編集部の釣行で、堤防からエギで釣れたイカたちです。サイズ感の参考にしてください。
       </p>
       <PhotoGrid photos={catchPhotos} />
+      <p className="mt-4 text-sm leading-relaxed sm:text-base">
+        釣れた場所は、兵庫県神戸市の
+        <Link prefetch={false} href="/spots/hiraiso-fishing-park" className="font-semibold text-primary hover:underline">
+          平磯海づり公園
+        </Link>
+        。全域が柵付きで足場がよく、売店・トイレ・レンタル竿もそろうので、初めてのエギングにも向いています。
+      </p>
 
       <H2>1. エギングロッドの選び方</H2>
       <p className="text-sm leading-relaxed sm:text-base">
