@@ -15,6 +15,8 @@ import {
   setUserBanned,
 } from "@/lib/user-status";
 import { cleanupUserContent } from "@/lib/account-cleanup";
+import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
+import { revokeAllAppTokens } from "@/lib/app-link/store";
 
 /** bestCatchId は自分の投稿のみ指定可（他人の投稿を自分のベストとして表示させない） */
 async function isOwnPost(tsuriId: string, reportId: string): Promise<boolean> {
@@ -41,12 +43,13 @@ interface ProfilePatch {
   styles?: string[];
 }
 
-export async function GET() {
-  const session = await auth();
-  if (!session?.user?.tsuriId) {
+export async function GET(request: Request) {
+  const ru = await getRequestUser(request);
+  if (ru.kind === "unauthorized") return unauthorizedResponse();
+  if (ru.kind !== "user") {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
-  const user = await getUserById(session.user.tsuriId);
+  const user = await getUserById(ru.user.tsuriId);
   if (!user) {
     return NextResponse.json({ error: "ユーザーが見つかりません" }, { status: 404 });
   }
@@ -185,9 +188,10 @@ export async function PATCH(request: Request) {
   return NextResponse.json({ ok: true, user: updated });
 }
 
-export async function DELETE() {
-  const session = await auth();
-  const tsuriId = session?.user?.tsuriId;
+export async function DELETE(request: Request) {
+  const ru = await getRequestUser(request);
+  if (ru.kind === "unauthorized") return unauthorizedResponse();
+  const tsuriId = ru.kind === "user" ? ru.user.tsuriId : undefined;
   if (!tsuriId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
@@ -214,6 +218,9 @@ export async function DELETE() {
     else await clearUserStatus(tsuriId).catch(() => {});
     return NextResponse.json({ error: "削除に失敗しました" }, { status: 500 });
   }
+
+  // アプリ連携トークンを全て失効（失敗しても退会は成立。状態が deleted のためトークンは元々通らない）
+  await revokeAllAppTokens(tsuriId).catch((err) => console.error("[退会] アプリトークン失効エラー:", err));
 
   return NextResponse.json({ ok: true });
 }

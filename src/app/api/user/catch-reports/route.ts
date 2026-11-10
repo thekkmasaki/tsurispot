@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
-import { auth } from "@/lib/auth";
+import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { getUserById } from "@/lib/user-store";
 
 // GET: 認証ユーザーの投稿した釣果一覧を取得
-export async function GET() {
-  const session = await auth();
-  const userId = session?.user?.tsuriId;
+export async function GET(request: Request) {
+  const ru = await getRequestUser(request);
+  if (ru.kind === "unauthorized") return unauthorizedResponse();
+  const userId = ru.kind === "user" ? ru.user.tsuriId : undefined;
   if (!userId) {
     return NextResponse.json({ error: "未認証" }, { status: 401 });
   }

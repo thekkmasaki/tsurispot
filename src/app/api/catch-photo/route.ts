@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { readMultipartFile, validateAndUploadImage } from "@/lib/image-upload";
 import { rejectInactiveUser } from "@/lib/user-status";
@@ -14,8 +14,9 @@ export async function POST(request: NextRequest) {
   }
 
   // 匿名投稿も許可するが、ログイン済みなら退会/BANを弾き、ユーザー単位でも制限する
-  const session = await auth().catch(() => null);
-  const tsuriId = session?.user?.tsuriId;
+  const ru = await getRequestUser(request, { tolerateAuthError: true });
+  if (ru.kind === "unauthorized") return unauthorizedResponse();
+  const tsuriId = ru.kind === "user" ? ru.user.tsuriId : undefined;
   if (tsuriId) {
     const inactive = await rejectInactiveUser(tsuriId);
     if (inactive) return inactive;

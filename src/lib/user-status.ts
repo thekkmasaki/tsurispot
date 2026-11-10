@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
+import { revokeAllAppTokens } from "@/lib/app-link/store";
 
 // 退会済み/BANされたユーザーの書き込みを拒否するための状態管理。
 // JWTセッションは退会/BAN後も有効期限まで生きるため、書き込みAPI側とauthセッションコールバック側の両方で参照する。
@@ -35,6 +36,12 @@ export async function isUserBanned(tsuriId: string): Promise<boolean> {
 
 export async function setUserBanned(tsuriId: string): Promise<void> {
   await redis.set(key(tsuriId), "banned", { ex: STATUS_TTL_SECONDS });
+  // 利用停止時はアプリ連携トークンも全て失効（状態確認でも弾かれるが念のため）
+  try {
+    await revokeAllAppTokens(tsuriId);
+  } catch (err) {
+    console.error("[ban] アプリトークン失効エラー:", err);
+  }
 }
 
 export async function clearUserBanned(tsuriId: string): Promise<void> {

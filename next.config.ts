@@ -334,6 +334,13 @@ const nextConfig: NextConfig = {
         { key: "Cache-Control", value: "private, no-store, max-age=0, must-revalidate" },
       ],
     },
+    // アプリ連携の確認ページ: 利用者ごとの名前と1回きりの値を含むので共有キャッシュさせない
+    {
+      source: "/app-link",
+      headers: [
+        { key: "Cache-Control", value: "private, no-store, max-age=0, must-revalidate" },
+      ],
+    },
   ],
 };
 

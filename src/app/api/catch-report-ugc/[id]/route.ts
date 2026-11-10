@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
-import { auth } from "@/lib/auth";
+import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { checkNgWords } from "@/lib/moderation";
 import { decrementReportCount } from "@/lib/user-store";
 import { savePostMeta, deletePostMeta } from "@/lib/social-store";
@@ -66,8 +66,9 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const session = await auth();
-  const tsuriId = session?.user?.tsuriId;
+  const ru = await getRequestUser(request);
+  if (ru.kind === "unauthorized") return unauthorizedResponse();
+  const tsuriId = ru.kind === "user" ? ru.user.tsuriId : undefined;
   if (!tsuriId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }
@@ -147,8 +148,9 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const session = await auth();
-  const tsuriId = session?.user?.tsuriId;
+  const ru = await getRequestUser(request);
+  if (ru.kind === "unauthorized") return unauthorizedResponse();
+  const tsuriId = ru.kind === "user" ? ru.user.tsuriId : undefined;
   if (!tsuriId) {
     return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
   }

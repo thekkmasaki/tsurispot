@@ -1,8 +1,10 @@
 "use server";
 
 import { AuthError } from "next-auth";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { signIn } from "@/lib/auth";
+import { APP_LINK_REQ_COOKIE, isAppLinkEnabled, resolveLoginRedirect } from "@/lib/app-link/config";
 
 // ログイン開始の Server Action。
 // 旧実装は client で /api/auth/csrf を fetch してから素の form POST だったため、
@@ -10,8 +12,13 @@ import { signIn } from "@/lib/auth";
 // レースで「押しても無反応」になる構造だった。Server Action なら CSRF はフレームワークが
 // 処理し、ボタンは SSR に載り、Next の progressive enhancement で JS 無効でも動作する。
 export async function loginWithGoogle() {
+  // 戻り先は固定の 2 つだけ（クエリ値は使わない＝オープンリダイレクトを作らない）。
+  // アプリ連携が有効で app_link_req Cookie がある時だけ /app-link、それ以外は従来どおり /mypage。
+  const redirectTo = isAppLinkEnabled()
+    ? resolveLoginRedirect(true, Boolean((await cookies()).get(APP_LINK_REQ_COOKIE)))
+    : "/mypage";
   try {
-    await signIn("cognito", { redirectTo: "/mypage" });
+    await signIn("cognito", { redirectTo });
   } catch (err) {
     // signIn の正常系は NEXT_REDIRECT を throw して Cognito の authorize URL へ遷移する
     // （そのまま伝播させる）。AuthError のみ /login のエラーバナー + 自動リトライ導線へ変換。
