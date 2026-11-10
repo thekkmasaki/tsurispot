@@ -114,7 +114,7 @@ export function TimelineFeed() {
             aria-selected={tab === t.key}
             onClick={() => setTab(t.key)}
             className={cn(
-              "flex-1 rounded-full py-1.5 text-sm transition-colors",
+              "flex-1 rounded-full py-2 text-sm transition-colors sm:text-[15px]",
               tab === t.key
                 ? "bg-ocean-deep font-semibold text-white"
                 : "text-muted-foreground hover:text-foreground",

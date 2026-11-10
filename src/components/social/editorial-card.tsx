@@ -24,8 +24,8 @@ export function EditorialCard({ card }: { card: EditorialCardData }) {
   const Icon = meta.icon;
 
   return (
-    <Card className="border-sky-200/60 bg-sky-50/40 py-3 dark:border-sky-900/40 dark:bg-sky-950/20">
-      <CardContent className="px-4">
+    <Card className="gap-0 border-sky-200/60 bg-sky-50/40 py-0 dark:border-sky-900/40 dark:bg-sky-950/20">
+      <CardContent className="px-3 py-3.5 sm:px-5 sm:py-4">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span className="inline-flex items-center gap-1 rounded-full bg-sky-700 px-2 py-0.5 font-bold text-white">
             ツリスポ編集部
@@ -37,7 +37,7 @@ export function EditorialCard({ card }: { card: EditorialCardData }) {
           {card.date && <span>{formatDate(card.date)}</span>}
         </div>
         <Link prefetch={false} href={card.href} className="group mt-2 block">
-          <p className="text-sm font-bold leading-snug group-hover:underline">{card.title}</p>
+          <p className="text-[15px] font-bold leading-snug group-hover:underline sm:text-base">{card.title}</p>
           {card.description && (
             <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
               {card.description}
