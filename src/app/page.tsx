@@ -39,6 +39,8 @@ import { HomeSearchBar } from "@/components/home-search-bar";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 import { ContentDivider } from "@/components/ui/content-divider";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
+import { SPOT_FEATURES } from "@/lib/data/spot-features";
 
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
@@ -900,6 +902,17 @@ export default async function Home() {
 
       {/* 広告: エリアセクション後 */}
       <NativeAdBreak />
+
+      {/* 特徴から探す（設備・ルール条件。サウナイキタイの「特徴から探す」を参考） */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
+        <div className="mb-4 flex items-end justify-between gap-3">
+          <SectionHeading title="特徴から釣り場を探す" />
+          <Link prefetch={false} href="/spot-feature" className="shrink-0 text-sm text-primary hover:underline">
+            すべて見る
+          </Link>
+        </div>
+        <FeatureChipGrid items={SPOT_FEATURES.map((feature) => ({ feature }))} />
+      </section>
 
       {/* 釣り方コンパクトリンク */}
       <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">

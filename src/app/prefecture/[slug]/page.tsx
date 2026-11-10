@@ -45,6 +45,8 @@ import { ShareButtons } from "@/components/ui/share-buttons";
 import { getStrikingSpotsByPref } from "@/lib/data/striking-spots";
 import { getStationsForPrefecture } from "@/lib/tide/station-spots";
 import { getStationSlug } from "@/lib/tide/station-slugs";
+import { getFeaturesForPref } from "@/lib/data/spot-features";
+import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -364,6 +366,7 @@ export default async function PrefecturePage({ params }: PageProps) {
     .map((st) => ({ ...st, slug: getStationSlug(st.code) }))
     .filter((st): st is typeof st & { slug: string } => st.slug !== null);
   const prefInfo = getPrefectureInfoBySlug(slug);
+  const prefFeatureLinks = getFeaturesForPref(pref.name);
 
   const { regionMap, ungroupedSpots } = getSpotsByRegion(pref.name);
 
@@ -806,6 +809,14 @@ export default async function PrefecturePage({ params }: PageProps) {
               </div>
             </CardContent>
           </Card>
+        </section>
+      )}
+
+      {/* 条件から探す（/spot-feature/[feature]/[pref] への導線。サウナイキタイの「特徴から探す」を参考） */}
+      {prefFeatureLinks.length > 0 && (
+        <section className="mb-8 sm:mb-10" id="features">
+          <h2 className="mb-3 text-base font-bold sm:text-lg">{pref.name}の釣り場を条件から探す</h2>
+          <FeatureChipGrid items={prefFeatureLinks} prefSlug={pref.slug} />
         </section>
       )}
 
