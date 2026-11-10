@@ -84,7 +84,7 @@ function PhotoGrid({ photos }: { photos: { src: string; alt: string; cap: string
   );
 }
 
-const smallGearIds = ["p48", "p28", "p29", "p11"];
+const smallGearIds = ["p48", "p49", "p28", "p29", "p11"];
 const smallGear = smallGearIds
   .map((id) => products.find((p) => p.id === id))
   .filter((p): p is NonNullable<typeof p> => Boolean(p));
@@ -215,9 +215,10 @@ export default function EgingGearPage() {
         />
       </div>
 
-      <H2>あると差が出る小物（夜エギング・安全装備）</H2>
+      <H2>あると差が出る小物（ライト・ギャフ・安全装備）</H2>
       <p className="text-sm leading-relaxed sm:text-base">
         夜エギングで手元を照らすなら、赤色LEDのヘッドライトがおすすめです。白色光は魚やイカを警戒させやすく、赤色のほうが逃げにくいと言われています。
+        秋〜春のイカは大きく育つので、取り込み用のギャフも必須です（抜き上げはバラシのもと）。
         ラインはPE＋フロロのリーダー、そして堤防ではライフジャケットも忘れずに。
       </p>
       <div className="mt-4">

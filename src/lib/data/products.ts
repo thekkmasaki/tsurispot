@@ -707,6 +707,22 @@ export const products: Product[] = [
     relatedFish: ["aoriika", "kouika", "yariika"],
     priority: 48,
   },
+  {
+    id: "p49",
+    name: "ギャフ（エギング用・取り込み）",
+    description:
+      "秋〜春に釣れるイカは大型になるので、足場の高い堤防での取り込みにギャフは必須。抜き上げでのバラシ防止にも。",
+    priceRange: "価格は商品ページで確認",
+    imageDescription: "エギング用ギャフ",
+    amazonAsin: "",
+    amazonDirectUrl: "https://link.amazon/B0aF4BHmA",
+    rakutenSearchQuery: "エギング ギャフ",
+    category: "accessory",
+    difficulty: "beginner",
+    relatedMethods: ["eging"],
+    relatedFish: ["aoriika", "kouika", "yariika"],
+    priority: 49,
+  },
 ];
 
 /**
