@@ -44,10 +44,10 @@ const breadcrumbJsonLd = {
   ],
 };
 
-const rods = products.filter((p) => p.relatedMethods.includes("eging") && p.category === "rod");
-const egis = products.filter(
-  (p) => p.relatedMethods.includes("eging") && p.category === "tackle" && /エギ/.test(p.name)
-);
+const pick = (ids: string[]) =>
+  ids.map((id) => products.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+const rods = pick(["p41", "p42", "p43"]);
+const egis = pick(["p44", "p45", "p27"]);
 
 const catchPhotos = [
   { src: "aoriika-night-egi", alt: "エギに掛かって釣り上げられたアオリイカ（夜の堤防）", cap: "夜の堤防でエギに乗ったアオリイカ" },
@@ -85,9 +85,7 @@ function PhotoGrid({ photos }: { photos: { src: string; alt: string; cap: string
 }
 
 const smallGearIds = ["p48", "p49", "p28", "p29", "p11"];
-const smallGear = smallGearIds
-  .map((id) => products.find((p) => p.id === id))
-  .filter((p): p is NonNullable<typeof p> => Boolean(p));
+const smallGear = pick(smallGearIds);
 
 function H2({ children }: { children: React.ReactNode }) {
   return <h2 className="mb-3 mt-10 text-xl font-bold sm:text-2xl">{children}</h2>;
@@ -119,6 +117,10 @@ export default function EgingGearPage() {
           </ul>
         </CardContent>
       </Card>
+
+      <div className="mt-6">
+        <ShakurhythmPromo source="eging_gear_top" />
+      </div>
 
       <H2>実際に釣れたイカ</H2>
       <p className="text-sm leading-relaxed sm:text-base">
