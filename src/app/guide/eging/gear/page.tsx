@@ -188,6 +188,12 @@ export default function EgingGearPage() {
           自然系（ナチュラル）と目立つ系（ピンク・オレンジ）を基本に、夜や濁りには夜光系を足すと対応の幅が広がります。
         </li>
       </ul>
+      <div className="mt-6 rounded-lg border border-primary/30 bg-primary/5 p-4 text-sm leading-relaxed">
+        <p className="font-bold">編集部のおすすめは「ヤマシタ エギ王 K」</p>
+        <p className="mt-1">
+          エギはやっぱりヤマシタ。カラー選びは、昼は「ムラムラチェリー」、夜は「軍艦グリーン」から始めるのがおすすめです。
+        </p>
+      </div>
       <div className="mt-6">
         <ProductList
           products={egis}

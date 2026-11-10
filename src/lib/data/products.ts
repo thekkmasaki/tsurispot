@@ -664,10 +664,11 @@ export const products: Product[] = [
     id: "p44",
     name: "ヤマシタ エギ王 K 3.5号",
     description:
-      "アオリイカ用エギの定番。号数別の沈下速度が公表されているので、フォール秒数の目安を立てやすい。",
+      "編集部おすすめのエギ。昼は「ムラムラチェリー」、夜は「軍艦グリーン」から試すのが定番。号数別の沈下速度が公表されているので、フォール秒数の目安も立てやすい。",
     priceRange: "1,000〜1,500円",
     imageDescription: "ヤマシタ エギ王 K エギ",
     amazonAsin: "",
+    // TODO: ユーザー提供の https://link.amazon/B0ejsJWxb は404だったため、再発行され次第 amazonDirectUrl に設定
     rakutenSearchQuery: "ヤマシタ エギ王K 3.5号",
     category: "tackle",
     difficulty: "beginner",
