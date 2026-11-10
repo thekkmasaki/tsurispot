@@ -11,14 +11,17 @@ export const dynamic = "force-dynamic";
 
 const SITE_ORIGIN = "https://tsurispot.com";
 
-/** Origin ヘッダーがサイト自身のものか。 */
+/**
+ * Origin ヘッダーがサイト自身のものか。
+ * 本番で通すのは https://tsurispot.com だけ。本番のコンテナから見た自分の origin は
+ * 内部のホスト名（localhost など）になり得るので、それを許可に入れない。
+ * 開発・テストの時だけ、リクエスト自身の origin も通す。
+ */
 function isSameSiteOrigin(request: NextRequest): boolean {
   const origin = request.headers.get("origin");
   if (!origin) return false;
-  const allowed = new Set<string>([SITE_ORIGIN, request.nextUrl.origin]);
-  const host = request.headers.get("host");
-  if (host) allowed.add(`https://${host}`);
-  return allowed.has(origin);
+  if (origin === SITE_ORIGIN) return true;
+  return process.env.NODE_ENV !== "production" && origin === request.nextUrl.origin;
 }
 
 function forbidden() {

@@ -95,6 +95,9 @@ export default async function AppLinkPage() {
               <span>アカウントを退会する</span>
             </li>
           </ul>
+          <p className="rounded-lg bg-muted px-3 py-2 text-xs text-muted-foreground">
+            アプリの「ログイン」を押してこの画面が開いた時だけ「連携する」を押してください。覚えがない時は「やめる」を押してください。
+          </p>
         </div>
 
         <form method="POST" action="/api/app/link/approve" className="space-y-3">

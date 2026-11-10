@@ -332,6 +332,20 @@ describe("アプリ連携", () => {
       expect([...fake.kv.keys()].some((k) => k.startsWith("auth:app_code:"))).toBe(false);
     });
 
+    it("approve: 本番では https://tsurispot.com 以外の Origin を通さない（内部ホスト名も不可）", async () => {
+      const cookie = await cookieValue();
+      const info = parseAppLinkReq(cookie)!;
+      vi.mocked(auth).mockResolvedValue({ user: { tsuriId: "u1", nickname: "n" } } as never);
+      vi.stubEnv("NODE_ENV", "production");
+      try {
+        expect((await approvePOST(approveReq(cookie, info.nonce, "http://localhost"))).status).toBe(403);
+        expect([...fake.kv.keys()].some((k) => k.startsWith("auth:app_code:"))).toBe(false);
+        expect((await approvePOST(approveReq(cookie, info.nonce, "https://tsurispot.com"))).status).toBe(303);
+      } finally {
+        vi.stubEnv("NODE_ENV", "test");
+      }
+    });
+
     it("token: 停止中ユーザーは 403 inactive、形式不正は 400", async () => {
       const code = await issueAuthCode("u1", CHALLENGE);
       await markUserDeleted("u1");
