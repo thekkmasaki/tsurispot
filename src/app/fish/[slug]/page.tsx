@@ -1127,13 +1127,16 @@ export default async function FishDetailPage({ params }: PageProps) {
           "フカセ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド", desc: "フカセ釣りの基本テクニック" },
         };
         const seen = new Set<string>();
-        const guideLinks = fish.fishingMethods
+        const baseLinks = fish.fishingMethods
           .map((m) => GUIDE_MAP[m.methodName])
           .filter((g): g is { href: string; label: string; desc: string } => {
             if (!g || seen.has(g.href)) return false;
             seen.add(g.href);
             return true;
           });
+        const guideLinks = fish.fishingMethods.some((m) => m.methodName === "エギング")
+          ? [...baseLinks, { href: "/guide/eging/gear", label: "エギング道具の選び方特集", desc: "ロッド・エギ・小物のおすすめ" }]
+          : baseLinks;
         if (guideLinks.length === 0) return null;
         return (
           <section className="mb-6 sm:mb-8">

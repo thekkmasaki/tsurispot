@@ -8,9 +8,9 @@ import { ShakurhythmPromo } from "@/components/promo/shakurhythm-promo";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { products } from "@/lib/data/products";
 
-const TITLE = "エギング道具の選び方特集｜ロッド・エギの選び方とおすすめ";
+const TITLE = "エギングロッド・エギの選び方とおすすめ｜初心者向け道具ガイド";
 const DESC =
-  "エギング初心者向けに、ロッドの長さ・硬さ・価格帯の選び方と、エギの号数・カラー・沈下速度の選び方を解説。おすすめロッドとエギ、シャクリのリズムを振動で刻むアプリ「シャクリズム」も紹介。";
+  "エギングロッドの長さ・硬さ・価格帯、エギの号数・カラー・沈下速度の選び方を初心者向けに解説。編集部おすすめのロッド・エギ・ヘッドライト・ギャフ、実釣写真、平磯海づり公園での釣果も紹介。";
 const URL = "https://tsurispot.com/guide/eging/gear";
 
 export const metadata: Metadata = {
@@ -40,7 +40,7 @@ const breadcrumbJsonLd = {
     { "@type": "ListItem", position: 1, name: "ホーム", item: "https://tsurispot.com" },
     { "@type": "ListItem", position: 2, name: "釣りの始め方ガイド", item: "https://tsurispot.com/guide" },
     { "@type": "ListItem", position: 3, name: "エギング入門ガイド", item: "https://tsurispot.com/guide/eging" },
-    { "@type": "ListItem", position: 4, name: "エギング道具の選び方特集", item: URL },
+    { "@type": "ListItem", position: 4, name: "エギングロッド・エギの選び方", item: URL },
   ],
 };
 
@@ -87,6 +87,61 @@ function PhotoGrid({ photos, cols = 3 }: { photos: { src: string; alt: string; c
 const smallGearIds = ["p48", "p49", "p28", "p29", "p11"];
 const smallGear = pick(smallGearIds);
 
+const faqs = [
+  {
+    q: "エギングロッドは何フィートを選べばいい？",
+    a: "堤防からのエギングなら8フィート台（約2.4〜2.7m）、硬さはML〜Mが標準です。迷ったら8.3ft前後のエギング専用ロッドから選ぶと、キャストのしやすさとシャクリやすさのバランスが取れます。",
+  },
+  {
+    q: "エギは何号を買えばいい？",
+    a: "堤防エギングでは3.0〜3.5号が基本です。秋の新子（小型）が多い時期は2.5〜3.0号、サイズが育つ晩秋〜春は3.5号が目安です。",
+  },
+  {
+    q: "エギのカラーはどう選ぶ？",
+    a: "自然系と目立つ系の2色を基本に、夜は夜光系を足すとよいです。編集部のおすすめは、ヤマシタ エギ王 Kの昼「ムラムラチェリー」、夜「軍艦グリーン」です。",
+  },
+  {
+    q: "夜エギングのヘッドライトは赤色がいい？",
+    a: "赤色LEDは白色光より魚やイカを警戒させにくいと言われています。手元を照らすなら赤色LED搭載の釣り用ヘッドライトがおすすめです。",
+  },
+  {
+    q: "エギングにギャフは必要？",
+    a: "秋〜春に釣れるイカは大きく育つため、足場の高い堤防ではギャフがあると取り込みが安全で確実です。抜き上げはバラシの原因になります。",
+  },
+  {
+    q: "シャクリのリズムが分からないときは？",
+    a: "ツリスポ公式アプリ「シャクリズム」（iPhone・Apple Watch、無料）が、フォールの秒数を数えて振動で知らせてくれます。",
+  },
+];
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "エギングロッド・エギの選び方とおすすめ｜初心者向け道具ガイド",
+  description: DESC,
+  datePublished: "2026-11-10",
+  dateModified: "2026-11-10",
+  image: ["https://tsurispot.com/images/eging/aoriika-hanging.webp"],
+  author: { "@type": "Organization", name: "ツリスポ編集部", url: "https://tsurispot.com/about" },
+  publisher: {
+    "@type": "Organization",
+    name: "ツリスポ",
+    url: "https://tsurispot.com",
+    logo: { "@type": "ImageObject", url: "https://tsurispot.com/logo.svg" },
+  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": URL },
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 function H2({ children }: { children: React.ReactNode }) {
   return <h2 className="mb-3 mt-10 text-xl font-bold sm:text-2xl">{children}</h2>;
 }
@@ -95,13 +150,15 @@ export default function EgingGearPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <Link prefetch={false} href="/guide/eging" className="mb-4 inline-flex items-center text-sm text-muted-foreground hover:text-primary">
         <ChevronLeft className="size-4" />
         エギング入門ガイドへ
       </Link>
 
-      <h1 className="text-2xl font-bold sm:text-3xl">エギング道具の選び方特集｜ロッドとエギ</h1>
+      <h1 className="text-2xl font-bold sm:text-3xl">エギングロッド・エギの選び方とおすすめ｜初心者向け道具ガイド</h1>
       <p className="page-description mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
         エギングは道具選びで釣りやすさが大きく変わります。このページでは「ロッド」と「エギ」に絞って、初心者が迷いやすいポイントを整理しました。
         最後に、シャクリのリズム作りを助けるアプリ「シャクリズム」も紹介します。
@@ -243,12 +300,27 @@ export default function EgingGearPage() {
       </p>
       <ShakurhythmPromo source="eging_gear" />
 
+      <H2>よくある質問</H2>
+      <div className="space-y-3">
+        {faqs.map((f) => (
+          <details key={f.q} className="rounded-lg border p-4 text-sm">
+            <summary className="cursor-pointer font-semibold">{f.q}</summary>
+            <p className="mt-2 leading-relaxed text-muted-foreground">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
       <div className="mt-10 rounded-lg border p-4 text-sm">
         <p className="font-semibold">あわせて読みたい</p>
         <ul className="mt-2 space-y-1">
           <li>
             <Link prefetch={false} href="/guide/eging" className="text-primary hover:underline">
               エギング入門ガイド（シャクリ方・季節別攻略・締め方）
+            </Link>
+          </li>
+          <li>
+            <Link prefetch={false} href="/spots/hiraiso-fishing-park" className="text-primary hover:underline">
+              平磯海づり公園（神戸・垂水）の釣り場情報
             </Link>
           </li>
           <li>
