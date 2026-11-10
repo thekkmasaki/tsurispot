@@ -691,6 +691,22 @@ export const products: Product[] = [
     relatedFish: ["aoriika", "kouika", "yariika"],
     priority: 45,
   },
+  {
+    id: "p48",
+    name: "シーボンズ 釣り用ヘッドライト（赤色LED搭載・タイプC充電）",
+    description:
+      "夜エギングの必需品。赤色LED搭載で、白色光より魚やイカを警戒させにくいと言われています。約114gの軽量設計・IP66防水で、釣り用に作られた1台。",
+    priceRange: "4,000円前後",
+    imageDescription: "シーボンズ ヘッドライト 赤色LED",
+    amazonAsin: "",
+    amazonDirectUrl: "https://link.amazon/B0bKAPmlT",
+    rakutenSearchQuery: "ヘッドライト 釣り 赤色LED 充電式",
+    category: "accessory",
+    difficulty: "beginner",
+    relatedMethods: ["eging", "ajing", "mebaru"],
+    relatedFish: ["aoriika", "kouika", "yariika"],
+    priority: 48,
+  },
 ];
 
 /**
