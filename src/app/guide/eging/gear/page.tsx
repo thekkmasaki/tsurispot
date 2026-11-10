@@ -148,6 +148,13 @@ export default function EgingGearPage() {
           PEライン0.6〜0.8号を150m巻ける2500番前後が目安です。
         </li>
       </ul>
+      <div className="mt-6 rounded-lg border border-primary/30 bg-primary/5 p-4 text-sm leading-relaxed">
+        <p className="font-bold">編集部のおすすめは「シマノ 25ソルティーアドバンス ショアモデル エギング S83ML」</p>
+        <p className="mt-1">
+          エギングロッドは軽さが正義。約100gの軽さで1万円台前半というコスパは頭ひとつ抜けています。
+          8.3ft・MLなので、堤防からのアオリイカ狙いにそのまま使える1本です。
+        </p>
+      </div>
       <div className="mt-6">
         <ProductList
           products={rods}

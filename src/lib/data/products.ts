@@ -615,14 +615,14 @@ export const products: Product[] = [
   // ============================================
   {
     id: "p41",
-    name: "エギングロッド（8フィート台・初心者向け）",
+    name: "シマノ 25ソルティーアドバンス ショアモデル エギング S83ML",
     description:
-      "エギング専用ロッド。8.3ft前後のML〜Mクラスなら、シャクリやすく堤防でも扱いやすい。まず1本目におすすめ。",
-    priceRange: "5,000〜10,000円",
-    imageDescription: "エギングロッド 8.3ft",
+      "編集部おすすめの1本。エギングロッドは軽さが正義で、約100gの軽量設計だから一日中シャクっても疲れにくい。8.3ft・MLで堤防エギングにちょうどよく、この価格帯でこの軽さはコスパ抜群。",
+    priceRange: "12,000円前後",
+    imageDescription: "シマノ 25ソルティーアドバンス ショアモデル エギング S83ML",
     amazonAsin: "",
-    amazonDirectUrl: "https://amzn.to/4rLFPqc",
-    rakutenSearchQuery: "エギングロッド 8.3ft 初心者",
+    // TODO: ユーザー提供の https://link.amazon/B0aq95SSM は404だったため、再発行され次第 amazonDirectUrl に設定
+    rakutenSearchQuery: "シマノ 25 ソルティーアドバンス ショアモデル エギング S83ML",
     category: "rod",
     difficulty: "beginner",
     relatedMethods: ["eging"],
@@ -652,6 +652,7 @@ export const products: Product[] = [
     priceRange: "15,000〜30,000円",
     imageDescription: "ダイワ エメラルダス エギングロッド",
     amazonAsin: "",
+    amazonDirectUrl: "https://amzn.to/4rLFPqc",
     rakutenSearchQuery: "ダイワ エメラルダス エギングロッド",
     category: "rod",
     difficulty: "intermediate",
