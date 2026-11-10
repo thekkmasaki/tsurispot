@@ -76,6 +76,11 @@ export const seaKaiyuuAptitude: Record<string, FishRegionalAptitude> = {
       "ショアキャスティング・泳がせ釣り実績（能登・佐渡・外房）",
     ],
   },
+  aiburi: {
+    default: 1, // 沖合の岩礁域に暮らす南方系。陸っぱりでは「まれ」扱い
+    regionOverrides: { hokkaido: 0, tohoku: 0 },
+    rationale: "水深20〜150mの沖合岩礁域に生息する南方系で水揚げは少ない。日本海側の北限記録は新潟県で、北海道・東北は生息なし扱い。陸っぱりでの実績は乏しいためデフォルトは「まれ」。",
+  },
   kanpachi: {
     default: 2,
     regionOverrides: { hokkaido: 0, tohoku: 1 },

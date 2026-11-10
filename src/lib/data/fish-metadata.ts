@@ -57,6 +57,8 @@ export const fishMetadata: Record<string, FishMeta> = {
   ainame:         { aliases: ["アブラコ", "鮎並", "ネウ", "アブラメ", "シジュウ", "ポン"], popularity: 23 },
   // カンパチ: 幼魚はショゴ・ネリゴ、九州でアカバラ
   kanpachi:       { aliases: ["ショゴ", "ネリゴ", "間八", "アカバラ", "シオ"], popularity: 24 },
+  // アイブリ: 水揚げ少なく知名度低め
+  aiburi:         { aliases: ["藍鰤"], popularity: 150 },
   // ヒラマサ: 九州でヒラス、平政
   hiramasa:       { aliases: ["ヒラス", "平政", "ヒラサ", "マサ"], popularity: 25 },
   // マダコ: 各地でタコ
