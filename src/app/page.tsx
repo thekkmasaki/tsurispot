@@ -914,6 +914,36 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* 編集部特集: エギング道具（実釣写真つき。下の「今月のおすすめアイテム」への自然な導線） */}
+      <section className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 sm:pt-8">
+        <Link
+          prefetch={false}
+          href="/guide/eging/gear"
+          className="group flex flex-col overflow-hidden rounded-2xl border bg-card transition-shadow hover:shadow-md sm:flex-row"
+        >
+          <div className="relative aspect-[16/9] w-full shrink-0 sm:aspect-auto sm:w-72">
+            <Image
+              src="/images/eging/aoriika-hanging.webp"
+              alt="明石海峡に面した堤防で編集長が釣ったアオリイカ"
+              fill
+              sizes="(min-width: 640px) 288px, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center gap-2 p-4 sm:p-6">
+            <span className="w-fit rounded-full bg-sky-700 px-2.5 py-0.5 text-xs font-bold text-white">
+              編集部特集
+            </span>
+            <p className="text-lg font-bold leading-snug group-hover:underline sm:text-xl">
+              明石海峡で実際に釣れた！編集長のエギングタックル全公開
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              釣り歴2年目の編集長がアオリイカを釣ったロッド・エギ・小物をそのまま紹介。初心者が最初にそろえる道具がわかります。
+            </p>
+          </div>
+        </Link>
+      </section>
+
       {/* 今月のおすすめアイテム */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <SeasonalRecommend maxItems={4} />

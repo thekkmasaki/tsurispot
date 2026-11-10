@@ -184,7 +184,7 @@ const detailGuides: GuideItem[] = [
   },
   {
     href: "/guide/eging/gear",
-    title: "エギング道具の選び方特集",
+    title: "明石海峡で実際に釣れた！編集長のエギングタックル全公開",
     description:
       "エギングロッドの長さ・硬さ・価格帯、エギの号数・カラー・沈下速度の選び方と、おすすめ道具を紹介。",
     icon: Crosshair,
