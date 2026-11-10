@@ -610,6 +610,85 @@ export const products: Product[] = [
     relatedFish: [],
     priority: 40,
   },
+  // ============================================
+  // エギング特集（ロッド・エギ）
+  // ============================================
+  {
+    id: "p41",
+    name: "エギングロッド（8フィート台・初心者向け）",
+    description:
+      "エギング専用ロッド。8.3ft前後のML〜Mクラスなら、シャクリやすく堤防でも扱いやすい。まず1本目におすすめ。",
+    priceRange: "5,000〜10,000円",
+    imageDescription: "エギングロッド 8.3ft",
+    amazonAsin: "",
+    amazonDirectUrl: "https://amzn.to/4rLFPqc",
+    rakutenSearchQuery: "エギングロッド 8.3ft 初心者",
+    category: "rod",
+    difficulty: "beginner",
+    relatedMethods: ["eging"],
+    relatedFish: ["aoriika", "kouika", "yariika"],
+    priority: 41,
+  },
+  {
+    id: "p42",
+    name: "シマノ セフィア BB（エギングロッド）",
+    description:
+      "エギング専用設計の定番シリーズ。軽量でシャクリの疲れにくさを重視したい人向けのステップアップロッド。",
+    priceRange: "10,000〜15,000円",
+    imageDescription: "シマノ セフィア BB エギングロッド",
+    amazonAsin: "",
+    rakutenSearchQuery: "シマノ セフィア BB エギングロッド",
+    category: "rod",
+    difficulty: "intermediate",
+    relatedMethods: ["eging"],
+    relatedFish: ["aoriika", "kouika", "yariika"],
+    priority: 42,
+  },
+  {
+    id: "p43",
+    name: "ダイワ エメラルダス（エギングロッド）",
+    description:
+      "エギングの代名詞ブランドのロッド。エギのダートを出しやすい操作感で、中級者以上の本格志向にも。",
+    priceRange: "15,000〜30,000円",
+    imageDescription: "ダイワ エメラルダス エギングロッド",
+    amazonAsin: "",
+    rakutenSearchQuery: "ダイワ エメラルダス エギングロッド",
+    category: "rod",
+    difficulty: "intermediate",
+    relatedMethods: ["eging"],
+    relatedFish: ["aoriika", "kouika", "yariika"],
+    priority: 43,
+  },
+  {
+    id: "p44",
+    name: "ヤマシタ エギ王 K 3.5号",
+    description:
+      "アオリイカ用エギの定番。号数別の沈下速度が公表されているので、フォール秒数の目安を立てやすい。",
+    priceRange: "1,000〜1,500円",
+    imageDescription: "ヤマシタ エギ王 K エギ",
+    amazonAsin: "",
+    rakutenSearchQuery: "ヤマシタ エギ王K 3.5号",
+    category: "tackle",
+    difficulty: "beginner",
+    relatedMethods: ["eging"],
+    relatedFish: ["aoriika", "kouika", "yariika"],
+    priority: 44,
+  },
+  {
+    id: "p45",
+    name: "ヤマシタ ナオリー RH 3.5号",
+    description:
+      "ヤマシタの人気エギ。カラーが豊富で、エギ王Kとローテーションして反応を探る2本目に便利。",
+    priceRange: "900〜1,400円",
+    imageDescription: "ヤマシタ ナオリー エギ",
+    amazonAsin: "",
+    rakutenSearchQuery: "ヤマシタ ナオリー RH 3.5号",
+    category: "tackle",
+    difficulty: "beginner",
+    relatedMethods: ["eging"],
+    relatedFish: ["aoriika", "kouika", "yariika"],
+    priority: 45,
+  },
 ];
 
 /**

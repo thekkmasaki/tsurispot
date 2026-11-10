@@ -183,6 +183,14 @@ const detailGuides: GuideItem[] = [
     category: "method",
   },
   {
+    href: "/guide/eging/gear",
+    title: "エギング道具の選び方特集",
+    description:
+      "エギングロッドの長さ・硬さ・価格帯、エギの号数・カラー・沈下速度の選び方と、おすすめ道具を紹介。",
+    icon: Crosshair,
+    category: "method",
+  },
+  {
     href: "/guide/tachiuo",
     title: "タチウオ釣り完全ガイド",
     description:
