@@ -238,7 +238,7 @@ export function CatchPhoto({
         alt={alt}
         width={640}
         height={360}
-        className="mt-2 max-h-72 w-full rounded-xl border object-cover"
+        className="mt-2 max-h-80 w-full rounded-xl border object-cover sm:max-h-[420px]"
         unoptimized
         onError={() => setError(true)}
       />
