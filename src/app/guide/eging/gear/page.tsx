@@ -8,7 +8,7 @@ import { ShakurhythmPromo } from "@/components/promo/shakurhythm-promo";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { products } from "@/lib/data/products";
 
-const TITLE = "エギングロッド・エギの選び方とおすすめ｜初心者向け道具ガイド";
+const TITLE = "明石海峡でアオリイカを釣った道具、全部見せます｜初心者のエギングロッド・エギの選び方";
 const DESC =
   "エギングロッドの長さ・硬さ・価格帯、エギの号数・カラー・沈下速度の選び方を初心者向けに解説。編集部おすすめのロッド・エギ・ヘッドライト・ギャフ、実釣写真、平磯海づり公園での釣果も紹介。";
 const URL = "https://tsurispot.com/guide/eging/gear";
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "ツリスポ",
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent("エギング道具の選び方特集")}&emoji=${encodeURIComponent("🦑")}`,
+        url: `/api/og?title=${encodeURIComponent("明石海峡で釣れたエギング道具 全公開")}&emoji=${encodeURIComponent("🦑")}`,
         width: 1200,
         height: 630,
       },
@@ -117,7 +117,7 @@ const faqs = [
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "エギングロッド・エギの選び方とおすすめ｜初心者向け道具ガイド",
+  headline: "釣り歴2年目の編集長が明石海峡でアオリイカを釣った道具、全部見せます｜エギングロッド・エギの選び方",
   description: DESC,
   datePublished: "2026-11-10",
   dateModified: "2026-11-10",
@@ -158,7 +158,7 @@ export default function EgingGearPage() {
         エギング入門ガイドへ
       </Link>
 
-      <h1 className="text-2xl font-bold sm:text-3xl">エギングロッド・エギの選び方とおすすめ｜初心者向け道具ガイド</h1>
+      <h1 className="text-2xl font-bold sm:text-3xl">釣り歴2年目の編集長が明石海峡でアオリイカを釣った道具、全部見せます｜エギングロッド・エギの選び方</h1>
       <p className="page-description mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
         エギングは道具選びで釣りやすさが大きく変わります。このページでは「ロッド」と「エギ」に絞って、初心者が迷いやすいポイントを整理しました。
         最後に、シャクリのリズム作りを助けるアプリ「シャクリズム」も紹介します。
