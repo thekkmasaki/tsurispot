@@ -132,7 +132,7 @@ export default function EgingGearPage() {
         <Link prefetch={false} href="/spots/hiraiso-fishing-park" className="font-semibold text-primary hover:underline">
           平磯海づり公園
         </Link>
-        。全域が柵付きで足場がよく、売店・トイレ・レンタル竿もそろうので、初めてのエギングにも向いています。
+        。全域が柵付きで足場がよく、売店・トイレもそろうので、初めてのエギングにも向いています。エギングロッドのレンタルはないため、竿は持参してください。
       </p>
 
       <H2>1. エギングロッドの選び方</H2>
