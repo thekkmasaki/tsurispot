@@ -4,7 +4,7 @@ import { purgeCloudflareUrls } from "@/lib/cloudflare";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
-import { auth } from "@/lib/auth";
+import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { savePostMeta, addToGlobalFeed, sanitizeTags, addTagsForPost } from "@/lib/social-store";
@@ -74,8 +74,10 @@ function parseReports(raw: unknown[]): CatchReport[] {
 // POST: ユーザー釣果投稿を受け取る
 export async function POST(request: Request) {
   try {
-    const session = await auth();
-    const tsuriId = session?.user?.tsuriId;
+    const ru = await getRequestUser(request);
+    if (ru.kind === "unauthorized") return unauthorizedResponse();
+    const reqUser = ru.kind === "user" ? ru.user : null;
+    const tsuriId = reqUser?.tsuriId;
 
     if (tsuriId) {
       const inactive = await rejectInactiveUser(tsuriId);
@@ -133,7 +135,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "魚名を入力してください（30文字以内）" }, { status: 400 });
     }
     // 表示名: ログイン済みはセッションのニックネームを強制（なりすまし防止）。匿名は入力値＋予約語禁止
-    const sessionNickname = (session?.user?.nickname ?? "").trim();
+    const sessionNickname = (reqUser?.nickname ?? "").trim();
     const userName = tsuriId && sessionNickname ? sessionNickname : body.userName;
     if (!userName || typeof userName !== "string" || userName.length > 20) {
       return NextResponse.json({ error: "ニックネームを入力してください（20文字以内）" }, { status: 400 });
