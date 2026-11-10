@@ -11,6 +11,7 @@ import { blogArticles9 } from "./blog-articles-9";
 import { blogArticles10 } from "./blog-articles-10";
 import { blogArticles11 } from "./blog-articles-11";
 import { blogArticles12 } from "./blog-articles-12";
+import { blogArticles13 } from "./blog-articles-13";
 
 export interface BlogPost {
   id: string;
@@ -2572,6 +2573,7 @@ export const blogPosts: BlogPost[] = [
   ...blogArticles10,
   ...blogArticles11,
   ...blogArticles12,
+  ...blogArticles13,
 ];
 
 /** slugで記事を取得（同期版、静的記事のみ） */
