@@ -21,6 +21,11 @@ export interface AffiliateProduct {
   prefectures?: string[];
   /** 価格帯の目安（表示用） */
   priceRange?: string;
+  /**
+   * 商品写真。Amazon SiteStripe「画像」リンクの img src をそのまま入れる
+   * （規約上、画像をダウンロードして自サーバーに置くのは禁止）
+   */
+  image?: string;
   /** 編集部おすすめフラグ（高単価・高品質商品に設定） */
   isRecommended?: boolean;
 }
