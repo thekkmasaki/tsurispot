@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, MapPin, TrendingUp, Fish } from "lucide-react";
 import { NotFoundSearch } from "@/components/not-found-search";
+import { Sakanacchi } from "@/components/fun/sakanacchi";
 
 export const metadata: Metadata = {
   title: "ページが見つかりません | ツリスポ（つりすぽ）",
@@ -14,8 +15,7 @@ export default function NotFound() {
     <div
       className="relative min-h-screen overflow-hidden"
       style={{
-        background:
-          "linear-gradient(180deg, #e0f2fe 0%, #bae6fd 30%, #e0f7fa 60%, #f0fdf4 100%)",
+        background: "linear-gradient(180deg, oklch(97% 0.014 242) 0%, #ffffff 70%)",
       }}
     >
       {/* 波模様の背景装飾 */}
@@ -41,9 +41,9 @@ export default function NotFound() {
           404
         </p>
 
-        {/* 釣りアイコン */}
-        <div className="-mt-10 mb-4 text-7xl sm:-mt-14 sm:text-8xl">
-          🎣
+        {/* マスコット「さかなっち」 */}
+        <div className="-mt-10 mb-4 sm:-mt-14">
+          <Sakanacchi size={112} />
         </div>
 
         {/* メインメッセージ */}

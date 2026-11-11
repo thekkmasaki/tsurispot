@@ -68,26 +68,169 @@
   --color-danger: var(--destructive);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   UI/UX刷新 Phase1（2026-11）: 色相の統合
+   生パレット直書きが19色相・6,000箇所超に散らばっていたため、
+   似た色相をテーマ変数レベルで同じスケールへ寄せる（各ファイルは無改修）。
+   - blue / sky / cyan / indigo → 「海の青」1スケール（アクセント色）
+   - emerald / teal → green、yellow → amber、slate / stone → gray、
+     violet → purple、rose → red
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  /* 影は控えめに（区切りは線と面で付ける方針）。hover:shadow-md 等の浮き上がりも弱くなる */
+  --shadow-sm: 0 1px 2px 0 rgb(20 40 60 / 0.04);
+  --shadow-md: 0 2px 6px -1px rgb(20 40 60 / 0.06);
+  --shadow-lg: 0 6px 16px -4px rgb(20 40 60 / 0.08);
+  --shadow-xl: 0 10px 24px -6px rgb(20 40 60 / 0.10);
+  --color-blue-50: oklch(97% 0.014 242);
+  --color-blue-100: oklch(94% 0.03 242);
+  --color-blue-200: oklch(89% 0.06 242);
+  --color-blue-300: oklch(81% 0.1 242);
+  --color-blue-400: oklch(71% 0.145 242);
+  --color-blue-500: oklch(61% 0.165 242);
+  --color-blue-600: oklch(52% 0.165 242);
+  --color-blue-700: oklch(45% 0.145 242);
+  --color-blue-800: oklch(39% 0.12 242);
+  --color-blue-900: oklch(33% 0.09 242);
+  --color-blue-950: oklch(25% 0.06 242);
+  --color-sky-50: oklch(97% 0.014 242);
+  --color-sky-100: oklch(94% 0.03 242);
+  --color-sky-200: oklch(89% 0.06 242);
+  --color-sky-300: oklch(81% 0.1 242);
+  --color-sky-400: oklch(71% 0.145 242);
+  --color-sky-500: oklch(61% 0.165 242);
+  --color-sky-600: oklch(52% 0.165 242);
+  --color-sky-700: oklch(45% 0.145 242);
+  --color-sky-800: oklch(39% 0.12 242);
+  --color-sky-900: oklch(33% 0.09 242);
+  --color-sky-950: oklch(25% 0.06 242);
+  --color-cyan-50: oklch(97% 0.014 242);
+  --color-cyan-100: oklch(94% 0.03 242);
+  --color-cyan-200: oklch(89% 0.06 242);
+  --color-cyan-300: oklch(81% 0.1 242);
+  --color-cyan-400: oklch(71% 0.145 242);
+  --color-cyan-500: oklch(61% 0.165 242);
+  --color-cyan-600: oklch(52% 0.165 242);
+  --color-cyan-700: oklch(45% 0.145 242);
+  --color-cyan-800: oklch(39% 0.12 242);
+  --color-cyan-900: oklch(33% 0.09 242);
+  --color-cyan-950: oklch(25% 0.06 242);
+  --color-indigo-50: oklch(97% 0.014 242);
+  --color-indigo-100: oklch(94% 0.03 242);
+  --color-indigo-200: oklch(89% 0.06 242);
+  --color-indigo-300: oklch(81% 0.1 242);
+  --color-indigo-400: oklch(71% 0.145 242);
+  --color-indigo-500: oklch(61% 0.165 242);
+  --color-indigo-600: oklch(52% 0.165 242);
+  --color-indigo-700: oklch(45% 0.145 242);
+  --color-indigo-800: oklch(39% 0.12 242);
+  --color-indigo-900: oklch(33% 0.09 242);
+  --color-indigo-950: oklch(25% 0.06 242);
+  /* emerald / teal → green */
+  --color-emerald-50: oklch(98.2% 0.018 155.826);
+  --color-emerald-100: oklch(96.2% 0.044 156.743);
+  --color-emerald-200: oklch(92.5% 0.084 155.995);
+  --color-emerald-300: oklch(87.1% 0.15 154.449);
+  --color-emerald-400: oklch(79.2% 0.209 151.711);
+  --color-emerald-500: oklch(72.3% 0.219 149.579);
+  --color-emerald-600: oklch(62.7% 0.194 149.214);
+  --color-emerald-700: oklch(52.7% 0.154 150.069);
+  --color-emerald-800: oklch(44.8% 0.119 151.328);
+  --color-emerald-900: oklch(39.3% 0.095 152.535);
+  --color-emerald-950: oklch(26.6% 0.065 152.934);
+  --color-teal-50: oklch(98.2% 0.018 155.826);
+  --color-teal-100: oklch(96.2% 0.044 156.743);
+  --color-teal-200: oklch(92.5% 0.084 155.995);
+  --color-teal-300: oklch(87.1% 0.15 154.449);
+  --color-teal-400: oklch(79.2% 0.209 151.711);
+  --color-teal-500: oklch(72.3% 0.219 149.579);
+  --color-teal-600: oklch(62.7% 0.194 149.214);
+  --color-teal-700: oklch(52.7% 0.154 150.069);
+  --color-teal-800: oklch(44.8% 0.119 151.328);
+  --color-teal-900: oklch(39.3% 0.095 152.535);
+  --color-teal-950: oklch(26.6% 0.065 152.934);
+  /* yellow → amber */
+  --color-yellow-50: oklch(98.7% 0.022 95.277);
+  --color-yellow-100: oklch(96.2% 0.059 95.617);
+  --color-yellow-200: oklch(92.4% 0.12 95.746);
+  --color-yellow-300: oklch(87.9% 0.169 91.605);
+  --color-yellow-400: oklch(82.8% 0.189 84.429);
+  --color-yellow-500: oklch(76.9% 0.188 70.08);
+  --color-yellow-600: oklch(66.6% 0.179 58.318);
+  --color-yellow-700: oklch(55.5% 0.163 48.998);
+  --color-yellow-800: oklch(47.3% 0.137 46.201);
+  --color-yellow-900: oklch(41.4% 0.112 45.904);
+  --color-yellow-950: oklch(27.9% 0.077 45.635);
+  /* slate / stone → gray */
+  --color-slate-50: oklch(98.5% 0.002 247.839);
+  --color-slate-100: oklch(96.7% 0.003 264.542);
+  --color-slate-200: oklch(92.8% 0.006 264.531);
+  --color-slate-300: oklch(87.2% 0.01 258.338);
+  --color-slate-400: oklch(70.7% 0.022 261.325);
+  --color-slate-500: oklch(55.1% 0.027 264.364);
+  --color-slate-600: oklch(44.6% 0.03 256.802);
+  --color-slate-700: oklch(37.3% 0.034 259.733);
+  --color-slate-800: oklch(27.8% 0.033 256.848);
+  --color-slate-900: oklch(21% 0.034 264.665);
+  --color-slate-950: oklch(13% 0.028 261.692);
+  --color-stone-50: oklch(98.5% 0.002 247.839);
+  --color-stone-100: oklch(96.7% 0.003 264.542);
+  --color-stone-200: oklch(92.8% 0.006 264.531);
+  --color-stone-300: oklch(87.2% 0.01 258.338);
+  --color-stone-400: oklch(70.7% 0.022 261.325);
+  --color-stone-500: oklch(55.1% 0.027 264.364);
+  --color-stone-600: oklch(44.6% 0.03 256.802);
+  --color-stone-700: oklch(37.3% 0.034 259.733);
+  --color-stone-800: oklch(27.8% 0.033 256.848);
+  --color-stone-900: oklch(21% 0.034 264.665);
+  --color-stone-950: oklch(13% 0.028 261.692);
+  /* violet → purple */
+  --color-violet-50: oklch(97.7% 0.014 308.299);
+  --color-violet-100: oklch(94.6% 0.033 307.174);
+  --color-violet-200: oklch(90.2% 0.063 306.703);
+  --color-violet-300: oklch(82.7% 0.119 306.383);
+  --color-violet-400: oklch(71.4% 0.203 305.504);
+  --color-violet-500: oklch(62.7% 0.265 303.9);
+  --color-violet-600: oklch(55.8% 0.288 302.321);
+  --color-violet-700: oklch(49.6% 0.265 301.924);
+  --color-violet-800: oklch(43.8% 0.218 303.724);
+  --color-violet-900: oklch(38.1% 0.176 304.987);
+  --color-violet-950: oklch(29.1% 0.149 302.717);
+  /* rose → red */
+  --color-rose-50: oklch(97.1% 0.013 17.38);
+  --color-rose-100: oklch(93.6% 0.032 17.717);
+  --color-rose-200: oklch(88.5% 0.062 18.334);
+  --color-rose-300: oklch(80.8% 0.114 19.571);
+  --color-rose-400: oklch(70.4% 0.191 22.216);
+  --color-rose-500: oklch(63.7% 0.237 25.331);
+  --color-rose-600: oklch(57.7% 0.245 27.325);
+  --color-rose-700: oklch(50.5% 0.213 27.518);
+  --color-rose-800: oklch(44.4% 0.177 26.899);
+  --color-rose-900: oklch(39.6% 0.141 25.723);
+  --color-rose-950: oklch(25.8% 0.092 26.042);
+}
+
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.98 0.005 80);
-  --foreground: oklch(0.145 0.01 240);
+  /* Phase1: 砂色(クリーム)の地を白に。面は青寄りの薄いグレー、アクセントは海の青1色 */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.015 245);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0.01 240);
+  --card-foreground: oklch(0.22 0.015 245);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0.01 240);
-  --primary: oklch(0.40 0.12 230);
+  --popover-foreground: oklch(0.22 0.015 245);
+  --primary: oklch(0.47 0.15 242);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.82 0.06 80);
-  --secondary-foreground: oklch(0.15 0.05 75);
-  --muted: oklch(0.955 0.008 80);
-  --muted-foreground: oklch(0.38 0.02 240);
-  --accent: oklch(0.68 0.16 25);
-  --accent-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.008 242);
+  --secondary-foreground: oklch(0.30 0.03 245);
+  --muted: oklch(0.97 0.004 242);
+  --muted-foreground: oklch(0.45 0.02 245);
+  --accent: oklch(0.95 0.025 242);
+  --accent-foreground: oklch(0.40 0.13 242);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.90 0.01 80);
-  --input: oklch(0.90 0.01 80);
-  --ring: oklch(0.55 0.15 230);
+  --border: oklch(0.92 0.006 242);
+  --input: oklch(0.90 0.008 242);
+  --ring: oklch(0.55 0.15 242);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -209,6 +352,50 @@
 }
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* マスコット「さかなっち」(src/components/fun/sakanacchi.tsx) のマイクロアニメーション。
+   transform/opacity のみ＝レイアウトを動かさない。reduced-motion は下の包括ルールで停止。 */
+@keyframes sakanacchi-swim {
+  0%, 100% { transform: translateX(-4px) rotate(-3deg); }
+  50% { transform: translateX(4px) rotate(3deg); }
+}
+@keyframes sakanacchi-jump {
+  0% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-28%) scale(1.06, 0.94) rotate(-8deg); }
+  60% { transform: translateY(0) scale(1.08, 0.9); }
+  80% { transform: translateY(-6%); }
+  100% { transform: translateY(0); }
+}
+@keyframes sakanacchi-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes sakanacchi-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  40% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.sakanacchi-swim {
+  animation: sakanacchi-swim 2.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+.sakanacchi-jump {
+  animation: sakanacchi-jump 0.8s ease-out;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.sakanacchi-eye {
+  animation: sakanacchi-blink 4s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.sakanacchi-heart {
+  opacity: 0;
+  animation: sakanacchi-pop 0.5s 0.25s ease-out forwards;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 /* SVGインラインの波パターン背景 */

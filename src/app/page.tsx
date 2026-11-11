@@ -41,6 +41,7 @@ import { ContentDivider } from "@/components/ui/content-divider";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SPOT_FEATURES } from "@/lib/data/spot-features";
+import { Sakanacchi } from "@/components/fun/sakanacchi";
 
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
@@ -300,30 +301,17 @@ export default async function Home() {
       />
       {/* ヒーローセクション */}
       {/* ATFのLinkはprefetch={false}: 初期ロード中のRSC自動プリフェッチ(実測442KB、/spotsだけで354KB)が低速回線でLCPと帯域競合するため。タップ時取得に変更（体感+100-300msだが初期表示を優先） */}
-      <section className="relative overflow-x-hidden bg-gradient-to-b from-sky-400 via-[oklch(0.45_0.14_220)] to-[oklch(0.30_0.10_235)]">
-        {/* 水平線グロー（夕焼け/朝焼け感） */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-0 right-0 top-[45%] h-24 bg-gradient-to-r from-transparent via-sunset-gold/15 to-transparent blur-2xl" />
-        </div>
-
-        {/* 波アニメーション 2レイヤー */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-          <svg viewBox="0 0 2880 120" fill="none" className="absolute bottom-0 w-[200%] animate-wave" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,60 C1800,120 2160,0 2520,60 C2700,90 2820,80 2880,60 L2880,120 L0,120 Z" fill="white" fillOpacity="0.15" />
-          </svg>
-          <svg viewBox="0 0 2880 120" fill="none" className="absolute bottom-0 w-[200%] animate-wave-slow" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0,80 C360,20 720,100 1080,40 C1260,20 1380,50 1440,80 C1800,20 2160,100 2520,40 C2700,20 2820,50 2880,80 L2880,120 L0,120 Z" fill="white" fillOpacity="0.10" />
-          </svg>
-        </div>
-
-        <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-10 sm:px-6 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
+      {/* UI/UX刷新Phase1: 3色グラデ・水平線グロー・波アニメ2層を撤去し、海の青1色＋さかなっちに */}
+      <section className="relative overflow-x-hidden bg-[oklch(0.45_0.13_242)]">
+        <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-8 sm:px-6 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[oklch(0.30_0.10_235)]/35 px-4 py-1.5 text-sm text-white backdrop-blur-sm sm:mb-4">
+            <Sakanacchi size={56} className="mb-2" />
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm text-white sm:mb-4">
               <Waves className="size-4" aria-hidden="true" />
               <span>海釣り・川釣り 総合情報サイト</span>
             </div>
 
-            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance font-display drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:mb-4 sm:text-4xl lg:text-5xl">
+            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance font-display sm:mb-4 sm:text-4xl lg:text-5xl">
               近くの釣りスポットが
               <br className="sm:hidden" />
               すぐ見つかる。
@@ -362,7 +350,7 @@ export default async function Home() {
                   現在地GPS検索(navigator.geolocation)＋title「近くの釣り場を探す」で意図・アンカーが完全一致。
                   home 最大の完全一致アンカーを、この語で狙う near-me LP へ集約する。/map はヘッダー等に残す。 */}
               <Link href="/fishing-spots/near-me" prefetch={false} className="w-full sm:w-auto">
-                <Button size="lg" className="w-full gap-2 bg-gradient-to-r from-sunset-coral to-sunset-gold px-8 py-6 text-base font-bold text-white shadow-lg shadow-sunset-coral/25 transition-[box-shadow,transform] hover:shadow-xl hover:shadow-sunset-coral/30 hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
+                <Button size="lg" className="w-full gap-2 rounded-full bg-white px-8 py-6 text-base font-bold text-primary transition-colors hover:bg-white/90 sm:w-auto sm:text-lg min-h-[52px]">
                   <MapPin className="size-5" />
                   近くの釣り場を探す
                 </Button>
