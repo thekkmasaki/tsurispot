@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FishImage } from "@/components/ui/spot-image";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { SECTION_INNER, SECTION_HEADING_GAP } from "@/components/ui/page-section";
 
 interface SeasonalFish {
   id: string;
@@ -70,8 +71,8 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
 
   if (safeFish.length === 0) {
     return (
-      <section className="border-t py-8 sm:py-10">
-        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
+      <section className="py-10 sm:py-16">
+        <div className={`${SECTION_INNER} text-center`}>
           <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">今月釣れる魚</h2>
           <p className="mt-2 text-sm text-muted-foreground">データの読み込みに失敗しました</p>
           <Link prefetch={false} href="/fish" className="mt-4 inline-block">
@@ -88,21 +89,14 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
   const visibleFish = expanded ? safeFiltered : safeFiltered.slice(0, INITIAL_COUNT);
 
   return (
-    <section className="border-t py-8 sm:py-10">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="mb-4 flex items-end justify-between sm:mb-6">
-          <SectionHeading
-            title={`${currentMonth}月に釣れる魚`}
-            subtitle={`${safeFiltered.length}種類`}
-          />
-          <Link prefetch={false}
-            href="/fish"
-            className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-          >
-            もっと見る
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
+    <section className="py-10 sm:py-16">
+      <div className={SECTION_INNER}>
+        <SectionHeading
+          title={`${currentMonth}月に釣れる魚`}
+          subtitle={`${safeFiltered.length}種類`}
+          action={{ href: "/fish", label: "魚図鑑へ" }}
+          className={SECTION_HEADING_GAP}
+        />
 
         {/* Filter tabs */}
         <div className="-mx-4 mb-4 flex gap-1.5 overflow-x-auto px-4 pb-1 scrollbar-hide sm:mx-0 sm:mb-6 sm:flex-wrap sm:px-0">
@@ -113,7 +107,7 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
               className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors sm:text-sm ${
                 filter === f.key
                   ? "bg-primary text-primary-foreground shadow-sm"
-                  : "bg-background text-muted-foreground hover:bg-muted border"
+                  : "bg-card text-muted-foreground hover:text-foreground"
               }`}
             >
               {f.label}
@@ -178,7 +172,7 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
               );
             })}
           </div>
-          <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-background to-transparent sm:hidden" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-muted to-transparent sm:hidden" />
         </div>
 
         {/* もっと見る / 折りたたむ */}
@@ -195,14 +189,6 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
           </div>
         )}
 
-        <div className="mt-4 flex justify-center sm:hidden">
-          <Link prefetch={false} href="/fish">
-            <Button variant="outline" className="min-h-[44px] gap-1">
-              すべての魚を見る
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );

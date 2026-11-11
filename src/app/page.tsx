@@ -20,7 +20,6 @@ import { getHomeAreaMarkers } from "@/lib/geo/home-area-markers";
 import {
   MapPin,
   Fish,
-  ArrowRight,
   Waves,
   BookOpen,
   ChevronRight,
@@ -36,8 +35,8 @@ import {
 import nextDynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
-import { ContentDivider } from "@/components/ui/content-divider";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { PageSection, SECTION_INNER, SECTION_HEADING_GAP, SCROLL_ROW } from "@/components/ui/page-section";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SPOT_FEATURES } from "@/lib/data/spot-features";
 import { Sakanacchi } from "@/components/fun/sakanacchi";
@@ -295,7 +294,7 @@ export default async function Home() {
   ];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-muted">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLdArray) }}
@@ -304,7 +303,7 @@ export default async function Home() {
       {/* ATFのLinkはprefetch={false}: 初期ロード中のRSC自動プリフェッチ(実測442KB、/spotsだけで354KB)が低速回線でLCPと帯域競合するため。タップ時取得に変更（体感+100-300msだが初期表示を優先） */}
       {/* UI/UX刷新Phase1: 3色グラデ・水平線グロー・波アニメ2層を撤去し、海の青1色＋さかなっちに */}
       <section className="relative overflow-x-hidden bg-[oklch(0.45_0.13_242)]">
-        <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-8 sm:px-6 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
+        <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-8 sm:px-6 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-16">
           <div className="flex flex-col items-center text-center">
             <Sakanacchi size={56} className="mb-2" />
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm text-white sm:mb-4">
@@ -380,21 +379,6 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* セクション下部の波形 */}
-        <div className="absolute bottom-0 left-0 right-0 z-10">
-          <svg
-            viewBox="0 0 1440 60"
-            fill="none"
-            className="w-full"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"
-              className="fill-background"
-            />
-          </svg>
-        </div>
       </section>
 
       {/* ヒーロー直下: 近くの釣り場バンド（現在地→近い順→実地図。実地図はボタン押下後に遅延マウント）。
@@ -405,49 +389,70 @@ export default async function Home() {
       {/* ヒーロー直下の一等地: 旧 Green Join CTA（/login 登録導線）を広告枠に置換（2026-08-03）。
           広告密度回復＝収益優先の判断。DisplayAd は min-h-[250px] 領域予約で CLS=0、未fill時は
           ハウス広告フォールバック。登録導線はヘッダー/各ページの /login で維持されるため funnel は残る。 */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-3 sm:py-4">
+      <section className={`${SECTION_INNER} pt-6 sm:pt-8`}>
         <DisplayAd />
       </section>
+
+      {/* 注目の特集（サウナイキタイの「注目です」型）。編集部特集を一等地へ（2026-11 ユーザー指示）。
+          広告（DisplayAd）の位置は変えず、その下・釣行指数の上に置く。 */}
+      <PageSection className="pb-0 sm:pb-0">
+        <SectionHeading
+          title="注目の特集"
+          subtitle="編集部が実際に釣って書いた記事"
+          className={SECTION_HEADING_GAP}
+        />
+        <Link
+          prefetch={false}
+          href="/guide/eging/gear"
+          className="group flex flex-col overflow-hidden rounded-2xl bg-card transition-shadow hover:shadow-lg sm:flex-row"
+        >
+          <div className="relative aspect-[16/10] w-full shrink-0 sm:aspect-auto sm:min-h-[280px] sm:w-1/2">
+            <Image
+              src="/images/eging/aoriika-hanging.webp"
+              alt="明石海峡に面した堤防で編集長が釣ったアオリイカ"
+              fill
+              sizes="(min-width: 640px) 576px, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          </div>
+          <div className="flex flex-col justify-center gap-3 p-5 sm:p-10">
+            <span className="w-fit rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+              編集部特集
+            </span>
+            <p className="text-xl font-black leading-snug group-hover:underline sm:text-3xl">
+              明石海峡で実際に釣れた！編集長のエギングタックル全公開
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+              釣り歴2年目の編集長がアオリイカを釣ったロッド・エギ・小物をそのまま紹介。初心者が最初にそろえる道具がわかります。
+            </p>
+            <span className="mt-1 inline-flex items-center gap-1 text-sm font-bold text-primary">
+              記事を読む
+              <ChevronRight className="size-4" aria-hidden="true" />
+            </span>
+          </div>
+        </Link>
+      </PageSection>
 
       {/* 今日の釣行指数（案③）: お気に入り×今日の条件を0-100点で。毎日開く理由をつくる。
           一等地の DisplayAd（2026-08-03 の収益優先判断）は動かさず、その直下に置く。
           force-static を壊さないよう完全にクライアント計算（お気に入りは localStorage、匿名OK）。 */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-3 sm:py-4">
+      <section className={`${SECTION_INNER} pt-6 sm:pt-8`}>
         <FishingIndexCard />
       </section>
 
       {/* 最新釣果週報（6件表示） */}
       {weeklyReports.length > 0 && (
-        <section className="border-t py-8 sm:py-10">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <div className="mb-6 flex items-end justify-between sm:mb-8">
-              <SectionHeading
-                title="最新釣果週報"
-                subtitle="全国の今週の釣果をエリア別にお届け"
-              />
-              <Link prefetch={false}
-                href="/blog?tag=釣果週報"
-                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-              >
-                すべて見る
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-
-            {/* モバイル用「すべて見る」リンク — カード一覧の上 */}
-            <div className="mb-4 flex justify-center sm:hidden">
-              <Link prefetch={false} href="/blog?tag=釣果週報">
-                <Button variant="outline" className="min-h-[44px] gap-1">
-                  すべての釣果週報を見る
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <PageSection>
+            <SectionHeading
+              title="最新釣果週報"
+              subtitle="全国の今週の釣果をエリア別にお届け"
+              action={{ href: "/blog?tag=釣果週報", label: "すべて見る" }}
+              className={SECTION_HEADING_GAP}
+            />
+            <div className={SCROLL_ROW}>
               {weeklyReports.map((post) => (
                 <Link prefetch={false} key={post.id} href={`/blog/${post.slug}`}>
-                  <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
+                  <Card className="group h-full overflow-hidden border-0 py-0 shadow-none transition-shadow hover:shadow-md">
                     <div className="relative h-36 w-full overflow-hidden">
                       <Image
                         src={post.image || getFishImage(post.tags, post.id)}
@@ -492,20 +497,18 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
-          </div>
-        </section>
+        </PageSection>
       )}
 
       {/* 広告: 釣果週報後
           注: ルートが flex flex-col のため、mx-auto だけだと auto マージンが stretch を打ち消し
           fit-content 幅(実測145px)に収縮 → 広告が availableWidth 不足で配信されない。w-full 必須。 */}
-      <div className="mx-auto w-full max-w-5xl px-4">
-        <ContentDivider variant="line" />
-        <InArticleAd className="my-4" />
+      <div className={SECTION_INNER}>
+        <InArticleAd className="my-0!" />
       </div>
 
       {/* UX-7: 最近見た釣り場 carousel (RecentlyViewedTracker のデータを使用、 spot 詳細を見た user のみ表示) */}
-      <div className="mx-auto w-full max-w-5xl px-4">
+      <div className={SECTION_INNER}>
         <RecentlyViewedSpots />
       </div>
 
@@ -535,7 +538,6 @@ export default async function Home() {
       />
 
       {/* 広告（below fold） */}
-      <div className="mx-auto w-full max-w-5xl px-4"><ContentDivider variant="line" /></div>
       <NativeAdBreak />
 
       {/* 今釣れる魚セクション */}
@@ -560,7 +562,7 @@ export default async function Home() {
       </SectionErrorBoundary>
 
       {/* 広告: 今釣れる魚セクション後 */}
-      <div className="mx-auto w-full max-w-5xl px-4"><InArticleAd className="my-4" /></div>
+      <div className={SECTION_INNER}><InArticleAd className="my-0!" /></div>
 
       {/* 今月おすすめの釣り場 */}
       {(() => {
@@ -579,21 +581,14 @@ export default async function Home() {
           .slice(0, 6);
 
         return seasonalSpots.length > 0 ? (
-          <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-            <div className="mb-6 flex items-end justify-between sm:mb-8">
-              <SectionHeading
-                title="今月おすすめの釣り場"
-                subtitle={`${currentMonth}月に釣れる魚がいるスポットをピックアップ`}
-              />
-              <Link prefetch={false}
-                href="/catchable-now"
-                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-              >
-                もっと見る
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <PageSection>
+            <SectionHeading
+              title="今月おすすめの釣り場"
+              subtitle={`${currentMonth}月に釣れる魚がいるスポットをピックアップ`}
+              action={{ href: "/catchable-now", label: "もっと見る" }}
+              className={SECTION_HEADING_GAP}
+            />
+            <div className={SCROLL_ROW}>
               {seasonalSpots.map((spot) => {
                 const catchableNow = spot.catchableFish
                   .filter((cf) => {
@@ -629,16 +624,8 @@ export default async function Home() {
                 );
               })}
             </div>
-            <div className="mt-6 flex justify-center sm:hidden">
-              <Link prefetch={false} href="/catchable-now">
-                <Button variant="outline" className="min-h-[44px] gap-1">
-                  もっと見る
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
-            </div>
             {/* 月別ガイドへの導線（/monthly はトップから未リンクだったためクロール導線を確保） */}
-            <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
               <Link
                 prefetch={false}
                 href={`/monthly/${monthSlugs[currentMonth - 1]}`}
@@ -656,7 +643,7 @@ export default async function Home() {
                 <ChevronRight className="size-3.5" />
               </Link>
             </div>
-          </section>
+          </PageSection>
         ) : null;
       })()}
 
@@ -664,21 +651,13 @@ export default async function Home() {
       <div className="lg:hidden"><NativeAdBreak /></div>
 
       {/* 人気のエリア */}
-      <section className="border-t py-8 sm:py-10">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="mb-6 flex items-end justify-between sm:mb-8">
-            <SectionHeading
-              title="人気のエリアで釣り場を探す"
-              subtitle="都道府県別の釣りスポット・釣れる魚情報"
-            />
-            <Link prefetch={false}
-              href="/prefecture"
-              className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-            >
-              すべての都道府県
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
+      <PageSection>
+          <SectionHeading
+            title="人気のエリアで釣り場を探す"
+            subtitle="都道府県別の釣りスポット・釣れる魚情報"
+            action={{ href: "/prefecture", label: "すべての都道府県" }}
+            className={SECTION_HEADING_GAP}
+          />
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
             {(() => {
               // 人気の都道府県: 検索需要の高い主要市場(東京/大阪/神奈川/福岡/愛知)を必ず含めた上で、
@@ -699,7 +678,7 @@ export default async function Home() {
               const prefSpotCounts = [...pinnedPrefs, ...restPrefs].slice(0, 12);
               return prefSpotCounts.map((pref) => (
                 <Link prefetch={false} key={pref.slug} href={`/prefecture/${pref.slug}`} title={`${pref.name}の釣りスポット${pref.spotCount}件`}>
-                  <div className="flex items-center justify-between gap-2 rounded-lg border bg-card p-3 transition-colors hover:border-primary/40">
+                  <div className="flex items-center justify-between gap-2 rounded-xl bg-card p-3.5 transition-colors hover:text-primary">
                     <div className="min-w-0">
                       <p className="text-sm font-semibold">{pref.nameShort}</p>
                       <p className="text-xs text-muted-foreground">{pref.spotCount}スポット</p>
@@ -710,34 +689,24 @@ export default async function Home() {
               ));
             })()}
           </div>
-          <div className="mt-6 flex justify-center sm:hidden">
-            <Link prefetch={false} href="/prefecture">
-              <Button variant="outline" className="min-h-[44px] gap-1">
-                すべての都道府県を見る
-                <ArrowRight className="size-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      </PageSection>
 
       {/* 広告: エリアセクション後 */}
       <NativeAdBreak />
 
       {/* 「特徴から探す」＋「人気の釣り方」を1ブロックに統合（UI/UX刷新Phase5。見出しh2は両方維持） */}
-      <section className="mx-auto w-full max-w-5xl space-y-6 border-t px-4 py-8 sm:px-6 sm:py-10">
+      <PageSection innerClassName="space-y-10">
         <div>
-          <div className="mb-4 flex items-end justify-between gap-3">
-            <SectionHeading title="特徴から釣り場を探す" />
-            <Link prefetch={false} href="/spot-feature" className="shrink-0 text-sm text-primary hover:underline">
-              すべて見る
-            </Link>
-          </div>
+          <SectionHeading
+            title="特徴から釣り場を探す"
+            action={{ href: "/spot-feature", label: "すべて見る" }}
+            className={SECTION_HEADING_GAP}
+          />
           {/* 特徴から探す（設備・ルール条件。サウナイキタイの「特徴から探す」を参考） */}
           <FeatureChipGrid items={SPOT_FEATURES.map((feature) => ({ feature }))} />
         </div>
         <div>
-          <SectionHeading title="人気の釣り方" size="md" className="mb-3" />
+          <SectionHeading title="人気の釣り方" size="md" className="mb-4" />
           <div className="flex flex-wrap gap-1.5">
             {[
               ["/fishing/sabiki", "サビキ釣り"],
@@ -751,49 +720,19 @@ export default async function Home() {
                 key={href}
                 prefetch={false}
                 href={href}
-                className="inline-flex min-h-[36px] items-center rounded-full border px-3.5 text-sm transition-colors hover:border-primary/40 hover:text-primary"
+                className="inline-flex min-h-[40px] items-center rounded-full bg-card px-4 text-sm font-medium transition-colors hover:text-primary"
               >
                 {label}
               </Link>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* 編集部特集: エギング道具（実釣写真つき。下の「今月のおすすめアイテム」への自然な導線） */}
-      <section className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 sm:pt-8">
-        <Link
-          prefetch={false}
-          href="/guide/eging/gear"
-          className="group flex flex-col overflow-hidden rounded-2xl border bg-card transition-shadow hover:shadow-md sm:flex-row"
-        >
-          <div className="relative aspect-[16/9] w-full shrink-0 sm:aspect-auto sm:w-72">
-            <Image
-              src="/images/eging/aoriika-hanging.webp"
-              alt="明石海峡に面した堤防で編集長が釣ったアオリイカ"
-              fill
-              sizes="(min-width: 640px) 288px, 100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="flex flex-col justify-center gap-2 p-4 sm:p-6">
-            <span className="w-fit rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-primary-foreground">
-              編集部特集
-            </span>
-            <p className="text-lg font-bold leading-snug group-hover:underline sm:text-xl">
-              明石海峡で実際に釣れた！編集長のエギングタックル全公開
-            </p>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              釣り歴2年目の編集長がアオリイカを釣ったロッド・エギ・小物をそのまま紹介。初心者が最初にそろえる道具がわかります。
-            </p>
-          </div>
-        </Link>
-      </section>
+      </PageSection>
 
       {/* 今月のおすすめアイテム */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+      <PageSection>
         <SeasonalRecommend maxItems={4} />
-      </section>
+      </PageSection>
 
 
       {/* スマホ向け位置情報バナー */}

@@ -128,7 +128,7 @@ export function SeasonalRecommend({ maxItems = 4 }: SeasonalRecommendProps) {
   const SeasonIcon = config.icon;
 
   return (
-    <section className={`rounded-2xl bg-gradient-to-br ${config.gradient} p-5 sm:p-6`}>
+    <section className="rounded-2xl bg-card p-5 sm:p-8">
       <div className="mb-4 flex items-center gap-2">
         <div className={`flex size-8 items-center justify-center rounded-full bg-white/80 ${config.accent}`}>
           <SeasonIcon className="size-4" />
@@ -156,7 +156,7 @@ export function SeasonalRecommend({ maxItems = 4 }: SeasonalRecommendProps) {
             })}
             className="block"
           >
-            <Card className="group h-full gap-0 border-white/60 bg-white/80 py-0 backdrop-blur-sm transition-all hover:border-primary/30 hover:shadow-md">
+            <Card className="group h-full gap-0 py-0 shadow-none transition-all hover:border-primary/30 hover:shadow-md">
               <CardContent className="p-3 sm:p-4">
                 <div className="flex items-start justify-between gap-2">
                   <Badge
