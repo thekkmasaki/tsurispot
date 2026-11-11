@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X, MapPin, Fish, BookOpen, FileText, Wrench, LoaderCircle } from "lucide-react";
 import type { SearchItemType } from "@/lib/search/search-types";
 import { trackSearch, trackSearchSelect } from "@/lib/analytics";
+import { SearchNavigationIndicator } from "@/components/search/search-navigation-indicator";
 
 // API レスポンスの型（searchText を除いた SearchItem）
 interface SearchResult {
@@ -61,6 +62,16 @@ export function SearchOverlayClient() {
   const inputRef = useRef<HTMLInputElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  // 結果を選んでから次のページが出るまで（検索窓は先に閉じるので、その間の表示に使う）
+  const [isNavigating, startNavigation] = useTransition();
+  const [navigatingLabel, setNavigatingLabel] = useState("");
+
+  const navigate = useCallback((href: string, label: string) => {
+    setNavigatingLabel(label);
+    startNavigation(() => {
+      router.push(href);
+    });
+  }, [router]);
 
   // API fetch
   const fetchResults = useCallback(async (q: string) => {
@@ -190,7 +201,7 @@ export function SearchOverlayClient() {
     trackSearchSelect({ itemType: result.type, slug: result.slug });
     setIsOpen(false);
     handleQueryChange("");
-    router.push(result.slug);
+    navigate(result.slug, `「${result.name}」を開いています`);
   };
 
   // 人気の検索をクリック
@@ -201,6 +212,8 @@ export function SearchOverlayClient() {
 
   return (
     <div className="relative" ref={overlayRef}>
+      <SearchNavigationIndicator active={isNavigating} label={navigatingLabel} />
+
       {/* Desktop trigger */}
       <button
         onClick={() => setIsOpen(true)}
@@ -337,9 +350,10 @@ export function SearchOverlayClient() {
                           {cat === "spot" && spotTotal > catItems.length && (
                             <button
                               onClick={() => {
+                                const q = query.trim();
                                 setIsOpen(false);
                                 handleQueryChange("");
-                                router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
+                                navigate(`/spots?q=${encodeURIComponent(q)}`, `「${q}」の釣り場を探しています`);
                               }}
                               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-primary transition-colors hover:bg-primary/5"
                             >

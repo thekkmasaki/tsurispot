@@ -1,17 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { LoaderCircle, Search } from "lucide-react";
+import { SearchNavigationIndicator } from "@/components/search/search-navigation-indicator";
 
 export function NotFoundSearch() {
   const router = useRouter();
   const [query, setQuery] = useState("");
+  // 押してからスポット一覧が出るまでの表示
+  const [isNavigating, startNavigation] = useTransition();
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
-    if (query.trim()) {
-      router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
+    if (query.trim() && !isNavigating) {
+      startNavigation(() => {
+        router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
+      });
     }
   }
 
@@ -20,6 +25,7 @@ export function NotFoundSearch() {
       onSubmit={handleSearch}
       className="mb-10 flex w-full max-w-sm gap-2"
     >
+      <SearchNavigationIndicator active={isNavigating} label={`「${query.trim()}」の釣り場を探しています`} />
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
         <input
@@ -32,9 +38,11 @@ export function NotFoundSearch() {
       </div>
       <button
         type="submit"
-        className="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        aria-busy={isNavigating}
+        className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
       >
-        検索
+        {isNavigating && <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />}
+        {isNavigating ? "検索中" : "検索"}
       </button>
     </form>
   );

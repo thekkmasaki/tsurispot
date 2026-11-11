@@ -314,6 +314,9 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
     });
   };
 
+  // 4,000件超の絞り込みは端末によって時間がかかるため、反映待ちの間は入力欄と件数に表示する
+  const isFiltering = isPending || searchText !== deferredSearchText;
+
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* Search bar - prominent */}
@@ -324,8 +327,14 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
           placeholder="スポット名・地域名で検索..."
           value={searchText}
           onChange={(e) => { setSearchText(e.target.value); startTransition(() => { setCurrentPage(1); }); }}
-          className="h-12 pl-11 text-base sm:h-10 sm:pl-10 sm:text-sm"
+          className={cn("h-12 pl-11 text-base sm:h-10 sm:pl-10 sm:text-sm", searchText && "pr-16")}
         />
+        {isFiltering && (
+          <Loader2
+            className={cn("absolute top-1/2 size-4 -translate-y-1/2 animate-spin text-primary", searchText ? "right-10" : "right-3")}
+            aria-hidden="true"
+          />
+        )}
         {searchText && (
           <button
             onClick={() => setSearchText("")}
@@ -631,8 +640,15 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
 
       {/* Active filters summary + clear */}
       <div className="flex items-center justify-between">
-        <p aria-live="polite" className="text-sm text-muted-foreground">
-          {filteredSpots.length}件のスポット
+        <p aria-live="polite" className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          {isFiltering ? (
+            <>
+              <Loader2 className="size-3.5 animate-spin text-primary" aria-hidden="true" />
+              絞り込み中…
+            </>
+          ) : (
+            <>{filteredSpots.length}件のスポット</>
+          )}
         </p>
         {hasFilters && (
           <Button variant="ghost" size="sm" onClick={clearFilters} className="min-h-[40px]">
@@ -645,7 +661,7 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
       {/* Results grid */}
       {paginatedSpots.length > 0 ? (
         <>
-          <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 transition-opacity duration-200", isPending && "opacity-50")}>
+          <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 transition-opacity duration-200", isFiltering && "opacity-50")}>
             {paginatedSpots.map((spot, index) => (
               <Fragment key={spot.id}>
                 <SpotCard
