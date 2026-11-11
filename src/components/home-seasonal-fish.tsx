@@ -70,7 +70,7 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
 
   if (safeFish.length === 0) {
     return (
-      <section className="bg-muted/50 py-8 sm:py-12">
+      <section className="border-t py-8 sm:py-10">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
           <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">今月釣れる魚</h2>
           <p className="mt-2 text-sm text-muted-foreground">データの読み込みに失敗しました</p>
@@ -88,7 +88,7 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
   const visibleFish = expanded ? safeFiltered : safeFiltered.slice(0, INITIAL_COUNT);
 
   return (
-    <section className="bg-muted/50 py-8 sm:py-12">
+    <section className="border-t py-8 sm:py-10">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="mb-4 flex items-end justify-between sm:mb-6">
           <SectionHeading
@@ -178,7 +178,7 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
               );
             })}
           </div>
-          <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-muted/50 to-transparent sm:hidden" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-background to-transparent sm:hidden" />
         </div>
 
         {/* もっと見る / 折りたたむ */}
