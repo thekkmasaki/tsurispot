@@ -15,6 +15,7 @@ import { SECTION_INNER, SECTION_HEADING_GAP, SectionMore } from "@/components/ui
  * 2026-11: 以前は SSR/JS無効時にハードコードの見本データ（2026-02 日付）を描画しており、
  * Google が読む初期 HTML に古い見本が「みんなの釣果」として載っていた。初期 HTML は
  * 高さ固定のスケルトンにし（CLS 回避）、取得できた実データだけを表示する。
+ * スマホは下部ナビに「タイムライン」があるため非表示（PC のみ表示。2026-11 ユーザー判断）。
  */
 export function RecentCatchReports() {
   const [recent, setRecent] = useState<CatchReport[] | null>(null);
@@ -37,7 +38,7 @@ export function RecentCatchReports() {
 
   if (recent === null) {
     return (
-      <section className={`${SECTION_INNER} py-12 sm:py-16`} aria-busy="true">
+      <section className={`${SECTION_INNER} hidden py-12 sm:block sm:py-16`} aria-busy="true">
         <SectionHeading
           title="みんなの最近の釣果"
           subtitle="全国の釣り人から届いた釣果"
@@ -56,7 +57,7 @@ export function RecentCatchReports() {
   if (recent.length === 0) return null;
 
   return (
-    <section className={`${SECTION_INNER} py-12 sm:py-16`}>
+    <section className={`${SECTION_INNER} hidden py-12 sm:block sm:py-16`}>
       <SectionHeading
         title="みんなの最近の釣果"
         subtitle="全国の釣り人から届いた釣果"
