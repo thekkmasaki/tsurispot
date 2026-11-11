@@ -163,3 +163,74 @@ export function SpotCard({
     </article>
   );
 }
+
+/**
+ * 正規スポットカード（コンパクト版・写真なし）。関連スポット・近くのスポット等の小さい一覧用。
+ * 並び順は SpotCard と同じ: 順位 → 名称 → 種別・エリア・距離 → 釣れる魚 → 評価 / 追加情報。
+ * 必要最小限の項目だけで描画できるよう、ListSpot の一部だけを受け取る。
+ */
+export type SpotCardCompactData = Pick<ListSpot, "slug" | "name" | "spotType"> & {
+  region: Pick<ListSpot["region"], "prefecture" | "areaName">;
+  fishNames?: string[];
+  rating?: number;
+};
+
+export function SpotCardCompact({
+  spot,
+  distance,
+  rank,
+  children,
+  className,
+}: {
+  spot: SpotCardCompactData;
+  distance?: number | null;
+  rank?: number;
+  children?: React.ReactNode;
+  className?: string;
+}) {
+  const fish = spot.fishNames ?? [];
+  return (
+    <article
+      className={cn(
+        "group relative flex items-start gap-2.5 rounded-xl border bg-card p-3 transition-colors hover:border-primary/40",
+        className,
+      )}
+    >
+      {rank != null && (
+        <span className="mt-0.5 inline-flex min-w-6 shrink-0 items-center justify-center rounded-md bg-primary px-1.5 py-0.5 text-xs font-bold tabular-nums text-primary-foreground">
+          {rank}
+        </span>
+      )}
+      <div className="min-w-0 flex-1">
+        <h3 className="truncate font-display text-sm font-bold group-hover:text-primary">
+          <Link href={`/spots/${spot.slug}`} prefetch={false} className="after:absolute after:inset-0">
+            {spot.name}
+          </Link>
+        </h3>
+        <p className="mt-0.5 truncate text-xs text-muted-foreground">
+          {SPOT_TYPE_LABELS[spot.spotType]} − {spot.region.prefecture} {spot.region.areaName}
+          {distance != null && (
+            <span className="ml-1.5 font-bold text-primary">約{formatDistance(distance)}</span>
+          )}
+        </p>
+        {(fish.length > 0 || spot.rating != null) && (
+          <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
+            {spot.rating != null && (
+              <span className="inline-flex items-center gap-0.5">
+                <Star className="size-3 fill-amber-400 text-amber-400" aria-hidden="true" />
+                <span className="font-bold tabular-nums text-foreground">{spot.rating.toFixed(1)}</span>
+              </span>
+            )}
+            {fish.length > 0 && (
+              <span className="truncate">
+                {fish.slice(0, 3).join("・")}
+                {fish.length > 3 && ` ほか${fish.length - 3}種`}
+              </span>
+            )}
+          </p>
+        )}
+        {children && <div className="relative z-10 mt-1.5 text-xs">{children}</div>}
+      </div>
+    </article>
+  );
+}
