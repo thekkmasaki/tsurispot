@@ -345,60 +345,37 @@ export default async function Home() {
             {/* 検索バー */}
             <HomeSearchBar />
 
-            {/* メインCTA */}
-            <div className="mb-4 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-              {/* 主CTA「近くの釣り場を探す」は near-me LP へ（旧: /map）。near-me は
-                  現在地GPS検索(navigator.geolocation)＋title「近くの釣り場を探す」で意図・アンカーが完全一致。
-                  home 最大の完全一致アンカーを、この語で狙う near-me LP へ集約する。/map はヘッダー等に残す。 */}
-              <Link href="/fishing-spots/near-me" prefetch={false} className="w-full sm:w-auto">
-                <Button size="lg" className="w-full gap-2 rounded-full bg-white px-8 py-6 text-base font-bold text-primary transition-colors hover:bg-white/90 sm:w-auto sm:text-lg min-h-[52px]">
-                  <MapPin className="size-5" />
-                  近くの釣り場を探す
-                </Button>
-              </Link>
-              <div className="flex gap-3">
-                <Link href="/for-beginners" prefetch={false}>
-                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-[background-color,transform] hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
-                    <BookOpen className="size-4" />
-                    初心者ガイド
-                  </Button>
+            {/* UI/UX刷新Phase5: 検索を主役に。主CTA1つ＋「目的から探す」チップ1列に整理
+                （旧: 大ボタン3つ＋タイプタグ5つの2段。リンク先はすべて同じ） */}
+            {/* 主CTA「近くの釣り場を探す」は near-me LP へ（旧: /map）。near-me は
+                現在地GPS検索(navigator.geolocation)＋title「近くの釣り場を探す」で意図・アンカーが完全一致。
+                home 最大の完全一致アンカーを、この語で狙う near-me LP へ集約する。/map はヘッダー等に残す。 */}
+            <Link href="/fishing-spots/near-me" prefetch={false} className="mb-4 w-full sm:w-auto">
+              <Button size="lg" className="w-full gap-2 rounded-full bg-white px-8 py-6 text-base font-bold text-primary transition-colors hover:bg-white/90 sm:w-auto sm:text-lg min-h-[52px]">
+                <MapPin className="size-5" />
+                近くの釣り場を探す
+              </Button>
+            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+              {[
+                { href: "/for-beginners", label: "初心者ガイド", icon: BookOpen },
+                { href: "/catchable-now", label: "今釣れる魚", icon: Fish },
+                { href: "/spots?type=breakwater", label: "堤防" },
+                { href: "/spots?type=port", label: "漁港" },
+                { href: "/spots?type=rocky", label: "磯" },
+                { href: "/spots?type=river", label: "川・湖" },
+                { href: "/spots", label: "すべて" },
+              ].map(({ href, label, icon: Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  prefetch={false}
+                  className="inline-flex min-h-[40px] items-center gap-1 rounded-full border border-white/30 px-3.5 text-sm text-white transition-colors hover:bg-white/15"
+                >
+                  {Icon && <Icon className="size-4" aria-hidden="true" />}
+                  {label}
                 </Link>
-                <Link href="/catchable-now" prefetch={false}>
-                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-[background-color,transform] hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
-                    <Fish className="size-4" />
-                    今釣れる魚
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* フィルタータグ */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <Link href="/spots?type=breakwater" prefetch={false}>
-                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
-                  堤防
-                </Badge>
-              </Link>
-              <Link href="/spots?type=port" prefetch={false}>
-                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
-                  漁港
-                </Badge>
-              </Link>
-              <Link href="/spots?type=rocky" prefetch={false}>
-                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
-                  磯
-                </Badge>
-              </Link>
-              <Link href="/spots?type=river" prefetch={false}>
-                <Badge variant="outline" className="cursor-pointer border-emerald-300/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-emerald-500/20 min-h-[40px]">
-                  川・湖
-                </Badge>
-              </Link>
-              <Link href="/spots" prefetch={false}>
-                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
-                  すべて
-                </Badge>
-              </Link>
+              ))}
             </div>
           </div>
         </div>
