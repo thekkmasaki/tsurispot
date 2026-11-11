@@ -1,7 +1,6 @@
 "use client";
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
 import { Fish, Wrench, Car, Info } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
@@ -10,6 +9,8 @@ interface SpotDetailTabsProps {
   fishTab: ReactNode;
   gearTab: ReactNode;
   accessTab: ReactNode;
+  /** タブ見出しに出す件数（サウナイキタイ式「サ活(820)」のように中身の量を見せる） */
+  fishCount?: number;
 }
 
 const TAB_ITEMS = [
@@ -26,11 +27,8 @@ export function SpotDetailTabs({
   fishTab,
   gearTab,
   accessTab,
+  fishCount,
 }: SpotDetailTabsProps) {
-  // UX-5: tab state を URL に同期 (share/back/reload で復元)
-  const router = useRouter();
-  const pathname = usePathname();
-
   // useSearchParams() は使わない: Suspense 境界なしで呼ぶとページ全体が CSR へ
   // バックアウトし、スポット詳細の SSR HTML から本文・広告が丸ごと消える
   // （2026-07 判明: h1 なし・広告 ins が pre_footer のみの本番 HTML の原因）。
@@ -42,11 +40,14 @@ export function SpotDetailTabs({
   useEffect(() => {
     const urlTab = new URLSearchParams(window.location.search).get("tab") ?? "";
     if (VALID_TAB_VALUES.has(urlTab as typeof TAB_ITEMS[number]["value"])) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- URL からの一度きりの復元
       setActiveTab(urlTab);
     }
   }, []);
 
-  // tab 変更 → URL 更新（初回実行はスキップ: 復元前に ?tab= を消さないため）
+  // tab 変更 → URL 更新（初回実行はスキップ: 復元前に ?tab= を消さないため）。
+  // router.replace は同一ルートでも RSC ペイロード（数百KB）を取りに行くため、
+  // History API で URL だけ書き換える（App Router 公式サポート）。
   useEffect(() => {
     if (!didMount.current) {
       didMount.current = true;
@@ -59,35 +60,42 @@ export function SpotDetailTabs({
       params.set("tab", activeTab);
     }
     const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    window.history.replaceState(null, "", query ? `${window.location.pathname}?${query}` : window.location.pathname);
   }, [activeTab]);
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-6">
-      <TabsList className="w-full overflow-x-auto scrollbar-hide bg-sand-light/80 rounded-2xl p-1.5 sticky top-14 z-20 backdrop-blur-sm shadow-sm">
+      {/* サウナイキタイ式: 下線タブ＋件数。影・角丸の塗りタブはやめて線で区切る */}
+      <TabsList className="sticky top-14 z-20 h-auto w-full justify-start gap-0 overflow-x-auto rounded-none border-b bg-background/95 p-0 scrollbar-hide backdrop-blur-sm">
         {TAB_ITEMS.map(({ value, label, icon: Icon }) => (
           <TabsTrigger
             key={value}
             value={value}
-            className="flex items-center gap-1 px-2 py-2 text-xs rounded-xl font-bold font-display data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-ocean-deep sm:gap-1.5 sm:px-3 sm:text-sm min-h-[40px]"
+            className="relative flex min-h-[44px] flex-none items-center gap-1 rounded-none border-0 border-b-2 border-transparent px-3 py-2 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none sm:px-4"
           >
-            <Icon className="size-3.5 sm:size-4" aria-hidden="true" />
+            <Icon className="size-4" aria-hidden="true" />
             {label}
+            {value === "fish" && fishCount != null && fishCount > 0 && (
+              <span className="text-xs font-normal tabular-nums">({fishCount})</span>
+            )}
           </TabsTrigger>
         ))}
       </TabsList>
 
-      <TabsContent value="overview" className="mt-4 space-y-6 sm:space-y-8">
+      {/* forceMount: 非アクティブなタブの中身も SSR HTML に出す。
+          Radix は既定で非アクティブな TabsContent を DOM に描画しないため、
+          「釣れる魚」「装備・仕掛け」「アクセス」タブの本文が検索エンジンから見えていなかった。
+          表示の切替は data-state による CSS の hidden で行う（中身は常に HTML にある）。 */}
+      <TabsContent forceMount value="overview" className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {overviewTab}
       </TabsContent>
-      <TabsContent value="fish" className="mt-4 space-y-6 sm:space-y-8">
+      <TabsContent forceMount value="fish" className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {fishTab}
       </TabsContent>
-      <TabsContent value="gear" className="mt-4 space-y-6 sm:space-y-8">
+      <TabsContent forceMount value="gear" className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {gearTab}
       </TabsContent>
-      <TabsContent value="access" className="mt-4 space-y-6 sm:space-y-8">
+      <TabsContent forceMount value="access" className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {accessTab}
       </TabsContent>
     </Tabs>
