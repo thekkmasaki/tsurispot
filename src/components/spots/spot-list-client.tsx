@@ -71,7 +71,38 @@ const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
   { key: "hasRentalRod", label: "レンタル竿" },
 ];
 
-export function SpotListClient({ spots }: { spots: ListSpot[] }) {
+/**
+ * 全件データ（5,000件超）は HTML に埋め込まず、表示後に /api/spots/list（force-static・CDN配信）から
+ * 1回だけ取得する（/spots の HTML が gzip 約500KB → 数十KB）。取得完了までは initialSpots（既定の
+ * 1ページ目＝SSR と同じ20件）で描画し、件数は totalCount を出す。
+ */
+export function SpotListClient({ initialSpots, totalCount }: { initialSpots: ListSpot[]; totalCount: number }) {
+  const [allSpots, setAllSpots] = useState<ListSpot[] | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  useEffect(() => {
+    let alive = true;
+    const load = () =>
+      fetch("/api/spots/list")
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        .then((data: ListSpot[]) => {
+          if (alive) setAllSpots(data);
+        })
+        .catch(() => {
+          if (alive) setLoadError(true);
+        });
+    // 初期表示（LCP）を邪魔しないようアイドル時に取得。URLに絞り込み条件があれば即取得
+    const hasQuery = window.location.search.length > 1;
+    if (hasQuery || typeof window.requestIdleCallback !== "function") {
+      load();
+    } else {
+      window.requestIdleCallback(() => load(), { timeout: 1500 });
+    }
+    return () => {
+      alive = false;
+    };
+  }, []);
+  const spots = allSpots ?? initialSpots;
+  const isLoadingAll = allSpots === null && !loadError;
   // UX-3: URL query から filter 初期値を復元 (share/back/reload で復元可能に)
   // useSearchParams() で初回レンダから URL の値を state に反映する。静的生成時は
   // 空 params のまま page.tsx 側の Suspense fallback（サーバー描画の既定一覧）が
@@ -308,7 +339,9 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
     return filtered;
   }, [spots, deferredSearchText, selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, sortByRating, distanceMap]);
 
-  const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
+  // 全件取得前は、絞り込みなしなら全体件数（totalCount）でページ数・件数を出す
+  const resultCount = allSpots === null && !hasFilters ? totalCount : filteredSpots.length;
+  const totalPages = Math.ceil(resultCount / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
@@ -339,7 +372,8 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
   };
 
   // 4,000件超の絞り込みは端末によって時間がかかるため、反映待ちの間は入力欄と件数に表示する
-  const isFiltering = isPending || searchText !== deferredSearchText;
+  // 全件の取得待ちで、絞り込みや2ページ目以降を表示しようとしている間も「絞り込み中」扱いにする
+  const isFiltering = isPending || searchText !== deferredSearchText || (isLoadingAll && (Boolean(hasFilters) || currentPage > 1));
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -448,6 +482,11 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
         </div>
       </div>
       {geoError && <p className="text-xs text-red-600">{geoError}</p>}
+      {loadError && (
+        <p className="text-xs text-red-600">
+          釣り場データの読み込みに失敗しました。絞り込みは表示中のスポットだけが対象です。ページを再読み込みしてください。
+        </p>
+      )}
 
       {/* すべての条件パネル（既定は閉じる。PCでも閉じてスッキリ見せる） */}
       <div className={cn(
@@ -690,7 +729,7 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
           ) : (
             <>
               <span className="text-muted-foreground">検索結果</span>
-              <span className="font-display text-lg font-bold tabular-nums">{filteredSpots.length.toLocaleString()}</span>
+              <span className="font-display text-lg font-bold tabular-nums">{resultCount.toLocaleString()}</span>
               <span className="text-muted-foreground">件</span>
             </>
           )}
@@ -760,7 +799,13 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
       )}
 
       {/* Results grid */}
-      {viewMode === "map" ? null : paginatedSpots.length > 0 ? (
+      {viewMode === "map" ? null : isLoadingAll && (hasFilters || currentPage > 1) ? (
+        /* 全件データの取得待ち（絞り込み・2ページ目以降は全件が必要）。誤って「見つかりません」を出さない */
+        <div className="flex flex-col items-center gap-2 py-12 text-sm text-muted-foreground" role="status">
+          <Loader2 className="size-6 animate-spin text-primary" aria-hidden="true" />
+          釣り場データを読み込んでいます…
+        </div>
+      ) : paginatedSpots.length > 0 ? (
         <>
           <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 transition-opacity duration-200", isFiltering && "opacity-50")}>
             {paginatedSpots.map((spot, index) => (

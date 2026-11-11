@@ -17,9 +17,11 @@ export const revalidate = 3600;
 
 const sc = fishingSpots.length.toLocaleString();
 
-// 全 FishingSpot をクライアントに渡すと JS バンドル / RSC ペイロードが肥大化するため、
-// 一覧カードに必要な軽量 ListSpot に絞ってから SpotListClient へ渡す（CWV改善）。
-const listSpots = fishingSpots.map(toListSpot);
+// HTML（RSC ペイロード）に載せるのは既定の1ページ目（20件）だけ。
+// 全件（5,000件超・gzip約500KB）は表示後に /api/spots/list（force-static・CDN）から取得する。
+const INITIAL_COUNT = 20;
+const initialSpots = fishingSpots.slice(0, INITIAL_COUNT).map(toListSpot);
+const totalSpotCount = fishingSpots.length;
 
 // 掲載スポット全体で最も多い釣り方（装備レコメンドの文脈スコアリングに使う）。
 // 一覧ページは 1,555PV に対し affiliateClick 0 件＝収益枠が1つも無い状態だった（2026-08-23 実測）。
@@ -218,8 +220,8 @@ export default function SpotsPage() {
       </div>
       {/* SpotListClient は useSearchParams() を使うため Suspense 境界が必須。
           fallback は既定一覧のサーバー描画（SSR 本文の担保・CSRバックアウト再発防止） */}
-      <Suspense fallback={<SpotListFallback spots={listSpots} />}>
-        <SpotListClient spots={listSpots} />
+      <Suspense fallback={<SpotListFallback spots={initialSpots} totalCount={totalSpotCount} />}>
+        <SpotListClient initialSpots={initialSpots} totalCount={totalSpotCount} />
       </Suspense>
 
       {/* おすすめ装備（収益導線）: スポット一覧を見終えた直後＝釣行準備で道具の必要性が最も高まる位置。
