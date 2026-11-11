@@ -822,6 +822,19 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
+      {/* エリア別の全スポット一覧（UI/UX刷新Phase3: 本命の一覧を順位系リストより上へ。
+          旧位置は TOP10・注目・穴場・今月TOP5 等の後＝ページ中盤だった） */}
+      <SpotSearchFilter
+        prefName={pref.name}
+        prefRegions={prefRegions.map((r) => ({ id: r.id, slug: r.slug, areaName: r.areaName }))}
+        regionGroups={Array.from(regionMap.values()).map(({ region: r, spots: s }) => ({
+          region: { id: r.id, slug: r.slug, areaName: r.areaName },
+          spots: s.map(toListSpot),
+        }))}
+        ungroupedSpots={ungroupedSpots.map(toListSpot)}
+        totalSpots={spots.length}
+      />
+
       {/* エリア別の釣り場解説（定義した県のみ表示） */}
       {prefInfo?.areaOverviews && prefInfo.areaOverviews.length > 0 && (
         <section className="mb-8 sm:mb-10">
@@ -1360,17 +1373,7 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
-      {/* Area + Spot search filter (client component) */}
-      <SpotSearchFilter
-        prefName={pref.name}
-        prefRegions={prefRegions.map((r) => ({ id: r.id, slug: r.slug, areaName: r.areaName }))}
-        regionGroups={Array.from(regionMap.values()).map(({ region: r, spots: s }) => ({
-          region: { id: r.id, slug: r.slug, areaName: r.areaName },
-          spots: s.map(toListSpot),
-        }))}
-        ungroupedSpots={ungroupedSpots.map(toListSpot)}
-        totalSpots={spots.length}
-      />
+      {/* Area + Spot search filter は UI/UX刷新Phase3 でページ上部（条件から探す の直後）へ移設 */}
 
       {/* エリアガイド（area-guide）へのリンク */}
       {prefAreaGuides.length > 0 && (
