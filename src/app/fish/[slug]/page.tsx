@@ -1059,7 +1059,7 @@ export default async function FishDetailPage({ params }: PageProps) {
         <CollapsibleSection
           title={`${fish.name}に関連する魚種`}
           icon={<Fish className="size-5 text-primary" />}
-          previewText={`${coOccurringFish.length + similarFish.length + sameCategoryFish.length}種`}
+          previewText={`${new Set([...coOccurringFish, ...similarFish, ...sameCategoryFish].map((f) => f.slug)).size}種`}
         >
           {coOccurringFish.length > 0 && (
             <div className="mb-4">

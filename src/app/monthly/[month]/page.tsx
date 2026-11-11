@@ -940,6 +940,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
           title={`${guide.nameJa}のおすすめ装備`}
           icon={<Package className="size-5" />}
           mobileOnly={true}
+          showTitleOnDesktop={false}
         >
         <section className="mb-8">
           <h2 className="mb-4 hidden items-center gap-2 text-lg font-bold md:flex">
