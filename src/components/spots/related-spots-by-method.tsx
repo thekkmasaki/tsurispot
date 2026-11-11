@@ -1,6 +1,5 @@
-import Link from "next/link";
-import { Anchor, MapPin } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Anchor } from "lucide-react";
+import { SpotCardCompact } from "@/components/spots/spot-card";
 import type { FishingSpot } from "@/types";
 
 interface Props {
@@ -26,20 +25,19 @@ export function RelatedSpotsByMethod({ spots, methodLabel }: Props) {
       </p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {spots.map((s) => (
-          <Link prefetch={false} key={s.slug} href={`/spots/${s.slug}`}>
-            <Card className="h-full transition-colors hover:bg-muted/50">
-              <CardContent className="p-3">
-                <div className="font-medium">{s.name}</div>
-                <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <MapPin className="h-3 w-3" />
-                  {s.region.prefecture}・{s.region.areaName}
-                </div>
-                <div className="mt-1 text-xs text-muted-foreground">
-                  {s.catchableFish.length}種が狙える
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+          <SpotCardCompact
+            key={s.slug}
+            className="h-full"
+            spot={{
+              slug: s.slug,
+              name: s.name,
+              spotType: s.spotType,
+              region: s.region,
+              rating: s.rating,
+            }}
+          >
+            <span className="text-muted-foreground">{s.catchableFish.length}種が狙える</span>
+          </SpotCardCompact>
         ))}
       </div>
     </section>

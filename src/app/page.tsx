@@ -26,7 +26,6 @@ import {
   ChevronRight,
   Compass,
   Tag,
-  Star,
   // 以下 5 アイコンは 2026-07-30 非表示化したクイックアクション専用。復活時にコメント解除。
   // Calendar,
   // Target,
@@ -42,6 +41,8 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SPOT_FEATURES } from "@/lib/data/spot-features";
 import { Sakanacchi } from "@/components/fun/sakanacchi";
+import { SpotCardCompact } from "@/components/spots/spot-card";
+import { DIFFICULTY_LABELS } from "@/types";
 
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
@@ -710,15 +711,6 @@ export default async function Home() {
       {/* 今月おすすめの釣り場 */}
       {(() => {
         const currentMonth = new Date().getMonth() + 1;
-        const SPOT_TYPE_LABELS: Record<string, string> = {
-          port: "漁港", beach: "砂浜", rocky: "磯", river: "河川", pier: "桟橋", breakwater: "堤防",
-        };
-        const DIFFICULTY_LABELS: Record<string, string> = {
-          beginner: "初心者向け", intermediate: "中級者向け", advanced: "上級者向け",
-        };
-        const DIFFICULTY_COLORS: Record<string, string> = {
-          beginner: "bg-green-100 text-green-800", intermediate: "bg-blue-100 text-blue-800", advanced: "bg-orange-100 text-orange-800",
-        };
         const seasonalSpots = fishingSpots
           .filter((spot) =>
             spot.catchableFish.some((cf) => {
@@ -758,41 +750,28 @@ export default async function Home() {
                   })
                   .slice(0, 3);
                 return (
-                  <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
-                    <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                      <CardContent className="p-4">
-                        <div className="mb-2 flex items-start justify-between gap-2">
-                          <div className="min-w-0">
-                            <h3 className="truncate font-semibold group-hover:text-primary">{spot.name}</h3>
-                            <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                              <MapPin className="size-3 shrink-0" />
-                              {spot.region.prefecture} {spot.region.areaName}
-                            </p>
-                          </div>
-                          <Badge className={`shrink-0 text-[10px] ${DIFFICULTY_COLORS[spot.difficulty] || ""}`}>
-                            {DIFFICULTY_LABELS[spot.difficulty] || spot.difficulty}
-                          </Badge>
-                        </div>
-                        <div className="mb-2 flex items-center gap-2">
-                          <Badge variant="outline" className="text-[10px]">
-                            {SPOT_TYPE_LABELS[spot.spotType] || spot.spotType}
-                          </Badge>
-                          <div className="flex items-center gap-0.5 text-xs text-amber-600">
-                            <Star className="size-3 fill-amber-400 text-amber-400" />
-                            <span className="font-medium">{spot.rating.toFixed(1)}</span>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-1">
-                          <span className="text-[10px] text-muted-foreground">今月釣れる:</span>
-                          {catchableNow.map((cf) => (
-                            <Badge key={cf.fish.slug} variant="secondary" className="text-[10px]">
-                              {cf.fish.name}
-                            </Badge>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                  <SpotCardCompact
+                    key={spot.id}
+                    spot={{
+                      slug: spot.slug,
+                      name: spot.name,
+                      spotType: spot.spotType,
+                      region: { prefecture: spot.region.prefecture, areaName: spot.region.areaName },
+                      rating: spot.rating,
+                    }}
+                  >
+                    <p className="text-muted-foreground">
+                      {DIFFICULTY_LABELS[spot.difficulty] ?? spot.difficulty}
+                      {catchableNow.length > 0 && (
+                        <>
+                          {" ・ "}今月釣れる:{" "}
+                          <span className="font-bold text-foreground">
+                            {catchableNow.map((cf) => cf.fish.name).join("・")}
+                          </span>
+                        </>
+                      )}
+                    </p>
+                  </SpotCardCompact>
                 );
               })}
             </div>

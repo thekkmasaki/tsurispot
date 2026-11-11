@@ -181,12 +181,21 @@ export function SpotCardCompact({
   rank,
   children,
   className,
+  headingAs: Heading = "h3",
+  headingSuffix,
+  linkTitle,
 }: {
   spot: SpotCardCompactData;
   distance?: number | null;
   rank?: number;
   children?: React.ReactNode;
   className?: string;
+  /** 見出しレベル（SEO上、既存ページの見出し階層を維持するため。例: ランキングは h2） */
+  headingAs?: "h2" | "h3" | "h4";
+  /** 見出し内でスポット名の後ろに続ける補足（既存の見出し文言を維持するため。例:「（アジが釣れる堤防）」） */
+  headingSuffix?: React.ReactNode;
+  /** リンクの title 属性（既存の title/aria-label 文言を維持するため） */
+  linkTitle?: string;
 }) {
   const fish = spot.fishNames ?? [];
   return (
@@ -202,11 +211,12 @@ export function SpotCardCompact({
         </span>
       )}
       <div className="min-w-0 flex-1">
-        <h3 className="truncate font-display text-sm font-bold group-hover:text-primary">
-          <Link href={`/spots/${spot.slug}`} prefetch={false} className="after:absolute after:inset-0">
+        <Heading className="font-display text-sm font-bold leading-snug group-hover:text-primary">
+          <Link href={`/spots/${spot.slug}`} prefetch={false} title={linkTitle} className="after:absolute after:inset-0">
             {spot.name}
           </Link>
-        </h3>
+          {headingSuffix && <span className="ml-1 text-xs font-normal text-muted-foreground">{headingSuffix}</span>}
+        </Heading>
         <p className="mt-0.5 truncate text-xs text-muted-foreground">
           {SPOT_TYPE_LABELS[spot.spotType]} − {spot.region.prefecture} {spot.region.areaName}
           {distance != null && (

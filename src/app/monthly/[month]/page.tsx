@@ -44,6 +44,7 @@ import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
 import { MonthlyRigSection } from "@/components/monthly-rig-section";
 import { MonthlySportsSorter } from "@/components/monthly-spots-sorter";
 import type { MonthlySpot } from "@/components/monthly-spots-sorter";
+import { toListSpot } from "@/lib/data/list-spot";
 import { getAllBlogPosts } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
 import { products as allProducts } from "@/lib/data/products";
@@ -856,16 +857,8 @@ export default async function MonthlyGuidePage({ params }: Props) {
               {guide.nameJa}に旬の魚が釣れる人気スポットと穴場を厳選しました。初心者でも楽しめるポイントも掲載。「現在地から近い順」で近くのスポットを表示できます。
             </p>
             <MonthlySportsSorter
-              spots={spotsForMonth.map((spot) => ({
-                slug: spot.slug,
-                name: spot.name,
-                rating: spot.rating,
-                latitude: spot.latitude,
-                longitude: spot.longitude,
-                spotType: spot.spotType,
-                difficulty: spot.difficulty,
-                mainImageUrl: spot.mainImageUrl,
-                region: { prefecture: spot.region.prefecture },
+              spots={spotsForMonth.map((spot): MonthlySpot => ({
+                ...toListSpot(spot),
                 catchableFishNames: spot.catchableFish
                   .filter((cf) => {
                     if (!isFishListedAtSpot(spot, cf.fish.slug)) return false; // 釣れる度ゲート
@@ -879,7 +872,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                   })
                   .map((cf) => cf.fish.name)
                   .slice(0, 4),
-              })) as MonthlySpot[]}
+              }))}
               monthName={guide.nameJa}
             />
             <div className="mt-4 flex flex-wrap items-center justify-center gap-4">

@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useCallback } from "react";
-import { Navigation, MapPin, Loader2 } from "lucide-react";
+import { Navigation, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SPOT_TYPE_LABELS, type FishingSpot } from "@/types";
+import { SpotCardCompact } from "@/components/spots/spot-card";
+import type { FishingSpot } from "@/types";
 
 interface NearbySpotData {
   slug: string;
@@ -13,6 +13,7 @@ interface NearbySpotData {
   latitude: number;
   longitude: number;
   prefecture: string;
+  areaName: string;
 }
 
 function getDistanceKm(
@@ -30,12 +31,6 @@ function getDistanceKm(
       Math.cos((lat2 * Math.PI) / 180) *
       Math.sin(dLng / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)}m`;
-  if (km < 10) return `${km.toFixed(1)}km`;
-  return `${Math.round(km)}km`;
 }
 
 export function NearbyGpsSearch({
@@ -96,20 +91,17 @@ export function NearbyGpsSearch({
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2">
           {results.map((s) => (
-            <Link prefetch={false} key={s.slug} href={`/spots/${s.slug}`} className="shrink-0">
-              <div className="min-w-[200px] rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
-                <p className="text-sm font-medium text-sky-600 mb-1">
-                  <MapPin className="mr-1 inline size-3" />
-                  {formatDistance(s.distanceKm)}
-                </p>
-                <p className="font-medium text-blue-600 hover:underline leading-snug">
-                  {s.name}
-                </p>
-                <p className="mt-1 text-xs text-gray-500">
-                  {s.prefecture} · {SPOT_TYPE_LABELS[s.spotType]}
-                </p>
-              </div>
-            </Link>
+            <SpotCardCompact
+              key={s.slug}
+              className="w-[200px] shrink-0"
+              distance={s.distanceKm}
+              spot={{
+                slug: s.slug,
+                name: s.name,
+                spotType: s.spotType,
+                region: { prefecture: s.prefecture, areaName: s.areaName },
+              }}
+            />
           ))}
         </div>
       </div>

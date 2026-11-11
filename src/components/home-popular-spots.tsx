@@ -3,28 +3,13 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { SPOT_TYPE_LABELS } from "@/types";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import type { ListSpot } from "@/types";
 import { Button } from "@/components/ui/button";
-import { SpotImage } from "@/components/ui/spot-image";
-import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
-import { Star, ArrowRight, MapPin } from "lucide-react";
+import { SpotCard } from "@/components/spots/spot-card";
+import { ArrowRight } from "lucide-react";
 
-interface PopularSpotData {
-  id: string;
-  slug: string;
-  name: string;
-  spotType: string;
-  rating: number;
-  latitude: number;
-  longitude: number;
-  prefecture: string;
-  areaName: string;
-  difficulty: string;
-  mainImageUrl?: string;
-  fishNames: string[];
-}
+/** サーバー側で toListSpot（lib/data/list-spot.ts）した軽量データを受け取る */
+type PopularSpotData = ListSpot;
 
 function getDistanceKm(
   lat1: number,
@@ -41,12 +26,6 @@ function getDistanceKm(
       Math.cos((lat2 * Math.PI) / 180) *
       Math.sin(dLng / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)}m`;
-  if (km < 10) return `${km.toFixed(1)}km`;
-  return `${Math.round(km)}km`;
 }
 
 interface HomePopularSpotsProps {
@@ -69,7 +48,7 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
         .slice(0, 6);
 
       if (withDistance.length >= 3) {
-        const nearestPref = withDistance[0].prefecture;
+        const nearestPref = withDistance[0].region.prefecture;
         return {
           displaySpots: withDistance,
           isNearby: true,
@@ -89,7 +68,7 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
       return {
         displaySpots: byDistance,
         isNearby: true,
-        nearLabel: byDistance[0]?.prefecture ? `${byDistance[0].prefecture}周辺` : "",
+        nearLabel: byDistance[0]?.region.prefecture ? `${byDistance[0].region.prefecture}周辺` : "",
       };
     }
 
@@ -125,73 +104,15 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {displaySpots.map((spot) => (
-          <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
-            <Card className="group h-full gap-0 overflow-hidden border py-0 transition-shadow hover:shadow-md">
-              <SpotImage
-                src={resolveSpotImageSrc(spot.mainImageUrl)}
-                alt={spot.name}
-                spotType={spot.spotType}
-                height="h-36 sm:h-40"
-              />
-
-              <CardContent className="flex flex-col gap-3 p-4">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <h3 className="truncate text-base font-semibold group-hover:text-primary">
-                      {spot.name}
-                    </h3>
-                    <p className="mt-0.5 text-xs text-muted-foreground">
-                      {spot.prefecture} {spot.areaName}
-                    </p>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-1 text-sm">
-                    <Star className="size-4 fill-amber-400 text-amber-400" />
-                    <span className="font-medium">{spot.rating}</span>
-                  </div>
-                </div>
-
-                {/* 釣れる魚バッジ */}
-                <div className="flex flex-wrap gap-1.5">
-                  {spot.fishNames.slice(0, 3).map((name) => (
-                    <Badge key={name} variant="outline" className="text-xs">
-                      {name}
-                    </Badge>
-                  ))}
-                  {spot.fishNames.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
-                      +{spot.fishNames.length - 3}
-                    </Badge>
-                  )}
-                </div>
-
-                {/* スポットタイプ & 距離 */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">
-                      {SPOT_TYPE_LABELS[spot.spotType as keyof typeof SPOT_TYPE_LABELS] || spot.spotType}
-                    </Badge>
-                    <Badge
-                      variant="outline"
-                      className={`text-xs ${["river", "lake", "pond"].includes(spot.spotType) ? "border-emerald-200 text-emerald-700" : "border-sky-200 text-sky-700"}`}
-                    >
-                      {spot.spotType === "pond" ? "管理釣り場" : ["river", "lake"].includes(spot.spotType) ? "川釣り" : "海釣り"}
-                    </Badge>
-                    {(spot.difficulty === "beginner" || spot.difficulty === "all") && (
-                      <Badge className="bg-emerald-100 text-xs text-emerald-700 hover:bg-emerald-100">
-                        初心者OK
-                      </Badge>
-                    )}
-                  </div>
-                  {isNearby && spot.distanceKm != null && (
-                    <span className="flex items-center gap-1 text-xs font-medium text-sky-600">
-                      <MapPin className="size-3" />
-                      {formatDistance(spot.distanceKm)}
-                    </span>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+          <SpotCard
+            key={spot.id}
+            spot={spot}
+            distance={isNearby ? spot.distanceKm ?? null : null}
+          >
+            <span className="text-muted-foreground">
+              {spot.spotType === "pond" ? "管理釣り場" : ["river", "lake"].includes(spot.spotType) ? "川釣り" : "海釣り"}
+            </span>
+          </SpotCard>
         ))}
       </div>
 

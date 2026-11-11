@@ -517,6 +517,7 @@ export default function BeginnerGuidePage() {
   const beginnerSpotGeoData = allBeginnerSpots.map((s) => ({
     slug: s.slug,
     name: s.name,
+    spotType: s.spotType,
     prefecture: s.region.prefecture,
     areaName: s.region.areaName,
     latitude: s.latitude,

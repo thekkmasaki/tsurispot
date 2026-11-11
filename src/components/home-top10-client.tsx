@@ -2,17 +2,18 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Star, ChevronRight, Loader2, ArrowRight, MapPin, Waves, TreePine, Navigation } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Loader2, ArrowRight, Waves, TreePine, Navigation } from "lucide-react";
+import type { ListSpot } from "@/types";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { SpotCardCompact } from "@/components/spots/spot-card";
 import { cn } from "@/lib/utils";
 
 interface Top10Spot {
   id: string;
   slug: string;
   name: string;
-  spotType: string;
+  spotType: ListSpot["spotType"];
   rating: number;
   reviewCount: number;
   latitude: number;
@@ -20,15 +21,6 @@ interface Top10Spot {
   prefecture: string;
   areaName: string;
 }
-
-const SPOT_TYPE_LABELS: Record<string, string> = {
-  port: "漁港",
-  beach: "砂浜",
-  rocky: "磯",
-  river: "河川",
-  pier: "桟橋",
-  breakwater: "堤防",
-};
 
 function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371;
@@ -40,12 +32,6 @@ function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number): 
       Math.cos((lat2 * Math.PI) / 180) *
       Math.sin(dLng / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)}m`;
-  if (km < 10) return `${km.toFixed(1)}km`;
-  return `${Math.round(km)}km`;
 }
 
 const SEA_TYPES = new Set(["port", "beach", "rocky", "pier", "breakwater"]);
@@ -164,51 +150,18 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
 
         <div className="space-y-1.5">
           {displaySpots.map((spot, index) => (
-            <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`} className="block">
-              <div className={cn(
-                "flex items-center gap-3 rounded-lg border bg-white",
-                index < 3
-                  ? "p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all border-l-3"
-                  : "p-3 transition-shadow hover:shadow-md",
-                index === 0 && "border-l-amber-400 bg-amber-50/50",
-                index === 1 && "border-l-gray-400 bg-gray-50/50",
-                index === 2 && "border-l-orange-400 bg-orange-50/30",
-              )}>
-                <div
-                  className={`flex size-8 shrink-0 items-center justify-center rounded-full font-bold text-sm ${
-                    index < 3
-                      ? "bg-amber-100 text-amber-700"
-                      : "bg-muted text-muted-foreground"
-                  }`}
-                >
-                  {index + 1}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <p className="truncate text-sm font-semibold">{spot.name}</p>
-                    <Badge variant="outline" className="shrink-0 text-[10px]">
-                      {SPOT_TYPE_LABELS[spot.spotType] || spot.spotType}
-                    </Badge>
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    {spot.prefecture} {spot.areaName}
-                  </p>
-                </div>
-                <div className="flex shrink-0 items-center gap-2">
-                  {spot.dist != null && (
-                    <span className="flex items-center gap-0.5 text-xs font-medium text-emerald-600">
-                      <MapPin className="size-3" />
-                      {formatDistance(spot.dist)}
-                    </span>
-                  )}
-                  <div className="flex items-center gap-0.5 text-xs">
-                    <Star className="size-3.5 fill-amber-400 text-amber-400" />
-                    <span className="font-semibold">{spot.rating.toFixed(1)}</span>
-                  </div>
-                </div>
-                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
-              </div>
-            </Link>
+            <SpotCardCompact
+              key={spot.id}
+              rank={index + 1}
+              distance={spot.dist ?? null}
+              spot={{
+                slug: spot.slug,
+                name: spot.name,
+                spotType: spot.spotType,
+                region: { prefecture: spot.prefecture, areaName: spot.areaName },
+                rating: spot.rating,
+              }}
+            />
           ))}
         </div>
 

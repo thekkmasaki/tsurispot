@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { MapPin, Navigation, Star, Loader2 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CATCH_RATING_LABELS } from "@/types";
+import { SpotCardCompact } from "@/components/spots/spot-card";
+import { CATCH_RATING_LABELS, type FishingSpot } from "@/types";
 import { useGeolocation } from "@/hooks/use-geolocation";
 
 /** クライアントに渡す軽量スポットデータ（region.id/slugを省略） */
@@ -14,6 +13,7 @@ export interface SpotLight {
   id: string;
   name: string;
   slug: string;
+  spotType: FishingSpot["spotType"];
   prefecture: string;
   areaName: string;
   rating: number;
@@ -38,12 +38,6 @@ function haversineDistance(
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2);
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)}m`;
-  if (km < 10) return `${km.toFixed(1)}km`;
-  return `${Math.round(km)}km`;
 }
 
 interface NearbySpotsSorterProps {
@@ -91,56 +85,39 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
   }) => {
     const richLabel = `${spot.prefecture}${spot.areaName}の${spot.name}で${fishName}を釣る`;
     return (
-    <Link prefetch={false}
-      href={`/spots/${spot.slug}`}
-      title={richLabel}
-      aria-label={richLabel}
+    <SpotCardCompact
+      linkTitle={richLabel}
+      distance={spot.distance}
+      spot={{
+        slug: spot.slug,
+        name: spot.name,
+        spotType: spot.spotType,
+        region: { prefecture: spot.prefecture, areaName: spot.areaName },
+        rating: spot.rating,
+      }}
     >
-      <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-        <CardContent className="flex items-center justify-between gap-2 p-3 sm:p-4">
-          <div className="min-w-0 flex-1">
-            <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
-              {spot.name}
-            </h3>
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              {spot.prefecture} {spot.areaName}
-              {spot.distance !== null && (
-                <span className="ml-2 inline-flex items-center gap-0.5 text-primary font-medium">
-                  <Navigation className="size-3" />
-                  {formatDistance(spot.distance)}
-                </span>
-              )}
-            </p>
-          </div>
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <Badge
-              variant="outline"
-              className={`inline-flex text-xs ${
-                spot.catchRating === "excellent"
-                  ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                  : spot.catchRating === "good"
-                    ? "border-sky-200 bg-sky-50 text-sky-700"
-                    : ""
-              }`}
-            >
-              {CATCH_RATING_LABELS[spot.catchRating]}
-              {/* モバイルは記号（◎/○/△）のみ、sm以上でテキスト付き（サイト独自価値をスマホでも露出） */}
-              <span className="ml-0.5 hidden sm:inline">
-                {spot.catchRating === "excellent"
-                  ? "よく釣れる"
-                  : spot.catchRating === "good"
-                    ? "釣れる"
-                    : "まずまず"}
-              </span>
-            </Badge>
-            <div className="flex items-center gap-1 text-sm">
-              <Star className="size-3.5 fill-amber-400 text-amber-400" />
-              <span className="font-medium">{spot.rating}</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+      {/* 魚種ページ固有: この魚の釣れる度（◎/○/△ + テキスト）。テキストは全幅で常時表示 */}
+      <Badge
+        variant="outline"
+        className={`inline-flex text-xs ${
+          spot.catchRating === "excellent"
+            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+            : spot.catchRating === "good"
+              ? "border-sky-200 bg-sky-50 text-sky-700"
+              : ""
+        }`}
+      >
+        {CATCH_RATING_LABELS[spot.catchRating]}
+        <span className="ml-0.5">
+          {fishName}が
+          {spot.catchRating === "excellent"
+            ? "よく釣れる"
+            : spot.catchRating === "good"
+              ? "釣れる"
+              : "まずまず"}
+        </span>
+      </Badge>
+    </SpotCardCompact>
   );
   };
 

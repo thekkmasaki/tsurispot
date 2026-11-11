@@ -6,15 +6,13 @@ import {
   Navigation,
   Loader2,
   MapPin,
-  Star,
   Car,
   Toilet,
   Fish,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { SpotCardCompact } from "@/components/spots/spot-card";
 import { cn } from "@/lib/utils";
-import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { DIFFICULTY_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
 
 interface SpotData {
@@ -53,12 +51,11 @@ function getDistanceKm(
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)}m`;
-  if (km < 10) return `${km.toFixed(1)}km`;
-  return `${Math.round(km)}km`;
-}
-
+/**
+ * 正規コンパクトカード + スペック行（children）。
+ * catchableFishNames は呼び出し側で先頭3件に切られているため、
+ * 「釣れる魚N種」を出す写真付き SpotCard ではなく SpotCardCompact を使う。
+ */
 function SpotItem({
   spot,
   distanceKm,
@@ -66,71 +63,47 @@ function SpotItem({
   spot: SpotData;
   distanceKm?: number;
 }) {
+  const fishNames = Array.from(new Set(spot.catchableFishNames.filter(Boolean)));
   return (
-    <Link prefetch={false} href={`/spots/${spot.slug}`}>
-      <Card className="group gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
-        <CardContent className="space-y-2.5 p-3 sm:space-y-3 sm:p-4">
-          <div>
-            <h3 className="text-sm font-semibold leading-tight group-hover:text-primary sm:text-base">
-              {spot.name}
-            </h3>
-            <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
-              {spot.prefecture} {spot.areaName}
-              {distanceKm != null && (
-                <span className="ml-1.5 inline-flex items-center gap-0.5 text-xs font-medium text-primary">
-                  <Navigation className="size-3" />
-                  約{formatDistance(distanceKm)}
-                </span>
-              )}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-1">
-            {spot.catchableFishNames.map((name) => (
-              <Badge key={name} variant="secondary" className="text-xs">
-                {name}
-              </Badge>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-1 text-sm">
-            <Star className="size-4 fill-yellow-400 text-yellow-400" />
-            <span className="font-medium">{spot.rating.toFixed(1)}</span>
-            <span className="ml-2 text-xs text-muted-foreground">
-              {SPOT_TYPE_LABELS[spot.spotType]}
-            </span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-1.5">
-            {spot.difficulty === "beginner" && (
-              <Badge className="bg-green-600 text-xs hover:bg-green-600">
-                初心者OK
-              </Badge>
-            )}
-            {spot.isFree && (
-              <Badge className="bg-orange-500 text-xs hover:bg-orange-500">
-                無料
-              </Badge>
-            )}
-            {spot.hasParking && (
-              <span className="text-muted-foreground" title="駐車場あり">
-                <Car className="size-4" />
-              </span>
-            )}
-            {spot.hasToilet && (
-              <span className="text-muted-foreground" title="トイレあり">
-                <Toilet className="size-4" />
-              </span>
-            )}
-            {spot.hasRentalRod && (
-              <span className="text-muted-foreground" title="レンタル竿あり">
-                <Fish className="size-4" />
-              </span>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+    <SpotCardCompact
+      className="h-full"
+      distance={distanceKm}
+      spot={{
+        slug: spot.slug,
+        name: spot.name,
+        spotType: spot.spotType,
+        region: { prefecture: spot.prefecture, areaName: spot.areaName },
+        fishNames,
+        rating: spot.rating,
+      }}
+    >
+      <div className="flex flex-wrap gap-x-3 gap-y-1 rounded-lg bg-muted px-2.5 py-1.5">
+        {spot.difficulty === "beginner" ? (
+          <span className="font-bold text-primary">初心者OK</span>
+        ) : (
+          <span className="text-muted-foreground">{DIFFICULTY_LABELS[spot.difficulty]}</span>
+        )}
+        <span className="font-bold">{spot.isFree ? "無料" : "有料"}</span>
+        {spot.hasParking && (
+          <span className="inline-flex items-center gap-1">
+            <Car className="size-3.5" aria-hidden="true" />
+            駐車場あり
+          </span>
+        )}
+        {spot.hasToilet && (
+          <span className="inline-flex items-center gap-1">
+            <Toilet className="size-3.5" aria-hidden="true" />
+            トイレあり
+          </span>
+        )}
+        {spot.hasRentalRod && (
+          <span className="inline-flex items-center gap-1">
+            <Fish className="size-3.5" aria-hidden="true" />
+            レンタル竿あり
+          </span>
+        )}
+      </div>
+    </SpotCardCompact>
   );
 }
 

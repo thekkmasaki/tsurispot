@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useState, useCallback } from "react";
 import { Navigation, MapPin, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SpotCardCompact } from "@/components/spots/spot-card";
+import type { FishingSpot } from "@/types";
 
 interface BeginnerSpotData {
   slug: string;
   name: string;
+  spotType: FishingSpot["spotType"];
   prefecture: string;
   areaName: string;
   latitude: number;
@@ -30,12 +33,6 @@ function getDistanceKm(
       Math.cos((lat2 * Math.PI) / 180) *
       Math.sin(dLng / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)}m`;
-  if (km < 10) return `${km.toFixed(1)}km`;
-  return `${Math.round(km)}km`;
 }
 
 export function NearbyBeginnerSpots({
@@ -98,26 +95,17 @@ export function NearbyBeginnerSpots({
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
           {results.map((spot) => (
-            <Link prefetch={false}
+            <SpotCardCompact
               key={spot.slug}
-              href={`/spots/${spot.slug}`}
-              className="group flex items-center gap-3 rounded-lg border p-3 transition-colors hover:border-emerald-500"
-            >
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-                <Navigation className="size-4" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium group-hover:text-emerald-600">
-                  {spot.name}
-                </p>
-                <p className="truncate text-xs text-muted-foreground">
-                  {spot.prefecture} {spot.areaName}
-                  <span className="ml-2 font-medium text-emerald-600">
-                    {formatDistance(spot.distanceKm)}
-                  </span>
-                </p>
-              </div>
-            </Link>
+              distance={spot.distanceKm}
+              spot={{
+                slug: spot.slug,
+                name: spot.name,
+                spotType: spot.spotType,
+                region: { prefecture: spot.prefecture, areaName: spot.areaName },
+                rating: spot.rating,
+              }}
+            />
           ))}
         </div>
         <div className="mt-3 text-center">

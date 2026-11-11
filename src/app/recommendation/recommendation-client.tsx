@@ -34,6 +34,8 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
+import { SpotCardCompact } from "@/components/spots/spot-card";
+import type { ListSpot } from "@/types";
 // /recommendation はクライアントに全2,141スポット＋全100魚種を渡すため、RSCペイロード/
 // ハイドレーション削減用に必要フィールドだけの軽量型を定義する。特に cf.fish の完全 RecoFish
 // （24フィールド）が数千回直列化されるのを {slug,name} のみに削減するのが主目的。
@@ -1596,7 +1598,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
               {topSpots.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {topSpots.map((scored, index) => (
-                    <SpotCard
+                    <RecommendationSpotCard
                       key={scored.spot.id}
                       scored={scored}
                       rank={index + 1}
@@ -1687,7 +1689,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
 
 // --- スポットカード ---
 
-function SpotCard({
+function RecommendationSpotCard({
   scored,
   rank,
   userLocation,
@@ -1712,15 +1714,6 @@ function SpotCard({
       )
     : null;
 
-  const spotTypeLabel: Record<string, string> = {
-    port: "漁港",
-    beach: "砂浜",
-    rocky: "磯",
-    river: "河川",
-    pier: "桟橋",
-    breakwater: "堤防",
-  };
-
   const difficultyLabel: Record<string, string> = {
     beginner: "初心者向け",
     intermediate: "中級者向け",
@@ -1738,63 +1731,32 @@ function SpotCard({
   };
 
   return (
-    <Link prefetch={false} href={`/spots/${spot.slug}`}>
-      <Card className="hover:shadow-lg transition-all cursor-pointer h-full group overflow-hidden">
-        {/* ランクバッジ */}
-        <div className="relative">
-          <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
+    <SpotCardCompact
+      className="h-full"
+      spot={{
+        slug: spot.slug,
+        name: spot.name,
+        spotType: spot.spotType as ListSpot["spotType"],
+        region: spot.region,
+        rating: spot.rating,
+      }}
+      rank={rank}
+      distance={distance}
+    >
+      <div className="space-y-2.5">
+          {/* おすすめランク（S/A/B…）・メダル・難易度 */}
+          <div className="flex flex-wrap items-center gap-1.5">
             <span
-              className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold shadow-lg ${getRankColor(scoreRank)}`}
+              className={`inline-flex items-center justify-center min-w-6 h-6 px-1 rounded-md text-xs font-bold ${getRankColor(scoreRank)}`}
             >
               {scoreRank}
             </span>
             {rank <= 3 && (
               <Award
-                className={`size-5 ${rank === 1 ? "text-yellow-400" : rank === 2 ? "text-gray-400" : "text-amber-600"} drop-shadow`}
+                className={`size-4 ${rank === 1 ? "text-yellow-400" : rank === 2 ? "text-gray-400" : "text-amber-600"}`}
+                aria-hidden="true"
               />
             )}
-          </div>
-          <div className="absolute top-3 right-3 z-10">
-            <Badge className="bg-white/90 text-gray-700 text-xs backdrop-blur-sm">
-              #{rank}
-            </Badge>
-          </div>
-          <div className="h-2 bg-gradient-to-r from-orange-400 to-amber-300" />
-        </div>
-
-        <CardContent className="p-4 space-y-3">
-          {/* スポット名と基本情報 */}
-          <div>
-            <h3 className="font-bold text-base group-hover:text-blue-600 transition-colors line-clamp-1">
-              {spot.name}
-            </h3>
-            <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-              <MapPin className="size-3" />
-              <span>
-                {spot.region.prefecture} {spot.region.areaName}
-              </span>
-              {distance !== null && (
-                <span className="text-blue-500 font-medium ml-auto">
-                  <Navigation className="size-3 inline mr-0.5" />
-                  {distance < 1
-                    ? `${(distance * 1000).toFixed(0)}m`
-                    : distance < 100
-                      ? `${distance.toFixed(1)}km`
-                      : `${distance.toFixed(0)}km`}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* レーティング・タグ */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <div className="flex items-center gap-1">
-              <Star className="size-3.5 text-amber-400 fill-amber-400" />
-              <span className="text-sm font-medium">{spot.rating}</span>
-            </div>
-            <Badge variant="outline" className="text-[10px] px-1.5 py-0">
-              {spotTypeLabel[spot.spotType] || spot.spotType}
-            </Badge>
             <Badge variant="outline" className="text-[10px] px-1.5 py-0">
               {difficultyLabel[spot.difficulty] || spot.difficulty}
             </Badge>
@@ -1845,7 +1807,7 @@ function SpotCard({
             </div>
             <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-orange-400 to-amber-400 transition-all duration-500"
+                className="h-full rounded-full bg-orange-400 transition-all duration-500"
                 style={{ width: `${(totalScore / 10) * 100}%` }}
               />
             </div>
@@ -1873,8 +1835,7 @@ function SpotCard({
               </span>
             )}
           </button>
-        </CardContent>
-      </Card>
-    </Link>
+      </div>
+    </SpotCardCompact>
   );
 }

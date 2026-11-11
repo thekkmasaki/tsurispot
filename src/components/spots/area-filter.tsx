@@ -1,14 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
-import { Star, Car, Toilet, Fish, ShoppingBag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { SpotImage } from "@/components/ui/spot-image";
-import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
-import { SPOT_TYPE_LABELS } from "@/types";
-import { FavoriteButton } from "@/components/spots/favorite-button";
+import { SpotCard } from "@/components/spots/spot-card";
+import type { ListSpot } from "@/types";
 
 /** SpotCardに必要な最小限のフィールドだけを持つ軽量型 */
 export type SpotCardData = {
@@ -74,51 +69,35 @@ function getRegionKey(prefecture: string): RegionKey | null {
   return null;
 }
 
-function LightSpotCard({ spot }: { spot: SpotCardData }) {
-  const displayFish = spot.fishNames.slice(0, 3);
-  const remainingCount = spot.fishNames.length - 3;
-  return (
-    <Link prefetch={false} href={`/spots/${spot.slug}`}>
-      <Card className="group gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
-        <div className="relative">
-          <SpotImage
-            src={resolveSpotImageSrc(spot.mainImageUrl)}
-            alt={spot.name}
-            spotType={spot.spotType as "port" | "beach" | "rocky" | "pier" | "breakwater" | "river" | "lake" | "canal" | "managed" | "surf" | "estuary"}
-            height="h-40"
-          />
-          <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-0.5 text-xs text-white">
-            {SPOT_TYPE_LABELS[spot.spotType as keyof typeof SPOT_TYPE_LABELS] ?? spot.spotType}
-          </span>
-          <div className="absolute top-2 right-2">
-            <FavoriteButton spotSlug={spot.slug} />
-          </div>
-        </div>
-        <CardContent className="space-y-2.5 p-3 sm:space-y-3 sm:p-4">
-          <div>
-            <h3 className="text-sm font-semibold leading-tight group-hover:text-primary sm:text-base">{spot.name}</h3>
-            <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">{spot.region.prefecture} {spot.region.areaName}</p>
-          </div>
-          <div className="flex flex-wrap gap-1">
-            {displayFish.map((name) => (<Badge key={name} variant="secondary" className="text-xs">{name}</Badge>))}
-            {remainingCount > 0 && <Badge variant="outline" className="text-xs">+{remainingCount}</Badge>}
-          </div>
-          <div className="flex items-center gap-1 text-sm">
-            <Star className="size-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
-            <span className="font-medium">{spot.rating.toFixed(1)}</span>
-          </div>
-          <div className="flex flex-wrap items-center gap-1.5">
-            {spot.difficulty === "beginner" && <Badge variant="beginner" className="text-xs">初心者OK</Badge>}
-            {spot.isFree && <Badge variant="free" className="text-xs">無料</Badge>}
-            {spot.hasParking && <span className="text-muted-foreground" role="img" aria-label="駐車場あり" title="駐車場あり"><Car className="size-4" aria-hidden="true" /></span>}
-            {spot.hasToilet && <span className="text-muted-foreground" role="img" aria-label="トイレあり" title="トイレあり"><Toilet className="size-4" aria-hidden="true" /></span>}
-            {spot.hasRentalRod && <span className="text-muted-foreground" role="img" aria-label="レンタル竿あり" title="レンタル竿あり"><Fish className="size-4" aria-hidden="true" /></span>}
-            {spot.hasConvenienceStore && <span className="text-muted-foreground" role="img" aria-label="コンビニ近く" title="コンビニ近く"><ShoppingBag className="size-4" aria-hidden="true" /></span>}
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
-  );
+/**
+ * SpotCardData（軽量型）→ 正規 SpotCard 用の ListSpot へ詰め替える。
+ * SpotCard が描画に使わない項目（住所・座標・釣法など）は空値で埋める。
+ * 穴場/高級魚の事前計算はこの型に無いため false（従来カードもタグ非表示）。
+ */
+function toCardSpot(spot: SpotCardData): ListSpot {
+  return {
+    id: spot.id,
+    slug: spot.slug,
+    name: spot.name,
+    address: "",
+    region: spot.region as ListSpot["region"],
+    latitude: 0,
+    longitude: 0,
+    spotType: spot.spotType as ListSpot["spotType"],
+    difficulty: spot.difficulty as ListSpot["difficulty"],
+    isFree: spot.isFree,
+    hasParking: spot.hasParking,
+    hasToilet: spot.hasToilet,
+    hasConvenienceStore: spot.hasConvenienceStore,
+    hasFishingShop: false,
+    hasRentalRod: spot.hasRentalRod,
+    mainImageUrl: spot.mainImageUrl ?? "",
+    rating: spot.rating,
+    fishNames: Array.from(new Set(spot.fishNames.filter(Boolean))),
+    methods: [],
+    isHiddenGem: false,
+    hasPremiumFish: false,
+  };
 }
 
 export function AreaFilteredSpotList({ spots }: { spots: SpotCardData[] }) {
@@ -200,7 +179,7 @@ export function AreaFilteredSpotList({ spots }: { spots: SpotCardData[] }) {
       {filteredSpots.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredSpots.map((spot) => (
-            <LightSpotCard key={spot.id} spot={spot} />
+            <SpotCard key={spot.id} spot={toCardSpot(spot)} />
           ))}
         </div>
       ) : (
