@@ -658,14 +658,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* PC ヘッダー下リーダーボード広告 (above-fold, lg:1024px+ のみ表示。 mobile は MobileStickyAd で対応するためスキップ) */}
       <HeaderBannerAd />
 
-      {/* PR-INV-1: 投稿動線強化 - 上部に釣果投稿 CTA */}
-      <a
-        href="#catch-report"
-        className="my-3 inline-flex w-full items-center justify-between rounded-lg border-2 border-primary/30 bg-primary/5 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10 sm:w-auto"
-      >
-        <span>釣果を投稿する (ログイン不要)</span>
-        <span className="ml-3 text-xs text-muted-foreground">↓ 報告セクションへ</span>
-      </a>
+      {/* PR-INV-1 の釣果投稿CTAは、UI/UX刷新Phase4でヘッダーの「行きたい／釣果を投稿」2大ボタンへ統合 */}
 
       {/* Back link */}
       <Link prefetch={false}
@@ -694,13 +687,25 @@ export default async function SpotDetailPage({ params }: PageProps) {
             )}
           </h1>
           <div className="flex shrink-0 items-center gap-2">
-            <WishlistButton slug={spot.slug} />
             <FavoriteButton spotSlug={spot.slug} />
           </div>
         </div>
 
-        {/* 釣行記録ボタン（プライベート、ログイン時のみ表示） */}
-        <div className="mt-2">
+        {/* 種別 − エリア（サウナイキタイ式の1行サマリー） */}
+        <p className="mt-1 text-sm text-muted-foreground">
+          {SPOT_TYPE_LABELS[spot.spotType]} − {spot.region.prefecture} {spot.region.areaName}
+        </p>
+
+        {/* 2大アクション: 行きたい ／ 釣果を投稿（旧: ページ上部の投稿CTAバナー） */}
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <WishlistButton slug={spot.slug} className="min-h-[44px] px-5 text-base" />
+          <a
+            href="#catch-report"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-primary px-5 text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            釣果を投稿する
+            <span className="text-xs font-normal opacity-80">(ログイン不要)</span>
+          </a>
           <CheckinButton slug={spot.slug} />
         </div>
 
@@ -752,32 +757,32 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* バッジ（3段目） */}
+        {/* バッジ（3段目）: 色を1色（枠線＋アクセント）に統一。5色の塗りバッジをやめる */}
         <div className="mt-2 flex flex-wrap gap-1.5">
           {isHiddenGem(spot) && (
-            <Badge className="bg-emerald-600 hover:bg-emerald-600 text-xs">
+            <Badge variant="outline" className="border-primary/40 text-xs text-primary">
               <Gem className="mr-0.5 size-3" />
               穴場スポット
             </Badge>
           )}
           {getPremiumFishForSpot(spot).length > 0 && (
-            <Badge className="bg-amber-600 hover:bg-amber-600 text-xs">
+            <Badge variant="outline" className="border-primary/40 text-xs text-primary">
               <Crown className="mr-0.5 size-3" />
               高級魚が狙える
             </Badge>
           )}
           {spot.difficulty === "beginner" && (
-            <Badge className="bg-green-600 hover:bg-green-600 text-xs">
+            <Badge variant="outline" className="border-primary/40 text-xs text-primary">
               初心者OK
             </Badge>
           )}
           {spot.hasRentalRod && (
-            <Badge className="bg-purple-600 hover:bg-purple-600 text-xs">
+            <Badge variant="outline" className="border-primary/40 text-xs text-primary">
               手ぶらOK
             </Badge>
           )}
           {spot.isFree && (
-            <Badge className="bg-orange-500 hover:bg-orange-500 text-xs">無料</Badge>
+            <Badge variant="outline" className="border-primary/40 text-xs text-primary">無料</Badge>
           )}
           <Badge variant="outline" className="text-xs">
             {SPOT_TYPE_LABELS[spot.spotType]}
@@ -796,13 +801,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <p>{spot.description}</p>
         </div>
 
-        {/* データ信頼性指標 */}
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1">
-            <Fish className="size-3.5 text-primary" />
-            釣れる魚 {spot.catchableFish.length}種類
-          </span>
-        </div>
+        {/* データ信頼性指標（枠を外して1行に） */}
+        <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+          <Fish className="size-3.5 text-primary" aria-hidden="true" />
+          釣れる魚 {spot.catchableFish.length}種類
+        </p>
 
         {/* 「今日行く」ボタン + ナビゲーション */}
         <div className="mt-4 rounded-xl border bg-muted/30 p-3 sm:p-4">
@@ -1015,6 +1018,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* タブレイアウト */}
       <SpotDetailTabs
+        fishCount={new Set(spot.catchableFish.map((cf) => cf.fish.slug)).size}
         overviewTab={<>
           <h2 className="sr-only">{spot.name}の基本情報・設備</h2>
           <section>
@@ -1096,13 +1100,30 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {/* 釣りポイント配置図は「釣り場の様子」セクションに統合済み */}
           <section>
             <h3 className="mb-3 text-lg font-bold">設備</h3>
-            <div className="flex flex-wrap gap-2">
-              {spot.hasParking && <Badge variant="outline" className="text-xs"><Car className="size-3.5 mr-1" />{getParkingBadgeText(spot.hasParking, spot.parkingDetail, spot.parkingGuide)}</Badge>}
-              {spot.hasToilet && <Badge variant="outline" className="text-xs"><Toilet className="size-3.5 mr-1" />トイレ</Badge>}
-              {spot.hasFishingShop && <Badge variant="outline" className="text-xs"><Store className="size-3.5 mr-1" />釣具店</Badge>}
-              {spot.hasRentalRod && <Badge variant="outline" className="text-xs"><Wrench className="size-3.5 mr-1" />レンタル竿</Badge>}
-              {spot.hasConvenienceStore && <Badge variant="outline" className="text-xs"><ShoppingBag className="size-3.5 mr-1" />コンビニ近く</Badge>}
-            </div>
+            {/* サウナイキタイ式の ○/− 表。「無い」ことも情報なので全項目を並べる */}
+            <dl className="grid grid-cols-1 overflow-hidden rounded-xl border text-sm sm:grid-cols-2">
+              {([
+                { ok: spot.hasParking, icon: Car, label: "駐車場", detail: spot.hasParking ? getParkingBadgeText(spot.hasParking, spot.parkingDetail, spot.parkingGuide) : undefined },
+                { ok: spot.hasToilet, icon: Toilet, label: "トイレ", detail: undefined },
+                { ok: spot.hasFishingShop, icon: Store, label: "釣具店", detail: undefined },
+                { ok: spot.hasRentalRod, icon: Wrench, label: "レンタル竿", detail: undefined },
+                { ok: spot.hasConvenienceStore, icon: ShoppingBag, label: "コンビニ近く", detail: undefined },
+              ] as { ok: boolean; icon: typeof Car; label: string; detail?: string }[]).map(({ ok, icon: Icon, label, detail }) => (
+                <div key={label} className="flex items-center gap-2 border-b px-3 py-2 last:border-b-0 sm:[&:nth-last-child(2)]:border-b-0">
+                  <dt className="flex w-28 shrink-0 items-center gap-1.5 text-muted-foreground">
+                    <Icon className="size-4" aria-hidden="true" />
+                    {label}
+                  </dt>
+                  <dd className="min-w-0">
+                    <span className={ok ? "font-bold text-primary" : "text-muted-foreground"} aria-label={ok ? "あり" : "情報なし"}>
+                      {ok ? "○" : "−"}
+                    </span>
+                    {detail && detail !== label && <span className="ml-2 text-xs text-muted-foreground">{detail}</span>}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-1.5 text-xs text-muted-foreground">○：あり　−：情報なし（現地でご確認ください）</p>
           </section>
           {/* 釣りルール: 個別データがあれば優先表示。無ければ県レベルの公的ルール（出典付き）をフォールバック。
               推測のスポット固有ルールは誤情報源になるため出さない。 */}
