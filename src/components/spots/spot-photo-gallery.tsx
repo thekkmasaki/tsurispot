@@ -3,7 +3,9 @@
 import { useState, useCallback, useRef, useEffect, Component, type ErrorInfo, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Link from "next/link";
 import type { SpotPhoto } from "@/types";
+import type { PublicSpotPhoto } from "@/lib/spot-photo-public";
 
 const AerialPhotoMap = dynamic(
   () => import("./aerial-photo-map").then((m) => ({ default: m.AerialPhotoMap })),
@@ -146,7 +148,7 @@ interface SpotPhotoGalleryProps {
   spotSlug: string;
   latitude?: number;
   longitude?: number;
-  initialCommunityPhotos?: { url: string; uploadedAt: number }[];
+  initialCommunityPhotos?: PublicSpotPhoto[];
 }
 
 // クライアント側で画像をリサイズ・JPEG圧縮
@@ -195,11 +197,17 @@ function removeToken(url: string) {
   localStorage.setItem(SPOT_PHOTO_TOKENS_KEY, JSON.stringify(tokens));
 }
 
-interface CommunityPhoto {
-  url: string;
-  uploadedAt: number;
+interface CommunityPhoto extends PublicSpotPhoto {
   mine?: boolean;
   token?: string;
+}
+
+function FlagIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />
+    </svg>
+  );
 }
 
 function UploadIcon({ className }: { className?: string }) {
@@ -232,7 +240,7 @@ function SpotPhotoUploader({ spotSlug, spotName, onUploaded }: { spotSlug: strin
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<false | "first" | "normal">(false);
 
   const handleFile = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -251,9 +259,9 @@ function SpotPhotoUploader({ spotSlug, spotName, onUploaded }: { spotSlug: strin
       const data = await res.json();
       if (res.ok && data.ok) {
         saveToken(data.url, data.token);
-        setSuccess(true);
+        setSuccess(data.first ? "first" : "normal");
         onUploaded();
-        setTimeout(() => setSuccess(false), 3000);
+        setTimeout(() => setSuccess(false), data.first ? 8000 : 3000);
       } else {
         setError(data.error || "アップロードに失敗しました");
       }
@@ -277,10 +285,18 @@ function SpotPhotoUploader({ spotSlug, spotName, onUploaded }: { spotSlug: strin
         <p className="mt-0.5 text-xs text-muted-foreground">
           釣り場の雰囲気が伝わる写真をお持ちの方はぜひお寄せください。あなたの写真が釣り仲間の参考になります。（ご自身で撮った写真のみ。人の顔や車のナンバーが写らないようにお願いします）
         </p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          写真にはあなたのニックネームが表示されます（プロフィール非公開の方は名前を出しません）。このスポットで最初の1枚には「一番乗り」の印が付きます。
+        </p>
         {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
-        {success && (
+        {success === "normal" && (
           <p className="mt-1 flex items-center gap-1 text-xs text-emerald-600">
             <CheckIcon className="size-3" /> アップロードしました！ありがとうございます
+          </p>
+        )}
+        {success === "first" && (
+          <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900 motion-safe:animate-bounce dark:bg-amber-900/40 dark:text-amber-200">
+            <FlagIcon className="size-3.5" /> このスポット初の写真です！一番乗りの印が付きました
           </p>
         )}
       </div>
@@ -338,11 +354,23 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
   return (
     <div className="mt-4">
       <p className="mb-2 text-xs font-semibold text-muted-foreground">みんなの投稿写真</p>
-      <div className="flex gap-2 overflow-x-auto pb-2">
+      <div className="flex gap-3 overflow-x-auto pb-2">
         {photos.map((photo) => (
-          <div key={photo.url} className="relative shrink-0">
-            <div className="relative h-20 w-28 overflow-hidden rounded-md border">
-              <Image src={photo.url} alt="投稿写真" fill className="object-cover" sizes="112px" />
+          <figure key={photo.url} className="relative w-32 shrink-0">
+            <div className="relative h-24 w-32 overflow-hidden rounded-md border">
+              <Image
+                src={photo.url}
+                alt={photo.uploader ? `${photo.uploader.name}さんの投稿写真` : "投稿写真"}
+                fill
+                className="object-cover"
+                sizes="128px"
+              />
+              {photo.first && (
+                <span className="absolute left-1 top-1 inline-flex items-center gap-0.5 rounded-full bg-amber-400 px-1.5 py-0.5 text-[10px] font-bold text-amber-950 shadow-sm">
+                  <FlagIcon className="size-2.5" />
+                  一番乗り
+                </span>
+              )}
               {deleting === photo.url && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50">
                   <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -359,7 +387,23 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
                 <TrashIcon className="size-3" />
               </button>
             )}
-          </div>
+            {photo.uploader && (
+              <figcaption className="mt-1 flex items-center gap-1 text-[11px] text-muted-foreground">
+                <CameraIcon className="size-3 shrink-0" />
+                {photo.uploader.tsuriId ? (
+                  <Link
+                    prefetch={false}
+                    href={`/users/${photo.uploader.tsuriId}`}
+                    className="truncate font-semibold text-foreground hover:text-primary hover:underline"
+                  >
+                    {photo.uploader.name}
+                  </Link>
+                ) : (
+                  <span className="truncate">{photo.uploader.name}</span>
+                )}
+              </figcaption>
+            )}
+          </figure>
         ))}
       </div>
     </div>
@@ -394,7 +438,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName, spotSlug, latitud
         if (data.photos) {
           const tokens = getSavedTokens();
           setCommunityPhotos(
-            data.photos.map((p: { url: string; uploadedAt: number }) => ({
+            data.photos.map((p: PublicSpotPhoto) => ({
               ...p,
               mine: !!tokens[p.url],
               token: tokens[p.url],
