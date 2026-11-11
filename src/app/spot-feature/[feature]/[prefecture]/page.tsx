@@ -21,6 +21,8 @@ import {
   getFeaturesForPref,
   getSpotFeature,
 } from "@/lib/data/spot-features";
+import { WaterTypeFilter } from "@/components/spots/water-type-filter";
+import { countByWaterType, pickForWaterFilter } from "@/lib/water-type";
 
 type PageProps = { params: Promise<{ feature: string; prefecture: string }> };
 
@@ -92,6 +94,8 @@ export default async function SpotFeaturePrefPage({ params }: PageProps) {
   const Icon = FEATURE_ICONS[feature.icon];
   const url = `https://tsurispot.com/spot-feature/${feature.slug}/${pref.slug}`;
   const shown = spots.slice(0, LIST_LIMIT);
+  // 海／川／湖・池の切り替え用に、種類ごとの上位も含めて HTML に出す
+  const picked = pickForWaterFilter(spots, LIST_LIMIT);
   const fish = topFishNames(spots, 6);
   const prefFeatures = getFeaturesForPref(pref.name);
   const otherPrefs = getFeaturePrefCounts(feature);
@@ -230,20 +234,17 @@ export default async function SpotFeaturePrefPage({ params }: PageProps) {
             </span>
           )}
         </h2>
-        <div className="grid gap-3 md:grid-cols-2">
-          {shown.map((spot) => (
+        <WaterTypeFilter
+          items={picked.map((p) => ({ water: p.water, inAll: p.inAll }))}
+          totals={countByWaterType(spots)}
+          limit={LIST_LIMIT}
+          moreHref={`/prefecture/${pref.slug}/all`}
+          moreLabel={`${pref.name}の全釣り場一覧`}
+        >
+          {picked.map(({ spot }) => (
             <SpotSpecCard key={spot.id} spot={spot} />
           ))}
-        </div>
-        {spots.length > LIST_LIMIT && (
-          <p className="mt-3 text-sm text-muted-foreground">
-            残りの{spots.length - LIST_LIMIT}件は
-            <Link prefetch={false} href={`/prefecture/${pref.slug}/all`} className="mx-1 text-sky-700 hover:underline">
-              {pref.name}の全釣り場一覧
-            </Link>
-            で探せます。
-          </p>
-        )}
+        </WaterTypeFilter>
       </section>
 
       <SeasonalAffiliateSection
