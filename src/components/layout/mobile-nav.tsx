@@ -3,31 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Map,
-  Fish,
-  Heart,
-  MapPin,
-  MoreHorizontal,
-  X,
-  Trophy,
-  BookOpen,
-  GraduationCap,
-  Scale,
-  Target,
-  Sparkles,
-  Calendar,
-  Compass,
-  Package,
-  Home,
-  FileText,
-  Anchor,
-  Store,
-  ClipboardCheck,
-  Users,
-  Send,
-} from "lucide-react";
+import { Map, Heart, MapPin, MoreHorizontal, X, Home, Users, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { NAV_GROUPS } from "./nav-config";
 import { useFavorites } from "@/hooks/use-favorites";
 
 // 中央は投稿FAB（下のJSXで固定描画）。「釣果レポート」タブは編集部ブログ行きで
@@ -41,27 +19,12 @@ const mainNavRight = [
   { href: "/favorites", label: "お気に入り", icon: Heart },
 ];
 
-const moreNavItems = [
-  { href: "/", label: "ホーム", icon: Home },
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/users", label: "釣り人を探す", icon: Users },
-  { href: "/ranking", label: "ランキング", icon: Trophy },
-  { href: "/fish", label: "魚図鑑", icon: BookOpen },
-  { href: "/methods", label: "釣り方", icon: Anchor },
-  { href: "/area", label: "エリア一覧", icon: Compass },
-  { href: "/area-guide", label: "エリアガイド", icon: MapPin },
-  { href: "/monthly", label: "月別ガイド", icon: Calendar },
-  { href: "/guide", label: "釣りガイド", icon: GraduationCap },
-  { href: "/blog", label: "ブログ", icon: FileText },
-  { href: "/shops", label: "釣具店ガイド", icon: Store },
-  { href: "/gear", label: "おすすめ道具", icon: Package },
-  { href: "/bouzu-checker", label: "ボウズ確率", icon: Target },
-  { href: "/fishing-rules", label: "ルール・マナー", icon: Scale },
-  { href: "/quiz", label: "釣りクイズ", icon: Sparkles },
-  { href: "/instructor-exam", label: "インストラクター試験", icon: ClipboardCheck },
-  { href: "/catch-reports", label: "釣行レポート", icon: Fish },
-  { href: "/umigyo", label: "海業推進", icon: Anchor },
+// 「もっと」メニューはヘッダーと共通の NAV_GROUPS（目的別グループ・同じラベル）。ホームだけ先頭に足す
+const moreNavGroups = [
+  { title: "", items: [{ href: "/", label: "ホーム", icon: Home }] },
+  ...NAV_GROUPS,
 ];
+const moreNavItems = moreNavGroups.flatMap((g) => g.items);
 
 export function MobileNav() {
   const pathname = usePathname();
@@ -123,29 +86,34 @@ export function MobileNav() {
               <X className="size-5 text-muted-foreground" aria-hidden="true" />
             </button>
           </div>
-          <div className="grid grid-cols-3 gap-1.5 p-3">
-            {moreNavItems.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  prefetch={false}
-                  role="menuitem"
-                  className={cn(
-                    "flex flex-col items-center gap-1.5 rounded-xl px-2 py-3.5 text-xs transition-colors touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                    isActive
-                      ? "bg-ocean-mid/10 text-ocean-mid font-medium"
-                      : "text-muted-foreground hover:bg-sand-light/50"
-                  )}
-                >
-                  <item.icon className="size-5" aria-hidden="true" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
+          <div className="max-h-[65vh] space-y-3 overflow-y-auto p-3">
+            {moreNavGroups.map((group) => (
+              <div key={group.title || "home"}>
+                {group.title && <p className="px-1 pb-1 text-xs font-bold text-muted-foreground">{group.title}</p>}
+                <div className="grid grid-cols-3 gap-1">
+                  {group.items.map((item) => {
+                    const isActive =
+                      pathname === item.href ||
+                      (item.href !== "/" && pathname.startsWith(item.href));
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        prefetch={false}
+                        role="menuitem"
+                        className={cn(
+                          "flex flex-col items-center gap-1 rounded-lg px-1 py-2.5 text-center text-xs transition-colors touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                          isActive ? "bg-accent font-medium text-primary" : "text-foreground hover:bg-muted",
+                        )}
+                      >
+                        <item.icon className="size-5 text-muted-foreground" aria-hidden="true" />
+                        <span className="leading-tight">{item.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -197,7 +165,7 @@ export function MobileNav() {
                       pathname.startsWith("/post") ? "text-ocean-mid" : "text-muted-foreground"
                     )}
                   >
-                    <span className="flex size-8 items-center justify-center rounded-full bg-gradient-to-r from-primary to-ocean-mid text-white shadow-md">
+                    <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
                       <Send aria-hidden="true" className="h-4 w-4" />
                     </span>
                     <span className="font-medium whitespace-nowrap">投稿</span>
