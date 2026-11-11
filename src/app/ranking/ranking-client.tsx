@@ -163,13 +163,45 @@ function RankingSpotCard({ spot, rank, distanceKm }: SpotCardProps) {
   );
 }
 
-export function RankingClient({ spots }: { spots: RankingSpot[] }) {
+/**
+ * initialSpots: 既定表示（全国・総合）の TOP10（SSR）。
+ * 絞り込み・現在地ランキングに必要な全件は、表示後に /api/ranking/spots（force-static・CDN）から1回だけ取得する。
+ */
+export function RankingClient({ initialSpots }: { initialSpots: RankingSpot[] }) {
   const [activeTab, setActiveTab] = useState<TabKey>("all");
   const [activePrefecture, setActivePrefecture] = useState("全国");
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
   const [nearbyMode, setNearbyMode] = useState(false);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
+
+  const [allSpots, setAllSpots] = useState<RankingSpot[] | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  useEffect(() => {
+    let alive = true;
+    const load = () =>
+      fetch("/api/ranking/spots")
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        .then((data: RankingSpot[]) => {
+          if (alive) setAllSpots(data);
+        })
+        .catch(() => {
+          if (alive) setLoadError(true);
+        });
+    // 初期表示（LCP）を邪魔しないようアイドル時に取得
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(() => load(), { timeout: 1500 });
+    } else {
+      setTimeout(load, 300);
+    }
+    return () => {
+      alive = false;
+    };
+  }, []);
+  const spots = allSpots ?? initialSpots;
+  const isDefaultView = activeTab === "all" && activePrefecture === "全国" && !nearbyMode;
+  // 全件の取得前に既定以外の表示を選んだ場合は、読み込み中を出す（誤った「見つかりません」を防ぐ）
+  const waitingAll = allSpots === null && !loadError && !isDefaultView;
 
   // A/B: ranking_infeed 実験。SSR は control 相当（広告なし）で描画し、マウント後に確定する。
   const [adBucket, setAdBucket] = useState<"control" | "treatment" | null>(null);
@@ -340,11 +372,22 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
       {/* 件数表示 */}
       <p aria-live="polite" className="mb-4 text-sm text-muted-foreground">
         {nearbyMode ? "現在地の近く" : activePrefecture}・{TABS.find((t) => t.key === activeTab)?.label ?? "総合"} TOP10
-        （{rankedSpots.length}件）
+        （{waitingAll ? "…" : rankedSpots.length}件）
       </p>
 
+      {loadError && (
+        <p className="mb-3 text-xs text-red-600">
+          ランキングデータの読み込みに失敗しました。ページを再読み込みしてください。
+        </p>
+      )}
+
       {/* ランキングリスト */}
-      {rankedSpots.length > 0 ? (
+      {waitingAll ? (
+        <div className="flex flex-col items-center gap-2 py-12 text-sm text-muted-foreground" role="status">
+          <Loader2 className="size-6 animate-spin text-primary" aria-hidden="true" />
+          ランキングを集計しています…
+        </div>
+      ) : rankedSpots.length > 0 ? (
         <div className="space-y-3">
           {rankedSpots.map((spot, index) => (
             <Fragment key={spot.id}>

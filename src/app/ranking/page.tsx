@@ -4,7 +4,7 @@ import { Trophy } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { monthSlugs } from "@/lib/data/monthly-guides";
 import { RankingClient, type RankingSpot } from "./ranking-client";
-import { calcRankScore } from "@/lib/ranking-score";
+import { buildRankingSpots } from "@/lib/data/ranking-spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
@@ -75,40 +75,11 @@ const itemListJsonLd = {
     })),
 };
 
-// サーバー側でランキングデータを構築（APIを経由しない）
-const rankingSpots: RankingSpot[] = fishingSpots.map((s) => {
-  const fishCount = s.catchableFish.length;
-  return {
-    id: s.id,
-    slug: s.slug,
-    name: s.name,
-    rating: s.rating,
-    reviewCount: s.reviewCount,
-    prefecture: s.region.prefecture,
-    spotType: s.spotType,
-    difficulty: s.difficulty,
-    latitude: s.latitude,
-    longitude: s.longitude,
-    hasParking: s.hasParking,
-    hasToilet: s.hasToilet,
-    hasRentalRod: s.hasRentalRod,
-    isFree: s.isFree,
-    fishCount,
-    // ランキングスコアをサーバーで事前計算（クライアントの再計算を廃止）
-    score: calcRankScore({
-      rating: s.rating,
-      reviewCount: s.reviewCount,
-      fishCount,
-      hasParking: s.hasParking,
-      hasToilet: s.hasToilet,
-      hasRentalRod: s.hasRentalRod,
-      isFree: s.isFree,
-      difficulty: s.difficulty,
-    }),
-    topFish: s.catchableFish.slice(0, 3).map((cf) => ({ id: cf.fish.id, name: cf.fish.name })),
-    bestTimes: s.bestTimes.map((t) => ({ label: t.label, rating: t.rating })),
-  };
-});
+// 初期 HTML（RSC ペイロード）に載せるのは既定表示（全国・総合）の TOP10 だけ。
+// 全件（5,000件超・gzip約336KB）は表示後に /api/ranking/spots（force-static・CDN）から取得する。
+const initialRankingSpots: RankingSpot[] = buildRankingSpots()
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 10);
 
 export default function RankingPage() {
   const currentMonth = new Date().getMonth() + 1; // 1-12（ビルド時固定・既存の季節導線と同方式）
@@ -151,7 +122,7 @@ export default function RankingPage() {
 
         <InArticleAd className="my-6" />
 
-        <RankingClient spots={rankingSpots} />
+        <RankingClient initialSpots={initialRankingSpots} />
 
         <InArticleAd className="my-8" />
 
