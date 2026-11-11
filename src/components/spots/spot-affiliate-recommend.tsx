@@ -1,30 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ExternalLink, ShoppingBag, Star, Tag } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { ShoppingBag } from "lucide-react";
+import { RecommendProductCard } from "@/components/affiliate/recommend-product-card";
 import {
   type AffiliateProduct,
   getRelevantAffiliateProducts,
 } from "@/lib/data/affiliate-products";
-import { getRakutenUrl, trackAffiliateClick } from "@/lib/affiliate-config";
-
-const CATEGORY_LABELS: Record<AffiliateProduct["category"], string> = {
-  tackle: "仕掛け・ライン",
-  bait: "エサ",
-  wear: "ウェア",
-  accessory: "便利グッズ",
-  book: "釣り場ガイド",
-};
-
-const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
-  tackle: "bg-blue-100 text-blue-700",
-  bait: "bg-green-100 text-green-700",
-  wear: "bg-orange-100 text-orange-700",
-  accessory: "bg-purple-100 text-purple-700",
-  book: "bg-amber-100 text-amber-700",
-};
 
 const SEASON_MESSAGES: Record<string, string> = {
   spring: "春の釣りシーズン到来！GW前に装備を揃えよう",
@@ -82,83 +64,10 @@ export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefec
         </p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product) => {
-          const rakutenUrl = getRakutenUrl(product.name);
-          return (
-            <Card key={product.id} className="group relative h-full gap-0 overflow-hidden py-0 transition-all hover:shadow-lg hover:border-primary/40">
-              {/* 編集部おすすめバッジ */}
-              {product.isRecommended && (
-                <div className="absolute right-0 top-0 z-10">
-                  <div className="flex items-center gap-1 rounded-bl-lg bg-orange-500 px-2 py-1 text-[10px] font-bold text-white">
-                    <Star className="size-3 fill-current" />
-                    編集部おすすめ
-                  </div>
-                </div>
-              )}
-
-              <CardContent className="flex h-full flex-col p-4">
-                <div className="flex items-start gap-2">
-                  <Badge
-                    className={`shrink-0 text-[10px] ${CATEGORY_COLORS[product.category]}`}
-                  >
-                    {CATEGORY_LABELS[product.category]}
-                  </Badge>
-                </div>
-
-                <h4 className="mt-2 text-sm font-bold leading-tight group-hover:text-primary">
-                  {product.name}
-                </h4>
-
-                {/* 価格帯 */}
-                {product.priceRange && (
-                  <div className="mt-1.5 flex items-center gap-1">
-                    <Tag className="size-3 text-red-500" />
-                    <span className="text-sm font-bold text-red-600">{product.priceRange}</span>
-                  </div>
-                )}
-
-                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-2">
-                  {product.description}
-                </p>
-
-                {/* CTAボタン */}
-                <div className="mt-3 flex flex-col gap-1.5">
-                  <a
-                    href={product.url}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    onClick={() => trackAffiliateClick({
-                      productName: product.name,
-                      productCategory: product.category,
-                      platform: "amazon",
-                      pageType: "spot",
-                    })}
-                    className="flex items-center justify-center gap-1.5 rounded-md bg-[#FF9900] px-3 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#E88B00] hover:shadow-md"
-                  >
-                    Amazonで詳細を見る
-                    <ExternalLink className="size-3" />
-                  </a>
-                  <a
-                    href={rakutenUrl}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    onClick={() => trackAffiliateClick({
-                      productName: product.name,
-                      productCategory: product.category,
-                      platform: "rakuten",
-                      pageType: "spot",
-                    })}
-                    className="flex items-center justify-center gap-1.5 rounded-md bg-[#BF0000] px-3 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#A00000] hover:shadow-md"
-                  >
-                    楽天で詳細を見る
-                    <ExternalLink className="size-3" />
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+        {products.map((product) => (
+          <RecommendProductCard key={product.id} product={product} pageType="spot" />
+        ))}
       </div>
       <p className="mt-2 text-[10px] text-muted-foreground">
         ※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。価格は変動する場合があります。
