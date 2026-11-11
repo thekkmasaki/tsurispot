@@ -158,6 +158,20 @@ export async function PATCH(
 const UGC_ID_RE = /^ugc-[0-9a-z-]{1,90}$/;
 
 /**
+ * スポットページは ISR(7日)＋Cloudflare エッジのため、削除後は投稿時と同じく該当ページだけ無効化する
+ * （CF purge は特定 URL のみ・env 未設定なら no-op）。失敗しても削除は成功扱い。
+ */
+async function invalidateSpotPage(spotSlug: string, label: string): Promise<void> {
+  if (!spotSlug) return;
+  try {
+    revalidatePath(`/spots/${spotSlug}`);
+    await purgeCloudflareUrls([`/spots/${spotSlug}`]);
+  } catch (err) {
+    console.error(`${label} キャッシュ無効化エラー:`, err);
+  }
+}
+
+/**
  * spotSlug 無しの削除で投稿を探す。正本(META)を優先し、無ければ（正本の保存失敗・旧投稿）
  * 本人の投稿一覧から探す。返り値の tsuriId で持ち主を確かめること。
  */
@@ -246,15 +260,7 @@ async function deleteWithKey(request: NextRequest, id: string, key: string): Pro
       console.error("[釣果削除(キー)] 写真削除エラー:", err);
     }
   }
-  if (spotSlug) {
-    // スポットページは ISR(7日)＋Cloudflare エッジのため、投稿時と同じく該当ページだけ無効化する
-    try {
-      revalidatePath(`/spots/${spotSlug}`);
-      await purgeCloudflareUrls([`/spots/${spotSlug}`]);
-    } catch (err) {
-      console.error("[釣果削除(キー)] キャッシュ無効化エラー:", err);
-    }
-  }
+  await invalidateSpotPage(spotSlug, "[釣果削除(キー)]");
 
   return NextResponse.json({ ok: true });
 }
@@ -341,6 +347,7 @@ export async function DELETE(
   } catch (err) {
     console.error("[釣果削除] reportCount デクリメントエラー:", err);
   }
+  await invalidateSpotPage(spotSlug, "[釣果削除]");
 
   return NextResponse.json({ ok: true });
 }

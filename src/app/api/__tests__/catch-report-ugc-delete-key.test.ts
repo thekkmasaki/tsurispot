@@ -108,6 +108,7 @@ import { auth } from "@/lib/auth";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { deleteFromS3 } from "@/lib/s3";
 import { revalidatePath } from "next/cache";
+import { purgeCloudflareUrls } from "@/lib/cloudflare";
 import { DELETE_KEY_RE, hashDeleteKey, verifyDeleteKey } from "@/lib/ugc-delete-key";
 import { NextRequest } from "next/server";
 import { decrementReportCount, getUserById } from "@/lib/user-store";
@@ -383,6 +384,36 @@ describe("DELETE /api/catch-report-ugc/[id]（ログイン済み・spotSlug 省�
     vi.mocked(auth).mockResolvedValue(me as never);
     const { data } = await post();
     expect((await del(data.id, {}, "?spotSlug=test-spot")).status).toBe(200);
+  });
+
+  it("場所あり投稿の削除後はスポットページを無効化する（spotSlug 指定・保存値から解決の両方）", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const a = await post();
+    const b = await post();
+    vi.mocked(revalidatePath).mockClear();
+    vi.mocked(purgeCloudflareUrls).mockClear();
+    expect((await del(a.data.id, {}, "?spotSlug=test-spot")).status).toBe(200);
+    expect(revalidatePath).toHaveBeenCalledWith("/spots/test-spot");
+    expect(purgeCloudflareUrls).toHaveBeenCalledWith(["/spots/test-spot"]);
+
+    vi.mocked(revalidatePath).mockClear();
+    vi.mocked(purgeCloudflareUrls).mockClear();
+    expect((await del(b.data.id)).status).toBe(200);
+    expect(revalidatePath).toHaveBeenCalledWith("/spots/test-spot");
+    expect(purgeCloudflareUrls).toHaveBeenCalledWith(["/spots/test-spot"]);
+  });
+
+  it("場所なし投稿・権限なしの削除ではスポットページを無効化しない", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const placeless = await post({ spotSlug: "" });
+    const spotPost = await post();
+    vi.mocked(revalidatePath).mockClear();
+    vi.mocked(purgeCloudflareUrls).mockClear();
+    expect((await del(placeless.data.id)).status).toBe(200);
+    vi.mocked(auth).mockResolvedValue({ user: { tsuriId: "t2", nickname: "別人" } } as never);
+    expect((await del(spotPost.data.id, {}, "?spotSlug=test-spot")).status).toBe(403);
+    expect(revalidatePath).not.toHaveBeenCalled();
+    expect(purgeCloudflareUrls).not.toHaveBeenCalled();
   });
 
   it("アプリのトークン（Bearer）で場所なし投稿を消せる", async () => {
