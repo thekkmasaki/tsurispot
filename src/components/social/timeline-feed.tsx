@@ -9,6 +9,7 @@ import { NativeAdBreak } from "@/components/ads/ad-unit";
 import { SocialCatchCard } from "@/components/social/social-catch-card";
 import { EditorialCard } from "@/components/social/editorial-card";
 import { cn } from "@/lib/utils";
+import { Sakanacchi } from "@/components/fun/sakanacchi";
 import type { PostMeta } from "@/lib/social-store";
 import type { EditorialCard as EditorialCardData } from "@/lib/editorial-feed";
 
@@ -141,7 +142,7 @@ export function TimelineFeed() {
         ) : items.length === 0 ? (
           <>
             <div className="rounded-lg border border-dashed border-muted-foreground/30 p-8 text-center">
-              <Fish className="mx-auto size-8 text-muted-foreground/40" aria-hidden="true" />
+              <Sakanacchi size={72} className="mx-auto" />
               <p className="mt-2 text-sm text-muted-foreground">
                 {tab === "following"
                   ? "フォロー中のユーザーの釣果がここに流れます。気になる釣り人をフォローしてみましょう。"

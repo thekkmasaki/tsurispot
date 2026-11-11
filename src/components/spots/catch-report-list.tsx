@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Fish, Calendar, User, Ruler, Flag, Share2, MessageCircle } from "lucide-react";
 import { CatchPhoto } from "@/components/ui/spot-image";
+import { Sakanacchi } from "@/components/fun/sakanacchi";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/toast";
@@ -141,7 +142,7 @@ export function CatchReportList({ spotSlug, initialReports, pioneer = null, allo
       <div className="space-y-3">
         {pioneerLine}
         <div className="flex flex-col items-center gap-2.5 rounded-lg border border-dashed border-primary/40 bg-primary/5 p-6 text-center">
-          <span className="text-2xl" aria-hidden="true">🏴</span>
+          <Sakanacchi size={64} />
           <p className="text-sm font-bold">このスポット、まだ誰も投稿していません</p>
           <p className="max-w-md text-xs text-muted-foreground">
             最初の投稿者は<b className="text-foreground">開拓者</b>として、このページに表示され続けます。

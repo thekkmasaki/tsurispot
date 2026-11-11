@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Bookmark, Check } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
+import { Sakanacchi } from "@/components/fun/sakanacchi";
 
 interface WishlistButtonProps {
   slug: string;
@@ -15,6 +15,7 @@ export function WishlistButton({ slug, className }: WishlistButtonProps) {
   const [inWishlist, setInWishlist] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [jumpKey, setJumpKey] = useState(0);
 
   useEffect(() => {
     if (status !== "authenticated") {
@@ -46,6 +47,7 @@ export function WishlistButton({ slug, className }: WishlistButtonProps) {
     setLoading(true);
     const willAdd = !inWishlist;
     setInWishlist(willAdd);
+    if (willAdd) setJumpKey((k) => k + 1);
     try {
       const res = await fetch("/api/user/wishlist", {
         method: willAdd ? "POST" : "DELETE",
@@ -67,25 +69,22 @@ export function WishlistButton({ slug, className }: WishlistButtonProps) {
       aria-pressed={inWishlist}
       aria-label={inWishlist ? "行きたいリストから外す" : "行きたいリストに追加"}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors",
+        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-bold transition-colors",
         inWishlist
-          ? "border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100"
-          : "border-gray-300 bg-white text-driftwood hover:bg-sand-light",
+          ? "border-primary bg-primary text-primary-foreground hover:bg-primary/90"
+          : "border-primary/60 bg-white text-primary hover:bg-accent",
         loading && "opacity-50",
         className,
       )}
     >
-      {inWishlist ? (
-        <>
-          <Check className="h-4 w-4" />
-          行きたい登録済
-        </>
-      ) : (
-        <>
-          <Bookmark className="h-4 w-4" />
-          行きたい
-        </>
-      )}
+      {/* 追加した瞬間だけ、さかなっちがピチッと跳ねてハートを出す（key で再生し直す） */}
+      <Sakanacchi
+        key={jumpKey}
+        size={22}
+        motion={jumpKey > 0 && inWishlist ? "jump" : "none"}
+        happy={jumpKey > 0 && inWishlist}
+      />
+      {inWishlist ? "行きたい登録済" : "行きたい"}
     </button>
   );
 }
