@@ -11,7 +11,8 @@ export default function Loading() {
     <div className="flex min-h-[60vh] items-center justify-center px-4">
       <div className="flex flex-col items-center gap-2 text-center" role="status">
         <Sakanacchi size={72} />
-        <p className="text-sm text-muted-foreground">読み込み中...</p>
+        <p className="text-sm font-bold text-primary">釣れるかな…釣れるかな…</p>
+        <p className="sr-only">読み込み中</p>
       </div>
     </div>
   );

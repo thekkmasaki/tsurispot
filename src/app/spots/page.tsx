@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MascotBand } from "@/components/fun/mascot-band";
 import { Suspense } from "react";
 import { PlusCircle, ArrowRight } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
@@ -204,6 +205,7 @@ export default function SpotsPage() {
           { label: "釣りスポット" },
         ]}
       />
+      <MascotBand message="釣りたい魚・場所・設備で釣り場を探せるよ！" className="mb-5" />
       <div className="mb-5 flex items-start justify-between gap-4 sm:mb-8">
         <PageHeader
           title="近くの釣りスポット・釣り場を探す"
