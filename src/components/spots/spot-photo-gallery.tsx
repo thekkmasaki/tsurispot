@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, Component, type ErrorInfo, type ReactNode } from "react";
+import { useState, useCallback, useRef, useEffect, Component, type ErrorInfo, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { SpotPhoto } from "@/types";
@@ -266,7 +266,7 @@ function SpotPhotoUploader({ spotSlug, spotName, onUploaded }: { spotSlug: strin
   }, [spotSlug, onUploaded]);
 
   return (
-    <div className="flex flex-col items-center gap-3 rounded-lg bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center dark:from-blue-950/30 dark:to-sky-950/30 sm:flex-row sm:text-left">
+    <div id="spot-photo-upload" className="flex scroll-mt-24 flex-col items-center gap-3 rounded-lg bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center dark:from-blue-950/30 dark:to-sky-950/30 sm:flex-row sm:text-left">
       <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
         <ImagePlusIcon className="size-6 text-blue-600 dark:text-blue-400" />
       </div>
@@ -275,7 +275,7 @@ function SpotPhotoUploader({ spotSlug, spotName, onUploaded }: { spotSlug: strin
           {spotName}の写真を募集中！
         </p>
         <p className="mt-0.5 text-xs text-muted-foreground">
-          釣り場の雰囲気が伝わる写真をお持ちの方はぜひお寄せください。あなたの写真が釣り仲間の参考になります。
+          釣り場の雰囲気が伝わる写真をお持ちの方はぜひお寄せください。あなたの写真が釣り仲間の参考になります。（ご自身で撮った写真のみ。人の顔や車のナンバーが写らないようにお願いします）
         </p>
         {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
         {success && (
@@ -377,6 +377,15 @@ export function SpotPhotoGallery({ photos, spotType, spotName, spotSlug, latitud
   );
   const hasPhotos = photos && photos.length > 0;
   const hasCoordinates = typeof latitude === "number" && typeof longitude === "number";
+
+  // 写真募集一覧（/photo-wanted）から #spot-photo-upload で来たとき、遅延読み込み後に投稿欄へスクロール
+  useEffect(() => {
+    if (window.location.hash !== "#spot-photo-upload") return;
+    const t = setTimeout(() => {
+      document.getElementById("spot-photo-upload")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
+    return () => clearTimeout(t);
+  }, []);
 
   const loadCommunityPhotos = useCallback(() => {
     fetch(`/api/spot-photo?slug=${encodeURIComponent(spotSlug)}`)
