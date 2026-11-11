@@ -83,6 +83,15 @@ function FlyToHandler({
   return null;
 }
 
+// 検索・リストで選んだスポットの強調マーカー（大きめの赤ピン）
+const selectedIcon = new L.DivIcon({
+  html: '<div style="width:26px;height:26px;background:#e5484d;border:3px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(0,0,0,0.35)"></div>',
+  className: '',
+  iconSize: [26, 26],
+  iconAnchor: [13, 26],
+  popupAnchor: [0, -26],
+});
+
 const userIcon = new L.DivIcon({
   html: '<div style="width:16px;height:16px;background:#3b82f6;border:3px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
   className: '',
@@ -339,7 +348,8 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
   const [nearbyMode, setNearbyMode] = useState(false);
-  const [filtersOpen, setFiltersOpen] = useState(true);
+  // スマホでは地図を先に見せる（絞り込みは開いて使う）。2026-11 ユーザー指摘で既定を閉に
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [showAllAreas, setShowAllAreas] = useState(false);
   const [heatEnabled, setHeatEnabled] = useState(false);
   const [listOpen, setListOpen] = useState(false);
@@ -363,16 +373,36 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
     tick: number;
   } | null>(null);
 
+  // 検索・リストで選んだスポット（絞り込みに関係なく強調マーカーで必ず表示する）
+  const [selectedSpot, setSelectedSpot] = useState<MapSpot | null>(null);
+  const [searchNotice, setSearchNotice] = useState<string | null>(null);
+
   const handleSearchSelect = useCallback((spot: MapSpot) => {
+    // 選んだスポットが今の絞り込み（県・エリア・魚種・現在地）の外にあると、地図は移動しても
+    // マーカーが出なかった（2026-11 ユーザー指摘）。外れている場合は絞り込みを解除する。
+    const prefOk = selectedPrefectures.size === 0 || selectedPrefectures.has(spot.region.prefecture);
+    const areaOk = selectedAreas.size === 0 || selectedAreas.has(spot.region.areaName);
+    const fishOk = selectedFish.size === 0 || spot.fishSlugs.some((f) => selectedFish.has(f));
+    if (!prefOk || !areaOk || !fishOk || nearbyMode) {
+      setSelectedPrefectures(new Set());
+      setSelectedAreas(new Set());
+      setSelectedFish(new Set());
+      setNearbyMode(false);
+      setSearchNotice("絞り込みを解除して表示しました");
+    } else {
+      setSearchNotice(null);
+    }
+    setSelectedSpot(spot);
     setFlyTarget({
       lat: spot.latitude,
       lng: spot.longitude,
       zoom: 14,
       tick: Date.now(),
     });
-  }, []);
+  }, [selectedPrefectures, selectedAreas, selectedFish, nearbyMode]);
 
   const handleListSelect = useCallback((spot: MapSpot) => {
+    setSelectedSpot(spot);
     setFlyTarget({
       lat: spot.latitude,
       lng: spot.longitude,
@@ -608,21 +638,24 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
   return (
     <div className="space-y-2">
       <SpotSearch spots={spots} onSelect={handleSearchSelect} />
+      {searchNotice && (
+        <p className="text-xs font-medium text-primary" role="status">{searchNotice}</p>
+      )}
       <div className="flex items-center justify-between gap-2">
         <button
           onClick={() => setFiltersOpen((v) => !v)}
           aria-expanded={filtersOpen}
           aria-controls="map-filters"
-          className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/60 transition-colors"
+          className="flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2 py-2 text-sm font-medium text-foreground hover:bg-muted/60 transition-colors sm:px-3"
         >
           <SlidersHorizontal className="size-4" />
-          フィルター
+          絞り込み
           {filtersOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
           {(selectedPrefectures.size > 0 || selectedFish.size > 0 || nearbyMode) && (
             <span className="ml-1 flex size-2 rounded-full bg-blue-600" />
           )}
         </button>
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-center gap-1 sm:gap-2">
           <button
             onClick={() => setListOpen(true)}
             className="flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors min-h-[36px] hover:bg-muted/80 hover:text-foreground sm:text-sm"
@@ -642,7 +675,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
             title="釣果ヒート（釣果データを優先、無い場合は人気度を表示）"
           >
             <Flame className="size-3.5" />
-            <span>ヒート</span>
+            <span className="hidden sm:inline">ヒート</span>
           </button>
           <button
             onClick={() => setLegendOpen((v) => !v)}
@@ -659,7 +692,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
             <span className="hidden sm:inline">凡例</span>
           </button>
           <div
-            className="flex items-center gap-1.5 text-sm text-muted-foreground"
+            className="flex shrink-0 items-center gap-1 whitespace-nowrap text-sm text-muted-foreground"
             aria-live="polite"
             aria-atomic="true"
           >
@@ -973,6 +1006,27 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
         )}
         <HeatLayer spots={filteredSpots} enabled={heatEnabled} catchCounts={catchCounts} />
         <ClusteredSpotMarkers spots={filteredSpots} />
+        {selectedSpot && (
+          <Marker
+            key={selectedSpot.id}
+            position={[selectedSpot.latitude, selectedSpot.longitude]}
+            icon={selectedIcon}
+            zIndexOffset={1000}
+            eventHandlers={{ add: (e) => e.target.openPopup() }}
+          >
+            <Popup>
+              <div className="space-y-1">
+                <p className="text-sm font-bold">{selectedSpot.name}</p>
+                <p className="text-xs text-muted-foreground">
+                  {selectedSpot.region.prefecture} {selectedSpot.region.areaName}
+                </p>
+                <a href={`/spots/${selectedSpot.slug}`} className="text-xs font-bold text-primary">
+                  詳細を見る →
+                </a>
+              </div>
+            </Popup>
+          </Marker>
+        )}
       </MapContainer>
 
       <Sheet open={listOpen} onOpenChange={setListOpen}>
