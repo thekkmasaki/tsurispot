@@ -4,7 +4,7 @@ import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { fishSpecies, getCatchableNow } from "@/lib/data/fish";
-import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
+import { getLatestBlogPostsAsync } from "@/lib/data/blog";
 import { monthSlugs } from "@/lib/data/monthly-guides";
 import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
@@ -463,8 +463,9 @@ export default async function Home() {
                     </div>
                     <CardContent className="flex h-full flex-col gap-1.5 px-0 pt-2.5 pb-0">
                       <div className="flex items-center gap-2">
+                        {/* このセクションは「釣果週報」タグの記事だけ。microCMS 側のカテゴリ（釣り知識等）ではなく週報と出す */}
                         <Badge variant="secondary" className="text-xs">
-                          {BLOG_CATEGORIES[post.category]}
+                          釣果週報
                         </Badge>
                         <span className="text-xs text-muted-foreground">
                           {post.publishedAt}
