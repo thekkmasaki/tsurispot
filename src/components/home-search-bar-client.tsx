@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Search, MapPin, Fish, BookOpen, FileText, Wrench, LoaderCircle } from "lucide-react";
 import type { SearchItemType } from "@/lib/search/search-types";
+import { SearchNavigationIndicator } from "@/components/search/search-navigation-indicator";
 
 // API レスポンスの型（searchText を除いた SearchItem）
 interface SearchResult {
@@ -52,6 +53,19 @@ export function HomeSearchBarClient() {
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const router = useRouter();
+  // 「検索」や候補を押してから次のページが出るまで（候補は先に閉じるので、その間の表示に使う）
+  const [isNavigating, startNavigation] = useTransition();
+  const [navigatingLabel, setNavigatingLabel] = useState("");
+
+  const navigate = useCallback(
+    (href: string, label: string) => {
+      setNavigatingLabel(label);
+      startNavigation(() => {
+        router.push(href);
+      });
+    },
+    [router]
+  );
 
   // API fetch
   const fetchResults = useCallback(async (q: string) => {
@@ -128,30 +142,31 @@ export function HomeSearchBarClient() {
   const showDropdown = isFocused && query.trim().length > 0;
 
   const handleSelect = useCallback(
-    (slug: string) => {
+    (result: SearchResult) => {
       setQuery("");
       setResults([]);
       setHasSearched(false);
       setIsFocused(false);
-      router.push(slug);
+      navigate(result.slug, `「${result.name}」を開いています`);
     },
-    [router]
+    [navigate]
   );
 
   const handleSearch = useCallback(() => {
     setIsFocused(false);
-    if (!query.trim()) {
-      router.push("/spots");
+    const q = query.trim();
+    if (!q) {
+      navigate("/spots", "釣り場の一覧を開いています");
     } else {
-      router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
+      navigate(`/spots?q=${encodeURIComponent(q)}`, `「${q}」の釣り場を探しています`);
     }
-  }, [query, router]);
+  }, [query, navigate]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === "Enter") {
         if (activeIndex >= 0 && activeIndex < results.length) {
-          handleSelect(results[activeIndex].slug);
+          handleSelect(results[activeIndex]);
         } else {
           handleSearch();
         }
@@ -187,6 +202,8 @@ export function HomeSearchBarClient() {
 
   return (
     <div ref={containerRef} className="relative w-full max-w-lg mb-5 sm:mb-6">
+      <SearchNavigationIndicator active={isNavigating} label={navigatingLabel} />
+
       {/* 検索入力 */}
       <div className="flex items-center gap-3 rounded-xl bg-white/95 px-4 py-3.5 shadow-lg backdrop-blur-sm transition-shadow hover:shadow-xl focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 sm:px-5 sm:py-4">
         <Search className="size-5 shrink-0 text-muted-foreground" />
@@ -204,10 +221,12 @@ export function HomeSearchBarClient() {
           <LoaderCircle className="size-4 shrink-0 animate-spin text-primary" />
         )}
         <button
-          onMouseDown={(e) => { e.preventDefault(); handleSearch(); }}
-          className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 sm:text-sm"
+          onMouseDown={(e) => { e.preventDefault(); if (!isNavigating) handleSearch(); }}
+          aria-busy={isNavigating}
+          className="flex shrink-0 items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 sm:text-sm"
         >
-          検索
+          {isNavigating && <LoaderCircle className="size-3.5 animate-spin" aria-hidden="true" />}
+          {isNavigating ? "検索中" : "検索"}
         </button>
       </div>
 
@@ -259,7 +278,7 @@ export function HomeSearchBarClient() {
                   return (
                     <li key={result.slug}>
                       <button
-                        onClick={() => handleSelect(result.slug)}
+                        onClick={() => handleSelect(result)}
                         onMouseEnter={() => setActiveIndex(i)}
                         className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${
                           i === activeIndex ? "bg-muted" : "hover:bg-muted"
