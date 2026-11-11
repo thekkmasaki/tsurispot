@@ -579,6 +579,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     latitude: s.latitude,
     longitude: s.longitude,
     prefecture: s.region.prefecture,
+    areaName: s.region.areaName,
   }));
 
   // 海業地区マッチング

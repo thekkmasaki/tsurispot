@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Link from "next/link";
 import { Navigation, Loader2 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import type { ListSpot } from "@/types";
 import { Button } from "@/components/ui/button";
-import { SpotImage } from "@/components/ui/spot-image";
-import { isDisplayableSpotImage } from "@/lib/data/spot-image-resolver";
+import { SpotCard } from "@/components/spots/spot-card";
 
 function haversineDistance(
   lat1: number,
@@ -26,24 +24,13 @@ function haversineDistance(
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function formatDistance(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)}m`;
-  if (km < 10) return `${km.toFixed(1)}km`;
-  return `${Math.round(km)}km`;
-}
-
-export interface MonthlySpot {
-  slug: string;
-  name: string;
-  rating: number;
-  latitude: number;
-  longitude: number;
-  spotType: string;
-  difficulty: string;
-  mainImageUrl?: string;
-  region: { prefecture: string };
+/**
+ * サーバー側で toListSpot（lib/data/list-spot.ts）した ListSpot に、
+ * その月に釣れる魚名（釣れる度ゲート済み）を足したもの。
+ */
+export type MonthlySpot = ListSpot & {
   catchableFishNames: string[];
-}
+};
 
 interface MonthlySportsSorterProps {
   spots: MonthlySpot[];
@@ -172,65 +159,16 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
 
       {/* スポットグリッド */}
       <div className="grid gap-3 sm:grid-cols-2">
-        {sortedSpots.map((spot) => {
-          const spotImageSrc = isDisplayableSpotImage(spot.mainImageUrl)
-            ? spot.mainImageUrl
-            : undefined;
-
-          return (
-            <Link prefetch={false}
-              key={spot.slug}
-              href={`/spots/${spot.slug}`}
-              className="group overflow-hidden rounded-lg border bg-white transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <SpotImage
-                src={spotImageSrc}
-                alt={spot.name}
-                spotType={spot.spotType}
-                height="h-32"
-              />
-              <div className="p-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-semibold group-hover:text-primary">
-                    {spot.name}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    ★{spot.rating.toFixed(1)}
-                  </span>
-                  {spot.distance !== null && (
-                    <span className="inline-flex items-center gap-0.5 text-xs font-medium text-primary">
-                      <Navigation className="size-3" />
-                      {formatDistance(spot.distance)}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  {spot.region.prefecture} ·{" "}
-                  {spot.difficulty === "beginner"
-                    ? "初心者向け"
-                    : spot.difficulty === "intermediate"
-                    ? "中級者向け"
-                    : spot.difficulty === "all"
-                    ? "初心者〜上級者向け"
-                    : "上級者向け"}
-                </p>
-                {spot.catchableFishNames.length > 0 && (
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {spot.catchableFishNames.map((name) => (
-                      <Badge
-                        key={name}
-                        variant="secondary"
-                        className="px-1.5 py-0 text-[10px]"
-                      >
-                        {name}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </Link>
-          );
-        })}
+        {sortedSpots.map(({ catchableFishNames, distance, ...spot }) => (
+          <SpotCard key={spot.slug} spot={spot} distance={distance}>
+            {catchableFishNames.length > 0 && (
+              <p className="text-muted-foreground">
+                {monthName}に釣れる:{" "}
+                <span className="font-bold text-foreground">{catchableFishNames.join("・")}</span>
+              </p>
+            )}
+          </SpotCard>
+        ))}
       </div>
     </>
   );

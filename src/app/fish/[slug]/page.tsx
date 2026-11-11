@@ -682,6 +682,7 @@ export default async function FishDetailPage({ params }: PageProps) {
           id: s.id,
           name: s.name,
           slug: s.slug,
+          spotType: s.spotType,
           prefecture: s.region.prefecture,
           areaName: s.region.areaName,
           rating: s.rating,

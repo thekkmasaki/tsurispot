@@ -1,16 +1,11 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Link from "next/link";
-import {
-  ChevronRight,
-  Star,
-  MapPin,
-  Navigation,
-} from "lucide-react";
+import { Navigation } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { DIFFICULTY_LABELS } from "@/types";
+import { SpotCardCompact } from "@/components/spots/spot-card";
 
 /** クライアントに渡すシリアライズ済みスポットデータ */
 export interface SpotForFilter {
@@ -161,61 +156,38 @@ export function SpotListWithFilter({ spots, methodName, monthName }: Props) {
       ) : (
         <div className="space-y-3">
           {sorted.map((spot, idx) => (
-            <Link prefetch={false} key={spot.slug} href={`/spots/${spot.slug}`}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 font-bold text-sm shrink-0">
-                      {idx + 1}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <h3 className="font-bold">{spot.name}</h3>
-                        <Badge variant="secondary" className="text-xs">
-                          {SPOT_TYPE_LABELS[spot.spotType]}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          {spot.prefecture}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center gap-3 text-sm text-gray-600 mb-1">
-                        <span className="flex items-center gap-1">
-                          <Star className="size-3.5 text-yellow-500 fill-yellow-500" />
-                          {spot.rating.toFixed(1)}
-                        </span>
-                        <span>{spot.matchingFishCount}魚種マッチ</span>
-                        <span>{DIFFICULTY_LABELS[spot.difficulty]}</span>
-                        {sortByDistance && userLocation && (
-                          <span className="flex items-center gap-1 text-green-600">
-                            <MapPin className="size-3" />
-                            {getDistanceKm(
-                              userLocation.lat,
-                              userLocation.lng,
-                              spot.latitude,
-                              spot.longitude
-                            ).toFixed(0)}
-                            km
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-gray-500 line-clamp-1">
-                        {spot.address}
-                      </p>
-                      {spot.matchingFishNames.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mt-2">
-                          {spot.matchingFishNames.slice(0, 4).map((name) => (
-                            <Badge key={name} variant="secondary" className="text-xs">
-                              {name}
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <ChevronRight className="size-4 text-gray-400 shrink-0 mt-2" />
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+            <SpotCardCompact
+              key={spot.slug}
+              spot={{
+                slug: spot.slug,
+                name: spot.name,
+                spotType: spot.spotType,
+                region: { prefecture: spot.prefecture, areaName: "" },
+                rating: spot.rating,
+              }}
+              rank={idx + 1}
+              distance={
+                sortByDistance && userLocation
+                  ? getDistanceKm(userLocation.lat, userLocation.lng, spot.latitude, spot.longitude)
+                  : null
+              }
+            >
+              <p className="text-muted-foreground">
+                {spot.matchingFishCount}魚種マッチ
+                <span className="mx-1">|</span>
+                {DIFFICULTY_LABELS[spot.difficulty]}
+              </p>
+              <p className="mt-0.5 line-clamp-1 text-muted-foreground">{spot.address}</p>
+              {spot.matchingFishNames.length > 0 && (
+                <div className="mt-1 flex flex-wrap gap-1">
+                  {spot.matchingFishNames.slice(0, 4).map((name) => (
+                    <Badge key={name} variant="secondary" className="text-xs">
+                      {name}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </SpotCardCompact>
           ))}
         </div>
       )}

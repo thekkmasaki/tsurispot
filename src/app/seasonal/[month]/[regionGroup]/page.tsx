@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MonthlySportsSorter, type MonthlySpot } from "@/components/monthly-spots-sorter";
+import { toListSpot } from "@/lib/data/list-spot";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { MONTHS, MONTH_CONDITIONS } from "@/lib/data/fishing-methods";
 import { prefectures } from "@/lib/data/prefectures";
@@ -628,15 +629,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
       {/* おすすめスポット（近い順ソート対応） */}
       {topSpots.length > 0 && (() => {
         const sortableSpots: MonthlySpot[] = topSpots.map(({ spot }) => ({
-          slug: spot.slug,
-          name: spot.name,
-          rating: spot.rating,
-          latitude: spot.latitude,
-          longitude: spot.longitude,
-          spotType: spot.spotType,
-          difficulty: spot.difficulty,
-          mainImageUrl: spot.mainImageUrl,
-          region: { prefecture: spot.region.prefecture },
+          ...toListSpot(spot),
           catchableFishNames: spot.catchableFish
             .filter(
               (cf) =>

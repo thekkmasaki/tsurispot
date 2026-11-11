@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, Fragment } from "react";
-import Link from "next/link";
-import { Star, MapPin, Trophy, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
+import { Trophy, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { ListSpot } from "@/types";
+import { SpotCardCompact } from "@/components/spots/spot-card";
 import { InFeedAd } from "@/components/ads/ad-unit";
 import { getBucket } from "@/lib/ab-test";
 
@@ -49,15 +50,6 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "night", label: "夜釣り" },
   { key: "port", label: "堤防・漁港" },
 ];
-
-const SPOT_TYPE_LABELS: Record<string, string> = {
-  port: "漁港",
-  beach: "海水浴場",
-  rocky: "磯",
-  river: "河川",
-  pier: "堤防",
-  breakwater: "防波堤",
-};
 
 const DIFFICULTY_LABELS: Record<string, string> = {
   beginner: "初心者",
@@ -109,58 +101,6 @@ function sortSpots(spots: RankingSpot[]): RankingSpot[] {
   return [...spots].sort((a, b) => b.score - a.score);
 }
 
-function MedalBadge({ rank }: { rank: number }) {
-  if (rank === 1) {
-    return (
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-white shadow-md">
-        <Trophy className="h-5 w-5" />
-      </div>
-    );
-  }
-  if (rank === 2) {
-    return (
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-300 text-white shadow-md">
-        <span className="text-sm font-bold">2</span>
-      </div>
-    );
-  }
-  if (rank === 3) {
-    return (
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-600 text-white shadow-md">
-        <span className="text-sm font-bold">3</span>
-      </div>
-    );
-  }
-  return (
-    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500">
-      <span className="text-sm font-semibold">{rank}</span>
-    </div>
-  );
-}
-
-function StarRating({ rating }: { rating: number }) {
-  const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  return (
-    <div className="flex items-center gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={cn(
-            "h-3.5 w-3.5",
-            i < full
-              ? "fill-yellow-400 text-yellow-400"
-              : i === full && half
-              ? "fill-yellow-200 text-yellow-400"
-              : "fill-gray-100 text-gray-300"
-          )}
-        />
-      ))}
-      <span className="ml-1 text-sm font-semibold text-gray-700">{rating.toFixed(1)}</span>
-    </div>
-  );
-}
-
 function calcDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const toRad = (d: number) => (d * Math.PI) / 180;
   const dLat = toRad(lat2 - lat1);
@@ -175,75 +115,51 @@ interface SpotCardProps {
   distanceKm?: number;
 }
 
-function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
-  const isTop3 = rank <= 3;
-  const score = spot.score;
+const MEDAL_COLORS = ["text-yellow-500", "text-gray-400", "text-amber-600"];
 
+/** 正規 SpotCardCompact にランキング固有情報（メダル・スコア・難易度・対象魚）を children で足す */
+function RankingSpotCard({ spot, rank, distanceKm }: SpotCardProps) {
   return (
-    <Link prefetch={false}
-      href={`/spots/${spot.slug}`}
-      className={cn(
-        "flex gap-3 rounded-xl border p-4 transition-all hover:shadow-md sm:gap-4",
-        isTop3
-          ? "border-yellow-200 bg-yellow-50 hover:border-yellow-300"
-          : "border-gray-100 bg-white hover:border-blue-100"
-      )}
+    <SpotCardCompact
+      spot={{
+        slug: spot.slug,
+        name: spot.name,
+        spotType: spot.spotType as ListSpot["spotType"],
+        region: { prefecture: spot.prefecture, areaName: "" },
+        rating: spot.rating,
+      }}
+      rank={rank}
+      distance={distanceKm}
+      headingAs="h2"
     >
-      {/* 順位バッジ */}
-      <MedalBadge rank={rank} />
-
-      {/* コンテンツ */}
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-start justify-between gap-1">
-          <h2 className="text-base font-bold text-gray-900 leading-tight">{spot.name}</h2>
-          <StarRating rating={spot.rating} />
-        </div>
-
-        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1">
-            <MapPin className="h-3.5 w-3.5" />
-            {spot.prefecture}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        {rank <= 3 && (
+          <span className="inline-flex items-center gap-0.5 font-bold">
+            <Trophy className={cn("size-3.5", MEDAL_COLORS[rank - 1])} aria-hidden="true" />
+            TOP{rank}
           </span>
-          <span>{SPOT_TYPE_LABELS[spot.spotType] ?? spot.spotType}</span>
-          <span className="flex items-center gap-1 font-semibold text-blue-600">
-            {score.toFixed(1)}pt
-          </span>
-          {distanceKm !== undefined && (
-            <span className="flex items-center gap-1 font-medium text-emerald-600">
-              <Navigation className="h-3 w-3" />
-              {distanceKm < 10 ? distanceKm.toFixed(1) : Math.round(distanceKm)}km
-            </span>
-          )}
-        </div>
-
-        {/* 対象魚 */}
-        {spot.topFish.length > 0 && (
-          <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            <Fish className="h-3.5 w-3.5 shrink-0 text-blue-400" />
-            {spot.topFish.map((f) => (
-              <span
-                key={f.id}
-                className="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700"
-              >
-                {f.name}
-              </span>
-            ))}
-          </div>
         )}
-
-        {/* 難易度バッジ */}
-        <div className="mt-2">
-          <span
-            className={cn(
-              "rounded-full px-2 py-0.5 text-xs font-medium",
-              DIFFICULTY_COLORS[spot.difficulty]
-            )}
-          >
-            {DIFFICULTY_LABELS[spot.difficulty]}
-          </span>
-        </div>
+        <span className="font-semibold text-primary">{spot.score.toFixed(1)}pt</span>
+        <span
+          className={cn(
+            "rounded-full px-2 py-0.5 text-xs font-medium",
+            DIFFICULTY_COLORS[spot.difficulty]
+          )}
+        >
+          {DIFFICULTY_LABELS[spot.difficulty]}
+        </span>
       </div>
-    </Link>
+      {spot.topFish.length > 0 && (
+        <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+          <Fish className="size-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+          {spot.topFish.map((f) => (
+            <span key={f.id} className="rounded-md border px-1.5 py-0.5 text-xs">
+              {f.name}
+            </span>
+          ))}
+        </div>
+      )}
+    </SpotCardCompact>
   );
 }
 
@@ -432,7 +348,7 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
         <div className="space-y-3">
           {rankedSpots.map((spot, index) => (
             <Fragment key={spot.id}>
-              <SpotCard
+              <RankingSpotCard
                 spot={spot}
                 rank={index + 1}
                 distanceKm={nearbyMode && "_dist" in spot ? (spot as RankingSpot & { _dist: number })._dist : undefined}

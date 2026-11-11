@@ -30,6 +30,7 @@ function toSpotSummary(spot: FishingSpot, fishSlug: string): SpotSummary {
     id: spot.id,
     name: spot.name,
     slug: spot.slug,
+    spotType: spot.spotType,
     region: spot.region,
     rating: spot.rating,
     catchRating: assessment.tier === "excluded" ? "fair" : assessment.tier,

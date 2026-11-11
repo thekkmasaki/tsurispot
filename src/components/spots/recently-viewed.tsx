@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Clock, MapPin } from "lucide-react";
-import { SPOT_TYPE_LABELS } from "@/types";
+import { Clock } from "lucide-react";
+import { SpotCardCompact } from "@/components/spots/spot-card";
 import type { FishingSpot } from "@/types";
 
 const STORAGE_KEY = "tsurispot-recently-viewed";
@@ -61,20 +59,16 @@ export function RecentlyViewedSpots() {
       </h2>
       <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-3 scrollbar-hide sm:-mx-0 sm:px-0">
         {spots.map((spot) => (
-          <Link prefetch={false}
+          <SpotCardCompact
             key={spot.slug}
-            href={`/spots/${spot.slug}`}
-            className="w-44 shrink-0 rounded-xl border bg-card p-3 transition-shadow hover:shadow-md"
-          >
-            <h3 className="truncate text-sm font-semibold">{spot.name}</h3>
-            <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-              <MapPin className="size-3 shrink-0" />
-              <span className="truncate">{spot.prefecture} {spot.areaName}</span>
-            </div>
-            <Badge variant="secondary" className="mt-2 text-xs">
-              {SPOT_TYPE_LABELS[spot.spotType]}
-            </Badge>
-          </Link>
+            className="w-44 shrink-0"
+            spot={{
+              slug: spot.slug,
+              name: spot.name,
+              spotType: spot.spotType,
+              region: { prefecture: spot.prefecture, areaName: spot.areaName },
+            }}
+          />
         ))}
       </div>
     </section>

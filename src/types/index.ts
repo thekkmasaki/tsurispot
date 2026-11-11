@@ -325,6 +325,7 @@ export interface SpotSummary {
   id: string;
   name: string;
   slug: string;
+  spotType: FishingSpot["spotType"];
   region: Region;
   rating: number;
   catchRating: "excellent" | "good" | "fair";

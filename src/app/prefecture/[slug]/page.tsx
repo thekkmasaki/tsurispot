@@ -48,6 +48,7 @@ import { getStationsForPrefecture } from "@/lib/tide/station-spots";
 import { getStationSlug } from "@/lib/tide/station-slugs";
 import { getFeaturesForPref } from "@/lib/data/spot-features";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
+import { SpotCardCompact } from "@/components/spots/spot-card";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -875,76 +876,33 @@ export default async function PrefecturePage({ params }: PageProps) {
                 .slice(0, 3)
                 .map((cf) => cf.fish.name);
               return (
-                <Link prefetch={false}
+                <SpotCardCompact
                   key={spot.id}
-                  href={`/spots/${spot.slug}`}
-                  title={`${spot.name}（${topFish.join("・")}が釣れる${SPOT_TYPE_LABELS[spot.spotType]}）`}
+                  spot={{ ...spot, fishNames: topFish }}
+                  rank={index + 1}
+                  headingSuffix={`（${topFish.join("・")}が釣れる${SPOT_TYPE_LABELS[spot.spotType]}）`}
+                  linkTitle={`${spot.name}（${topFish.join("・")}が釣れる${SPOT_TYPE_LABELS[spot.spotType]}）`}
                 >
-                  <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="p-3 sm:p-4">
-                      <div className="flex items-start gap-3 sm:gap-4">
-                        <div
-                          className={`flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white sm:size-10 sm:text-base ${
-                            index === 0
-                              ? "bg-yellow-500"
-                              : index === 1
-                                ? "bg-gray-400"
-                                : index === 2
-                                  ? "bg-amber-700"
-                                  : "bg-muted-foreground"
-                          }`}
-                        >
-                          {index + 1}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
-                            {spot.name}（{topFish.join("・")}が釣れる{SPOT_TYPE_LABELS[spot.spotType]}）
-                          </h3>
-                          <p className="mt-0.5 text-xs text-muted-foreground">
-                            {spot.region.areaName}
-                            <span className="mx-1">|</span>
-                            {SPOT_TYPE_LABELS[spot.spotType]}
-                            <span className="mx-1">|</span>
-                            {DIFFICULTY_LABELS[spot.difficulty]}
-                          </p>
-                          <div className="mt-2 flex flex-wrap gap-1">
-                            {topFish.map((name) => (
-                              <Badge
-                                key={name}
-                                variant="secondary"
-                                className="text-xs"
-                              >
-                                <Fish className="mr-0.5 size-3" />
-                                {name}
-                              </Badge>
-                            ))}
-                            {spot.hasParking && (
-                              <Badge variant="outline" className="text-xs">
-                                駐車場あり
-                              </Badge>
-                            )}
-                            {spot.hasToilet && (
-                              <Badge variant="outline" className="text-xs">
-                                トイレあり
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-                        <div className="shrink-0 text-right">
-                          <div className="flex items-center gap-1 text-sm">
-                            <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                            <span className="font-medium">
-                              {spot.rating.toFixed(1)}
-                            </span>
-                          </div>
-                          <p className="mt-1 text-xs text-muted-foreground">
-                            {spot.catchableFish.length}魚種
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
+                  <p className="text-muted-foreground">
+                    {DIFFICULTY_LABELS[spot.difficulty]}
+                    <span className="mx-1">|</span>
+                    {spot.catchableFish.length}魚種
+                  </p>
+                  {(spot.hasParking || spot.hasToilet) && (
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {spot.hasParking && (
+                        <Badge variant="outline" className="text-xs">
+                          駐車場あり
+                        </Badge>
+                      )}
+                      {spot.hasToilet && (
+                        <Badge variant="outline" className="text-xs">
+                          トイレあり
+                        </Badge>
+                      )}
+                    </div>
+                  )}
+                </SpotCardCompact>
               );
             })}
           </div>
@@ -976,25 +934,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
             {strikingSpotsForPref.map((spot) => (
-              <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
-                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex items-center gap-3">
-                      <div className="min-w-0 flex-1">
-                        <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
-                          {spot.name}
-                        </h3>
-                        <p className="mt-0.5 text-xs text-muted-foreground">
-                          {spot.region.areaName}
-                          <span className="mx-1">|</span>
-                          {SPOT_TYPE_LABELS[spot.spotType]}
-                        </p>
-                      </div>
-                      <ArrowRight className="size-4 shrink-0 text-muted-foreground group-hover:text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <SpotCardCompact key={spot.id} spot={spot} />
             ))}
           </div>
         </section>
@@ -1013,54 +953,28 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="grid gap-3 sm:gap-4">
             {hiddenGemSpots.map((spot) => (
-              <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
-                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md border-emerald-200/50">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 sm:size-10">
-                        <Gem className="size-4 sm:size-5" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
-                          {spot.name}
-                        </h3>
-                        <p className="mt-0.5 text-xs text-muted-foreground">
-                          {spot.region.areaName}
-                          <span className="mx-1">|</span>
-                          {SPOT_TYPE_LABELS[spot.spotType]}
-                        </p>
-                        <div className="mt-2 flex flex-wrap gap-1">
-                          {spot.premiumFish.slice(0, 4).map((fish) => (
-                            <Badge
-                              key={fish.slug}
-                              className="bg-amber-100 text-amber-800 hover:bg-amber-100 text-xs border-amber-200"
-                            >
-                              <Crown className="mr-0.5 size-3" />
-                              {fish.name}
-                            </Badge>
-                          ))}
-                          {spot.catchableFish.length > spot.premiumFish.length && (
-                            <Badge variant="outline" className="text-xs">
-                              +{spot.catchableFish.length - spot.premiumFish.length}種
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                      <div className="shrink-0 text-right">
-                        <div className="flex items-center gap-1 text-sm">
-                          <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                          <span className="font-medium">
-                            {spot.rating.toFixed(1)}
-                          </span>
-                        </div>
-                        <p className="mt-1 text-xs font-medium text-emerald-600">
-                          <Gem className="mr-0.5 inline size-3" />穴場
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <SpotCardCompact key={spot.id} spot={{ ...spot, fishNames: undefined }}>
+                <div className="flex flex-wrap items-center gap-1">
+                  <span className="inline-flex items-center gap-0.5 font-medium text-emerald-600">
+                    <Gem className="size-3" aria-hidden="true" />穴場
+                  </span>
+                  {spot.premiumFish.slice(0, 4).map((fish) => (
+                    <Badge
+                      key={fish.slug}
+                      variant="outline"
+                      className="text-xs"
+                    >
+                      <Crown className="mr-0.5 size-3 text-amber-600" />
+                      {fish.name}
+                    </Badge>
+                  ))}
+                  {spot.catchableFish.length > spot.premiumFish.length && (
+                    <Badge variant="outline" className="text-xs">
+                      +{spot.catchableFish.length - spot.premiumFish.length}種
+                    </Badge>
+                  )}
+                </div>
+              </SpotCardCompact>
             ))}
           </div>
         </section>
@@ -1078,66 +992,30 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="grid gap-3 sm:gap-4">
             {topSeasonalSpots.map((item, index) => (
-              <Link prefetch={false} key={item.spot.id} href={`/spots/${item.spot.slug}`}>
-                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      {/* Rank badge */}
-                      <div
-                        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white sm:size-10 sm:text-base ${
-                          index === 0
-                            ? "bg-yellow-500"
-                            : index === 1
-                              ? "bg-gray-400"
-                              : index === 2
-                                ? "bg-amber-700"
-                                : "bg-muted-foreground"
-                        }`}
-                      >
-                        {index + 1}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
-                          {item.spot.name}
-                        </h3>
-                        <p className="mt-0.5 text-xs text-muted-foreground">
-                          {item.spot.region.areaName}
-                          <span className="mx-1">|</span>
-                          {SPOT_TYPE_LABELS[item.spot.spotType]}
-                        </p>
-                        <div className="mt-2 flex flex-wrap gap-1">
-                          {item.seasonalFishNames.slice(0, 6).map((name) => (
-                            <Badge
-                              key={name}
-                              variant="secondary"
-                              className="text-xs"
-                            >
-                              <Flame className="mr-0.5 size-3 text-orange-500" />
-                              {name}
-                            </Badge>
-                          ))}
-                          {item.seasonalFishNames.length > 6 && (
-                            <Badge variant="outline" className="text-xs">
-                              +{item.seasonalFishNames.length - 6}
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                      <div className="shrink-0 text-right">
-                        <div className="flex items-center gap-1 text-sm">
-                          <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                          <span className="font-medium">
-                            {item.spot.rating.toFixed(1)}
-                          </span>
-                        </div>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          旬の魚{item.score}種
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <SpotCardCompact
+                key={item.spot.id}
+                spot={{ ...item.spot, fishNames: undefined }}
+                rank={index + 1}
+              >
+                <p className="mb-1 font-medium text-muted-foreground">旬の魚{item.score}種</p>
+                <div className="flex flex-wrap gap-1">
+                  {item.seasonalFishNames.slice(0, 6).map((name) => (
+                    <Badge
+                      key={name}
+                      variant="secondary"
+                      className="text-xs"
+                    >
+                      <Flame className="mr-0.5 size-3 text-orange-500" />
+                      {name}
+                    </Badge>
+                  ))}
+                  {item.seasonalFishNames.length > 6 && (
+                    <Badge variant="outline" className="text-xs">
+                      +{item.seasonalFishNames.length - 6}
+                    </Badge>
+                  )}
+                </div>
+              </SpotCardCompact>
             ))}
           </div>
         </section>
