@@ -158,6 +158,28 @@ export async function PATCH(
 const UGC_ID_RE = /^ugc-[0-9a-z-]{1,90}$/;
 
 /**
+ * spotSlug 無しの削除で投稿を探す。正本(META)を優先し、無ければ（正本の保存失敗・旧投稿）
+ * 本人の投稿一覧から探す。返り値の tsuriId で持ち主を確かめること。
+ */
+async function findOwnPost(
+  tsuriId: string,
+  id: string,
+): Promise<{ tsuriId?: string; spotSlug?: string } | null> {
+  const meta = await getPostMeta(id);
+  if (meta) return meta;
+  try {
+    const list = await redis.lrange<string>(`auth:user_reports:${tsuriId}`, 0, -1);
+    for (const item of list) {
+      const parsed = (typeof item === "string" ? JSON.parse(item) : item) as CatchReport | null;
+      if (parsed?.id === id) return { tsuriId, spotSlug: parsed.spotSlug };
+    }
+  } catch (err) {
+    console.error("[釣果削除] 投稿一覧の読込エラー:", err);
+  }
+  return null;
+}
+
+/**
  * ログインしない投稿を削除キー（ヘッダ X-Delete-Key）で消す。
  * ログイン済みの投稿（tsuriId あり）は対象外。後片付けはアカウント投稿の削除
  * （スポット別一覧・最近の釣果・投稿正本）に合わせ、加えてスポットページのキャッシュを無効化する。
@@ -259,9 +281,42 @@ export async function DELETE(
 
   const { id } = await params;
   const { searchParams } = new URL(request.url);
-  const spotSlug = searchParams.get("spotSlug");
-  if (!spotSlug || !SPOT_SLUG_RE.test(spotSlug)) {
-    return NextResponse.json({ error: "spotSlug が必要です" }, { status: 400 });
+  const spotSlugParam = searchParams.get("spotSlug");
+  // 指定された時は従来どおり形式を検証する（不正なら 400）
+  if (spotSlugParam && !SPOT_SLUG_RE.test(spotSlugParam)) {
+    return NextResponse.json({ error: "spotSlug が不正です" }, { status: 400 });
+  }
+
+  // spotSlug 省略・空: 投稿正本（無ければ本人の投稿一覧）から投稿を引いて、場所の有無を判断する。
+  // 場所なし投稿の保存先は 投稿正本(POST#{id}/META)・本人の auth:user_reports・タイムライン/タグの参照
+  // （参照は正本を引いて表示するため、正本を消せば出なくなる）。スポット別一覧と最近の釣果には載らない。
+  let spotSlug = spotSlugParam ?? "";
+  if (!spotSlug) {
+    const found = await findOwnPost(tsuriId, id);
+    if (!found) {
+      return NextResponse.json({ error: "釣果が見つかりません" }, { status: 404 });
+    }
+    if (found.tsuriId !== tsuriId) {
+      return NextResponse.json({ error: "この釣果を削除する権限がありません" }, { status: 403 });
+    }
+    const foundSlug = typeof found.spotSlug === "string" ? found.spotSlug : "";
+    if (foundSlug && SPOT_SLUG_RE.test(foundSlug)) {
+      // 実は場所あり投稿だった → 以下の従来の処理で消す
+      spotSlug = foundSlug;
+    } else {
+      await syncRedisItem(tsuriId, id, null);
+      try {
+        await deletePostMeta(id);
+      } catch (err) {
+        console.error("[釣果削除] POST META削除エラー:", err);
+      }
+      try {
+        await decrementReportCount(tsuriId);
+      } catch (err) {
+        console.error("[釣果削除] reportCount デクリメントエラー:", err);
+      }
+      return NextResponse.json({ ok: true });
+    }
   }
 
   const existing = (await dbGet<CatchReport[]>(`SPOT#${spotSlug}`, "UGC_REPORTS")) ?? [];

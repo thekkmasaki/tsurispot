@@ -80,7 +80,11 @@ vi.mock("@/lib/data/spots", () => ({
     slug === "test-spot" ? { slug: "test-spot", name: "テストスポット" } : undefined,
   ),
 }));
-vi.mock("@/lib/user-status", () => ({ rejectInactiveUser: vi.fn().mockResolvedValue(null) }));
+vi.mock("@/lib/user-status", () => ({
+  rejectInactiveUser: vi.fn().mockResolvedValue(null),
+  getUserStatus: vi.fn(),
+}));
+vi.mock("@/lib/app-link/store", () => ({ verifyAppToken: vi.fn() }));
 vi.mock("@/lib/auth", () => ({ auth: vi.fn().mockResolvedValue(null) }));
 vi.mock("@/lib/user-store", () => ({
   incrementReportCount: vi.fn().mockResolvedValue(1),
@@ -106,6 +110,9 @@ import { deleteFromS3 } from "@/lib/s3";
 import { revalidatePath } from "next/cache";
 import { DELETE_KEY_RE, hashDeleteKey, verifyDeleteKey } from "@/lib/ugc-delete-key";
 import { NextRequest } from "next/server";
+import { decrementReportCount, getUserById } from "@/lib/user-store";
+import { getUserStatus } from "@/lib/user-status";
+import { verifyAppToken } from "@/lib/app-link/store";
 
 const sha256 = (s: string) => createHash("sha256").update(s).digest("hex");
 
@@ -316,6 +323,90 @@ describe("DELETE /api/catch-report-ugc/[id]（X-Delete-Key）", () => {
   it("ヘッダ無しの匿名 DELETE は従来どおり 401", async () => {
     const { data } = await post();
     expect((await del(data.id, {}, "?spotSlug=test-spot")).status).toBe(401);
+  });
+});
+
+describe("DELETE /api/catch-report-ugc/[id]（ログイン済み・spotSlug 省略/場所なし）", () => {
+  const me = { user: { tsuriId: "t1", nickname: "釣り人" } };
+  const userList = () => mem.lists.get("auth:user_reports:t1") ?? [];
+
+  it("場所なし投稿を spotSlug 無しで消せる（正本・本人の一覧・件数）", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const { data } = await post({ spotSlug: "" });
+    expect(data.deleteKey).toBeUndefined();
+    expect(userList().some((s) => s.includes(data.id))).toBe(true);
+    vi.mocked(decrementReportCount).mockClear();
+
+    const res = await del(data.id);
+    expect(res.status).toBe(200);
+    expect(mem.db.has(`POST#${data.id}\u0000META`)).toBe(false);
+    expect(userList().some((s) => s.includes(data.id))).toBe(false);
+    expect(decrementReportCount).toHaveBeenCalledWith("t1");
+    const timelineText = await (await getTimeline(new NextRequest("http://localhost/api/timeline"))).text();
+    expect(timelineText).not.toContain(data.id);
+  });
+
+  it("spotSlug= の空指定も省略と同じに扱う", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const { data } = await post({ spotSlug: "" });
+    expect((await del(data.id, {}, "?spotSlug=")).status).toBe(200);
+  });
+
+  it("正本が無い場所なし投稿も本人の一覧から見つけて消す", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const { data } = await post({ spotSlug: "" });
+    mem.db.delete(`POST#${data.id}\u0000META`);
+    expect((await del(data.id)).status).toBe(200);
+    expect(userList().some((s) => s.includes(data.id))).toBe(false);
+  });
+
+  it("場所あり投稿を spotSlug 無しで消しても、スポット別一覧から消える", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const { data } = await post();
+    expect((await del(data.id)).status).toBe(200);
+    const spot = (mem.db.get("SPOT#test-spot\u0000UGC_REPORTS")?.data as { id: string }[]) ?? [];
+    expect(spot.some((r) => r.id === data.id)).toBe(false);
+    expect(mem.db.has(`POST#${data.id}\u0000META`)).toBe(false);
+  });
+
+  it("他人の場所なし投稿は 403、無い投稿は 404、不正な spotSlug は 400", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const { data } = await post({ spotSlug: "" });
+    vi.mocked(auth).mockResolvedValue({ user: { tsuriId: "t2", nickname: "別人" } } as never);
+    expect((await del(data.id)).status).toBe(403);
+    expect(mem.db.has(`POST#${data.id}\u0000META`)).toBe(true);
+    expect((await del("ugc-0-none")).status).toBe(404);
+    expect((await del(data.id, {}, "?spotSlug=../x")).status).toBe(400);
+  });
+
+  it("従来どおり spotSlug 付きでも消せる", async () => {
+    vi.mocked(auth).mockResolvedValue(me as never);
+    const { data } = await post();
+    expect((await del(data.id, {}, "?spotSlug=test-spot")).status).toBe(200);
+  });
+
+  it("アプリのトークン（Bearer）で場所なし投稿を消せる", async () => {
+    const saved = process.env.APP_LINK_ENABLED;
+    process.env.APP_LINK_ENABLED = "true";
+    try {
+      vi.mocked(auth).mockResolvedValue(me as never);
+      const { data } = await post({ spotSlug: "" });
+      vi.mocked(auth).mockResolvedValue(null as never);
+      vi.mocked(verifyAppToken).mockResolvedValue({ tsuriId: "t1" } as never);
+      vi.mocked(getUserStatus).mockResolvedValue("active" as never);
+      vi.mocked(getUserById).mockResolvedValue({ id: "t1", nickname: "釣り人" } as never);
+      const res = await del(data.id, { Authorization: `Bearer tsa_${"a".repeat(43)}` });
+      expect(res.status).toBe(200);
+      expect(mem.db.has(`POST#${data.id}\u0000META`)).toBe(false);
+    } finally {
+      if (saved === undefined) delete process.env.APP_LINK_ENABLED;
+      else process.env.APP_LINK_ENABLED = saved;
+    }
+  });
+
+  it("削除キーは ?spotSlug が付いていても使え、場所なし投稿も消せる", async () => {
+    const { data } = await post();
+    expect((await del(data.id, { "X-Delete-Key": data.deleteKey }, "?spotSlug=test-spot")).status).toBe(200);
   });
 });
 
