@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getShakurhythmSpotContext } from "@/lib/shakurhythm";
+import { ShakurhythmSpotNote } from "@/components/promo/shakurhythm-spot-note";
 import Link from "next/link";
 import nextDynamic from "next/dynamic";
 import { notFound } from "next/navigation";
@@ -545,6 +547,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // 夜釣りを訴求してよいか（recommendedTimeに「夜」があっても、ルールで
   // 夜釣り禁止のスポットでは false。禁止なのに夜推しが出ていた実バグの対策）
   const isNightFishing = isNightFishingAdvisable(spot);
+  // シャクリズム（自社エギングアプリ）の案内: アオリイカが釣れてエギング禁止でないスポットのみ
+  const shakurhythmCtx = getShakurhythmSpotContext(spot);
   // ルール上禁止されている釣法（おすすめ・ガイドリンクから除外する）
   const forbiddenMethods = getForbiddenMethods(spot);
 
@@ -1035,6 +1039,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </dl>
             </CardContent></Card>
           </section>
+          {shakurhythmCtx?.inSeason && (
+            <ShakurhythmSpotNote ctx={shakurhythmCtx} source="spot_overview" className="mt-6" />
+          )}
           {/* 管理・問い合わせ情報 */}
           {spot.managementInfo && (
             <section className="mt-6">
@@ -1300,6 +1307,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   );
                 })}
               </div>
+              {shakurhythmCtx && (
+                <ShakurhythmSpotNote ctx={shakurhythmCtx} source="spot_fish" className="mt-4" />
+              )}
             </section>
           )}
           {/* 県×魚種プログラマティックページへのリンク */}

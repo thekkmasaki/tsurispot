@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { EGING_TARGET_FISH } from "@/lib/shakurhythm";
+import { ShakurhythmPromo } from "@/components/promo/shakurhythm-promo";
 import Image from "next/image";
 import Link from "next/link";
 import { permanentRedirect } from "next/navigation";
@@ -601,6 +603,13 @@ export default async function FishDetailPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+      )}
+
+      {/* エギング対象魚: 自社アプリ「シャクリズム」の案内 */}
+      {EGING_TARGET_FISH.has(fish.slug) && (
+        <div className="mb-6 sm:mb-8">
+          <ShakurhythmPromo source={`fish_${fish.slug}`} />
+        </div>
       )}
 
       {/* 基本情報 */}

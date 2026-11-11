@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ShakurhythmPromo } from "@/components/promo/shakurhythm-promo";
 import Link from "next/link";
 import { permanentRedirect } from "next/navigation";
 import {
@@ -280,6 +281,12 @@ export default async function MethodPage({ params }: Props) {
             })}
           </div>
         </section>
+
+        {method.slug === "eging" && (
+          <div className="mb-12">
+            <ShakurhythmPromo source="method_eging" />
+          </div>
+        )}
 
         <InArticleAd />
 
