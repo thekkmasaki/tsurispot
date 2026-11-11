@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { dbConditionalPut, dbGet, dbIncr, dbPut, dbQuery } from "@/lib/dynamodb";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { getPostMeta, type PostComment } from "@/lib/social-store";
@@ -75,8 +75,11 @@ async function targetExists(
 
 export async function POST(request: Request) {
   try {
-    const session = await auth();
-    const tsuriId = session?.user?.tsuriId;
+    // iPhone アプリ（Bearer tsa_…）からも通報できるよう、アプリ連携と共通の本人確認を使う。
+    // アプリ連携が無効な時は従来どおり auth()（Cookie）だけを見る。
+    const ru = await getRequestUser(request);
+    if (ru.kind === "unauthorized") return unauthorizedResponse();
+    const tsuriId = ru.kind === "user" ? ru.user.tsuriId : undefined;
     if (!tsuriId) {
       return NextResponse.json(
         { error: "通報にはログインが必要です", message: "通報にはログインが必要です" },

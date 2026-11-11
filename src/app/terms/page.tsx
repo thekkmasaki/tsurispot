@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollText } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "利用規約",
@@ -27,7 +28,7 @@ export default function TermsPage() {
             利用規約
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            最終更新日: 2026年3月11日
+            最終更新日: 2026年11月11日
           </p>
         </div>
       </section>
@@ -176,8 +177,20 @@ export default function TermsPage() {
                   <li>
                     当サイトを利用して虚偽の情報を流布する行為
                   </li>
+                  <li>
+                    わいせつ・暴力的・差別的な内容、誹謗中傷、嫌がらせ、個人情報、スパムなど、不適切な内容を投稿する行為
+                  </li>
                   <li>その他、当サイト運営者が不適切と判断する行為</li>
                 </ul>
+                <p>
+                  当サイト（iPhone アプリ「ツリスポ釣果記録」を含む）は、不適切な投稿や迷惑行為を一切容認しません。
+                  投稿は各投稿の「通報」から報告でき、運営者は通報を確認のうえ、該当する投稿の非表示・削除や、
+                  投稿者の利用停止を行います。お気づきの点は
+                  <Link href="/contact" className="underline hover:text-foreground">
+                    お問い合わせ
+                  </Link>
+                  からもご連絡いただけます。
+                </p>
               </div>
             </div>
 

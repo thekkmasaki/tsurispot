@@ -1,11 +1,16 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 vi.mock("@/lib/auth", () => ({ auth: vi.fn() }));
+vi.mock("@/lib/app-link/store", () => ({ verifyAppToken: vi.fn() }));
+vi.mock("@/lib/user-store", () => ({ getUserById: vi.fn() }));
 vi.mock("@/lib/rate-limit", () => ({
   checkRateLimit: vi.fn().mockResolvedValue(true),
   getClientIp: vi.fn().mockReturnValue("1.2.3.4"),
 }));
-vi.mock("@/lib/user-status", () => ({ rejectInactiveUser: vi.fn().mockResolvedValue(null) }));
+vi.mock("@/lib/user-status", () => ({
+  rejectInactiveUser: vi.fn().mockResolvedValue(null),
+  getUserStatus: vi.fn(),
+}));
 vi.mock("@/lib/data/spots", () => ({ getSpotBySlug: vi.fn(() => undefined) }));
 vi.mock("@/lib/s3", () => ({ ownS3KeyFromUrl: vi.fn(() => null) }));
 vi.mock("@/lib/social-store", () => ({ getPostMeta: vi.fn() }));
@@ -21,6 +26,9 @@ import { POST } from "../report-flag/route";
 import { auth } from "@/lib/auth";
 import { getPostMeta } from "@/lib/social-store";
 import { dbConditionalPut, dbIncr, dbPut, dbQuery } from "@/lib/dynamodb";
+import { verifyAppToken } from "@/lib/app-link/store";
+import { getUserById } from "@/lib/user-store";
+import { getUserStatus } from "@/lib/user-status";
 
 const post = (body: unknown) =>
   POST(new Request("http://localhost/api/report-flag", { method: "POST", body: JSON.stringify(body) }));
@@ -77,5 +85,47 @@ describe("report-flag", () => {
     vi.mocked(dbQuery).mockResolvedValue([]);
     expect((await post({ reportId: "cmt-2", parentReportId: "tw-1" })).status).toBe(404);
     expect((await post({ reportId: "cmt-1" })).status).toBe(404);
+  });
+});
+
+describe("report-flag（iPhone アプリのトークン）", () => {
+  const savedFlag = process.env.APP_LINK_ENABLED;
+  const appPost = (token: string) =>
+    POST(
+      new Request("http://localhost/api/report-flag", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ reportId: "tw-1" }),
+      }),
+    );
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    process.env.APP_LINK_ENABLED = "true";
+    vi.mocked(auth).mockResolvedValue(null as never);
+    vi.mocked(getPostMeta).mockResolvedValue({ id: "tw-1" } as never);
+    vi.mocked(dbConditionalPut).mockResolvedValue(true);
+    vi.mocked(dbIncr).mockResolvedValue(1);
+    vi.mocked(getUserStatus).mockResolvedValue("active" as never);
+    vi.mocked(getUserById).mockResolvedValue({ id: "app-u1", nickname: "アプリ" } as never);
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
+  });
+  afterEach(() => {
+    if (savedFlag === undefined) delete process.env.APP_LINK_ENABLED;
+    else process.env.APP_LINK_ENABLED = savedFlag;
+  });
+
+  it("有効なアプリのトークンで通報でき、利用者単位で記録する", async () => {
+    vi.mocked(verifyAppToken).mockResolvedValue({ tsuriId: "app-u1" } as never);
+    const res = await appPost(`tsa_${"a".repeat(43)}`);
+    expect(res.status).toBe(200);
+    expect(dbConditionalPut).toHaveBeenCalledWith("REPORT#tw-1", "USERFLAG#app-u1", "1", expect.any(Number));
+  });
+
+  it("無効なトークンは 401 で何も記録しない", async () => {
+    vi.mocked(verifyAppToken).mockResolvedValue(null as never);
+    const res = await appPost(`tsa_${"b".repeat(43)}`);
+    expect(res.status).toBe(401);
+    expect(dbConditionalPut).not.toHaveBeenCalled();
   });
 });

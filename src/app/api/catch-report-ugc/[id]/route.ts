@@ -1,12 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+import { purgeCloudflareUrls } from "@/lib/cloudflare";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { checkNgWords } from "@/lib/moderation";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { decrementReportCount } from "@/lib/user-store";
-import { savePostMeta, deletePostMeta } from "@/lib/social-store";
+import { savePostMeta, deletePostMeta, getPostMeta } from "@/lib/social-store";
 import { rejectInactiveUser } from "@/lib/user-status";
+import { deleteFromS3, ownS3KeyFromUrl } from "@/lib/s3";
 import { SPOT_SLUG_RE } from "@/lib/ugc-validation";
+import {
+  DELETE_KEY_HEADER,
+  DELETE_KEY_RE,
+  getDeleteKeyRecord,
+  removeDeleteKey,
+  verifyDeleteKey,
+} from "@/lib/ugc-delete-key";
 
 interface CatchReport {
   id: string;
@@ -144,10 +155,99 @@ export async function PATCH(
   return NextResponse.json({ ok: true, report: updated });
 }
 
+const UGC_ID_RE = /^ugc-[0-9a-z-]{1,90}$/;
+
+/**
+ * ログインしない投稿を削除キー（ヘッダ X-Delete-Key）で消す。
+ * ログイン済みの投稿（tsuriId あり）は対象外。後片付けはアカウント投稿の削除
+ * （スポット別一覧・最近の釣果・投稿正本）に合わせ、加えてスポットページのキャッシュを無効化する。
+ */
+async function deleteWithKey(request: NextRequest, id: string, key: string): Promise<NextResponse> {
+  if (!(await checkRateLimit(getClientIp(request), "CATCH_REPORT_UGC_DELKEY", 20, 600))) {
+    return NextResponse.json(
+      { error: "操作が多すぎます。しばらくしてからお試しください。" },
+      { status: 429 },
+    );
+  }
+  if (!UGC_ID_RE.test(id) || !DELETE_KEY_RE.test(key)) {
+    return NextResponse.json({ error: "リクエストが不正です" }, { status: 400 });
+  }
+
+  const rec = await getDeleteKeyRecord(id);
+  if (!rec) {
+    return NextResponse.json({ error: "釣果が見つかりません" }, { status: 404 });
+  }
+  if (!verifyDeleteKey(key, rec.hash)) {
+    return NextResponse.json({ error: "この釣果を削除する権限がありません" }, { status: 403 });
+  }
+
+  const meta = await getPostMeta(id).catch(() => null);
+  if (meta?.tsuriId) {
+    // 念のため: アカウントに紐づく投稿は削除キーでは消さない（アカウントの削除を使う）
+    return NextResponse.json({ error: "この釣果を削除する権限がありません" }, { status: 403 });
+  }
+
+  const spotSlug = typeof rec.spotSlug === "string" && SPOT_SLUG_RE.test(rec.spotSlug) ? rec.spotSlug : "";
+  let photoUrl = meta?.photoUrl;
+  if (spotSlug) {
+    const existing = (await dbGet<CatchReport[]>(`SPOT#${spotSlug}`, "UGC_REPORTS")) ?? [];
+    const target = existing.find((r) => r.id === id);
+    if (target?.tsuriId) {
+      return NextResponse.json({ error: "この釣果を削除する権限がありません" }, { status: 403 });
+    }
+    if (target) {
+      photoUrl = photoUrl ?? target.photoUrl;
+      await dbPut(
+        `SPOT#${spotSlug}`,
+        "UGC_REPORTS",
+        existing.filter((r) => r.id !== id),
+        TTL_SECONDS,
+      );
+    }
+  }
+  await syncRedisList("recent_reports:global", id, null);
+  try {
+    await deletePostMeta(id);
+  } catch (err) {
+    console.error("[釣果削除(キー)] POST META削除エラー:", err);
+  }
+  try {
+    await removeDeleteKey(id);
+  } catch (err) {
+    console.error("[釣果削除(キー)] 削除キー削除エラー:", err);
+  }
+  // 投稿者がアカウントを持たないため、写真を消す手段はここしかない。自前バケットの写真だけ消す。
+  if (photoUrl && ownS3KeyFromUrl(photoUrl)) {
+    try {
+      await deleteFromS3(photoUrl);
+    } catch (err) {
+      console.error("[釣果削除(キー)] 写真削除エラー:", err);
+    }
+  }
+  if (spotSlug) {
+    // スポットページは ISR(7日)＋Cloudflare エッジのため、投稿時と同じく該当ページだけ無効化する
+    try {
+      revalidatePath(`/spots/${spotSlug}`);
+      await purgeCloudflareUrls([`/spots/${spotSlug}`]);
+    } catch (err) {
+      console.error("[釣果削除(キー)] キャッシュ無効化エラー:", err);
+    }
+  }
+
+  return NextResponse.json({ ok: true });
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  // 削除キー付きはログイン不要の別経路（ログイン無しの投稿に限る）。Authorization は見ない。
+  const deleteKey = request.headers.get(DELETE_KEY_HEADER);
+  if (deleteKey !== null) {
+    const { id } = await params;
+    return deleteWithKey(request, id, deleteKey.trim());
+  }
+
   const ru = await getRequestUser(request);
   if (ru.kind === "unauthorized") return unauthorizedResponse();
   const tsuriId = ru.kind === "user" ? ru.user.tsuriId : undefined;

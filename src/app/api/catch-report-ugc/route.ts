@@ -13,6 +13,7 @@ import { rejectInactiveUser } from "@/lib/user-status";
 import { isReservedName, RESERVED_NAME_ERROR } from "@/lib/reserved-names";
 import { isOwnImageUrl, isRealDate, readJsonBody, resolveSpot, todayJst } from "@/lib/ugc-validation";
 import type { PostCatchResult } from "@/lib/catch-result";
+import { generateDeleteKey, saveDeleteKey } from "@/lib/ugc-delete-key";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -202,6 +203,20 @@ export async function POST(request: Request) {
       tags: normTags.length > 0 ? normTags : undefined,
     };
 
+    // ログインしない投稿だけ削除キーを発行する。保存するのはハッシュだけで、置き場所は
+    // POST#{id}/DELKEY（reportData には入れない＝META・一覧・フィード・GAS へ載らない）。
+    // 保存に失敗したら、使えないキーを返さないよう deleteKey 自体を返さない。
+    let deleteKey: string | undefined;
+    if (!tsuriId) {
+      const generated = generateDeleteKey();
+      try {
+        await saveDeleteKey(reportId, generated.hash, slug);
+        deleteKey = generated.key;
+      } catch (err) {
+        console.error("[釣果投稿] 削除キー保存エラー:", err);
+      }
+    }
+
     // 投稿の正本（POST#{id}/META）。パーマリンク・いいね・コメントの参照元
     try {
       await savePostMeta(reportData);
@@ -382,18 +397,23 @@ export async function POST(request: Request) {
       });
     }
 
-    return NextResponse.json({
-      ok: true,
-      message: "釣果が投稿されました！",
-      id: reportId,
-      // スポット初投稿（開拓者）。匿名にも返し、リザルトの開拓者行に使う
-      pioneer: isPioneer,
-      // 匿名クライアントが端末図鑑（localStorage）へ保存するための slug（正規化できた魚種のみ）
-      fishSlugs: postedSpecies
-        .map((name) => slugByName.get(name))
-        .filter((s): s is string => Boolean(s)),
-      ...(result ? { result } : {}),
-    });
+    return NextResponse.json(
+      {
+        ok: true,
+        message: "釣果が投稿されました！",
+        id: reportId,
+        // スポット初投稿（開拓者）。匿名にも返し、リザルトの開拓者行に使う
+        pioneer: isPioneer,
+        // 匿名クライアントが端末図鑑（localStorage）へ保存するための slug（正規化できた魚種のみ）
+        fishSlugs: postedSpecies
+          .map((name) => slugByName.get(name))
+          .filter((s): s is string => Boolean(s)),
+        ...(result ? { result } : {}),
+        // ログインしない投稿の削除キー（この応答で 1 度だけ返す。再発行はしない）
+        ...(deleteKey ? { deleteKey } : {}),
+      },
+      deleteKey ? { headers: { "Cache-Control": "no-store" } } : undefined,
+    );
   } catch (e) {
     console.error("[釣果投稿] 処理エラー:", e);
     return NextResponse.json(
