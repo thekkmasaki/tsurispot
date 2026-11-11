@@ -36,7 +36,7 @@ import nextDynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { PageSection, SECTION_INNER, SECTION_HEADING_GAP, SCROLL_ROW } from "@/components/ui/page-section";
+import { PageSection, SectionMore, SECTION_INNER, SECTION_HEADING_GAP, CARD_GRID_2, CARD_LIST } from "@/components/ui/page-section";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SPOT_FEATURES } from "@/lib/data/spot-features";
 import { Sakanacchi } from "@/components/fun/sakanacchi";
@@ -294,7 +294,7 @@ export default async function Home() {
   ];
 
   return (
-    <div className="flex flex-col bg-muted">
+    <div className="flex flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLdArray) }}
@@ -404,7 +404,7 @@ export default async function Home() {
         <Link
           prefetch={false}
           href="/guide/eging/gear"
-          className="group flex flex-col overflow-hidden rounded-2xl bg-card transition-shadow hover:shadow-lg sm:flex-row"
+          className="group flex flex-col overflow-hidden rounded-2xl bg-muted transition-shadow hover:shadow-lg sm:flex-row"
         >
           <div className="relative aspect-[16/10] w-full shrink-0 sm:aspect-auto sm:min-h-[280px] sm:w-1/2">
             <Image
@@ -446,23 +446,22 @@ export default async function Home() {
             <SectionHeading
               title="最新釣果週報"
               subtitle="全国の今週の釣果をエリア別にお届け"
-              action={{ href: "/blog?tag=釣果週報", label: "すべて見る" }}
               className={SECTION_HEADING_GAP}
             />
-            <div className={SCROLL_ROW}>
+            <div className={CARD_GRID_2}>
               {weeklyReports.map((post) => (
                 <Link prefetch={false} key={post.id} href={`/blog/${post.slug}`}>
-                  <Card className="group h-full overflow-hidden border-0 py-0 shadow-none transition-shadow hover:shadow-md">
-                    <div className="relative h-36 w-full overflow-hidden">
+                  <Card className="group h-full gap-0 overflow-hidden rounded-none border-0 bg-transparent py-0 shadow-none">
+                    <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                       <Image
                         src={post.image || getFishImage(post.tags, post.id)}
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-300 "
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
-                    <CardContent className="flex h-full flex-col gap-2 p-4">
+                    <CardContent className="flex h-full flex-col gap-1.5 px-0 pt-2.5 pb-0">
                       <div className="flex items-center gap-2">
                         <Badge variant="secondary" className="text-xs">
                           {BLOG_CATEGORIES[post.category]}
@@ -471,13 +470,13 @@ export default async function Home() {
                           {post.publishedAt}
                         </span>
                       </div>
-                      <h3 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
+                      <h3 className="line-clamp-3 text-sm font-bold leading-snug group-hover:text-primary sm:text-base">
                         {post.title}
                       </h3>
-                      <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      <p className="hidden line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground sm:block">
                         {post.description}
                       </p>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="hidden flex-wrap gap-1.5 sm:flex">
                         {post.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
@@ -488,7 +487,7 @@ export default async function Home() {
                           </span>
                         ))}
                       </div>
-                      <div className="flex items-center gap-1 text-sm font-medium text-primary">
+                      <div className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">
                         続きを読む
                         <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
                       </div>
@@ -497,6 +496,7 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
+            <SectionMore href="/blog?tag=釣果週報" />
         </PageSection>
       )}
 
@@ -585,10 +585,9 @@ export default async function Home() {
             <SectionHeading
               title="今月おすすめの釣り場"
               subtitle={`${currentMonth}月に釣れる魚がいるスポットをピックアップ`}
-              action={{ href: "/catchable-now", label: "もっと見る" }}
               className={SECTION_HEADING_GAP}
             />
-            <div className={SCROLL_ROW}>
+            <div className={CARD_LIST}>
               {seasonalSpots.map((spot) => {
                 const catchableNow = spot.catchableFish
                   .filter((cf) => {
@@ -643,6 +642,7 @@ export default async function Home() {
                 <ChevronRight className="size-3.5" />
               </Link>
             </div>
+            <SectionMore href="/catchable-now" />
           </PageSection>
         ) : null;
       })()}
@@ -651,11 +651,10 @@ export default async function Home() {
       <div className="lg:hidden"><NativeAdBreak /></div>
 
       {/* 人気のエリア */}
-      <PageSection>
+      <PageSection tone="gray">
           <SectionHeading
             title="人気のエリアで釣り場を探す"
             subtitle="都道府県別の釣りスポット・釣れる魚情報"
-            action={{ href: "/prefecture", label: "すべての都道府県" }}
             className={SECTION_HEADING_GAP}
           />
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
@@ -678,7 +677,7 @@ export default async function Home() {
               const prefSpotCounts = [...pinnedPrefs, ...restPrefs].slice(0, 12);
               return prefSpotCounts.map((pref) => (
                 <Link prefetch={false} key={pref.slug} href={`/prefecture/${pref.slug}`} title={`${pref.name}の釣りスポット${pref.spotCount}件`}>
-                  <div className="flex items-center justify-between gap-2 rounded-xl bg-card p-3.5 transition-colors hover:text-primary">
+                  <div className="flex items-center justify-between gap-2 rounded-lg bg-card p-3.5 transition-colors hover:text-primary">
                     <div className="min-w-0">
                       <p className="text-sm font-semibold">{pref.nameShort}</p>
                       <p className="text-xs text-muted-foreground">{pref.spotCount}スポット</p>
@@ -689,6 +688,7 @@ export default async function Home() {
               ));
             })()}
           </div>
+          <SectionMore href="/prefecture" label="すべての都道府県を見る" />
       </PageSection>
 
       {/* 広告: エリアセクション後 */}
@@ -699,7 +699,6 @@ export default async function Home() {
         <div>
           <SectionHeading
             title="特徴から釣り場を探す"
-            action={{ href: "/spot-feature", label: "すべて見る" }}
             className={SECTION_HEADING_GAP}
           />
           {/* 特徴から探す（設備・ルール条件。サウナイキタイの「特徴から探す」を参考） */}
@@ -720,17 +719,18 @@ export default async function Home() {
                 key={href}
                 prefetch={false}
                 href={href}
-                className="inline-flex min-h-[40px] items-center rounded-full bg-card px-4 text-sm font-medium transition-colors hover:text-primary"
+                className="inline-flex min-h-[40px] items-center rounded-full border bg-background px-4 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary"
               >
                 {label}
               </Link>
             ))}
           </div>
         </div>
+        <SectionMore href="/spot-feature" label="すべての特徴を見る" className="sm:mt-6" />
       </PageSection>
 
       {/* 今月のおすすめアイテム */}
-      <PageSection>
+      <PageSection tone="gray">
         <SeasonalRecommend maxItems={4} />
       </PageSection>
 

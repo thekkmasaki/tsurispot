@@ -22,7 +22,7 @@ interface SectionHeadingProps {
  * 右端に「すべて見る」を置き、スマホ専用の別ボタンを不要にする。
  */
 const sizeClasses = {
-  lg: "text-[22px] font-black sm:text-[28px]",
+  lg: "text-2xl font-black sm:text-[28px]",
   md: "text-lg font-bold sm:text-xl",
 } as const
 
@@ -50,14 +50,14 @@ export function SectionHeading({
           </Tag>
         </div>
         {subtitle && (
-          <p className="mt-1 text-xs text-muted-foreground sm:mt-0 sm:text-sm">{subtitle}</p>
+          <p className="mt-1.5 text-[13px] text-foreground/80 sm:mt-0 sm:text-sm">{subtitle}</p>
         )}
       </div>
       {action && (
         <Link
           prefetch={false}
           href={action.href}
-          className="inline-flex shrink-0 items-center gap-0.5 pb-0.5 text-sm font-bold text-primary hover:underline"
+          className="hidden shrink-0 items-center gap-0.5 pb-0.5 text-sm font-bold text-primary hover:underline sm:inline-flex"
         >
           {action.label}
           <ChevronRight className="size-4" aria-hidden="true" />

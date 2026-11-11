@@ -70,8 +70,8 @@ export function HomeMapBand({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-10">
-      <div className="rounded-2xl bg-card p-4 sm:p-6">
+    <section className="mx-auto w-full max-w-6xl px-5 pt-8 sm:px-6 sm:pt-12">
+      <div className="rounded-2xl bg-muted p-4 sm:p-6">
         <div className="mb-3 flex items-center gap-2">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sky-100">
             <Compass className="size-5 text-sky-600" aria-hidden="true" />
