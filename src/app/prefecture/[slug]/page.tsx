@@ -1146,7 +1146,7 @@ export default async function PrefecturePage({ params }: PageProps) {
       <InArticleAd className="my-8" />
 
       {/* 今月この県で釣れる魚 */}
-      {inSeasonFish.length > 0 && (
+      {(inSeasonFish.length > 0 || currentMonthFishList.length > 0) && (
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
             <Fish className="size-5 text-blue-500" />
@@ -1199,19 +1199,13 @@ export default async function PrefecturePage({ params }: PageProps) {
               );
             })}
           </div>
-        </section>
-      )}
-
-      {/* 今月の都道府県×月×魚種 pSEOページへの内部リンク */}
-      {currentMonthFishList.length > 0 && (
-        <section className="mb-8 sm:mb-10">
-          <h2 className="mb-3 text-base font-bold sm:text-lg">
-            {currentMonthDef.name}の{pref.name}で釣れる魚
-          </h2>
-          <p className="mb-3 text-sm text-muted-foreground">
-            今の時期に{pref.name}で狙える魚種の詳しい情報
-          </p>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+          {/* 今月の都道府県×月×魚種 pSEOページへの内部リンク（旧: 同内容の別セクション。見出し・件数の二重表示を解消して統合） */}
+          {currentMonthFishList.length > 0 && (
+            <div className="mt-5">
+              <h3 className="mb-2 text-sm font-bold">
+                魚種別の{currentMonthDef.name}の{pref.name}釣り情報
+              </h3>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {currentMonthFishList.map((f) => (
               <Link prefetch={false}
                 key={f.slug}
@@ -1222,19 +1216,20 @@ export default async function PrefecturePage({ params }: PageProps) {
                   className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
                 >
                   {f.name}
-                  <span className="ml-1 text-muted-foreground">({f.count}件)</span>
                 </Badge>
               </Link>
             ))}
-          </div>
-          <div className="mt-3">
-            <Link prefetch={false}
-              href={`/prefecture/${pref.slug}/${currentMonthDef.slug}`}
-              className="text-sm text-primary hover:underline"
-            >
-              {pref.name}の{currentMonthDef.name}の釣り情報をもっと見る →
-            </Link>
-          </div>
+              </div>
+              <div className="mt-3">
+                <Link prefetch={false}
+                  href={`/prefecture/${pref.slug}/${currentMonthDef.slug}`}
+                  className="text-sm text-primary hover:underline"
+                >
+                  {pref.name}の{currentMonthDef.name}の釣り情報をもっと見る →
+                </Link>
+              </div>
+            </div>
+          )}
         </section>
       )}
 
