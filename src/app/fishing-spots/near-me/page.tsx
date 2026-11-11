@@ -233,24 +233,28 @@ const webPageJsonLd = {
 
 /* ---------- Component ---------- */
 export default function NearMePage() {
-  const spotData = fishingSpots.map((s) => ({
-    id: s.id,
-    name: s.name,
-    slug: s.slug,
-    spotType: s.spotType,
-    difficulty: s.difficulty,
-    rating: s.rating,
-    latitude: s.latitude,
-    longitude: s.longitude,
-    prefecture: s.region.prefecture,
-    areaName: s.region.areaName,
-    catchableFishNames: s.catchableFish.slice(0, 3).map((cf) => cf.fish.name),
-    hasParking: s.hasParking,
-    hasToilet: s.hasToilet,
-    isFree: s.isFree,
-    hasRentalRod: s.hasRentalRod,
-    mainImageUrl: s.mainImageUrl,
-  }));
+  // 初期 HTML は人気順の先頭30件だけ（全件はクライアントが /api/spots/list から必要時に取得）
+  const spotData = [...fishingSpots]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 30)
+    .map((s) => ({
+      id: s.id,
+      name: s.name,
+      slug: s.slug,
+      spotType: s.spotType,
+      difficulty: s.difficulty,
+      rating: s.rating,
+      latitude: s.latitude,
+      longitude: s.longitude,
+      prefecture: s.region.prefecture,
+      areaName: s.region.areaName,
+      catchableFishNames: [...new Set(s.catchableFish.map((cf) => cf.fish.name))],
+      hasParking: s.hasParking,
+      hasToilet: s.hasToilet,
+      isFree: s.isFree,
+      hasRentalRod: s.hasRentalRod,
+      mainImageUrl: s.mainImageUrl,
+    }));
 
   // 魚種セレクトの選択肢: 掲載スポット数の多い順
   const fishSpotCount = new Map<string, number>();
@@ -324,7 +328,7 @@ export default function NearMePage() {
       </div>
 
       {/* ===== 2. NearMeClient（位置情報ツール） ===== */}
-      <NearMeClient spots={spotData} fishOptions={fishOptions} />
+      <NearMeClient initialSpots={spotData} totalCount={fishingSpots.length} fishOptions={fishOptions} />
 
       {/* ===== 3. 地域別人気スポットランキング ===== */}
       <section className="region-ranking-section mt-12">

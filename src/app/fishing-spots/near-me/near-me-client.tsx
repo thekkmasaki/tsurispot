@@ -121,11 +121,39 @@ type FeatureKey = (typeof FEATURE_FILTERS)[number]["key"];
 const selectClass =
   "h-10 w-full rounded-lg border bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40";
 
+function toSpotData(s: ListSpot): SpotData {
+  return {
+    id: s.id,
+    name: s.name,
+    slug: s.slug,
+    spotType: s.spotType,
+    difficulty: s.difficulty,
+    rating: s.rating,
+    latitude: s.latitude,
+    longitude: s.longitude,
+    prefecture: s.region.prefecture,
+    areaName: s.region.areaName,
+    catchableFishNames: s.fishNames,
+    hasParking: s.hasParking,
+    hasToilet: s.hasToilet,
+    isFree: s.isFree,
+    hasRentalRod: s.hasRentalRod,
+    mainImageUrl: s.mainImageUrl,
+  };
+}
+
+/**
+ * 2026-11: 以前は全5,349件を HTML に埋め込み約2.6MB あった。初期 HTML は人気順30件（従来の初期表示と同じ）
+ * だけを SSR し、全件は現在地・絞り込み・もっと見るの操作時に /api/spots/list（CDN 配信）から1回だけ取得する。
+ */
 export function NearMeClient({
-  spots,
+  initialSpots,
+  totalCount,
   fishOptions,
 }: {
-  spots: SpotData[];
+  /** 人気順の先頭30件（SSR） */
+  initialSpots: SpotData[];
+  totalCount: number;
   /** 魚種セレクトの選択肢（掲載スポット数の多い順） */
   fishOptions: string[];
 }) {
@@ -135,33 +163,32 @@ export function NearMeClient({
   const [maxKm, setMaxKm] = useState<number | null>(null);
   const [features, setFeatures] = useState<FeatureKey[]>([]);
   const [limit, setLimit] = useState(PAGE_SIZE);
-  // 魚種の絞り込みは全魚種が必要（SSR の spots は先頭3魚種のみ）→ 選択時に一覧APIから1回だけ取得
-  const [fullFish, setFullFish] = useState<Map<string, string[]> | null>(null);
-  const [fishLoading, setFishLoading] = useState(false);
+  const [allSpots, setAllSpots] = useState<SpotData[] | null>(null);
+  const [allLoading, setAllLoading] = useState(false);
+  const [loadFailed, setLoadFailed] = useState(false);
 
-  const loadFullFish = useCallback(() => {
-    if (fullFish || fishLoading) return;
-    setFishLoading(true);
+  const loadAll = useCallback(() => {
+    if (allSpots || allLoading) return;
+    setAllLoading(true);
     fetch("/api/spots/list")
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((list: ListSpot[]) => {
-        setFullFish(new Map(list.map((s) => [s.id, s.fishNames])));
-      })
-      .catch(() => {
-        /* 取得失敗時は先頭3魚種で絞り込む */
-      })
-      .finally(() => setFishLoading(false));
-  }, [fullFish, fishLoading]);
+      .then((list: ListSpot[]) => setAllSpots(list.map(toSpotData)))
+      .catch(() => setLoadFailed(true))
+      .finally(() => setAllLoading(false));
+  }, [allSpots, allLoading]);
+
+  const spots = allSpots ?? initialSpots;
 
   const changeFish = (value: string) => {
     setFish(value);
     setLimit(PAGE_SIZE);
-    if (value) loadFullFish();
+    loadAll();
   };
 
   const toggleFeature = (key: FeatureKey) => {
     setFeatures((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]));
     setLimit(PAGE_SIZE);
+    loadAll();
   };
 
   const resetFilters = () => {
@@ -178,6 +205,7 @@ export function NearMeClient({
   );
 
   const handleLocate = useCallback(() => {
+    loadAll();
     if (!navigator.geolocation) {
       setError("お使いのブラウザは位置情報に対応していません");
       return;
@@ -200,22 +228,21 @@ export function NearMeClient({
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
-  }, []);
+  }, [loadAll]);
 
   const filteredSpots = useMemo(() => {
     const featureTests = FEATURE_FILTERS.filter((f) => features.includes(f.key));
     return spots.filter((s) => {
       if (spotType && s.spotType !== spotType) return false;
-      if (fish) {
-        const names = fullFish?.get(s.id) ?? s.catchableFishNames;
-        if (!names.includes(fish)) return false;
-      }
+      if (fish && !s.catchableFishNames.includes(fish)) return false;
       return featureTests.every((f) => f.test(s));
     });
-  }, [spots, spotType, fish, fullFish, features]);
+  }, [spots, spotType, fish, features]);
 
   const activeFilterCount =
     (spotType ? 1 : 0) + (fish ? 1 : 0) + (maxKm && userLocation ? 1 : 0) + features.length;
+
+  const busy = allLoading && !allSpots;
 
   const displaySpots = useMemo(() => {
     if (userLocation) {
@@ -237,6 +264,9 @@ export function NearMeClient({
       .sort((a, b) => b.rating - a.rating)
       .map((s) => ({ ...s, distanceKm: undefined as number | undefined }));
   }, [filteredSpots, userLocation, maxKm]);
+
+  // 全件の読み込み前（＝絞り込みなし・人気順の初期表示）は総件数を出す
+  const resultCount = allSpots || loadFailed ? displaySpots.length : totalCount;
 
   return (
     <div>
@@ -359,18 +389,18 @@ export function NearMeClient({
 
       {/* Results count */}
       <p className="mb-4 text-sm text-muted-foreground" aria-live="polite">
-        {fishLoading ? (
-          "魚種データを読み込み中..."
+        {busy ? (
+          "釣り場データを読み込み中..."
         ) : (
           <>
             {userLocation ? "近い順" : "人気順"}・
-            <span className="font-bold text-foreground">{displaySpots.length.toLocaleString()}件</span>
+            <span className="font-bold text-foreground">{resultCount.toLocaleString()}件</span>
             {activeFilterCount > 0 && "（絞り込み中）"}
           </>
         )}
       </p>
 
-      {displaySpots.length === 0 && !fishLoading && (
+      {displaySpots.length === 0 && !busy && (
         <p className="rounded-xl border border-dashed p-6 text-center text-sm text-muted-foreground">
           条件に合う釣り場が見つかりませんでした。条件を減らしてみてください。
         </p>
@@ -387,19 +417,22 @@ export function NearMeClient({
         ))}
       </div>
 
-      {displaySpots.length > limit && (
+      {resultCount > limit && (
         <div className="mt-6 text-center">
           <button
             type="button"
-            onClick={() => setLimit((n) => n + PAGE_SIZE)}
+            onClick={() => {
+              loadAll();
+              setLimit((n) => n + PAGE_SIZE);
+            }}
             className="inline-flex items-center gap-1 rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
-            もっと見る（残り{(displaySpots.length - limit).toLocaleString()}件）
+            もっと見る（残り{(resultCount - limit).toLocaleString()}件）
           </button>
         </div>
       )}
 
-      {displaySpots.length > PAGE_SIZE && (
+      {totalCount > PAGE_SIZE && (
         <div className="mt-4 text-center">
           <Link prefetch={false}
             href="/spots"
