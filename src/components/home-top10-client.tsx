@@ -3,8 +3,9 @@
 import { useState, useMemo } from "react";
 import { Loader2, Waves, TreePine, Navigation } from "lucide-react";
 import type { ListSpot } from "@/types";
+import Link from "next/link";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { SECTION_INNER, SECTION_HEADING_GAP } from "@/components/ui/page-section";
+import { SECTION_INNER, SECTION_HEADING_GAP, SectionMore } from "@/components/ui/page-section";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { cn } from "@/lib/utils";
 
@@ -72,7 +73,6 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
       <div className={SECTION_INNER}>
           <SectionHeading
             className={SECTION_HEADING_GAP}
-            action={{ href: "/spots", label: "すべて見る" }}
             title={hasLocation ? "近くの人気スポット TOP10" : "人気スポット TOP10"}
             subtitle={
               hasLocation
@@ -101,7 +101,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
               hasLocation
                 ? "bg-emerald-600 text-white shadow-sm"
-                : "bg-card text-muted-foreground hover:text-emerald-700",
+                : "bg-muted text-muted-foreground hover:text-emerald-700",
             )}
           >
             {locating ? (
@@ -120,7 +120,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
               waterFilter === "sea"
                 ? "bg-sky-600 text-white shadow-sm"
-                : "bg-card text-muted-foreground hover:text-sky-700",
+                : "bg-muted text-muted-foreground hover:text-sky-700",
             )}
           >
             <Waves className="mr-1 inline size-3.5" />
@@ -132,7 +132,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
               waterFilter === "river"
                 ? "bg-emerald-700 text-white shadow-sm"
-                : "bg-card text-muted-foreground hover:text-emerald-700",
+                : "bg-muted text-muted-foreground hover:text-emerald-700",
             )}
           >
             <TreePine className="mr-1 inline size-3.5" />
@@ -156,7 +156,10 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
             />
           ))}
         </div>
-
+        <SectionMore href="/ranking" label="ランキングをもっと見る" />
+        <Link prefetch={false} href="/spots" className="mt-4 block text-center text-sm font-bold text-muted-foreground hover:text-primary">
+          すべての釣りスポット
+        </Link>
       </div>
     </section>
   );

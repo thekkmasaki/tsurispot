@@ -89,17 +89,16 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
   const visibleFish = expanded ? safeFiltered : safeFiltered.slice(0, INITIAL_COUNT);
 
   return (
-    <section className="py-10 sm:py-16">
+    <section className="bg-muted py-12 sm:py-16">
       <div className={SECTION_INNER}>
         <SectionHeading
           title={`${currentMonth}月に釣れる魚`}
           subtitle={`${safeFiltered.length}種類`}
-          action={{ href: "/fish", label: "魚図鑑へ" }}
           className={SECTION_HEADING_GAP}
         />
 
         {/* Filter tabs */}
-        <div className="-mx-4 mb-4 flex gap-1.5 overflow-x-auto px-4 pb-1 scrollbar-hide sm:mx-0 sm:mb-6 sm:flex-wrap sm:px-0">
+        <div className="mb-5 flex flex-wrap gap-1.5 sm:mb-6">
           {FILTERS.map((f) => (
             <button
               key={f.key}
@@ -117,14 +116,14 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
 
         {/* Fish cards */}
         <div className="relative">
-          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-4 scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {visibleFish.map((f) => {
               const isPeak = Array.isArray(f.peakMonths) && f.peakMonths.includes(currentMonth);
               return (
                 <Link prefetch={false}
                   key={f.id}
                   href={`/fish/${f.slug}`}
-                  className="w-52 shrink-0 sm:w-auto"
+                  className="block"
                 >
                   <Card className={`group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md ${f.isPoisonous ? "ring-2 ring-red-200" : ""}`}>
                     <div className="relative">
@@ -163,7 +162,7 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
                           </Badge>
                         )}
                       </div>
-                      <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                      <p className="hidden line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:block">
                         {f.description}
                       </p>
                     </CardContent>
@@ -172,15 +171,13 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
               );
             })}
           </div>
-          <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-muted to-transparent sm:hidden" />
-        </div>
+                  </div>
 
         {/* もっと見る / 折りたたむ */}
         {safeFiltered.length > INITIAL_COUNT && (
-          <div className="mt-4 flex justify-center">
+          <div className="mt-6 flex justify-center sm:mt-10">
             <Button
-              variant="outline"
-              className="min-h-[44px] gap-1"
+              className="h-[52px] w-full gap-1 rounded-lg text-sm font-bold sm:w-80"
               onClick={() => setExpanded(!expanded)}
             >
               {expanded ? "折りたたむ" : `残り${safeFiltered.length - INITIAL_COUNT}種類を見る`}
@@ -188,7 +185,9 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
             </Button>
           </div>
         )}
-
+        <Link prefetch={false} href="/fish" className="mt-4 block text-center text-sm font-bold text-muted-foreground hover:text-primary">
+          魚図鑑をすべて見る
+        </Link>
       </div>
     </section>
   );

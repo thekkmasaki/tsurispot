@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Fish, Calendar, MapPin, Camera } from "lucide-react";
 import { catchReports, type CatchReport } from "@/lib/data/catch-reports";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { SECTION_INNER, SECTION_HEADING_GAP } from "@/components/ui/page-section";
+import { SECTION_INNER, SECTION_HEADING_GAP, SectionMore } from "@/components/ui/page-section";
 
 /**
  * PR-INV-1: ホームに「最近の釣果」 mini feed 表示。
@@ -47,20 +47,19 @@ export function RecentCatchReports() {
   if (recent.length === 0) return null;
 
   return (
-    <section className={`${SECTION_INNER} py-10 sm:py-16`}>
+    <section className={`${SECTION_INNER} py-12 sm:py-16`}>
       <SectionHeading
         title="みんなの最近の釣果"
         subtitle="全国の釣り人から届いた釣果"
-        action={{ href: "/post", label: "投稿する" }}
         className={SECTION_HEADING_GAP}
       />
-      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-3 scrollbar-hide sm:-mx-0 sm:px-0">
+      <div className="-mx-5 divide-y border-y sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:divide-y-0 sm:border-0 lg:grid-cols-3">
         {recent.map((report) => (
           <Link
             key={report.id}
             href={`/spots/${report.spotSlug}`}
             prefetch={false}
-            className="w-64 shrink-0 snap-start rounded-2xl bg-card p-4 transition-shadow hover:shadow-md sm:w-72"
+            className="block px-5 py-4 transition-colors hover:bg-muted/60 sm:rounded-lg sm:border sm:p-4"
           >
             <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
               <Calendar className="size-3" />
@@ -93,14 +92,8 @@ export function RecentCatchReports() {
           </Link>
         ))}
       </div>
-      <Link
-        href="/post"
-        prefetch={false}
-        className="mt-3 block rounded-2xl bg-card px-4 py-3 text-center text-sm transition-colors hover:text-primary"
-      >
-        <span className="font-semibold text-primary">あなたの釣果も投稿しよう</span>
-        <span className="ml-2 text-muted-foreground">— タップして投稿へ（スポット詳細からはログイン不要）</span>
-      </Link>
+      <SectionMore href="/post" label="あなたの釣果も投稿しよう" />
+      <p className="mt-2 text-center text-xs text-muted-foreground">スポット詳細からはログイン不要で投稿できます</p>
     </section>
   );
 }
