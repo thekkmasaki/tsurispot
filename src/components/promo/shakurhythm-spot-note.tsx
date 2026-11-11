@@ -89,7 +89,7 @@ export function ShakurhythmSpotNote({
         <Smartphone className="size-4" aria-hidden="true" />
         {cta}
       </a>
-      <span className="ml-3 text-xs text-muted-foreground">iPhone・Apple Watch</span>
+      <span className="mt-2 block text-xs text-muted-foreground sm:ml-3 sm:mt-0 sm:inline">iPhone・Apple Watch対応・無料</span>
     </aside>
   );
 }
