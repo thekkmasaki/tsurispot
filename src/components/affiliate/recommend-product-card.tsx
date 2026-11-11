@@ -65,7 +65,9 @@ export function RecommendProductCard({
         aria-hidden="true"
       >
         {product.image ? (
-          <div className="flex aspect-[4/3] items-center justify-center bg-white p-4">
+          // PC の3列でも大きくなりすぎないよう高さを固定（商品写真は白背景が多いので contain で収める）
+          <div className="flex h-36 items-center justify-center bg-white p-3 sm:h-44">
+
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={product.image}
@@ -76,8 +78,9 @@ export function RecommendProductCard({
             />
           </div>
         ) : (
-          <div className={`flex aspect-[4/3] items-center justify-center bg-gradient-to-br ${visual.className}`}>
-            <Icon className="size-12 opacity-80 sm:size-14" strokeWidth={1.5} />
+          // 写真がない商品は大きな空き枠にせず、細い帯にしてカードを詰める
+          <div className={`flex h-14 items-center justify-end bg-gradient-to-br px-3 sm:h-16 ${visual.className}`}>
+            <Icon className="size-7 opacity-70 sm:size-8" strokeWidth={1.5} />
           </div>
         )}
         {product.isRecommended && (
