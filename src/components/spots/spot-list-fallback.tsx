@@ -8,13 +8,13 @@ import { ListSpot } from "@/types";
 // クライアントでは hydration 後に SpotListClient がこの内容を置き換える。
 const ITEMS_PER_PAGE = 20;
 
-export function SpotListFallback({ spots }: { spots: ListSpot[] }) {
+export function SpotListFallback({ spots, totalCount }: { spots: ListSpot[]; totalCount: number }) {
   const firstPage = spots.slice(0, ITEMS_PER_PAGE);
   return (
     <div className="space-y-4 sm:space-y-6">
       <p className="flex items-center gap-1.5 border-b pb-3 text-sm">
         <span className="text-muted-foreground">検索結果</span>
-        <span className="font-display text-lg font-bold tabular-nums">{spots.length.toLocaleString()}</span>
+        <span className="font-display text-lg font-bold tabular-nums">{totalCount.toLocaleString()}</span>
         <span className="text-muted-foreground">件のスポット</span>
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
