@@ -69,7 +69,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
   const hasLocation = !!userLocation;
 
   return (
-    <section className="bg-muted/50 py-8 sm:py-12">
+    <section className="border-t py-8 sm:py-10">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="mb-6 flex items-end justify-between sm:mb-8">
           <SectionHeading

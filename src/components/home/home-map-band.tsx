@@ -71,7 +71,7 @@ export function HomeMapBand({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
 
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
-      <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-br from-sky-50 to-cyan-50 p-4 sm:p-6">
+      <div className="rounded-xl border bg-muted/40 p-4 sm:p-6">
         <div className="mb-3 flex items-center gap-2">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sky-100">
             <Compass className="size-5 text-sky-600" aria-hidden="true" />
@@ -178,7 +178,7 @@ export function HomeMapBand({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
             onClick={locate}
             disabled={status === "locating"}
             size="lg"
-            className="w-full gap-2 bg-gradient-to-r from-sky-600 to-cyan-600 text-white shadow-sm transition-transform hover:scale-[1.01] sm:w-auto"
+            className="w-full gap-2 bg-primary text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
           >
             {status === "locating" ? (
               <Loader2 className="size-5 animate-spin" />

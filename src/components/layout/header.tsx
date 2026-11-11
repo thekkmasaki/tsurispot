@@ -4,61 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { useFavorites } from "@/hooks/use-favorites";
-import {
-  Fish,
-  Map,
-  MapPin,
-  BookOpen,
-  GraduationCap,
-  Scale,
-  Heart,
-  Package,
-  Target,
-  Trophy,
-  Calendar,
-  Sparkles,
-  ChevronDown,
-  Compass,
-  FileText,
-  Anchor,
-  Store,
-  ClipboardCheck,
-  Users,
-} from "lucide-react";
+import { Fish, Map, MapPin, Heart, Trophy, ChevronDown, FileText, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
 import { UserMenu } from "./user-menu";
 import { NotificationBell } from "@/components/social/notification-bell";
-// メインナビ。ラベルは whitespace-nowrap 前提のため、全項目が入らない幅では
-// 下位項目をバーから隠して「もっと見る」に退避する（bar/menu は対の可視クラス）。
-// 幅の目安: md=スポット+タイムライン / lg=+釣果レポート+地図 / xl=+ランキング
-const mainNavItems = [
-  { href: "/spots", label: "スポット", icon: MapPin, bar: "", menu: null },
-  { href: "/timeline", label: "タイムライン", icon: Users, bar: "", menu: null },
-  { href: "/blog", label: "釣果レポート", icon: FileText, bar: "hidden lg:flex", menu: "lg:hidden" },
-  { href: "/map", label: "地図", icon: Map, bar: "hidden lg:flex", menu: "lg:hidden" },
-  { href: "/ranking", label: "ランキング", icon: Trophy, bar: "hidden xl:flex", menu: "xl:hidden" },
-];
+import { NAV_GROUPS, isNavActive } from "./nav-config";
 
-// ドロップダウン「もっと見る」
-const moreNavItems = [
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/fish", label: "図鑑", icon: BookOpen },
-  { href: "/users", label: "釣り人を探す", icon: Users },
-  { href: "/methods", label: "釣り方ガイド", icon: Anchor },
-  { href: "/area", label: "エリア一覧", icon: Compass },
-  { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
-  { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
-  { href: "/guide", label: "釣りガイド", icon: GraduationCap },
-  { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
-  { href: "/shops", label: "釣具店ガイド", icon: Store },
-  { href: "/gear", label: "おすすめ道具", icon: Package },
-  { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
-  { href: "/quiz", label: "釣りクイズ", icon: Sparkles },
-  { href: "/instructor-exam", label: "インストラクター試験", icon: ClipboardCheck },
-  { href: "/catch-reports", label: "釣行レポート", icon: Fish },
-  { href: "/umigyo", label: "海業推進", icon: Anchor },
+// メインナビ。ラベルは whitespace-nowrap 前提のため、全項目が入らない幅では
+// 下位項目をバーから隠す（「もっと見る」には NAV_GROUPS で全項目が入っている）。
+// 幅の目安: md=スポット+タイムライン / lg=+ブログ+地図 / xl=+ランキング
+const mainNavItems = [
+  { href: "/spots", label: "スポット", icon: MapPin, bar: "" },
+  { href: "/timeline", label: "タイムライン", icon: Users, bar: "" },
+  { href: "/blog", label: "ブログ", icon: FileText, bar: "hidden lg:flex" },
+  { href: "/map", label: "地図", icon: Map, bar: "hidden lg:flex" },
+  { href: "/ranking", label: "ランキング", icon: Trophy, bar: "hidden xl:flex" },
 ];
 
 function DropdownMenu() {
@@ -83,11 +45,9 @@ function DropdownMenu() {
     };
   }, []);
 
-  // ドロップダウン内のリンクがアクティブかチェック
-  const hasActiveChild = moreNavItems.some(
-    (item) =>
-      pathname === item.href ||
-      (item.href !== "/" && pathname.startsWith(item.href))
+  const mainHrefs = new Set(mainNavItems.filter((i) => !i.bar).map((i) => i.href));
+  const hasActiveChild = NAV_GROUPS.some((g) =>
+    g.items.some((item) => !mainHrefs.has(item.href) && isNavActive(pathname, item.href)),
   );
 
   return (
@@ -99,72 +59,41 @@ function DropdownMenu() {
         aria-label="その他のメニュー"
         className={cn(
           "flex items-center gap-1 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-          hasActiveChild
-            ? "bg-ocean-mid/10 text-ocean-mid"
-            : "text-driftwood hover:bg-sand-light hover:text-foreground"
+          hasActiveChild ? "text-primary" : "text-muted-foreground hover:text-foreground",
         )}
       >
         もっと見る
-        <ChevronDown
-          aria-hidden="true"
-          className={cn(
-            "h-3.5 w-3.5 transition-transform",
-            open && "rotate-180"
-          )}
-        />
+        <ChevronDown aria-hidden="true" className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div role="menu" className="absolute right-0 top-full mt-1 w-56 rounded-2xl border bg-white py-2 shadow-xl shadow-ocean-deep/5">
-          {/* バーに入りきらない幅ではメインナビの下位項目をここに退避（bar側の hidden と対） */}
-          {mainNavItems
-            .filter((item) => item.menu)
-            .map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  prefetch={false}
-                  role="menuitem"
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
-                    item.menu,
-                    isActive
-                      ? "bg-ocean-mid/5 font-medium text-ocean-mid"
-                      : "text-driftwood hover:bg-sand-light/50 hover:text-foreground"
-                  )}
-                >
-                  <item.icon className="h-4 w-4" aria-hidden="true" />
-                  {item.label}
-                </Link>
-              );
-            })}
-          {moreNavItems.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/" && pathname.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                prefetch={false}
-                role="menuitem"
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
-                  isActive
-                    ? "bg-ocean-mid/5 font-medium text-ocean-mid"
-                    : "text-driftwood hover:bg-sand-light/50 hover:text-foreground"
-                )}
-              >
-                <item.icon className="h-4 w-4" aria-hidden="true" />
-                {item.label}
-              </Link>
-            );
-          })}
+        <div
+          role="menu"
+          className="absolute right-0 top-full mt-1 grid w-[30rem] grid-cols-2 gap-x-2 gap-y-3 rounded-xl border bg-background p-3 shadow-lg"
+        >
+          {NAV_GROUPS.map((group) => (
+            <div key={group.title}>
+              <p className="px-2 pb-1 text-xs font-bold text-muted-foreground">{group.title}</p>
+              {group.items.map((item) => {
+                const isActive = isNavActive(pathname, item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    prefetch={false}
+                    role="menuitem"
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
+                      isActive ? "bg-accent font-medium text-primary" : "text-foreground hover:bg-muted",
+                    )}
+                  >
+                    <item.icon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -176,20 +105,18 @@ export function Header() {
   const { count: favCount } = useFavorites();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r from-white/95 via-white/90 to-sand-light/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur-lg">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" prefetch={false} className="flex shrink-0 items-center gap-2">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Fish className="h-5 w-5" aria-hidden="true" />
           </div>
-          <span className="whitespace-nowrap bg-gradient-to-r from-ocean-deep to-ocean-mid bg-clip-text text-lg font-bold text-transparent font-display">ツリスポ</span>
+          <span className="whitespace-nowrap font-display text-lg font-bold text-primary">ツリスポ</span>
         </Link>
 
         <nav aria-label="メインナビゲーション" className="hidden items-center gap-1 md:flex">
           {mainNavItems.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/" && pathname.startsWith(item.href));
+            const isActive = isNavActive(pathname, item.href);
             return (
               <Link
                 key={item.href}
@@ -198,9 +125,7 @@ export function Header() {
                 className={cn(
                   "flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   item.bar,
-                  isActive
-                    ? "bg-ocean-mid/10 text-ocean-mid"
-                    : "text-driftwood hover:bg-sand-light hover:text-foreground"
+                  isActive ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 <item.icon className="h-4 w-4" aria-hidden="true" />
@@ -222,9 +147,7 @@ export function Header() {
             prefetch={false}
             className={cn(
               "relative flex items-center justify-center rounded-lg p-2 transition-colors",
-              pathname === "/favorites"
-                ? "bg-ocean-mid/10 text-ocean-mid"
-                : "text-driftwood hover:bg-sand-light hover:text-foreground"
+              pathname === "/favorites" ? "text-primary" : "text-muted-foreground hover:text-foreground",
             )}
             aria-label="お気に入り"
           >
