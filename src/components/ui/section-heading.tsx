@@ -1,4 +1,6 @@
 import * as React from "react"
+import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface SectionHeadingProps {
@@ -9,12 +11,19 @@ interface SectionHeadingProps {
   as?: "h2" | "h3"
   /** lg=セクション大見出し、md=サブセクション見出し */
   size?: "lg" | "md"
+  /** 見出し右端の「すべて見る」リンク（スマホでも同じ位置に出す） */
+  action?: { href: string; label: string }
   className?: string
 }
 
+/**
+ * セクション見出し（2026-11 余白・見出し統一）。
+ * サウナイキタイ型: 大きな太字 + 小さな説明。PC は説明を見出しの横、スマホは下に置く。
+ * 右端に「すべて見る」を置き、スマホ専用の別ボタンを不要にする。
+ */
 const sizeClasses = {
-  lg: "text-xl sm:text-2xl",
-  md: "text-base sm:text-lg",
+  lg: "text-[22px] font-black sm:text-[28px]",
+  md: "text-lg font-bold sm:text-xl",
 } as const
 
 export function SectionHeading({
@@ -23,26 +32,36 @@ export function SectionHeading({
   subtitle,
   as: Tag = "h2",
   size = "lg",
+  action,
   className,
 }: SectionHeadingProps) {
   return (
-    <div className={cn("space-y-1", className)}>
-      <div className="flex items-center gap-2">
-        {icon && (
-          <span className="text-primary shrink-0">{icon}</span>
+    <div className={cn("flex items-end justify-between gap-3", className)}>
+      <div className="min-w-0 sm:flex sm:items-baseline sm:gap-4">
+        <div className="flex items-center gap-2">
+          {icon && <span className="shrink-0 text-primary">{icon}</span>}
+          <Tag
+            className={cn(
+              "font-display leading-tight tracking-tight text-pretty text-foreground",
+              sizeClasses[size]
+            )}
+          >
+            {title}
+          </Tag>
+        </div>
+        {subtitle && (
+          <p className="mt-1 text-xs text-muted-foreground sm:mt-0 sm:text-sm">{subtitle}</p>
         )}
-        <Tag
-          className={cn(
-            "font-display font-bold tracking-tight text-pretty text-foreground",
-            sizeClasses[size]
-          )}
-        >
-          {title}
-        </Tag>
       </div>
-      <div className="h-0.5 w-16 rounded-full bg-gradient-to-r from-primary/60 to-primary/10" />
-      {subtitle && (
-        <p className="text-sm text-muted-foreground">{subtitle}</p>
+      {action && (
+        <Link
+          prefetch={false}
+          href={action.href}
+          className="inline-flex shrink-0 items-center gap-0.5 pb-0.5 text-sm font-bold text-primary hover:underline"
+        >
+          {action.label}
+          <ChevronRight className="size-4" aria-hidden="true" />
+        </Link>
       )}
     </div>
   )

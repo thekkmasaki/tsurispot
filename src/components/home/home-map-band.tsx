@@ -70,14 +70,14 @@ export function HomeMapBand({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
-      <div className="rounded-xl border bg-muted/40 p-4 sm:p-6">
+    <section className="mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 sm:pt-10">
+      <div className="rounded-2xl bg-card p-4 sm:p-6">
         <div className="mb-3 flex items-center gap-2">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sky-100">
             <Compass className="size-5 text-sky-600" aria-hidden="true" />
           </span>
           <div>
-            <h2 className="text-base font-bold text-sky-900 sm:text-lg">
+            <h2 className="text-lg font-black text-sky-900 sm:text-xl">
               地図で釣り場を探す
             </h2>
             <p className="text-xs text-sky-700 sm:text-sm">

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Waves } from "lucide-react";
 import {
   trackAdEvent,
   trackAdFallback,
@@ -432,16 +431,11 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
   // w-full: flex コンテナ直下に置かれると mx-auto の auto マージンが stretch を打ち消し
   // fit-content 幅に収縮して広告が配信されなくなるため明示する
   return (
-    <div className={`mx-auto w-full max-w-4xl px-4 py-10 ${className}`}>
-      {/* fallback時はテキストのみ「TsuriSpot」に差し替え（行は消さない=シフト0） */}
-      <div className="flex items-center justify-center gap-3 mb-4">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
-        <Waves className="size-4 text-ocean-mid/30" />
-        <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{empty ? HOUSE_LABEL : AD_LABEL}</span>
-        <Waves className="size-4 text-ocean-mid/30" />
-        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
-      </div>
-      <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
+    <div className={`mx-auto w-full max-w-4xl px-4 py-4 ${className}`}>
+      {/* 2026-11 余白統一: 前後のセクション余白(40/64px)に任せ、広告自身の上下余白と波飾りを削減。
+          fallback時はテキストのみ「TsuriSpot」に差し替え（行は消さない=シフト0） */}
+      <p className="mb-2 text-center text-[11px] font-medium tracking-widest text-muted-foreground">{empty ? HOUSE_LABEL : AD_LABEL}</p>
+      <div className="rounded-2xl bg-card p-3 sm:p-5">
         {/* CLS対策: fluid広告の後挿入による押し下げを防ぐため最小高さを予約 */}
         <AdUnit
           slot={AD_SLOTS.native_break}

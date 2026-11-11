@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
-import { Loader2, ArrowRight, Waves, TreePine, Navigation } from "lucide-react";
+import { Loader2, Waves, TreePine, Navigation } from "lucide-react";
 import type { ListSpot } from "@/types";
-import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { SECTION_INNER, SECTION_HEADING_GAP } from "@/components/ui/page-section";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { cn } from "@/lib/utils";
 
@@ -69,10 +68,11 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
   const hasLocation = !!userLocation;
 
   return (
-    <section className="border-t py-8 sm:py-10">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="mb-6 flex items-end justify-between sm:mb-8">
+    <section className="py-10 sm:py-16">
+      <div className={SECTION_INNER}>
           <SectionHeading
+            className={SECTION_HEADING_GAP}
+            action={{ href: "/spots", label: "すべて見る" }}
             title={hasLocation ? "近くの人気スポット TOP10" : "人気スポット TOP10"}
             subtitle={
               hasLocation
@@ -80,14 +80,6 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
                 : "評価とレビュー数で選ぶ注目の釣り場"
             }
           />
-          <Link prefetch={false}
-            href="/spots"
-            className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-          >
-            すべて見る
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
 
         {/* 現在地 + 海/川フィルター */}
         <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -109,7 +101,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
               hasLocation
                 ? "bg-emerald-600 text-white shadow-sm"
-                : "bg-muted text-muted-foreground hover:bg-emerald-50 hover:text-emerald-700",
+                : "bg-card text-muted-foreground hover:text-emerald-700",
             )}
           >
             {locating ? (
@@ -128,7 +120,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
               waterFilter === "sea"
                 ? "bg-sky-600 text-white shadow-sm"
-                : "bg-muted text-muted-foreground hover:bg-sky-50 hover:text-sky-700",
+                : "bg-card text-muted-foreground hover:text-sky-700",
             )}
           >
             <Waves className="mr-1 inline size-3.5" />
@@ -140,7 +132,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
               "rounded-full px-4 py-2 text-sm font-medium transition-colors",
               waterFilter === "river"
                 ? "bg-emerald-700 text-white shadow-sm"
-                : "bg-muted text-muted-foreground hover:bg-emerald-50 hover:text-emerald-700",
+                : "bg-card text-muted-foreground hover:text-emerald-700",
             )}
           >
             <TreePine className="mr-1 inline size-3.5" />
@@ -148,7 +140,7 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
           </button>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="grid gap-2 lg:grid-cols-2">
           {displaySpots.map((spot, index) => (
             <SpotCardCompact
               key={spot.id}
@@ -165,14 +157,6 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
           ))}
         </div>
 
-        <div className="mt-6 flex justify-center sm:hidden">
-          <Link prefetch={false} href="/spots">
-            <Button variant="outline" className="min-h-[44px] gap-1">
-              すべてのスポットを見る
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );
