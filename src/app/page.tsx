@@ -302,7 +302,17 @@ export default async function Home() {
       {/* ヒーローセクション */}
       {/* ATFのLinkはprefetch={false}: 初期ロード中のRSC自動プリフェッチ(実測442KB、/spotsだけで354KB)が低速回線でLCPと帯域競合するため。タップ時取得に変更（体感+100-300msだが初期表示を優先） */}
       {/* UI/UX刷新Phase1: 3色グラデ・水平線グロー・波アニメ2層を撤去し、海の青1色＋さかなっちに */}
-      <section className="relative overflow-x-hidden bg-[oklch(0.45_0.13_242)]">
+      <section className="relative overflow-hidden bg-[oklch(0.45_0.13_242)]">
+        {/* 背景写真（編集部撮影・赤い手すりと竿）。サウナイキタイ型: 写真をグレーにして海の青に乗算し、
+            明暗だけをうっすら残す。文字のコントラストは青地のまま確保。装飾なので alt は空。 */}
+        <Image
+          src="/images/hero/pier-rods.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="pointer-events-none select-none object-cover opacity-45 mix-blend-multiply grayscale contrast-125"
+        />
         <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-8 sm:px-6 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-16">
           <div className="flex flex-col items-center text-center">
             <Sakanacchi size={56} className="mb-2" />
