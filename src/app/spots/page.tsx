@@ -231,7 +231,7 @@ export default function SpotsPage() {
       />
 
       {/* 初心者CTA */}
-      <div className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-5 sm:p-6">
+      <div className="mt-8 rounded-xl border bg-muted/40 p-5 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-base font-bold text-emerald-900 sm:text-lg">釣りが初めてですか？</h2>

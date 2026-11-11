@@ -2,8 +2,15 @@
 
 import { useState, useMemo, useCallback, useDeferredValue, useTransition, useEffect, useRef, Fragment } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2, Star } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, Navigation, Loader2, List, Map as MapIcon } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
+
+// 地図タブ用（Leaflet）。タブを開いたときだけ読み込む
+const SpotResultsMap = dynamic(
+  () => import("@/components/spots/spot-results-map").then((m) => m.SpotResultsMap),
+  { ssr: false, loading: () => <div className="h-[60vh] min-h-[360px] w-full animate-pulse rounded-xl bg-muted" /> },
+);
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -129,6 +136,23 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
     },
     [searchText, selectedPrefecture, selectedType, selectedDifficulty, pathname],
   );
+
+  // ページ送りリンクの href（writeUrl と同じ組み立て。クローラ・新規タブ用）
+  const pageHref = useCallback(
+    (page: number) => {
+      const params = new URLSearchParams();
+      if (searchText) params.set("q", searchText);
+      if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
+      if (selectedType) params.set("type", selectedType);
+      if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
+      if (page > 1) params.set("page", String(page));
+      const query = params.toString();
+      return query ? `${pathname}?${query}` : pathname;
+    },
+    [searchText, selectedPrefecture, selectedType, selectedDifficulty, pathname],
+  );
+
+  const [viewMode, setViewMode] = useState<"list" | "map">("list");
 
   // ページ送り。setState と URL を必ずセットで動かす
   const goToPage = useCallback(
@@ -346,72 +370,89 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
         )}
       </div>
 
-      {/* Nearby sort button */}
-      {!sortByDistance ? (
-        <div className="flex flex-wrap items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={requestLocation}
-            disabled={geoLoading}
-            className="gap-1.5 min-h-[44px] border-primary/30 text-primary hover:bg-primary/5 hover:text-primary"
+      {/* よく使う条件（サウナイキタイ式: 検索バー直下に3つだけ。細かい条件は「すべての条件」パネルへ） */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <label className="flex flex-col gap-1 text-xs font-bold text-muted-foreground">
+          都道府県
+          <select
+            value={selectedPrefecture}
+            onChange={(e) => {
+              const v = e.target.value;
+              startTransition(() => {
+                setSelectedRegion("");
+                setSelectedPrefecture(v);
+                setSelectedArea("");
+                setCurrentPage(1);
+              });
+            }}
+            className="h-11 rounded-lg border bg-background px-2 text-sm font-normal text-foreground"
           >
-            {geoLoading ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <MapPin className="size-4" />
-            )}
-            {geoLoading ? "位置情報を取得中..." : "現在地から近い順に並べ替え"}
-          </Button>
-          <Button
-            variant={sortByRating ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSortByRating((v) => !v)}
-            className="gap-1.5 min-h-[44px]"
+            <option value="">すべて</option>
+            {(Object.keys(REGION_CONFIG) as RegionKey[]).map((key) => (
+              <optgroup key={key} label={REGION_CONFIG[key].label}>
+                {REGION_CONFIG[key].prefectures.map((pref) => (
+                  <option key={pref} value={pref}>{pref}</option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1 text-xs font-bold text-muted-foreground">
+          釣りたい魚
+          <select
+            value={selectedFishNames.length === 1 ? selectedFishNames[0] : ""}
+            onChange={(e) => {
+              const v = e.target.value;
+              startTransition(() => {
+                setSelectedFishNames(v ? [v] : []);
+                setCurrentPage(1);
+              });
+            }}
+            className="h-11 rounded-lg border bg-background px-2 text-sm font-normal text-foreground"
           >
-            <Star className={`size-4 ${sortByRating ? "fill-current" : ""}`} />
-            評価の高い順
-          </Button>
-          {geoError && (
-            <p className="mt-1.5 w-full text-xs text-red-600">{geoError}</p>
-          )}
-        </div>
-      ) : (
-        <div className="flex items-center gap-2 rounded-lg bg-primary/5 border border-primary/20 px-3 py-2 text-sm">
-          <Navigation className="size-4 shrink-0 text-primary" />
-          <span className="text-muted-foreground">
-            現在地から近い順に表示しています
-          </span>
+            <option value="">すべて</option>
+            {topFishNames.map((name) => (
+              <option key={name} value={name}>{name}</option>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1 text-xs font-bold text-muted-foreground">
+          釣り場のタイプ
+          <select
+            value={selectedType}
+            onChange={(e) => handleFilterChange(setSelectedType, e.target.value as ListSpot["spotType"] | "")}
+            className="h-11 rounded-lg border bg-background px-2 text-sm font-normal text-foreground"
+          >
+            <option value="">すべて</option>
+            {spotTypes.map(([key, label]) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
+        </label>
+        <div className="flex flex-col justify-end">
           <button
-            onClick={clearDistanceSort}
-            className="ml-auto shrink-0 rounded-md px-2 py-1 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            type="button"
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            aria-expanded={isFilterOpen}
+            className="flex h-11 items-center justify-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-primary transition-colors hover:bg-accent"
           >
-            解除
+            <SlidersHorizontal className="size-4" aria-hidden="true" />
+            すべての条件
+            {activeFilterCount > 0 && (
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+                {activeFilterCount}
+              </span>
+            )}
+            <ChevronDown className={cn("size-4 transition-transform", isFilterOpen && "rotate-180")} aria-hidden="true" />
           </button>
         </div>
-      )}
+      </div>
+      {geoError && <p className="text-xs text-red-600">{geoError}</p>}
 
-      {/* Mobile: collapsible filter toggle */}
-      <button
-        onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className="flex w-full items-center justify-between rounded-lg border border-border bg-muted/50 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted sm:hidden min-h-[44px]"
-      >
-        <div className="flex items-center gap-2">
-          <SlidersHorizontal className="size-4" />
-          <span>絞り込み</span>
-          {activeFilterCount > 0 && (
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-              {activeFilterCount}
-            </span>
-          )}
-        </div>
-        <ChevronDown className={cn("size-4 transition-transform", isFilterOpen && "rotate-180")} />
-      </button>
-
-      {/* Filters - always visible on desktop, collapsible on mobile */}
+      {/* すべての条件パネル（既定は閉じる。PCでも閉じてスッキリ見せる） */}
       <div className={cn(
-        "space-y-4 overflow-hidden transition-all duration-200",
-        isFilterOpen ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0 sm:max-h-none sm:opacity-100"
+        "space-y-4 overflow-hidden rounded-xl transition-all duration-200",
+        isFilterOpen ? "max-h-[1600px] border bg-muted/40 p-4 opacity-100" : "max-h-0 opacity-0"
       )}>
         {/* Region block filter (1段目: 地方ブロック) */}
         <div>
@@ -638,28 +679,88 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
         )}
       </div>
 
-      {/* Active filters summary + clear */}
-      <div className="flex items-center justify-between">
-        <p aria-live="polite" className="flex items-center gap-1.5 text-sm text-muted-foreground">
+      {/* 結果ヘッダー: 件数 ・ 並び替え ・ リスト/地図 */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b pb-3">
+        <p aria-live="polite" className="flex items-center gap-1.5 text-sm">
           {isFiltering ? (
             <>
               <Loader2 className="size-3.5 animate-spin text-primary" aria-hidden="true" />
-              絞り込み中…
+              <span className="text-muted-foreground">絞り込み中…</span>
             </>
           ) : (
-            <>{filteredSpots.length}件のスポット</>
+            <>
+              <span className="text-muted-foreground">検索結果</span>
+              <span className="font-display text-lg font-bold tabular-nums">{filteredSpots.length.toLocaleString()}</span>
+              <span className="text-muted-foreground">件</span>
+            </>
           )}
         </p>
         {hasFilters && (
-          <Button variant="ghost" size="sm" onClick={clearFilters} className="min-h-[40px]">
-            <X className="mr-1 size-4" />
-            クリア
-          </Button>
+          <button type="button" onClick={clearFilters} className="inline-flex items-center gap-0.5 text-xs text-muted-foreground hover:text-foreground">
+            <X className="size-3.5" aria-hidden="true" />
+            条件をクリア
+          </button>
         )}
+        <div className="ml-auto flex items-center gap-2">
+          <label className="sr-only" htmlFor="spot-sort">並び替え</label>
+          <select
+            id="spot-sort"
+            value={sortByDistance ? "distance" : sortByRating ? "rating" : "default"}
+            disabled={geoLoading}
+            onChange={(e) => {
+              const v = e.target.value;
+              if (v === "distance") {
+                setSortByRating(false);
+                requestLocation();
+              } else {
+                clearDistanceSort();
+                setSortByRating(v === "rating");
+                setCurrentPage(1);
+              }
+            }}
+            className="h-9 rounded-lg border bg-background px-2 text-sm"
+          >
+            <option value="default">おすすめ順</option>
+            <option value="rating">評価の高い順</option>
+            <option value="distance">{geoLoading ? "位置情報を取得中…" : "現在地から近い順"}</option>
+          </select>
+          <div className="flex rounded-lg border p-0.5" role="tablist" aria-label="表示切替">
+            {([["list", "リスト", List], ["map", "地図", MapIcon]] as const).map(([mode, label, Icon]) => (
+              <button
+                key={mode}
+                type="button"
+                role="tab"
+                aria-selected={viewMode === mode}
+                onClick={() => setViewMode(mode)}
+                className={cn(
+                  "inline-flex h-8 items-center gap-1 rounded-md px-2.5 text-sm font-bold transition-colors",
+                  viewMode === mode ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <Icon className="size-4" aria-hidden="true" />
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
+      {sortByDistance && (
+        <p className="-mt-2 flex items-center gap-1 text-xs text-primary">
+          <Navigation className="size-3.5" aria-hidden="true" />
+          現在地から近い順に表示しています
+        </p>
+      )}
+
+      {/* 地図表示（タブを開いたときだけ読み込む） */}
+      {viewMode === "map" && (
+        <div className={cn("transition-opacity", isFiltering && "opacity-50")}>
+          <SpotResultsMap spots={filteredSpots} />
+          <p className="mt-2 text-xs text-muted-foreground">ピンをタップするとスポットの詳細へ進めます。</p>
+        </div>
+      )}
 
       {/* Results grid */}
-      {paginatedSpots.length > 0 ? (
+      {viewMode === "map" ? null : paginatedSpots.length > 0 ? (
         <>
           <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 transition-opacity duration-200", isFiltering && "opacity-50")}>
             {paginatedSpots.map((spot, index) => (
@@ -679,69 +780,55 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
           </div>
 
           {/* Pagination */}
+          {/* ページ送り: 番号付きの <a href="?page=n">（クロール可能）。クリック時は従来どおり
+              History API でページ遷移なしに切り替える（goToPage） */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-1 pt-4 sm:gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={currentPage === 1}
-                onClick={() => goToPage(currentPage - 1)}
-                className="min-h-[44px] gap-1"
-              >
-                <ChevronLeft className="size-4" />
-                <span className="hidden sm:inline">前へ</span>
-              </Button>
-              <div className="flex items-center gap-0.5 sm:gap-1">
-                {(() => {
-                  if (totalPages <= 7) {
-                    return Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                      <Button
-                        key={page}
-                        variant={currentPage === page ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => goToPage(page)}
-                        className="min-h-[44px] min-w-[44px]"
-                      >
-                        {page}
-                      </Button>
-                    ));
-                  }
-                  const pages: (number | string)[] = [];
+            <nav aria-label="ページ送り" className="flex items-center justify-center gap-1 pt-4 sm:gap-2">
+              {(() => {
+                const linkCls = "inline-flex min-h-[44px] min-w-[36px] items-center justify-center gap-1 rounded-lg border px-2 text-sm transition-colors hover:bg-accent sm:min-w-[44px]";
+                const pageLink = (page: number, content: React.ReactNode, label?: string) => (
+                  <a
+                    key={`p-${page}-${label ?? ""}`}
+                    href={pageHref(page)}
+                    aria-label={label}
+                    aria-current={page === currentPage && !label ? "page" : undefined}
+                    onClick={(e) => {
+                      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+                      e.preventDefault();
+                      goToPage(page);
+                    }}
+                    className={cn(linkCls, page === currentPage && !label && "border-primary bg-primary font-bold text-primary-foreground hover:bg-primary")}
+                  >
+                    {content}
+                  </a>
+                );
+                const pages: (number | string)[] = [];
+                if (totalPages <= 7) {
+                  for (let p = 1; p <= totalPages; p++) pages.push(p);
+                } else {
                   pages.push(1);
                   if (currentPage > 3) pages.push("start-ellipsis");
-                  for (let p = Math.max(2, currentPage - 1); p <= Math.min(totalPages - 1, currentPage + 1); p++) {
-                    pages.push(p);
-                  }
+                  for (let p = Math.max(2, currentPage - 1); p <= Math.min(totalPages - 1, currentPage + 1); p++) pages.push(p);
                   if (currentPage < totalPages - 2) pages.push("end-ellipsis");
                   pages.push(totalPages);
-                  return pages.map((page) =>
-                    typeof page === "string" ? (
-                      <span key={page} className="flex min-h-[44px] min-w-[32px] items-center justify-center text-sm text-muted-foreground sm:min-w-[44px]">...</span>
-                    ) : (
-                      <Button
-                        key={page}
-                        variant={currentPage === page ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => goToPage(page)}
-                        className="min-h-[44px] min-w-[36px] sm:min-w-[44px]"
-                      >
-                        {page}
-                      </Button>
-                    )
-                  );
-                })()}
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={currentPage === totalPages}
-                onClick={() => goToPage(currentPage + 1)}
-                className="min-h-[44px] gap-1"
-              >
-                <span className="hidden sm:inline">次へ</span>
-                <ChevronRight className="size-4" />
-              </Button>
-            </div>
+                }
+                return (
+                  <>
+                    {currentPage > 1 &&
+                      pageLink(currentPage - 1, <><ChevronLeft className="size-4" aria-hidden="true" /><span className="hidden sm:inline">前へ</span></>, "前のページ")}
+                    {pages.map((page) =>
+                      typeof page === "string" ? (
+                        <span key={page} className="flex min-h-[44px] min-w-[24px] items-center justify-center text-sm text-muted-foreground">…</span>
+                      ) : (
+                        pageLink(page, page)
+                      ),
+                    )}
+                    {currentPage < totalPages &&
+                      pageLink(currentPage + 1, <><span className="hidden sm:inline">次へ</span><ChevronRight className="size-4" aria-hidden="true" /></>, "次のページ")}
+                  </>
+                );
+              })()}
+            </nav>
           )}
         </>
       ) : (
