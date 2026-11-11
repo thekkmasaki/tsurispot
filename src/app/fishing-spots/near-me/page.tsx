@@ -251,6 +251,17 @@ export default function NearMePage() {
     mainImageUrl: s.mainImageUrl,
   }));
 
+  // 魚種セレクトの選択肢: 掲載スポット数の多い順
+  const fishSpotCount = new Map<string, number>();
+  for (const s of fishingSpots) {
+    for (const name of new Set(s.catchableFish.map((cf) => cf.fish.name))) {
+      if (name) fishSpotCount.set(name, (fishSpotCount.get(name) ?? 0) + 1);
+    }
+  }
+  const fishOptions = [...fishSpotCount.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([name]) => name);
+
   const prefsByRegion = getPrefecturesByRegionGroup();
 
   return (
@@ -311,7 +322,7 @@ export default function NearMePage() {
       </div>
 
       {/* ===== 2. NearMeClient（位置情報ツール） ===== */}
-      <NearMeClient spots={spotData} />
+      <NearMeClient spots={spotData} fishOptions={fishOptions} />
 
       {/* ===== 3. 地域別人気スポットランキング ===== */}
       <section className="region-ranking-section mt-12">
