@@ -1,7 +1,7 @@
 # SNSランキング投稿（Instagramリール / Threads）
 
 毎日 JST 20:00 に「◯月に△△が釣れる□□県の釣り場TOP10」を1本、自動で生成・投稿する。
-マスコットは「ウキまる」（紅白の玉ウキ。`mascot.js` の SVG）。
+マスコットは「さかなっち」（丸い小魚。`mascot.js` の SVG。サイトの `src/components/fun/sakanacchi.tsx` と同じデザイン。2026-11 にウキまるから差し替え）。
 
 ## 流れ
 

@@ -49,11 +49,11 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><link rel="styles
 <div class="mas" id="m1"></div><div class="bub">${bubble}</div></header>
 <main>${cards}</main>
 ${tipsHtml ? `<section class="tips"><div class="mas2" id="m2"></div><div><h2>${esc(t.fish.name)}を釣るコツ</h2><ul>${tipsHtml}</ul></div></section>` : ""}
-<footer><div class="brand"><span class="logo" id="lg"></span>ツリスポ<small>全国4,000か所の釣り場ガイド</small></div>
+<footer><div class="brand"><span class="logo" id="lg"></span>ツリスポ<small>全国5,000か所超の釣り場ガイド</small></div>
 <div class="cta">🔖 保存して釣行前にチェック<br><small>駐車場・釣果・詳しい情報はプロフのリンクから</small></div>
 <p class="note">※立入禁止・釣り禁止の場所では釣りをしないでください。ライフジャケット着用を。${hasPhotoCredit ? "写真出典はキャプションに記載。" : ""}</p></footer>
 <script>
-m1.innerHTML=uki("wow",{point:true}); if(window.m2) m2.innerHTML=uki("wink",{cap:true}); lg.innerHTML=uki("smile");
+m1.innerHTML=sakanacchi("wow",{point:true}); if(window.m2) m2.innerHTML=sakanacchi("wink",{cap:true}); lg.innerHTML=sakanacchi("smile");
 document.querySelectorAll('.ph[data-scene]').forEach(el=>{el.innerHTML=scene(el.dataset.scene)+'<i>'+el.dataset.scene+'</i>'});
 </script></body></html>`;
 const htmlPath = path.join(outDir, "post.html");
