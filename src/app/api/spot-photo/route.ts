@@ -8,6 +8,8 @@ import { readMultipartFile, validateAndUploadImage } from "@/lib/image-upload";
 import { rejectInactiveUser } from "@/lib/user-status";
 import { indexUserSpotPhoto } from "@/lib/account-cleanup";
 import { readJsonBody, resolveSpot, SPOT_SLUG_RE } from "@/lib/ugc-validation";
+import { getUserById } from "@/lib/user-store";
+import { toPublicSpotPhotos } from "@/lib/spot-photo-public";
 
 const MAX_PHOTOS_PER_SPOT = 20;
 
@@ -32,8 +34,9 @@ export async function GET(request: NextRequest) {
 
   try {
     const photos = (await dbGet<SpotPhotoEntry[]>(`SPOT#${slug}`, "PHOTOS")) || [];
+    // token・uploaderId は返さない。投稿者はニックネーム（非公開プロフィールは名前なし）だけ
     return NextResponse.json(
-      { photos: photos.map((p) => ({ url: p.url, uploadedAt: p.uploadedAt })) },
+      { photos: await toPublicSpotPhotos(photos, getUserById) },
       { headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" } },
     );
   } catch {
@@ -99,7 +102,8 @@ export async function POST(request: NextRequest) {
     await indexUserSpotPhoto(tsuriId, slug, result.url).catch((err) =>
       console.error("[spot-photo] 退会用索引の書込エラー:", err),
     );
-    return NextResponse.json({ ok: true, url: result.url, token });
+    // first: このスポットで最初の1枚（投稿完了時に「一番乗り」を伝える）
+    return NextResponse.json({ ok: true, url: result.url, token, first: currentPhotos.length === 0 });
   } catch (e) {
     console.error("[spot-photo] 保存エラー:", e);
     await deleteFromS3(result.url).catch(() => {});

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { PublicSpotPhoto, SpotPhotoEntryLike } from "@/lib/spot-photo-public";
 import { getShakurhythmSpotContext } from "@/lib/shakurhythm";
 import { ShakurhythmSpotNote } from "@/components/promo/shakurhythm-spot-note";
 import Link from "next/link";
@@ -251,15 +252,19 @@ export function generateStaticParams() {
   return prioritized.map((spot) => ({ slug: spot.slug }));
 }
 
-async function getInitialCommunityPhotos(slug: string): Promise<{ url: string; uploadedAt: number }[]> {
+async function getInitialCommunityPhotos(slug: string): Promise<PublicSpotPhoto[]> {
   // SSGビルド時はDynamoDBを叩かない（全スポット完全SSG化でビルド時I/Oを排除）。
   // コミュニティ写真はランタイムISR再生成時に取得される。
   if (process.env.NEXT_PHASE === "phase-production-build") return [];
   try {
     const { dbGet } = await import("@/lib/dynamodb");
-    const photos = await dbGet<{ url: string; uploadedAt: number }[]>(`SPOT#${slug}`, "PHOTOS");
-    if (!photos) return [];
-    return photos.map((p) => ({ url: p.url, uploadedAt: p.uploadedAt }));
+    const photos = await dbGet<SpotPhotoEntryLike[]>(`SPOT#${slug}`, "PHOTOS");
+    if (!photos || photos.length === 0) return [];
+    const [{ getUserById }, { toPublicSpotPhotos }] = await Promise.all([
+      import("@/lib/user-store"),
+      import("@/lib/spot-photo-public"),
+    ]);
+    return await toPublicSpotPhotos(photos, getUserById);
   } catch {
     return [];
   }
