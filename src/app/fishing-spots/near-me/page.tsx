@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MascotBand } from "@/components/fun/mascot-band";
 import Image from "next/image";
 import { Star, Car, MapPin, Fish, Anchor } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
@@ -291,6 +292,7 @@ export default function NearMePage() {
           { label: "近くの釣り場" },
         ]}
       />
+      <MascotBand message="いまいる場所から、近い釣り場を探せるよ！" className="mb-5" />
 
       {/* ===== 1. h1 + イントロ ===== */}
       <div className="mb-6 sm:mb-8">
