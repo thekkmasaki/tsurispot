@@ -41,6 +41,8 @@ import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SPOT_FEATURES } from "@/lib/data/spot-features";
 import { Sakanacchi } from "@/components/fun/sakanacchi";
 import { HeroSlideshow } from "@/components/home/hero-slideshow";
+import { WantedBand } from "@/components/photo-wanted/wanted-band";
+import { getWantedSpots } from "@/lib/photo-wanted";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { DIFFICULTY_LABELS } from "@/types";
 
@@ -434,6 +436,11 @@ export default async function Home() {
             </span>
           </div>
         </Link>
+      </PageSection>
+
+      {/* WANTED（写真募集）: サウナイキタイの「未入力施設の情報募集中」型。位置情報が許可済みなら近くの件数 */}
+      <PageSection className="pb-0 sm:pb-0">
+        <WantedBand total={getWantedSpots(fishingSpots).length} />
       </PageSection>
 
       {/* 今日の釣行指数（案③）: お気に入り×今日の条件を0-100点で。毎日開く理由をつくる。
