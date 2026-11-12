@@ -23,6 +23,12 @@ interface SpotIndex {
   dates: string[];
   today: FishingIndexResult | null;
   weatherOk: boolean;
+  tideToday?: {
+    tideLabel: string;
+    moonAge: number;
+    highTides: string[];
+    lowTides: string[];
+  };
 }
 
 interface IndexResponse {
@@ -119,6 +125,8 @@ export function FishingIndexCard({ className }: { className?: string }) {
       .then((res: IndexResponse | null) => {
         if (cancelled || !res) return;
         setData(res);
+        // 天気が1件でも取れていない結果はキャッシュしない（復旧後すぐ再取得させる）
+        if (res.spots.some((s) => !s.weatherOk)) return;
         try {
           sessionStorage.setItem(
             cacheKey,
@@ -273,10 +281,23 @@ export function FishingIndexCard({ className }: { className?: string }) {
         </div>
 
         {!selected.weatherOk || !today ? (
-          <p className="mt-3 text-sm text-muted-foreground">
-            天気データを取得できませんでした。潮回りは
-            {today?.tide.tideLabel ?? "—"}です。時間をおいて再度お試しください。
-          </p>
+          <div className="mt-3 text-sm">
+            {selected.tideToday && (
+              <p className="font-medium">
+                今日は{selected.tideToday.tideLabel}（月齢{selected.tideToday.moonAge.toFixed(1)}）
+                {selected.tideToday.highTides.length > 0 && (
+                  <span className="ml-1 text-xs font-normal text-muted-foreground">
+                    満潮 {selected.tideToday.highTides.join("・")}
+                    {selected.tideToday.lowTides.length > 0 &&
+                      ` ／ 干潮 ${selected.tideToday.lowTides.join("・")}`}
+                  </span>
+                )}
+              </p>
+            )}
+            <p className="mt-1 text-xs text-muted-foreground">
+              天気予報の配信元に接続できないため、点数は一時的に出せません。復旧すると自動で表示されます。
+            </p>
+          </div>
         ) : (
           <>
             {/* スコア */}

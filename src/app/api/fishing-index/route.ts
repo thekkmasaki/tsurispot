@@ -8,6 +8,7 @@ import {
 } from "@/lib/weather/fishing-index";
 import { getTideDisplayMode, getTideStationForSpot } from "@/lib/tide/nearest-station";
 import { getTideInfoForDate } from "@/lib/tide/tide-info";
+import { todayJST } from "@/lib/activity";
 import {
   clusterByDistance,
   pickHomeClusterIndex,
@@ -43,6 +44,13 @@ interface SpotIndexPayload {
   dates: string[];
   today: FishingIndexResult | null;
   weatherOk: boolean;
+  /** 天気取得失敗時のみ: 今日の潮回り（天気に依存しない部分） */
+  tideToday?: {
+    tideLabel: string;
+    moonAge: number;
+    highTides: string[];
+    lowTides: string[];
+  };
 }
 
 function sanitizeSlugs(input: unknown, cap: number): string[] {
@@ -109,7 +117,15 @@ export async function POST(request: Request) {
     const forecast = forecastByCoord.get(
       coordKey(spot.latitude, spot.longitude),
     );
+    // 満干時刻は最寄り観測地点の気象庁データから。
+    // フル表示スポット以外（湖・池・非河口の河川）には海の満干時刻を流さない（潮回りのみ）
+    const tideCode =
+      getTideDisplayMode(spot) === "full"
+        ? (getTideStationForSpot(spot)?.code ?? null)
+        : null;
     if (!forecast || forecast.days.length === 0) {
+      // 天気APIが落ちていても潮回り・満干は手元データで出せるので返す
+      const t = getTideInfoForDate(tideCode, todayJST());
       return {
         slug: spot.slug,
         name: spot.name,
@@ -118,14 +134,14 @@ export async function POST(request: Request) {
         dates: [],
         today: null,
         weatherOk: false,
+        tideToday: {
+          tideLabel: t.tideLabel,
+          moonAge: t.moonAge,
+          highTides: t.highTides,
+          lowTides: t.lowTides,
+        },
       };
     }
-    // 満干時刻は最寄り観測地点の気象庁データから。
-    // フル表示スポット以外（湖・池・非河口の河川）には海の満干時刻を流さない（潮回りのみ）
-    const tideCode =
-      getTideDisplayMode(spot) === "full"
-        ? (getTideStationForSpot(spot)?.code ?? null)
-        : null;
     const results = forecast.days.map((d) =>
       calcFishingIndex(getTideInfoForDate(tideCode, d.date), d),
     );

@@ -121,12 +121,15 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
       try {
         // 天気API（14日間予報 + 時間別）
         const weatherPromise = fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Asia%2FTokyo&forecast_days=14`
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Asia%2FTokyo&forecast_days=14`,
+          // 配信元が落ちていると接続待ちで読み込み中が長く続くため打ち切る
+          { signal: AbortSignal.timeout(10000) },
         ).then(r => r.json());
 
         // 海水温API（Marine API、14日間）
         const marinePromise = fetch(
-          `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&daily=sea_surface_temperature_max&timezone=Asia%2FTokyo&forecast_days=14`
+          `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&daily=sea_surface_temperature_max&timezone=Asia%2FTokyo&forecast_days=14`,
+          { signal: AbortSignal.timeout(10000) },
         ).then(r => r.json()).catch(() => null);
 
         const [data, marine] = await Promise.all([weatherPromise, marinePromise]);
