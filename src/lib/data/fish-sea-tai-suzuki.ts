@@ -160,6 +160,9 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
         ],
       },
     ],
+    userPhotos: [
+      { url: "/images/fish/madai-user1.jpg", alt: "マダイ約33cmの実釣写真（メジャー計測）", credit: "実釣写真" },
+    ],
     spots: [],
   },
   {
