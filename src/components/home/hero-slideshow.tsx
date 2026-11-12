@@ -13,9 +13,15 @@ import { cn } from "@/lib/utils";
  * - 2枚目以降はページ表示から少し経ってからマウントして読み込む。
  * - prefers-reduced-motion の人には切り替えない。
  */
-// オーナー指定（2026-11-12）: 明石海峡大橋の釣り場写真1枚に固定。
-// 枚数を増やせばそのままクロスフェードに戻る。
-const PHOTOS: readonly string[] = ["/images/hero/akashi-bridge.jpg"];
+const PHOTOS = [
+  "/images/hero/akashi-bridge.jpg",
+  "/images/hero/pier-rods.jpg",
+  "/images/hero/aoriika-hanging.jpg",
+  "/images/hero/pier-horizon.jpg",
+  "/images/hero/aoriika-egi.jpg",
+  "/images/hero/rocky-coast.jpg",
+  "/images/hero/ika-sashimi.jpg",
+] as const;
 
 const INTERVAL_MS = 6000;
 const START_DELAY_MS = 2500;
