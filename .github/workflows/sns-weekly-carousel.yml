@@ -3,7 +3,6 @@ name: 釣果週報カルーセル（Instagram）
 # 週報（microCMS の chouka-shuho-*）の釣果まとめを Instagram カルーセルで1本投稿する。
 # 本命: /weekly-report の最後に workflow_dispatch（dry_run=false, force=true）で即投稿。
 # 保険: 毎日 JST 19:00 に未投稿の最新週が出揃っていれば投稿（投稿済みなら何もしない）。
-# 写真は写真プール s3://tsurispot-sns-assets/photo-pool/ から最近使っていない順に選ぶ。
 # 生成器: scripts/sns/weekly-carousel/
 on:
   schedule:
