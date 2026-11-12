@@ -3,6 +3,7 @@
 import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { CatchlogMypageNote } from "@/components/promo/catchlog-promo";
 import {
   User, Heart, Trash2, Fish, ArrowLeft, MapPin, Calendar, Ruler,
   Edit3, Check, X, Trophy, Sparkles, Waves, Moon, Bookmark, Anchor, Bell,
@@ -1217,6 +1218,9 @@ export default function MyPage() {
 
         {/* 振り返り (On This Day / 同月過去 / 直近1週間) */}
         <OnThisDay />
+
+        {/* iPhoneアプリとのアカウント連携の案内 */}
+        <CatchlogMypageNote className="mt-4" />
 
         {/* 釣果 */}
         <Card className="mt-4">

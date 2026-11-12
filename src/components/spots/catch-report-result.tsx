@@ -19,6 +19,7 @@ import { getTitle, getNextTier, ALL_TIERS } from "@/lib/titles";
 import { todayJST } from "@/lib/activity";
 import { trackPostResultView } from "@/lib/analytics";
 import type { PostCatchResult } from "@/lib/catch-result";
+import { CatchlogPostedPromo } from "@/components/promo/catchlog-promo";
 
 interface CatchReportResultProps {
   spotSlug: string;
@@ -297,6 +298,8 @@ export function CatchReportResult({
               </p>
             </div>
           )}
+
+          <CatchlogPostedPromo className="mt-3" />
 
           <div className="mt-4 flex gap-2">
             <Button onClick={onPostAnother} variant="outline" className="flex-1">
