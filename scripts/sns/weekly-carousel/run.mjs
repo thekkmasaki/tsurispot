@@ -7,7 +7,7 @@
  *   --dry-run:    投稿・台帳書き込みをせず、Discord に画像プレビューを送るだけ
  *   --force:      「週報が出揃ったか」の判定を飛ばす
  *
- * 写真は使わない（週報の内容と関係のない写真を載せないため）。表紙は今週の注目釣果3件。
+ * 写真は週報に載っている魚の実写だけ（photos.mjs）。週報と関係のない写真は使わない。
  * /weekly-report の最後に workflow_dispatch（--force）で即投稿される。毎日の cron は取りこぼし時の保険。
  * 認証情報が無いのに投稿すべき週がある場合は「失敗」で終わる（黙ってスキップしない）。
  */
@@ -18,6 +18,7 @@ import { fileURLToPath } from "url";
 import { redis, getToken, discord, uploadPublic, removePublic } from "../ranking-reel/lib.mjs";
 import { postInstagramCarousel } from "../ranking-reel/platforms.mjs";
 import { parseWeekTag, latestWeekTag, fetchWeekArticles, parseArticle, topRows } from "./data.mjs";
+import { loadFishIndex, createPhotoResolver } from "./photos.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -60,13 +61,35 @@ const areas = articles.map(parseArticle)
 if (!areas.length) await fail(`${tag} の週報から釣果表を読み取れませんでした（記事${articles.length}件）`);
 console.log(`エリア: ${areas.map((a) => a.area).join(" / ")}`);
 
-// 3) 出力先
+// 3) 出力先と魚の写真（週報に載っている魚の実写だけ。見つからない魚は写真なし）
 const outDir = path.resolve(arg("out") ?? `out/sns-weekly/${tag}`);
 fs.mkdirSync(outDir, { recursive: true });
+const credits = new Set();
+try {
+  const photoDir = path.join(outDir, "photos");
+  fs.mkdirSync(photoDir, { recursive: true });
+  let s3;
+  const fetchOwner = async (key) => {
+    const f = path.join(photoDir, path.basename(key));
+    if (fs.existsSync(f)) return f;
+    const m = await import("@aws-sdk/client-s3");
+    s3 ??= new m.S3Client({ region: process.env.AWS_REGION || "ap-northeast-1" });
+    const obj = await s3.send(new m.GetObjectCommand({ Bucket: process.env.SNS_ASSETS_BUCKET || "tsurispot-sns-assets", Key: key }));
+    fs.writeFileSync(f, await obj.Body.transformToByteArray());
+    return f;
+  };
+  const resolve = createPhotoResolver(loadFishIndex(), fetchOwner, week.month * 5 + week.weekN);
+  for (const a of areas) for (const r of a.rows) {
+    r.photo = await resolve(r.fish);
+    if (r.photo?.credit) credits.add(r.photo.credit);
+  }
+  const n = areas.flatMap((a) => a.rows).filter((r) => r.photo).length;
+  console.log(`魚の写真: ${n}/${areas.flatMap((a) => a.rows).length}件`);
+} catch (e) { console.warn("魚の写真の解決に失敗（写真なしで続行）:", e.message); }
 
 // 4) 描画
 const dataPath = path.join(outDir, "week.json");
-fs.writeFileSync(dataPath, JSON.stringify({ week, areas }, null, 2));
+fs.writeFileSync(dataPath, JSON.stringify({ week, areas, credits: [...credits] }, null, 2));
 const out = execFileSync("node", [path.join(here, "render.mjs"), dataPath, outDir], { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] });
 const slides = JSON.parse(out.trim().split("\n").at(-1));
 const caption = fs.readFileSync(path.join(outDir, "caption-instagram.txt"), "utf8");

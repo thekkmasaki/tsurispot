@@ -5,7 +5,7 @@
  *
  * week.json: { week:{label,range,tag}, areas:[{area,catchCopy,url,rows:[{spot,fish,size,method,heat}]}] }
  * 構成: 表紙(今週の注目3件) → エリア(1枚に2〜3エリア) → 締め
- * 写真は使わない（週報の内容と関係のない写真を載せないため）
+ * 写真は週報に載っている魚種の実写だけ（rows[].photo）。週報と関係のない写真は使わない
  */
 import fs from "fs";
 import path from "path";
@@ -39,11 +39,14 @@ if (!areaChunks.length) throw new Error("釣果表のあるエリアが0件");
 if (1 + areaChunks.length + 1 > MAX_SLIDES) throw new Error(`エリアが多すぎてカルーセルに収まりません（${areas.length}エリア）`);
 const total = 1 + areaChunks.length + 1;
 
-// 表紙の注目釣果: 各エリアの最上位から好調度順に3件（別エリア・別魚種）
+// 魚の写真（週報に載っている魚種の実写。photo.name = 写っている魚種）
+const thumb = (p, cls = "ph") => (p ? `<div class="${cls}" style="background-image:url('file://${p.file}')"><i>${esc(p.name)}</i></div>` : "");
+
+// 表紙の注目釣果: 各エリアから1件（写真のある魚を優先）→ 写真あり・好調度順に3件（別魚種）
 const seenFish = new Set();
 const highlights = areas
-  .map((a) => ({ area: a.area, r: a.rows[0] }))
-  .sort((x, y) => y.r.heat - x.r.heat)
+  .map((a) => ({ area: a.area, r: a.rows.find((r) => r.photo) ?? a.rows[0] }))
+  .sort((x, y) => (y.r.photo ? 1 : 0) - (x.r.photo ? 1 : 0) || y.r.heat - x.r.heat)
   .filter((h) => !/^情報なし/.test(h.r.size) && (seenFish.has(fishLabel(h.r.fish)) ? false : seenFish.add(fishLabel(h.r.fish))))
   .slice(0, 3);
 
@@ -52,17 +55,17 @@ const slides = [
   <div class="top"><span class="chip">釣果週報</span><span class="chip ghost">全国${areas.length}エリア</span></div>
   <div class="head"><h1>${esc(d.week.label)}</h1><div class="range">${esc(d.week.range)}の釣果まとめ</div></div>
   <div class="hl"><h2>今週の注目</h2><ul>
-  ${highlights.map((h) => `<li><span>${esc(h.area)}</span><b>${esc(fishLabel(h.r.fish))}</b><em>${esc(cut(sizeLabel(h.r.size), 24))}</em></li>`).join("")}
+  ${highlights.map((h) => `<li class="${h.r.photo ? "" : "np"}">${thumb(h.r.photo, "ph big")}<div><span>${esc(h.area)}</span><b>${esc(fishLabel(h.r.fish))}</b><em>${esc(cut(sizeLabel(h.r.size), 20))}</em></div></li>`).join("")}
   </ul></div>
-  <div class="brand"><span class="logo" data-m="smile"></span>ツリスポ</div><div class="swipe">エリア別はスワイプ ▶</div></section>`,
+  <div class="brand"><span class="logo" data-m="smile"></span>ツリスポ</div><div class="swipe">エリア別はスワイプ ▶</div><p class="cnote">※魚の写真は魚種のイメージです</p></section>`,
   ...areaChunks.map((chunk, ci) => `<section class="slide areas"><header><b>${esc(d.week.label)}の釣果</b><span>${ci + 2} / ${total}</span></header><main>
   ${chunk.map((a) => {
     const top = Math.max(0, ...a.rows.map((r) => r.heat));
     return `<div class="area"><h2>${esc(a.area)}<i>${HEAT[Math.min(top, 5)]}</i></h2><p class="copy">${esc(a.catchCopy)}</p><ul>
-    ${a.rows.map((r) => `<li><b>${esc(fishLabel(r.fish))}</b><em>${esc(cut(sizeLabel(r.size), 26))}</em><small>📍${esc(r.spot)}${r.method && !/^(情報なし|記載なし|不明)/.test(r.method) ? `｜${esc(r.method)}` : ""}　${"🔥".repeat(r.heat)}</small></li>`).join("")}
+    ${a.rows.map((r) => `<li class="${r.photo ? "" : "np"}">${thumb(r.photo)}<div class="tx"><b>${esc(fishLabel(r.fish))}</b><em>${esc(cut(sizeLabel(r.size), 26))}</em><small>📍${esc(r.spot)}${r.method && !/^(情報なし|記載なし|不明)/.test(r.method) ? `｜${esc(r.method)}` : ""}　${"🔥".repeat(r.heat)}</small></div></li>`).join("")}
     </ul></div>`;
   }).join("")}</main>
-  <footer><span>出典：各施設・釣具店の公開釣果をツリスポがまとめ</span><span>ツリスポ</span></footer></section>`),
+  <footer><span>釣果の出典：各施設・釣具店の公開情報</span><span>魚の写真は魚種のイメージです</span></footer></section>`),
   `<section class="slide cta"><div class="mas" data-m="wink"></div>
   <h2>釣れたスポットと<br><span>詳しい釣果表</span>は<br>プロフのリンクから</h2>
   <p>ツリスポ › 釣果週報で<br>エリアごとの全釣果を公開中</p>
@@ -111,6 +114,7 @@ ${lines}
 🔖 保存して週末の釣行計画に！
 
 ※釣果は各施設・釣具店の公開情報をもとにまとめています。立入禁止・釣り禁止の場所では釣りをしないでください。
+📷 魚の写真は魚種のイメージです（ツリスポ編集部の実釣写真${(d.credits ?? []).length ? "ほか" : ""}）${(d.credits ?? []).length ? "\n" + d.credits.map((c) => `・${c}`).join("\n") : ""}
 
 ${hashtags}`;
 fs.writeFileSync(path.join(outDir, "caption-instagram.txt"), caption.slice(0, 2200));
