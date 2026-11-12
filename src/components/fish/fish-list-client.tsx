@@ -148,6 +148,7 @@ const FISHING_CATEGORY_MAP: Record<string, FishingCategory> = {
   fugu: "shore",
   kusafugu: "shore",
   haokoze: "shore",
+  anahaze: "shore",
   aigo: "shore",
   ishidai: "shore",
   shimadai: "shore",

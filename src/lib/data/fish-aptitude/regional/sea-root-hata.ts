@@ -197,6 +197,14 @@ export const seaRootHataAptitude: Record<string, FishRegionalAptitude> = {
       "ハオコゼは本州〜九州の堤防・藻場に広く生息する小型の毒魚で、探り釣り・サビキの外道として全国で釣れる。東北は境界域で、北海道には分布しない。",
     sources: ["堤防釣り実績（外道）", "魚類図鑑的分布情報（ハオコゼ・分布域）"],
   },
+  anahaze: {
+    default: 2,
+    regionOverrides: { hokkaido: 1 },
+    prefectureOverrides: { okinawa: 0 },
+    rationale:
+      "アナハゼは北海道南部〜九州の沿岸の藻場・岩礁・堤防の壁際に広く生息する小型のカジカ類で、探り釣りやライトゲームの外道として全国的に釣れる。沖縄には分布しない。",
+    sources: ["堤防釣り実績（外道）", "魚類図鑑的分布情報（アナハゼ・分布域）"],
+  },
   oniokoze: {
     default: 1,
     regionOverrides: { hokkaido: 0, tohoku: 0, shikoku: 2, kyushu: 2 },

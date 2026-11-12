@@ -82,6 +82,7 @@ export const spotTypeOverrides: Record<string, Partial<Record<SpotType, Aptitude
   fugu: { beach: 2 },
   gonzui: {},
   haokoze: {},
+  anahaze: { breakwater: 3, port: 3, rocky: 3 },
   oniokoze: { rocky: 2, port: 2, breakwater: 2 },
   akaei: { beach: 3, surf: 3, river: 2, breakwater: 2 },
   dochizame: { surf: 3, beach: 3, port: 2, breakwater: 2 },
