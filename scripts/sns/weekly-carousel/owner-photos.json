@@ -1,0 +1,8 @@
+{
+  "_説明": "オーナーから受け取った実釣写真（s3://tsurispot-sns-assets/photo-pool/、EXIF/GPS削除済み）を魚種slugに対応づける。魚種を断定できた写真だけ載せる。週報にその魚が出たときだけ使う",
+  "aoriika": ["photo-pool/411969786a06b42d.jpg", "photo-pool/875f59a6eec0364f.jpg", "photo-pool/1ff7994041211b86.jpg"],
+  "kurodai": ["photo-pool/4018441477be38f4.jpg"],
+  "kasago": ["photo-pool/70d343ef1b08f777.jpg"],
+  "anahaze": ["photo-pool/c7091413825e6d15.jpg"],
+  "inada": ["photo-pool/ac962dcf88d038d8.jpg"]
+}
