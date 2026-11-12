@@ -4,7 +4,7 @@
  *   node scripts/sns/weekly-carousel/render.mjs <week.json> <outDir>
  *
  * week.json: { week:{label,range,tag}, areas:[{area,catchCopy,url,rows:[{spot,fish,size,method,heat}]}], photos:[絶対パス] }
- * 構成: 表紙(写真1枚目) → エリア(1枚に2〜3エリア) → 今週の一枚(写真2枚目以降) → 締め
+ * 構成: 表紙(写真1枚目) → エリア(1枚に2〜3エリア) → 編集部の写真(2枚目以降) → 締め
  */
 import fs from "fs";
 import path from "path";
@@ -58,7 +58,7 @@ const slides = [
     </ul></div>`;
   }).join("")}</main>
   <footer><span>出典：各施設・釣具店の公開釣果をツリスポがまとめ</span><span>ツリスポ</span></footer></section>`),
-  ...extraPhotos.map((p) => `<section class="slide snap"><div class="photo" style="background-image:url('${url(p)}')"></div><div class="shade"></div><div class="cap">📷 今週の一枚</div></section>`),
+  ...extraPhotos.map((p) => `<section class="slide snap"><div class="photo" style="background-image:url('${url(p)}')"></div><div class="shade"></div><div class="cap">📷 ツリスポ編集部の釣行より</div></section>`),
   `<section class="slide cta"><div class="mas" data-m="wink"></div>
   <h2>釣れたスポットと<br><span>詳しい釣果表</span>は<br>プロフのリンクから</h2>
   <p>ツリスポ › 釣果週報で<br>エリアごとの全釣果を公開中</p>

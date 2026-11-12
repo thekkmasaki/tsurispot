@@ -7,9 +7,10 @@
  *   --week:       省略時は microCMS の最新週
  *   --dry-run:    投稿・台帳書き込みをせず、Discord に画像プレビューを送るだけ
  *   --force:      「週報が出揃ったか」の判定を飛ばす
- *   --photos-dir: 写真をローカルから読む（省略時は s3://tsurispot-sns-assets/weekly-photos/<週>/）
+ *   --photos-dir: 写真をローカルのフォルダから選ぶ（省略時は写真プール s3://tsurispot-sns-assets/photo-pool/）
  *
- * 毎日 cron で呼ばれ、未投稿の最新週が出揃っていれば投稿する。出揃っていない・投稿済みなら何もしない。
+ * 写真はプールから毎週4枚（表紙1+写真スライド3）を「最近使っていない順」に選んで使い回す。
+ * /weekly-report の最後に workflow_dispatch（--force）で即投稿される。毎日の cron は取りこぼし時の保険。
  * 認証情報が無いのに投稿すべき週がある場合は「失敗」で終わる（黙ってスキップしない）。
  */
 import { execFileSync } from "child_process";
@@ -61,30 +62,51 @@ const areas = articles.map(parseArticle)
 if (!areas.length) await fail(`${tag} の週報から釣果表を読み取れませんでした（記事${articles.length}件）`);
 console.log(`エリア: ${areas.map((a) => a.area).join(" / ")}`);
 
-// 3) 写真（無ければ写真なしの表紙で続行）
+// 3) 写真: プールから「最近使っていない順」に4枚（表紙は縦長を優先）。取れなければ写真なしの表紙で続行
 const outDir = path.resolve(arg("out") ?? `out/sns-weekly/${tag}`);
 fs.mkdirSync(outDir, { recursive: true });
+const PHOTO_USED_KEY = "sns:weekly:photo-used"; // Redis HASH（写真ID → 最後に使った日時）
+const PHOTOS_PER_POST = 4;
 let photos = [];
-const photosDir = arg("photos-dir");
-if (photosDir) {
-  photos = fs.readdirSync(photosDir).filter((f) => /\.jpe?g$/i.test(f)).sort().map((f) => path.resolve(photosDir, f));
-} else {
-  try {
+let photoIds = [];
+try {
+  const photosDir = arg("photos-dir");
+  let candidates; // [{ id, fetch: () => ローカルパス }]
+  if (photosDir) {
+    candidates = fs.readdirSync(photosDir).filter((f) => /\.jpe?g$/i.test(f)).map((f) => ({ id: f, fetch: async () => path.resolve(photosDir, f) }));
+  } else {
     const { S3Client, ListObjectsV2Command, GetObjectCommand } = await import("@aws-sdk/client-s3");
     const s3 = new S3Client({ region: process.env.AWS_REGION || "ap-northeast-1" });
     const Bucket = process.env.SNS_ASSETS_BUCKET || "tsurispot-sns-assets";
-    const list = (await s3.send(new ListObjectsV2Command({ Bucket, Prefix: `weekly-photos/${tag}/` }))).Contents ?? [];
+    const list = (await s3.send(new ListObjectsV2Command({ Bucket, Prefix: "photo-pool/" }))).Contents ?? [];
     const dir = path.join(outDir, "photos");
     fs.mkdirSync(dir, { recursive: true });
-    for (const o of list.filter((o) => /\.jpe?g$/i.test(o.Key)).sort((a, b) => a.Key.localeCompare(b.Key))) {
-      const body = await (await s3.send(new GetObjectCommand({ Bucket, Key: o.Key }))).Body.transformToByteArray();
-      const f = path.join(dir, path.basename(o.Key));
-      fs.writeFileSync(f, body);
-      photos.push(f);
-    }
-  } catch (e) { console.warn("写真の取得に失敗（写真なしで続行）:", e.message); }
-}
-console.log(`写真: ${photos.length}枚`);
+    candidates = list.filter((o) => /\.jpe?g$/i.test(o.Key)).map((o) => ({
+      id: path.basename(o.Key),
+      fetch: async () => {
+        const f = path.join(dir, path.basename(o.Key));
+        fs.writeFileSync(f, await (await s3.send(new GetObjectCommand({ Bucket, Key: o.Key }))).Body.transformToByteArray());
+        return f;
+      },
+    }));
+  }
+  const flat = (await redis(["HGETALL", PHOTO_USED_KEY]).catch(() => null)) ?? [];
+  const used = Object.fromEntries(flat.flatMap((v, i, a) => (i % 2 ? [] : [[v, Date.parse(a[i + 1]) || 0]])));
+  // 未使用 → 古い順。同順位はランダム
+  const order = candidates.map((c) => ({ ...c, at: used[c.id] ?? 0, r: Math.random() })).sort((a, b) => a.at - b.at || a.r - b.r);
+  const { default: sharp } = await import("sharp");
+  const picked = [];
+  for (const c of order.slice(0, PHOTOS_PER_POST + 2)) {
+    const file = await c.fetch();
+    const m = await sharp(file).metadata();
+    picked.push({ id: c.id, file, portrait: m.height >= m.width });
+  }
+  const coverIdx = Math.max(0, picked.findIndex((p) => p.portrait));
+  const chosen = [picked[coverIdx], ...picked.filter((_, i) => i !== coverIdx)].filter(Boolean).slice(0, PHOTOS_PER_POST);
+  photos = chosen.map((p) => p.file);
+  photoIds = chosen.map((p) => p.id);
+  console.log(`写真: プール${candidates.length}枚から ${photoIds.join(", ") || "なし"}`);
+} catch (e) { console.warn("写真の取得に失敗（写真なしで続行）:", e.message); }
 
 // 4) 描画
 const dataPath = path.join(outDir, "week.json");
@@ -113,6 +135,8 @@ try {
   for (const [i, f] of slides.entries()) imageUrls.push(await uploadPublic(f, keys[i], "image/jpeg"));
   const res = await postInstagramCarousel({ userId, token, imageUrls, caption });
   await redis(["SADD", POSTED_KEY, tag]);
+  const now = new Date().toISOString();
+  if (photoIds.length) await redis(["HSET", PHOTO_USED_KEY, ...photoIds.flatMap((id) => [id, now])]);
   await redis(["LPUSH", LOG_KEY, JSON.stringify({ week: tag, at: new Date().toISOString(), id: res.id, permalink: res.permalink, areas: areas.length, photos: photos.length })]);
   console.log("投稿完了:", res.permalink ?? res.id);
   await discord(`📣 **釣果週報カルーセル** ${label}\n✅ ${res.permalink ?? res.id}`);
