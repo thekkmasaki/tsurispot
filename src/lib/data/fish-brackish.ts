@@ -81,6 +81,7 @@ export const brackishFish: FishSpecies[] = [
     ],
     userPhotos: [
       { url: "/images/fish/kurodai-1.jpg", alt: "クロダイ（チヌ）約50cmの実釣写真", credit: "実釣写真" },
+      { url: "/images/fish/kurodai-user3.jpg", alt: "クロダイ（チヌ）の実釣写真 銀色の体と黒い背びれ", credit: "実釣写真" },
     ],
     spots: [],
   },

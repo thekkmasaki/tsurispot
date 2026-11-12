@@ -83,6 +83,7 @@ export const seaFishRootHata: FishSpecies[] = [
       { url: "/images/fish/kasago-1.jpg", alt: "カサゴ（ガシラ）の実釣写真", credit: "実釣写真" },
       { url: "/images/fish/kasago-2.jpg", alt: "カサゴの実釣写真 斑点模様", credit: "実釣写真" },
       { url: "/images/fish/kasago-3.jpg", alt: "カサゴの実釣写真", credit: "実釣写真" },
+      { url: "/images/fish/kasago-user4.jpg", alt: "カサゴ（ガシラ）の実釣写真 赤褐色のまだら模様", credit: "実釣写真" },
     ],
     spots: [],
   },
@@ -400,6 +401,9 @@ export const seaFishRootHata: FishSpecies[] = [
           "アタリはコンコンという明確な感触。間を置かずしっかり合わせる",
         ],
       },
+    ],
+    userPhotos: [
+      { url: "/images/fish/hata-user1.jpg", alt: "キジハタ（アコウ）の実釣写真 オレンジの斑点と白い横帯", credit: "実釣写真" },
     ],
     spots: [],
   },

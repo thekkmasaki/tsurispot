@@ -592,7 +592,7 @@ export default async function FishDetailPage({ params }: PageProps) {
                     src={photo.url}
                     alt={photo.alt}
                     fill
-                    className="object-cover transition-transform group-hover:scale-105"
+                    className="object-contain transition-transform group-hover:scale-105"
                     sizes="(max-width: 640px) 50vw, 33vw"
                   />
                 </div>
