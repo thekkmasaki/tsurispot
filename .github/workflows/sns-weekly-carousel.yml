@@ -1,0 +1,86 @@
+name: 釣果週報カルーセル（Instagram）
+
+# 週報（microCMS の chouka-shuho-*）が出揃ったら、その週の釣果まとめをカルーセルで1本投稿する。
+# 毎日 JST 19:00 に確認し、未投稿の最新週が出揃っていれば投稿（投稿済み・未完成なら何もしない）。
+# 写真は /weekly-report の最後に prep-photos.mjs が s3://tsurispot-sns-assets/weekly-photos/<週>/ に置く。
+# 生成器: scripts/sns/weekly-carousel/
+on:
+  schedule:
+    - cron: '0 10 * * *'   # JST 19:00（ランキング投稿の20:00と重ねない）
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '投稿せずDiscordに画像プレビューだけ送る'
+        type: boolean
+        default: true
+      week:
+        description: '対象週（例: 2026-11-week2）。空なら最新週'
+        required: false
+      force:
+        description: '週報が出揃ったかの判定を飛ばす'
+        type: boolean
+        default: false
+
+concurrency:
+  group: sns-weekly-carousel
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+      INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+      MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+      MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ap-northeast-1
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: 依存インストール
+        run: npm ci
+
+      - name: 描画環境（Chromium・日本語/絵文字フォント）
+        run: |
+          npx playwright install chromium --with-deps
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk fonts-noto-color-emoji
+
+      - name: 生成して投稿
+        run: |
+          ARGS=()
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            [ "${{ inputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
+            [ "${{ inputs.force }}" = "true" ] && ARGS+=(--force)
+            [ -n "${{ inputs.week }}" ] && ARGS+=(--week "${{ inputs.week }}")
+          fi
+          node scripts/sns/weekly-carousel/run.mjs "${ARGS[@]}"
+
+      - name: 生成物を保存（確認用・7日）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sns-weekly-${{ github.run_id }}
+          path: |
+            out/sns-weekly/**/slide-*.jpg
+            out/sns-weekly/**/caption-instagram.txt
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Discord通知（異常終了）
+        if: failure() && env.DISCORD_WEBHOOK_URL != ''
+        run: |
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"❌ **釣果週報カルーセル** ワークフロー失敗\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+            "$DISCORD_WEBHOOK_URL"
