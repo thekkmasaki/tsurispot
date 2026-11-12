@@ -57,6 +57,11 @@ function splitFishNames(fishName: string): string[] {
     .filter(Boolean);
 }
 
+/** iPhoneアプリ「ツリスポ釣果記録」からの投稿か */
+function isCatchlogApp(request: Request): boolean {
+  return /^CatchLog\//.test(request.headers.get("user-agent") ?? "");
+}
+
 function parseReports(raw: unknown[]): CatchReport[] {
   return (raw || [])
     .map((item) => {
@@ -201,6 +206,8 @@ export async function POST(request: Request) {
       weather: weather || undefined,
       submittedAt: new Date().toISOString(),
       tags: normTags.length > 0 ? normTags : undefined,
+      // アプリは全リクエストに User-Agent「CatchLog/x.y (iOS)」を付けて送る
+      ...(isCatchlogApp(request) ? { via: "app" as const } : {}),
     };
 
     // ログインしない投稿だけ削除キーを発行する。保存するのはハッシュだけで、置き場所は

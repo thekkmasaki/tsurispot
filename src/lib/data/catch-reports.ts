@@ -22,6 +22,7 @@ export interface CatchReport {
   weather?: string; // 天候
   submittedAt?: string; // 投稿日時(ISO)。UGC投稿時に設定。型と実値の整合用
   pioneer?: boolean; // スポット初投稿（開拓者）。一覧の🏴バッジ表示用
+  via?: "app"; // iPhoneアプリ「ツリスポ釣果記録」からの投稿（User-Agent で判定）。一覧の「アプリから投稿」印
   officialReply?: OfficialReplyInfo; // 運営返信（取得時にbatchGetで付与、配列には保存しない）
 }
 

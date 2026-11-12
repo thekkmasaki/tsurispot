@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/toast";
 import { LikeButton } from "@/components/social/like-button";
 import type { CatchReport, SpotPioneer } from "@/lib/data/catch-reports";
+import { CatchlogViaBadge } from "@/components/promo/catchlog-promo";
 
 interface CatchReportListProps {
   spotSlug: string;
@@ -217,6 +218,7 @@ export function CatchReportList({ spotSlug, initialReports, pioneer = null, allo
                       🏴 開拓者
                     </span>
                   )}
+                  {report.via === "app" && <CatchlogViaBadge />}
                 </p>
                 <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1">

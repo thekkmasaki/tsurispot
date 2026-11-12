@@ -84,6 +84,7 @@ import { getLatestWeeklyReportForSpot } from "@/lib/data/weekly-report-latest";
 import { getCurrentMonthTargets, pickRecentUgcCatches, getJstMonth } from "@/lib/spot-recent-catch";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
+import { CatchlogFormPromo } from "@/components/promo/catchlog-promo";
 import { getSpotContributionsAsync } from "@/lib/data/spot-contributions";
 import { SpotContributionList } from "@/components/spots/spot-contribution-list";
 import { SpotEeatFooter } from "@/components/spots/spot-eeat-footer";
@@ -1185,7 +1186,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 からお知らせください。
               </p>
             ) : (
-              <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
+              <>
+                {/* iPhoneアプリ「ツリスポ釣果記録」の案内（アプリの投稿がこの一覧に載る連携を図で示す） */}
+                <CatchlogFormPromo className="mt-4" />
+                <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
+              </>
             )}
             {/* エリアの釣果傾向（釣果報告の補完情報） */}
             {(() => {
