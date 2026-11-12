@@ -756,6 +756,72 @@ export const seaFishRootHata: FishSpecies[] = [
     spots: [],
   },
   {
+    id: "f131",
+    name: "アナハゼ",
+    nameKana: "アナハゼ",
+    nameEnglish: "Sculpin (Pseudoblennius percoides)",
+    scientificName: "Pseudoblennius percoides",
+    slug: "anahaze",
+    description:
+      "名前にハゼと付くがカジカの仲間。堤防の際や藻場に潜み、探り釣り・穴釣り・ワームでよく掛かる外道の常連。頭から体が青緑〜褐色のまだら模様で、身や骨が青緑色をしているのが特徴。毒はないが、食味は好みが分かれる。",
+    category: "sea",
+    family: "カジカ科",
+    difficulty: "beginner",
+    tasteRating: 2,
+    sizeCm: "10~20cm",
+    imageUrl: "/images/fish/anahaze.jpg",
+    seasonMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    peakMonths: [4, 5, 6, 7, 8],
+    cookingTips: [
+      "小型が多いのでリリースが基本",
+      "食べるなら唐揚げや味噌汁。身や骨が青緑色だが、加熱しても食べられる",
+    ],
+    youtubeLinks: [
+      { label: "アナハゼの釣れ方", searchQuery: "アナハゼ 堤防 釣り 外道", description: "堤防の探り釣りやワームで掛かるアナハゼの様子" },
+      { label: "アナハゼとカサゴの見分け方", searchQuery: "アナハゼ 見分け方 カジカ", description: "根魚と間違えやすいアナハゼの見分け方" },
+    ],
+    fishingMethods: [
+      {
+        methodName: "探り釣り・穴釣り（外道）",
+        difficulty: "beginner",
+        description: "堤防の壁際やテトラの隙間をブラクリや胴突き仕掛けで探ると、カサゴやメバルに混じってよく掛かる。エサへの反応が良く、子どもでも釣りやすい。",
+        bestSeason: "4〜8月",
+        tackle: {
+          rod: "万能竿・穴釣りロッド 1〜2.7m",
+          reel: "小型スピニングまたはベイトリール",
+          line: "ナイロン2〜3号",
+          hookOrLure: "ブラクリ仕掛け 2〜5号",
+          otherItems: ["アオイソメ・オキアミ（エサ）", "フィッシュグリップ", "ペンチ"],
+        },
+        tips: [
+          "壁際の藻の生えている場所に多い。足元から丁寧に探る",
+          "口が大きくエサを丸飲みしやすいので、針外しはペンチを使う",
+        ],
+      },
+      {
+        methodName: "ライトゲーム（ワーム）",
+        difficulty: "beginner",
+        description: "ジグヘッドに小型ワームを付けて底や壁際を探るロックフィッシュ狙いで、アナハゼがよく反応する。ルアーに積極的に食い付くので、ライトゲームの入門にも向く。",
+        bestSeason: "4〜10月",
+        tackle: {
+          rod: "ライトゲームロッド 7ft前後",
+          reel: "スピニングリール 2000番",
+          line: "PE0.3〜0.4号＋フロロリーダー1.5〜2号",
+          hookOrLure: "ジグヘッド 1〜3g＋2インチワーム",
+          otherItems: ["フィッシュグリップ", "プライヤー"],
+        },
+        tips: [
+          "底を取ってからゆっくりズル引きすると掛かりやすい",
+          "藻場の際を通すと反応が出やすい",
+        ],
+      },
+    ],
+    userPhotos: [
+      { url: "/images/fish/anahaze-user1.jpg", alt: "アナハゼの実釣写真 青緑色の頭とまだら模様", credit: "実釣写真" },
+    ],
+    spots: [],
+  },
+  {
     id: "f61",
     name: "オニオコゼ",
     nameKana: "オニオコゼ",

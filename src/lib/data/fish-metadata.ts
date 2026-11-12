@@ -152,6 +152,7 @@ export const fishMetadata: Record<string, FishMeta> = {
   // アイゴ: 関西でバリ、四国でアイ
   aigo:           { aliases: ["バリ", "藍子", "アイ", "ヤノウオ"], popularity: 69 },
   haokoze:        { aliases: ["葉鰧", "ハチオコゼ"], popularity: 70 },
+  anahaze:        { aliases: ["穴鯊"], popularity: 151 },
   oniokoze:       { aliases: ["鬼鰧", "オコゼ", "ヤマノカミ"], popularity: 71 },
   akaei:          { aliases: ["赤鱝", "エイ", "アカエ"], popularity: 72 },
   dochizame:      { aliases: ["奴智鮫", "サメ"], popularity: 73 },
