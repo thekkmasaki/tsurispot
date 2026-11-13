@@ -240,3 +240,42 @@ export function pickLatestWeeklyByArea(
   }
   return latest;
 }
+
+/** 毎週更新している主要10エリア（エリア別の最新釣果ページ /chouka/{slug} を持つ） */
+export const MAIN_WEEKLY_AREA_SLUGS: readonly string[] = WEEKLY_REPORT_AREAS.slice(0, 10).map((a) => a.slug);
+
+/** エリア別の最新釣果ページのパス */
+export function weeklyAreaHubPath(areaSlug: string): string {
+  return `/chouka/${areaSlug}`;
+}
+
+/** 記事一覧から、指定エリアの週報を新しい順に返す */
+export function listWeeklyPostsForArea<T extends { slug: string; title: string; publishedAt: string }>(
+  posts: T[],
+  areaSlug: string,
+): T[] {
+  return posts
+    .filter((p) => matchWeeklyAreaForPost(p)?.slug === areaSlug)
+    .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : a.publishedAt > b.publishedAt ? -1 : 0));
+}
+
+/**
+ * 週報本文HTMLから、エリア別ページに載せる部分（冒頭の要約段落と「釣果速報（一覧）」表）を抜き出す。
+ * 記事全文を転載すると週報記事と重複コンテンツになるため、要約と一覧表だけにする。
+ * 見つからない部分は空文字。
+ */
+export function extractWeeklyDigest(html: string): { intro: string; table: string } {
+  const src = html ?? "";
+  const firstH2 = src.search(/<h2[\s>]/i);
+  const head = firstH2 >= 0 ? src.slice(0, firstH2) : "";
+  const intro = /<p\b[^>]*>[\s\S]*?<\/p>/i.exec(head)?.[0] ?? "";
+  const tableStart = src.search(/<h2[^>]*>[^<]*釣果速報/i);
+  let table = "";
+  if (tableStart >= 0) {
+    const afterHeading = src.indexOf("</h2>", tableStart);
+    const rest = afterHeading >= 0 ? src.slice(afterHeading + 5) : "";
+    const end = rest.search(/<h2[\s>]|<hr\b/i);
+    table = (end >= 0 ? rest.slice(0, end) : rest).trim();
+  }
+  return { intro, table };
+}

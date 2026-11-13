@@ -28,6 +28,7 @@ import {
 import { InArticleAd, StickySidebarAd, MultiplexAd } from "@/components/ads/ad-unit";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recommend";
+import { MAIN_WEEKLY_AREA_SLUGS, matchWeeklyAreaForPost, weeklyAreaHubPath } from "@/lib/weekly-report-areas";
 
 // ISR: 静的記事は generateStaticParams で SSG、microCMS記事は dynamicParams で随時生成。
 // （旧 force-dynamic は2026-05-19の空HTML焼き付き対策の暫定措置。
@@ -282,6 +283,22 @@ export default async function BlogPostPage({
           ))}
         </div>
       </header>
+
+      {/* 週報記事 → そのエリアの最新釣果ページへ（古い週の記事から最新へ送る） */}
+      {(() => {
+        const area = matchWeeklyAreaForPost(post);
+        if (!area || !MAIN_WEEKLY_AREA_SLUGS.includes(area.slug)) return null;
+        return (
+          <Link
+            prefetch={false}
+            href={weeklyAreaHubPath(area.slug)}
+            className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm font-medium text-sky-800 hover:bg-sky-100"
+          >
+            <span>📍 {area.label}の最新釣果は毎週こちらで更新しています</span>
+            <ChevronRight className="size-4 shrink-0" />
+          </Link>
+        );
+      })()}
 
       {/* ATF広告: 記事タイトル・メタ情報の直後 */}
       <InArticleAd className="my-6" />

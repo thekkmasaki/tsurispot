@@ -5,6 +5,10 @@ import {
   matchWeeklyAreaForPost,
   pickLatestWeeklyByArea,
   isWeeklyReportTitle,
+  MAIN_WEEKLY_AREA_SLUGS,
+  weeklyAreaHubPath,
+  listWeeklyPostsForArea,
+  extractWeeklyDigest,
 } from "../weekly-report-areas";
 import { fishingSpots } from "../data/spots";
 
@@ -137,5 +141,38 @@ describe("matchWeeklyAreaForPost / pickLatestWeeklyByArea", () => {
   it("freshDays を広げれば古い週報も拾える（しきい値が効いていることの確認）", () => {
     const map = pickLatestWeeklyByArea(posts, now, 365);
     expect(map.has("boso")).toBe(true);
+  });
+});
+
+describe("エリア別最新釣果ページ用ヘルパー", () => {
+  it("主要10エリアだけを対象にする", () => {
+    expect(MAIN_WEEKLY_AREA_SLUGS).toHaveLength(10);
+    expect(MAIN_WEEKLY_AREA_SLUGS).toContain("tokyobay-yokohama");
+    expect(MAIN_WEEKLY_AREA_SLUGS).not.toContain("boso");
+    expect(weeklyAreaHubPath("nanki-shirahama")).toBe("/chouka/nanki-shirahama");
+  });
+
+  it("指定エリアの週報だけを新しい順に返す", () => {
+    const posts = [
+      { slug: "chouka-shuho-nanki-shirahama-2026-11-week1", title: "【釣果週報】南紀・白浜エリア 2026年11月第1週｜a", publishedAt: "2026-11-03" },
+      { slug: "chouka-shuho-akashi-kobe-2026-11-week2", title: "【釣果週報】明石・神戸エリア 2026年11月第2週｜b", publishedAt: "2026-11-10" },
+      { slug: "chouka-shuho-nanki-shirahama-2026-11-week2", title: "【釣果週報】南紀・白浜エリア 2026年11月第2週｜c", publishedAt: "2026-11-10" },
+      { slug: "aji-guide", title: "アジの釣り方", publishedAt: "2026-11-11" },
+    ];
+    expect(listWeeklyPostsForArea(posts, "nanki-shirahama").map((p) => p.publishedAt)).toEqual(["2026-11-10", "2026-11-03"]);
+  });
+
+  it("週報本文から冒頭要約と一覧表だけを抜き出す", () => {
+    const html =
+      '<p style="x">南紀の釣果をまとめました。</p><h2>今週の釣果速報（一覧）</h2><div><table><tr><td>天神崎</td></tr></table></div><p>※好調度は…</p><hr/><h2>① 天神崎</h2><p>本文</p>';
+    const d = extractWeeklyDigest(html);
+    expect(d.intro).toBe('<p style="x">南紀の釣果をまとめました。</p>');
+    expect(d.table).toContain("<table>");
+    expect(d.table).toContain("※好調度");
+    expect(d.table).not.toContain("本文");
+  });
+
+  it("表が無い記事では空文字を返す", () => {
+    expect(extractWeeklyDigest("<h2>まとめ</h2><p>x</p>")).toEqual({ intro: "", table: "" });
   });
 });

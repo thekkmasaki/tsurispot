@@ -9,6 +9,7 @@ import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { getAllBlogPosts } from "@/lib/data/blog";
+import { MAIN_WEEKLY_AREA_SLUGS, listWeeklyPostsForArea } from "@/lib/weekly-report-areas";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
@@ -240,6 +241,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/legal`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/privacy`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.3 },
+    // エリア別の最新釣果（毎週更新。lastModified はそのエリアの最新週報の公開日）
+    { url: `${baseUrl}/chouka`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
+    ...MAIN_WEEKLY_AREA_SLUGS.map((slug) => {
+      const latest = listWeeklyPostsForArea(blogPosts, slug)[0];
+      return {
+        url: `${baseUrl}/chouka/${slug}`,
+        lastModified: latest?.publishedAt ? new Date(latest.publishedAt) : dynamicDate,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      };
+    }),
     // ブログ
     { url: `${baseUrl}/blog`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.7 },
     ...blogPosts.map((post) => ({

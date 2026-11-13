@@ -97,6 +97,7 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りを学ぶ</h3>
             <ul className="space-y-2 text-sm text-blue-100/90">
+              <li><Link href="/chouka" prefetch={false} className="hover:text-white">エリア別の最新釣果</Link></li>
               <li><Link href="/blog" prefetch={false} className="hover:text-white">エリア釣果レポート</Link></li>
               <li><Link href="/quiz" prefetch={false} className="hover:text-white">釣りクイズ</Link></li>
               <li><Link href="/bouzu-checker" prefetch={false} className="hover:text-white">ボウズ確率チェッカー</Link></li>
