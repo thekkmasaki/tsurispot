@@ -18,7 +18,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { redis, getToken, discord, uploadPublic, removePublic } from "../ranking-reel/lib.mjs";
 import { postInstagramCarousel } from "../ranking-reel/platforms.mjs";
-import { parseWeekTag, latestWeekTag, fetchWeekArticles, parseArticle, topRows } from "./data.mjs";
+import { parseWeekTag, latestWeekTag, fetchWeekArticles, parseArticle, topRows, weekPeriod } from "./data.mjs";
 import { loadFishIndex, createPhotoResolver } from "./photos.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -53,6 +53,9 @@ if (!todo.instagram && !todo.x) {
 
 // 2) 週報を読む・出揃い判定
 const articles = await fetchWeekArticles(tag);
+// 表示は実際に扱っている期間（例: 11/2〜11/8）。WEEKTAG の「第N週」は週報を作った週なので使わない
+week.period = weekPeriod(articles);
+console.log(`期間: ${week.period ?? "（不明。WEEKTAG の表記を使う）"}`);
 const firstAt = Math.min(...articles.map((a) => Date.parse(a.publishedAt ?? 0) || Infinity));
 const ageH = (Date.now() - firstAt) / 3600e3;
 if (!force && articles.length < READY_MIN && !(ageH >= 24)) {
@@ -98,7 +101,7 @@ fs.writeFileSync(dataPath, JSON.stringify({ week, areas, credits: [...credits] }
 const out = execFileSync("node", [path.join(here, "render.mjs"), dataPath, outDir], { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] });
 const slides = JSON.parse(out.trim().split("\n").at(-1));
 const caption = fs.readFileSync(path.join(outDir, "caption-instagram.txt"), "utf8");
-const label = `${week.label}（${areas.length}エリア・${slides.length}枚）`;
+const label = `${week.period ?? week.label}（${areas.length}エリア・${slides.length}枚）`;
 const xText = fs.readFileSync(path.join(outDir, "caption-x.txt"), "utf8");
 const xSlides = slides.slice(0, X_IMAGES);
 
@@ -161,4 +164,4 @@ for (const [name, label2, fn] of [["instagram", "Instagram", postInstagram], ["x
     errors.push(`${label2}: ${e.message}`);
   }
 }
-if (errors.length) await fail(`${week.label} の投稿に失敗\n${errors.join("\n")}`);
+if (errors.length) await fail(`${week.period ?? week.label} の投稿に失敗\n${errors.join("\n")}`);

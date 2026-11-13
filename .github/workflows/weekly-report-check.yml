@@ -1,0 +1,24 @@
+name: 釣果週報の取りこぼし検知
+
+# 週報が止まっている（最終公開から8日超）／最新週に主要10エリアの欠けがある ときに Discord に知らせる。
+# 生成自体はローカルの /weekly-report（Claude）なので、ここでは検知と通知だけ行う。
+on:
+  schedule:
+    - cron: '17 3 * * 2,5'   # 火・金 JST 12:17ごろ（遅延あり）
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+      MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 検知
+        run: node scripts/sns/weekly-carousel/check-fresh.mjs
