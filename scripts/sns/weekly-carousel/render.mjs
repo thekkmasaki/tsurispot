@@ -127,5 +127,27 @@ ${lines}
 
 ${hashtags}`;
 fs.writeFileSync(path.join(outDir, "caption-instagram.txt"), caption.slice(0, 2200));
-console.log(`OK ${files.length}枚 caption=${caption.length}字`);
+
+// ── X の本文（280ウェイト。日本語・絵文字は2、URLは一律23で数える）──
+const xWeight = (s) => [...s.replace(/https?:\/\/\S+/g, "u".repeat(23))].reduce((n, c) => n + (c.codePointAt(0) <= 0x10ff || (c >= " " && c <= "‍") || (c >= "‐" && c <= "‟") || (c >= "′" && c <= "‷") ? 1 : 2), 0);
+const X_MAX = 280;
+const xLink = areas[0].url; // 一番釣れていたエリアの週報記事
+const xHead = `【釣果週報】${d.week.label}（${d.week.range}）`;
+const xTail = `全国${areas.length}エリアの釣果はこちら👇\n${xLink}\n#釣果情報 #釣り`;
+const xBuild = (fishN, areaLines) => [xHead, fishN ? `🐟 ${fishRank.slice(0, fishN).join("・")}` : "", ...areaLines, xTail].filter(Boolean).join("\n");
+let xText = xBuild(0, []);
+outer: for (let nAreas = 3; nAreas >= 0; nAreas--) {
+  for (let fishN = 6; fishN >= 3; fishN--) {
+    const t = xBuild(fishN, areas.slice(0, nAreas).map((a) => `📍${a.area}｜${a.catchCopy}`));
+    if (xWeight(t) <= X_MAX) { xText = t; break outer; }
+  }
+}
+// エリア1行も入らないときは、先頭エリアの一言を切り詰めて入れる
+if (!xText.includes("📍")) {
+  const room = Math.floor((X_MAX - xWeight(xBuild(3, ["📍"]))) / 2) - 1;
+  if (room >= 12) xText = xBuild(3, [`📍${cut(`${areas[0].area}｜${areas[0].catchCopy}`, room)}`]);
+}
+if (xWeight(xText) > X_MAX) throw new Error(`X本文が長すぎます（${xWeight(xText)}）`);
+fs.writeFileSync(path.join(outDir, "caption-x.txt"), xText);
+console.log(`OK ${files.length}枚 caption=${caption.length}字 x=${xWeight(xText)}/${X_MAX}`);
 console.log(JSON.stringify(files));
