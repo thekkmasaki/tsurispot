@@ -5,7 +5,7 @@ name: 釣果週報カルーセル（Instagram・X）
 # 本命: /weekly-report の最後に workflow_dispatch（dry_run=false, force=true）で即投稿。
 # 保険: 毎日 JST 19:00 ごろに未投稿の最新週が出揃っていれば投稿（投稿済みなら何もしない）。
 #   GitHub の定時実行は5〜10時間遅れるため、早めに起動して gate ジョブで JST 18:55 まで待つ。
-#   遅れて日付をまたいだ（JST 0〜12時）起動は見送り、翌日の起動で投稿する（深夜の投稿はbot感が強いため）。
+#   遅れて日付をまたいだ（JST 0〜12時）起動は待たずにそのまま投稿する。
 # 生成器: scripts/sns/weekly-carousel/
 on:
   schedule:
@@ -32,25 +32,17 @@ jobs:
   gate:
     runs-on: ubuntu-latest
     timeout-minutes: 300
-    outputs:
-      go: ${{ steps.wait.outputs.go }}
     steps:
       - name: 投稿時刻（JST 18:55）まで待つ
-        id: wait
         run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ "${{ github.event_name }}" != "schedule" ]; then exit 0; fi
           h=$(TZ=Asia/Tokyo date +%-H)
-          if [ "$h" -lt 12 ]; then
-            echo "JST ${h}時の起動（遅延で日付をまたいだ）→ 深夜には投稿しないので見送り（翌日の起動で投稿）"
-            echo "go=false" >> "$GITHUB_OUTPUT"; exit 0
-          fi
+          if [ "$h" -lt 12 ]; then echo "JST ${h}時の起動（遅延で日付をまたいだ）→ 待たずに投稿"; exit 0; fi
           now=$(date +%s); target=$(TZ=Asia/Tokyo date -d "today 18:55" +%s)
           if [ "$now" -lt "$target" ]; then echo "JST 18:55 まで $(( (target-now)/60 ))分待つ"; sleep $((target-now)); fi
-          echo "go=true" >> "$GITHUB_OUTPUT"
 
   post:
     needs: gate
-    if: needs.gate.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
