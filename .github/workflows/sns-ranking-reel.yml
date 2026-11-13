@@ -2,9 +2,17 @@ name: SNS ランキング投稿（Instagramリール / Threads）
 
 # 毎日1本「◯月に△△が釣れる□□県の釣り場TOP10」を自動生成して投稿する。
 # 生成器: scripts/sns/ranking-reel/（サイトの県×月×魚種ページと同じデータ・掲載基準）
+#
+# 投稿時刻: JST 20:00 ごろ（帰宅後のアクティブ帯）。
+# GitHub の定時実行は毎日5〜10時間遅れていた（20:00予定→実際は深夜1〜6時に投稿）ため、
+# 早めに2回起動し、gate ジョブで JST 19:55 まで待ってから投稿する。
+# 遅れすぎて日付をまたいだ（JST 0〜12時）起動は「前日の分」として投稿する（--date に前日を渡す。
+# 当日扱いにすると、その日の20時の分が投稿済み扱いでスキップされてしまうため）。
+# 2回目の起動は、その日すでに投稿済みなら run.mjs が何もしない。
 on:
   schedule:
-    - cron: '0 11 * * *'   # JST 20:00（帰宅後のアクティブ帯）
+    - cron: '17 6 * * *'   # JST 15:17 起動 → 19:55 まで待つ
+    - cron: '47 8 * * *'   # JST 17:47 起動（1回目が大きく遅れたときの保険）
   workflow_dispatch:
     inputs:
       dry_run:
@@ -26,7 +34,27 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    outputs:
+      date: ${{ steps.wait.outputs.date }}
+    steps:
+      - name: 投稿時刻（JST 19:55）まで待つ
+        id: wait
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then exit 0; fi
+          h=$(TZ=Asia/Tokyo date +%-H)
+          if [ "$h" -lt 12 ]; then
+            echo "JST ${h}時の起動（遅延で日付をまたいだ）→ 前日の分として投稿"
+            echo "date=$(TZ=Asia/Tokyo date -d yesterday +%F)" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          now=$(date +%s); target=$(TZ=Asia/Tokyo date -d "today 19:55" +%s)
+          if [ "$now" -lt "$target" ]; then echo "JST 19:55 まで $(( (target-now)/60 ))分待つ"; sleep $((target-now)); fi
+          echo "date=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
+
   post:
+    needs: gate
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -74,6 +102,7 @@ jobs:
             [ -n "${{ inputs.fish }}" ] && ARGS+=(--fish "${{ inputs.fish }}")
             ARGS+=(--platforms "${{ inputs.platforms }}")
           fi
+          [ -n "${{ needs.gate.outputs.date }}" ] && ARGS+=(--date "${{ needs.gate.outputs.date }}")
           node scripts/sns/ranking-reel/run.mjs "${ARGS[@]}"
 
       - name: 生成物を保存（確認用・7日）

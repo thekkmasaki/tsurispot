@@ -31,6 +31,10 @@ const fishLabel = (f) => {
 const sizeLabel = (s) => (/^情報なし/.test(s) ? s.replace(/^情報なし/, "サイズ情報なし") : s);
 const HEAT = ["情報少なめ", "低調", "ポツポツ", "まずまず", "好調", "爆釣"];
 
+// 表示する期間（例: 11/2〜11/8）。古いデータで period が無いときは WEEKTAG の表記
+const period = d.week.period ?? null;
+const titleLabel = period ?? d.week.label;
+const periodText = period ?? `${d.week.label}（${d.week.range}）`;
 const areas = d.areas.filter((a) => a.rows.length);
 const perSlide = areas.length <= 10 ? 2 : 3;
 const areaChunks = [];
@@ -53,12 +57,12 @@ const highlights = areas
 const slides = [
   `<section class="slide cover"><div class="mas" data-m="wow"></div>
   <div class="top"><span class="chip">釣果週報</span><span class="chip ghost">全国${areas.length}エリア</span></div>
-  <div class="head"><h1>${esc(d.week.label)}</h1><div class="range">${esc(d.week.range)}の釣果まとめ</div></div>
+  <div class="head"><h1>${esc(titleLabel)}</h1><div class="range">${period ? "1週間の釣果まとめ" : `${esc(d.week.range)}の釣果まとめ`}</div></div>
   <div class="hl"><h2>今週の注目</h2><ul>
   ${highlights.map((h) => `<li class="${h.r.photo ? "" : "np"}">${thumb(h.r.photo, "ph big")}<div><span>${esc(h.area)}</span><b>${esc(fishLabel(h.r.fish))}</b><em>${esc(cut(sizeLabel(h.r.size), 20))}</em></div></li>`).join("")}
   </ul></div>
   <div class="brand"><span class="logo" data-m="smile"></span>ツリスポ</div><div class="swipe">エリア別はスワイプ ▶</div><p class="cnote">※魚の写真は魚種のイメージです</p></section>`,
-  ...areaChunks.map((chunk, ci) => `<section class="slide areas"><header><b>${esc(d.week.label)}の釣果</b><span>${ci + 2} / ${total}</span></header><main>
+  ...areaChunks.map((chunk, ci) => `<section class="slide areas"><header><b>${esc(titleLabel)}の釣果</b><span>${ci + 2} / ${total}</span></header><main>
   ${chunk.map((a) => {
     const top = Math.max(0, ...a.rows.map((r) => r.heat));
     return `<div class="area"><h2>${esc(a.area)}<i>${HEAT[Math.min(top, 5)]}</i></h2><p class="copy">${esc(a.catchCopy)}</p><ul>
@@ -113,7 +117,7 @@ const fishRank = [...fishScore].sort((a, b) => b[1] - a[1]).map(([f]) => f);
 const HASHTAG_MAX = 5;
 const hashtags = [...new Set(["#釣果情報", "#堤防釣り", ...fishRank.slice(0, 3).map((f) => `#${f}釣り`), "#海釣り", "#ツリスポ"])]
   .slice(0, HASHTAG_MAX).join(" ");
-const caption = `【釣果週報】${d.week.label}（${d.week.range}）全国${areas.length}エリアの釣果情報・釣れてる魚まとめ🎣
+const caption = `【釣果週報】${periodText} 全国${areas.length}エリアの釣果情報・釣れてる魚まとめ🎣
 
 🐟 今週釣れてる魚：${fishRank.slice(0, 12).join("・")}
 
@@ -132,8 +136,10 @@ fs.writeFileSync(path.join(outDir, "caption-instagram.txt"), caption.slice(0, 22
 const xWeight = (s) => [...s.replace(/https?:\/\/\S+/g, "u".repeat(23))].reduce((n, c) => n + (c.codePointAt(0) <= 0x10ff || (c >= " " && c <= "‍") || (c >= "‐" && c <= "‟") || (c >= "′" && c <= "‷") ? 1 : 2), 0);
 const X_MAX = 280;
 const xLink = areas[0].url; // 一番釣れていたエリアの週報記事
-const xHead = `【釣果週報】${d.week.label}（${d.week.range}）`;
-const xTail = `全国${areas.length}エリアの釣果はこちら👇\n${xLink}\n#釣果情報 #釣り`;
+const xHead = `【釣果週報】${periodText}`;
+// ハッシュタグは3個（X はタグが多いと逆効果。3個目はその週いちばん釣れた魚＝毎週入れ替わる）
+const xTags = [...new Set(["#釣果情報", "#釣り", ...(fishRank[0] ? [`#${fishRank[0]}釣り`] : [])])].join(" ");
+const xTail = `全国${areas.length}エリアの釣果はこちら👇\n${xLink}\n${xTags}`;
 const xBuild = (fishN, areaLines) => [xHead, fishN ? `🐟 ${fishRank.slice(0, fishN).join("・")}` : "", ...areaLines, xTail].filter(Boolean).join("\n");
 let xText = xBuild(0, []);
 outer: for (let nAreas = 3; nAreas >= 0; nAreas--) {

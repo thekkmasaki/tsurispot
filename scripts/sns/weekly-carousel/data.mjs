@@ -63,7 +63,8 @@ export async function fetchWeekArticles(tag) {
   return Promise.all(slugs.map(async (slug) => {
     const html = await (await fetch(`${SITE}/blog/${slug}`)).text();
     const title = (/<title>([^<]*)/.exec(html)?.[1] ?? "").replace(/\s*\|\s*ツリスポ.*$/, "");
-    return { slug, title: decode(title), publishedAt: null, html };
+    const published = /"datePublished":"(\d{4}-\d{2}-\d{2})/.exec(html)?.[1];
+    return { slug, title: decode(title), publishedAt: published ? `${published}T00:00:00+09:00` : null, html };
   }));
 }
 
@@ -84,6 +85,23 @@ export function parseArticle(a) {
     .filter((cells) => cells.length >= 5)
     .map(([spot, fish, size, method, heatRaw]) => ({ spot, fish, size, method, heat: (heatRaw.match(/🔥/g) ?? []).length }));
   return { slug: a.slug, area, catchCopy, rows, url: `${SITE}/blog/${a.slug}` };
+}
+
+/**
+ * 週報が実際に扱っている期間（例: "11/2〜11/8"）。
+ * WEEKTAG（11月第2週 = 11/8〜11/14）は「週報を作った週」で、中身は前の7日間の釣果なので、
+ * 表示には実際の期間を使う。①タイトルに期間があればそれ ②無ければ最初の公開日の前日までの7日間。
+ */
+export function weekPeriod(articles) {
+  for (const a of articles) {
+    const m = /(\d{1,2})\/(\d{1,2})〜(\d{1,2})\/(\d{1,2})/.exec(a.title ?? "");
+    if (m) return `${+m[1]}/${+m[2]}〜${+m[3]}/${+m[4]}`;
+  }
+  const first = Math.min(...articles.map((a) => Date.parse(a.publishedAt ?? "") || Infinity));
+  if (!Number.isFinite(first)) return null;
+  const jst = (ms) => new Date(ms + 9 * 3600e3);
+  const md = (d) => `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
+  return `${md(jst(first - 7 * 864e5))}〜${md(jst(first - 864e5))}`;
 }
 
 /** スライドに載せる上位の釣果（好調度順・同じ魚種は1回まで） */
