@@ -97,6 +97,15 @@ function doPost(e) {
     if (data.type === "paid_inquiry_basic" || data.type === "paid_inquiry_pro") {
       return handlePaidInquiry(data);
     }
+    if (data.type === "contact") {
+      return handleContact(data);
+    }
+    // 釣果の本体（魚名もスポット名も無い）が無いものは釣果報告として扱わない
+    if (!data.fishName && !data.spotName) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ ok: false, error: "empty report" })
+      ).setMimeType(ContentService.MimeType.JSON);
+    }
     return handleCatchReport(data);
 
   } catch (error) {
@@ -153,6 +162,47 @@ function handleCatchReport(data) {
   ].join("\n");
 
   MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+
+  return ContentService.createTextOutput(
+    JSON.stringify({ ok: true })
+  ).setMimeType(ContentService.MimeType.JSON);
+}
+
+// === お問い合わせ ===
+var CONTACT_SHEET_NAME = "お問い合わせ";
+function handleContact(data) {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(CONTACT_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(CONTACT_SHEET_NAME);
+    sheet.appendRow(["受信日時", "名前", "メール", "種別", "内容", "対応"]);
+    sheet.getRange(1, 1, 1, 6).setFontWeight("bold");
+    sheet.setFrozenRows(1);
+  }
+  sheet.appendRow([
+    new Date().toLocaleString("ja-JP"),
+    data.name || "",
+    data.email || "",
+    data.category || "",
+    data.message || "",
+    "未対応"
+  ]);
+
+  var subject = "【ツリスポ】お問い合わせ: " + (data.category || "一般") + "（" + (data.name || "名前なし") + "）";
+  var body = [
+    "お問い合わせが届きました。",
+    "",
+    "名前: " + (data.name || ""),
+    "メール: " + (data.email || ""),
+    "種別: " + (data.category || ""),
+    "",
+    data.message || "",
+    "",
+    "スプレッドシート: https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID
+  ].join("\n");
+  var opts = {};
+  if (data.email) opts.replyTo = data.email;
+  MailApp.sendEmail(NOTIFY_EMAIL, subject, body, opts);
 
   return ContentService.createTextOutput(
     JSON.stringify({ ok: true })

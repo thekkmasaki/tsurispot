@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { sendToInbox } from "@/lib/gas-inbox";
 
 const GAS_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -61,11 +62,19 @@ export async function POST(request: Request) {
       };
 
       try {
-        await fetch(GAS_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          redirect: "follow",
+        await sendToInbox(GAS_URL, {
+          type,
+          summary: payload.shopName,
+          senderName: payload.contactName || payload.shopName,
+          details: [
+            ["店舗名", payload.shopName],
+            ["担当者", payload.contactName],
+            ["メール", payload.email],
+            ["電話", payload.phone],
+            ["プラン", payload.plan],
+            ["内容", payload.message],
+          ],
+          fields: payload,
         });
       } catch (err) {
         console.error("[有料プラン問い合わせ] GAS送信エラー:", err);
@@ -114,11 +123,21 @@ export async function POST(request: Request) {
     };
 
     try {
-      await fetch(GAS_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        redirect: "follow",
+      await sendToInbox(GAS_URL, {
+        type: "shop_listing",
+        summary: payload.shopName,
+        senderName: payload.shopName,
+        details: [
+          ["店舗名", payload.shopName],
+          ["住所", payload.address],
+          ["電話", payload.phone],
+          ["メール", payload.email],
+          ["営業時間", payload.businessHours],
+          ["定休日", payload.closedDays],
+          ["サービス", payload.services],
+          ["近くの釣り場", payload.nearbySpots],
+        ],
+        fields: payload,
       });
     } catch (err) {
       console.error("[店舗掲載申請] GAS送信エラー:", err);

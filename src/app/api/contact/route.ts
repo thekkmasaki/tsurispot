@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { dbIncr } from "@/lib/dynamodb";
+import { sendToInbox } from "@/lib/gas-inbox";
 
 const GAS_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -59,11 +60,17 @@ export async function POST(request: Request) {
     };
 
     try {
-      await fetch(GAS_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        redirect: "follow",
+      await sendToInbox(GAS_URL, {
+        type: "contact",
+        summary: payload.category || "お問い合わせ",
+        senderName: payload.name || "（名前なし）",
+        details: [
+          ["名前", payload.name],
+          ["メール", payload.email],
+          ["種別", payload.category],
+          ["内容", payload.message],
+        ],
+        fields: payload,
       });
     } catch (err) {
       console.error("[お問い合わせ] GAS送信エラー:", err);
