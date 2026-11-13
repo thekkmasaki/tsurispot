@@ -9,6 +9,8 @@ import {
   weeklyAreaHubPath,
   listWeeklyPostsForArea,
   extractWeeklyDigest,
+  parseWeeklyCatchRows,
+  catchRowHasFish,
 } from "../weekly-report-areas";
 import { fishingSpots } from "../data/spots";
 
@@ -172,7 +174,44 @@ describe("エリア別最新釣果ページ用ヘルパー", () => {
     expect(d.table).not.toContain("本文");
   });
 
+  it("「今週末に狙うなら」節も抜き出す（新形式の週報）", () => {
+    const html =
+      '<p>intro</p><h2>今週末に狙うなら</h2><ul><li><strong>アジ</strong>：本牧</li></ul><h2>今週の釣果速報（一覧）</h2><table><tr><td>a</td></tr></table><h3>先週からの変化</h3><ul><li>🆕 タチウオ</li></ul><hr/><h2>① 本牧</h2>';
+    const d = extractWeeklyDigest(html);
+    expect(d.picks).toBe("<ul><li><strong>アジ</strong>：本牧</li></ul>");
+    expect(d.table).toContain("先週からの変化");
+    expect(d.table).not.toContain("① 本牧");
+  });
+
+  it("釣果表の行を読む", () => {
+    const html =
+      '<h2>今週の釣果速報（一覧）</h2><div><table><thead><tr><th>スポット</th><th>魚種</th><th>サイズ</th><th>釣り方</th><th>好調度</th></tr></thead><tbody>' +
+      '<tr><td style="x"><a href="/spots/minabe-sakai-gyokou">みなべ・堺漁港</a></td><td>タチウオ・カマス</td><td>70cm</td><td>ウキ釣り</td><td>🔥🔥🔥</td></tr>' +
+      '<tr><td>白浜町の磯</td><td>アオリイカ</td><td>1kg</td><td>エギング</td><td>—</td></tr></tbody></table></div>';
+    expect(parseWeeklyCatchRows(html)).toEqual([
+      { spot: "みなべ・堺漁港", spotHref: "/spots/minabe-sakai-gyokou", fish: "タチウオ・カマス", size: "70cm", method: "ウキ釣り", heat: 3 },
+      { spot: "白浜町の磯", spotHref: null, fish: "アオリイカ", size: "1kg", method: "エギング", heat: 0 },
+    ]);
+  });
+
+  it("microCMS保存後の実際のマークアップ（th行・<p>入りセル・h2にid）でも読める", () => {
+    const html =
+      '<h2 id="h08b3c2c740">今週の釣果速報（一覧）</h2><table><tbody><tr><th colspan="1" rowspan="1"><p>スポット</p></th><th colspan="1" rowspan="1"><p>魚種</p></th><th colspan="1" rowspan="1"><p>サイズ</p></th><th colspan="1" rowspan="1"><p>釣り方</p></th><th colspan="1" rowspan="1"><p>好調度</p></th></tr>' +
+      '<tr><td colspan="1" rowspan="1"><p><a href="/spots/minabe-sakai-gyokou"><strong>みなべ・堺漁港</strong></a></p></td><td colspan="1" rowspan="1"><p>タチウオ・カマス・アジ</p></td><td colspan="1" rowspan="1"><p>タチウオ指2〜3本／70cm、カマス25cm、アジ20cm</p></td><td colspan="1" rowspan="1"><p>ウキ釣り・カゴ釣り・テンヤ・ジグサビキ</p></td><td colspan="1" rowspan="1"><p>🔥🔥🔥</p></td></tr></tbody></table><p>※好調度は…</p><h2 id="x">① みなべ・堺漁港</h2>';
+    const rows = parseWeeklyCatchRows(html);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ spot: "みなべ・堺漁港", spotHref: "/spots/minabe-sakai-gyokou", fish: "タチウオ・カマス・アジ", heat: 3 });
+    expect(extractWeeklyDigest(html).table).not.toContain("①");
+  });
+
+  it("魚種セルが魚（別名含む）を含むか判定する", () => {
+    const buri = { name: "ブリ", aliases: ["ハマチ", "メジロ"] };
+    expect(catchRowHasFish("ハマチ・メジロ・シオほか", buri)).toBe(true);
+    expect(catchRowHasFish("タチウオ（指3本）", { name: "タチウオ" })).toBe(true);
+    expect(catchRowHasFish("アオリイカ", buri)).toBe(false);
+  });
+
   it("表が無い記事では空文字を返す", () => {
-    expect(extractWeeklyDigest("<h2>まとめ</h2><p>x</p>")).toEqual({ intro: "", table: "" });
+    expect(extractWeeklyDigest("<h2>まとめ</h2><p>x</p>")).toEqual({ intro: "", picks: "", table: "" });
   });
 });

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { getAllBlogPosts } from "@/lib/data/blog";
+import { getFishWithLatestCatches } from "@/lib/data/weekly-fish-latest";
 import {
   MAIN_WEEKLY_AREA_SLUGS,
   getWeeklyReportArea,
@@ -31,7 +32,7 @@ function fmtDate(ymd: string): string {
 }
 
 export default async function WeeklyAreaIndexPage() {
-  const posts = await getAllBlogPosts();
+  const [posts, fishes] = await Promise.all([getAllBlogPosts(), getFishWithLatestCatches()]);
   const areas = MAIN_WEEKLY_AREA_SLUGS.map((slug) => {
     const area = getWeeklyReportArea(slug)!;
     const latest = listWeeklyPostsForArea(posts, slug)[0];
@@ -69,6 +70,27 @@ export default async function WeeklyAreaIndexPage() {
           </li>
         ))}
       </ul>
+
+      {fishes.length > 0 && (
+        <section aria-labelledby="by-fish" className="mt-10">
+          <h2 id="by-fish" className="text-lg font-bold">魚から探す</h2>
+          <p className="mt-1 text-xs text-muted-foreground">最新の週報で報告があった魚（報告の多い順）</p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {fishes.map((f) => (
+              <li key={f.slug}>
+                <Link
+                  prefetch={false}
+                  href={`/chouka/fish/${f.slug}`}
+                  className="inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm hover:border-sky-300 hover:bg-sky-50"
+                >
+                  {f.name}
+                  <span className="text-xs text-muted-foreground">{f.count}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <InArticleAd className="my-8" />
     </div>

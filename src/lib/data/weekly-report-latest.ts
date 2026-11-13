@@ -10,10 +10,13 @@
  * fishingSpots を import しないので spot 側の依存を増やさない。クライアントから import 禁止。
  */
 import { cache } from "react";
-import { getAllBlogPosts } from "./blog";
+import { getAllBlogPosts, getBlogPostBySlugAsync } from "./blog";
 import {
+  MAIN_WEEKLY_AREA_SLUGS,
   getWeeklyAreaForSpot,
+  parseWeeklyCatchRows,
   pickLatestWeeklyByArea,
+  type WeeklyCatchRow,
   type WeeklyReportSummary,
 } from "@/lib/weekly-report-areas";
 
@@ -37,3 +40,41 @@ export async function getLatestWeeklyReportForSpot(spot: {
   const map = await buildLatestWeeklyMap();
   return map.get(area.slug) ?? null;
 }
+
+export interface LatestWeeklyCatch extends WeeklyCatchRow {
+  areaSlug: string;
+  areaLabel: string;
+  /** 週報記事のパス */
+  articleHref: string;
+  /** 週報の公開日 YYYY-MM-DD */
+  publishedAt: string;
+}
+
+/** 魚別ページで使う週報の鮮度（これより古いエリアの週報は「今釣れている」に含めない） */
+const FISH_VIEW_FRESH_DAYS = 14;
+
+/**
+ * 主要10エリアの最新週報（14日以内のもの）の釣果表を全部読む。
+ * 本文取得は getBlogPostBySlugAsync（unstable_cache 1時間）なので、
+ * /chouka・/chouka/fish/* ・sitemap で共有され microCMS へのリクエストは1時間に最大10本。
+ */
+export const getLatestWeeklyCatches = cache(async (): Promise<LatestWeeklyCatch[]> => {
+  try {
+    const posts = await getAllBlogPosts();
+    const latest = pickLatestWeeklyByArea(posts, new Date(), FISH_VIEW_FRESH_DAYS);
+    const out: LatestWeeklyCatch[] = [];
+    for (const slug of MAIN_WEEKLY_AREA_SLUGS) {
+      const s = latest.get(slug);
+      if (!s) continue;
+      const post = await getBlogPostBySlugAsync(s.href.replace(/^\/blog\//, ""));
+      if (!post) continue;
+      for (const row of parseWeeklyCatchRows(post.content)) {
+        out.push({ ...row, areaSlug: s.areaSlug, areaLabel: s.areaLabel, articleHref: s.href, publishedAt: s.publishedAt });
+      }
+    }
+    return out;
+  } catch (err) {
+    console.error("[weekly-report-latest] 週報の釣果表の取得に失敗:", err);
+    return [];
+  }
+});

@@ -20,7 +20,7 @@ WEEKTAG の「11月第2週（11/8〜11/14）」は週報を**作った週**で�
 
 ## 取りこぼし検知
 
-`weekly-report-check.yml`（火・金）が、最終公開から8日超 or 最新週に主要10エリアの欠けがあると Discord に ⚠️ を送る（`check-fresh.mjs`）。
+`weekly-report-check.yml`（木・金の朝）が、前回の週報から6日超（＝木曜運用で今週分がまだ）or 最新週に主要10エリアの欠けがあると Discord に ⚠️ を送る（`check-fresh.mjs`）。
 
 ## スライド構成（1080×1350 JPEG、最大10枚）
 

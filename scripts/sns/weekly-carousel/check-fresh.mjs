@@ -12,7 +12,7 @@ const MAIN = [
   "akashi-kobe", "osaka-sennan", "tokyobay-yokohama", "fukuoka-kitakyushu", "suruga-izu",
   "chita-mikawa", "nanki-shirahama", "setouchi-hiroshima", "sendai-ishinomaki", "otaru-ishikari",
 ];
-const STALE_DAYS = 8;
+const STALE_DAYS = 6; // 木曜運用: 前回の木曜から6日超＝今週分がまだ
 
 const tag = await latestWeekTag();
 if (!tag) { await discord("⚠️ **釣果週報** 週報が1件も見つかりません"); process.exit(1); }
@@ -23,6 +23,6 @@ const missing = MAIN.filter((s) => !articles.some((a) => a.slug === `chouka-shuh
 console.log(`最新週 ${tag}: ${articles.length}件・最終公開から${ageDays.toFixed(1)}日・欠け ${missing.join(",") || "なし"}`);
 
 const msgs = [];
-if (ageDays > STALE_DAYS) msgs.push(`最後の週報から${Math.floor(ageDays)}日経っています（${tag}）。\`/weekly-report\` を実行してください。`);
+if (ageDays > STALE_DAYS) msgs.push(`今週の週報がまだです（前回から${Math.floor(ageDays)}日・${tag}）。週末の前に \`/weekly-report\` を実行してください。`);
 if (missing.length) msgs.push(`${tag} に欠けているエリアがあります: ${missing.join(", ")}。\`/weekly-report --week ${tag}\` で埋め戻せます。`);
 if (msgs.length) await discord(`⚠️ **釣果週報の取りこぼし**\n${msgs.join("\n")}`);
