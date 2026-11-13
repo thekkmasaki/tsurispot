@@ -104,9 +104,18 @@ if (overflow.length) { console.error("レイアウト崩れ（エリアスライ
 const lines = areas.map((a) => `📍${a.area}｜${a.catchCopy}`).join("\n");
 const fishCount = new Map();
 for (const a of areas) for (const r of a.rows) for (const f of fishLabel(r.fish).replace(/ほか$/, "").split("・")) fishCount.set(f, (fishCount.get(f) ?? 0) + 1);
-const topFish = [...fishCount].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([f]) => `#${f.replace(/[\s（）()]/g, "")}釣り`);
-const hashtags = ["#釣果情報", "#釣果", ...topFish, "#釣り", "#海釣り", "#堤防釣り", "#ツリスポ"].join(" ");
-const caption = `【釣果週報】${d.week.label}（${d.week.range}）全国${areas.length}エリアの釣果まとめ🎣
+// 「豆アジ」「良型アジ」などはアジにまとめる（検索語は魚種名）
+const baseFish = (f) => { const s = f.replace(/[\s（）()]/g, ""), b = s.replace(/^(豆|小型|小|中型|大型|良型|特大|新子|ジャンボ|デカ|尺)/, ""); return b.length >= 2 ? b : s; };
+const fishScore = new Map();
+for (const [f, n] of fishCount) { const b = baseFish(f); if (b) fishScore.set(b, (fishScore.get(b) ?? 0) + n); }
+const fishRank = [...fishScore].sort((a, b) => b[1] - a[1]).map(([f]) => f);
+// ハッシュタグは5個まで（Instagram が 2025-12 に1投稿5個へ制限）。検索は本文のキーワードで拾わせる
+const HASHTAG_MAX = 5;
+const hashtags = [...new Set(["#釣果情報", "#堤防釣り", ...fishRank.slice(0, 3).map((f) => `#${f}釣り`), "#海釣り", "#ツリスポ"])]
+  .slice(0, HASHTAG_MAX).join(" ");
+const caption = `【釣果週報】${d.week.label}（${d.week.range}）全国${areas.length}エリアの釣果情報・釣れてる魚まとめ🎣
+
+🐟 今週釣れてる魚：${fishRank.slice(0, 12).join("・")}
 
 ${lines}
 
