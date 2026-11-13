@@ -133,7 +133,9 @@ const xWeight = (s) => [...s.replace(/https?:\/\/\S+/g, "u".repeat(23))].reduce(
 const X_MAX = 280;
 const xLink = areas[0].url; // 一番釣れていたエリアの週報記事
 const xHead = `【釣果週報】${d.week.label}（${d.week.range}）`;
-const xTail = `全国${areas.length}エリアの釣果はこちら👇\n${xLink}\n#釣果情報 #釣り`;
+// ハッシュタグは3個（X はタグが多いと逆効果。3個目はその週いちばん釣れた魚＝毎週入れ替わる）
+const xTags = [...new Set(["#釣果情報", "#釣り", ...(fishRank[0] ? [`#${fishRank[0]}釣り`] : [])])].join(" ");
+const xTail = `全国${areas.length}エリアの釣果はこちら👇\n${xLink}\n${xTags}`;
 const xBuild = (fishN, areaLines) => [xHead, fishN ? `🐟 ${fishRank.slice(0, fishN).join("・")}` : "", ...areaLines, xTail].filter(Boolean).join("\n");
 let xText = xBuild(0, []);
 outer: for (let nAreas = 3; nAreas >= 0; nAreas--) {
