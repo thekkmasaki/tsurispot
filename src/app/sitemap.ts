@@ -10,6 +10,7 @@ import { areaGuides } from "@/lib/data/area-guides";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { getAllBlogPosts } from "@/lib/data/blog";
 import { MAIN_WEEKLY_AREA_SLUGS, listWeeklyPostsForArea } from "@/lib/weekly-report-areas";
+import { getFishWithLatestCatches } from "@/lib/data/weekly-fish-latest";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
@@ -113,6 +114,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const REGION_SLUGS = ["hokkaido","tohoku","kanto","chubu","kinki","chugoku","shikoku","kyushu-okinawa"];
 
   const blogPosts = await getAllBlogPosts();
+  // 魚別の最新釣果（今週報告のある魚だけ。報告が無い魚のページは noindex なので載せない）
+  const latestFishes = await getFishWithLatestCatches().catch(() => []);
 
   return [
     // ===== 固定ページ・主要ページ =====
@@ -252,6 +255,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       };
     }),
+    ...latestFishes.map((f) => ({
+      url: `${baseUrl}/chouka/fish/${f.slug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
     // ブログ
     { url: `${baseUrl}/blog`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.7 },
     ...blogPosts.map((post) => ({

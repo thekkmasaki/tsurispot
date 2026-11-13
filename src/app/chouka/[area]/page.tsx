@@ -70,7 +70,7 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
   const data = await load(areaSlug);
   if (!data) notFound();
   const { area, posts, latest } = data;
-  const digest = latest ? extractWeeklyDigest(latest.content) : { intro: "", table: "" };
+  const digest = latest ? extractWeeklyDigest(latest.content) : { intro: "", picks: "", table: "" };
   const past = posts.slice(1, PAST_LIMIT + 1);
 
   const breadcrumbJsonLd = {
@@ -119,6 +119,12 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
               className="prose prose-sm prose-gray mt-3 max-w-none"
               dangerouslySetInnerHTML={{ __html: digest.intro }}
             />
+          )}
+          {digest.picks && (
+            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/60 p-4">
+              <h3 className="text-base font-bold text-amber-900">今週末に狙うなら</h3>
+              <div className="prose prose-sm prose-gray mt-2 max-w-none" dangerouslySetInnerHTML={{ __html: digest.picks }} />
+            </div>
           )}
           {digest.table && (
             <div className="prose prose-sm prose-gray mt-4 max-w-none" dangerouslySetInnerHTML={{ __html: digest.table }} />

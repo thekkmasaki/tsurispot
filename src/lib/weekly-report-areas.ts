@@ -259,23 +259,73 @@ export function listWeeklyPostsForArea<T extends { slug: string; title: string; 
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : a.publishedAt > b.publishedAt ? -1 : 0));
 }
 
+/** 見出し（h2）の文言で始まる節を、次の h2 / hr の手前まで取り出す。無ければ空文字 */
+function sectionAfterHeading(src: string, heading: RegExp): string {
+  const re = new RegExp(`<h2[^>]*>(?:(?!</h2>)[\\s\\S])*?${heading.source}`, "i");
+  const m = re.exec(src);
+  if (!m) return "";
+  const afterHeading = src.indexOf("</h2>", m.index);
+  if (afterHeading < 0) return "";
+  const rest = src.slice(afterHeading + 5);
+  const end = rest.search(/<h2[\s>]|<hr\b/i);
+  return (end >= 0 ? rest.slice(0, end) : rest).trim();
+}
+
 /**
- * 週報本文HTMLから、エリア別ページに載せる部分（冒頭の要約段落と「釣果速報（一覧）」表）を抜き出す。
- * 記事全文を転載すると週報記事と重複コンテンツになるため、要約と一覧表だけにする。
- * 見つからない部分は空文字。
+ * 週報本文HTMLから、エリア別ページに載せる部分を抜き出す:
+ * 冒頭の要約段落・「今週末に狙うなら」（2026-11 以降の週報のみ）・「釣果速報（一覧）」表（先週比を含む）。
+ * 記事全文を転載すると週報記事と重複コンテンツになるため、この3つだけにする。見つからない部分は空文字。
  */
-export function extractWeeklyDigest(html: string): { intro: string; table: string } {
+export function extractWeeklyDigest(html: string): { intro: string; picks: string; table: string } {
   const src = html ?? "";
   const firstH2 = src.search(/<h2[\s>]/i);
   const head = firstH2 >= 0 ? src.slice(0, firstH2) : "";
   const intro = /<p\b[^>]*>[\s\S]*?<\/p>/i.exec(head)?.[0] ?? "";
-  const tableStart = src.search(/<h2[^>]*>[^<]*釣果速報/i);
-  let table = "";
-  if (tableStart >= 0) {
-    const afterHeading = src.indexOf("</h2>", tableStart);
-    const rest = afterHeading >= 0 ? src.slice(afterHeading + 5) : "";
-    const end = rest.search(/<h2[\s>]|<hr\b/i);
-    table = (end >= 0 ? rest.slice(0, end) : rest).trim();
+  return {
+    intro,
+    picks: sectionAfterHeading(src, /今週末に狙うなら/),
+    table: sectionAfterHeading(src, /釣果速報/),
+  };
+}
+
+export interface WeeklyCatchRow {
+  /** スポット名（タグ除去済み） */
+  spot: string;
+  /** スポットページへのリンク（/spots/... のときだけ） */
+  spotHref: string | null;
+  fish: string;
+  size: string;
+  method: string;
+  /** 好調度（🔥の数。❄️/— は 0） */
+  heat: number;
+}
+
+const stripTags = (s: string) =>
+  s.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+
+/** 週報の「釣果速報（一覧）」表の行を読む（スポット・魚種・サイズ・釣り方・好調度の5列） */
+export function parseWeeklyCatchRows(html: string): WeeklyCatchRow[] {
+  const section = sectionAfterHeading(html ?? "", /釣果速報/);
+  const table = /<table[\s\S]*?<\/table>/i.exec(section)?.[0] ?? "";
+  const rows: WeeklyCatchRow[] = [];
+  for (const tr of table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)) {
+    const cells = [...tr[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((c) => c[1]);
+    if (cells.length < 5) continue;
+    const href = /href="(\/spots\/[a-z0-9-]+)"/i.exec(cells[0])?.[1] ?? null;
+    rows.push({
+      spot: stripTags(cells[0]),
+      spotHref: href,
+      fish: stripTags(cells[1]),
+      size: stripTags(cells[2]),
+      method: stripTags(cells[3]),
+      heat: (cells[4].match(/🔥/g) ?? []).length,
+    });
   }
-  return { intro, table };
+  return rows;
+}
+
+/** 表の魚種セル（例「タチウオ・カマス・アジ」「豆アジ（15cm）」）が、その魚を含むか */
+export function catchRowHasFish(fishCell: string, fish: { name: string; aliases?: string[] }): boolean {
+  const cell = fishCell.replace(/[（(][^）)]*[）)]/g, "");
+  return [fish.name, ...(fish.aliases ?? [])].filter((n) => n.length >= 2).some((n) => cell.includes(n));
 }
