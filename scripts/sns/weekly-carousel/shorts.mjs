@@ -14,6 +14,9 @@
  * 3か所に満たないエリアは作らない（数合わせをしない）。
  * 写真は週報に載っている魚種の実写だけ（photo）。無い魚は写真なしのカード。
  * 画像は静止（ズームしない＝ユーザー指示 2026-11）。切り替えだけスライド。
+ * アプリの案内（2026-11 合意・内容に合うときだけ）:
+ *   ランキングにイカが入った回だけ、締めに「エギングなら シャクリズム」。説明欄は全エリアに「ツリスポ釣果記録」、イカの回はシャクリズムも。
+ *   リンクの ct= で App Store Connect に流入元が出る。ショートの説明欄のリンクは押せないので、画面では「App Storeで検索」と出す。
  * BGM は SNS_BGM_DIR（非公開バケットから取得。Meta サウンドコレクション）。無ければ無音。
  */
 import { execFileSync } from "child_process";
@@ -45,6 +48,9 @@ const fishSize = (name) => (name.length <= 5 ? 132 : name.length <= 7 ? 108 : 86
 const areaSize = (name) => (name.length <= 6 ? 120 : name.length <= 8 ? 100 : 80);
 const HEAT = ["情報少なめ", "低調", "ポツポツ", "まずまず", "好調", "爆釣"];
 const period = d.week.period ?? d.week.label;
+const CATCHLOG_URL = "https://apps.apple.com/jp/app/id6833248739?ct=tsurispot_youtube"; // ツリスポ釣果記録（iPhone）
+const SHAKURHYTHM_URL = "https://apps.apple.com/jp/app/id6825799808?ct=tsurispot_youtube"; // シャクリズム（エギング・iPhone/Apple Watch）
+const SQUID = /イカ/; // アオリイカ・コウイカ・ヤリイカ・ケンサキイカ等
 const CSS = `@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap');
 :root{--navy:#10324F;--sea:#2BA6DE;--sky:#E8F6FD;--red:#FF5A4E;--sun:#FFC53D}
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:'M PLUS Rounded 1c',sans-serif;background:#000;color:var(--navy)}
@@ -91,7 +97,11 @@ footer .logo{width:74px;display:inline-block}
 .outro>p{position:absolute;left:0;right:0;top:1280px;font-size:64px;font-weight:900}
 .outro>p small{display:block;margin-top:6px;font-size:54px;font-weight:800;color:var(--sun);letter-spacing:.02em}
 .outro .follow{position:absolute;left:90px;right:90px;top:1500px;background:var(--red);font-size:52px;font-weight:900;border-radius:24px;padding:22px 0;white-space:nowrap}
-.outro .note{top:1660px;font-size:30px;font-weight:600;opacity:.75;line-height:1.6}`;
+.outro .note{top:1660px;font-size:30px;font-weight:600;opacity:.75;line-height:1.6}
+.outro.app .follow{top:1460px}
+.outro .app{position:absolute;left:90px;right:90px;top:1600px;font-size:40px;font-weight:800;line-height:1.4}
+.outro .app b{color:var(--sun);font-weight:900}
+.outro.app .note{top:1740px}`;
 
 const targets = d.areas
   .map((a) => ({ ...a, key: areaKey(a.slug ?? a.area) }))
@@ -115,6 +125,7 @@ console.log(JSON.stringify(made));
 
 async function makeShort(a, picked) {
   const N = picked.length;
+  const squid = picked.some((r) => SQUID.test(r.fish));
   const frameDir = path.join(outDir, `short-frames-${a.key}`);
   fs.mkdirSync(frameDir, { recursive: true });
 
@@ -139,10 +150,11 @@ async function makeShort(a, picked) {
     <div class="mas" data-m="wow"></div>
     <footer><span class="logo" data-m="smile"></span>ツリスポ TOP${N}</footer></section>`,
     `<section class="f tease"><p>そして</p><h2>1位は…</h2><div class="mas" data-m="wow"></div></section>`,
-    `<section class="f outro"><div class="mas" data-m="wink"></div>
+    `<section class="f outro${squid ? " app" : ""}"><div class="mas" data-m="wink"></div>
     <h2>${esc(a.area)}の<br><span>釣果の詳細</span>は</h2>
     <div class="search">🔍 ツリスポ</div><p>で検索<small>tsurispot.com</small></p>
     <div class="follow">チャンネル登録で毎週チェック</div>
+    ${squid ? `<div class="app">🦑 エギングなら iPhoneアプリ <b>シャクリズム</b><br>App Storeで検索</div>` : ""}
     <p class="note">※釣果は各施設・釣具店の公開情報をもとにまとめています。<br>立入禁止・釣り禁止の場所では釣りをしないでください。</p></section>`,
   ];
   // picked は 1位→N位の順。表示は つかみ → N位 → … → 2位 → 溜め → 1位 → 締め
@@ -208,6 +220,12 @@ ${lines.join("\n")}
 
 ${a.area}エリアの釣果の詳細・出典は「ツリスポ」で検索。
 ${a.url ?? "https://tsurispot.com/chouka"}
+${squid ? `
+▼エギングのお供に：iPhone / Apple Watch アプリ「シャクリズム」
+${SHAKURHYTHM_URL}
+` : ""}
+▼釣果の記録は iPhone アプリ「ツリスポ釣果記録」
+${CATCHLOG_URL}
 
 ※釣果は各施設・釣具店の公開情報をもとにまとめています。立入禁止・釣り禁止の場所では釣りをしないでください。
 ※魚の写真は魚種のイメージです。
