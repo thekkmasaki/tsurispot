@@ -34,6 +34,17 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** 連携を始めた時刻（日本時間）。旧Cookieで不明なら表示時刻を使う */
+function formatStartedAt(startedAt: number | undefined): string {
+  return new Date(startedAt ?? Date.now()).toLocaleString("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export default async function AppLinkPage() {
   if (!isAppLinkEnabled()) notFound();
 
@@ -68,14 +79,8 @@ export default async function AppLinkPage() {
 
   const cancelUrl = appSchemeUrl({ error: "cancelled", state: req.state });
   const nickname = session.user.nickname || "釣り人";
-  // 連携を始めた時刻（旧Cookieで不明なら表示時刻）。心当たりのない連携要求に気付けるよう明示する
-  const startedLabel = new Date(req.startedAt ?? Date.now()).toLocaleString("ja-JP", {
-    timeZone: "Asia/Tokyo",
-    month: "numeric",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  // 心当たりのない連携要求に気付けるよう、連携を始めた時刻を明示する
+  const startedLabel = formatStartedAt(req.startedAt);
 
   return (
     <Shell>
