@@ -1,5 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut } from "@/lib/dynamodb";
+import {
+  MAX_PLACES,
+  PLACES_COMMAND,
+  addPlace,
+  buildPlacesFlex,
+  buildPlacesText,
+  parsePlacesCommand,
+  placeFromPrefecture,
+  placeLabelFromAddress,
+  type SavedPlace,
+} from "@/lib/line/places";
 import { createHmac } from "crypto";
 import { prefectures } from "@/lib/data/prefectures";
 import { safeEqual } from "@/lib/safe-compare";
@@ -7,6 +18,8 @@ import { fishSpecies } from "@/lib/data/fish";
 import { getLatestWeeklyCatches, type LatestWeeklyCatch } from "@/lib/data/weekly-report-latest";
 import {
   buildChoukaFlex,
+  nearestReachableArea,
+  REACH_KM,
   buildChoukaReplyText,
   buildFishFlex,
   buildFishReplyText,
@@ -127,8 +140,12 @@ async function loadCoordSpots(): Promise<CoordSpot[]> {
   }
 }
 
-async function handleLocationMessage(replyToken: string, userId: string, lat: number, lng: number) {
+async function handleLocationMessage(replyToken: string, userId: string, lat: number, lng: number, address?: string) {
   const list = nearestSpots(await loadCoordSpots(), lat, lng);
+  // 以後の「釣果」「魚の名前」を行ける範囲に絞るために、場所として登録（最大3か所・約1kmに丸める）
+  const label = placeLabelFromAddress(address, list[0] && list[0].km <= 50 ? list[0].spot.p : undefined);
+  const added = addPlace(await getUserPlaces(userId), { lat, lng, label });
+  await setUserPlaces(userId, added.list);
   // マイエリア未登録なら、いちばん近い釣り場の都道府県で自動登録（50km 以内のときだけ）
   let areaNote: string | undefined;
   const near = list[0];
@@ -143,9 +160,17 @@ async function handleLocationMessage(replyToken: string, userId: string, lat: nu
       quick.push(pref.nameShort); // タップでマイエリアを変更
     }
   }
-  const flex = buildNearbyFlex(list, areaNote);
+  const placeNote = added.updated
+    ? `📍 登録した場所「${label ?? "この場所"}」を更新しました`
+    : `📍 場所を登録しました（${added.list.length}/${MAX_PLACES}か所${added.dropped ? `・いちばん古い「${added.dropped.label ?? "場所"}」と入れ替え` : ""}）`;
+  const note = [
+    areaNote,
+    placeNote,
+    `🚗 「釣果」や魚の名前は、登録した場所から${REACH_KM}km以内の釣果に絞ってお返しします。ほかの場所（職場・実家など）も位置情報を送ると追加できます。確認・削除は「${PLACES_COMMAND}」`,
+  ].filter(Boolean).join("\n");
+  const flex = buildNearbyFlex(list, note);
   flex.quickReply = [...quick, ...flex.quickReply];
-  await replyFlex(replyToken, flex, buildNearbyText(list, areaNote));
+  await replyFlex(replyToken, flex, buildNearbyText(list, note));
 }
 
 /** DynamoDB: LINE userId → 店舗情報 */
@@ -196,6 +221,25 @@ async function getUserArea(userId: string): Promise<string | null> {
 async function setUserArea(userId: string, prefSlug: string): Promise<void> {
   try {
     await dbPut(`LINE#${userId}`, "AREA", prefSlug);
+  } catch {
+    // ignore
+  }
+}
+
+/** 登録した場所（位置情報を送ってもらった場所。最大3か所・約1kmに丸めて保存。180日送り直さなければ使わない） */
+const PLACE_TTL_MS = 180 * 86400_000;
+async function getUserPlaces(userId: string): Promise<SavedPlace[]> {
+  try {
+    const list = await dbGet<SavedPlace[]>(`LINE#${userId}`, "PLACES");
+    return (Array.isArray(list) ? list : []).filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lng) && Date.now() - (p.at ?? 0) < PLACE_TTL_MS);
+  } catch {
+    return [];
+  }
+}
+
+async function setUserPlaces(userId: string, list: SavedPlace[]): Promise<void> {
+  try {
+    await dbPut(`LINE#${userId}`, "PLACES", list);
   } catch {
     // ignore
   }
@@ -274,34 +318,65 @@ async function loadWeeklyRows(): Promise<LatestWeeklyCatch[]> {
 
 // ─── 一般ユーザー向けメッセージハンドラ ─────────────────────────
 async function handleGeneralUserMessage(replyToken: string, text: string, userId: string) {
-  // 都道府県名にマッチ → エリアを記憶
+  // 都道府県名 → 場所として登録（県庁所在地。京都の人が「大阪」「兵庫」も足せる）。マイエリアは最初の1県
   const prefMatch = matchPrefecture(text);
   if (prefMatch) {
-    await setUserArea(userId, prefMatch.slug);
-    await replyMessage(
-      replyToken,
-      [
-        `📍 マイエリアを「${prefMatch.name}」に登録しました！`,
-        "",
-        "「釣果」を送ると、このエリアの今週の釣果を先にお届けします。",
-        "変更したいときは、別の都道府県名を送ってください。",
-      ].join("\n"),
-      [{ label: "釣果", text: "釣果" }, { label: "スポット", text: "スポット" }, { label: "アジ", text: "アジ" }],
-      LOCATION_LABEL,
-    );
+    const prefFull = prefectures.find((x) => x.slug === prefMatch.slug);
+    const place = prefFull ? placeFromPrefecture(prefFull.name, prefFull.nameShort) : null;
+    if (!(await getUserArea(userId))) await setUserArea(userId, prefMatch.slug);
+    let list = await getUserPlaces(userId);
+    let note = `📍 「${prefMatch.name}」を登録しました`;
+    if (place) {
+      const added = addPlace(list, place);
+      list = added.list;
+      await setUserPlaces(userId, list);
+      note = added.updated
+        ? `📍 「${prefMatch.name}」はもう登録されています`
+        : `📍 「${prefMatch.name}」を登録しました（${list.length}/${MAX_PLACES}か所${added.dropped ? `・いちばん古い「${added.dropped.label ?? "場所"}」と入れ替え` : ""}）`;
+    }
+    const flex = buildPlacesFlex(list, note);
+    flex.quickReply = ["釣果", "アジ", ...flex.quickReply.filter((q) => q !== "釣果")].slice(0, 12);
+    await replyFlex(replyToken, flex, buildPlacesText(list, note));
     return;
+  }
+
+  // 登録した場所の一覧・削除（「登録地」「場所1を消す」「場所をすべて消す」）
+  const placesCmd = parsePlacesCommand(text);
+  if (placesCmd) {
+    let list = await getUserPlaces(userId);
+    const byName = placesCmd.type === "deleteByName"
+      ? list.findIndex((x) => x.label && (x.label === placesCmd.name || x.label.startsWith(placesCmd.name) || placesCmd.name.startsWith(x.label)))
+      : -1;
+    // 登録地にない名前（「エサを消す」等）は場所の話ではないので、下の通常処理へ
+    if (placesCmd.type !== "deleteByName" || byName >= 0) {
+      let note: string | undefined;
+      const del = placesCmd.type === "delete" ? placesCmd.index : byName;
+      if (placesCmd.type === "clear" && list.length) {
+        list = [];
+        note = "登録した場所をすべて消しました";
+      } else if (del >= 0 && list[del]) {
+        note = `「${list[del].label ?? `場所${del + 1}`}」を消しました`;
+        list = list.filter((_, i) => i !== del);
+      }
+      if (note) await setUserPlaces(userId, list);
+      await replyFlex(replyToken, buildPlacesFlex(list, note), buildPlacesText(list, note));
+      return;
+    }
   }
 
   // ユーザーのエリアを取得
   const userArea = await getUserArea(userId);
   const userPref = userArea ? prefectures.find((p) => p.slug === userArea) : null;
   const myWeeklyArea = weeklyAreaForPrefecture(userPref?.name);
+  // 場所を登録していれば、釣果はどれかの場所から行ける範囲（REACH_KM 以内）に絞る
+  const places = await getUserPlaces(userId);
+  const origin = places.length ? places : null;
 
   // 魚の名前（「アジ」「タチウオ釣れてる？」）→ その魚が今釣れている場所
   const fish = findFishInText(text, fishSpecies);
   if (fish) {
     const rows = await loadWeeklyRows();
-    await replyFlex(replyToken, buildFishFlex(fish, rows, myWeeklyArea), buildFishReplyText(fish, rows, myWeeklyArea));
+    await replyFlex(replyToken, buildFishFlex(fish, rows, myWeeklyArea, origin), buildFishReplyText(fish, rows, myWeeklyArea, origin));
     return;
   }
 
@@ -364,7 +439,9 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   if (/釣果|週報|釣れた|レポート|report/i.test(text)) {
     // マイエリアの今週の釣果＋全国の好調エリア上位＋/chouka
     const rows = await loadWeeklyRows();
-    await replyFlex(replyToken, buildChoukaFlex(rows, myWeeklyArea), buildChoukaReplyText(rows, myWeeklyArea));
+    // マイエリアに週報が無い県（京都など）は、行ける範囲でいちばん近い週報エリアをマイエリア扱いに
+    const area = myWeeklyArea ?? (origin ? nearestReachableArea(rows, origin) : null);
+    await replyFlex(replyToken, buildChoukaFlex(rows, area, origin), buildChoukaReplyText(rows, area, origin));
     return;
   }
 
@@ -492,9 +569,9 @@ export async function POST(request: NextRequest) {
     // 位置情報 → 近くの釣り場（店舗オーナーも同じ）
     if (event.type === "message" && event.message?.type === "location") {
       const userId = event.source?.userId;
-      const { latitude, longitude } = event.message;
+      const { latitude, longitude, address } = event.message;
       if (userId && event.replyToken && Number.isFinite(latitude) && Number.isFinite(longitude)) {
-        await handleLocationMessage(event.replyToken, userId, latitude, longitude);
+        await handleLocationMessage(event.replyToken, userId, latitude, longitude, address);
       }
       continue;
     }
