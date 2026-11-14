@@ -8,6 +8,7 @@ import path from "path";
 const mem = vi.hoisted(() => ({
   db: new Map<string, { pk: string; sk: string; data: unknown }>(),
   lists: new Map<string, string[]>(),
+  kv: new Map<string, string>(),
 }));
 
 vi.mock("@/lib/dynamodb", () => {
@@ -63,6 +64,11 @@ vi.mock("@/lib/redis", () => ({
     }),
     lset: vi.fn(),
     smembers: vi.fn(async () => []),
+    get: vi.fn(async (key: string) => mem.kv.get(key) ?? null),
+    set: vi.fn(async (key: string, v: string) => {
+      mem.kv.set(key, v);
+      return "OK";
+    }),
     zincrby: vi.fn(),
   },
 }));
@@ -151,6 +157,9 @@ function dumpExceptDelKey(): string {
 beforeEach(() => {
   mem.db.clear();
   mem.lists.clear();
+  mem.kv.clear();
+  // 投稿に付ける写真は、同じ人（ここでは同じIP）が直近にアップしたもの
+  mem.kv.set("uploadowner:catch-reports/a.jpg", `ip:${sha256("1.2.3.4").slice(0, 32)}`);
   vi.mocked(auth).mockResolvedValue(null as never);
   vi.mocked(checkRateLimit).mockResolvedValue(true);
   vi.mocked(deleteFromS3).mockClear();
@@ -449,5 +458,25 @@ describe("verifyDeleteKey", () => {
     expect(verifyDeleteKey(key, "nothex")).toBe(false);
     expect(verifyDeleteKey(undefined, hashDeleteKey(key))).toBe(false);
     expect(verifyDeleteKey(key, undefined)).toBe(false);
+  });
+});
+
+describe("釣果写真の持ち主確認（他人の写真・放置写真の流用防止）", () => {
+  const otherPhoto = "https://tsurispot-images.s3.ap-northeast-1.amazonaws.com/catch-reports/b.jpg";
+
+  it("アップロード記録の無い写真は付けられない", async () => {
+    const { res } = await post({ photoUrl: otherPhoto });
+    expect(res.status).toBe(400);
+  });
+
+  it("別の人（別IP）がアップした写真は付けられない", async () => {
+    mem.kv.set("uploadowner:catch-reports/b.jpg", `ip:${sha256("9.9.9.9").slice(0, 32)}`);
+    const { res } = await post({ photoUrl: otherPhoto });
+    expect(res.status).toBe(400);
+  });
+
+  it("自分がアップした写真・写真なしの投稿は通る", async () => {
+    expect((await post()).res.status).toBe(200);
+    expect((await post({ photoUrl: undefined })).res.status).toBe(200);
   });
 });
