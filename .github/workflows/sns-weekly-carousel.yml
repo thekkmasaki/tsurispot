@@ -67,6 +67,8 @@ jobs:
       # API 審査が通るまでは private 固定（YouTube 側で強制）。審査後に repo variable YOUTUBE_PRIVACY=public
       YOUTUBE_PRIVACY: ${{ vars.YOUTUBE_PRIVACY || 'private' }}
       SNS_BGM_DIR: /tmp/bgm
+      # BGM を絞る（ファイル名の一部をカンマ区切り。空なら全曲から週ごとに選ぶ）
+      SNS_BGM_PICK: ${{ vars.SNS_BGM_PICK }}
     steps:
       - uses: actions/checkout@v4
 
