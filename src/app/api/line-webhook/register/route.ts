@@ -28,9 +28,14 @@ export async function POST(request: NextRequest) {
   }
   const { adminKey, lineUserId, shopSlug, token, shopName } = body as Record<string, string | undefined>;
 
-  // 管理キー: ADMIN_LINE_TOKEN（未設定時は従来どおり LINE_CHANNEL_SECRET にフォールバック）
-  const expectedKey = resolveAdminToken("ADMIN_LINE_TOKEN", "LINE_CHANNEL_SECRET");
-  if (typeof adminKey !== "string" || !expectedKey || !safeEqual(adminKey, expectedKey)) {
+  // 管理キー: ADMIN_LINE_TOKEN 必須（未設定なら 503 でフェイルクローズ）。
+  // 以前は LINE_CHANNEL_SECRET にフォールバックしていたが、チャネルシークレットは
+  // 署名検証用で用途が異なり漏えい面も広いため管理キーとしては使わない。
+  const expectedKey = resolveAdminToken("ADMIN_LINE_TOKEN");
+  if (!expectedKey) {
+    return NextResponse.json({ error: "not configured" }, { status: 503 });
+  }
+  if (typeof adminKey !== "string" || !safeEqual(adminKey, expectedKey)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
