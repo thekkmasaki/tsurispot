@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopInfoForm } from "./shop-info-form";
+import { useShopSession } from "./use-shop-session";
 
 type StockStatus = "available" | "low" | "out";
 
@@ -35,7 +36,8 @@ type TabType = "bait" | "info";
 export function ShopUpdateForm({ shopName }: { shopName?: string }) {
   const searchParams = useSearchParams();
   const shop = searchParams.get("shop");
-  const token = searchParams.get("token");
+  // LINE 等で届いた管理URLの ?token= は HttpOnly Cookie に交換して即座に URL から消す（デモ店舗は従来どおり）
+  const { status: authStatus, token, isDemo } = useShopSession(shop, { allowDemo: true });
 
   const [activeTab, setActiveTab] = useState<TabType>("bait");
   const [items, setItems] = useState<BaitItem[]>([]);
@@ -120,7 +122,7 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
       const res = await fetch("/api/bait-stock", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ shop, token, stock: items }),
+        body: JSON.stringify({ shop, ...(token ? { token } : {}), stock: items }),
       });
       if (res.ok) {
         setSaved(true);
@@ -135,9 +137,7 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
     setSaving(false);
   };
 
-  const isDemo = shop === "sample-premium" || shop === "sample-basic" || shop === "sample-free";
-
-  if (!shop || (!token && !isDemo)) {
+  if (!shop || (authStatus === "denied" && !isDemo)) {
     return (
       <div className="text-center py-12 space-y-4">
         <p className="text-lg font-bold text-muted-foreground">
@@ -158,7 +158,7 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
     );
   }
 
-  if (loading) {
+  if (loading || (authStatus === "checking" && !isDemo)) {
     return (
       <div className="flex flex-col items-center gap-3 py-12">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -218,7 +218,7 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
       </div>
 
       {/* 店舗情報タブ */}
-      {activeTab === "info" && <ShopInfoForm />}
+      {activeTab === "info" && <ShopInfoForm token={token} />}
 
       {/* エサ在庫タブ */}
       {activeTab !== "bait" ? null : (<>

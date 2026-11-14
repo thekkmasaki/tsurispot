@@ -29,10 +29,13 @@ const PRESET_SERVICES = [
   "修理・メンテナンス",
 ];
 
-export function ShopInfoForm({ shopName }: { shopName?: string }) {
+/**
+ * token: 親（ShopUpdateForm）が URL から受け取った生トークン（後方互換・body でのみ送る）。
+ * 通常は shop_session Cookie で認証されるため null でもよい。
+ */
+export function ShopInfoForm({ shopName, token = null }: { shopName?: string; token?: string | null }) {
   const searchParams = useSearchParams();
   const shop = searchParams.get("shop");
-  const token = searchParams.get("token");
 
   const [info, setInfo] = useState<ShopInfoData>({
     businessHours: "",
@@ -112,14 +115,14 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
   const handlePhotoUpload = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
-      if (!file || !shop || !token) return;
+      if (!file || !shop) return;
 
       setUploading(true);
       setPhotoError("");
 
       const formData = new FormData();
       formData.append("shop", shop);
-      formData.append("token", token);
+      if (token) formData.append("token", token);
       formData.append("file", file);
 
       try {
@@ -145,14 +148,14 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
 
   const handlePhotoDelete = useCallback(
     async (url: string) => {
-      if (!shop || !token) return;
+      if (!shop) return;
       setPhotoError("");
 
       try {
         const res = await fetch("/api/shop-photos", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ shop, token, url }),
+          body: JSON.stringify({ shop, ...(token ? { token } : {}), url }),
         });
         const data = await res.json();
         if (res.ok && data.photos) {
@@ -175,7 +178,7 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
       const res = await fetch("/api/shop-info", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ shop, token, info }),
+        body: JSON.stringify({ shop, ...(token ? { token } : {}), info }),
       });
       if (res.ok) {
         setSaved(true);
