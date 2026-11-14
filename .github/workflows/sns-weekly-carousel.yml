@@ -111,8 +111,8 @@ jobs:
             out/sns-weekly/**/slide-*.jpg
             out/sns-weekly/**/caption-instagram.txt
             out/sns-weekly/**/caption-x.txt
-            out/sns-weekly/**/short.mp4
-            out/sns-weekly/**/youtube.json
+            out/sns-weekly/**/short-*.mp4
+            out/sns-weekly/**/youtube-*.json
           if-no-files-found: ignore
           retention-days: 7
 
