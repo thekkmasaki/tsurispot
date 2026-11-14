@@ -31,9 +31,14 @@ function req(path: string, body: unknown, headers?: Record<string, string>) {
 describe("shop-auth/verify", () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it("shop/token 欠落で 400", async () => {
-    const res = await verifyPOST(req("/api/shop-auth/verify", { shop: "x" }));
+  it("shop 欠落で 400", async () => {
+    const res = await verifyPOST(req("/api/shop-auth/verify", { token: "x" }));
     expect(res.status).toBe(400);
+  });
+
+  it("token も shop_session Cookie も無ければ 403", async () => {
+    const res = await verifyPOST(req("/api/shop-auth/verify", { shop: "real-shop" }));
+    expect(res.status).toBe(403);
   });
 
   it("サンプル店舗 + 固定 demo トークンは受け付けない（403）", async () => {

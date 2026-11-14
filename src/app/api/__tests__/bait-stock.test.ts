@@ -122,13 +122,23 @@ describe("bait-stock API", () => {
       expect(res.status).toBe(400);
     });
 
-    it("token 未指定で 400", async () => {
+    it("非デモ店舗で token も shop_session Cookie も無ければ 403", async () => {
+      vi.mocked(dbGet).mockResolvedValue("correct-token");
       const req = new NextRequest("http://localhost/api/bait-stock", {
         method: "POST",
-        body: JSON.stringify({ shop: "sample-premium", stock: [] }),
+        body: JSON.stringify({ shop: "some-real-shop", stock: [{ name: "アオイソメ", available: true }] }),
       });
       const res = await POST(req);
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(403);
+    });
+
+    it("token が文字列以外なら 403", async () => {
+      const req = new NextRequest("http://localhost/api/bait-stock", {
+        method: "POST",
+        body: JSON.stringify({ shop: "some-real-shop", token: 123, stock: [] }),
+      });
+      const res = await POST(req);
+      expect(res.status).toBe(403);
     });
 
     it("stock が配列でないと 400", async () => {
