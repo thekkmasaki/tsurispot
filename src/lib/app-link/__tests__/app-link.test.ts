@@ -255,6 +255,8 @@ describe("アプリ連携", () => {
       expect(setCookie).toMatch(/Max-Age=600/i);
       const value = /app_link_req=([^;]+)/.exec(setCookie)![1];
       expect(parseAppLinkReq(value)).toMatchObject({ challenge: CHALLENGE, state });
+      // 同意画面に「連携を始めた時刻」を出すため開始時刻を保持する
+      expect(parseAppLinkReq(value)!.startedAt).toBeGreaterThan(0);
     });
 
     async function cookieValue() {

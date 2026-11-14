@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   }
 
   const nonce = randomB64url(16);
-  const value = Buffer.from(JSON.stringify({ c: challenge, s: state, n: nonce })).toString("base64url");
+  const value = Buffer.from(JSON.stringify({ c: challenge, s: state, n: nonce, t: Date.now() })).toString("base64url");
 
   // 相対 Location（プロキシ配下でもホストを取り違えない）
   const res = new NextResponse(null, { status: 302, headers: { Location: "/app-link" } });
