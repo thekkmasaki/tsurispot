@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import {
   Store,
   ChevronRight,
@@ -291,7 +292,7 @@ export default function ShopsListPage() {
                 <strong>初期費用0円・月額0円</strong>で貴店の情報を掲載して、地元の釣り人にアピールしませんか？
               </p>
 
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <div className={`grid grid-cols-1 gap-4 ${SHOP_PLANS_PAUSED ? "" : "md:grid-cols-3"}`}>
                 <Card>
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg text-green-700 dark:text-green-400">無料掲載</CardTitle>
@@ -308,6 +309,8 @@ export default function ShopsListPage() {
                     </ul>
                   </CardContent>
                 </Card>
+                {/* 有料プランの料金カード（SHOP_PLANS_PAUSED 中は非表示） */}
+                {!SHOP_PLANS_PAUSED && (<>
                 <Card className="border-blue-300/50">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg text-blue-600 dark:text-blue-400">ベーシック</CardTitle>
@@ -342,9 +345,11 @@ export default function ShopsListPage() {
                     </ul>
                   </CardContent>
                 </Card>
+                </>)}
               </div>
 
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+                {!SHOP_PLANS_PAUSED && (<>
                 <Link prefetch={false} href="/shops/sample-basic" className="inline-flex items-center justify-center gap-1 rounded-lg border border-blue-300 px-5 py-2.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50">
                   ベーシックプランのサンプルを見る
                 </Link>
@@ -352,7 +357,8 @@ export default function ShopsListPage() {
                   プロプランのサンプルを見る
                   <ChevronRight className="size-4" />
                 </Link>
-                <Link prefetch={false} href="/shops/update?shop=sample-premium&token=demo" className="inline-flex items-center justify-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
+                </>)}
+                <Link prefetch={false} href={`/shops/update?shop=${SHOP_PLANS_PAUSED ? "sample-free" : "sample-premium"}&token=demo`} className="inline-flex items-center justify-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
                   店舗管理のデモを試す
                 </Link>
               </div>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopInfoForm } from "./shop-info-form";
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 
 type StockStatus = "available" | "low" | "out";
 
@@ -148,7 +149,7 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
         </p>
         <div className="pt-4 border-t">
           <Link prefetch={false}
-            href="/shops/update?shop=sample-premium&token=demo"
+            href={`/shops/update?shop=${SHOP_PLANS_PAUSED ? "sample-free" : "sample-premium"}&token=demo`}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
           >
             デモを体験してみる →
@@ -180,7 +181,9 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
             🎮 デモモード
           </p>
           <p className="text-xs text-blue-700 dark:text-blue-400">
-            これはお試し用のデモページです。実際にボタンをタップして操作感をお確かめください。無料プラン（1日10回まで更新可）のほか、ベーシック（最初の1年は月額500円、その後月額980円・写真3枚・公式バッジ・Googleのお店情報を整備）、プロ（最初の1年は月額1,980円、その後月額2,980円・1日50回更新・写真20枚・クーポン掲載・Googleのお店情報を整備）もお選びいただけます。
+            これはお試し用のデモページです。{SHOP_PLANS_PAUSED
+              ? "実際にボタンをタップして操作感をお確かめください。無料掲載ではエサ在庫を1日10回まで更新できます。"
+              : "実際にボタンをタップして操作感をお確かめください。無料プラン（1日10回まで更新可）のほか、ベーシック（最初の1年は月額500円、その後月額980円・写真3枚・公式バッジ・Googleのお店情報を整備）、プロ（最初の1年は月額1,980円、その後月額2,980円・1日50回更新・写真20枚・クーポン掲載・Googleのお店情報を整備）もお選びいただけます。"}
           </p>
           <a
             href="mailto:fishingspotjapan@gmail.com?subject=店舗管理について"
