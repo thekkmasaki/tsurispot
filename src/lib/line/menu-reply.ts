@@ -11,7 +11,8 @@ type FlexComponent = Record<string, unknown>;
 
 /** 友だち追加直後に出す都道府県ボタン（位置情報ボタンと合わせて LINE の上限13個以内） */
 export const QUICK_PREFS = ["東京", "神奈川", "千葉", "大阪", "兵庫", "愛知", "静岡", "福岡", "広島", "北海道", "宮城", "和歌山"];
-export const LOCATION_LABEL = "📍位置情報を送る";
+// LINE が位置情報ボタンに自動でピンのアイコンを付けるので、絵文字は入れない（二重になる）
+export const LOCATION_LABEL = "位置情報を送る";
 
 const C = { brand: "#0369a1", sub: "#e0f2fe", text: "#111827", muted: "#6b7280", soft: "#f8fafc", accent: "#ea580c", ok: "#047857" };
 const txt = (text: string, opt: FlexComponent = {}): FlexComponent => ({ type: "text", text: text || " ", wrap: true, ...opt });
