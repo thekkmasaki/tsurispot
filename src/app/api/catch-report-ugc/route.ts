@@ -7,6 +7,7 @@ import { checkNgWords } from "@/lib/moderation";
 import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { gasAuthField } from "@/lib/gas-inbox";
 import { savePostMeta, addToGlobalFeed, sanitizeTags, addTagsForPost } from "@/lib/social-store";
 import { fishSpecies } from "@/lib/data/fish";
 import { rejectInactiveUser } from "@/lib/user-status";
@@ -402,6 +403,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           ...reportData,
           spotUrl: slug ? `https://tsurispot.com/spots/${slug}` : "",
+          ...gasAuthField(),
         }),
         redirect: "follow",
       }).catch((err) => {
