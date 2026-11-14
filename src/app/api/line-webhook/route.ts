@@ -273,20 +273,14 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
 
   // 釣果・週報 → 最新の釣果週報
   if (/釣果|週報|釣れた|レポート|report/i.test(text)) {
-    await replyMessage(
-      replyToken,
-      [
-        "━━━━━━━━━━━━━━",
-        "📊 最新の釣果情報",
-        "━━━━━━━━━━━━━━",
-        "",
-        "▼ 釣果週報・釣行レポート",
-        "https://tsurispot.com/blog",
-        "",
-        "毎週エリア別の釣果情報を",
-        "更新しています！",
-      ].join("\n")
-    );
+    // 最新週報の上位エリア＋/chouka。週報の取得が遅いとき（キャッシュが冷えている等）は待たずに /chouka だけ返す
+    const { getLatestWeeklyCatches } = await import("@/lib/data/weekly-report-latest");
+    const { buildChoukaReplyText } = await import("@/lib/line/chouka-reply");
+    const rows = await Promise.race([
+      getLatestWeeklyCatches(),
+      new Promise<[]>((r) => setTimeout(() => r([]), 4000)),
+    ]).catch(() => []);
+    await replyMessage(replyToken, buildChoukaReplyText(rows));
     return;
   }
 
