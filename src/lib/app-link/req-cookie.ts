@@ -4,6 +4,8 @@ export interface AppLinkReq {
   challenge: string;
   state: string;
   nonce: string;
+  /** 連携を始めた時刻（epoch ミリ秒）。同意画面に表示する。旧Cookieには無い */
+  startedAt?: number;
 }
 
 /** app_link_req Cookie の値を検証して取り出す。壊れていれば null。 */
@@ -14,6 +16,7 @@ export function parseAppLinkReq(value: string | undefined | null): AppLinkReq | 
       c?: unknown;
       s?: unknown;
       n?: unknown;
+      t?: unknown;
     };
     if (
       typeof o.c !== "string" ||
@@ -25,7 +28,8 @@ export function parseAppLinkReq(value: string | undefined | null): AppLinkReq | 
     ) {
       return null;
     }
-    return { challenge: o.c, state: o.s, nonce: o.n };
+    const startedAt = typeof o.t === "number" && Number.isFinite(o.t) && o.t > 0 ? o.t : undefined;
+    return { challenge: o.c, state: o.s, nonce: o.n, ...(startedAt ? { startedAt } : {}) };
   } catch {
     return null;
   }

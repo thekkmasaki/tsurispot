@@ -3,6 +3,7 @@ import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { gasAuthField } from "@/lib/gas-inbox";
 import { savePostMeta, addToGlobalFeed, type PostMeta } from "@/lib/social-store";
 import { rejectInactiveUser } from "@/lib/user-status";
 import { isOwnImageUrl, readJsonBody, resolveSpot, todayJst } from "@/lib/ugc-validation";
@@ -145,6 +146,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           ...post,
           spotUrl: post.spotSlug ? `https://tsurispot.com/spots/${post.spotSlug}` : "",
+          ...gasAuthField(),
         }),
         redirect: "follow",
       }).catch((err) => {

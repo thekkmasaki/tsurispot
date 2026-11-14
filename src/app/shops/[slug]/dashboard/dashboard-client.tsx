@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { tackleShops } from "@/lib/data/shops";
@@ -18,44 +18,21 @@ import {
   Loader2,
 } from "lucide-react";
 import { PlanManagement } from "@/components/shops/plan-management";
+import { useShopSession } from "@/components/shops/use-shop-session";
 
 export function DashboardClient() {
   const params = useParams();
   const searchParams = useSearchParams();
   const slug = params.slug as string;
-  const token = searchParams.get("token");
+  // 管理URLの ?token= は HttpOnly Cookie に交換して URL から消す（以降は Cookie で認証）
+  const { status: authState, token } = useShopSession(slug);
 
   const shop = tackleShops.find((s) => s.slug === slug);
 
-  const [authState, setAuthState] = useState<"checking" | "ok" | "denied">("checking");
   const [baitStock, setBaitStock] = useState<BaitStock[]>([]);
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
-
-  // トークン認証（DynamoDB のトークンと照合。ハードコード TOKENS は廃止）
-  useEffect(() => {
-    if (!token) {
-      setAuthState("denied");
-      return;
-    }
-    let active = true;
-    fetch("/api/shop-auth/verify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ shop: slug, token }),
-    })
-      .then((r) => r.json())
-      .then((d) => {
-        if (active) setAuthState(d.ok ? "ok" : "denied");
-      })
-      .catch(() => {
-        if (active) setAuthState("denied");
-      });
-    return () => {
-      active = false;
-    };
-  }, [slug, token]);
 
   useEffect(() => {
     if (!shop) return;
@@ -80,8 +57,12 @@ export function DashboardClient() {
   }, [slug, shop]);
 
   // Stripe 課金完了（success_url の ?subscribed=true）を GA4 に計測し、課金ファネル（問い合わせ→決済）の CVR を可視化する
+  // ?token= 除去（replaceState）で searchParams が変わっても二重計測しないようにする
+  const subscribedTrackedRef = useRef(false);
   useEffect(() => {
     if (searchParams.get("subscribed") !== "true") return;
+    if (subscribedTrackedRef.current) return;
+    subscribedTrackedRef.current = true;
     const plan = searchParams.get("plan") || shop?.planLevel || "unknown";
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", "shop_subscription", { shop_slug: slug, plan });
@@ -163,7 +144,7 @@ export function DashboardClient() {
       const res = await fetch("/api/bait-stock", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ shop: slug, token: token || "", stock: filtered }),
+        body: JSON.stringify({ shop: slug, ...(token ? { token } : {}), stock: filtered }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({ error: "保存に失敗しました" }));
@@ -288,7 +269,7 @@ export function DashboardClient() {
         </CardContent>
       </Card>
 
-      <PlanManagement shopSlug={slug} token={token || ""} />
+      <PlanManagement shopSlug={slug} token={token} />
 
       <p className="mt-4 text-xs text-muted-foreground">
         ※ 保存内容はサーバーに反映され、店舗ページにリアルタイム表示されます（どの端末からでも編集できます）。

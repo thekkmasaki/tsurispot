@@ -11,7 +11,8 @@ import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 
 interface PlanManagementProps {
   shopSlug: string;
-  token: string;
+  /** 後方互換用（このタブで URL から受け取った生トークン）。body でのみ送り、URL には載せない。通常は shop_session Cookie で認証 */
+  token?: string | null;
 }
 
 export function PlanManagement({ shopSlug, token }: PlanManagementProps) {
@@ -20,7 +21,11 @@ export function PlanManagement({ shopSlug, token }: PlanManagementProps) {
   const [portalLoading, setPortalLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/stripe/subscription?shop=${shopSlug}&token=${token}`)
+    fetch("/api/stripe/subscription", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ shop: shopSlug, ...(token ? { token } : {}) }),
+    })
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
         if (data?.subscription) setSubscription(data.subscription);
@@ -35,7 +40,7 @@ export function PlanManagement({ shopSlug, token }: PlanManagementProps) {
       const res = await fetch("/api/stripe/portal", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ shopSlug, token }),
+        body: JSON.stringify({ shopSlug, ...(token ? { token } : {}) }),
       });
       const data = await res.json();
       if (res.ok && data.url) {
@@ -122,7 +127,7 @@ export function PlanManagement({ shopSlug, token }: PlanManagementProps) {
                 <p className="text-xs text-muted-foreground">
                   有料プランにアップグレードすると、公式バッジ・検索優先表示・写真掲載などの機能が使えます。
                 </p>
-                <Link prefetch={false} href={`/subscribe/basic?shop=${shopSlug}&token=${token}`}>
+                <Link prefetch={false} href={`/subscribe/basic?shop=${shopSlug}`}>
                   <Button size="sm" className="gap-1.5">
                     <Crown className="size-3" />
                     有料プランにアップグレード

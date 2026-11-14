@@ -34,6 +34,17 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** 連携を始めた時刻（日本時間）。旧Cookieで不明なら表示時刻を使う */
+function formatStartedAt(startedAt: number | undefined): string {
+  return new Date(startedAt ?? Date.now()).toLocaleString("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export default async function AppLinkPage() {
   if (!isAppLinkEnabled()) notFound();
 
@@ -68,6 +79,8 @@ export default async function AppLinkPage() {
 
   const cancelUrl = appSchemeUrl({ error: "cancelled", state: req.state });
   const nickname = session.user.nickname || "釣り人";
+  // 心当たりのない連携要求に気付けるよう、連携を始めた時刻を明示する
+  const startedLabel = formatStartedAt(req.startedAt);
 
   return (
     <Shell>
@@ -76,6 +89,9 @@ export default async function AppLinkPage() {
           <h1 className="text-lg font-bold">釣果記録アプリと連携しますか</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             ログイン中のアカウント: <span className="font-medium text-foreground">{nickname}</span>
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            連携を始めた時刻: <span className="font-medium text-foreground">{startedLabel}</span>（日本時間）
           </p>
         </div>
 
@@ -95,8 +111,11 @@ export default async function AppLinkPage() {
               <span>アカウントを退会する</span>
             </li>
           </ul>
-          <p className="rounded-lg bg-muted px-3 py-2 text-xs text-muted-foreground">
-            アプリの「ログイン」を押してこの画面が開いた時だけ「連携する」を押してください。覚えがない時は「やめる」を押してください。
+          <p
+            role="alert"
+            className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-medium text-amber-900 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200"
+          >
+            このボタンは、あなたが今ツリスポ釣果記録アプリから連携を始めた場合だけ押してください。覚えがない時や、上の時刻に心当たりがない時は「やめる」を押してください。
           </p>
         </div>
 
