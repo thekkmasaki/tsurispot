@@ -12,7 +12,7 @@ const MAIN = [
   "akashi-kobe", "osaka-sennan", "tokyobay-yokohama", "fukuoka-kitakyushu", "suruga-izu",
   "chita-mikawa", "nanki-shirahama", "setouchi-hiroshima", "sendai-ishinomaki", "otaru-ishikari",
 ];
-const STALE_DAYS = 6; // 木曜運用: 前回の木曜から6日超＝今週分がまだ
+const STALE_DAYS = 6; // 水曜運用: 前回の水曜から6日超＝今週分がまだ
 
 const tag = await latestWeekTag();
 if (!tag) { await discord("⚠️ **釣果週報** 週報が1件も見つかりません"); process.exit(1); }
