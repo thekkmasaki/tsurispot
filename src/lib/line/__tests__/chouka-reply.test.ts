@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
   buildChoukaReplyText,
+  areaKm,
+  nearestReachableArea,
+  REACH_KM,
+  selectChouka,
+  selectFishRows,
   buildFishReplyText,
   CHOUKA_URL,
   findFishInText,
@@ -59,7 +64,7 @@ describe("buildChoukaReplyText", () => {
     expect(text).toContain("タチウオ（osakaの堤防）");
     expect(text).toContain(CHOUKA_URL);
     expect(text).not.toContain("/blog");
-    expect(text).toContain("都道府県名を送ると");
+    expect(text).toContain("都道府県名か位置情報を送ると");
   });
 
   it("マイエリアを先頭に出し、全国枠からは除く", () => {
@@ -169,5 +174,54 @@ describe("Flex（カード）", () => {
   it("週報が取れないときもカードを作れる", () => {
     const { texts } = walk(buildChoukaFlex([]).contents);
     expect(texts.every((t) => t.trim().length > 0)).toBe(true);
+  });
+});
+
+describe("現在地から行ける範囲に絞る", () => {
+  // 京都・伏見（ユーザーのスクショの例）
+  const fushimi = { lat: 34.94, lng: 135.77 };
+  const tachi = (area: string, heat: number) => row(area, heat, "タチウオ", { areaLabel: area });
+  const rows = [
+    tachi("tokyobay-yokohama", 3),
+    tachi("nanki-shirahama", 3),
+    tachi("osaka-sennan", 2),
+    tachi("akashi-kobe", 1),
+    tachi("chita-mikawa", 3),
+  ];
+
+  it("距離の目安", () => {
+    expect(areaKm("osaka-sennan", fushimi)).toBeLessThan(REACH_KM);
+    expect(areaKm("tokyobay-yokohama", fushimi)).toBeGreaterThan(REACH_KM);
+    expect(areaKm("unknown", fushimi)).toBeNull();
+  });
+
+  it("魚名: 範囲内だけを近い順に（東京湾・南紀は出さない）", () => {
+    const hits = selectFishRows(FISH[2], rows, null, fushimi);
+    expect(hits.map((r) => r.areaSlug)).toEqual(["osaka-sennan", "akashi-kobe", "chita-mikawa"]);
+    const s = JSON.stringify(buildFishFlex(FISH[2], rows, null, fushimi).contents);
+    expect(s).toContain("120km以内");
+    expect(s).toMatch(/osaka-sennan（約\d+km）/);
+    expect(s).not.toContain("tokyobay-yokohama");
+    expect(buildFishReplyText(FISH[2], rows, null, fushimi)).not.toContain("nanki-shirahama");
+  });
+
+  it("魚名: 範囲内に無ければそう言い、いちばん近い報告を添える", () => {
+    const far = [tachi("tokyobay-yokohama", 3), tachi("nanki-shirahama", 2)];
+    const s = JSON.stringify(buildFishFlex(FISH[2], far, null, fushimi).contents);
+    expect(s).toContain("報告はありませんでした");
+    expect(s).toContain("いちばん近い報告：nanki-shirahama");
+  });
+
+  it("現在地が無ければ従来どおり全国", () => {
+    expect(selectFishRows(FISH[2], rows, null).length).toBe(5);
+  });
+
+  it("釣果: 好調エリアは範囲内だけ、範囲内のいちばん近いエリアをマイエリア扱いにできる", () => {
+    const all = [row("tokyobay-yokohama", 3), row("osaka-sennan", 2), row("akashi-kobe", 1)];
+    expect(selectChouka(all, null, fushimi).picks.map((r) => r.areaSlug)).toEqual(["osaka-sennan", "akashi-kobe"]);
+    expect(nearestReachableArea(all, fushimi)?.slug).toBe("osaka-sennan");
+    expect(buildChoukaReplyText(all, null, fushimi)).toContain("近くの好調エリア");
+    // 範囲内に1つも無ければ全国に戻す
+    expect(selectChouka([row("tokyobay-yokohama", 3)], null, fushimi).picks.length).toBe(1);
   });
 });

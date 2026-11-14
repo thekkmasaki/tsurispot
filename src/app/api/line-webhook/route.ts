@@ -7,6 +7,9 @@ import { fishSpecies } from "@/lib/data/fish";
 import { getLatestWeeklyCatches, type LatestWeeklyCatch } from "@/lib/data/weekly-report-latest";
 import {
   buildChoukaFlex,
+  nearestReachableArea,
+  REACH_KM,
+  type LineOrigin,
   buildChoukaReplyText,
   buildFishFlex,
   buildFishReplyText,
@@ -128,6 +131,8 @@ async function loadCoordSpots(): Promise<CoordSpot[]> {
 }
 
 async function handleLocationMessage(replyToken: string, userId: string, lat: number, lng: number) {
+  // 以後の「釣果」「魚の名前」を行ける範囲に絞るために、現在地を約1kmに丸めて保存
+  await setUserOrigin(userId, { lat, lng });
   const list = nearestSpots(await loadCoordSpots(), lat, lng);
   // マイエリア未登録なら、いちばん近い釣り場の都道府県で自動登録（50km 以内のときだけ）
   let areaNote: string | undefined;
@@ -143,9 +148,10 @@ async function handleLocationMessage(replyToken: string, userId: string, lat: nu
       quick.push(pref.nameShort); // タップでマイエリアを変更
     }
   }
-  const flex = buildNearbyFlex(list, areaNote);
+  const note = [areaNote, `🚗 これから「釣果」や魚の名前を送ると、ここから${REACH_KM}km以内の釣果に絞ってお返しします`].filter(Boolean).join("\n");
+  const flex = buildNearbyFlex(list, note);
   flex.quickReply = [...quick, ...flex.quickReply];
-  await replyFlex(replyToken, flex, buildNearbyText(list, areaNote));
+  await replyFlex(replyToken, flex, buildNearbyText(list, note));
 }
 
 /** DynamoDB: LINE userId → 店舗情報 */
@@ -196,6 +202,26 @@ async function getUserArea(userId: string): Promise<string | null> {
 async function setUserArea(userId: string, prefSlug: string): Promise<void> {
   try {
     await dbPut(`LINE#${userId}`, "AREA", prefSlug);
+  } catch {
+    // ignore
+  }
+}
+
+/** 位置情報を送ってもらった人の現在地（約1kmに丸めて保存。180日で使わなくなる） */
+const ORIGIN_TTL_MS = 180 * 86400_000;
+async function getUserOrigin(userId: string): Promise<LineOrigin | null> {
+  try {
+    const o = await dbGet<LineOrigin & { at: number }>(`LINE#${userId}`, "ORIGIN");
+    return o && Number.isFinite(o.lat) && Number.isFinite(o.lng) && Date.now() - (o.at ?? 0) < ORIGIN_TTL_MS ? o : null;
+  } catch {
+    return null;
+  }
+}
+
+async function setUserOrigin(userId: string, o: LineOrigin | null): Promise<void> {
+  try {
+    const round = (n: number) => Math.round(n * 100) / 100;
+    await dbPut(`LINE#${userId}`, "ORIGIN", o ? { lat: round(o.lat), lng: round(o.lng), at: Date.now() } : null);
   } catch {
     // ignore
   }
@@ -278,6 +304,7 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   const prefMatch = matchPrefecture(text);
   if (prefMatch) {
     await setUserArea(userId, prefMatch.slug);
+    await setUserOrigin(userId, null); // 都道府県を選び直したら、前に送られた現在地は使わない
     await replyMessage(
       replyToken,
       [
@@ -296,12 +323,14 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   const userArea = await getUserArea(userId);
   const userPref = userArea ? prefectures.find((p) => p.slug === userArea) : null;
   const myWeeklyArea = weeklyAreaForPrefecture(userPref?.name);
+  // 位置情報を送ってもらっていれば、釣果は行ける範囲（REACH_KM 以内）に絞る
+  const origin = await getUserOrigin(userId);
 
   // 魚の名前（「アジ」「タチウオ釣れてる？」）→ その魚が今釣れている場所
   const fish = findFishInText(text, fishSpecies);
   if (fish) {
     const rows = await loadWeeklyRows();
-    await replyFlex(replyToken, buildFishFlex(fish, rows, myWeeklyArea), buildFishReplyText(fish, rows, myWeeklyArea));
+    await replyFlex(replyToken, buildFishFlex(fish, rows, myWeeklyArea, origin), buildFishReplyText(fish, rows, myWeeklyArea, origin));
     return;
   }
 
@@ -364,7 +393,9 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   if (/釣果|週報|釣れた|レポート|report/i.test(text)) {
     // マイエリアの今週の釣果＋全国の好調エリア上位＋/chouka
     const rows = await loadWeeklyRows();
-    await replyFlex(replyToken, buildChoukaFlex(rows, myWeeklyArea), buildChoukaReplyText(rows, myWeeklyArea));
+    // マイエリアに週報が無い県（京都など）は、行ける範囲でいちばん近い週報エリアをマイエリア扱いに
+    const area = myWeeklyArea ?? (origin ? nearestReachableArea(rows, origin) : null);
+    await replyFlex(replyToken, buildChoukaFlex(rows, area, origin), buildChoukaReplyText(rows, area, origin));
     return;
   }
 
