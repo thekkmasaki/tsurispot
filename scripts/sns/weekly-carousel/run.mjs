@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
  * 釣果週報カルーセル（週1本）: 週報記事 → スライド画像 → Instagram カルーセル + X（画像4枚）投稿 → 台帳 → Discord
+ * YouTube はエリア別ショート（1エリア1本・最大10本）を3日に分けて上げる（API の1日の上限＝約6本のため）。
+ *   1日目は /weekly-report 直後の実行、2・3日目は毎日の cron。1日に上げる本数 = ceil(残り本数 / 残り日数)（10本なら 4→3→3）
  *
  *   node scripts/sns/weekly-carousel/run.mjs [--week 2026-11-week2] [--dry-run] [--force] [--out out/sns-weekly]
  *   --week:       省略時は microCMS の最新週
@@ -18,7 +20,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { redis, getToken, discord, uploadPublic, removePublic } from "../ranking-reel/lib.mjs";
 import { postInstagramCarousel } from "../ranking-reel/platforms.mjs";
-import { parseWeekTag, latestWeekTag, fetchWeekArticles, parseArticle, topRows, weekPeriod } from "./data.mjs";
+import { parseWeekTag, latestWeekTag, fetchWeekArticles, parseArticle, topRows, topSpots, areaKey, weekPeriod } from "./data.mjs";
 import { loadFishIndex, createPhotoResolver } from "./photos.mjs";
 import { youtubeConfigured, uploadYouTubeVideo } from "../youtube.mjs";
 
@@ -30,7 +32,11 @@ const force = argv.includes("--force");
 const POSTED_KEY = "sns:weekly:posted"; // Redis SET（Instagram 投稿済み WEEKTAG）
 const X_POSTED_KEY = "sns:weekly:x:posted"; // Redis SET（X 投稿済み WEEKTAG）
 const X_IMAGES = 4; // X は1投稿に画像4枚まで（表紙＋エリア上位3枚）
-const YT_POSTED_KEY = "sns:weekly:yt:posted"; // Redis SET（YouTube ショート投稿済み WEEKTAG）
+const YT_POSTED_KEY = "sns:weekly:yt:posted"; // Redis SET（YouTube のエリア別ショートを全部上げ終えた WEEKTAG）
+const ytDoneKey = (t) => `sns:weekly:yt:${t}:areas`; // Redis SET（その週に上げたエリアのキー）
+const ytDaysKey = (t) => `sns:weekly:yt:${t}:days`; // Redis SET（その週に上げた日付 JST）
+const YT_DAYS = 3; // 何日に分けて上げるか
+const YT_MAX_PER_DAY = 5; // API の上限（1日 10,000 ユニット・1本 1,600）より少なめ
 const LOG_KEY = "sns:weekly:ledger"; // Redis LIST（投稿記録）
 const READY_MIN = 8; // この数のエリアが揃えば投稿（揃わなくても最初の記事から24時間で投稿）
 
@@ -47,11 +53,14 @@ const week = parseWeekTag(tag);
 console.log(`対象週: ${tag}（${week.label} ${week.range}）`);
 
 const isPosted = async (key) => !dryRun && Number(await redis(["SISMEMBER", key, tag]).catch(() => 0)) === 1;
+const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10); // JST の日付
+const ytDays = dryRun ? [] : ((await redis(["SMEMBERS", ytDaysKey(tag)]).catch(() => [])) ?? []);
+const ytToday = ytDays.includes(today); // 今日はもう上げた → 次の日に回す
 // YouTube は認証情報を登録してから有効（未登録の間は毎回 Discord に「未設定」と出す。黙ってスキップしない）
 const todo = {
   instagram: !(await isPosted(POSTED_KEY)),
   x: !(await isPosted(X_POSTED_KEY)),
-  youtube: youtubeConfigured() && !(await isPosted(YT_POSTED_KEY)),
+  youtube: youtubeConfigured() && !(await isPosted(YT_POSTED_KEY)) && !ytToday,
 };
 if (!todo.instagram && !todo.x && !todo.youtube) {
   console.log(`${tag} は投稿済み`);
@@ -70,7 +79,11 @@ if (!force && articles.length < READY_MIN && !(ageH >= 24)) {
   process.exit(0);
 }
 const areas = articles.map(parseArticle)
-  .map((a) => ({ ...a, rows: topRows(a.rows.filter((r) => r.heat > 0).length ? a.rows.filter((r) => r.heat > 0) : a.rows) }))
+  .map((a) => {
+    const use = a.rows.some((r) => r.heat > 0) ? a.rows.filter((r) => r.heat > 0) : a.rows;
+    // rows = カルーセル（1エリア3行まで・魚種が被らない）、spots = エリア別ショート（5か所まで・釣り場が被らない）
+    return { ...a, key: areaKey(a.slug), rows: topRows(use), spots: topSpots(use.filter((r) => r.heat > 0)) };
+  })
   .filter((a) => a.rows.length)
   .sort((a, b) => Math.max(...b.rows.map((r) => r.heat)) - Math.max(...a.rows.map((r) => r.heat)));
 if (!areas.length) await fail(`${tag} の週報から釣果表を読み取れませんでした（記事${articles.length}件）`);
@@ -94,7 +107,7 @@ try {
     return f;
   };
   const resolve = createPhotoResolver(loadFishIndex(), fetchOwner, week.month * 5 + week.weekN);
-  for (const a of areas) for (const r of a.rows) {
+  for (const a of areas) for (const r of [...a.rows, ...a.spots]) {
     r.photo = await resolve(r.fish);
     if (r.photo?.credit) credits.add(r.photo.credit);
   }
@@ -112,22 +125,30 @@ const label = `${week.period ?? week.label}（${areas.length}エリア・${slide
 const xText = fs.readFileSync(path.join(outDir, "caption-x.txt"), "utf8");
 const xSlides = slides.slice(0, X_IMAGES);
 
-// YouTube ショート「今週末 釣れてる釣り場TOP5」（作れなくても Instagram / X は止めない）
-let short = null;
-try {
-  const o = execFileSync("node", [path.join(here, "shorts.mjs"), dataPath, outDir], { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] });
-  const s = JSON.parse(o.trim().split("\n").at(-1));
-  short = { file: s.video, ...JSON.parse(fs.readFileSync(s.meta, "utf8")) };
-  console.log(`ショート: ${short.title}`);
-} catch (e) {
-  console.warn("ショート動画を作れませんでした:", e.status === 2 ? "ランキングに足る釣果なし" : e.message);
+// YouTube エリア別ショート（作れなくても Instagram / X は止めない）
+// 好調なエリアから順に、今日の分だけ作る。3か所に満たないエリアは対象外（数合わせをしない）
+const ytCandidates = areas.filter((a) => a.spots.length >= 3);
+const ytDone = new Set(dryRun ? [] : ((await redis(["SMEMBERS", ytDoneKey(tag)]).catch(() => [])) ?? []));
+const ytLeft = ytCandidates.filter((a) => !ytDone.has(a.key));
+const ytDaysLeft = Math.max(1, YT_DAYS - ytDays.length);
+const ytToday_ = ytLeft.slice(0, Math.min(YT_MAX_PER_DAY, Math.ceil(ytLeft.length / ytDaysLeft)));
+console.log(`YouTube: 対象${ytCandidates.length}エリア（3か所未満で対象外: ${areas.filter((a) => a.spots.length < 3).map((a) => a.area).join("・") || "なし"}）／済み${ytDone.size}／今日${ytToday_.length}本`);
+let shorts = [];
+if ((todo.youtube || dryRun || !youtubeConfigured()) && ytToday_.length) {
+  try {
+    const o = execFileSync("node", [path.join(here, "shorts.mjs"), dataPath, outDir, ...ytToday_.map((a) => a.key)], { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] });
+    shorts = JSON.parse(o.trim().split("\n").at(-1)).map((s) => ({ ...s, file: s.video, ...JSON.parse(fs.readFileSync(s.meta, "utf8")) }));
+    for (const s of shorts) console.log(`ショート: ${s.title}`);
+  } catch (e) {
+    console.warn("ショート動画を作れませんでした:", e.message);
+  }
 }
 
 if (dryRun) {
   await discord(`🧪 **釣果週報カルーセル（dry-run）** ${label}\n\`\`\`\n${caption.slice(0, 1500)}\n\`\`\``, slides[0]);
   await discord("（2枚目）", slides[1]);
   await discord(`🧪 **X（dry-run）** 画像${xSlides.length}枚\n\`\`\`\n${xText}\n\`\`\``);
-  if (short) await discord(`🧪 **YouTube ショート（dry-run）** ${short.title}`, short.file);
+  for (const s of shorts) await discord(`🧪 **YouTube ショート（dry-run・今日の分 ${shorts.length}本）** ${s.title}`, s.file);
   console.log("dry-run 完了");
   process.exit(0);
 }
@@ -172,19 +193,39 @@ async function postX() {
 }
 
 async function postYouTube() {
-  if (!short) throw new Error("ショート動画を作れませんでした（ログを確認）");
-  const res = await uploadYouTubeVideo({ file: short.file, title: short.title, description: short.description, tags: short.tags });
-  await redis(["SADD", YT_POSTED_KEY, tag]);
-  await redis(["LPUSH", LOG_KEY, JSON.stringify({ platform: "youtube", week: tag, at: new Date().toISOString(), id: res.id, permalink: res.url, privacy: res.privacy, areas: areas.length })]);
-  // API 審査前は非公開でしか上がらない → YouTube Studio で公開に切り替える
-  return res.privacy === "public" ? res.url : `${res.url}（${res.privacy}。YouTube Studio で「公開」に切り替えてください）`;
+  if (!ytLeft.length) { await redis(["SADD", YT_POSTED_KEY, tag]); return "上げるエリアがありません（3か所以上の釣り場があるエリアなし）"; }
+  if (!shorts.length) throw new Error("ショート動画を作れませんでした（ログを確認）");
+  const urls = [];
+  const errs = [];
+  for (const s of shorts) {
+    try {
+      const res = await uploadYouTubeVideo({ file: s.file, title: s.title, description: s.description, tags: s.tags });
+      await redis(["SADD", ytDoneKey(tag), s.key]);
+      await redis(["EXPIRE", ytDoneKey(tag), 30 * 86400]);
+      await redis(["LPUSH", LOG_KEY, JSON.stringify({ platform: "youtube", week: tag, area: s.key, at: new Date().toISOString(), id: res.id, permalink: res.url, privacy: res.privacy })]);
+      // API 審査前は非公開でしか上がらない → YouTube Studio で公開に切り替える
+      urls.push(`${s.area}: ${res.url}${res.privacy === "public" ? "" : `（${res.privacy}）`}`);
+    } catch (e) {
+      errs.push(`${s.area}: ${e.message}`);
+      if (/quota/i.test(e.message)) break; // 1日の上限に達した → 残りは翌日
+    }
+  }
+  if (urls.length) {
+    await redis(["SADD", ytDaysKey(tag), today]);
+    await redis(["EXPIRE", ytDaysKey(tag), 30 * 86400]);
+  }
+  const left = ytLeft.length - urls.length;
+  if (!left) await redis(["SADD", YT_POSTED_KEY, tag]);
+  const msg = `${urls.length}本（残り${left}本は${left ? "明日以降に自動で" : "なし"}）\n${urls.join("\n")}${urls.some((u) => /private|unlisted/.test(u)) ? "\n※非公開で上がっています。YouTube Studio で「公開」に切り替えてください" : ""}`;
+  if (errs.length) throw new Error(`${msg}\n失敗: ${errs.join(" / ")}`);
+  return msg;
 }
 
-if (!youtubeConfigured()) await discord("⏭️ **釣果週報（YouTube）** 認証情報が未登録のためショートは未投稿（scripts/sns/youtube-auth.mjs で登録）", short?.file);
+if (!youtubeConfigured()) await discord("⏭️ **釣果週報（YouTube）** 認証情報が未登録のためショートは未投稿（scripts/sns/youtube-auth.mjs で登録）", shorts[0]?.file);
 
 const errors = [];
 for (const [name, label2, fn] of [["instagram", "Instagram", postInstagram], ["x", "X", postX], ["youtube", "YouTube", postYouTube]]) {
-  if (!todo[name]) { console.log(`${label2}: ${name === "youtube" && !youtubeConfigured() ? "未設定" : "投稿済み"}`); continue; }
+  if (!todo[name]) { console.log(`${label2}: ${name === "youtube" && !youtubeConfigured() ? "未設定" : name === "youtube" && ytToday ? "今日の分は投稿済み" : "投稿済み"}`); continue; }
   try {
     const url = await fn();
     console.log(`${label2} 投稿完了:`, url);
