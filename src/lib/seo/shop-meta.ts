@@ -15,6 +15,7 @@
  * 純関数: ページコンポーネントや Next.js API を import しない（vitest で全件検証する）。
  */
 import type { TackleShop } from "@/types";
+import { getShopHoursTraits, is24HourShop } from "@/lib/shop-hours";
 import { composeMetaDescription, firstSentence } from "@/lib/seo/meta-description";
 
 /** SERP で切れずに表示できる title の目安（全角 32 字。layout の template が「| ツリスポ（つりすぽ）」を後置する）。 */
@@ -94,12 +95,8 @@ export function countShopUtility(
     Pick<TackleShop, "businessHours" | "hasLiveBait" | "hasFrozenBait" | "hasRentalRod">
   >,
 ) {
-  const is24 = (hours: string) => hours.trim() === "24時間営業";
-  const isEarly = (hours: string) => {
-    if (is24(hours)) return false;
-    const m = hours.match(/(\d{1,2}):\d{2}/);
-    return m ? Number(m[1]) <= 5 : false;
-  };
+  const is24 = (hours: string) => is24HourShop(hours);
+  const isEarly = (hours: string) => getShopHoursTraits(hours).early;
   return {
     n24: shops.filter((s) => is24(s.businessHours)).length,
     nEarly: shops.filter((s) => isEarly(s.businessHours)).length,

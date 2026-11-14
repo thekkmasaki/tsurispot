@@ -4,7 +4,6 @@ import { permanentRedirect } from "next/navigation";
 import {
   Store,
   MapPin,
-  Phone,
   Clock,
   ChevronRight,
   Fish,
@@ -18,6 +17,8 @@ import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { adjacentPrefectures } from "@/lib/data/prefecture-info";
 import { fishingSpots } from "@/lib/data/spots";
 import { getEffectivePlanMap } from "@/lib/shop-plan";
+import { getShopHoursTraits, shopHoursLabels } from "@/lib/shop-hours";
+import { AreaShopList, type AreaShopItem } from "@/components/shops/area-shop-list";
 import {
   buildShopAreaDescription,
   buildShopAreaLead,
@@ -129,6 +130,42 @@ export default async function PrefectureShopsPage({
     if (!a.isPremium && b.isPremium) return 1;
     return 0;
   });
+
+  // 一覧カード（クライアントで現在地ソート・時間帯/エサ絞り込み）。SSR 初期表示はこの並び順のまま
+  const items: AreaShopItem[] = shops.map((s) => {
+    const t = getShopHoursTraits(s.businessHours);
+    return {
+      id: s.id,
+      slug: s.slug,
+      name: s.name,
+      areaName: s.region.areaName,
+      prefecture: s.region.prefecture,
+      address: s.address,
+      phone: s.phone,
+      businessHours: s.businessHours,
+      description: s.description,
+      latitude: s.latitude,
+      longitude: s.longitude,
+      hasLiveBait: s.hasLiveBait,
+      hasFrozenBait: s.hasFrozenBait,
+      hasRentalRod: s.hasRentalRod,
+      hasParking: !!s.hasParking,
+      is24h: t.is24h,
+      early: t.early,
+      lateNight: t.lateNight,
+      hoursLabels: shopHoursLabels(s.businessHours),
+      planLevel: planMap[s.slug] ?? "free",
+    };
+  });
+
+  // 24時間・早朝営業の店（GSC: 時間帯系クエリは CTR 2.7% で釣具系最高）。24時間 → 開店が早い順
+  const offHourShops = items
+    .filter((s) => s.is24h || s.early)
+    .map((s) => ({ s, open: getShopHoursTraits(s.businessHours).earliestOpenMinutes ?? 9999 }))
+    .sort((a, b) => a.open - b.open)
+    .map((x) => x.s);
+  const n24 = offHourShops.filter((s) => s.is24h).length;
+  const nEarly = offHourShops.length - n24;
 
   // H1直下でも title/description と同じ実数（件数・市区町村・時間帯）を示し本文一致させる
   const lead = buildShopAreaLead({ prefName: pref.name, shops: baseShops });
@@ -260,106 +297,52 @@ export default async function PrefectureShopsPage({
         {/* メインコンテンツ */}
         <div className="flex-1">
           {count > 0 ? (
-            <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
-              {shops.map((shop) => {
-                const planLevel = planMap[shop.slug] ?? "free";
-                const isPro = planLevel === "pro";
-                const isBasic = planLevel === "basic";
-                const isPaid = isPro || isBasic;
-
-                return (
-                  <Link prefetch={false}
-                    key={shop.id}
-                    href={`/shops/${shop.slug}`}
-                    className="group block"
-                  >
-                    <Card className="h-full transition-shadow hover:shadow-md group-hover:border-primary/30">
-                      <CardHeader className="pb-2">
-                        <div className="flex items-start justify-between gap-2">
-                          <CardTitle className="text-lg leading-snug transition-colors group-hover:text-primary">
-                            {shop.name}
-                          </CardTitle>
-                          <ChevronRight className="mt-0.5 size-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          {shop.region.prefecture} ·{" "}
-                          {shop.region.areaName}エリア
-                        </p>
-                      </CardHeader>
-                      <CardContent className="space-y-3">
-                        <div className="flex items-center gap-2 text-sm">
-                          <MapPin className="size-4 shrink-0 text-muted-foreground" />
-                          <span className="line-clamp-1">{shop.address}</span>
-                        </div>
-                        {shop.phone && (
-                          <div className="flex items-center gap-2 text-sm">
-                            <Phone className="size-4 shrink-0 text-muted-foreground" />
-                            <span>{shop.phone}</span>
-                          </div>
-                        )}
-                        <div className="flex items-center gap-2 text-sm">
-                          <Clock className="size-4 shrink-0 text-muted-foreground" />
-                          <span className="line-clamp-1">
-                            {shop.businessHours}
+            <>
+              {offHourShops.length > 0 && (
+                <section className="mb-6 rounded-xl border border-violet-200 bg-violet-50/50 p-4 dark:border-violet-900 dark:bg-violet-950/20">
+                  <h2 className="mb-1 flex items-center gap-2 text-base font-bold sm:text-lg">
+                    <Clock className="size-5 text-violet-600" />
+                    {pref.name}の{n24 > 0 ? "24時間営業・" : ""}早朝から開いている釣具屋
+                  </h2>
+                  <p className="mb-3 text-xs text-muted-foreground">
+                    {[n24 > 0 ? `24時間営業${n24}件` : null, nEarly > 0 ? `早朝（5時台まで）に開店${nEarly}件` : null]
+                      .filter(Boolean)
+                      .join("・")}
+                    。夜釣り・朝マズメ前のエサ調達に。営業時間は季節で変わるため来店前にご確認ください。
+                  </p>
+                  <ul className="divide-y rounded-lg border bg-background">
+                    {offHourShops.slice(0, 12).map((s) => (
+                      <li key={s.id}>
+                        <Link prefetch={false}
+                          href={`/shops/${s.slug}`}
+                          className="flex items-center gap-3 px-3 py-2.5 text-sm transition-colors hover:bg-muted"
+                        >
+                          <span className="min-w-0 flex-1">
+                            <span className="block font-medium">{s.name}</span>
+                            <span className="block text-xs text-muted-foreground line-clamp-1">
+                              {s.areaName}・{s.businessHours}
+                            </span>
                           </span>
-                        </div>
-
-                        {/* サービスバッジ */}
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {shop.hasLiveBait && (
-                            <Badge
-                              variant="secondary"
-                              className="bg-green-100 text-xs text-green-700 hover:bg-green-100"
-                            >
-                              活きエサ
+                          {s.is24h && (
+                            <Badge variant="secondary" className="shrink-0 bg-violet-100 text-xs text-violet-700 hover:bg-violet-100">
+                              24時間
                             </Badge>
                           )}
-                          {shop.hasFrozenBait && (
-                            <Badge
-                              variant="secondary"
-                              className="bg-blue-100 text-xs text-blue-700 hover:bg-blue-100"
-                            >
-                              冷凍エサ
-                            </Badge>
-                          )}
-                          {shop.hasRentalRod && (
-                            <Badge
-                              variant="secondary"
-                              className="bg-indigo-100 text-xs text-indigo-700 hover:bg-indigo-100"
-                            >
-                              レンタルロッド
-                            </Badge>
-                          )}
-                          {shop.hasParking && (
-                            <Badge
-                              variant="secondary"
-                              className="bg-amber-100 text-xs text-amber-700 hover:bg-amber-100"
-                            >
-                              駐車場あり
-                            </Badge>
-                          )}
-                          {isPaid && (
-                            <Badge
-                              className={
-                                isPro
-                                  ? "bg-amber-100 text-xs text-amber-700 hover:bg-amber-100"
-                                  : "bg-blue-100 text-xs text-blue-700 hover:bg-blue-100"
-                              }
-                            >
-                              {isPro ? "公式（プロ）" : "公式"}
-                            </Badge>
-                          )}
-                        </div>
-
-                        <p className="line-clamp-2 pt-1 text-sm text-muted-foreground">
-                          {shop.description}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                );
-              })}
-            </div>
+                          <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {offHourShops.length > 12 && (
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      ほか{offHourShops.length - 12}件は下の一覧で「早朝営業」「24時間営業」で絞り込めます。
+                    </p>
+                  )}
+                </section>
+              )}
+              <h2 className="mb-3 text-lg font-bold">{pref.name}の釣具屋 全{count}件</h2>
+              <AreaShopList shops={items} prefName={pref.name} />
+            </>
           ) : (
             <div className="rounded-xl border bg-muted/30 py-16 text-center">
               <Store className="mx-auto mb-4 size-12 text-muted-foreground/40" />
