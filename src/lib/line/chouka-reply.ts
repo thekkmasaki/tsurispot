@@ -46,16 +46,29 @@ export function pickLineHighlights(rows: LatestWeeklyCatch[], excludeArea?: stri
   return [...best.values()].sort(byHeat).slice(0, MAX_AREAS);
 }
 
+/** 「釣果」返信に出す行: マイエリアの上位3行と、それ以外の好調エリア上位3つ */
+export function selectChouka(rows: LatestWeeklyCatch[], myArea?: LineArea | null) {
+  const mine = myArea ? rows.filter((r) => r.areaSlug === myArea.slug).sort(byHeat).slice(0, MAX_MY_AREA_ROWS) : [];
+  const picks = pickLineHighlights(rows, mine.length ? myArea?.slug : undefined);
+  return { mine, picks };
+}
+
+/** 魚名返信に出す行: その魚の行をマイエリア優先→好調度順に */
+export function selectFishRows(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null) {
+  return rows
+    .filter((r) => catchRowHasFish(r.fish, fish))
+    .sort((a, b) => Number(b.areaSlug === myArea?.slug) - Number(a.areaSlug === myArea?.slug) || byHeat(a, b));
+}
+
 export function buildChoukaReplyText(rows: LatestWeeklyCatch[], myArea?: LineArea | null): string {
   const lines = HEAD("📊 今週の釣果ピックアップ");
 
-  const mine = myArea ? rows.filter((r) => r.areaSlug === myArea.slug).sort(byHeat).slice(0, MAX_MY_AREA_ROWS) : [];
+  const { mine, picks } = selectChouka(rows, myArea);
   if (myArea && mine.length) {
     lines.push("", `📍 マイエリア（${myArea.label}）`);
     for (const r of mine) lines.push(`${fire(r.heat)} ${r.fish}${sizeText(r)}（${r.spot}）`);
   }
 
-  const picks = pickLineHighlights(rows, mine.length ? myArea?.slug : undefined);
   if (picks.length) {
     lines.push("", mine.length ? "🗾 全国の好調エリア" : "🗾 今週の好調エリア");
     for (const r of picks) lines.push(`${fire(r.heat)} ${r.areaLabel}`, `　${r.fish}${sizeText(r)}（${r.spot}）`);
@@ -99,9 +112,7 @@ export function findFishInText(text: string, fishList: readonly LineFish[]): Lin
 
 export function buildFishReplyText(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null): string {
   const lines = HEAD(`🐟 ${fish.name}が今釣れている場所`);
-  const hits = rows
-    .filter((r) => catchRowHasFish(r.fish, fish))
-    .sort((a, b) => Number(b.areaSlug === myArea?.slug) - Number(a.areaSlug === myArea?.slug) || byHeat(a, b));
+  const hits = selectFishRows(fish, rows, myArea);
 
   if (!hits.length) {
     lines.push(
@@ -126,4 +137,153 @@ export function buildFishReplyText(fish: LineFish, rows: LatestWeeklyCatch[], my
   if (hits.length > MAX_FISH_ROWS) lines.push(`ほか${hits.length - MAX_FISH_ROWS}か所`);
   lines.push("", `▼ ${fish.name}の最新釣果をすべて見る`, fishUrl(fish.slug));
   return lines.join("\n");
+}
+
+// ─── Flex Message（カード表示） ─────────────────────────────────
+// テキスト版（上の build*ReplyText）は Flex が LINE に弾かれたときの予備として残す。
+
+type FlexComponent = Record<string, unknown>;
+export interface LineFlexReply {
+  altText: string;
+  contents: FlexComponent;
+  /** 下に出す候補ボタン（タップでその文字を送信） */
+  quickReply: string[];
+}
+
+const C = {
+  brand: "#0369a1",
+  sub: "#e0f2fe",
+  text: "#111827",
+  muted: "#6b7280",
+  line: "#e5e7eb",
+  mine: "#ecfdf5",
+};
+
+const txt = (text: string, opt: FlexComponent = {}): FlexComponent => ({ type: "text", text: text || " ", wrap: true, ...opt });
+
+function header(title: string, sub: string): FlexComponent {
+  return {
+    type: "box",
+    layout: "vertical",
+    backgroundColor: C.brand,
+    paddingAll: "16px",
+    spacing: "4px",
+    contents: [txt(title, { color: "#ffffff", weight: "bold", size: "lg" }), txt(sub, { color: C.sub, size: "xs" })],
+  };
+}
+
+function sectionTitle(text: string): FlexComponent {
+  return txt(text, { weight: "bold", size: "sm", color: C.brand, margin: "lg" });
+}
+
+/** 1行: 左に🔥（または📍）、右に「主」と「従」の2段 */
+function catchRow(mark: string, main: string, sub: string, highlight = false): FlexComponent {
+  return {
+    type: "box",
+    layout: "horizontal",
+    spacing: "md",
+    margin: "md",
+    paddingAll: highlight ? "8px" : "0px",
+    cornerRadius: "8px",
+    ...(highlight && { backgroundColor: C.mine }),
+    contents: [
+      txt(mark, { flex: 0, size: "sm", gravity: "top" }),
+      {
+        type: "box",
+        layout: "vertical",
+        flex: 1,
+        contents: [txt(main, { weight: "bold", size: "md", color: C.text }), txt(sub, { size: "xs", color: C.muted })],
+      },
+    ],
+  };
+}
+
+function bubble(head: FlexComponent, body: FlexComponent[], buttonLabel: string, uri: string, note?: string): FlexComponent {
+  return {
+    type: "bubble",
+    size: "mega",
+    header: head,
+    body: { type: "box", layout: "vertical", paddingAll: "16px", contents: body },
+    footer: {
+      type: "box",
+      layout: "vertical",
+      spacing: "sm",
+      paddingAll: "12px",
+      contents: [
+        { type: "button", style: "primary", color: C.brand, height: "sm", action: { type: "uri", label: buttonLabel, uri } },
+        ...(note ? [txt(note, { size: "xxs", color: C.muted, align: "center" })] : []),
+      ],
+    },
+  };
+}
+
+const fishOf = (r: LatestWeeklyCatch) => r.fish.replace(/[（(][^）)]*[）)]/g, "").split(/[・、/／,\s]/)[0].trim();
+
+/** 今週の報告に多い魚（タップで魚名返信へ）最大4つ */
+function topFishNames(rows: LatestWeeklyCatch[]): string[] {
+  const n = new Map<string, number>();
+  for (const r of rows) {
+    const f = fishOf(r);
+    if (f.length >= 2 && f.length <= 8) n.set(f, (n.get(f) ?? 0) + 1 + r.heat);
+  }
+  return [...n].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([f]) => f);
+}
+
+export function buildChoukaFlex(rows: LatestWeeklyCatch[], myArea?: LineArea | null): LineFlexReply {
+  const { mine, picks } = selectChouka(rows, myArea);
+  const body: FlexComponent[] = [];
+  if (myArea && mine.length) {
+    body.push(sectionTitle(`📍 マイエリア　${myArea.label}`));
+    for (const r of mine) body.push(catchRow(fire(r.heat), `${r.fish}${sizeText(r)}`, r.spot, true));
+  }
+  if (picks.length) {
+    body.push(sectionTitle(mine.length ? "🗾 全国の好調エリア" : "🗾 今週の好調エリア"));
+    for (const r of picks) body.push(catchRow(fire(r.heat), r.areaLabel, `${r.fish}${sizeText(r)}・${r.spot}`));
+  }
+  if (!body.length) body.push(txt("全国10エリアの最新釣果を毎週まとめています。", { size: "sm", color: C.muted }));
+  (body[0] as FlexComponent).margin = "none";
+
+  const first = mine[0] ?? picks[0];
+  const altText = first ? `今週の釣果：${first.areaLabel} ${first.fish}${sizeText(first)}ほか` : "今週の釣果ピックアップ";
+  return {
+    altText,
+    contents: bubble(
+      header("今週の釣果ピックアップ", "全国10エリアの最新釣果週報より"),
+      body,
+      "エリア別の最新釣果を見る",
+      CHOUKA_URL,
+      myArea ? undefined : "都道府県名を送ると、あなたのエリアを先頭に表示します",
+    ),
+    quickReply: topFishNames(rows),
+  };
+}
+
+export function buildFishFlex(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null): LineFlexReply {
+  const hits = selectFishRows(fish, rows, myArea);
+  const head = header(`${fish.name}が今釣れている場所`, "全国10エリアの最新釣果週報より");
+  if (!hits.length) {
+    return {
+      altText: `${fish.name}：今週の釣果週報に報告はありませんでした`,
+      contents: bubble(
+        head,
+        [txt(`今週の釣果週報では、${fish.name}の報告はありませんでした。`, { size: "sm", color: C.text })],
+        `${fish.name}の釣り方・時期を見る`,
+        `${SITE}/fish/${fish.slug}?${utm("fish")}`,
+      ),
+      quickReply: ["釣果", ...topFishNames(rows).filter((f) => f !== fish.name)].slice(0, 4),
+    };
+  }
+  const shown = hits.slice(0, MAX_FISH_ROWS);
+  const body = shown.map((r) => {
+    const isMine = r.areaSlug === myArea?.slug;
+    const detail = [r.size && r.size !== "—" && r.size !== "-" ? r.size : "", r.method].filter(Boolean).join("・");
+    return catchRow(isMine ? "📍" : fire(r.heat), r.areaLabel, `${r.spot}${detail ? `　${detail}` : ""}`, isMine);
+  });
+  (body[0] as FlexComponent).margin = "none";
+  if (hits.length > shown.length) body.push(txt(`ほか${hits.length - shown.length}か所`, { size: "xs", color: C.muted, margin: "md" }));
+  return {
+    altText: `${fish.name}が今釣れている場所：${shown[0].areaLabel} ${shown[0].spot}ほか`,
+    contents: bubble(head, body, `${fish.name}の最新釣果をすべて見る`, fishUrl(fish.slug)),
+    quickReply: ["釣果", ...topFishNames(rows).filter((f) => f !== fish.name)].slice(0, 4),
+  };
 }

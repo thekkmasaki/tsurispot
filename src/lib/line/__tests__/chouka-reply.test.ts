@@ -116,3 +116,58 @@ describe("buildFishReplyText", () => {
     expect(text).toContain(CHOUKA_URL);
   });
 });
+
+import { buildChoukaFlex, buildFishFlex } from "../chouka-reply";
+
+/** Flex の全 text 要素と button label を集める */
+function walk(node: unknown, out: { texts: string[]; labels: string[] } = { texts: [], labels: [] }) {
+  if (Array.isArray(node)) node.forEach((n) => walk(n, out));
+  else if (node && typeof node === "object") {
+    const o = node as Record<string, unknown>;
+    if (o.type === "text") out.texts.push(String(o.text));
+    if (o.type === "button") out.labels.push(String((o.action as Record<string, unknown>).label));
+    Object.values(o).forEach((v) => walk(v, out));
+  }
+  return out;
+}
+
+describe("Flex（カード）", () => {
+  const rows = [row("tokyo", 1, "カサゴ"), row("osaka", 3, "タチウオ（指3本）"), row("kobe", 2), row("sendai", 2, "アジ・サバ")];
+
+  it("釣果カード: マイエリア→全国、空の text なし、ボタンは /chouka", () => {
+    const f = buildChoukaFlex(rows, { slug: "tokyo", label: "東京湾・横浜" });
+    const { texts, labels } = walk(f.contents);
+    expect(texts.every((t) => t.trim().length > 0)).toBe(true);
+    expect(texts.indexOf("📍 マイエリア　東京湾・横浜")).toBeLessThan(texts.indexOf("🗾 全国の好調エリア"));
+    expect(labels).toEqual(["エリア別の最新釣果を見る"]);
+    expect(JSON.stringify(f.contents)).toContain(CHOUKA_URL);
+    expect(f.altText).toContain("tokyoエリア");
+    expect(f.altText.length).toBeLessThanOrEqual(400);
+  });
+
+  it("候補ボタンは今週の報告が多い魚（20文字以内・最大4つ）", () => {
+    const f = buildChoukaFlex(rows);
+    expect(f.quickReply).toContain("タチウオ");
+    expect(f.quickReply).toContain("アジ");
+    expect(f.quickReply.length).toBeLessThanOrEqual(4);
+    expect(f.quickReply.every((q) => q.length <= 20)).toBe(true);
+  });
+
+  it("魚カード: 該当行のみ・/chouka/fish へ、報告なしは解説ページ", () => {
+    const aji = FISH[0];
+    const f = buildFishFlex(aji, rows);
+    expect(JSON.stringify(f.contents)).toContain("/chouka/fish/aji?");
+    expect(walk(f.contents).texts).not.toContain("osakaエリア");
+    expect(f.quickReply[0]).toBe("釣果");
+    expect(f.quickReply).not.toContain("アジ");
+
+    const none = buildFishFlex(FISH[2], [row("kobe", 2)]);
+    expect(none.altText).toContain("報告はありませんでした");
+    expect(JSON.stringify(none.contents)).toContain("/fish/tachiuo?");
+  });
+
+  it("週報が取れないときもカードを作れる", () => {
+    const { texts } = walk(buildChoukaFlex([]).contents);
+    expect(texts.every((t) => t.trim().length > 0)).toBe(true);
+  });
+});
