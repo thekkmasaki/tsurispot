@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyShopToken, getEffectivePlan } from "@/lib/shop-plan";
+import { getEffectivePlan } from "@/lib/shop-plan";
+import { verifyShopAuth } from "@/lib/shop-session";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
 /**
- * 管理画面の認証API。{ shop, token } を受け取り、DynamoDB のトークンと照合する。
+ * 管理画面の認証API。{ shop, token? } を受け取り、DynamoDB のトークンと照合する。
+ * token 省略時は shop_session Cookie（/api/shop-auth/session で発行）で認証する。
  * 認証成功時は実効プランも返す（ダッシュボードのプラン表示に利用可）。
  * 従来 dashboard-client.tsx にハードコードされていた TOKENS を置き換える。
  */
 export async function POST(request: NextRequest) {
-  let body: { shop?: string; token?: string };
+  let body: { shop?: unknown; token?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -18,8 +20,8 @@ export async function POST(request: NextRequest) {
   }
 
   const { shop, token } = body;
-  if (!shop || !token) {
-    return NextResponse.json({ ok: false, error: "shop, token required" }, { status: 400 });
+  if (typeof shop !== "string" || !shop || shop.length > 100) {
+    return NextResponse.json({ ok: false, error: "shop required" }, { status: 400 });
   }
 
   // トークン総当たり対策（IP単位: 10分に30回・shop-info と同じ枠）
@@ -28,7 +30,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const ok = await verifyShopToken(shop, token);
+    const ok = await verifyShopAuth(request, shop, token);
     if (!ok) {
       return NextResponse.json({ ok: false }, { status: 403 });
     }
