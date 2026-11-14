@@ -116,7 +116,7 @@ npx vitest run src/lib/data/__tests__/spots.test.ts  # 単一テスト
 
 ### API (`src/app/api/`)
 
-- `/api/indexnow` — 全URL（5,000件超）をBing/Yandexにバッチ通知
+- `/api/indexnow` — POST で URL を Bing/Yandex にバッチ通知（未認証の GET は 2026-11 に廃止）
 - `/api/catch-report` — 釣果報告（Upstash Redis）
 - `/api/presence` — オンラインユーザー検出（Redis、120秒TTL）
 
