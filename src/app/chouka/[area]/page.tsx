@@ -11,6 +11,7 @@ import {
 } from "@/lib/weekly-report-areas";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { LineChoukaCta } from "@/components/line/line-chouka-cta";
 
 // エリアごとに「常に最新週の釣果」を出すページ。週報記事は毎週別URLで増えるため、
 // 「{地名} 釣果」の検索はこのページで受け、週報記事へ送る（週報記事側からもここへリンク）。
@@ -143,6 +144,8 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
           {area.label}エリアの釣果週報はまだありません。
         </p>
       )}
+
+      <LineChoukaCta className="mt-8" />
 
       <InArticleAd className="my-8" />
 

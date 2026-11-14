@@ -3,6 +3,14 @@ import { dbGet, dbPut } from "@/lib/dynamodb";
 import { createHmac } from "crypto";
 import { prefectures } from "@/lib/data/prefectures";
 import { safeEqual } from "@/lib/safe-compare";
+import { fishSpecies } from "@/lib/data/fish";
+import { getLatestWeeklyCatches, type LatestWeeklyCatch } from "@/lib/data/weekly-report-latest";
+import {
+  buildChoukaReplyText,
+  buildFishReplyText,
+  findFishInText,
+  weeklyAreaForPrefecture,
+} from "@/lib/line/chouka-reply";
 
 const CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET ?? "";
 const CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN ?? "";
@@ -170,6 +178,18 @@ async function handleShopOwnerMessage(
   );
 }
 
+// ─── 最新週報の釣果表 ─────────────────────────────────────────
+/**
+ * 主要10エリアの最新週報の釣果表（/chouka と共有の1時間キャッシュ）。
+ * キャッシュが冷えていて遅いときは待たずに空で返す（reply token の期限切れで無返信になるのを防ぐ）
+ */
+async function loadWeeklyRows(): Promise<LatestWeeklyCatch[]> {
+  return Promise.race([
+    getLatestWeeklyCatches(),
+    new Promise<LatestWeeklyCatch[]>((r) => setTimeout(() => r([]), 4000)),
+  ]).catch(() => []);
+}
+
 // ─── 一般ユーザー向けメッセージハンドラ ─────────────────────────
 async function handleGeneralUserMessage(replyToken: string, text: string, userId: string) {
   // 都道府県名にマッチ → エリアを記憶
@@ -192,6 +212,14 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   // ユーザーのエリアを取得
   const userArea = await getUserArea(userId);
   const userPref = userArea ? prefectures.find((p) => p.slug === userArea) : null;
+  const myWeeklyArea = weeklyAreaForPrefecture(userPref?.name);
+
+  // 魚の名前（「アジ」「タチウオ釣れてる？」）→ その魚が今釣れている場所
+  const fish = findFishInText(text, fishSpecies);
+  if (fish) {
+    await replyMessage(replyToken, buildFishReplyText(fish, await loadWeeklyRows(), myWeeklyArea));
+    return;
+  }
 
   // スポット・釣り場 → スポット検索ページ（エリア対応）
   if (/スポット|釣り場|釣りスポット|ポイント|spot|場所/i.test(text)) {
@@ -273,20 +301,8 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
 
   // 釣果・週報 → 最新の釣果週報
   if (/釣果|週報|釣れた|レポート|report/i.test(text)) {
-    await replyMessage(
-      replyToken,
-      [
-        "━━━━━━━━━━━━━━",
-        "📊 最新の釣果情報",
-        "━━━━━━━━━━━━━━",
-        "",
-        "▼ 釣果週報・釣行レポート",
-        "https://tsurispot.com/blog",
-        "",
-        "毎週エリア別の釣果情報を",
-        "更新しています！",
-      ].join("\n")
-    );
+    // マイエリアの今週の釣果＋全国の好調エリア上位＋/chouka
+    await replyMessage(replyToken, buildChoukaReplyText(await loadWeeklyRows(), myWeeklyArea));
     return;
   }
 
@@ -543,7 +559,10 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
         "　→ 始め方ガイド",
         "",
         "📊「釣果」",
-        "　→ 最新の釣果週報",
+        "　→ あなたのエリアの今週の釣果",
+        "",
+        "🐟 魚の名前（例「アジ」）",
+        "　→ 今その魚が釣れている場所",
         "",
         "🎣「道具」",
         "　→ おすすめタックル",
@@ -607,7 +626,10 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
       "　→ 始め方ガイド",
       "",
       "📊「釣果」",
-      "　→ 最新の釣果週報",
+      "　→ あなたのエリアの今週の釣果",
+      "",
+      "🐟 魚の名前（例「アジ」）",
+      "　→ 今その魚が釣れている場所",
       "",
       "🎣「道具」",
       "　→ おすすめタックル",
@@ -673,6 +695,7 @@ export async function POST(request: NextRequest) {
               "📍「スポット」🐟「今釣れる」",
               "📖「初心者」📊「釣果」",
               "🎣「道具」🔍「診断」📅「潮」",
+              "🐟魚の名前で今釣れている場所",
               "",
               "━━━━━━━━━━━━━━",
               "https://tsurispot.com",

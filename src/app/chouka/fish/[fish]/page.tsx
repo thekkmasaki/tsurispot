@@ -7,6 +7,7 @@ import { getLatestWeeklyCatches, type LatestWeeklyCatch } from "@/lib/data/weekl
 import { catchRowHasFish, weeklyAreaHubPath } from "@/lib/weekly-report-areas";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { LineChoukaCta } from "@/components/line/line-chouka-cta";
 
 // 魚から探す「今◯◯が釣れている場所」。主要10エリアの最新週報（14日以内）の釣果表を横断して出す。
 // 週報が毎週差し替わるので中身も毎週変わる。今週報告が無い魚は noindex（薄いページを索引させない）。
@@ -122,6 +123,8 @@ export default async function FishLatestCatchPage({ params }: Props) {
           ))}
         </div>
       )}
+
+      <LineChoukaCta className="mt-8" />
 
       <InArticleAd className="my-8" />
 

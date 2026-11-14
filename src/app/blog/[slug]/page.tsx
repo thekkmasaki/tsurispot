@@ -29,6 +29,7 @@ import { InArticleAd, StickySidebarAd, MultiplexAd } from "@/components/ads/ad-u
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recommend";
 import { MAIN_WEEKLY_AREA_SLUGS, matchWeeklyAreaForPost, weeklyAreaHubPath } from "@/lib/weekly-report-areas";
+import { LineChoukaCta } from "@/components/line/line-chouka-cta";
 
 // ISR: 静的記事は generateStaticParams で SSG、microCMS記事は dynamicParams で随時生成。
 // （旧 force-dynamic は2026-05-19の空HTML焼き付き対策の暫定措置。
@@ -323,6 +324,9 @@ export default async function BlogPostPage({
           </>
         );
       })()}
+
+      {/* 週報記事 → LINE（「釣果」「魚の名前」で最新週報から返信） */}
+      {matchWeeklyAreaForPost(post) && <LineChoukaCta className="my-8" />}
 
       <InArticleAd className="my-8" />
 

@@ -11,6 +11,7 @@ import {
 } from "@/lib/weekly-report-areas";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { LineChoukaCta } from "@/components/line/line-chouka-cta";
 
 export const revalidate = 3600;
 export const dynamic = "force-static";
@@ -91,6 +92,8 @@ export default async function WeeklyAreaIndexPage() {
           </ul>
         </section>
       )}
+
+      <LineChoukaCta className="mt-8" />
 
       <InArticleAd className="my-8" />
     </div>
