@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyShopToken, getEffectivePlan } from "@/lib/shop-plan";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -19,6 +20,11 @@ export async function POST(request: NextRequest) {
   const { shop, token } = body;
   if (!shop || !token) {
     return NextResponse.json({ ok: false, error: "shop, token required" }, { status: 400 });
+  }
+
+  // トークン総当たり対策（IP単位: 10分に30回・shop-info と同じ枠）
+  if (!(await checkRateLimit(getClientIp(request), "SHOPINFO_AUTH", 30, 600))) {
+    return NextResponse.json({ ok: false, error: "too many requests" }, { status: 429 });
   }
 
   try {
