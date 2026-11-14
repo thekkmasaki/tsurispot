@@ -28,7 +28,7 @@ import {
   weeklyAreaForPrefecture,
 } from "@/lib/line/chouka-reply";
 import { buildGearFlex, buildGearMenuFlex, buildGearMenuText, buildGearReplyText, findGearMethod } from "@/lib/line/gear-reply";
-import { buildNearbyFlex, buildNearbyText, nearestSpots, type CoordSpot } from "@/lib/line/nearby-reply";
+import { buildNearbyFlex, buildNearbyText, nearestSpots, parseNearbyKind, type CoordSpot } from "@/lib/line/nearby-reply";
 import {
   LOCATION_LABEL,
   UNKNOWN_QUICK,
@@ -337,6 +337,20 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     const flex = buildPlacesFlex(list, note);
     flex.quickReply = ["釣果", "アジ", ...flex.quickReply.filter((q) => q !== "釣果")].slice(0, 12);
     await replyFlex(replyToken, flex, buildPlacesText(list, note));
+    return;
+  }
+
+  // 近くの釣り場を「海だけ」「川・湖だけ」に絞る（いちばん最近登録した場所から）
+  const kind = parseNearbyKind(text);
+  if (kind) {
+    const latest = (await getUserPlaces(userId)).reduce<SavedPlace | null>((a, b) => (!a || b.at > a.at ? b : a), null);
+    if (!latest) {
+      await replyFlex(replyToken, buildSpotsFlex(null), buildSpotsText(null));
+      return;
+    }
+    const list = nearestSpots(await loadCoordSpots(), latest.lat, latest.lng, undefined, kind);
+    const note = latest.label ? `📍「${latest.label}」から` : undefined;
+    await replyFlex(replyToken, buildNearbyFlex(list, note, kind), buildNearbyText(list, note, kind));
     return;
   }
 
