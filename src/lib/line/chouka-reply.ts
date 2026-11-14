@@ -23,11 +23,17 @@ export interface LineArea {
   label: string;
 }
 
-/** 位置情報を送ってもらった人の現在地（保存時に約1kmに丸める） */
+/** 位置情報を送ってもらった場所（保存時に約1kmに丸める）。label は「京都市」等、複数登録したときの見分け用 */
 export interface LineOrigin {
   lat: number;
   lng: number;
+  label?: string;
 }
+
+/** 登録した場所（1つでも複数でも）。自宅・職場・実家など、どこから近いかで「行ける範囲」を決める */
+export type LineOrigins = LineOrigin | readonly LineOrigin[];
+const listOf = (o: LineOrigins): readonly LineOrigin[] => (Array.isArray(o) ? o : [o as LineOrigin]);
+const many = (o: LineOrigins | null | undefined) => !!o && listOf(o).length > 1;
 
 /** 「行ける範囲」= 現在地から直線この距離まで（日帰りで車1.5〜2時間ほど。2026-11 ユーザー指示「行ける範囲だけに絞って」） */
 export const REACH_KM = 120;
@@ -51,19 +57,29 @@ export const AREA_CENTERS: Record<string, readonly [number, number]> = {
   "nagasaki-hirado": [33.0, 129.7],
 };
 
-/** 現在地からエリアまでの直線距離（km）。中心が分からないエリアは null */
-export function areaKm(areaSlug: string, origin: LineOrigin): number | null {
+/** 登録した場所のうち、いちばん近い場所からエリアまでの直線距離。中心が分からないエリアは null */
+export function areaDist(areaSlug: string, origin: LineOrigins): { km: number; from: LineOrigin } | null {
   const c = AREA_CENTERS[areaSlug];
-  return c ? haversineKm(origin.lat, origin.lng, c[0], c[1]) : null;
+  if (!c) return null;
+  let best: { km: number; from: LineOrigin } | null = null;
+  for (const o of listOf(origin)) {
+    const km = haversineKm(o.lat, o.lng, c[0], c[1]);
+    if (!best || km < best.km) best = { km, from: o };
+  }
+  return best;
 }
 
-const within = (r: LatestWeeklyCatch, origin: LineOrigin) => {
+export function areaKm(areaSlug: string, origin: LineOrigins): number | null {
+  return areaDist(areaSlug, origin)?.km ?? null;
+}
+
+const within = (r: LatestWeeklyCatch, origin: LineOrigins) => {
   const km = areaKm(r.areaSlug, origin);
   return km !== null && km <= REACH_KM;
 };
 
 /** 行ける範囲でいちばん近い週報エリア（マイエリアの代わりに使う） */
-export function nearestReachableArea(rows: LatestWeeklyCatch[], origin: LineOrigin): LineArea | null {
+export function nearestReachableArea(rows: LatestWeeklyCatch[], origin: LineOrigins): LineArea | null {
   let best: { a: LineArea; km: number } | null = null;
   for (const r of rows) {
     const km = areaKm(r.areaSlug, origin);
@@ -73,6 +89,13 @@ export function nearestReachableArea(rows: LatestWeeklyCatch[], origin: LineOrig
 }
 
 const kmLabel = (km: number) => `約${Math.max(1, Math.round(km / 5) * 5)}km`;
+/** 「（約55km）」。場所を複数登録していれば「（京都市から約55km）」 */
+function distLabel(areaSlug: string, origin: LineOrigins): string {
+  const d = areaDist(areaSlug, origin);
+  if (!d) return "";
+  return `（${many(origin) && d.from.label ? `${d.from.label}から` : ""}${kmLabel(d.km)}）`;
+}
+const fromText = (origin: LineOrigins) => (many(origin) ? `登録した${listOf(origin).length}か所のどこか` : "現在地");
 
 /** マイエリア（都道府県名 例: 神奈川県）→ 週報の主要10エリア。週報の無い県は null */
 export function weeklyAreaForPrefecture(prefName: string | null | undefined): LineArea | null {
@@ -102,7 +125,7 @@ export function pickLineHighlights(rows: LatestWeeklyCatch[], excludeArea?: stri
  * 「釣果」返信に出す行: マイエリアの上位3行と、それ以外の好調エリア上位3つ。
  * 現在地が分かっていれば、好調エリアは行ける範囲のものだけ（範囲内に無ければ全国）。
  */
-export function selectChouka(rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigin | null) {
+export function selectChouka(rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigins | null) {
   const mine = myArea ? rows.filter((r) => r.areaSlug === myArea.slug).sort(byHeat).slice(0, MAX_MY_AREA_ROWS) : [];
   const near = origin ? rows.filter((r) => within(r, origin)) : [];
   const picks = pickLineHighlights(near.length ? near : rows, mine.length ? myArea?.slug : undefined);
@@ -114,7 +137,7 @@ export function selectChouka(rows: LatestWeeklyCatch[], myArea?: LineArea | null
  * - 現在地あり: 行ける範囲（REACH_KM 以内）だけを近い順に
  * - 現在地なし: マイエリア優先→好調度順（全国）
  */
-export function selectFishRows(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigin | null) {
+export function selectFishRows(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigins | null) {
   const hits = rows.filter((r) => catchRowHasFish(r.fish, fish));
   if (origin) {
     return hits
@@ -125,7 +148,7 @@ export function selectFishRows(fish: LineFish, rows: LatestWeeklyCatch[], myArea
 }
 
 /** 行ける範囲に報告が無いとき、参考に出す「いちばん近い報告」 */
-export function nearestFishRow(fish: LineFish, rows: LatestWeeklyCatch[], origin: LineOrigin): { row: LatestWeeklyCatch; km: number } | null {
+export function nearestFishRow(fish: LineFish, rows: LatestWeeklyCatch[], origin: LineOrigins): { row: LatestWeeklyCatch; km: number } | null {
   let best: { row: LatestWeeklyCatch; km: number } | null = null;
   for (const r of rows) {
     if (!catchRowHasFish(r.fish, fish)) continue;
@@ -135,7 +158,7 @@ export function nearestFishRow(fish: LineFish, rows: LatestWeeklyCatch[], origin
   return best;
 }
 
-export function buildChoukaReplyText(rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigin | null): string {
+export function buildChoukaReplyText(rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigins | null): string {
   const lines = HEAD("📊 今週の釣果ピックアップ");
 
   const { mine, picks, nearOnly } = selectChouka(rows, myArea, origin);
@@ -146,7 +169,7 @@ export function buildChoukaReplyText(rows: LatestWeeklyCatch[], myArea?: LineAre
 
   if (picks.length) {
     lines.push("", nearOnly ? `🚗 近くの好調エリア（${REACH_KM}km以内）` : mine.length ? "🗾 全国の好調エリア" : "🗾 今週の好調エリア");
-    for (const r of picks) lines.push(`${fire(r.heat)} ${r.areaLabel}${origin && nearOnly ? `（${kmLabel(areaKm(r.areaSlug, origin) ?? 0)}）` : ""}`, `　${r.fish}${sizeText(r)}（${r.spot}）`);
+    for (const r of picks) lines.push(`${fire(r.heat)} ${r.areaLabel}${origin && nearOnly ? distLabel(r.areaSlug, origin) : ""}`, `　${r.fish}${sizeText(r)}（${r.spot}）`);
   }
 
   if (!mine.length && !picks.length) lines.push("", "全国10エリアの最新釣果を", "毎週まとめています！");
@@ -185,10 +208,10 @@ export function findFishInText(text: string, fishList: readonly LineFish[]): Lin
   return hit;
 }
 
-export function buildFishReplyText(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigin | null): string {
+export function buildFishReplyText(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigins | null): string {
   const lines = HEAD(`🐟 ${fish.name}が今釣れている場所`);
   const hits = selectFishRows(fish, rows, myArea, origin);
-  if (origin) lines.push(`（現在地から${REACH_KM}km以内・近い順）`);
+  if (origin) lines.push(`（${fromText(origin)}から${REACH_KM}km以内・近い順）`);
 
   if (!hits.length) {
     const near = origin ? nearestFishRow(fish, rows, origin) : null;
@@ -196,7 +219,7 @@ export function buildFishReplyText(fish: LineFish, rows: LatestWeeklyCatch[], my
       "",
       origin ? `近く（${REACH_KM}km以内）の週報には、` : "今週の釣果週報では、",
       `今週${fish.name}の報告はありませんでした。`,
-      ...(near ? ["", `いちばん近い報告：${near.row.areaLabel}（${kmLabel(near.km)}）`, `　${near.row.spot}${sizeText(near.row)}`] : []),
+      ...(near ? ["", `いちばん近い報告：${near.row.areaLabel}${distLabel(near.row.areaSlug, origin!)}`, `　${near.row.spot}${sizeText(near.row)}`] : []),
       "",
       `▼ ${fish.name}の釣り方・釣れる時期`,
       `${SITE}/fish/${fish.slug}?${utm("fish")}`,
@@ -210,7 +233,7 @@ export function buildFishReplyText(fish: LineFish, rows: LatestWeeklyCatch[], my
   lines.push("");
   for (const r of hits.slice(0, MAX_FISH_ROWS)) {
     const mark = !origin && r.areaSlug === myArea?.slug ? "📍" : fire(r.heat);
-    lines.push(`${mark} ${r.areaLabel}${origin ? `（${kmLabel(areaKm(r.areaSlug, origin) ?? 0)}）` : ""}`, `　${r.spot}${sizeText(r)}${r.method ? `・${r.method}` : ""}`);
+    lines.push(`${mark} ${r.areaLabel}${origin ? distLabel(r.areaSlug, origin) : ""}`, `　${r.spot}${sizeText(r)}${r.method ? `・${r.method}` : ""}`);
   }
   if (hits.length > MAX_FISH_ROWS) lines.push(`ほか${hits.length - MAX_FISH_ROWS}か所`);
   lines.push("", `▼ ${fish.name}の最新釣果をすべて見る`, fishUrl(fish.slug));
@@ -309,7 +332,7 @@ function topFishNames(rows: LatestWeeklyCatch[]): string[] {
   return [...n].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([f]) => f);
 }
 
-export function buildChoukaFlex(rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigin | null): LineFlexReply {
+export function buildChoukaFlex(rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigins | null): LineFlexReply {
   const { mine, picks, nearOnly } = selectChouka(rows, myArea, origin);
   const body: FlexComponent[] = [];
   if (myArea && mine.length) {
@@ -319,8 +342,7 @@ export function buildChoukaFlex(rows: LatestWeeklyCatch[], myArea?: LineArea | n
   if (picks.length) {
     body.push(sectionTitle(nearOnly ? `🚗 近くの好調エリア（${REACH_KM}km以内）` : mine.length ? "🗾 全国の好調エリア" : "🗾 今週の好調エリア"));
     for (const r of picks) {
-      const km = origin && nearOnly ? areaKm(r.areaSlug, origin) : null;
-      body.push(catchRow(fire(r.heat), `${r.areaLabel}${km !== null ? `（${kmLabel(km)}）` : ""}`, `${r.fish}${sizeText(r)}・${r.spot}`));
+      body.push(catchRow(fire(r.heat), `${r.areaLabel}${origin && nearOnly ? distLabel(r.areaSlug, origin) : ""}`, `${r.fish}${sizeText(r)}・${r.spot}`));
     }
   }
   if (!body.length) body.push(txt("全国10エリアの最新釣果を毎週まとめています。", { size: "sm", color: C.muted }));
@@ -341,11 +363,11 @@ export function buildChoukaFlex(rows: LatestWeeklyCatch[], myArea?: LineArea | n
   };
 }
 
-export function buildFishFlex(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigin | null): LineFlexReply {
+export function buildFishFlex(fish: LineFish, rows: LatestWeeklyCatch[], myArea?: LineArea | null, origin?: LineOrigins | null): LineFlexReply {
   const hits = selectFishRows(fish, rows, myArea, origin);
   const head = header(
     `${fish.name}が今釣れている場所`,
-    origin ? `現在地から${REACH_KM}km以内（直線）・近い順` : "全国10エリアの最新釣果週報より",
+    origin ? `${fromText(origin)}から${REACH_KM}km以内（直線）・近い順` : "全国10エリアの最新釣果週報より",
   );
   if (!hits.length) {
     const near = origin ? nearestFishRow(fish, rows, origin) : null;
@@ -355,7 +377,7 @@ export function buildFishFlex(fish: LineFish, rows: LatestWeeklyCatch[], myArea?
         head,
         [
           txt(origin ? `近く（${REACH_KM}km以内）の週報には、今週${fish.name}の報告はありませんでした。` : `今週の釣果週報では、${fish.name}の報告はありませんでした。`, { size: "sm", color: C.text }),
-          ...(near ? [txt(`いちばん近い報告：${near.row.areaLabel}（${kmLabel(near.km)}）${near.row.spot}`, { size: "xs", color: C.muted, margin: "md" })] : []),
+          ...(near ? [txt(`いちばん近い報告：${near.row.areaLabel}${distLabel(near.row.areaSlug, origin!)}${near.row.spot}`, { size: "xs", color: C.muted, margin: "md" })] : []),
         ],
         `${fish.name}の釣り方・時期を見る`,
         `${SITE}/fish/${fish.slug}?${utm("fish")}`,
@@ -367,8 +389,7 @@ export function buildFishFlex(fish: LineFish, rows: LatestWeeklyCatch[], myArea?
   const body = shown.map((r) => {
     const isMine = !origin && r.areaSlug === myArea?.slug;
     const detail = [r.size && r.size !== "—" && r.size !== "-" ? r.size : "", r.method].filter(Boolean).join("・");
-    const km = origin ? areaKm(r.areaSlug, origin) : null;
-    return catchRow(isMine ? "📍" : fire(r.heat), `${r.areaLabel}${km !== null ? `（${kmLabel(km)}）` : ""}`, `${r.spot}${detail ? `　${detail}` : ""}`, isMine);
+    return catchRow(isMine ? "📍" : fire(r.heat), `${r.areaLabel}${origin ? distLabel(r.areaSlug, origin) : ""}`, `${r.spot}${detail ? `　${detail}` : ""}`, isMine);
   });
   (body[0] as FlexComponent).margin = "none";
   if (hits.length > shown.length) body.push(txt(`ほか${hits.length - shown.length}か所`, { size: "xs", color: C.muted, margin: "md" }));

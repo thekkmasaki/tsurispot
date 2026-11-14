@@ -99,6 +99,7 @@ export function buildHelpFlex(myPrefName?: string | null): LineFlexReply {
         sendRow("道具", "道具", "釣り方に合うおすすめ道具"),
         sendRow("潮", "潮", "潮・釣りカレンダー"),
         sendRow("診断", "診断", "あなたに合う釣りは？"),
+        sendRow("登録地", "登録地", "近い釣果に絞る場所（最大3か所）"),
         txt(
           myPrefName ? `マイエリア：${myPrefName}（都道府県名を送ると変更できます）` : "都道府県名を送ると、マイエリアを登録できます",
           { size: "xxs", color: myPrefName ? C.ok : C.muted, margin: "md" },
@@ -123,6 +124,7 @@ export function buildHelpText(myPrefName?: string | null): string {
     "・「道具」→ おすすめ道具",
     "・「潮」→ 釣りカレンダー",
     "・「診断」→ あなたに合う釣りは？",
+    "・「登録地」→ 近い釣果に絞る場所（位置情報で最大3か所）",
     "",
     myPrefName ? `マイエリア：${myPrefName}（都道府県名を送ると変更）` : "都道府県名を送るとマイエリアを登録できます",
     "",
