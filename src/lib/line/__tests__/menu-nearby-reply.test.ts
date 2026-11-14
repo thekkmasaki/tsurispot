@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { lineUrl } from "@/lib/line/line-url";
-import { buildNearbyFlex, buildNearbyText, formatKm, nearestSpots, type CoordSpot } from "@/lib/line/nearby-reply";
+import { buildNearbyFlex, buildNearbyText, formatKm, nearestSpots, parseNearbyKind, type CoordSpot } from "@/lib/line/nearby-reply";
 import {
   QUICK_PREFS,
   UNKNOWN_QUICK,
@@ -95,5 +95,37 @@ describe("案内の返信", () => {
     expect(buildUnknownText("あ".repeat(40))).toContain("…");
     expect(buildUnknownText("ありがとう").length).toBeLessThan(100);
     expect(UNKNOWN_QUICK).toContain("使い方");
+  });
+});
+
+describe("海・川湖の絞り込み", () => {
+  const mixed: CoordSpot[] = [
+    { s: "r", n: "宇治川", la: 34.89, lo: 135.8, t: "river", p: "京都府" },
+    { s: "l", n: "琵琶湖", la: 35.0, lo: 135.87, t: "lake", p: "滋賀県" },
+    { s: "m", n: "舞鶴港", la: 35.47, lo: 135.38, t: "port", p: "京都府" },
+    { s: "o", n: "大阪南港", la: 34.62, lo: 135.42, t: "breakwater", p: "大阪府" },
+  ];
+
+  it("コマンド", () => {
+    expect(parseNearbyKind("海だけ")).toBe("sea");
+    expect(parseNearbyKind("川・湖だけ")).toBe("fresh");
+    expect(parseNearbyKind("川")).toBe("fresh");
+    expect(parseNearbyKind("海も川も")).toBe("all");
+    expect(parseNearbyKind("海釣り公園")).toBeNull();
+  });
+
+  it("海だけ・川湖だけで絞る", () => {
+    expect(nearestSpots(mixed, 34.94, 135.77, 5, "sea").map((n) => n.spot.s)).toEqual(["o", "m"]);
+    expect(nearestSpots(mixed, 34.94, 135.77, 5, "fresh").map((n) => n.spot.s)).toEqual(["r", "l"]);
+    expect(nearestSpots(mixed, 34.94, 135.77).length).toBe(4);
+  });
+
+  it("カードに切り替えボタン（今の絞り込み以外）", () => {
+    const all = buildNearbyFlex(nearestSpots(mixed, 34.94, 135.77));
+    expect(all.quickReply.slice(0, 2)).toEqual(["海だけ", "川・湖だけ"]);
+    const sea = buildNearbyFlex(nearestSpots(mixed, 34.94, 135.77, 5, "sea"), undefined, "sea");
+    expect(sea.quickReply.slice(0, 2)).toEqual(["海も川も", "川・湖だけ"]);
+    expect(JSON.stringify(sea.contents)).toContain("海の釣り場だけ");
+    withinLimits(sea);
   });
 });
