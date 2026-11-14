@@ -22,6 +22,7 @@ const icon = {
   fish: `<path d="M2.5 12c3.2-5 9.5-6.2 13.5-2.6L21 6v12l-5-3.4C12 18.2 5.7 17 2.5 12z"/><circle cx="7.5" cy="11" r="1" fill="currentColor"/>`,
   book: `<path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/>`,
   hook: `<path d="M14 3v11a5 5 0 0 1-10 0v-1.5l2.5 2"/><circle cx="14" cy="3" r=".6" fill="currentColor"/><path d="M18 8h3M19.5 6.5v3"/>`,
+  send: `<path d="M4 12 20 4l-4 16-4-6.5z"/><path d="M12 13.5 20 4"/>`,
   help: `<circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.4a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.4-2.7 4"/><circle cx="12" cy="17.6" r=".6" fill="currentColor"/>`,
 };
 const svg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon[k]}</svg>`;
@@ -47,10 +48,17 @@ body{width:2500px;height:1686px;font-family:'M PLUS Rounded 1c',sans-serif;backg
 .tile b{display:block;font-size:96px;font-weight:900;margin-top:52px;letter-spacing:-.01em;white-space:nowrap}
 .tile span{display:block;font-size:52px;font-weight:700;color:#5b7489;margin-top:12px;white-space:nowrap}
 .tile i{position:absolute;right:56px;top:60px;font-style:normal;font-size:120px;font-weight:900;color:#c7d6e2;line-height:1}
-.help{position:absolute;left:1000px;top:1346px;width:1460px;height:300px;border-radius:64px;border:8px solid var(--navy);background:#fff;display:flex;align-items:center;gap:40px;padding:0 70px}
-.help .ic{width:150px;height:150px;color:var(--navy)}
-.help b{font-size:84px;font-weight:900}
-.help span{font-size:50px;font-weight:700;color:#5b7489;margin-left:auto}
+.try{position:absolute;left:1000px;top:1346px;width:1040px;height:300px;border-radius:64px;background:var(--navy);color:#fff;padding:36px 56px}
+.try p{font-size:54px;font-weight:900;white-space:nowrap}
+.try p em{font-style:normal;color:var(--sun)}
+.try .inp{margin-top:26px;height:130px;background:#fff;border-radius:66px;display:flex;align-items:center;padding:0 22px 0 56px;color:var(--navy)}
+.try .inp b{font-size:72px;font-weight:900}
+.try .inp small{font-size:44px;font-weight:700;color:#8aa0b2;margin-left:22px}
+.try .inp i{margin-left:auto;width:100px;height:100px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center}
+.try .inp i svg{width:58px;height:58px}
+.help{position:absolute;left:2080px;top:1346px;width:380px;height:300px;border-radius:64px;border:8px solid var(--navy);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.help .ic{width:120px;height:120px;color:var(--navy)}
+.help b{font-size:64px;font-weight:900}
 </style><script src="file://${mascot}"></script></head><body>
 <div class="hero"><div class="chip">毎週更新</div>
   <h1>今週の<br><span>釣果</span></h1>
@@ -63,7 +71,10 @@ body{width:2500px;height:1686px;font-family:'M PLUS Rounded 1c',sans-serif;backg
   ${tile("book", "var(--sun)", "初心者ガイド", "道具・釣り方の基本")}
   ${tile("hook", "var(--red)", "おすすめ道具", "失敗しないタックル")}
 </div>
-<div class="help"><div class="ic">${svg("help")}</div><b>使い方</b><span>都道府県名を送るとマイエリア登録</span></div>
+<!-- 魚名を送れることは言われないと分からない（ユーザー指摘 2026-11）→ 入力欄そっくりの見本。押すと「アジ」が送られる -->
+<div class="try"><p>魚の名前を送ると<em>釣れてる場所</em>がわかる</p>
+  <div class="inp"><b>アジ</b><small>← タップで試す</small><i>${svg("send")}</i></div></div>
+<div class="help"><div class="ic">${svg("help")}</div><b>使い方</b></div>
 <script>document.querySelectorAll('[data-m]').forEach(el=>{el.innerHTML=sakanacchi(el.dataset.m,{point:true})})</script>
 </body></html>`;
 

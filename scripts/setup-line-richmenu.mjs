@@ -67,14 +67,15 @@ const richMenu = {
   name: "ツリスポ メインメニュー",
   chatBarText: "メニュー",
   // 画像は scripts/line/render-richmenu.mjs で描く（座標をそろえること）
-  // 左: 今週の釣果（大）／右 2x2: スポット・今釣れる・初心者・道具／右下: 使い方
+  // 左: 今週の釣果（大）／右 2x2: スポット・今釣れる・初心者・道具／下: 魚名の見本（アジ）・使い方
   areas: [
     { bounds: { x: 0, y: 0, width: 1000, height: 1686 }, action: { type: "message", text: "釣果" } },
     { bounds: { x: 1000, y: 0, width: 730, height: 673 }, action: { type: "message", text: "スポット" } },
     { bounds: { x: 1730, y: 0, width: 770, height: 673 }, action: { type: "message", text: "今釣れる" } },
     { bounds: { x: 1000, y: 673, width: 730, height: 653 }, action: { type: "message", text: "初心者" } },
     { bounds: { x: 1730, y: 673, width: 770, height: 653 }, action: { type: "message", text: "道具" } },
-    { bounds: { x: 1000, y: 1326, width: 1500, height: 360 }, action: { type: "message", text: "使い方" } },
+    { bounds: { x: 1000, y: 1326, width: 1060, height: 360 }, action: { type: "message", text: "アジ" } }, // 魚名で返信できる見本
+    { bounds: { x: 2060, y: 1326, width: 440, height: 360 }, action: { type: "message", text: "使い方" } },
   ],
 };
 
