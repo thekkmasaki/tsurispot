@@ -49,7 +49,9 @@ export async function discord(content, filePath) {
     if (filePath && fs.existsSync(filePath)) {
       const fd = new FormData();
       fd.append("payload_json", JSON.stringify({ content }));
-      fd.append("files[0]", new Blob([fs.readFileSync(filePath)], { type: "image/png" }), "post.png");
+      const ext = filePath.split(".").pop().toLowerCase();
+      const type = ext === "mp4" ? "video/mp4" : ext === "jpg" || ext === "jpeg" ? "image/jpeg" : "image/png";
+      fd.append("files[0]", new Blob([fs.readFileSync(filePath)], { type }), `post.${ext}`);
       await fetch(hook, { method: "POST", body: fd });
     } else {
       await fetch(hook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ content }) });

@@ -8,6 +8,7 @@ export const seaFishKaiyuu: FishSpecies[] = [
     nameEnglish: "Largehead Hairtail",
     scientificName: "Trichiurus japonicus",
     slug: "tachiuo",
+    imageUrl: "/images/fish/tachiuo.jpg",
     description:
       "銀色に輝く刀のような魚体が特徴。夕マズメから夜にかけてがチャンス。テンヤやウキ釣りで狙え、独特の引きが楽しい。",
     category: "sea",

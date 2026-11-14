@@ -79,6 +79,11 @@
 | tanago.jpg | タナゴ | Rhodeus_ocellatus_ocellatus(Hamamatsu,Shizuoka,Japan).jpg | CC BY-SA 3.0 | Seotaro |
 | raigyo.jpg | ライギョ | Channa_argus_01.jpg | CC BY 4.0 | Ω64 |
 | hasu.jpg | ハス | Opsariichthys_uncirostris_01.jpg | CC BY 4.0 | Ω64 |
+| aji.jpg | アジ | Trachurus_japonicus_Suma_3.jpg | CC BY-SA 4.0 | Totti |
+| tachiuo.jpg | タチウオ | Largehead_hairtail.jpg | CC BY-SA 2.0 | 俊仁 (Toshihito) 小林 (Kobayashi) |
+| mebaru.jpg | メバル | Sebastes_Inermis.jpg | CC BY-SA 3.0 | Daiju Azuma |
+| iwashi.jpg | イワシ | Sardinops_melanostictus.jpg | CC BY-SA 2.5 | OpenCage |
+| suzuki.jpg | シーバス | Lateolabrax_japonicus_Iwaki.jpg | CC BY-SA 4.0 | Totti |
 
 ## ライセンス要約
 

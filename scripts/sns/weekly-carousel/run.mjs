@@ -20,6 +20,7 @@ import { redis, getToken, discord, uploadPublic, removePublic } from "../ranking
 import { postInstagramCarousel } from "../ranking-reel/platforms.mjs";
 import { parseWeekTag, latestWeekTag, fetchWeekArticles, parseArticle, topRows, weekPeriod } from "./data.mjs";
 import { loadFishIndex, createPhotoResolver } from "./photos.mjs";
+import { youtubeConfigured, uploadYouTubeVideo } from "../youtube.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -29,6 +30,7 @@ const force = argv.includes("--force");
 const POSTED_KEY = "sns:weekly:posted"; // Redis SET（Instagram 投稿済み WEEKTAG）
 const X_POSTED_KEY = "sns:weekly:x:posted"; // Redis SET（X 投稿済み WEEKTAG）
 const X_IMAGES = 4; // X は1投稿に画像4枚まで（表紙＋エリア上位3枚）
+const YT_POSTED_KEY = "sns:weekly:yt:posted"; // Redis SET（YouTube ショート投稿済み WEEKTAG）
 const LOG_KEY = "sns:weekly:ledger"; // Redis LIST（投稿記録）
 const READY_MIN = 8; // この数のエリアが揃えば投稿（揃わなくても最初の記事から24時間で投稿）
 
@@ -45,8 +47,13 @@ const week = parseWeekTag(tag);
 console.log(`対象週: ${tag}（${week.label} ${week.range}）`);
 
 const isPosted = async (key) => !dryRun && Number(await redis(["SISMEMBER", key, tag]).catch(() => 0)) === 1;
-const todo = { instagram: !(await isPosted(POSTED_KEY)), x: !(await isPosted(X_POSTED_KEY)) };
-if (!todo.instagram && !todo.x) {
+// YouTube は認証情報を登録してから有効（未登録の間は毎回 Discord に「未設定」と出す。黙ってスキップしない）
+const todo = {
+  instagram: !(await isPosted(POSTED_KEY)),
+  x: !(await isPosted(X_POSTED_KEY)),
+  youtube: youtubeConfigured() && !(await isPosted(YT_POSTED_KEY)),
+};
+if (!todo.instagram && !todo.x && !todo.youtube) {
   console.log(`${tag} は投稿済み`);
   process.exit(0);
 }
@@ -105,10 +112,22 @@ const label = `${week.period ?? week.label}（${areas.length}エリア・${slide
 const xText = fs.readFileSync(path.join(outDir, "caption-x.txt"), "utf8");
 const xSlides = slides.slice(0, X_IMAGES);
 
+// YouTube ショート「今週末 釣れてる釣り場TOP5」（作れなくても Instagram / X は止めない）
+let short = null;
+try {
+  const o = execFileSync("node", [path.join(here, "shorts.mjs"), dataPath, outDir], { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] });
+  const s = JSON.parse(o.trim().split("\n").at(-1));
+  short = { file: s.video, ...JSON.parse(fs.readFileSync(s.meta, "utf8")) };
+  console.log(`ショート: ${short.title}`);
+} catch (e) {
+  console.warn("ショート動画を作れませんでした:", e.status === 2 ? "ランキングに足る釣果なし" : e.message);
+}
+
 if (dryRun) {
   await discord(`🧪 **釣果週報カルーセル（dry-run）** ${label}\n\`\`\`\n${caption.slice(0, 1500)}\n\`\`\``, slides[0]);
   await discord("（2枚目）", slides[1]);
   await discord(`🧪 **X（dry-run）** 画像${xSlides.length}枚\n\`\`\`\n${xText}\n\`\`\``);
+  if (short) await discord(`🧪 **YouTube ショート（dry-run）** ${short.title}`, short.file);
   console.log("dry-run 完了");
   process.exit(0);
 }
@@ -152,9 +171,20 @@ async function postX() {
   }
 }
 
+async function postYouTube() {
+  if (!short) throw new Error("ショート動画を作れませんでした（ログを確認）");
+  const res = await uploadYouTubeVideo({ file: short.file, title: short.title, description: short.description, tags: short.tags });
+  await redis(["SADD", YT_POSTED_KEY, tag]);
+  await redis(["LPUSH", LOG_KEY, JSON.stringify({ platform: "youtube", week: tag, at: new Date().toISOString(), id: res.id, permalink: res.url, privacy: res.privacy, areas: areas.length })]);
+  // API 審査前は非公開でしか上がらない → YouTube Studio で公開に切り替える
+  return res.privacy === "public" ? res.url : `${res.url}（${res.privacy}。YouTube Studio で「公開」に切り替えてください）`;
+}
+
+if (!youtubeConfigured()) await discord("⏭️ **釣果週報（YouTube）** 認証情報が未登録のためショートは未投稿（scripts/sns/youtube-auth.mjs で登録）", short?.file);
+
 const errors = [];
-for (const [name, label2, fn] of [["instagram", "Instagram", postInstagram], ["x", "X", postX]]) {
-  if (!todo[name]) { console.log(`${label2}: 投稿済み`); continue; }
+for (const [name, label2, fn] of [["instagram", "Instagram", postInstagram], ["x", "X", postX], ["youtube", "YouTube", postYouTube]]) {
+  if (!todo[name]) { console.log(`${label2}: ${name === "youtube" && !youtubeConfigured() ? "未設定" : "投稿済み"}`); continue; }
   try {
     const url = await fn();
     console.log(`${label2} 投稿完了:`, url);
