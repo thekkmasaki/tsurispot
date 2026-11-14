@@ -113,3 +113,16 @@ export function topRows(rows, n = 3) {
     .filter((r) => (seen.has(r.fish) ? false : seen.add(r.fish)))
     .slice(0, n);
 }
+
+/** エリア別ショートに載せる釣り場（好調度順・同じ釣り場は1回まで。釣れた魚が同じでも別の釣り場なら載せる） */
+export function topSpots(rows, n = 5) {
+  const seen = new Set();
+  return [...rows]
+    .map((r, i) => ({ ...r, i }))
+    .sort((a, b) => b.heat - a.heat || a.i - b.i)
+    .filter((r) => (seen.has(r.spot) ? false : seen.add(r.spot)))
+    .slice(0, n);
+}
+
+/** 記事 slug（chouka-shuho-osaka-sennan-2026-11-week2）→ エリアのキー（osaka-sennan） */
+export const areaKey = (slug) => String(slug).replace(/^chouka-shuho-/, "").replace(/-\d{4}-\d{2}-week\d$/, "");

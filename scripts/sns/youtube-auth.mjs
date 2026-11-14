@@ -11,12 +11,22 @@
  *   - 認証情報: OAuth クライアント ID（種類「デスクトップ アプリ」）
  * ブラウザが開いたら、ツリスポのチャンネルを持つ Google アカウントで許可する。
  */
+import fs from "fs";
 import http from "http";
 import { execFileSync, spawnSync } from "child_process";
 
-const { YOUTUBE_CLIENT_ID: id, YOUTUBE_CLIENT_SECRET: secret } = process.env;
+// クライアント情報: Google Cloud で「JSON をダウンロード」したファイルのパスを引数で渡す（中身は表示しない）か、環境変数
+//   node scripts/sns/youtube-auth.mjs ~/Downloads/client_secret_xxx.json
+let { YOUTUBE_CLIENT_ID: id, YOUTUBE_CLIENT_SECRET: secret } = process.env;
+const jsonPath = process.argv[2];
+if (jsonPath) {
+  const c = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+  const v = c.installed ?? c.web ?? {};
+  id = v.client_id;
+  secret = v.client_secret;
+}
 if (!id || !secret) {
-  console.error("YOUTUBE_CLIENT_ID と YOUTUBE_CLIENT_SECRET を環境変数で渡してください");
+  console.error("ダウンロードしたクライアントの JSON のパスを引数で渡すか、YOUTUBE_CLIENT_ID と YOUTUBE_CLIENT_SECRET を環境変数で渡してください");
   process.exit(1);
 }
 const PORT = 53682;
@@ -62,3 +72,4 @@ for (const [name, value] of [["YOUTUBE_CLIENT_ID", id], ["YOUTUBE_CLIENT_SECRET"
   if (r.status !== 0) { console.error(`${name} の登録に失敗しました`); process.exit(1); }
 }
 console.log("✅ YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET / YOUTUBE_REFRESH_TOKEN を GitHub Secrets に登録しました");
+if (jsonPath) console.log(`ダウンロードした ${jsonPath} は不要になりました。削除してかまいません。`);
