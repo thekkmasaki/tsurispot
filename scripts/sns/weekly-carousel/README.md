@@ -61,3 +61,16 @@ GitHub Actions では「釣果週報カルーセル（Instagram・X）」を手�
 - 既存の `MICROCMS_*`・AWS・Upstash・Discord
 
 **投稿すべき週があるのに認証情報が無い・クレジットが無い場合は失敗（赤）で終わり、Discord に ❌ が届く。**
+
+## YouTube ショート（今週末 釣れてる釣り場TOP5）
+
+`run.mjs` が週報の投稿と同時に `shorts.mjs` で縦動画（1080x1920・約15秒）を作り、YouTube に上げる。
+`/weekly-report` → このワークフローの workflow_dispatch で、Instagram・X と一緒に投稿される。
+
+- 構成: 表紙 → 5位 → … → 1位 → 締め（静止画をスライドで切り替え。ズームしない）。各エリアで一番釣れていた1件から、魚種・写真が被らないように最大5件
+- BGM: `s3://tsurispot-sns-assets/bgm/`（Meta サウンドコレクション。再配布禁止なのでリポジトリに置かない）
+- 認証の登録（1回だけ）: Google Cloud で YouTube Data API v3 を有効化 → OAuth 同意画面を「本番環境」に → OAuth クライアント（デスクトップ）を作成 →
+  `YOUTUBE_CLIENT_ID=... YOUTUBE_CLIENT_SECRET=... node scripts/sns/youtube-auth.mjs`（GitHub Secrets に直接登録。トークンは表示しない）
+- 未登録の間は Discord に「未設定」と動画が届く（黙ってスキップしない）
+- **API の利用審査が通るまで、API で上げた動画は非公開になる**（YouTube の仕様）。YouTube Studio で「公開」に切り替える。審査後に repo variable `YOUTUBE_PRIVACY=public`
+- 投稿済みは Redis `sns:weekly:yt:posted`

@@ -60,6 +60,13 @@ jobs:
       UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
       UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      # YouTube ショート（scripts/sns/youtube-auth.mjs で登録。未登録の間は投稿しない）
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      # API 審査が通るまでは private 固定（YouTube 側で強制）。審査後に repo variable YOUTUBE_PRIVACY=public
+      YOUTUBE_PRIVACY: ${{ vars.YOUTUBE_PRIVACY || 'private' }}
+      SNS_BGM_DIR: /tmp/bgm
     steps:
       - uses: actions/checkout@v4
 
@@ -76,6 +83,12 @@ jobs:
           npx playwright install chromium --with-deps
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-noto-cjk fonts-noto-color-emoji
+
+      - name: BGM取得（非公開バケット。曲は再配布禁止のためリポジトリに置かない）
+        run: |
+          mkdir -p /tmp/bgm
+          aws s3 sync s3://tsurispot-sns-assets/bgm/ /tmp/bgm/ --only-show-errors || echo "BGMなし（無音で続行）"
+          ls /tmp/bgm
 
       - name: 生成して投稿
         run: |
@@ -96,6 +109,8 @@ jobs:
             out/sns-weekly/**/slide-*.jpg
             out/sns-weekly/**/caption-instagram.txt
             out/sns-weekly/**/caption-x.txt
+            out/sns-weekly/**/short.mp4
+            out/sns-weekly/**/youtube.json
           if-no-files-found: ignore
           retention-days: 7
 
