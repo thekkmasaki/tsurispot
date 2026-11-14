@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { MAX_PLACES, addPlace, buildPlacesFlex, parsePlacesCommand, placeLabelFromAddress, type SavedPlace } from "@/lib/line/places";
+import { MAX_PLACES, PREF_CAPITALS, addPlace, buildPlacesFlex, parsePlacesCommand, placeFromPrefecture, placeLabelFromAddress, type SavedPlace } from "@/lib/line/places";
 import { buildFishFlex, selectFishRows } from "@/lib/line/chouka-reply";
 import type { LatestWeeklyCatch } from "@/lib/data/weekly-report-latest";
 
@@ -7,7 +7,7 @@ const fushimi = { lat: 34.94, lng: 135.77, label: "京都市" };
 const yokohama = { lat: 35.45, lng: 139.63, label: "横浜市" };
 
 describe("登録した場所", () => {
-  it("近い場所（10km以内）は更新、離れていれば追加、4か所目は一番古いものと入れ替え", () => {
+  it("近い場所（10km以内）は更新、離れていれば追加、上限を超えたら一番古いものと入れ替え", () => {
     let r = addPlace([], fushimi, 1);
     expect(r.list).toHaveLength(1);
     r = addPlace(r.list, { lat: 34.95, lng: 135.76, label: "京都市" }, 2);
@@ -15,8 +15,10 @@ describe("登録した場所", () => {
     expect(r.list).toHaveLength(1);
     r = addPlace(r.list, yokohama, 3);
     r = addPlace(r.list, { lat: 33.59, lng: 130.4, label: "福岡市" }, 4);
+    r = addPlace(r.list, { lat: 38.27, lng: 140.87, label: "仙台市" }, 5);
+    r = addPlace(r.list, { lat: 34.4, lng: 132.46, label: "広島市" }, 6);
     expect(r.list).toHaveLength(MAX_PLACES);
-    r = addPlace(r.list, { lat: 43.06, lng: 141.35, label: "札幌市" }, 5);
+    r = addPlace(r.list, { lat: 43.06, lng: 141.35, label: "札幌市" }, 7);
     expect(r.list).toHaveLength(MAX_PLACES);
     expect(r.dropped?.label).toBe("京都市");
   });
@@ -67,5 +69,32 @@ describe("複数の場所で絞る", () => {
     expect(s).toMatch(/osaka-sennan（京都市から約\d+km）/);
     expect(s).toMatch(/tokyobay-yokohama（横浜市から約\d+km）/);
     expect(s).toContain("登録した2か所のどこかから");
+  });
+});
+
+describe("都道府県名で手動登録", () => {
+  it("県庁所在地で登録し、京都＋大阪＋兵庫で範囲が広がる", () => {
+    const kyoto = placeFromPrefecture("京都府", "京都");
+    const osaka = placeFromPrefecture("大阪府", "大阪");
+    expect(kyoto).toMatchObject({ label: "京都" });
+    expect(placeFromPrefecture("存在しない県", "x")).toBeNull();
+    let r = addPlace([], kyoto!, 1);
+    r = addPlace(r.list, osaka!, 2);
+    r = addPlace(r.list, placeFromPrefecture("兵庫県", "兵庫")!, 3);
+    expect(r.list.map((p) => p.label)).toEqual(["京都", "大阪", "兵庫"]);
+    // 同じ県をもう一度送っても増えない
+    expect(addPlace(r.list, osaka!, 4)).toMatchObject({ updated: true });
+    expect(addPlace(r.list, osaka!, 4).list).toHaveLength(3);
+  });
+
+  it("47都道府県すべてに位置がある", async () => {
+    const { prefectures } = await import("@/lib/data/prefectures");
+    for (const p of prefectures) expect(PREF_CAPITALS[p.name], p.name).toBeDefined();
+  });
+
+  it("名前で消す", () => {
+    expect(parsePlacesCommand("大阪を消す")).toEqual({ type: "deleteByName", name: "大阪" });
+    expect(parsePlacesCommand("場所をすべて消す")).toEqual({ type: "clear" });
+    expect(parsePlacesCommand("場所1を消す")).toEqual({ type: "delete", index: 0 });
   });
 });

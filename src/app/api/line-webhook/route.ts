@@ -7,6 +7,7 @@ import {
   buildPlacesFlex,
   buildPlacesText,
   parsePlacesCommand,
+  placeFromPrefecture,
   placeLabelFromAddress,
   type SavedPlace,
 } from "@/lib/line/places";
@@ -317,21 +318,25 @@ async function loadWeeklyRows(): Promise<LatestWeeklyCatch[]> {
 
 // ─── 一般ユーザー向けメッセージハンドラ ─────────────────────────
 async function handleGeneralUserMessage(replyToken: string, text: string, userId: string) {
-  // 都道府県名にマッチ → エリアを記憶
+  // 都道府県名 → 場所として登録（県庁所在地。京都の人が「大阪」「兵庫」も足せる）。マイエリアは最初の1県
   const prefMatch = matchPrefecture(text);
   if (prefMatch) {
-    await setUserArea(userId, prefMatch.slug);
-    await replyMessage(
-      replyToken,
-      [
-        `📍 マイエリアを「${prefMatch.name}」に登録しました！`,
-        "",
-        "「釣果」を送ると、このエリアの今週の釣果を先にお届けします。",
-        "変更したいときは、別の都道府県名を送ってください。",
-      ].join("\n"),
-      [{ label: "釣果", text: "釣果" }, { label: "スポット", text: "スポット" }, { label: "アジ", text: "アジ" }],
-      LOCATION_LABEL,
-    );
+    const prefFull = prefectures.find((x) => x.slug === prefMatch.slug);
+    const place = prefFull ? placeFromPrefecture(prefFull.name, prefFull.nameShort) : null;
+    if (!(await getUserArea(userId))) await setUserArea(userId, prefMatch.slug);
+    let list = await getUserPlaces(userId);
+    let note = `📍 「${prefMatch.name}」を登録しました`;
+    if (place) {
+      const added = addPlace(list, place);
+      list = added.list;
+      await setUserPlaces(userId, list);
+      note = added.updated
+        ? `📍 「${prefMatch.name}」はもう登録されています`
+        : `📍 「${prefMatch.name}」を登録しました（${list.length}/${MAX_PLACES}か所${added.dropped ? `・いちばん古い「${added.dropped.label ?? "場所"}」と入れ替え` : ""}）`;
+    }
+    const flex = buildPlacesFlex(list, note);
+    flex.quickReply = ["釣果", "アジ", ...flex.quickReply.filter((q) => q !== "釣果")].slice(0, 12);
+    await replyFlex(replyToken, flex, buildPlacesText(list, note));
     return;
   }
 
@@ -339,17 +344,24 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   const placesCmd = parsePlacesCommand(text);
   if (placesCmd) {
     let list = await getUserPlaces(userId);
-    let note: string | undefined;
-    if (placesCmd.type === "clear" && list.length) {
-      list = [];
-      note = "登録した場所をすべて消しました";
-    } else if (placesCmd.type === "delete" && list[placesCmd.index]) {
-      note = `「${list[placesCmd.index].label ?? `場所${placesCmd.index + 1}`}」を消しました`;
-      list = list.filter((_, i) => i !== placesCmd.index);
+    const byName = placesCmd.type === "deleteByName"
+      ? list.findIndex((x) => x.label && (x.label === placesCmd.name || x.label.startsWith(placesCmd.name) || placesCmd.name.startsWith(x.label)))
+      : -1;
+    // 登録地にない名前（「エサを消す」等）は場所の話ではないので、下の通常処理へ
+    if (placesCmd.type !== "deleteByName" || byName >= 0) {
+      let note: string | undefined;
+      const del = placesCmd.type === "delete" ? placesCmd.index : byName;
+      if (placesCmd.type === "clear" && list.length) {
+        list = [];
+        note = "登録した場所をすべて消しました";
+      } else if (del >= 0 && list[del]) {
+        note = `「${list[del].label ?? `場所${del + 1}`}」を消しました`;
+        list = list.filter((_, i) => i !== del);
+      }
+      if (note) await setUserPlaces(userId, list);
+      await replyFlex(replyToken, buildPlacesFlex(list, note), buildPlacesText(list, note));
+      return;
     }
-    if (note) await setUserPlaces(userId, list);
-    await replyFlex(replyToken, buildPlacesFlex(list, note), buildPlacesText(list, note));
-    return;
   }
 
   // ユーザーのエリアを取得

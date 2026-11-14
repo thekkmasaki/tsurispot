@@ -101,7 +101,7 @@ export function buildHelpFlex(myPrefName?: string | null): LineFlexReply {
         sendRow("診断", "診断", "あなたに合う釣りは？"),
         sendRow("登録地", "登録地", "近い釣果に絞る場所（最大3か所）"),
         txt(
-          myPrefName ? `マイエリア：${myPrefName}（都道府県名を送ると変更できます）` : "都道府県名を送ると、マイエリアを登録できます",
+          myPrefName ? `マイエリア：${myPrefName}（都道府県名や位置情報で、よく行く場所を追加できます）` : "都道府県名か位置情報を送ると、マイエリアを登録できます（よく行く場所を最大5か所）",
           { size: "xxs", color: myPrefName ? C.ok : C.muted, margin: "md" },
         ),
       ],
@@ -126,7 +126,7 @@ export function buildHelpText(myPrefName?: string | null): string {
     "・「診断」→ あなたに合う釣りは？",
     "・「登録地」→ 近い釣果に絞る場所（位置情報で最大3か所）",
     "",
-    myPrefName ? `マイエリア：${myPrefName}（都道府県名を送ると変更）` : "都道府県名を送るとマイエリアを登録できます",
+    myPrefName ? `マイエリア：${myPrefName}（都道府県名や位置情報で、よく行く場所を追加）` : "都道府県名か位置情報を送るとマイエリアを登録できます（最大5か所）",
     "",
     lineUrl("/", "help"),
   ].join("\n");
