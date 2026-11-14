@@ -6,8 +6,11 @@ import { safeEqual } from "@/lib/safe-compare";
 import { fishSpecies } from "@/lib/data/fish";
 import { getLatestWeeklyCatches, type LatestWeeklyCatch } from "@/lib/data/weekly-report-latest";
 import {
+  buildChoukaFlex,
   buildChoukaReplyText,
+  buildFishFlex,
   buildFishReplyText,
+  type LineFlexReply,
   findFishInText,
   weeklyAreaForPrefecture,
 } from "@/lib/line/chouka-reply";
@@ -64,6 +67,35 @@ async function replyMessage(
       messages: [message],
     }),
   });
+}
+
+/**
+ * カード（Flex Message）で返信。LINE に弾かれたら（形式エラー等）同じ replyToken でテキスト版を返す
+ * （400 で拒否された replyToken は未使用のまま再利用できる）
+ */
+async function replyFlex(replyToken: string, flex: LineFlexReply, fallbackText: string) {
+  const quickReply = flex.quickReply.length
+    ? {
+        items: flex.quickReply.map((t) => ({
+          type: "action",
+          action: { type: "message", label: t.slice(0, 20), text: t },
+        })),
+      }
+    : undefined;
+  const res = await fetch("https://api.line.me/v2/bot/message/reply", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${CHANNEL_ACCESS_TOKEN}`,
+    },
+    body: JSON.stringify({
+      replyToken,
+      messages: [{ type: "flex", altText: flex.altText.slice(0, 400), contents: flex.contents, ...(quickReply && { quickReply }) }],
+    }),
+  }).catch(() => null);
+  if (res?.ok) return;
+  console.error("[line-webhook] Flex返信失敗→テキストで再送", res?.status, await res?.text().catch(() => ""));
+  await replyMessage(replyToken, fallbackText, flex.quickReply.map((t) => ({ label: t.slice(0, 20), text: t })));
 }
 
 /** DynamoDB: LINE userId → 店舗情報 */
@@ -217,7 +249,8 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   // 魚の名前（「アジ」「タチウオ釣れてる？」）→ その魚が今釣れている場所
   const fish = findFishInText(text, fishSpecies);
   if (fish) {
-    await replyMessage(replyToken, buildFishReplyText(fish, await loadWeeklyRows(), myWeeklyArea));
+    const rows = await loadWeeklyRows();
+    await replyFlex(replyToken, buildFishFlex(fish, rows, myWeeklyArea), buildFishReplyText(fish, rows, myWeeklyArea));
     return;
   }
 
@@ -302,7 +335,8 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
   // 釣果・週報 → 最新の釣果週報
   if (/釣果|週報|釣れた|レポート|report/i.test(text)) {
     // マイエリアの今週の釣果＋全国の好調エリア上位＋/chouka
-    await replyMessage(replyToken, buildChoukaReplyText(await loadWeeklyRows(), myWeeklyArea));
+    const rows = await loadWeeklyRows();
+    await replyFlex(replyToken, buildChoukaFlex(rows, myWeeklyArea), buildChoukaReplyText(rows, myWeeklyArea));
     return;
   }
 
