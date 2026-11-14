@@ -26,8 +26,34 @@ export function sniffImageKind(buf: Buffer): ImageKind | null {
   return null;
 }
 
+/**
+ * 全アップロード画像を sharp で再エンコードしてメタデータ（EXIF の GPS 位置情報・撮影機種など）を落とす。
+ * - .rotate() で EXIF の向きを画素に反映してから出力（sharp は withMetadata しない限りメタデータを書き出さない）
+ * - PNG は PNG のまま、JPEG は JPEG のまま。WebP は Rekognition 非対応のため JPEG に変換（透過は白で埋める）
+ * - 読めない画像は null（呼び出し側で 400 を返す）
+ */
+export async function normalizeImage(
+  input: Buffer,
+  kind: ImageKind,
+): Promise<{ buffer: Buffer; contentType: "image/jpeg" | "image/png"; ext: "jpg" | "png" } | null> {
+  try {
+    const img = sharp(input, { limitInputPixels: 100_000_000 }).rotate();
+    if (kind === "png") {
+      return { buffer: await img.png().toBuffer(), contentType: "image/png", ext: "png" };
+    }
+    const pipeline = kind === "webp" ? img.flatten({ background: "#ffffff" }) : img;
+    return {
+      buffer: await pipeline.jpeg({ quality: 88, mozjpeg: true }).toBuffer(),
+      contentType: "image/jpeg",
+      ext: "jpg",
+    };
+  } catch {
+    return null;
+  }
+}
+
 export type UploadFailure = { ok: false; status: number; error: string };
-export type UploadSuccess = { ok: true; url: string };
+export type UploadSuccess = { ok: true; url: string; key: string };
 
 /** multipart を安全に読む。Content-Length 超過・不正形式は失敗結果を返す。 */
 export async function readMultipartFile(
@@ -57,6 +83,7 @@ export async function readMultipartFile(
 /**
  * 画像検証→S3保存→Rekognition(fail-closed)。
  * - MIME(宣言)ではなくマジックバイトで形式判定。拡張子は判定結果から決める（file.name は使わない）。
+ * - すべての画像を normalizeImage で再エンコードし、GPS 等のメタデータを落としてから保存する。
  * - Rekognition は JPEG/PNG のみ対応のため WebP は JPEG に変換して保存。
  * - モデレーション障害時もオブジェクトを削除して拒否する。
  */
@@ -74,21 +101,12 @@ export async function validateAndUploadImage(
     return { ok: false, status: 400, error: "JPG、PNG、WebPのみアップロード可能です" };
   }
 
-  let contentType = kind === "png" ? "image/png" : "image/jpeg";
-  let ext = kind === "png" ? "png" : "jpg";
-  if (kind === "webp") {
-    try {
-      buffer = await sharp(buffer, { limitInputPixels: 100_000_000 })
-        .rotate()
-        .flatten({ background: "#ffffff" })
-        .jpeg({ quality: 88 })
-        .toBuffer();
-    } catch {
-      return { ok: false, status: 400, error: "画像を読み込めませんでした。別の写真をお試しください。" };
-    }
-    contentType = "image/jpeg";
-    ext = "jpg";
+  const normalized = await normalizeImage(buffer, kind);
+  if (!normalized) {
+    return { ok: false, status: 400, error: "画像を読み込めませんでした。別の写真をお試しください。" };
   }
+  buffer = normalized.buffer;
+  const { contentType, ext } = normalized;
 
   const key = `${keyPrefix}/${Date.now()}-${randomBytes(8).toString("hex")}.${ext}`;
   let url: string;
@@ -117,5 +135,5 @@ export async function validateAndUploadImage(
     };
   }
 
-  return { ok: true, url };
+  return { ok: true, url, key };
 }
