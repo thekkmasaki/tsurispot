@@ -148,6 +148,8 @@ export interface LineFlexReply {
   contents: FlexComponent;
   /** 下に出す候補ボタン（タップでその文字を送信） */
   quickReply: string[];
+  /** 指定すると候補ボタンの先頭に「位置情報を送る」ボタン（このラベル）を出す */
+  askLocation?: string;
 }
 
 const C = {

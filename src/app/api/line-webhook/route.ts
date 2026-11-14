@@ -15,6 +15,19 @@ import {
   weeklyAreaForPrefecture,
 } from "@/lib/line/chouka-reply";
 import { buildGearFlex, buildGearMenuFlex, buildGearMenuText, buildGearReplyText, findGearMethod } from "@/lib/line/gear-reply";
+import { buildNearbyFlex, buildNearbyText, nearestSpots, type CoordSpot } from "@/lib/line/nearby-reply";
+import {
+  LOCATION_LABEL,
+  UNKNOWN_QUICK,
+  buildHelpFlex,
+  buildHelpText,
+  buildSpotsFlex,
+  buildSpotsText,
+  buildUnknownText,
+  buildWelcomeFlex,
+  buildWelcomeText,
+} from "@/lib/line/menu-reply";
+import { SITE, lineUrl } from "@/lib/line/line-url";
 
 const CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET ?? "";
 const CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN ?? "";
@@ -42,32 +55,39 @@ function verifySignature(body: string, signature: string): boolean {
   return safeEqual(hash, signature);
 }
 
-/** LINEにリプライメッセージを送信（quickReply対応） */
-async function replyMessage(
-  replyToken: string,
-  text: string,
-  quickReplyItems?: Array<{ label: string; text: string }>
-) {
-  const message: Record<string, unknown> = { type: "text", text };
-  if (quickReplyItems?.length) {
-    message.quickReply = {
-      items: quickReplyItems.map((item) => ({
-        type: "action",
-        action: { type: "message", label: item.label, text: item.text },
-      })),
-    };
-  }
-  await fetch("https://api.line.me/v2/bot/message/reply", {
+/** 候補ボタン（タップで文字を送る）。askLocation を渡すと先頭に「位置情報を送る」ボタン（スマホのみ表示） */
+function quickReplyOf(texts: string[], askLocation?: string) {
+  const items = [
+    ...(askLocation ? [{ type: "action", action: { type: "location", label: askLocation.slice(0, 20) } }] : []),
+    ...texts.map((t) => ({ type: "action", action: { type: "message", label: t.slice(0, 20), text: t } })),
+  ].slice(0, 13);
+  return items.length ? { items } : undefined;
+}
+
+async function postReply(replyToken: string, message: Record<string, unknown>): Promise<Response | null> {
+  return fetch("https://api.line.me/v2/bot/message/reply", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${CHANNEL_ACCESS_TOKEN}`,
     },
-    body: JSON.stringify({
-      replyToken,
-      messages: [message],
-    }),
+    body: JSON.stringify({ replyToken, messages: [message] }),
+  }).catch((e) => {
+    console.error("[line-webhook] 返信の送信に失敗", e);
+    return null;
   });
+}
+
+/** LINEにリプライメッセージを送信（quickReply対応）。失敗はログに残す（以前は黙って捨てていた） */
+async function replyMessage(
+  replyToken: string,
+  text: string,
+  quickReplyItems?: Array<{ label: string; text: string }>,
+  askLocation?: string,
+) {
+  const quickReply = quickReplyOf(quickReplyItems?.map((i) => i.text) ?? [], askLocation);
+  const res = await postReply(replyToken, { type: "text", text: text.slice(0, 5000), ...(quickReply && { quickReply }) });
+  if (res && !res.ok) console.error("[line-webhook] テキスト返信失敗", res.status, await res.text().catch(() => ""));
 }
 
 /**
@@ -75,28 +95,57 @@ async function replyMessage(
  * （400 で拒否された replyToken は未使用のまま再利用できる）
  */
 async function replyFlex(replyToken: string, flex: LineFlexReply, fallbackText: string) {
-  const quickReply = flex.quickReply.length
-    ? {
-        items: flex.quickReply.map((t) => ({
-          type: "action",
-          action: { type: "message", label: t.slice(0, 20), text: t },
-        })),
-      }
-    : undefined;
-  const res = await fetch("https://api.line.me/v2/bot/message/reply", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${CHANNEL_ACCESS_TOKEN}`,
-    },
-    body: JSON.stringify({
-      replyToken,
-      messages: [{ type: "flex", altText: flex.altText.slice(0, 400), contents: flex.contents, ...(quickReply && { quickReply }) }],
-    }),
-  }).catch(() => null);
+  const quickReply = quickReplyOf(flex.quickReply, flex.askLocation);
+  const res = await postReply(replyToken, {
+    type: "flex",
+    altText: flex.altText.slice(0, 400),
+    contents: flex.contents,
+    ...(quickReply && { quickReply }),
+  });
   if (res?.ok) return;
   console.error("[line-webhook] Flex返信失敗→テキストで再送", res?.status, await res?.text().catch(() => ""));
-  await replyMessage(replyToken, fallbackText, flex.quickReply.map((t) => ({ label: t.slice(0, 20), text: t })));
+  await replyMessage(replyToken, fallbackText, flex.quickReply.map((t) => ({ label: t.slice(0, 20), text: t })), flex.askLocation);
+}
+
+// ─── 近くの釣り場（位置情報） ─────────────────────────────────
+/**
+ * 全スポットの座標。スポット本体（TS 18MB）は import せず、CDN 配信の軽量 API を1日キャッシュして使う。
+ * 取れないときは空（カードは「読み込めませんでした」＋地図リンク）。
+ */
+let coordCache: { at: number; spots: CoordSpot[] } | null = null;
+async function loadCoordSpots(): Promise<CoordSpot[]> {
+  if (coordCache && Date.now() - coordCache.at < 24 * 3600_000) return coordCache.spots;
+  try {
+    const res = await fetch(`${SITE}/api/spots/coords`, { signal: AbortSignal.timeout(4000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const spots = (await res.json()) as CoordSpot[];
+    coordCache = { at: Date.now(), spots };
+    return spots;
+  } catch (e) {
+    console.error("[line-webhook] スポット座標の取得に失敗", e);
+    return coordCache?.spots ?? [];
+  }
+}
+
+async function handleLocationMessage(replyToken: string, userId: string, lat: number, lng: number) {
+  const list = nearestSpots(await loadCoordSpots(), lat, lng);
+  // マイエリア未登録なら、いちばん近い釣り場の都道府県で自動登録（50km 以内のときだけ）
+  let areaNote: string | undefined;
+  const near = list[0];
+  const pref = near && near.km <= 50 ? prefectures.find((p) => p.name === near.spot.p) : undefined;
+  const quick: string[] = [];
+  if (pref) {
+    const current = await getUserArea(userId);
+    if (!current) {
+      await setUserArea(userId, pref.slug);
+      areaNote = `📍 マイエリアを「${pref.nameShort}」に登録しました`;
+    } else if (current !== pref.slug) {
+      quick.push(pref.nameShort); // タップでマイエリアを変更
+    }
+  }
+  const flex = buildNearbyFlex(list, areaNote);
+  flex.quickReply = [...quick, ...flex.quickReply];
+  await replyFlex(replyToken, flex, buildNearbyText(list, areaNote));
 }
 
 /** DynamoDB: LINE userId → 店舗情報 */
@@ -129,7 +178,7 @@ async function getShopBaitStock(shopSlug: string): Promise<BaitStockEntry[]> {
 /** 今月の釣りガイドURLを生成 */
 function getCurrentMonthGuideUrl(): string {
   const month = new Date().getMonth() + 1;
-  return `https://tsurispot.com/monthly/${month}`;
+  return lineUrl(`/monthly/${month}`, "season");
 }
 
 // ─── エリア記憶 ─────────────────────────────────────────────
@@ -232,12 +281,13 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     await replyMessage(
       replyToken,
       [
-        `📍 ${prefMatch.name}を登録しました！`,
+        `📍 マイエリアを「${prefMatch.name}」に登録しました！`,
         "",
-        `今後「スポット」「今釣れる」と送ると、${prefMatch.name}の情報を優先してお届けします。`,
-        "",
-        "変更したい場合は、別の都道府県名を送ってください。",
-      ].join("\n")
+        "「釣果」を送ると、このエリアの今週の釣果を先にお届けします。",
+        "変更したいときは、別の都道府県名を送ってください。",
+      ].join("\n"),
+      [{ label: "釣果", text: "釣果" }, { label: "スポット", text: "スポット" }, { label: "アジ", text: "アジ" }],
+      LOCATION_LABEL,
     );
     return;
   }
@@ -255,32 +305,9 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     return;
   }
 
-  // スポット・釣り場 → スポット検索ページ（エリア対応）
-  if (/スポット|釣り場|釣りスポット|ポイント|spot|場所/i.test(text)) {
-    const lines = [
-      "━━━━━━━━━━━━━━",
-      "📍 釣りスポット検索",
-      "━━━━━━━━━━━━━━",
-      "",
-    ];
-    if (userPref) {
-      lines.push(
-        `▼ ${userPref.nameShort}の釣りスポット`,
-        `https://tsurispot.com/prefecture/${userPref.slug}`,
-        ""
-      );
-    }
-    lines.push(
-      "▼ スポット一覧から探す",
-      "https://tsurispot.com/spots",
-      "",
-      "▼ 現在地から近い順で探す",
-      "https://tsurispot.com/fishing-spots/near-me",
-      "",
-      "▼ 地図から探す",
-      "https://tsurispot.com/map"
-    );
-    await replyMessage(replyToken, lines.join("\n"));
+  // スポット・釣り場 → 位置情報ボタン付きのカード（位置を送ると近くの釣り場5か所）
+  if (/スポット|釣り場|釣りスポット|ポイント|spot|場所|近く/i.test(text)) {
+    await replyFlex(replyToken, buildSpotsFlex(userPref), buildSpotsText(userPref));
     return;
   }
 
@@ -296,7 +323,7 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     if (userPref) {
       lines.push(
         `▼ ${userPref.nameShort}の釣りスポット`,
-        `https://tsurispot.com/prefecture/${userPref.slug}`,
+        lineUrl(`/prefecture/${userPref.slug}`, "season"),
         ""
       );
     }
@@ -305,7 +332,7 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
       getCurrentMonthGuideUrl(),
       "",
       "▼ 今釣れる魚の一覧",
-      "https://tsurispot.com/catchable-now"
+      lineUrl("/catchable-now", "season")
     );
     await replyMessage(replyToken, lines.join("\n"));
     return;
@@ -321,13 +348,13 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
         "━━━━━━━━━━━━━━",
         "",
         "▼ まずはここから！初心者ガイド",
-        "https://tsurispot.com/guide/beginner",
+        lineUrl("/guide/beginner", "beginner"),
         "",
         "▼ 持ち物チェックリスト",
-        "https://tsurispot.com/beginner-checklist",
+        lineUrl("/beginner-checklist", "beginner"),
         "",
         "▼ 道具の選び方",
-        "https://tsurispot.com/gear",
+        lineUrl("/gear", "beginner"),
       ].join("\n")
     );
     return;
@@ -364,13 +391,13 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
         "━━━━━━━━━━━━━━",
         "",
         "▼ 釣り場診断（何を釣る？）",
-        "https://tsurispot.com/fish-finder",
+        lineUrl("/fish-finder", "diagnosis"),
         "",
         "▼ 釣りスタイル診断",
-        "https://tsurispot.com/quiz",
+        lineUrl("/quiz", "diagnosis"),
         "",
         "▼ ボウズ確率チェッカー",
-        "https://tsurispot.com/bouzu-checker",
+        lineUrl("/bouzu-checker", "diagnosis"),
       ].join("\n")
     );
     return;
@@ -386,7 +413,7 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
         "━━━━━━━━━━━━━━",
         "",
         "▼ 潮汐・ベストタイミング",
-        "https://tsurispot.com/fishing-calendar",
+        lineUrl("/fishing-calendar", "tide"),
         "",
         "潮の動きをチェックして",
         "釣果アップを狙おう！",
@@ -395,50 +422,9 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     return;
   }
 
-  // 使い方・ヘルプ → メニュー一覧
+  // 使い方・ヘルプ → タップで送れる使い方カード
   if (/使い方|ヘルプ|help|メニュー|menu/i.test(text)) {
-    const areaInfoHelp = userPref ? `\n📍 マイエリア: ${userPref.nameShort}` : "";
-    await replyMessage(
-      replyToken,
-      [
-        "━━━━━━━━━━━━━━",
-        "🎣 ツリスポ LINE",
-        "━━━━━━━━━━━━━━",
-        "",
-        "キーワードを送ってね👇",
-        "",
-        "📍「スポット」",
-        "　→ 釣り場を探す",
-        "",
-        "🐟「今釣れる」",
-        "　→ 今月釣れる魚",
-        "",
-        "📖「初心者」",
-        "　→ 始め方ガイド",
-        "",
-        "📊「釣果」",
-        "　→ あなたのエリアの今週の釣果",
-        "",
-        "🐟 魚の名前（例「アジ」）",
-        "　→ 今その魚が釣れている場所",
-        "",
-        "🎣「道具」",
-        "　→ おすすめタックル",
-        "",
-        "🔍「診断」",
-        "　→ あなたに合う釣りは？",
-        "",
-        "📅「潮」",
-        "　→ 釣りカレンダー",
-        "",
-        "都道府県名を送ると",
-        "マイエリアを登録できます",
-        areaInfoHelp,
-        "",
-        "━━━━━━━━━━━━━━",
-        "https://tsurispot.com",
-      ].join("\n")
-    );
+    await replyFlex(replyToken, buildHelpFlex(userPref?.nameShort), buildHelpText(userPref?.nameShort));
     return;
   }
 
@@ -463,48 +449,12 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     return;
   }
 
-  // ヘルプ（デフォルト）
-  const areaInfo = userPref ? `\n📍 マイエリア: ${userPref.nameShort}` : "";
+  // 分からない言葉 → 短く返してボタンで誘導（以前は長いヘルプ全文を毎回返していた）
   await replyMessage(
     replyToken,
-    [
-      "━━━━━━━━━━━━━━",
-      "🎣 ツリスポ LINE",
-      "━━━━━━━━━━━━━━",
-      "",
-      "キーワードを送ってね👇",
-      "",
-      "📍「スポット」",
-      "　→ 釣り場を探す",
-      "",
-      "🐟「今釣れる」",
-      "　→ 今月釣れる魚",
-      "",
-      "📖「初心者」",
-      "　→ 始め方ガイド",
-      "",
-      "📊「釣果」",
-      "　→ あなたのエリアの今週の釣果",
-      "",
-      "🐟 魚の名前（例「アジ」）",
-      "　→ 今その魚が釣れている場所",
-      "",
-      "🎣「道具」",
-      "　→ おすすめタックル",
-      "",
-      "🔍「診断」",
-      "　→ あなたに合う釣りは？",
-      "",
-      "📅「潮」",
-      "　→ 釣りカレンダー",
-      "",
-      "都道府県名を送ると",
-      "マイエリアを登録できます",
-      areaInfo,
-      "",
-      "━━━━━━━━━━━━━━",
-      "https://tsurispot.com",
-    ].join("\n")
+    buildUnknownText(text),
+    UNKNOWN_QUICK.map((t) => ({ label: t, text: t })),
+    LOCATION_LABEL,
   );
 }
 
@@ -532,34 +482,19 @@ export async function POST(request: NextRequest) {
             `${mapping.shopName}さん、ツリスポ釣具店サポートへようこそ！\n\n「更新」と送ると、餌の在庫更新ページを開けます。`
           );
         } else {
-          await replyMessage(
-            event.replyToken,
-            [
-              "━━━━━━━━━━━━━━",
-              "🎣 ツリスポへようこそ！",
-              "━━━━━━━━━━━━━━",
-              "",
-              "友だち追加ありがとうございます！",
-              "",
-              "まず、よく釣りするエリアを",
-              "教えてください👇",
-              "（都道府県名を送ってね）",
-              "",
-              "例: 「神奈川」「大阪」「北海道」",
-              "",
-              "━━━━━━━━━━━━━━",
-              "",
-              "キーワードで釣り情報も検索👇",
-              "📍「スポット」🐟「今釣れる」",
-              "📖「初心者」📊「釣果」",
-              "🎣「道具」🔍「診断」📅「潮」",
-              "🐟魚の名前で今釣れている場所",
-              "",
-              "━━━━━━━━━━━━━━",
-              "https://tsurispot.com",
-            ].join("\n")
-          );
+          // あいさつ＋エリア登録ボタン（位置情報・主な都道府県）。打たなくても登録できる
+          await replyFlex(event.replyToken, buildWelcomeFlex(), buildWelcomeText());
         }
+      }
+      continue;
+    }
+
+    // 位置情報 → 近くの釣り場（店舗オーナーも同じ）
+    if (event.type === "message" && event.message?.type === "location") {
+      const userId = event.source?.userId;
+      const { latitude, longitude } = event.message;
+      if (userId && event.replyToken && Number.isFinite(latitude) && Number.isFinite(longitude)) {
+        await handleLocationMessage(event.replyToken, userId, latitude, longitude);
       }
       continue;
     }
