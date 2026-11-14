@@ -1,0 +1,56 @@
+# Cloudflare → origin に秘密ヘッダ x-origin-verify を付与する Transform Rule を作成/更新（手動実行のみ）
+#
+# 背景（2026-11-15 セキュリティ点検）: App Runner の URL を直接叩くと cf-connecting-ip を偽装でき、
+# IP 単位のレート制限が全て無効になる。src/proxy.ts / src/lib/rate-limit.ts は ORIGIN_VERIFY_SECRET と
+# 一致する x-origin-verify ヘッダを持つリクエストだけを「Cloudflare 経由」とみなす。
+#
+# 手順:
+#   1. GitHub Secret ORIGIN_VERIFY_SECRET を登録
+#   2. gh workflow run cf-origin-header            # ルール作成 → ヘッダが付くことを確認
+#   3. App Runner に ORIGIN_VERIFY_SECRET と ORIGIN_LOCKDOWN_MODE=log を設定（数日ログ観察）
+#   4. 直アクセス以外の warn が出ないことを確認後 ORIGIN_LOCKDOWN_MODE=enforce
+#   check_only=true なら現在のルールを表示するだけ。
+name: CF origin header
+
+on:
+  workflow_dispatch:
+    inputs:
+      check_only:
+        description: "true なら設定を読むだけ（変更しない）"
+        required: false
+        default: "false"
+        type: string
+
+jobs:
+  upsert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Upsert request header transform rule
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          ORIGIN_VERIFY_SECRET: ${{ secrets.ORIGIN_VERIFY_SECRET }}
+          CHECK_ONLY: ${{ inputs.check_only }}
+        run: |
+          set -euo pipefail
+          echo "::add-mask::$CF_ZONE_ID"
+          echo "::add-mask::$ORIGIN_VERIFY_SECRET"
+          Z="https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}"
+          api() { curl -s -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" "$@"; }
+          PHASE="http_request_late_transform"
+          CUR=$(api "$Z/rulesets/phases/$PHASE/entrypoint")
+          echo "== current rules (values hidden) =="
+          echo "$CUR" | jq -c '{success, errors, rules: [.result.rules[]? | {id, description, enabled, expression, headers: (.action_parameters.headers // {} | keys)}]}'
+          if [ "$CHECK_ONLY" = "true" ]; then exit 0; fi
+          if [ -z "$ORIGIN_VERIFY_SECRET" ]; then echo "ORIGIN_VERIFY_SECRET 未登録"; exit 1; fi
+
+          DESC="tsurispot origin verify header"
+          # 既存ルールのうち自分のもの以外は保持し、自分のルールだけ差し替える
+          OTHERS=$(echo "$CUR" | jq -c --arg d "$DESC" '[.result.rules[]? | select(.description != $d) | {action, action_parameters, expression, description, enabled}]')
+          MINE=$(jq -nc --arg d "$DESC" --arg v "$ORIGIN_VERIFY_SECRET" \
+            '{action:"rewrite", expression:"true", description:$d, enabled:true,
+              action_parameters:{headers:{"x-origin-verify":{operation:"set", value:$v}}}}')
+          BODY=$(jq -nc --argjson o "$OTHERS" --argjson m "$MINE" '{rules: ($o + [$m])}')
+          echo "== put entrypoint =="
+          api -X PUT "$Z/rulesets/phases/$PHASE/entrypoint" --data "$BODY" | jq -c '{success, errors, n: (.result.rules | length)}'
