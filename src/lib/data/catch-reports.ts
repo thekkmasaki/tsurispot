@@ -130,6 +130,14 @@ export async function getCatchReportsBySpotAsync(
           return reply ? { ...r, officialReply: reply } : r;
         });
       }
+      // プロフィール非公開の人は「非公開の釣り人」表示にする（タイムライン等と同じルール）
+      if (ugcReports.length > 0) {
+        const [{ maskPrivateAuthors }, { getUserById }] = await Promise.all([
+          import("@/lib/private-author"),
+          import("@/lib/user-store"),
+        ]);
+        ugcReports = await maskPrivateAuthors(ugcReports, getUserById);
+      }
     }
   } catch (err) {
     console.error("[catch-reports] DynamoDB fetch error:", err);
@@ -154,7 +162,14 @@ export async function getSpotPioneerAsync(spotSlug: string): Promise<SpotPioneer
   if (process.env.NEXT_PHASE === "phase-production-build") return null;
   try {
     const { dbGet } = await import("@/lib/dynamodb");
-    return await dbGet<SpotPioneer>(`SPOT#${spotSlug}`, "PIONEER");
+    const pioneer = await dbGet<SpotPioneer>(`SPOT#${spotSlug}`, "PIONEER");
+    if (!pioneer?.tsuriId) return pioneer;
+    const [{ maskPrivateAuthors }, { getUserById }] = await Promise.all([
+      import("@/lib/private-author"),
+      import("@/lib/user-store"),
+    ]);
+    const [masked] = await maskPrivateAuthors([pioneer], getUserById);
+    return masked;
   } catch (err) {
     console.error("[catch-reports] PIONEER fetch error:", err);
     return null;
