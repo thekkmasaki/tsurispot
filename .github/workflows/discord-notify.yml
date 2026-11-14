@@ -1,0 +1,25 @@
+name: Discord に通知
+
+# ローカルの定期タスク（毎週水曜12時の /weekly-report 等）から結果を Discord に送るための中継。
+# Webhook URL は GitHub Secrets にだけ置き、ローカルには持たない。
+#   gh workflow run discord-notify.yml -f message="週報: 10/10エリア投稿"
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 送る本文（1900文字まで）
+        required: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 送信
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          MESSAGE: ${{ inputs.message }}
+        run: |
+          [ -n "$DISCORD_WEBHOOK_URL" ] || { echo "DISCORD_WEBHOOK_URL が未登録"; exit 1; }
+          jq -n --arg c "${MESSAGE:0:1900}" '{content: $c, allowed_mentions: {parse: []}}' \
+            | curl -sf -X POST -H 'Content-Type: application/json' -d @- "$DISCORD_WEBHOOK_URL"
