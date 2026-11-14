@@ -8,6 +8,7 @@ export const seaFishPopular: FishSpecies[] = [
     nameEnglish: "Horse Mackerel",
     scientificName: "Trachurus japonicus",
     slug: "aji",
+    imageUrl: "/images/fish/aji.jpg",
     description:
       "堤防から手軽に釣れる人気No.1の対象魚。サビキ釣りなら初心者でも数釣りが楽しめます。群れで回遊するため、回ってくれば連続ヒットも。",
     category: "sea",
@@ -132,6 +133,7 @@ export const seaFishPopular: FishSpecies[] = [
     nameEnglish: "Japanese Rockfish",
     scientificName: "Sebastes inermis",
     slug: "mebaru",
+    imageUrl: "/images/fish/mebaru.jpg",
     description:
       "夜釣りの人気ターゲット。メバリングと呼ばれるルアー釣りでも、ウキ釣りでも楽しめます。引きの強さも魅力。",
     category: "sea",
@@ -212,6 +214,7 @@ export const seaFishPopular: FishSpecies[] = [
     nameEnglish: "Japanese Sardine",
     scientificName: "Sardinops melanostictus",
     slug: "iwashi",
+    imageUrl: "/images/fish/iwashi.jpg",
     description:
       "イワシ釣りの時期は5〜10月で、6〜8月の夏が最盛期。堤防のサビキ釣りで群れに当たれば100匹以上も狙える、釣りデビューに最適な魚。",
     category: "sea",
