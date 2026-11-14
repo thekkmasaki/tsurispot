@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
   MapPin,
   Star,
@@ -13,11 +13,13 @@ import {
   HelpCircle,
   Calendar,
   Fish,
+  Clock,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { tackleShops, getShopBySlug } from "@/lib/data/shops";
+import { tackleShops, getShopBySlug, getNearbyShopsWithDistance } from "@/lib/data/shops";
+import { getShopHoursTraits, shopHoursLabels } from "@/lib/shop-hours";
 import { buildShopDetailDescription, buildShopDetailTitle } from "@/lib/seo/shop-meta";
 import { getMonthlyGuideByMonth, monthSlugs } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
@@ -92,6 +94,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
   }
 
   const isSample = slug === "sample-premium" || slug === "sample-basic" || slug === "sample-free";
+  // 有料プラン停止中は有料プランのサンプル店舗ページ自体を出さない（/subscribe と同じく 404）
+  if (SHOP_PLANS_PAUSED && (slug === "sample-basic" || slug === "sample-premium")) notFound();
   const planLevel = shop.planLevel || "free";
   const isBasic = planLevel === "basic";
   const isPro = planLevel === "pro";
@@ -162,18 +166,47 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
     ],
   };
 
-  // Resolve nearby spots
-  const nearbySpots = shop.nearbySpotSlugs.length > 0
-    ? shop.nearbySpotSlugs.map((s) => getSpotBySlug(s)).filter(Boolean)
-    : fishingSpots
-        .filter((s) => s.latitude && s.longitude)
-        .map((s) => ({
-          spot: s,
-          distance: getDistance(shop.latitude, shop.longitude, s.latitude, s.longitude),
-        }))
-        .sort((a, b) => a.distance - b.distance)
-        .slice(0, 5)
-        .map((entry) => entry.spot);
+  // 近くの釣りスポット（距離つき）。nearbySpotSlugs 指定があればそれを優先
+  const nearbySpotEntries = (shop.nearbySpotSlugs.length > 0
+    ? shop.nearbySpotSlugs
+        .map((s) => getSpotBySlug(s))
+        .filter((s): s is NonNullable<typeof s> => Boolean(s))
+    : fishingSpots.filter((s) => s.latitude && s.longitude)
+  )
+    .map((s) => ({
+      spot: s,
+      distance: getDistance(shop.latitude, shop.longitude, s.latitude, s.longitude),
+    }))
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, 5);
+  const nearbySpots = nearbySpotEntries.map((e) => e.spot);
+
+  // 周辺スポットで「今月」釣れる魚（ビルド時点の月。詳細ページは純SSGで deploy ごとに更新）
+  const monthNow = new Date().getMonth() + 1;
+  const inSeason = (start: number, end: number) =>
+    start <= end ? monthNow >= start && monthNow <= end : monthNow >= start || monthNow <= end;
+  const seasonFishMap = new Map<string, { slug: string; name: string; spots: number; peak: boolean }>();
+  for (const { spot, distance } of nearbySpotEntries) {
+    if (distance > 15) continue;
+    for (const cf of spot.catchableFish ?? []) {
+      if (!cf.fish || !inSeason(cf.monthStart, cf.monthEnd)) continue;
+      const cur = seasonFishMap.get(cf.fish.slug) ?? { slug: cf.fish.slug, name: cf.fish.name, spots: 0, peak: false };
+      cur.spots += 1;
+      cur.peak = cur.peak || cf.peakSeason;
+      seasonFishMap.set(cf.fish.slug, cur);
+    }
+  }
+  const seasonFish = [...seasonFishMap.values()]
+    .sort((a, b) => Number(b.peak) - Number(a.peak) || b.spots - a.spots)
+    .slice(0, 8);
+
+  // 近くの他の釣具屋（20km 以内・自店とサンプル除外）
+  const otherNearbyShops = getNearbyShopsWithDistance(shop.latitude, shop.longitude, 8, 20)
+    .filter(({ shop: o }) => o.slug !== shop.slug && !o.slug.startsWith("sample-"))
+    .slice(0, 5);
+
+  const hoursTraits = getShopHoursTraits(shop.businessHours);
+  const hoursLabels = shopHoursLabels(shop.businessHours);
 
   // 今月の釣りガイドデータ
   const currentMonth = new Date().getMonth() + 1;
@@ -206,10 +239,22 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       q: `${shop.name}でレンタルロッドは借りられますか？`,
       a: `はい、${shop.name}ではレンタルロッドのサービスがあります。手ぶらでの来店でも釣りを楽しめます。`,
     }] : []),
+    ...(hoursTraits.is24h || hoursTraits.early ? [{
+      q: `${shop.name}は朝早くから開いていますか？`,
+      a: hoursTraits.is24h
+        ? `${shop.name}は24時間営業として登録されています（${shop.businessHours}）。夜釣りや早朝の釣行前にも立ち寄れます。営業時間は変わることがあるため、来店前に店舗へご確認ください。`
+        : `${shop.name}の営業時間は${shop.businessHours}で、早朝から営業しています。朝マズメ前のエサ調達にも使えます。営業時間は季節で変わることがあるため、来店前にご確認ください。`,
+    }] : []),
     {
       q: `${shop.name}の近くの釣りスポットは？`,
-      a: `${shop.name}の周辺には複数の釣りスポットがあります。詳しくはページ内の「近くの釣りスポット」セクションをご覧ください。`,
+      a: nearbySpotEntries.length > 0
+        ? `${shop.name}から近い釣りスポットは${nearbySpotEntries.slice(0, 3).map((e) => `${e.spot.name}（約${e.distance.toFixed(1)}km）`).join("、")}などです。${seasonFish.length > 0 ? `${monthNow}月は${seasonFish.slice(0, 3).map((f) => f.name).join("・")}が狙えます。` : ""}`
+        : `${shop.name}の周辺の釣りスポットは、ページ内の「近くの釣りスポット」をご覧ください。`,
     },
+    ...(otherNearbyShops.length > 0 ? [{
+      q: `${shop.name}の近くにある他の釣具屋は？`,
+      a: `${shop.name}から近い釣具店は${otherNearbyShops.slice(0, 3).map(({ shop: o, distanceKm }) => `${o.name}（約${distanceKm.toFixed(1)}km）`).join("、")}などです。`,
+    }] : []),
   ];
 
   // FAQPage JSON-LD
@@ -282,6 +327,12 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
               {slug === "sample-free" ? "無料掲載" : isPro ? "プロプラン ¥2,980/月" : "ベーシックプラン ¥500/月"} サンプル
             </Badge>
           )}
+          {hoursLabels.map((l) => (
+            <Badge key={l} variant="secondary" className="bg-violet-100 text-xs text-violet-700 hover:bg-violet-100 dark:bg-violet-950/40 dark:text-violet-300">
+              <Clock className="mr-1 size-3" />
+              {l}
+            </Badge>
+          ))}
         </div>
         {shop.rating > 0 && (
           <div className="flex items-center gap-1 mt-2">
@@ -363,20 +414,18 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
             </CardHeader>
             <CardContent>
               <ul className="space-y-2">
-                {nearbySpots.map(
-                  (spot) =>
-                    spot && (
-                      <li key={spot.slug}>
-                        <Link prefetch={false}
-                          href={`/spots/${spot.slug}`}
-                          className="flex items-center gap-2 text-sm text-primary hover:underline"
-                        >
-                          <MapPin className="w-4 h-4 flex-shrink-0" />
-                          {spot.name}（{spot.region.prefecture}）
-                        </Link>
-                      </li>
-                    )
-                )}
+                {nearbySpotEntries.map(({ spot, distance }) => (
+                  <li key={spot.slug}>
+                    <Link prefetch={false}
+                      href={`/spots/${spot.slug}`}
+                      className="flex items-center gap-2 text-sm text-primary hover:underline"
+                    >
+                      <MapPin className="w-4 h-4 flex-shrink-0" />
+                      <span className="flex-1">{spot.name}（{spot.region.prefecture}）</span>
+                      <span className="shrink-0 text-xs text-muted-foreground">約{distance < 10 ? distance.toFixed(1) : Math.round(distance)}km</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </CardContent>
           </Card>
@@ -406,8 +455,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         </Card>
       </div>
 
-      {/* サンプル: プラン比較表 */}
-      {isSample && (
+      {/* サンプル: プラン比較表（SHOP_PLANS_PAUSED 中は料金を出さない） */}
+      {isSample && !SHOP_PLANS_PAUSED && (
         <div className="mt-8">
           <Card className={isPro ? "border-amber-200 bg-gradient-to-br from-amber-50/30 to-transparent" : isBasic ? "border-blue-200 bg-gradient-to-br from-blue-50/30 to-transparent" : "border-gray-200 bg-gradient-to-br from-gray-50/30 to-transparent"}>
             <CardHeader>
@@ -550,6 +599,73 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         </div>
       )}
 
+      {/* 周辺で今月狙える魚 */}
+      {seasonFish.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+            <Fish className="size-5 text-primary" />
+            {shop.name}周辺で{monthNow}月に狙える魚
+          </h2>
+          <p className="mb-3 text-sm text-muted-foreground">
+            お店から約15km以内の釣りスポットのデータから集計しています。エサや仕掛けを買う前の参考にどうぞ。
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {seasonFish.map((f) => (
+              <Link prefetch={false}
+                key={f.slug}
+                href={`/fish/${f.slug}`}
+                className="inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm transition-colors hover:bg-muted"
+              >
+                {f.name}
+                {f.peak && <span className="text-[10px] font-bold text-orange-600">最盛期</span>}
+                <span className="text-xs text-muted-foreground">{f.spots}か所</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 近くの他の釣具屋 */}
+      {!isSample && otherNearbyShops.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+            <Store className="size-5 text-primary" />
+            {shop.name}の近くにある釣具屋
+          </h2>
+          <ul className="divide-y rounded-lg border">
+            {otherNearbyShops.map(({ shop: o, distanceKm }) => {
+              const labels = shopHoursLabels(o.businessHours);
+              return (
+                <li key={o.slug}>
+                  <Link prefetch={false}
+                    href={`/shops/${o.slug}`}
+                    className="flex items-center gap-3 px-3 py-2.5 text-sm transition-colors hover:bg-muted"
+                  >
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-medium">{o.name}</span>
+                      <span className="block text-xs text-muted-foreground line-clamp-1">
+                        約{distanceKm < 10 ? distanceKm.toFixed(1) : Math.round(distanceKm)}km・{o.businessHours}
+                      </span>
+                    </span>
+                    {labels[0] && (
+                      <Badge variant="secondary" className="shrink-0 bg-violet-100 text-xs text-violet-700 hover:bg-violet-100">
+                        {labels[0]}
+                      </Badge>
+                    )}
+                    {o.hasLiveBait && (
+                      <Badge variant="secondary" className="shrink-0 bg-green-100 text-xs text-green-700 hover:bg-green-100">
+                        活きエサ
+                      </Badge>
+                    )}
+                    <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
       {/* 今月の釣り情報 */}
       {currentGuide && (
         <div className="mt-8">
@@ -626,6 +742,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   <Mail className="w-4 h-4" />
                   無料で店舗を管理する
                 </Link>
+                {!SHOP_PLANS_PAUSED && (
                 <Link prefetch={false}
                   href="/partner#plans"
                   className="inline-flex items-center gap-1 rounded-lg border border-blue-300 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 transition-colors dark:text-blue-400 dark:hover:bg-blue-950/30"
@@ -633,6 +750,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   プランを見る
                   <ChevronRight className="w-3.5 h-3.5" />
                 </Link>
+                )}
               </div>
             </div>
           </div>
@@ -642,9 +760,18 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       {/* 無料掲載CTA（サンプル以外の全店舗ページに表示） */}
       {!isSample && (
         <div className="mt-8 space-y-4">
-          <ShopListingForm />
+          {/* 釣り人の閲覧を妨げないよう、オーナー向けフォームは折りたたむ */}
+          <details className="rounded-xl border">
+            <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground">
+              釣具店オーナーの方へ：無料掲載・情報更新の申し込みフォームを開く
+            </summary>
+            <div className="border-t p-3">
+              <ShopListingForm />
+            </div>
+          </details>
 
-          {/* プラン比較 */}
+          {/* プラン比較・機能比較表（SHOP_PLANS_PAUSED 中は非表示） */}
+          {!SHOP_PLANS_PAUSED && (<>
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-base">プラン比較</CardTitle>
@@ -760,10 +887,11 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
               </tbody>
             </table>
           </div>
+          </>)}
 
           <div className="text-center">
             <Link prefetch={false}
-              href="/shops/update?shop=sample-premium&token=demo"
+              href="/shops/update?shop=sample-free&token=demo"
               className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               エサ在庫管理のデモを試す
