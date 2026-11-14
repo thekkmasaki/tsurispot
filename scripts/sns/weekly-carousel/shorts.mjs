@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * 週報データJSON → YouTube ショート「今週末 釣れてる釣り場 TOP5」（1080x1920, 約17秒）
+ * 週報データJSON → YouTube ショート「今週末 釣れてる釣り場 TOP5」（1080x1920, 約20秒）
  *   node scripts/sns/weekly-carousel/shorts.mjs <week.json> <outDir>
  *   出力: <outDir>/short.mp4, <outDir>/youtube.json（タイトル・説明・タグ）
  *
- * 構成: つかみ(1.3秒) → 5位 → … → 2位 → 「そして1位は…」 → 1位 → 締め。
+ * 構成: つかみ(2.2秒) → 5位 → … → 2位 → 「そして1位は…」 → 1位 → 締め。
  *   伸びているショートは最初の1〜2秒で「続きが気になる」を作り、テンポが速い（2026-11 調査）。
  *   つかみは1位の写真をぼかして「1位は…？」。タイトルでも1位を明かさない。
  * 各エリアから一番釣れていた1件を候補にし、好調度順に最大5件（魚種がなるべく被らないように）。
@@ -75,7 +75,7 @@ const rankFrame = (b, rank) => {
   <div class="card"><span class="area">${esc(b.area)}</span><h2 style="font-size:${fishSize(name)}px">${esc(name)}</h2>
   ${detail ? `<p class="det">${esc(detail)}</p>` : ""}<p class="spot">📍${esc(cut(r.spot, 18))}</p>
   <p class="heat">${"🔥".repeat(Math.max(1, Math.min(r.heat, 3)))}<span>${HEAT[Math.min(r.heat, 5)]}</span></p></div>
-  <footer><span class="logo" data-m="smile"></span>ツリスポ</footer></section>`;
+  <footer><span class="logo" data-m="smile"></span>ツリスポ<small>tsurispot.com</small></footer></section>`;
 };
 const frames = [
   // つかみ: 1位の写真をぼかして見せ、答えは最後まで引っ張る
@@ -87,7 +87,7 @@ const frames = [
   `<section class="f tease"><p>そして</p><h2>1位は…</h2><div class="mas" data-m="wow"></div></section>`,
   `<section class="f outro"><div class="mas" data-m="wink"></div>
   <h2>全国${d.areas.length}エリアの<br><span>最新釣果</span>は</h2>
-  <div class="search">🔍 ツリスポ</div><p>で検索</p>
+  <div class="search">🔍 ツリスポ</div><p>で検索<small>tsurispot.com</small></p>
   <div class="follow">チャンネル登録で毎週チェック</div>
   <p class="note">※釣果は各施設・釣具店の公開情報をもとにまとめています。<br>立入禁止・釣り禁止の場所では釣りをしないでください。</p></section>`,
 ];
@@ -100,6 +100,7 @@ const css = `@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounde
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:'M PLUS Rounded 1c',sans-serif;background:#000;color:var(--navy)}
 .f{width:1080px;height:1920px;position:relative;overflow:hidden}
 footer{position:absolute;left:0;right:0;bottom:70px;display:flex;justify-content:center;align-items:center;gap:12px;font-weight:900;font-size:46px;color:#fff}
+footer small{font-size:36px;font-weight:800;opacity:.75;margin-left:8px}
 footer .logo{width:74px;display:inline-block}
 .intro{background:var(--navy);color:#fff}
 .intro .bg{position:absolute;inset:-80px;background:var(--navy) center/cover;filter:blur(36px) brightness(.5) saturate(1.3)}
@@ -136,9 +137,10 @@ footer .logo{width:74px;display:inline-block}
 .outro h2{position:absolute;left:0;right:0;top:720px;font-size:96px;font-weight:900;line-height:1.3}
 .outro h2 span{color:var(--sun)}
 .outro .search{position:absolute;left:120px;right:120px;top:1040px;background:#fff;color:var(--navy);font-size:110px;font-weight:900;border-radius:90px;padding:26px 0;border:8px solid var(--sun)}
-.outro>p{position:absolute;left:0;right:0;top:1300px;font-size:64px;font-weight:900}
-.outro .follow{position:absolute;left:90px;right:90px;top:1460px;background:var(--red);font-size:52px;font-weight:900;border-radius:24px;padding:22px 0;white-space:nowrap}
-.outro .note{top:1620px;font-size:30px;font-weight:600;opacity:.75;line-height:1.6}`;
+.outro>p{position:absolute;left:0;right:0;top:1280px;font-size:64px;font-weight:900}
+.outro>p small{display:block;margin-top:6px;font-size:54px;font-weight:800;color:var(--sun);letter-spacing:.02em}
+.outro .follow{position:absolute;left:90px;right:90px;top:1500px;background:var(--red);font-size:52px;font-weight:900;border-radius:24px;padding:22px 0;white-space:nowrap}
+.outro .note{top:1660px;font-size:30px;font-weight:600;opacity:.75;line-height:1.6}`;
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>${css}</style><script src="file://${mascot}"></script></head>
 <body>${ordered.join("\n")}<script>document.querySelectorAll('[data-m]').forEach(el=>{el.innerHTML=sakanacchi(el.dataset.m,{point:el.dataset.m==='wow',cap:el.dataset.m==='wink'})})</script></body></html>`;
@@ -160,8 +162,8 @@ await browser.close();
 
 // ── 動画（静止画をスライドでつなぐ）──
 // つかみ・N位…2位・溜め・1位・締め（秒）。速めに回して最後まで見てもらう
-const DUR = [1.5, ...Array(N - 1).fill(2.1), 1.0, 3.0, 2.2];
-const T = 0.3; // 切り替え
+const DUR = [2.2, ...Array(N - 1).fill(3.0), 1.4, 3.8, 3.2]; // 2026-11 ユーザー指摘「遷移が早すぎる」で 14秒→約20秒
+const T = 0.5; // 切り替え（ゆっくりめ）
 const total = DUR.reduce((a, b) => a + b, 0) - T * (pngs.length - 1);
 const inputs = pngs.flatMap((p, i) => ["-loop", "1", "-t", String(DUR[i]), "-i", p]);
 let chain = "";
