@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { catchReports, type CatchReport } from "@/lib/data/catch-reports";
 import { redis } from "@/lib/redis";
 import { dbBatchGet } from "@/lib/dynamodb";
+import { getUserById } from "@/lib/user-store";
+import { maskPrivateAuthors } from "@/lib/private-author";
 
 // 全スポット横断の最新釣果フィード用キー（/api/catch-report-ugc の POST が push）
 const GLOBAL_RECENT_KEY = "recent_reports:global";
@@ -60,8 +62,11 @@ export async function GET(request: Request) {
     }
   }
 
+  // プロフィール非公開の人の釣果は名前とプロフィール導線を伏せる（共有キャッシュされるため本人例外なし）
+  const reports = await maskPrivateAuthors(merged.slice(0, limit), getUserById);
+
   return NextResponse.json(
-    { ok: true, reports: merged.slice(0, limit) },
+    { ok: true, reports },
     {
       headers: {
         "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",

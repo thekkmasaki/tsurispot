@@ -12,6 +12,7 @@ import { getUserById } from "@/lib/user-store";
 import { toPublicSpotPhotos } from "@/lib/spot-photo-public";
 
 const MAX_PHOTOS_PER_SPOT = 20;
+const MAX_PHOTOS_PER_USER_PER_SPOT = 5;
 
 interface SpotPhotoEntry {
   url: string;
@@ -85,6 +86,16 @@ export async function POST(request: NextRequest) {
   if (currentPhotos.length >= MAX_PHOTOS_PER_SPOT) {
     return NextResponse.json(
       { error: `このスポットの写真は上限（${MAX_PHOTOS_PER_SPOT}枚）に達しています` },
+      { status: 400 },
+    );
+  }
+  // 1人で枠を埋めてしまわないよう、同じスポットへの投稿は1人5枚まで
+  const mine = currentPhotos.filter((p) => p.uploaderId === tsuriId).length;
+  if (mine >= MAX_PHOTOS_PER_USER_PER_SPOT) {
+    return NextResponse.json(
+      {
+        error: `ひとつのスポットに投稿できる写真は1人${MAX_PHOTOS_PER_USER_PER_SPOT}枚までです。たくさん撮っていただきありがとうございます！ほかのスポットの写真もぜひお待ちしています。`,
+      },
       { status: 400 },
     );
   }

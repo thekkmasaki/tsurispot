@@ -7,6 +7,7 @@ import { savePostMeta, addToGlobalFeed, type PostMeta } from "@/lib/social-store
 import { rejectInactiveUser } from "@/lib/user-status";
 import { isOwnImageUrl, readJsonBody, resolveSpot, todayJst } from "@/lib/ugc-validation";
 import { isReservedName } from "@/lib/reserved-names";
+import { isUploadOwnedBy, UPLOAD_OWNER_ERROR } from "@/lib/upload-owner";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 const MAX_TEXT_LENGTH = 200;
@@ -75,6 +76,10 @@ export async function POST(request: Request) {
     }
     if (photoUrl !== undefined && !isOwnImageUrl(photoUrl, "catch-reports/")) {
       return NextResponse.json({ error: "写真URLが不正です" }, { status: 400 });
+    }
+    // 自分が直近24時間にアップした写真だけ付けられる（他人の写真・放置写真の流用防止）
+    if (photoUrl !== undefined && !(await isUploadOwnedBy(photoUrl, tsuriId, getClientIp(request)))) {
+      return NextResponse.json({ error: UPLOAD_OWNER_ERROR }, { status: 400 });
     }
     // スポットは任意。指定された場合は形式＋実在を検証し、名称はサーバー側で slug から解決する
     let spot: ReturnType<typeof resolveSpot> = null;

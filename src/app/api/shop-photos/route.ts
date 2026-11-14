@@ -5,6 +5,7 @@ import { getShopBySlug } from "@/lib/data/shops";
 import { getEffectivePlan, verifyShopToken, isDemoShop } from "@/lib/shop-plan";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { moderateImage } from "@/lib/rekognition";
+import { normalizeImage } from "@/lib/image-upload";
 
 // Rekognition が扱えるのは JPEG/PNG のみ。審査できない形式（WebP等）は fail-closed のため受け付けない。
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -108,14 +109,23 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     );
   }
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const sniffed = sniffImage(buffer);
+  const rawBuffer = Buffer.from(await file.arrayBuffer());
+  const sniffed = sniffImage(rawBuffer);
   if (!sniffed) {
     return NextResponse.json(
       { error: "JPG、PNGのみアップロード可能です" },
       { status: 400 }
     );
   }
+  // 再エンコードして EXIF（GPS 位置情報など）を落とす。形式は JPEG/PNG のまま
+  const normalized = await normalizeImage(rawBuffer, sniffed.ext === "png" ? "png" : "jpeg");
+  if (!normalized) {
+    return NextResponse.json(
+      { error: "画像を読み込めませんでした。別の写真をお試しください。" },
+      { status: 400 }
+    );
+  }
+  const buffer = normalized.buffer;
 
   // プラン制限チェック（課金状態を加味した実効プラン）
   const planLevel = await getEffectivePlan(shop);
