@@ -18,6 +18,7 @@ import { ProductList } from "@/components/affiliate/product-list";
 import { getBeginnerEssentials } from "@/lib/data/products";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const STORAGE_KEY = "tsurispot-checklist";
 
@@ -540,7 +541,7 @@ export default function BeginnerChecklistPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: safeJsonLd({
             "@context": "https://schema.org",
             "@type": "Article",
             headline: "釣り初心者の持ち物チェックリスト - 忘れ物防止",

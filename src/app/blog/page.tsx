@@ -5,6 +5,7 @@ import { BlogListClient } from "@/components/blog/blog-list.client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // ISR: 1時間ごとに再検証 (microCMS の新着記事を取り込みつつ Cloudflare cache 効率を維持)
 export const revalidate = 3600;
@@ -75,7 +76,7 @@ export default async function BlogListPage() {
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "エリア釣果レポート" }]} />

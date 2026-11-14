@@ -21,6 +21,7 @@ import {
   getUmigyoPrefectures,
 } from "@/lib/data/umigyo";
 import { UmigyoListClient } from "./umigyo-list-client";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "海業（うみぎょう）推進 | 釣りで地域を元気に",
@@ -88,11 +89,11 @@ export default function UmigyoPage() {
     <div className="flex flex-col">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       {/* ヒーローセクション */}

@@ -26,6 +26,7 @@ import { seasons, seasonSlugs, getSeasonBySlug } from "@/lib/data/seasonal-data"
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { SeasonalSeasonPage } from "@/components/seasonal-season-page";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface PageProps {
   params: Promise<{ month: string }>;
@@ -269,15 +270,15 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(howToJsonLd) }}
       />
 
       <main className="container mx-auto max-w-4xl px-4 py-6 sm:py-12">

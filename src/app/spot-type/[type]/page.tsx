@@ -13,6 +13,7 @@ import { regionGroupOrder } from "@/lib/data/prefectures";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ type: string }>;
@@ -207,7 +208,7 @@ export default async function SpotTypePage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbJsonLd, faqJsonLd, itemListJsonLd]),
+          __html: safeJsonLd([breadcrumbJsonLd, faqJsonLd, itemListJsonLd]),
         }}
       />
 

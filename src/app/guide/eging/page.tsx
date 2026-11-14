@@ -12,6 +12,7 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 import { ProductList } from "@/components/affiliate/product-list";
 import { ShakurhythmPromo } from "@/components/promo/shakurhythm-promo";
 import { getProductsByMethod } from "@/lib/data/products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "エギング入門ガイド - エギの選び方・シャクリ方・季節別攻略",
@@ -358,11 +359,11 @@ export default function EgingGuidePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}

@@ -19,6 +19,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // 純SSGだと「今の季節」ハイライトがビルド時刻で凍結するため日次ISR
 export const revalidate = 86400;
@@ -256,11 +257,11 @@ export default function SeasonalPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
         <div className="mb-4">

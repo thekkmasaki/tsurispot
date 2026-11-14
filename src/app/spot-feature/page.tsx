@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SPOT_FEATURES, getFeatureSpots } from "@/lib/data/spot-features";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const URL = "https://tsurispot.com/spot-feature";
 const TITLE = "特徴から釣り場を探す｜トイレあり・夜釣りOK・ファミリー向けなど";
@@ -32,7 +33,7 @@ export default function SpotFeatureIndexPage() {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }} />
       <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "特徴から探す" }]} />
       <h1 className="mt-2 text-2xl font-bold sm:text-3xl">特徴から釣り場を探す</h1>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">

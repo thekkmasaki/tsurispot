@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title:
@@ -451,7 +452,7 @@ export default function GearRodBeginnerPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbJsonLd, itemListJsonLd]),
+          __html: safeJsonLd([breadcrumbJsonLd, itemListJsonLd]),
         }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">

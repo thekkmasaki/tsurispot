@@ -18,6 +18,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishingSpots } from "@/lib/data/spots";
 import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "釣り方・釣法ガイド - 9つの釣法を徹底解説",
@@ -193,11 +194,11 @@ export default function MethodsIndexPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(itemListJsonLd) }}
       />
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣り方・釣法ガイド" }]} />

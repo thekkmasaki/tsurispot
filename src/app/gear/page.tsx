@@ -19,6 +19,7 @@ import {
   getProductsByCategory,
   getProductsByDifficulty,
 } from "@/lib/data/products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "編集部が厳選した釣り道具 - 実際に使って選んだおすすめアイテム",
@@ -118,7 +119,7 @@ export default function GearPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "おすすめ釣り道具" }]} />

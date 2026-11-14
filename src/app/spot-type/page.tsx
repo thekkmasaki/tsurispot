@@ -9,6 +9,7 @@ import { prefectures } from "@/lib/data/prefectures";
 import { SPOT_TYPE_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const SPOT_TYPE_ICONS: Record<FishingSpot["spotType"], typeof MapPin> = {
   port: Anchor,
@@ -104,7 +105,7 @@ export default function SpotTypeIndexPage() {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <Breadcrumb

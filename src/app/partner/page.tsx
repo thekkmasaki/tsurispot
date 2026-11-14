@@ -31,6 +31,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { PLAN_PRICING, formatYen, SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { fishSpecies } from "@/lib/data/fish";
 import { tackleShops } from "@/lib/data/shops";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const spotCount = fishingSpots.length;
 const fishCount = fishSpecies.length;
@@ -268,16 +269,16 @@ export default function PartnerPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd),
+          __html: safeJsonLd(breadcrumbJsonLd),
         }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceJsonLd) }}
       />
 
       <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "パートナー（釣具店様向け）" }]} />

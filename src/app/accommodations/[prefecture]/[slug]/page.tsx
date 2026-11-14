@@ -12,6 +12,7 @@ import { getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { HeaderBannerAd, InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // ISR: 6 時間ごとに再検証 (affiliate link 状態が変わる可能性)
 export const revalidate = 21600;
@@ -103,7 +104,7 @@ export default async function AccommodationDetailPage({
     <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(lodgingJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(lodgingJsonLd) }}
       />
       <Breadcrumb
         items={[

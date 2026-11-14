@@ -49,6 +49,7 @@ import { getStationSlug } from "@/lib/tide/station-slugs";
 import { getFeaturesForPref } from "@/lib/data/spot-features";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SpotCardCompact } from "@/components/spots/spot-card";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -734,7 +735,7 @@ export default async function PrefecturePage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdArray) }}
       />
 
       {/* パンくず */}

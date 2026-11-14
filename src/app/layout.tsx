@@ -23,6 +23,7 @@ const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => (
 const SmartMobileStickyAd = dynamic(() => import("@/components/layout/smart-mobile-ad").then(m => ({ default: m.SmartMobileStickyAd })));
 const SideRailAds = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.SideRailAds })));
 import "./globals.css";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const SPOT_COUNT = SPOT_COUNT_FORMATTED;
 
@@ -168,7 +169,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLd({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "@id": "https://tsurispot.com/#website",
@@ -193,7 +194,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLd({
               "@context": "https://schema.org",
               "@type": "Organization",
               "@id": "https://tsurispot.com/#organization",
@@ -225,7 +226,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLd({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               name: "ツリスポ",

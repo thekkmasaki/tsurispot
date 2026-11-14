@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { BouzuCheckerClient } from "./bouzu-checker-client";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "ボウズ確率チェッカー｜釣れない対策を事前診断",
@@ -46,7 +47,7 @@ export default function BouzuCheckerPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white">

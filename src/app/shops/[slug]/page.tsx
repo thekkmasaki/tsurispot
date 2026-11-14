@@ -32,6 +32,7 @@ import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { NoAdsSignal } from "@/components/ads/no-ads-signal";
 import { ShopPlanBadge } from "@/components/shops/shop-plan-badge";
 import { ShopCouponCard } from "@/components/shops/shop-coupon-card";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type Params = Promise<{ slug: string }>;
 
@@ -230,17 +231,17 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       {shouldOutputJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(localBusinessJsonLd) }}
         />
       )}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       {shouldOutputJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
         />
       )}
 

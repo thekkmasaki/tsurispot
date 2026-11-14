@@ -28,6 +28,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { fishSpecies } from "@/lib/data/fish";
 import type { YouTubeSearchLink, FishingSpot } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -700,22 +701,22 @@ export default async function MethodDetailPage({ params }: PageProps) {
     <main className="container mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleJsonLd) }}
       />
       {itemListJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(itemListJsonLd) }}
         />
       )}
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
         />
       )}
 

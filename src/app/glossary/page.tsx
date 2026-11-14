@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BookOpenText, Fish, Anchor, Waves, Moon, Cable } from "lucide-react";
 import { GlossaryClient } from "./glossary-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "釣り用語集 - 初心者が知っておきたい釣りの基本用語",
@@ -175,7 +176,7 @@ export default function GlossaryPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
         <div className="mb-4">

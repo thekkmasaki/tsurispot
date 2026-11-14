@@ -13,6 +13,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug } from "@/lib/data/prefecture-info";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "都道府県から釣り場を探す｜全国47都道府県の釣りスポット完全ガイド",
@@ -85,7 +86,7 @@ export default function PrefectureListPage() {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       {/* パンくず */}
