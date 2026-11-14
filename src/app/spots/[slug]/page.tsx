@@ -123,6 +123,7 @@ import { applyEnvironmentalEstimation, getMonthlyTopFish } from "@/lib/patent/fi
 import { getTideDisplayMode, getTideStationForSpot } from "@/lib/tide/nearest-station";
 import { aggregateCatchCounts } from "@/lib/patent/catch-feedback";
 import { SatelliteAnalysisSection } from "@/components/patent/satellite-analysis-section";
+import { isSpotLayoutB } from "@/lib/spot-layout-ab";
 import {
   generateSpotTips,
   generateTimeAdvice,
@@ -619,6 +620,95 @@ export default async function SpotDetailPage({ params }: PageProps) {
     hasFrozenBait: shop.hasFrozenBait,
   }));
 
+  // スポット詳細レイアウトA/B（slug単位）。B=概要を上に寄せた新レイアウト。詳細は spot-layout-ab.ts
+  const layoutB = isSpotLayoutB(slug);
+
+  const basicInfoSection = (
+    <section>
+      <h3 className="mb-4 text-lg font-bold">基本情報</h3>
+      <Card className="py-4"><CardContent className="px-4">
+        <dl className="space-y-3 text-sm">
+          <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">住所</dt><dd><span className="font-medium">{spot.address}</span><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}`} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"><MapPin className="size-3" />地図</a></dd></div>
+          {spot.feeDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd>{spot.feeDetail}</dd></div>)}
+          {spot.isFree && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd className="font-medium text-orange-600">無料</dd></div>)}
+          <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">難易度</dt><dd>{DIFFICULTY_LABELS[spot.difficulty]}</dd></div>
+          <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">タイプ</dt><dd>{SPOT_TYPE_LABELS[spot.spotType]}</dd></div>
+          {spot.rentalDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">レンタル</dt><dd>{spot.rentalDetail}</dd></div>)}
+          {spot.officialUrl && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">公式サイト</dt><dd><a href={spot.officialUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:underline"><ExternalLink className="size-3" />公式サイトを見る</a></dd></div>)}
+        </dl>
+      </CardContent></Card>
+    </section>
+  );
+
+  const facilitySection = (
+    <section>
+      <h3 className="mb-3 text-lg font-bold">設備</h3>
+      {/* サウナイキタイ式の ○/− 表。「無い」ことも情報なので全項目を並べる */}
+      <dl className="grid grid-cols-1 overflow-hidden rounded-xl border text-sm sm:grid-cols-2">
+        {([
+          { ok: spot.hasParking, icon: Car, label: "駐車場", detail: spot.hasParking ? getParkingBadgeText(spot.hasParking, spot.parkingDetail, spot.parkingGuide) : undefined },
+          { ok: spot.hasToilet, icon: Toilet, label: "トイレ", detail: undefined },
+          { ok: spot.hasFishingShop, icon: Store, label: "釣具店", detail: undefined },
+          { ok: spot.hasRentalRod, icon: Wrench, label: "レンタル竿", detail: undefined },
+          { ok: spot.hasConvenienceStore, icon: ShoppingBag, label: "コンビニ近く", detail: undefined },
+        ] as { ok: boolean; icon: typeof Car; label: string; detail?: string }[]).map(({ ok, icon: Icon, label, detail }) => (
+          <div key={label} className="flex items-center gap-2 border-b px-3 py-2 last:border-b-0 sm:[&:nth-last-child(2)]:border-b-0">
+            <dt className="flex w-28 shrink-0 items-center gap-1.5 text-muted-foreground">
+              <Icon className="size-4" aria-hidden="true" />
+              {label}
+            </dt>
+            <dd className="min-w-0">
+              <span className={ok ? "font-bold text-primary" : "text-muted-foreground"} aria-label={ok ? "あり" : "情報なし"}>
+                {ok ? "○" : "−"}
+              </span>
+              {detail && detail !== label && <span className="ml-2 text-xs text-muted-foreground">{detail}</span>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-1.5 text-xs text-muted-foreground">○：あり　−：情報なし（現地でご確認ください）</p>
+    </section>
+  );
+
+  const satelliteSection = spot.structureTypes && spot.structureTypes.length > 0 ? (
+    <div className="mt-6">
+      <SatelliteAnalysisSection
+        structureTypes={spot.structureTypes}
+        spotName={spot.name}
+        spotType={spot.spotType}
+        isAnalyzed={!!analysisResult}
+        monthlyRecommendation={
+          monthlyTopFish.length > 0
+            ? {
+                month: currentMonth,
+                fish: monthlyTopFish.map((f) => ({
+                  name: f.name,
+                  method: f.method,
+                  recommendLevel: f.recommendLevel,
+                  catchReportCount: f.catchReportCount,
+                  inSeasonNow: f.inSeasonNow,
+                })),
+              }
+            : undefined
+        }
+      />
+    </div>
+  ) : null;
+
+  // B の概要ブロック。広告より上に足す高さを、構造物分析の移動分で相殺できる時だけ広告①直後に置く
+  const overviewEarly = satelliteSection !== null;
+  const overviewBlock = (
+    <section className={overviewEarly ? "mb-6 mt-6 space-y-6 sm:mb-8" : "mb-2 space-y-6"}>
+      <h2 className="text-xl font-bold">{spot.name}の基本情報・設備</h2>
+      {basicInfoSection}
+      {facilitySection}
+      <ShareButtons
+        url={`https://tsurispot.com/spots/${spot.slug}`}
+        title={`${spot.name}の釣り情報｜ツリスポ`}
+      />
+    </section>
+  );
+
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
@@ -670,14 +760,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* PR-INV-1 の釣果投稿CTAは、UI/UX刷新Phase4でヘッダーの「行きたい／釣果を投稿」2大ボタンへ統合 */}
 
-      {/* Back link */}
-      <Link prefetch={false}
-        href="/spots"
-        className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
-      >
-        <ChevronLeft className="size-4" />
-        スポット一覧に戻る
-      </Link>
+      {/* Back link（B: パンくずと重複するため省き、広告より上の高さを要点チップに回す） */}
+      {!layoutB && (
+        <Link prefetch={false}
+          href="/spots"
+          className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
+        >
+          <ChevronLeft className="size-4" />
+          スポット一覧に戻る
+        </Link>
+      )}
 
       {/* Header section - モバイルファースト設計 */}
       <div className="mb-5 sm:mb-6">
@@ -707,16 +799,19 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </p>
 
         {/* 2大アクション: 行きたい ／ 釣果を投稿（旧: ページ上部の投稿CTAバナー） */}
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          <WishlistButton slug={spot.slug} className="min-h-[44px] px-5 text-base" />
+        {/* B: 行きたい／ここに行った を1段に並べ、3段→2段に詰める。
+            「ここに行った」を開くと記録フォーム(div)になるので、その時だけ全幅にする */}
+        <div className={layoutB ? "mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center [&>div]:col-span-2" : "mt-3 flex flex-wrap items-center gap-2"}>
+          <WishlistButton slug={spot.slug} className={layoutB ? "min-h-[44px] justify-center px-3 text-base" : "min-h-[44px] px-5 text-base"} />
+          {layoutB && <CheckinButton slug={spot.slug} className="justify-center" />}
           <a
             href="#catch-report"
-            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-primary px-5 text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+            className={`${layoutB ? "col-span-2 justify-center " : ""}inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-primary px-5 text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90`}
           >
             釣果を投稿する
             <span className="text-xs font-normal opacity-80">(ログイン不要)</span>
           </a>
-          <CheckinButton slug={spot.slug} />
+          {!layoutB && <CheckinButton slug={spot.slug} />}
         </div>
 
         {/* 評価 + エリア情報 */}
@@ -811,11 +906,25 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <p>{spot.description}</p>
         </div>
 
-        {/* データ信頼性指標（枠を外して1行に） */}
-        <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
-          <Fish className="size-3.5 text-primary" aria-hidden="true" />
-          釣れる魚 {spot.catchableFish.length}種類
-        </p>
+        {layoutB ? (
+          /* B: 行くか決めるための要点（料金・駐車場・トイレ・難易度・釣り禁止）を1行で */
+          <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs" aria-label={`${spot.name}の要点`}>
+            {spot.fishingBan && (
+              <li className="font-bold text-destructive">{spot.fishingBan.scope === "full" ? "釣り禁止" : "一部釣り禁止"}</li>
+            )}
+            <li><span className="text-muted-foreground">料金 </span><span className="font-medium">{spot.isFree ? "無料" : spot.feeDetail ? "有料" : "要確認"}</span></li>
+            <li><span className="text-muted-foreground">駐車場 </span><span className={spot.hasParking ? "font-bold text-primary" : "text-muted-foreground"}>{spot.hasParking ? "○" : "−"}</span></li>
+            <li><span className="text-muted-foreground">トイレ </span><span className={spot.hasToilet ? "font-bold text-primary" : "text-muted-foreground"}>{spot.hasToilet ? "○" : "−"}</span></li>
+            <li><span className="text-muted-foreground">難易度 </span><span className="font-medium">{DIFFICULTY_LABELS[spot.difficulty]}</span></li>
+            <li><span className="text-muted-foreground">釣れる魚 </span><span className="font-medium">{spot.catchableFish.length}種</span></li>
+          </ul>
+        ) : (
+          /* データ信頼性指標（枠を外して1行に） */
+          <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+            <Fish className="size-3.5 text-primary" aria-hidden="true" />
+            釣れる魚 {spot.catchableFish.length}種類
+          </p>
+        )}
 
         {/* 「今日行く」ボタン + ナビゲーション */}
         <div className="mt-4 rounded-xl border bg-muted/30 p-3 sm:p-4">
@@ -845,13 +954,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </p>
         </div>
 
-        {/* シェアボタン */}
-        <div className="mt-3">
+        {/* シェアボタン（B: 概要の後ろへ移す） */}
+        {!layoutB && <div className="mt-3">
           <ShareButtons
             url={`https://tsurispot.com/spots/${spot.slug}`}
             title={`${spot.name}の釣り情報｜ツリスポ`}
           />
-        </div>
+        </div>}
       </div>
 
       {/* 釣り禁止の告知はファーストビューに出す。広告より前に置く。 */}
@@ -863,6 +972,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* ATF広告: ヒーロー直後 */}
       <DisplayAd className="mt-4" />
+
+      {/* B: 概要（基本情報・設備）を広告①直後に。旧位置は概要タブ内（スマホで約5.8画面目）。
+          代わりに構造物分析を「釣れる魚」タブへ移して相殺し、広告③(モバイル広告A)と
+          PCサイドバー広告より上の高さを増やさない。構造物分析が無いスポットは相殺できないので
+          本文カラムの先頭に置く（下の overviewEarly=false 側） */}
+      {layoutB && overviewEarly && overviewBlock}
 
       {/* スポット写真ギャラリー（航空写真マップ or ユーザー投稿写真） */}
       <section className="mb-6 sm:mb-8">
@@ -920,30 +1035,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             distanceKm: s.distanceKm,
           }))}
         />}
-        {spot.structureTypes && spot.structureTypes.length > 0 && (
-          <div className="mt-6">
-            <SatelliteAnalysisSection
-              structureTypes={spot.structureTypes}
-              spotName={spot.name}
-              spotType={spot.spotType}
-              isAnalyzed={!!analysisResult}
-              monthlyRecommendation={
-                monthlyTopFish.length > 0
-                  ? {
-                      month: currentMonth,
-                      fish: monthlyTopFish.map((f) => ({
-                        name: f.name,
-                        method: f.method,
-                        recommendLevel: f.recommendLevel,
-                        catchReportCount: f.catchReportCount,
-                        inSeasonNow: f.inSeasonNow,
-                      })),
-                    }
-                  : undefined
-              }
-            />
-          </div>
-        )}
+        {!layoutB && satelliteSection}
       </section>
 
       {/* 安全警告 */}
@@ -968,6 +1060,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-8">
       {/* メインコンテンツ */}
       <div className="min-w-0">
+      {layoutB && !overviewEarly && overviewBlock}
       {/* スポット画像ギャラリー: mainImageUrl をヘッダー、images 配列をサブ画像で表示 */}
       {(spot.mainImageUrl || (spot.images && spot.images.length > 0)) && (() => {
         const main = isDisplayableSpotImage(spot.mainImageUrl) ? spot.mainImageUrl : undefined;
@@ -1030,21 +1123,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <SpotDetailTabs
         fishCount={new Set(spot.catchableFish.map((cf) => cf.fish.slug)).size}
         overviewTab={<>
-          <h2 className="sr-only">{spot.name}の基本情報・設備</h2>
-          <section>
-            <h3 className="mb-4 text-lg font-bold">基本情報</h3>
-            <Card className="py-4"><CardContent className="px-4">
-              <dl className="space-y-3 text-sm">
-                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">住所</dt><dd><span className="font-medium">{spot.address}</span><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}`} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"><MapPin className="size-3" />地図</a></dd></div>
-                {spot.feeDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd>{spot.feeDetail}</dd></div>)}
-                {spot.isFree && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd className="font-medium text-orange-600">無料</dd></div>)}
-                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">難易度</dt><dd>{DIFFICULTY_LABELS[spot.difficulty]}</dd></div>
-                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">タイプ</dt><dd>{SPOT_TYPE_LABELS[spot.spotType]}</dd></div>
-                {spot.rentalDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">レンタル</dt><dd>{spot.rentalDetail}</dd></div>)}
-                {spot.officialUrl && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">公式サイト</dt><dd><a href={spot.officialUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:underline"><ExternalLink className="size-3" />公式サイトを見る</a></dd></div>)}
-              </dl>
-            </CardContent></Card>
-          </section>
+          <h2 className="sr-only">{layoutB ? `${spot.name}の管理・ルール情報` : `${spot.name}の基本情報・設備`}</h2>
+          {!layoutB && basicInfoSection}
           {shakurhythmCtx?.inSeason && (
             <ShakurhythmSpotNote ctx={shakurhythmCtx} source="spot_overview" className="mt-6" />
           )}
@@ -1111,33 +1191,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </section>
           )}
           {/* 釣りポイント配置図は「釣り場の様子」セクションに統合済み */}
-          <section>
-            <h3 className="mb-3 text-lg font-bold">設備</h3>
-            {/* サウナイキタイ式の ○/− 表。「無い」ことも情報なので全項目を並べる */}
-            <dl className="grid grid-cols-1 overflow-hidden rounded-xl border text-sm sm:grid-cols-2">
-              {([
-                { ok: spot.hasParking, icon: Car, label: "駐車場", detail: spot.hasParking ? getParkingBadgeText(spot.hasParking, spot.parkingDetail, spot.parkingGuide) : undefined },
-                { ok: spot.hasToilet, icon: Toilet, label: "トイレ", detail: undefined },
-                { ok: spot.hasFishingShop, icon: Store, label: "釣具店", detail: undefined },
-                { ok: spot.hasRentalRod, icon: Wrench, label: "レンタル竿", detail: undefined },
-                { ok: spot.hasConvenienceStore, icon: ShoppingBag, label: "コンビニ近く", detail: undefined },
-              ] as { ok: boolean; icon: typeof Car; label: string; detail?: string }[]).map(({ ok, icon: Icon, label, detail }) => (
-                <div key={label} className="flex items-center gap-2 border-b px-3 py-2 last:border-b-0 sm:[&:nth-last-child(2)]:border-b-0">
-                  <dt className="flex w-28 shrink-0 items-center gap-1.5 text-muted-foreground">
-                    <Icon className="size-4" aria-hidden="true" />
-                    {label}
-                  </dt>
-                  <dd className="min-w-0">
-                    <span className={ok ? "font-bold text-primary" : "text-muted-foreground"} aria-label={ok ? "あり" : "情報なし"}>
-                      {ok ? "○" : "−"}
-                    </span>
-                    {detail && detail !== label && <span className="ml-2 text-xs text-muted-foreground">{detail}</span>}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-1.5 text-xs text-muted-foreground">○：あり　−：情報なし（現地でご確認ください）</p>
-          </section>
+          {!layoutB && facilitySection}
           {/* 釣りルール: 個別データがあれば優先表示。無ければ県レベルの公的ルール（出典付き）をフォールバック。
               推測のスポット固有ルールは誤情報源になるため出さない。 */}
           {(spot.rules || prefRule || prefectureRule?.seaRules?.chumRegulation) && (
@@ -1295,6 +1349,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <Card className="py-3 sm:py-4"><CardContent className="px-3 sm:px-4 overflow-x-auto scrollbar-hide"><div className="min-w-[480px]"><SeasonCalendar catchableFish={spot.catchableFish} /></div></CardContent></Card>
             ) : (<p className="text-sm text-muted-foreground">釣れる魚の情報はまだ登録されていません。</p>)}
           </section>
+          {/* B: 構造物分析（推定魚種・推奨釣法）は釣れる魚と内容が近いのでこのタブへ */}
+          {layoutB && satelliteSection}
           {spot.catchableFish.length > 0 && (
             <section>
               <h3 className="mb-3 text-lg font-bold">魚種別の釣り方</h3>
