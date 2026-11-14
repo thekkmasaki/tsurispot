@@ -86,3 +86,43 @@ describe("getClientIp", () => {
     expect(getClientIp(req({}))).toBe("unknown");
   });
 });
+
+describe("getClientIp（ORIGIN_VERIFY_SECRET 設定時）", () => {
+  const req = (headers: Record<string, string>) =>
+    new Request("http://localhost/", { headers });
+
+  beforeEach(() => {
+    vi.stubEnv("ORIGIN_VERIFY_SECRET", "s3cret");
+  });
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it("x-origin-verify が一致すれば cf-connecting-ip を信頼する", () => {
+    expect(
+      getClientIp(
+        req({ "x-origin-verify": "s3cret", "cf-connecting-ip": "1.1.1.1", "x-forwarded-for": "9.9.9.9, 2.2.2.2" }),
+      ),
+    ).toBe("1.1.1.1");
+  });
+
+  it("x-origin-verify が不一致なら偽装 cf-connecting-ip を無視し x-forwarded-for の右端を使う", () => {
+    expect(
+      getClientIp(
+        req({ "x-origin-verify": "wrong", "cf-connecting-ip": "1.1.1.1", "x-forwarded-for": "6.6.6.6, 2.2.2.2" }),
+      ),
+    ).toBe("2.2.2.2");
+  });
+
+  it("x-origin-verify が無い場合も x-forwarded-for 先頭（偽装可能）は使わない", () => {
+    expect(getClientIp(req({ "cf-connecting-ip": "1.1.1.1", "x-forwarded-for": "6.6.6.6,2.2.2.2" }))).toBe(
+      "2.2.2.2",
+    );
+  });
+
+  it("一致しても cf-connecting-ip が無ければ x-forwarded-for 右端 → x-real-ip → unknown", () => {
+    expect(getClientIp(req({ "x-origin-verify": "s3cret", "x-forwarded-for": "2.2.2.2" }))).toBe("2.2.2.2");
+    expect(getClientIp(req({ "x-origin-verify": "s3cret", "x-real-ip": "3.3.3.3" }))).toBe("3.3.3.3");
+    expect(getClientIp(req({ "x-origin-verify": "s3cret" }))).toBe("unknown");
+  });
+});
