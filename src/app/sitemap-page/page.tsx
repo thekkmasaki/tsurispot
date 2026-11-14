@@ -6,6 +6,7 @@ import { fishSpecies } from "@/lib/data/fish";
 import { regions } from "@/lib/data/regions";
 import { tackleShops } from "@/lib/data/shops";
 import { prefectures } from "@/lib/data/prefectures";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "サイトマップ",
@@ -176,7 +177,7 @@ export default function SitemapPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">

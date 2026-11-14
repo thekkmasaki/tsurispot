@@ -3,6 +3,7 @@ import { getAllBlogPosts } from "@/lib/data/blog";
 import { CatchReportSection } from "@/components/blog/catch-report-section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // ISR: 1時間ごとに再検証
 export const revalidate = 7200;
@@ -62,7 +63,7 @@ export default async function CatchReportsPage() {
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <Breadcrumb

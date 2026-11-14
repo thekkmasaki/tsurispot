@@ -15,6 +15,7 @@ import { monthSlugs } from "@/lib/data/monthly-guides";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { getSpotsForArea, getAreaMunicipalityName, getAreaRepSlug } from "@/lib/data/area-groups";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -431,7 +432,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdArray) }}
       />
 
       {/* パンくず */}

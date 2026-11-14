@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHeader } from "@/components/ui/page-header";
 import { FishListClient } from "@/components/fish/fish-list-client";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "魚種図鑑100種以上｜2026年最新の旬・釣り方・食べ方ガイド【初心者向け】",
@@ -101,15 +102,15 @@ function FishListContent() {
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishItemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(fishItemListJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishDatasetJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(fishDatasetJsonLd) }}
       />
       {/* パンくず */}
       <Breadcrumb

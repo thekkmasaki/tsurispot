@@ -16,6 +16,7 @@ import {
   getFeatureSpots,
   getSpotFeature,
 } from "@/lib/data/spot-features";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = { params: Promise<{ feature: string }> };
 
@@ -91,7 +92,7 @@ export default async function SpotFeaturePage({ params }: PageProps) {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <Breadcrumb
         items={[
           { label: "ホーム", href: "/" },

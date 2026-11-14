@@ -22,6 +22,7 @@ import {
   regionGroupOrder,
 } from "@/lib/data/prefectures";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const filteredShops = tackleShops.filter((s) => s.slug !== "sample-premium" && s.slug !== "sample-basic");
 const shopCount = filteredShops.length;
@@ -108,11 +109,11 @@ export default function ShopsListPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(itemListJsonLd) }}
       />
 
       {/* Hero Header */}

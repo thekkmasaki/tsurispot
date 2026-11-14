@@ -14,6 +14,7 @@ import type { FishingSpot } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ type: string; prefecture: string }>;
@@ -272,7 +273,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbJsonLd, faqJsonLd, itemListJsonLd]),
+          __html: safeJsonLd([breadcrumbJsonLd, faqJsonLd, itemListJsonLd]),
         }}
       />
 

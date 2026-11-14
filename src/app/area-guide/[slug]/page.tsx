@@ -23,6 +23,7 @@ import { DIFFICULTY_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // エリアガイドの魚名 → fishSpecies の名前へのマッピング（表記揺れ対応）
 const FISH_NAME_ALIASES: Record<string, string> = {
@@ -248,15 +249,15 @@ export default async function AreaGuideDetailPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(speakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <div className="min-h-screen bg-background">
         {/* Hero */}

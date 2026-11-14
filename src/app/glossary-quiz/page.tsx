@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { QuizClient } from "./quiz-client";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "釣り用語クイズ｜あなたの釣り知識をテスト！",
@@ -56,11 +57,11 @@ export default function GlossaryQuizPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(quizJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(quizJsonLd) }}
       />
       <main className="container mx-auto max-w-2xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[

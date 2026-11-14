@@ -29,6 +29,7 @@ import {
 } from "@/lib/data/fishing-rules-data";
 import { fishingSpots } from "@/lib/data/spots";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface Props {
   params: Promise<{ prefecture: string }>;
@@ -294,7 +295,7 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbJsonLd, articleJsonLd, faqJsonLd]),
+          __html: safeJsonLd([breadcrumbJsonLd, articleJsonLd, faqJsonLd]),
         }}
       />
 

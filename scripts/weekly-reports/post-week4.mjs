@@ -1,5 +1,6 @@
 // 週報投稿スクリプト - 2026年3月第4週 5エリア
-const API_KEY = "pd3VA0nt4yNInv3uBWbFxymzliuaDr4hF20v";
+const API_KEY = process.env.MICROCMS_API_KEY;
+if (!API_KEY) throw new Error("MICROCMS_API_KEY が未設定です");
 const ENDPOINT = "https://tsurispot.microcms.io/api/v1/blogs";
 
 const articles = [

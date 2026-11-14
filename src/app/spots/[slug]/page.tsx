@@ -141,6 +141,7 @@ import {
   getAdvisableCatchableFish,
 } from "@/lib/utils/spot-rule-consistency";
 import { METHOD_GUIDES, guidesForMethods } from "@/lib/data/method-guides";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // Below-the-fold client components loaded lazily
 const SpotWeatherTide = nextDynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide), {
@@ -713,29 +714,29 @@ export default async function SpotDetailPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(localBusinessJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(spotSpeakableJsonLd) }}
       />
       {videoJsonLd.map((vld, i) => (
         <script
           key={`video-${i}`}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(vld) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(vld) }}
         />
       ))}
       {/* 最近見たスポット記録 */}

@@ -9,6 +9,7 @@ import {
   MONTHS,
   getFishForMethodAndMonth,
 } from "@/lib/data/fishing-methods";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "釣り方×月別ガイド｜サビキ・ちょい投げ・ウキ釣り・エギング・ルアーの月別攻略",
@@ -69,7 +70,7 @@ export default function FishingIndexPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <div className="container mx-auto px-4 py-6 max-w-6xl">

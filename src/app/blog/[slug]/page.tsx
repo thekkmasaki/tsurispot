@@ -30,6 +30,7 @@ import { ShareButtons } from "@/components/ui/share-buttons";
 import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recommend";
 import { MAIN_WEEKLY_AREA_SLUGS, matchWeeklyAreaForPost, weeklyAreaHubPath } from "@/lib/weekly-report-areas";
 import { LineChoukaCta } from "@/components/line/line-chouka-cta";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // ISR: 静的記事は generateStaticParams で SSG、microCMS記事は dynamicParams で随時生成。
 // （旧 force-dynamic は2026-05-19の空HTML焼き付き対策の暫定措置。
@@ -200,11 +201,11 @@ export default async function BlogPostPage({
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleJsonLd) }}
       />
 
       <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">

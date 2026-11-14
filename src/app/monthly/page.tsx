@@ -7,6 +7,7 @@ import { MonthlyHeroImage } from "@/components/monthly-hero-image";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // 純SSGだと「今月」バッジと年号がビルド時刻で凍結するため、日次ISRで追従させる
 export const revalidate = 86400;
@@ -73,7 +74,7 @@ export default function MonthlyPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "月別釣りガイド" }]} />

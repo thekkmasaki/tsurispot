@@ -39,6 +39,7 @@ import {
   type RegionGroup,
 } from "@/lib/data/prefecture-month-enrichment";
 import { buildPrefMonthDescription } from "@/lib/seo/meta-description";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string }>;
@@ -401,7 +402,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdArray) }}
       />
 
       {/* パンくず */}

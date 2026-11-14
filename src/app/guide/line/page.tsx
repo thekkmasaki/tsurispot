@@ -6,6 +6,7 @@ import { ChevronLeft, Info } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "釣り糸（ライン）の選び方ガイド - PE・ナイロン・フロロカーボンの違いと号数別強度表",
@@ -286,11 +287,11 @@ export default function LineGuidePage() {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">      <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <Breadcrumb
         items={[

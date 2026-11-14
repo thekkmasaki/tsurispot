@@ -20,6 +20,7 @@ import {
   Handshake,
   FileText,
 } from "lucide-react";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "ツリスポについて｜釣りスポット総合情報サイト",
@@ -99,11 +100,11 @@ export default function AboutPage() {
     <div className="flex flex-col">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(editorialJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(editorialJsonLd) }}
       />
       {/* ヒーローセクション */}
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-600 via-blue-700 to-indigo-800">

@@ -9,6 +9,7 @@ import { fishSpecies, getPeakFish, getCatchableNow } from "@/lib/data/fish";
 import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CalendarTableClient } from "@/components/fishing-calendar/calendar-table-client";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // 純SSGだと generateMetadata の「今月」と旬の魚がビルド時刻で凍結し、
 // 実際とは違う月をSERPに出してしまうため日次ISRで追従させる（/monthly と同じ方針）
@@ -132,7 +133,7 @@ export default function FishingCalendarPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
