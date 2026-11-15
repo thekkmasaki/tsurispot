@@ -36,6 +36,7 @@ import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
 import { trimDescription } from "@/lib/utils/seo";
 import { composeMetaDescription, firstSentence } from "@/lib/seo/meta-description";
 import { MonthCalendar } from "@/components/fish/month-calendar";
+import { FishMonthlyTable, FishPrefectureTable } from "@/components/fish/fish-data-tables";
 import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
 import { FishCaughtButton } from "@/components/fish/fish-caught-button";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -677,6 +678,8 @@ export default async function FishDetailPage({ params }: PageProps) {
         </Card>
       </section>
 
+      <FishMonthlyTable fish={fish} regionalData={regionalData} />
+
       {/* 広告 */}
       <InArticleAd className="mt-4" />
 
@@ -709,6 +712,8 @@ export default async function FishDetailPage({ params }: PageProps) {
       <div className="lg:hidden">
         <LazyAd className="my-6"><InArticleAd /></LazyAd>
       </div>
+
+      <FishPrefectureTable fish={fish} />
 
       {/* 都道府県別リンク */}
       {fish.spots.length > 0 && (() => {
