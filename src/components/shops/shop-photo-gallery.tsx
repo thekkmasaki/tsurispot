@@ -1,5 +1,6 @@
 "use client";
 
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Camera, ImageIcon, X } from "lucide-react";
@@ -97,7 +98,7 @@ export function ShopPhotoGallery({
               );
             })}
           </div>
-          {isBasic && photos.length > 3 && (
+          {!SHOP_PLANS_PAUSED && isBasic && photos.length > 3 && (
             <p className="mt-2 text-xs text-muted-foreground text-center">
               ベーシックプランは写真3枚まで表示。プロプランなら全写真を表示。
             </p>

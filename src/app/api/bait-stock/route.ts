@@ -1,3 +1,4 @@
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
@@ -130,7 +131,7 @@ export async function POST(request: NextRequest) {
     const dailyLimit = dailyLimits[planLevel] ?? 10;
     if (count > dailyLimit) {
       return NextResponse.json(
-        { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。プロプラン（初年度 月額1,980円）なら1日50回まで更新できます。` },
+        { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。${SHOP_PLANS_PAUSED ? "明日またお試しください。" : "プロプラン（初年度 月額1,980円）なら1日50回まで更新できます。"}` },
         { status: 429 }
       );
     }

@@ -1,3 +1,4 @@
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -69,6 +70,9 @@ export default function TermsPage() {
                   <li>釣具・釣り関連商品のアフィリエイトリンクによる紹介</li>
                 </ul>
                 <p className="font-medium text-foreground">釣具店・エサ店向け</p>
+                {SHOP_PLANS_PAUSED && (
+                  <p className="rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/30 dark:text-amber-300">※ 釣具店向け有料プランは現在、新規のお申し込みを停止しています。すでにご契約中の店舗さまは引き続きご利用いただけます。</p>
+                )}
                 <ul className="ml-4 list-disc space-y-1.5">
                   <li>無料プラン：店舗基本情報の掲載、エサ在庫更新</li>
                   <li>ベーシックプラン（初年度 月額500円・2年目以降 月額980円・税込）：公式バッジ、検索優先表示、写真3枚、Googleのお店情報を整備</li>
@@ -131,6 +135,9 @@ export default function TermsPage() {
                 <h2 className="text-lg font-semibold">有料掲載プランについて</h2>
               </div>
               <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                {SHOP_PLANS_PAUSED && (
+                  <p className="rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:bg-amber-950/30 dark:text-amber-300">※ 釣具店向け有料プランは現在、新規のお申し込みを停止しています。すでにご契約中の店舗さまは引き続きご利用いただけます。</p>
+                )}
                 <ul className="ml-4 list-disc space-y-1.5">
                   <li>
                     有料プランは月額課金制です。契約は1ヶ月単位で自動更新されます。

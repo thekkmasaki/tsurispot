@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
   MapPin,
   Star,
@@ -93,6 +93,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
   }
 
   const isSample = slug === "sample-premium" || slug === "sample-basic" || slug === "sample-free";
+  // 有料プラン停止中は有料プランのサンプル店舗ページ自体を出さない（/subscribe と同じく 404）
+  if (SHOP_PLANS_PAUSED && (slug === "sample-basic" || slug === "sample-premium")) notFound();
   const planLevel = shop.planLevel || "free";
   const isBasic = planLevel === "basic";
   const isPro = planLevel === "pro";
@@ -407,8 +409,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         </Card>
       </div>
 
-      {/* サンプル: プラン比較表 */}
-      {isSample && (
+      {/* サンプル: プラン比較表（SHOP_PLANS_PAUSED 中は料金を出さない） */}
+      {isSample && !SHOP_PLANS_PAUSED && (
         <div className="mt-8">
           <Card className={isPro ? "border-amber-200 bg-gradient-to-br from-amber-50/30 to-transparent" : isBasic ? "border-blue-200 bg-gradient-to-br from-blue-50/30 to-transparent" : "border-gray-200 bg-gradient-to-br from-gray-50/30 to-transparent"}>
             <CardHeader>
@@ -627,6 +629,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   <Mail className="w-4 h-4" />
                   無料で店舗を管理する
                 </Link>
+                {!SHOP_PLANS_PAUSED && (
                 <Link prefetch={false}
                   href="/partner#plans"
                   className="inline-flex items-center gap-1 rounded-lg border border-blue-300 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 transition-colors dark:text-blue-400 dark:hover:bg-blue-950/30"
@@ -634,6 +637,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   プランを見る
                   <ChevronRight className="w-3.5 h-3.5" />
                 </Link>
+                )}
               </div>
             </div>
           </div>
@@ -645,7 +649,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         <div className="mt-8 space-y-4">
           <ShopListingForm />
 
-          {/* プラン比較 */}
+          {/* プラン比較・機能比較表（SHOP_PLANS_PAUSED 中は非表示） */}
+          {!SHOP_PLANS_PAUSED && (<>
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-base">プラン比較</CardTitle>
@@ -761,10 +766,11 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
               </tbody>
             </table>
           </div>
+          </>)}
 
           <div className="text-center">
             <Link prefetch={false}
-              href="/shops/update?shop=sample-premium&token=demo"
+              href="/shops/update?shop=sample-free&token=demo"
               className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               エサ在庫管理のデモを試す

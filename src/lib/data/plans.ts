@@ -21,7 +21,8 @@ export function formatYen(value: number): string {
  * true の間は課金関連の露出を全て非表示にする:
  * /partner の料金セクション・申込フォーム・有料offers(JSON-LD)、
  * フッターの事業者リンク、店舗サンプルページの申込、/subscribe/[plan]、
- * ダッシュボードのアップグレード導線。
+ * ダッシュボードのアップグレード導線、店舗詳細・/shops の料金比較とサンプル導線
+ * （有料サンプル sample-basic / sample-premium は 404）、店舗管理デモの料金案内。
  * 既契約(active/past_due)の管理UIとStripeポータルは停止しない。
  * 再開時は false に戻すだけで全て復活する。
  */

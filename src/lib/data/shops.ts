@@ -2889,6 +2889,11 @@ export const tackleShops: TackleShop[] = [
   ...shopsCastingWest,
 ];
 
+/** デモ用のサンプル店舗（実在しない）。一覧・サイトマップ・近くの釣具店には出さない */
+export function isSampleShopSlug(slug: string): boolean {
+  return slug.startsWith("sample-");
+}
+
 export function getShopBySlug(slug: string): TackleShop | undefined {
   return tackleShops.find((shop) => shop.slug === slug);
 }
@@ -2925,7 +2930,8 @@ export function getNearbyShopsWithDistance(
   limit: number = 3,
   maxDistanceKm: number = 50
 ): NearbyShopWithDistance[] {
-  return [...tackleShops]
+  return tackleShops
+    .filter((shop) => !isSampleShopSlug(shop.slug))
     .map((shop) => ({
       shop,
       distanceKm: distanceKm(lat, lng, shop.latitude, shop.longitude),
@@ -2937,6 +2943,6 @@ export function getNearbyShopsWithDistance(
 
 export function getShopsForSpot(spotSlug: string): TackleShop[] {
   return tackleShops.filter((shop) =>
-    shop.nearbySpotSlugs.includes(spotSlug)
+    !isSampleShopSlug(shop.slug) && shop.nearbySpotSlugs.includes(spotSlug)
   );
 }
