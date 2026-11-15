@@ -241,6 +241,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/instructor-exam/practical`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/umigyo/for-municipalities`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/about`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/about/editorial-policy`, lastModified: new Date("2026-11-15"), changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/legal`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/privacy`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.3 },

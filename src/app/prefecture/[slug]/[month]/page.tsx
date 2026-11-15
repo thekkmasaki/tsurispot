@@ -40,6 +40,7 @@ import {
 } from "@/lib/data/prefecture-month-enrichment";
 import { buildPrefMonthDescription } from "@/lib/seo/meta-description";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { MonthFishTable, buildMonthFishRows } from "@/components/seo/month-fish-table";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string }>;
@@ -595,6 +596,21 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      <MonthFishTable
+        heading={`${pref.name}で${month.name}に釣れる魚の早見表`}
+        areaHeader="よく釣れるエリア"
+        rows={buildMonthFishRows(prefSpots, month.num, {
+          groupBy: "area",
+          fishOrder: catchableFishList.map((f) => f.slug),
+          hrefOf: (s) => {
+            const count = catchableFishList.find((f) => f.slug === s)?.count ?? 0;
+            return count >= 2 ? `/prefecture/${pref.slug}/${month.slug}/${s}` : `/fish/${s}`;
+          },
+          limit: 15,
+        })}
+        note={`${pref.name}のツリスポ掲載スポットから集計。釣り方・エリアは該当スポット数の多い順（上位2件）。`}
+      />
 
       <InArticleAd />
 

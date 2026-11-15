@@ -53,6 +53,7 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
 import { getIndexablePrefMonthFishCombos } from "@/lib/data";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { MonthFishTable, buildMonthFishRows } from "@/components/seo/month-fish-table";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -522,6 +523,18 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </Card>
           </div>
         </section>
+
+        <MonthFishTable
+          heading={`${guide.nameJa}に釣れる魚の早見表`}
+          areaHeader="よく釣れる都道府県"
+          rows={buildMonthFishRows(fishingSpots, guide.month, {
+            groupBy: "prefecture",
+            fishOrder: displayFish.map((f) => f!.slug),
+            peakOf: (s) => fishSpecies.find((f) => f.slug === s)?.peakMonths.includes(guide.month) ?? false,
+            limit: 20,
+          })}
+          note={`ツリスポ掲載スポットのうち${guide.nameJa}に狙える釣り場を集計。釣り方・都道府県は該当スポット数の多い順（上位2件）。`}
+        />
 
         {/* 今月釣れる魚 */}
         <section className="mb-8">

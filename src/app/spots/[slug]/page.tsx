@@ -88,6 +88,7 @@ import { CatchlogFormPromo } from "@/components/promo/catchlog-promo";
 import { getSpotContributionsAsync } from "@/lib/data/spot-contributions";
 import { SpotContributionList } from "@/components/spots/spot-contribution-list";
 import { SpotEeatFooter } from "@/components/spots/spot-eeat-footer";
+import { SpotBasicDataTable } from "@/components/spots/spot-basic-data-table";
 import { SpotContributionForm } from "@/components/spots/spot-contribution-form";
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
@@ -976,6 +977,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* ATF広告: ヒーロー直後 */}
       <DisplayAd className="mt-4" />
+      <SpotBasicDataTable spot={spot} />
 
       {/* B: 概要（基本情報・設備）を広告①直後に。旧位置は概要タブ内（スマホで約5.8画面目）。
           代わりに構造物分析を「釣れる魚」タブへ移して相殺し、広告③(モバイル広告A)と

@@ -130,6 +130,7 @@ export function Footer() {
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">サイト情報</h3>
             <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link></li>
+              <li><Link href="/about/editorial-policy" prefetch={false} className="hover:text-white">編集方針・データの作り方</Link></li>
               <li><Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術（特許出願中）</Link></li>
               {!SHOP_PLANS_PAUSED && (
                 <li><Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け（掲載案内）</Link></li>

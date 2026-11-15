@@ -149,7 +149,9 @@ export function SpotRecentCatch({
           {/* 投稿導線（UGCが無いときほど強調） */}
           {allowPosting && (
             <p className={`text-xs text-muted-foreground ${hasCatches || weekly || hasTargets ? "border-t pt-3" : ""}`}>
-              {hasCatches ? "最近釣れた魚があれば" : `${spotName}の最近の釣果はまだ投稿がありません。釣れた魚があれば`}
+              {hasCatches
+                ? "最近釣れた魚があれば"
+                : `${spotName}の最初の釣果を投稿しませんか？最初の投稿者は「開拓者」としてこのページに表示されます。`}
               <a href="#catch-report" className="mx-1 font-medium text-primary underline-offset-2 hover:underline">
                 釣果を投稿する
               </a>
