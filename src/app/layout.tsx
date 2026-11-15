@@ -205,6 +205,7 @@ export default function RootLayout({
               description:
                 `全国${SPOT_COUNT}箇所以上の釣りスポットを掲載する総合情報サイト。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供。`,
               foundingDate: "2025",
+              publishingPrinciples: "https://tsurispot.com/about/editorial-policy",
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer support",

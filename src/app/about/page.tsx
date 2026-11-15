@@ -444,6 +444,11 @@ export default function AboutPage() {
                 </ul>
               </CardContent>
             </Card>
+            <p className="text-center text-sm">
+              <Link prefetch={false} href="/about/editorial-policy" className="font-medium text-primary hover:underline">
+                釣れる度スコア・潮汐データ・ルール情報の出典など、データの作り方の詳細はこちら →
+              </Link>
+            </p>
           </div>
         </div>
       </section>
