@@ -4,7 +4,7 @@ import { Map, MapPin, Fish, BookOpen, Anchor, ShieldCheck, Store, Globe, Buildin
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { regions } from "@/lib/data/regions";
-import { tackleShops } from "@/lib/data/shops";
+import { tackleShops, isSampleShopSlug } from "@/lib/data/shops";
 import { prefectures } from "@/lib/data/prefectures";
 
 export const metadata: Metadata = {
@@ -151,7 +151,7 @@ export default function SitemapPage() {
     {
       title: "釣具店",
       icon: <Store className="size-5 text-primary" />,
-      links: tackleShops.map((shop) => ({
+      links: tackleShops.filter((shop) => !isSampleShopSlug(shop.slug)).map((shop) => ({
         href: `/shops/${shop.slug}`,
         label: shop.name,
       })),
