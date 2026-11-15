@@ -54,6 +54,7 @@ import { MONTHS } from "@/lib/data/fishing-methods";
 import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { latestYmd, fishYmd } from "@/lib/content-dates";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -165,7 +166,7 @@ export default async function FishDetailPage({ params }: PageProps) {
     headline: `${fish.name}（${fish.nameEnglish}）の釣り情報`,
     description: fish.description,
     datePublished: "2025-01-01",
-    dateModified: new Date().toISOString().split('T')[0],
+    dateModified: latestYmd(fishYmd(fish.slug)),
     author: {
       "@type": "Organization",
       name: "ツリスポ編集部",

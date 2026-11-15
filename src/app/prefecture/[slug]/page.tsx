@@ -50,6 +50,7 @@ import { getFeaturesForPref } from "@/lib/data/spot-features";
 import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { spotsLatestYmd, fileYmd } from "@/lib/content-dates";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -587,7 +588,7 @@ export default async function PrefecturePage({ params }: PageProps) {
       "@id": `https://tsurispot.com/prefecture/${pref.slug}`,
     },
     datePublished: "2025-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: spotsLatestYmd(spots, fileYmd("src/lib/data/prefecture-info.ts")),
   };
 
   // スポット実データ入りFAQ（動的FAQと追加FAQの両方で使う）

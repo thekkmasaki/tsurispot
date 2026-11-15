@@ -16,6 +16,7 @@ import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-sectio
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { getSpotsForArea, getAreaMunicipalityName, getAreaRepSlug, getAllAreaGroups } from "@/lib/data/area-groups";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { spotsLatestYmd } from "@/lib/content-dates";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -393,7 +394,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
     headline: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選`,
     description: description || `${region.prefecture}${region.areaName}エリアの釣りスポット情報。近くのおすすめ釣り場を紹介。`,
     datePublished: "2025-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: spotsLatestYmd(spots),
     author: {
       "@type": "Organization",
       name: "ツリスポ編集部",

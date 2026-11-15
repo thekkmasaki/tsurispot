@@ -25,7 +25,19 @@ import { getUserById } from "@/lib/user-store";
 import { isSitemapEligible } from "@/lib/seo-quality";
 import { monthLastModified } from "@/lib/sitemap-dates";
 import { STATION_SLUGS } from "@/lib/tide/station-slugs";
-import { SPOT_FEATURES, getFeaturePrefCombos } from "@/lib/data/spot-features";
+import { SPOT_FEATURES, getFeaturePrefCombos, MIN_SPOTS_PER_PREF } from "@/lib/data/spot-features";
+import { getSpotsForArea } from "@/lib/data/area-groups";
+import { getPublishableAccommodations } from "@/lib/data/accommodations";
+import {
+  LATEST_CONTENT_DATE,
+  fileYmd,
+  filesLatestYmd,
+  fishYmd,
+  latestYmd,
+  routeYmd,
+  spotYmd,
+  spotsLatestYmd,
+} from "@/lib/content-dates";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -44,13 +56,90 @@ export const dynamic = "force-static";
 // ビルド時の日付を固定（毎回 new Date() にしない）
 const BUILD_DATE = new Date().toISOString().split("T")[0]; // YYYY-MM-DD形式
 
-// コンテンツ種別ごとのlastmod日付
-// dynamicDate: ビルド時の日付（スポット・都道府県等のデータ連動ページ）
-// contentDate: ビルド日と同期（コンテンツ更新もビルド時に反映されるため）
-// legalDate: 法務ページは手動更新のため固定
+// コンテンツ種別ごとのlastmod日付（以下3つは「後で実更新日に置換する」ための目印）
+// 2026-11: 旧実装はビルド日をそのまま lastmod にしており、デプロイのたびに全URLが
+// 「今日更新」になっていた（lastmod の信頼性を失う）。sitemap() の最後で
+// resolveLastmod() が git 由来の実データ更新日（src/lib/content-dates.ts）に置き換える。
+// dynamicDate: データ連動ページ（スポット・都道府県等）
+// contentDate: 静的コンテンツページ（ページファイル or データファイルの更新日）
+// legalDate: 法務ページ（ページファイルの更新日）
 const dynamicDate = new Date(BUILD_DATE);
 const contentDate = new Date(BUILD_DATE);
-const legalDate = new Date("2025-06-01");
+const legalDate = new Date(BUILD_DATE);
+const SENTINEL_DATES = new Set<unknown>([dynamicDate, contentDate, legalDate]);
+
+// ---- 実更新日の事前集計（スポットのデータファイル更新日を県・タイプ・エリア単位で最大化） ----
+const ALL_SPOTS_YMD = spotsLatestYmd(fishingSpots);
+const prefNameToSlug = new Map(prefectures.map((p) => [p.name, p.slug]));
+const prefYmd = new Map<string, string>();
+const typeYmd = new Map<string, string>();
+const typePrefYmd = new Map<string, string>();
+const typePrefCount = new Map<string, number>();
+function bump(map: Map<string, string>, key: string, ymd: string | undefined) {
+  if (!ymd) return;
+  const cur = map.get(key);
+  if (!cur || ymd > cur) map.set(key, ymd);
+}
+for (const s of fishingSpots) {
+  const prefSlug = prefNameToSlug.get(s.region.prefecture);
+  const ymd = spotYmd(s.slug);
+  bump(typeYmd, s.spotType, ymd);
+  if (!prefSlug) continue;
+  bump(prefYmd, prefSlug, ymd);
+  const tp = `${s.spotType}|${prefSlug}`;
+  bump(typePrefYmd, tp, ymd);
+  typePrefCount.set(tp, (typePrefCount.get(tp) ?? 0) + 1);
+}
+const SHOPS_YMD = filesLatestYmd(/^src\/lib\/data\/shops[^/]*\.ts$/);
+const FISHING_METHODS_YMD = fileYmd("src/lib/data/fishing-methods.ts");
+
+/**
+ * 目印日付（dynamicDate/contentDate/legalDate）のエントリを実更新日へ解決する。
+ * 1) 静的ルート: そのページファイルの更新日（データ連動ページは全スポットの最新更新日とも比較）
+ * 2) 動的ルート: パスから対応するデータ（スポット・魚種・県・データファイル）の更新日
+ * どれにも当たらなければ LATEST_CONTENT_DATE（= 生成時点の最新データ更新日。ビルド日ではない）
+ */
+function resolveLastmod(url: string, sentinel: unknown): string {
+  const path = url.slice(baseUrl.length) || "/";
+  const seg = path.split("/").filter(Boolean);
+  const dataDriven = sentinel === dynamicDate;
+
+  const route = routeYmd(path === "/" ? "" : path);
+  if (route) return dataDriven ? latestYmd(route, ALL_SPOTS_YMD) : route;
+
+  switch (seg[0]) {
+    case "spots":
+      return latestYmd(spotYmd(seg[1]));
+    case "fish":
+      return latestYmd(fishYmd(seg[1]));
+    case "prefecture":
+      return latestYmd(prefYmd.get(seg[1]), seg[2] === "fish" ? fishYmd(seg[3]) : undefined);
+    case "area":
+      return spotsLatestYmd(getSpotsForArea(seg[1]));
+    case "spot-type":
+      return latestYmd(seg[2] ? typePrefYmd.get(`${seg[1]}|${seg[2]}`) : typeYmd.get(seg[1]));
+    case "spot-feature":
+      return latestYmd(seg[2] ? prefYmd.get(seg[2]) : ALL_SPOTS_YMD, fileYmd("src/lib/data/spot-features.ts"));
+    case "shops":
+      return latestYmd(SHOPS_YMD);
+    case "fishing-rules":
+      return latestYmd(fileYmd("src/lib/data/fishing-rules-data.ts"));
+    case "fishing":
+      return latestYmd(FISHING_METHODS_YMD);
+    case "area-guide":
+      return latestYmd(fileYmd("src/lib/data/area-guides.ts"));
+    case "seasonal":
+      return latestYmd(fileYmd("src/lib/data/seasonal-guides.ts"), fileYmd("src/lib/data/seasonal-data.ts"));
+    case "accommodations":
+      return latestYmd(fileYmd("src/lib/data/accommodations.ts"));
+    // 潮見表（満干時刻は日替わり）・魚別最新釣果（週次）は内容が日付で変わるのでビルド日を維持
+    case "tides":
+    case "chouka":
+      return BUILD_DATE;
+    default:
+      return LATEST_CONTENT_DATE;
+  }
+}
 
 // 月ごとの lastModified（マトリクス・県×月・月×地域・釣り方×月ページ用）。
 // 「直近の過去のその月1日」＋ INDEX_POLICY_DATE(2026-06-23) 下限クランプ。
@@ -117,7 +206,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 魚別の最新釣果（今週報告のある魚だけ。報告が無い魚のページは noindex なので載せない）
   const latestFishes = await getFishWithLatestCatches().catch(() => []);
 
-  return [
+  const entries: MetadataRoute.Sitemap = [
     // ===== 固定ページ・主要ページ =====
     { url: baseUrl, lastModified: dynamicDate, changeFrequency: "daily", priority: 1.0 },
     { url: `${baseUrl}/spots`, lastModified: dynamicDate, changeFrequency: "daily", priority: 0.9 },
@@ -216,6 +305,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/quiz/local`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/bouzu-checker`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/shops`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
+    // 編集部の釣行レポート・釣果投稿ランキング（index可・canonical自己参照）
+    { url: `${baseUrl}/catch-reports`, lastModified: contentDate, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/ranking/reporters`, lastModified: contentDate, changeFrequency: "weekly", priority: 0.5 },
+    // 釣り宿（実掲載=楽天/じゃらんの実URLがある宿のみ。県ページも実掲載がある県だけ index のため同条件）
+    { url: `${baseUrl}/accommodations`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
+    ...(() => {
+      const publishable = getPublishableAccommodations();
+      const prefSlugs = new Set<string>();
+      const details: string[] = [];
+      for (const a of publishable) {
+        const prefSlug = prefNameToSlug.get(a.prefecture);
+        if (!prefSlug) continue;
+        prefSlugs.add(prefSlug);
+        details.push(`${baseUrl}/accommodations/${prefSlug}/${a.slug}`);
+      }
+      return [...[...prefSlugs].map((s) => `${baseUrl}/accommodations/${s}`), ...details].map((url) => ({
+        url,
+        lastModified: contentDate,
+        changeFrequency: "monthly" as const,
+        priority: 0.4,
+      }));
+    })(),
     { url: `${baseUrl}/sitemap-page`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.5 },
     { url: `${baseUrl}/contact`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/partner`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
@@ -379,8 +490,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     })),
 
-    // ===== 都道府県別釣具店ページ =====
-    ...prefectures.map((pref) => ({
+    // ===== 都道府県別釣具店ページ（掲載 MIN_SPOTS_PER_PREF 店未満の県はページ側で noindex のため除外） =====
+    ...prefectures
+      .filter(
+        (pref) =>
+          tackleShops.filter(
+            (s) => s.region.prefecture === pref.name && !isSampleShopSlug(s.slug),
+          ).length >= MIN_SPOTS_PER_PREF,
+      )
+      .map((pref) => ({
       url: `${baseUrl}/shops/area/${pref.slug}`,
       lastModified: contentDate,
       changeFrequency: "monthly" as const,
@@ -535,6 +653,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const pref = prefectures.find(p => p.name === spot.region.prefecture);
         if (!pref) continue;
         const key = `${spot.spotType}|${pref.slug}`;
+        // 掲載 MIN_SPOTS_PER_PREF 件未満の組み合わせはページ側で noindex のため除外
+        if ((typePrefCount.get(key) ?? 0) < MIN_SPOTS_PER_PREF) continue;
         if (!seenSTP.has(key)) {
           seenSTP.add(key);
           spotTypePrefCombos.push({ type: spot.spotType, prefSlug: pref.slug });
@@ -571,4 +691,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     })),
   ];
+
+  // 目印日付（ビルド日）のままのエントリを実更新日に置換
+  return entries.map((e) =>
+    SENTINEL_DATES.has(e.lastModified)
+      ? { ...e, lastModified: new Date(resolveLastmod(e.url, e.lastModified)) }
+      : e,
+  );
 }
