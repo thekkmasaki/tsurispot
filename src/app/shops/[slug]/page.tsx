@@ -124,17 +124,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       ? `https://tsurispot.com${shop.imageUrl}`
       : "https://tsurispot.com/logo.svg",
     "openingHours": shop.businessHours,
-    ...(shop.rating
-      ? {
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": shop.rating,
-            "bestRating": 5,
-            "worstRating": 1,
-            "reviewCount": 1,
-          },
-        }
-      : {}),
+    // aggregateRating は出力しない: 実レビューの集計ではない評価値（reviewCount: 1 固定）は
+    // Google のレビュースニペット規約違反になるため（2026-11 削除）。
   };
 
   const shouldOutputJsonLd = !isSample;
