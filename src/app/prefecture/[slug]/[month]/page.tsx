@@ -483,6 +483,36 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         </Link>
       </div>
 
+      {/* 翌月（当月ページでは「来月」）の先回り導線: 翌月の実集計（魚種数・旬の魚・水温）で目立たせる */}
+      {(() => {
+        const next = getMonthAggregates(pref.name, nextMonth.num);
+        if (next.catchableFishList.length === 0) return null;
+        const nextPeak = next.catchableFishList.filter((f) => f.isPeak);
+        const nextTop = (nextPeak.length > 0 ? nextPeak : next.catchableFishList).slice(0, 4).map((f) => f.name);
+        return (
+          <Link
+            prefetch={false}
+            href={`/prefecture/${pref.slug}/${nextMonth.slug}`}
+            className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-sky-200 bg-sky-50/60 p-4 transition-colors hover:bg-sky-100/60 dark:border-sky-900 dark:bg-sky-950/30"
+          >
+            <span className="min-w-0">
+              <span className="block text-xs font-bold text-sky-700 dark:text-sky-300">
+                {isCurrentMonth ? "来月の釣りを先取り" : "翌月の釣り"}
+              </span>
+              <span className="mt-0.5 block font-bold">
+                {pref.name}の{nextMonth.name}の釣り｜釣れる魚{next.catchableFishList.length}種
+              </span>
+              <span className="mt-0.5 block text-xs text-muted-foreground">
+                {nextPeak.length > 0 ? "旬" : "狙える魚"}: {nextTop.join("・")}
+                {getWaterTemp(pref.regionGroup, nextMonth.num) !== "—" &&
+                  `｜水温目安 ${getWaterTemp(pref.regionGroup, nextMonth.num)}`}
+              </span>
+            </span>
+            <ChevronRight className="size-5 shrink-0 text-sky-700" />
+          </Link>
+        );
+      })()}
+
       {/* 水温・シーズン概要 */}
       <section className="mb-6 sm:mb-8">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

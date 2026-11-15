@@ -39,10 +39,32 @@ export const TITLE_MAX = 60;
  *
  * OG/twitter とも文字列を共有できるよう、構造的型で受ける（FishingSpot 依存を持ち込まない）。
  */
-export function buildSpotTitle(spot: {
-  name: string;
-  catchableFish: { fish: { name: string }; method?: string }[];
-}): string {
+export function buildSpotTitle(
+  spot: {
+    name: string;
+    catchableFish: { fish: { name: string }; method?: string }[];
+  },
+  /**
+   * 実在する最新釣果（UGC・釣果週報。src/lib/spot-catch-summary.ts）。
+   * ある場合だけ「最新釣果【M/D・N件】釣れた魚」を title に出す（#515 の言い回し変更は CTR 不変だったため、
+   * 実データそのものを見せる）。無いスポットは従来の title のまま（虚偽表示防止）。
+   */
+  latestCatch?: { latestDate: string; count: number; fishNames: string[] } | null,
+): string {
+  if (latestCatch) {
+    const p = latestCatch.latestDate.split("-");
+    const md = p.length === 3 ? `${Number(p[1])}/${Number(p[2])}` : latestCatch.latestDate;
+    const head = `${spot.name}の最新釣果【${md}・${latestCatch.count}件】`;
+    const fish = latestCatch.fishNames.slice(0, 2).join("・");
+    const candidates = [
+      fish ? `${head}${fish}｜釣り情報` : "",
+      fish ? `${head}${fish}` : "",
+      `${head}釣り情報`,
+      head,
+    ];
+    const hit = candidates.find((c) => c && c.length <= TITLE_MAX);
+    if (hit) return hit;
+  }
   const year = new Date().getFullYear();
   const topFish = spot.catchableFish
     .slice(0, 2)

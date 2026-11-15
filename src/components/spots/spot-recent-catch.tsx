@@ -5,6 +5,9 @@ import { CATCH_RATING_LABELS } from "@/types";
 import type { MonthTargetFish, RecentCatchItem } from "@/lib/spot-recent-catch";
 import { formatMonthDay } from "@/lib/spot-recent-catch";
 import type { WeeklyReportSummary } from "@/lib/weekly-report-areas";
+import { MAIN_WEEKLY_AREA_SLUGS, weeklyAreaHubPath } from "@/lib/weekly-report-areas";
+import type { NearbyRecentCatch, SpotCatchSummary, SpotWeeklyCatchRow } from "@/lib/spot-catch-summary";
+import { formatCatchMonthDay } from "@/lib/spot-catch-summary";
 
 interface SpotRecentCatchProps {
   spotName: string;
@@ -14,6 +17,12 @@ interface SpotRecentCatchProps {
   ugcTotal: number;
   /** 該当エリアの最新週報。無ければ null で非表示 */
   weekly: WeeklyReportSummary | null;
+  /** このスポット自体の最新釣果サマリー（UGC＋週報のスポット行）。無ければ null */
+  latestCatch?: SpotCatchSummary | null;
+  /** 釣果週報の表でこのスポットにリンクされた行（新しい順） */
+  spotWeeklyCatches?: SpotWeeklyCatchRow[];
+  /** 自スポットに最新釣果が無いときの、近くの釣り場の直近釣果 */
+  nearbyRecentCatches?: NearbyRecentCatch[];
   /** 今月シーズン中の対象魚（釣れる度順） */
   monthTargets: MonthTargetFish[];
   /** 表示上の「今月」（JST、1-12） */
@@ -42,14 +51,27 @@ export function SpotRecentCatch({
   recentCatches,
   ugcTotal,
   weekly,
+  latestCatch = null,
+  spotWeeklyCatches = [],
+  nearbyRecentCatches = [],
   monthTargets,
   month,
   allowPosting,
 }: SpotRecentCatchProps) {
   const hasCatches = recentCatches.length > 0;
   const hasTargets = monthTargets.length > 0;
+  const hasWeeklyRows = spotWeeklyCatches.length > 0;
+  const hasNearby = nearbyRecentCatches.length > 0;
   // 出せる実データが何も無いときはブロックごと非表示（空見出しを出さない）
-  if (!hasCatches && !weekly && !hasTargets) return null;
+  if (!hasCatches && !weekly && !hasTargets && !hasWeeklyRows && !hasNearby) return null;
+  // 釣果ハブ（/chouka）への導線: 週報エリアのハブがあればそこ、無ければ全国の一覧
+  const hubAreaSlug = weekly?.areaSlug ?? spotWeeklyCatches[0]?.areaSlug;
+  const choukaHref =
+    hubAreaSlug && MAIN_WEEKLY_AREA_SLUGS.includes(hubAreaSlug) ? weeklyAreaHubPath(hubAreaSlug) : "/chouka";
+  const choukaLabel =
+    choukaHref === "/chouka"
+      ? "全国エリア別の最新釣果を見る"
+      : `${weekly?.areaLabel ?? spotWeeklyCatches[0]?.areaLabel}エリアの最新釣果をまとめて見る`;
 
   return (
     <section id="recent-catch" className="mb-6" aria-labelledby="recent-catch-heading">
@@ -59,6 +81,23 @@ export function SpotRecentCatch({
       </h2>
       <Card className="gap-0 py-0">
         <CardContent className="space-y-4 p-4 sm:p-5">
+          {latestCatch && (
+            <p className="text-sm">
+              <span className="font-bold">最新釣果 {formatCatchMonthDay(latestCatch.latestDate)}</span>
+              <span className="text-muted-foreground">（直近4週間で{latestCatch.count}件</span>
+              <span className="text-muted-foreground">
+                {latestCatch.ugcCount > 0 && latestCatch.weeklyCount > 0
+                  ? `：投稿${latestCatch.ugcCount}・釣果週報${latestCatch.weeklyCount}）`
+                  : latestCatch.ugcCount > 0
+                    ? "：ユーザー投稿）"
+                    : "：釣果週報）"}
+              </span>
+              {latestCatch.fishNames.length > 0 && (
+                <span className="ml-1">最近釣れた魚: <span className="font-medium">{latestCatch.fishNames.join("・")}</span></span>
+              )}
+            </p>
+          )}
+
           {/* (a) 最新のユーザー釣果 */}
           {hasCatches && (
             <div>
@@ -91,9 +130,34 @@ export function SpotRecentCatch({
             </div>
           )}
 
+          {/* (a2) 釣果週報の表に載ったこのスポットの釣果（施設・釣具店の公開情報を編集部がまとめたもの） */}
+          {hasWeeklyRows && (
+            <div className={hasCatches ? "border-t pt-4" : undefined}>
+              <h3 className="mb-2 flex items-center gap-1.5 text-sm font-bold">
+                <Newspaper className="size-4 text-primary" aria-hidden="true" />
+                釣果週報に載った{spotName}の釣果
+              </h3>
+              <ul className="space-y-1.5">
+                {spotWeeklyCatches.map((r, i) => (
+                  <li key={`${r.articleHref}-${i}`} className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-sm">
+                    <time dateTime={r.publishedAt} className="shrink-0 text-xs text-muted-foreground tabular-nums">
+                      {formatCatchMonthDay(r.publishedAt)}週報
+                    </time>
+                    <span className="font-medium">{r.fish}</span>
+                    {r.size && <span className="text-xs text-muted-foreground">{r.size}</span>}
+                    {r.method && <span className="text-xs text-muted-foreground">{r.method}</span>}
+                    <Link prefetch={false} href={r.articleHref} className="text-xs text-primary underline-offset-2 hover:underline">
+                      出典
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* (b) エリアの最新週報 */}
           {weekly && (
-            <div className={hasCatches ? "border-t pt-4" : undefined}>
+            <div className={hasCatches || hasWeeklyRows ? "border-t pt-4" : undefined}>
               <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-bold">
                 <Newspaper className="size-4 text-primary" aria-hidden="true" />
                 {weekly.areaLabel}エリアの最新釣果週報
@@ -119,7 +183,7 @@ export function SpotRecentCatch({
 
           {/* (c) 今月の対象魚 */}
           {hasTargets && (
-            <div className={hasCatches || weekly ? "border-t pt-4" : undefined}>
+            <div className={hasCatches || weekly || hasWeeklyRows ? "border-t pt-4" : undefined}>
               <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-bold">
                 <CalendarDays className="size-4 text-primary" aria-hidden="true" />
                 {month}月に{spotName}で狙える魚
@@ -145,6 +209,37 @@ export function SpotRecentCatch({
               </p>
             </div>
           )}
+
+          {/* (e) 自スポットに最新釣果が無いとき: 近くの釣り場の直近釣果（実データのみ） */}
+          {hasNearby && (
+            <div className="border-t pt-4">
+              <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-bold">
+                <Fish className="size-4 text-primary" aria-hidden="true" />
+                近くの釣り場の最新釣果
+              </h3>
+              <ul className="space-y-1 text-sm">
+                {nearbyRecentCatches.map((n) => (
+                  <li key={n.slug} className="flex flex-wrap items-baseline gap-x-2">
+                    <Link prefetch={false} href={`/spots/${n.slug}`} className="font-medium text-primary underline-offset-2 hover:underline">
+                      {n.name}
+                    </Link>
+                    <span className="text-xs text-muted-foreground">
+                      {formatCatchMonthDay(n.latestDate)}
+                      {n.fishNames.length > 0 && ` ${n.fishNames.join("・")}`}
+                      （直線約{Math.max(1, Math.round(n.distanceKm))}km）
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* 釣果ハブへの導線 */}
+          <p className="border-t pt-3 text-xs">
+            <Link prefetch={false} href={choukaHref} className="font-medium text-primary underline-offset-2 hover:underline">
+              {choukaLabel}
+            </Link>
+          </p>
 
           {/* 投稿導線（UGCが無いときほど強調） */}
           {allowPosting && (
