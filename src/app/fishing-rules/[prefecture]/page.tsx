@@ -30,6 +30,8 @@ import {
 import { fishingSpots } from "@/lib/data/spots";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { getPrefectureRestrictedSpots } from "@/lib/data/prefecture-restricted-spots";
+import { PrefectureRulesOverview } from "@/components/rules/prefecture-rules-overview";
 
 interface Props {
   params: Promise<{ prefecture: string }>;
@@ -157,6 +159,7 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
 
   const rule = getFishingRuleByPrefSlug(prefSlug);
   const hasSea = Boolean(rule?.seaRules);
+  const restrictedSpots = getPrefectureRestrictedSpots(pref.name);
 
   // この都道府県のスポット取得
   const prefSpots = fishingSpots
@@ -224,6 +227,16 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
 
   // FAQ JSON-LD をルールデータから動的生成
   const faqItems: { question: string; answer: string }[] = [];
+
+  // 釣り禁止・制限スポットの FAQ（答えファースト要約と同じ集計を使う）
+  const banSpots = restrictedSpots.filter((r) => r.restriction.level.startsWith("ban"));
+  faqItems.push({
+    question: `${pref.name}で釣り禁止の場所はどこですか？`,
+    answer:
+      restrictedSpots.length > 0
+        ? `ツリスポ掲載スポットでは${restrictedSpots.length}件に釣り禁止・制限の情報があります${banSpots.length > 0 ? `（釣り禁止: ${banSpots.slice(0, 5).map((r) => r.spot.name).join("、")}${banSpots.length > 5 ? " ほか" : ""}）` : ""}。${rule?.seaRules?.restrictedAreas.length ? `このほか県の海面ルールで釣り禁止・注意区域が${rule.seaRules.restrictedAreas.length}件あります。` : ""}現地の掲示と管理者の案内を必ず確認してください。`
+        : `ツリスポ掲載スポットで個別の釣り禁止情報が登録されたものはまだありません。${rule?.seaRules?.restrictedAreas.length ? `県の海面ルールとしては釣り禁止・注意区域が${rule.seaRules.restrictedAreas.length}件あります。` : ""}立入禁止の柵・看板がある場所では釣りをしないでください。`,
+  });
 
   if (rule && rule.yugyokenRivers.length > 0) {
     faqItems.push({
@@ -325,6 +338,8 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
         </div>
 
         <div className="space-y-8">
+          <PrefectureRulesOverview prefName={pref.name} rule={rule} restricted={restrictedSpots} />
+
           {/* 共通注意事項 */}
           <section>
             <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-4 text-red-800 dark:bg-red-950 dark:text-red-200">
