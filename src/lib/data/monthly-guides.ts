@@ -49,7 +49,8 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "寒波に注意、防寒必須",
       daylight: "日の出7:00頃 日の入17:10頃",
     },
-    topFish: ["karei", "mebaru", "kasago", "wakasagi", "hirame", "madara", "mejina", "yariika"],
+    // アイナメ（peak 11〜1月）は fish データ上1月が旬のため追加
+    topFish: ["karei", "mebaru", "kasago", "wakasagi", "hirame", "madara", "mejina", "yariika", "ainame"],
     tips: [
       "防寒対策が最重要。インナー・中間層・アウターの3層構造で防寒",
       "カイロや電気毛布、温かい飲み物を必ず持参",
@@ -691,7 +692,8 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "冬の寒さ本格化。強風・降雪に注意",
       daylight: "日の出6:45頃 日の入16:30頃",
     },
-    topFish: ["karei", "mebaru", "kasago", "hirame", "madai", "madara", "kawahagi", "mejina"],
+    // ヤリイカ（season 11〜4月）・アイナメ（peak 11〜1月）は fish データ上12月が旬/シーズンのため追加
+    topFish: ["karei", "mebaru", "kasago", "hirame", "madai", "madara", "kawahagi", "mejina", "yariika", "ainame"],
     tips: [
       "カレイの投げ釣りは大潮前後の満潮前後が特に好釣果",
       "メバリングは水温10℃を下回っても釣れる。ゆっくり巻きが基本",

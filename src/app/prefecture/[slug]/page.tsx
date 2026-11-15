@@ -1718,6 +1718,17 @@ export default async function PrefecturePage({ params }: PageProps) {
               <div className="text-xs text-muted-foreground">今釣れる魚・おすすめスポット</div>
             </div>
           </Link>
+          {/* 来月の先回り導線（11月なら12月ページ） */}
+          <Link prefetch={false}
+            href={`/prefecture/${slug}/${MONTHS[currentMonth % 12].slug}`}
+            className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
+          >
+            <Calendar className="size-8 text-sky-600" />
+            <div>
+              <div className="text-sm font-bold">{pref.name}の{MONTHS[currentMonth % 12].name}の釣り情報</div>
+              <div className="text-xs text-muted-foreground">来月に釣れる魚・おすすめスポットを先取り</div>
+            </div>
+          </Link>
           <Link prefetch={false}
             href="/catchable-now"
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"

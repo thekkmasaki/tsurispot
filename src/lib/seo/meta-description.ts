@@ -164,7 +164,20 @@ export function buildSpotMetaDescription(spot: {
 }, opts: {
   /** 最新の釣果週報が実在するエリアのラベル（例「明石・神戸」）。無ければ週報文は出さない */
   weeklyAreaLabel?: string;
+  /** 実在する最新釣果（UGC・釣果週報）。ある場合だけ先頭に日付・件数・魚を出す */
+  latestCatch?: { latestDate: string; count: number; fishNames: string[] } | null;
 } = {}): string {
+  const lc = opts.latestCatch;
+  const latestSentence = lc
+    ? (() => {
+        const p = lc.latestDate.split("-");
+        const md = p.length === 3 ? `${Number(p[1])}月${Number(p[2])}日` : lc.latestDate;
+        const fish = joinNames(lc.fishNames, 3);
+        return fish
+          ? `${spot.name}の最新釣果は${md}（直近${lc.count}件）、${fish}が釣れました。`
+          : `${spot.name}の最新釣果は${md}（直近${lc.count}件）。`;
+      })()
+    : false;
   const top3 = joinNames(
     spot.catchableFish.slice(0, 3).map((cf) => cf.fish.name),
     3,
@@ -186,9 +199,13 @@ export function buildSpotMetaDescription(spot: {
 
   return composeMetaDescription(
     [
+      // 実在する最新釣果があれば最優先（SERP で「いつ・何が」が一目でわかる）
+      latestSentence,
       // 「[地名] 釣果」クエリの意図語を先頭文に置く（釣果情報→釣れる魚→釣り方）。
-      `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の釣果情報・釣れる魚・釣り方。`,
-      firstSentence(spot.description, 40) || false,
+      lc
+        ? `${spot.region.prefecture}${spot.region.areaName}の釣り場で、釣れる魚・釣り方・最新釣果を掲載。`
+        : `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の釣果情報・釣れる魚・釣り方。`,
+      lc ? false : firstSentence(spot.description, 40) || false,
       top3 && topMethod
         ? `釣れる魚は${top3}など${fishCount}種で、${topMethod}が定番。`
         : top3

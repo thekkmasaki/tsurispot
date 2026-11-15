@@ -6,6 +6,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MonthlyHeroImage } from "@/components/monthly-hero-image";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
+import { prefectures } from "@/lib/data/prefectures";
+import { MONTHS } from "@/lib/data/fishing-methods";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 
@@ -247,6 +249,30 @@ export default function MonthlyPage() {
             );
           })}
         </div>
+
+        {/* 来月・再来月の都道府県別ページ（/prefecture/{県}/{月}）への先回り導線。
+            季節の変わり目に県×月クエリが伸びる（2026-11: 12月ページが急伸）ため、ハブから内部リンクを集める */}
+        <section className="mt-10 space-y-5" aria-labelledby="pref-upcoming">
+          <h2 id="pref-upcoming" className="text-lg font-bold">都道府県別に来月・再来月の釣りを先取り</h2>
+          {[MONTHS[currentMonth % 12], MONTHS[(currentMonth + 1) % 12]].map((m) => (
+            <div key={m.slug}>
+              <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+                {m.name}の釣り（都道府県別）
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {prefectures.map((p) => (
+                  <Link prefetch={false}
+                    key={p.slug}
+                    href={`/prefecture/${p.slug}/${m.slug}`}
+                    className="rounded-full border px-2.5 py-1 text-xs transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {p.name === "北海道" ? p.name : p.name.replace(/[都府県]$/, "")}の{m.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
 
         {/* 関連リンク */}
         <div className="mt-10 space-y-6 rounded-xl border bg-muted/30 p-6">

@@ -772,6 +772,21 @@ export default async function MonthlyGuidePage({ params }: Props) {
                 ))}
               </div>
             </div>
+            {/* 県×月ページ（/prefecture/{県}/{月}）への直リンク。冬は検索が県×月に寄るため先回りで内部リンクを集める */}
+            <div className="mt-4">
+              <h3 className="mb-2 text-sm font-bold text-muted-foreground">都道府県別の{guide.nameJa}の釣り</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {topPrefectures.map((pref) => (
+                  <Link prefetch={false}
+                    key={pref.slug}
+                    href={`/prefecture/${pref.slug}/${month}`}
+                    className="rounded-full border bg-white px-3 py-1 text-xs font-medium transition-colors hover:border-primary hover:text-primary dark:bg-card"
+                  >
+                    {pref.name === "北海道" ? pref.name : pref.name.replace(/[都府県]$/, "")}の{guide.nameJa}
+                  </Link>
+                ))}
+              </div>
+            </div>
             <div className="mt-3 text-center">
               <Link prefetch={false} href="/prefecture" className="text-sm text-primary hover:underline">
                 47都道府県から探す →

@@ -9,6 +9,9 @@ import {
   getWeeklyReportArea,
   listWeeklyPostsForArea,
 } from "@/lib/weekly-report-areas";
+import { getWeeklyCatchesBySpot } from "@/lib/data/spot-weekly-catches";
+import { getSpotBySlug } from "@/lib/data/spots";
+import { splitFishNames } from "@/lib/spot-catch-summary";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { LineChoukaCta } from "@/components/line/line-chouka-cta";
@@ -45,7 +48,18 @@ async function load(areaSlug: string) {
   if (!area || !MAIN_WEEKLY_AREA_SLUGS.includes(areaSlug)) return null;
   const posts = listWeeklyPostsForArea(await getAllBlogPosts(), areaSlug);
   const latest = posts[0] ? await getBlogPostBySlugAsync(posts[0].slug) : undefined;
-  return { area, posts, latest };
+  // このエリアの週報（直近4週間）でスポットページにリンクされた釣り場
+  const bySpot = await getWeeklyCatchesBySpot();
+  const recentSpots = Object.entries(bySpot)
+    .filter(([slug, rows]) => rows[0].areaSlug === area.slug && getSpotBySlug(slug))
+    .map(([slug, rows]) => ({
+      slug,
+      name: getSpotBySlug(slug)!.name,
+      latest: rows[0].publishedAt,
+      fishNames: [...new Set(rows.flatMap((r) => splitFishNames(r.fish)))].slice(0, 4),
+    }))
+    .sort((a, b) => b.latest.localeCompare(a.latest) || a.name.localeCompare(b.name, "ja"));
+  return { area, posts, latest, recentSpots };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -71,7 +85,7 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
   const { area: areaSlug } = await params;
   const data = await load(areaSlug);
   if (!data) notFound();
-  const { area, posts, latest } = data;
+  const { area, posts, latest, recentSpots } = data;
   const digest = latest ? extractWeeklyDigest(latest.content) : { intro: "", picks: "", table: "" };
   const past = posts.slice(1, PAST_LIMIT + 1);
 
@@ -144,6 +158,33 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
         <p className="rounded-xl border p-4 text-sm text-muted-foreground">
           {area.label}エリアの釣果週報はまだありません。
         </p>
+      )}
+
+      {recentSpots.length > 0 && (
+        <section aria-labelledby="spots" className="mt-8">
+          <h2 id="spots" className="mb-1 text-lg font-bold">{area.label}エリアで最近釣果があった釣り場</h2>
+          <p className="mb-3 text-xs text-muted-foreground">直近4週間の釣果週報に載った釣り場です。釣り場ページで釣果の詳細・アクセス・ルールを確認できます。</p>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {recentSpots.map((s) => (
+              <li key={s.slug}>
+                <Link
+                  prefetch={false}
+                  href={`/spots/${s.slug}`}
+                  className="flex h-full items-start justify-between gap-2 rounded-lg border p-3 text-sm hover:border-sky-300 hover:bg-sky-50/50"
+                >
+                  <span className="min-w-0">
+                    <span className="block font-medium">{s.name}の釣果</span>
+                    <span className="mt-0.5 block text-xs text-muted-foreground">
+                      {fmtDate(s.latest)}の週報
+                      {s.fishNames.length > 0 && `｜${s.fishNames.join("・")}`}
+                    </span>
+                  </span>
+                  <ChevronRight className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       <LineChoukaCta className="mt-8" />

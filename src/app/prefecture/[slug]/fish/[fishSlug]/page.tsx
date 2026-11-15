@@ -38,6 +38,7 @@ import {
   buildHowToJsonLd,
 } from "@/lib/seo/article-jsonld";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { WinterFishGuide } from "@/components/prefecture/winter-fish-guide";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
@@ -536,6 +537,9 @@ export default async function PrefectureFishPage({ params }: PageProps) {
           </Card>
         </div>
       </section>
+
+      {/* 冬（12〜2月）の攻略: 冬の釣り方メモがある魚かつ冬に狙えるスポットがある県のみ（県の実データで差別化） */}
+      <WinterFishGuide pref={pref} fish={fish} spots={spots} regionGroup={pref.regionGroup} />
 
       {/* 釣り方の攻略法 */}
       {attackMethods.length > 0 && (

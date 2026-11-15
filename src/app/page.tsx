@@ -645,6 +645,15 @@ export default async function Home() {
                 {currentMonth}月に釣れる魚一覧・釣り方ガイド
                 <ChevronRight className="size-3.5" />
               </Link>
+              {/* 来月の先回り導線（季節の変わり目に月別ページの検索が伸びるため） */}
+              <Link
+                prefetch={false}
+                href={`/monthly/${monthSlugs[currentMonth % 12]}`}
+                className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+              >
+                来月（{(currentMonth % 12) + 1}月）の釣りを先取り
+                <ChevronRight className="size-3.5" />
+              </Link>
               <Link
                 prefetch={false}
                 href="/monthly"
