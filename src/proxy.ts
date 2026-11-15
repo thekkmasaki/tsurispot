@@ -66,7 +66,25 @@ function checkOriginLockdown(req: NextRequest): NextResponse | null {
     return null;
   }
   // enforce
-  return new NextResponse("Forbidden", { status: 403 });
+  return forbidden();
+}
+
+// 403 応答（エッジ/ブラウザにキャッシュさせない）。
+// 背景(2026-11-15): next.config の headers() が middleware の応答にも適用され、
+// /spots/:slug の 403 に `Cache-Control: public, s-maxage=604800` が付いていた。
+// ブロック対象bot（SemrushBot 等）が先に来たページは Cloudflare が「Forbidden」を最大7日キャッシュし、
+// Googlebot・一般ユーザーにも 403 を返していた（GSC「アクセス禁止(403)」129件の原因）。
+// CDN-Cache-Control / Cloudflare-CDN-Cache-Control は next.config 側で設定しておらず衝突せず、
+// Cloudflare は Cache-Control より優先して解釈するため、ここで no-store を確実に効かせる。
+export function forbidden(): NextResponse {
+  return new NextResponse("Forbidden", {
+    status: 403,
+    headers: {
+      "Cache-Control": "private, no-store",
+      "CDN-Cache-Control": "no-store",
+      "Cloudflare-CDN-Cache-Control": "no-store",
+    },
+  });
 }
 
 // RSC / プリフェッチ要求かどうか（App Router がクライアントナビ用に付与）。
@@ -94,7 +112,7 @@ export function proxy(req: NextRequest) {
 
   const ua = req.headers.get("user-agent") || "";
   if (ua && BLOCKED_UA_PATTERNS.some((p) => p.test(ua))) {
-    return new NextResponse("Forbidden", { status: 403 });
+    return forbidden();
   }
 
   const lockdown = checkOriginLockdown(req);

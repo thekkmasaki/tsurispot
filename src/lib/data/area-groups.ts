@@ -65,7 +65,13 @@ const repSlugByMuni = new Map<string, string>();
     muniSlugCount.set(k, sc);
   }
   for (const [k, sc] of muniSlugCount) {
-    const cands = [...sc.entries()].sort((a, b) => {
+    // 候補は「主市区町村が k の slug」に限る。主市区町村が別の slug を代表にすると、
+    // その代表ページ自体が別市区町村の代表へ canonical され（例: 上天草市→天草市のページ）、
+    // sitemap掲載URLが「代替ページ」落ちする（2026-11-15 実測: 947中207件）。
+    // 自前の slug を持たない市区町村はページを持てないため代表なし（sitemap/一覧に出さない）。
+    const own = [...sc.entries()].filter(([slug]) => muniKeyBySlug.get(slug) === k);
+    if (own.length === 0) continue;
+    const cands = own.sort((a, b) => {
       const ra = regionSlugSet.has(a[0]) ? 0 : 1;
       const rb = regionSlugSet.has(b[0]) ? 0 : 1;
       if (ra !== rb) return ra - rb;

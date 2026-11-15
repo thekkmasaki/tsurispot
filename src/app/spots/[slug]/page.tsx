@@ -99,6 +99,9 @@ const SpotPhotoGallery = nextDynamic(
   { loading: () => <div className="aspect-video w-full animate-pulse rounded-xl bg-muted" /> },
 );
 import { areaGuides } from "@/lib/data/area-guides";
+// エリアリンクは市区町村の代表slugへ直接向ける（非代表slugは canonical で代表へ集約されるため、
+// リンクするとGSC「代替ページ」を積み増す＋クロール予算を浪費する）
+import { getAreaRepSlug } from "@/lib/data/area-groups";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
 import { monthSlugs } from "@/lib/data/monthly-guides";
 import { getSeasonByMonth } from "@/lib/data/seasonal-data";
@@ -505,7 +508,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         "@type": "ListItem",
         position: prefForBreadcrumb ? 4 : 3,
         name: spot.region.areaName,
-        item: `https://tsurispot.com/area/${spot.region.slug}`,
+        item: `https://tsurispot.com/area/${getAreaRepSlug(spot.region.slug)}`,
       },
       {
         "@type": "ListItem",
@@ -751,7 +754,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             const pref = getPrefectureByName(spot.region.prefecture);
             return pref ? [{ label: spot.region.prefecture, href: `/prefecture/${pref.slug}` }] : [];
           })()),
-          { label: spot.region.areaName, href: `/area/${spot.region.slug}` },
+          { label: spot.region.areaName, href: `/area/${getAreaRepSlug(spot.region.slug)}` },
           { label: spot.name },
         ]}
       />
@@ -854,7 +857,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     <span>{spot.region.prefecture}</span>
                   )}
                   {" "}
-                  <Link prefetch={false} href={`/area/${spot.region.slug}`} className="hover:text-foreground hover:underline">
+                  <Link prefetch={false} href={`/area/${getAreaRepSlug(spot.region.slug)}`} className="hover:text-foreground hover:underline">
                     {spot.region.areaName}
                   </Link>
                 </>
@@ -2302,7 +2305,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                       </>
                     );
                   })()}
-                  <Link prefetch={false} href={`/area/${spot.region.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                  <Link prefetch={false} href={`/area/${getAreaRepSlug(spot.region.slug)}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
                     <Compass className="size-3" />
                     {spot.region.areaName}エリアガイド
                   </Link>
