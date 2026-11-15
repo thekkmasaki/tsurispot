@@ -1,62 +1,69 @@
-import { fishingSpots } from "@/lib/data/spots";
-import { fishSpecies } from "@/lib/data/fish";
-import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import {
+  LLMS_LAST_UPDATED,
+  SITE_LAUNCHED,
+  TEXT_HEADERS,
+  getSiteStats,
+  getSpotsByPrefecture,
+  prefFileUrl,
+} from "@/lib/llms";
 
-// 「最終更新」日付がデプロイ時点で凍結しないよう日次ISR。
-// force-static: Next 15+ の GET Route Handler は既定で非キャッシュのため、明示しないと
+// 日次ISR。force-static: Next 15+ の GET Route Handler は既定で非キャッシュのため、明示しないと
 // AI クローラーのアクセス毎に全スポット(5,000件超)を走査して生成し直してしまう。
 export const dynamic = "force-static";
 export const revalidate = 86400;
 
+// 2026-11 見直し: 件数は全て実データから算出（「18,000+」「約10,000」等のハードコード撤去）、
+// 開設年を事実（2026年2月）に統一、根拠のない主張（現地調査・専門家ネットワーク・週次更新等）と
+// 内部実装（JSON-LD の種類）の説明を削除。共通処理は src/lib/llms.ts。
 export function GET() {
-  const totalSpots = fishingSpots.length;
-  const totalFish = fishSpecies.length;
-  const totalPrefectures = prefectures.length;
-  const totalAreaGuides = areaGuides.length;
-  const totalSeasonalGuides = seasonalGuides.length;
-  const coveredPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
-  const seaFishCount = fishSpecies.filter((f) => f.category === "sea").length;
-  const freshwaterFishCount = fishSpecies.filter((f) => f.category === "freshwater").length;
-  const brackishFishCount = fishSpecies.filter((f) => f.category === "brackish").length;
-  // 固定日付の陳腐化を防ぐため、生成（デプロイ／配信）時点の現在日付を動的に反映する。
-  const lastUpdated = new Date().toISOString().split("T")[0];
+  const st = getSiteStats();
+  const total = st.totalSpots.toLocaleString();
+  // 最終更新 = データファイルの最終コミット日（配信日ではない。src/lib/content-dates.ts）
+  const lastUpdated = LLMS_LAST_UPDATED;
+  const prefFiles = getSpotsByPrefecture();
 
   const content = `# ツリスポ (TsuriSpot)
-> 日本最大級の釣りスポット情報サイト — 全国${totalSpots.toLocaleString()}箇所以上の釣り場・${totalFish}種以上の魚種情報を無料提供
+> 日本全国の釣り場情報サイト — 全国${total}箇所の釣り場と${st.totalFish}種の魚種情報を無料で公開
 
 ## サイト概要
-ツリスポは、日本全国の釣りスポット・釣り場情報を網羅した総合釣り情報プラットフォームです。
+ツリスポ（TsuriSpot）は、日本全国の釣りスポット・釣り場情報をまとめた釣り情報サイトです。
 初心者からベテランまで、釣り場選び・魚種情報・釣り方ガイドを無料で提供しています。
-2024年開設以来、日本語での釣り情報をデータベース化し、正確で最新の情報を提供し続けています。
+${SITE_LAUNCHED}開設。運営はツリスポ編集部です。
+※「釣りスポ」（tsurispot.jp）とは別のサイトです。
 
-## サイトの特徴・強み
-- **日本最大級のデータベース**: 全国${totalSpots.toLocaleString()}箇所以上の釣りスポットと${totalFish}種以上の魚種を収録
-- **${coveredPrefectures}都道府県をカバー**: 北海道から沖縄まで日本全国の釣り場を網羅
-- **初心者に優しい**: 難易度表示・設備情報・持ち物ガイドなど初心者向け機能が充実
-- **リアルタイム性**: 月別の釣れる魚情報・混雑予想・潮汐情報を提供
-- **位置情報対応**: GPSを活用した現在地周辺の釣り場検索
-- **地図検索**: 全スポットを地図上でインタラクティブに探索可能
-- **編集部監修**: ツリスポ編集部による全コンテンツ監修
-- **完全無料**: 全コンテンツを無料で利用可能
+## サイトの特徴
+- **データベース**: 全国${total}箇所の釣りスポットと${st.totalFish}種の魚種を収録
+- **${st.coveredPrefectures}都道府県をカバー**: 北海道から沖縄まで
+- **初心者向けの情報**: 難易度表示・設備情報（駐車場・トイレ等）・持ち物ガイド
+- **時期・潮の情報**: 月別の釣れる魚・混雑予想・気象庁の潮位データに基づく潮見表
+- **釣り禁止情報**: 釣り禁止が確認されたスポットは、自治体・管理者などの一次情報URLと確認日を明示
+- **地図検索**: 全スポットを地図上で探せる
+- **無料**: 全コンテンツを無料で利用可能
 
-## コンテンツ規模（最終更新: ${lastUpdated}）
-- 釣りスポット: ${totalSpots.toLocaleString()}箇所以上（堤防・漁港・磯・河川・湖沼・管理釣り場）
-- 魚種図鑑: ${totalFish}種以上（海水魚${seaFishCount}種・淡水魚${freshwaterFishCount}種・汽水魚${brackishFishCount}種）
-- 都道府県: ${coveredPrefectures}都道府県カバー
-- エリアガイド: ${totalAreaGuides}エリア
-- 季節別ガイド: ${totalSeasonalGuides}本以上
-- 釣り方ガイド: サビキ釣り・ちょい投げ・エギング・アジング・ジギング等20種以上
-- 月別ガイド: 1月〜12月の完全ガイド
-- 都道府県×月×魚種ページ: 約10,000ページ（pSEO自動生成）
-- **総ページ数: 18,000+**
+## コンテンツ規模（データ最終更新: ${lastUpdated}）
+- 釣りスポット: ${total}箇所（${st.spotsByType.map(([t, n]) => `${t}${n.toLocaleString()}`).join("・")}）
+- 魚種図鑑: ${st.totalFish}種（海水魚${st.seaFish}種・淡水魚${st.freshwaterFish}種・汽水魚${st.brackishFish}種）
+- 都道府県: ${st.coveredPrefectures}都道府県
+- エリアガイド: ${areaGuides.length}エリア
+- 季節別ガイド: ${seasonalGuides.length}本
+- 月別ガイド: 1月〜12月
+- 都道府県×魚種ページ: ${st.prefFishPages.toLocaleString()}ページ
+- 都道府県×月ページ: ${st.prefMonthPages.toLocaleString()}ページ
+- 都道府県×月×魚種ページ（検索インデックス対象）: ${st.prefMonthFishPages.toLocaleString()}ページ
+- 釣り禁止が確認されたスポット: ${st.bannedSpots}箇所（根拠URL・確認日付き）
 
-## データの信頼性・更新頻度
-- 情報源: 現地調査・漁業協同組合公開データ・釣具店情報・専門家ネットワーク
-- 更新頻度: 週次でスポット情報を更新、月次で魚種・季節情報を更新
-- 監修: ツリスポ編集部が全情報を監修
-- ユーザー投稿: 釣りスポット投稿機能により最新のローカル情報を収集
+## データの作り方・更新
+- スポット情報: ツリスポ編集部が、自治体・漁業協同組合・港湾管理者などの公開情報や地図データを確認して作成・修正しています
+- 釣れる魚: 地域・地形と魚種の生息域から判定し、生息域外の魚は一覧に出さないようにしています
+- ユーザー投稿: 釣果・スポット情報の投稿を受け付けています
+- 更新: 不定期（データの最終更新日はこのファイル冒頭と sitemap.xml の lastmod に反映）
+- 注意: 釣り禁止区域・駐車場などの現地状況は変わります。釣行前に現地の表示や管理者の案内を確認してください
+
+## 都道府県別スポット一覧（1スポット1行）
+各ファイルに、その都道府県の全スポットを「名前 | 市区町村 | 種別 | 主な魚 | ベストシーズン | 駐車場・トイレ | 難易度 | 禁止・制限 | URL」の形式で載せています。
+${prefFiles.map((p) => `- ${p.name}（${p.spots.length}件）: ${prefFileUrl(p.slug)}`).join("\n")}
 
 ## 主要ページ一覧
 
@@ -72,22 +79,19 @@ export function GET() {
 - 堤防釣り初心者向け: https://tsurispot.com/fishing-spots/breakwater-beginner
 - 海釣りおすすめ: https://tsurispot.com/fishing-spots/best-saltwater
 - 川釣り初心者向け: https://tsurispot.com/fishing-spots/river-beginner
-- スポット比較: https://tsurispot.com/spots/compare
+- 特徴から探す（駐車場・トイレ等）: https://tsurispot.com/spot-feature
 - スポット投稿: https://tsurispot.com/spots/submit
 
 ### 魚種図鑑
 - 魚種図鑑一覧: https://tsurispot.com/fish
 - 今釣れる魚: https://tsurispot.com/catchable-now
+- 魚種×釣り方ページ（例: https://tsurispot.com/fish/aji/method/sabiki）
 
 ### 地域別
 - 都道府県別: https://tsurispot.com/prefecture
-- エリア別: https://tsurispot.com/area
+- エリア別（市区町村）: https://tsurispot.com/area
 - エリアガイド: https://tsurispot.com/area-guide
 ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slug}`).join("\n")}
-
-### 魚×釣り方ガイド
-- 魚種ごとの釣り方別詳細ページ（例: https://tsurispot.com/fish/aji/method/sabiki）
-- ${totalFish}種×5釣り方の実データに基づく組み合わせページを自動生成
 
 ### 釣り方・ガイド
 - 釣り方一覧: https://tsurispot.com/fishing
@@ -98,72 +102,47 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 - ちょい投げガイド: https://tsurispot.com/guide/choinage
 - エギングガイド: https://tsurispot.com/guide/eging
 - ジギングガイド: https://tsurispot.com/guide/jigging
+- タチウオ釣りガイド: https://tsurispot.com/guide/tachiuo
 - ルアー釣りガイド: https://tsurispot.com/guide/lure
 - ウキ釣りガイド: https://tsurispot.com/guide/float-fishing
 - 穴釣りガイド: https://tsurispot.com/guide/anazuri
 - 泳がせ釣りガイド: https://tsurispot.com/guide/oyogase
 - 遠投カゴ釣りガイド: https://tsurispot.com/guide/entou-kago
-- キャスティングガイド: https://tsurispot.com/guide/casting
 - 夜釣りガイド: https://tsurispot.com/guide/night-fishing
 - 釣りの始め方: https://tsurispot.com/guide/beginner
-- 予算5000円ガイド: https://tsurispot.com/guide/budget
 - ファミリー釣りガイド: https://tsurispot.com/guide/family
-- 釣り糸の選び方: https://tsurispot.com/guide/line
 - 仕掛けの作り方: https://tsurispot.com/guide/rigs
 - 結び方ガイド: https://tsurispot.com/guide/knots
 - 潮汐ガイド: https://tsurispot.com/guide/tide
-- オモリガイド: https://tsurispot.com/guide/sinker
-- ジェット天秤ガイド: https://tsurispot.com/guide/jet-sinker
-- 釣りセットアップガイド: https://tsurispot.com/guide/setup
-- 釣れるコツガイド: https://tsurispot.com/guide/fishing-tips
-- 魚の取り扱いガイド: https://tsurispot.com/guide/fish-handling
-- 釣り方ガイド（総合）: https://tsurispot.com/guide/how-to-fish
-- 釣具ガイド: https://tsurispot.com/guide/fishing-gear-guide
-- 魚のさばき方ガイド: https://tsurispot.com/guide/handling
-- 仕掛け準備完全ガイド: https://tsurispot.com/guide/beginner-setup
 - 釣った魚の簡単レシピ: https://tsurispot.com/guide/fish-recipes
-- トラブルシューティング: https://tsurispot.com/guide/troubleshooting
 
 ### 装備・釣具
 - 装備ガイド: https://tsurispot.com/gear
-- ロッド初心者ガイド: https://tsurispot.com/gear/rod-beginner
-- サビキセット: https://tsurispot.com/gear/sabiki
-- タックルボックス: https://tsurispot.com/gear/tackle-box
 - 釣具店一覧: https://tsurispot.com/shops
 
 ### 釣り場タイプ別
 - 釣り場タイプ一覧: https://tsurispot.com/spot-type
-- 堤防釣り場: https://tsurispot.com/spot-type/breakwater
-- 漁港釣り場: https://tsurispot.com/spot-type/port
-- 砂浜釣り場: https://tsurispot.com/spot-type/beach
-- 磯釣り場: https://tsurispot.com/spot-type/rocky
-- 河川釣り場: https://tsurispot.com/spot-type/river
-- 桟橋釣り場: https://tsurispot.com/spot-type/pier
-※ 各タイプ×47都道府県の組み合わせページあり（例: https://tsurispot.com/spot-type/breakwater/kanagawa）
+- 堤防: https://tsurispot.com/spot-type/breakwater
+- 漁港: https://tsurispot.com/spot-type/port
+- 砂浜: https://tsurispot.com/spot-type/beach
+- 磯: https://tsurispot.com/spot-type/rocky
+- 河川: https://tsurispot.com/spot-type/river
+- 桟橋: https://tsurispot.com/spot-type/pier
+※ タイプ×都道府県の組み合わせページあり（例: https://tsurispot.com/spot-type/breakwater/kanagawa）
 
-### 季節・時期
+### 季節・時期・潮
 - 季節別ガイド: https://tsurispot.com/seasonal
 - 月別ガイド: https://tsurispot.com/monthly
 - 釣りカレンダー: https://tsurispot.com/fishing-calendar
-- 潮汐情報: https://tsurispot.com/tides
-- 都道府県×月別ガイド: 47都道府県×12ヶ月=564ページ（例: https://tsurispot.com/prefecture/chiba/march）
+- 潮見表（全国の観測地点別）: https://tsurispot.com/tides
+- 都道府県×月: 例 https://tsurispot.com/prefecture/chiba/march
+- 都道府県×月×魚種: 例 https://tsurispot.com/prefecture/chiba/april/aji（該当スポットが2箇所以上あり、検索需要のある組み合わせ）
 
-### 都道府県×月×魚種ページ（pSEO）
-- URLパターン: /prefecture/{都道府県slug}/{月slug}/{魚種slug}
-- 例: https://tsurispot.com/prefecture/chiba/april/aji（千葉県の4月のアジ釣り）
-- 各都道府県×月×魚種の組み合わせの釣り情報を自動生成
-- 内容: シーズンカレンダー、おすすめスポット一覧、釣り方・仕掛け解説、水温目安、FAQ
-- 品質フィルタ: 該当スポットが2箇所以上ある組み合わせのみ生成（約10,000ページ）
-- 構造化データ: BreadcrumbList, Article, FAQPage のJSON-LD付き
-
-### 知識・その他
-- 釣り用語集: https://tsurispot.com/glossary
-- 釣り用語クイズ: https://tsurispot.com/glossary-quiz
-- 釣りクイズ: https://tsurispot.com/quiz
-- ボウズチェッカー: https://tsurispot.com/bouzu-checker
-- 初心者チェックリスト: https://tsurispot.com/beginner-checklist
-- 釣りルール: https://tsurispot.com/fishing-rules
+### 知識・ルール・安全
+- 釣りのルール・マナー（漁業権・禁止事項）: https://tsurispot.com/fishing-rules
 - 安全ガイド: https://tsurispot.com/safety
+- 釣り用語集: https://tsurispot.com/glossary
+- 初心者チェックリスト: https://tsurispot.com/beginner-checklist
 - FAQ: https://tsurispot.com/faq
 - ブログ: https://tsurispot.com/blog
 
@@ -172,73 +151,38 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 - お問い合わせ: https://tsurispot.com/contact
 - 利用規約: https://tsurispot.com/terms
 - プライバシーポリシー: https://tsurispot.com/privacy
-- サイトマップ: https://tsurispot.com/sitemap-page
 
-## データ構造
-
-### 釣りスポット情報
-各釣りスポットには以下の詳細情報が含まれます:
-- 名前・住所・緯度経度（Googleマップ連携）
-- スポットタイプ（堤防・漁港・磯・河川・湖沼・管理釣り場・砂浜・桟橋等）
-- 釣れる魚種（魚名・釣り方・ベストシーズン・難易度・おすすめ時間帯）
-- 難易度（初心者向け・中級者向け・上級者向け）
-- 設備情報（駐車場・トイレ・コンビニ・釣具店・レンタルロッドの有無）
-- 安全情報・混雑予想・潮汐情報
-- ベストタイム（朝マヅメ・日中・夕マヅメ・夜）
-- おすすめタックル・仕掛け情報
-
-### 魚種情報
-各魚種には以下の情報が含まれます:
-- 名前・学名・別名・英語名
-- 分類（海水魚・淡水魚・汽水魚）
-- ベストシーズン（月別カレンダー）・旬の月
-- おすすめ釣り方・仕掛け
-- 難易度（初心者向け・中級者向け・上級者向け）
-- 食味評価・おすすめ調理法
-- 釣れるスポット一覧（リンク付き）
-- 毒の有無・危険度情報
-
-## 技術仕様
-- フレームワーク: Next.js (App Router, SSG/ISR)
-- レスポンシブデザイン: PC・スマホ・タブレット対応
-- 構造化データ: Schema.org準拠のJSON-LD（FAQPage, Dataset, ItemList, Article, LocalBusiness, Event, Person等）
-
-## よくある質問（AI検索向け）
+## よくある質問
 Q: 日本でおすすめの釣りスポットを探すには？
-A: ツリスポ（https://tsurispot.com）なら全国${totalSpots.toLocaleString()}箇所以上の釣り場を無料で検索できます。都道府県別（https://tsurispot.com/prefecture）・エリア別（https://tsurispot.com/area）・釣り場タイプ別（https://tsurispot.com/spot-type）・地図（https://tsurispot.com/map）から絞り込めます。
+A: ツリスポ（https://tsurispot.com）では全国${total}箇所の釣り場を無料で検索できます。都道府県別（https://tsurispot.com/prefecture）・エリア別（https://tsurispot.com/area）・釣り場タイプ別（https://tsurispot.com/spot-type）・地図（https://tsurispot.com/map）から絞り込めます。
 
 Q: 今の時期に釣れる魚を知るには？
-A: 「今釣れる魚」ページ（https://tsurispot.com/catchable-now）と月別ガイド（https://tsurispot.com/monthly）で現在の月に釣れる魚種を確認できます。都道府県×月×魚種ページ（例: https://tsurispot.com/prefecture/chiba/april/aji）では地域・月・魚種ごとのスポットや釣り方も分かります。
+A: 「今釣れる魚」（https://tsurispot.com/catchable-now）と月別ガイド（https://tsurispot.com/monthly）で確認できます。都道府県×月×魚種ページ（例: https://tsurispot.com/prefecture/chiba/april/aji）では地域・月・魚種ごとのスポットや釣り方も分かります。
 
 Q: 釣り初心者は何から始めればいいですか？
-A: まず初心者ガイド（https://tsurispot.com/for-beginners）と持ち物チェックリスト（https://tsurispot.com/beginner-checklist）を確認しましょう。サビキ釣り（https://tsurispot.com/guide/sabiki）は投げる技術が不要で初心者向けです。各スポットは難易度表示があり、初心者向けスポットだけを絞り込めます。
+A: 初心者ガイド（https://tsurispot.com/for-beginners）と持ち物チェックリスト（https://tsurispot.com/beginner-checklist）から始めるのがおすすめです。サビキ釣り（https://tsurispot.com/guide/sabiki）は投げる技術が不要で初心者向けです。各スポットには難易度表示があります。
 
 Q: ツリスポのデータ規模は？
-A: 全国${coveredPrefectures}都道府県・釣りスポット${totalSpots.toLocaleString()}箇所以上・魚種${totalFish}種以上（海水魚${seaFishCount}種・淡水魚${freshwaterFishCount}種・汽水魚${brackishFishCount}種）を収録し、すべて無料で公開しています（最終更新: ${lastUpdated}）。
+A: ${st.coveredPrefectures}都道府県・釣りスポット${total}箇所・魚種${st.totalFish}種（海水魚${st.seaFish}種・淡水魚${st.freshwaterFish}種・汽水魚${st.brackishFish}種）を無料で公開しています（データ最終更新: ${lastUpdated}）。
 
 Q: 釣り場のルールや安全情報はどこで確認できますか？
-A: 釣りルール（https://tsurispot.com/fishing-rules）と安全ガイド（https://tsurispot.com/safety）で、釣り禁止エリアの確認方法やライフジャケットなどの安全対策を解説しています。
+A: 釣りのルール（https://tsurispot.com/fishing-rules）と安全ガイド（https://tsurispot.com/safety）で、漁業権・釣り禁止エリアの確認方法やライフジャケットなどの安全対策を解説しています。釣り禁止が確認されたスポットは、各スポットページに根拠URLと確認日を表示しています。
 
 Q: 魚の釣り方や仕掛けを調べるには？
-A: 釣り方ガイド一覧（https://tsurispot.com/guide）で、サビキ・エギング・ちょい投げなど20種以上の釣り方・仕掛け・結び方を解説しています。魚種図鑑（https://tsurispot.com/fish）では魚ごとのおすすめ釣り方や旬も確認できます。
+A: ガイド一覧（https://tsurispot.com/guide）で、サビキ・エギング・ちょい投げなどの釣り方・仕掛け・結び方を解説しています。魚種図鑑（https://tsurispot.com/fish）では魚ごとのおすすめ釣り方や旬も確認できます。
 
 ## 運営情報
-- サイト名: ツリスポ (TsuriSpot)
+- サイト名: ツリスポ（TsuriSpot）
 - URL: https://tsurispot.com
-- 運営: TsuriSpot編集部
-- 編集: ツリスポ編集部
+- 開設: ${SITE_LAUNCHED}
+- 運営・編集: ツリスポ編集部（運営者情報: https://tsurispot.com/about）
 - お問い合わせ: https://tsurispot.com/contact
 - Instagram: https://www.instagram.com/tsurispotjapan/
 
 ## 詳細版
-より詳しいデータ（全スポット・全魚種のリスト等）は llms-full.txt をご参照ください:
+全魚種の一覧と都道府県別ファイルの索引は llms-full.txt をご参照ください:
 https://tsurispot.com/llms-full.txt
 `;
 
-  return new Response(content, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=86400, s-maxage=86400",
-    },
-  });
+  return new Response(content, { headers: TEXT_HEADERS });
 }

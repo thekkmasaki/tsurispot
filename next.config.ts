@@ -295,6 +295,13 @@ const nextConfig: NextConfig = {
       ],
     },
     {
+      // 都道府県別スポット一覧（llms-full.txt を分割したもの）
+      source: "/llms/:file*",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400" },
+      ],
+    },
+    {
       source: "/sitemap.xml",
       headers: [
         { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
