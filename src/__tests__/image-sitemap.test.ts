@@ -22,8 +22,17 @@ describe("image-sitemap.xml", () => {
     const res = await GET();
     const body = await res.text();
     const imageCount = (body.match(/<image:loc>/g) || []).length;
-    expect(imageCount).toBeGreaterThan(1000);
+    // 2026-11: 実在する画像だけに絞った（placeholder 等の404を除外）ため 500件前後が正常値
+    expect(imageCount).toBeGreaterThan(300);
     // <url> ブロックは必ず <image:image> を1つ以上含む
     expect(body).not.toMatch(/<url>\s*<loc>[^<]*<\/loc>\s*<\/url>/);
+  });
+
+  it("404になるプレースホルダー画像・廃止タグ(image:title/caption)を含まない", async () => {
+    const res = await GET();
+    const body = await res.text();
+    expect(body).not.toContain("placeholder");
+    expect(body).not.toContain("<image:title>");
+    expect(body).not.toContain("<image:caption>");
   });
 });

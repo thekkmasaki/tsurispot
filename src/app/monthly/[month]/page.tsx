@@ -54,6 +54,7 @@ import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
 import { getIndexablePrefMonthFishCombos } from "@/lib/data";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 import { MonthFishTable, buildMonthFishRows } from "@/components/seo/month-fish-table";
+import { latestYmd, fileYmd } from "@/lib/content-dates";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -353,7 +354,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
       headline: guide.title,
       description: guide.description,
       datePublished: "2025-06-01",
-      dateModified: new Date().toISOString().split("T")[0],
+      dateModified: latestYmd(fileYmd("src/lib/data/monthly-guides.ts")),
       url: `https://tsurispot.com/monthly/${month}`,
       author: {
         "@type": "Organization",

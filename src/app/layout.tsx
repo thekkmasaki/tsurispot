@@ -114,7 +114,6 @@ export const metadata: Metadata = {
   classification: "fishing, outdoor recreation, Japan travel",
   other: {
     "ai-content-declaration": "human-created",
-    "supported-models": "GPTBot, ClaudeBot, PerplexityBot, Google-Extended",
   },
 };
 
@@ -204,7 +203,7 @@ export default function RootLayout({
               logo: "https://tsurispot.com/logo.svg",
               description:
                 `全国${SPOT_COUNT}箇所以上の釣りスポットを掲載する総合情報サイト。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供。`,
-              foundingDate: "2025",
+              foundingDate: "2026-02",
               publishingPrinciples: "https://tsurispot.com/about/editorial-policy",
               contactPoint: {
                 "@type": "ContactPoint",
