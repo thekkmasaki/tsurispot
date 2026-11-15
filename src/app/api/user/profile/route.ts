@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
+import { USER_VISIBILITY_TAG } from "@/lib/private-author-lookup";
 import { auth } from "@/lib/auth";
 import { updateProfile, deleteUser, getUserById, STYLE_TAGS } from "@/lib/user-store";
 import { checkNgWords } from "@/lib/moderation";
@@ -174,6 +176,16 @@ export async function PATCH(request: Request) {
   const updated = await updateProfile(session.user.tsuriId, patch);
   if (!updated) {
     return NextResponse.json({ error: "更新に失敗しました" }, { status: 500 });
+  }
+
+  // 公開/非公開・表示名の変更を、ISR ページ（スポット詳細の釣果・写真の投稿者表示）へ反映する。
+  // タグは private-author-lookup.ts のキャッシュと、それを使ったページの両方に付く。
+  if ("isPublic" in patch || "nickname" in patch) {
+    try {
+      revalidateTag(USER_VISIBILITY_TAG, { expire: 0 });
+    } catch (err) {
+      console.error("[プロフィール] 公開設定キャッシュの失効に失敗:", err);
+    }
   }
 
   // ユーザー検索索引の更新（失敗しても本操作は成功扱い）

@@ -42,6 +42,14 @@ function w<A extends unknown[], R>(
 
 // ---- 読み取り ----
 export const getUserById = read.getUserById;
+/** 公開/非公開判定専用（失敗時は throw＝呼び出し側で fail-closed）。dynamo の getUserById は元々 throw する */
+export const getUserVisibilityStrict: (id: string) => Promise<{ nickname: string; isPublic?: boolean } | null> =
+  MODE === "dynamo"
+    ? async (id) => {
+        const u = await dynamo.getUserById(id);
+        return u ? { nickname: u.nickname, isPublic: u.isPublic } : null;
+      }
+    : redis.getUserVisibilityStrict;
 export const getUserByProvider = read.getUserByProvider;
 export const getUserFavorites = read.getUserFavorites;
 export const isFollowing = read.isFollowing;

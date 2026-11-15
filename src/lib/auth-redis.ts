@@ -95,6 +95,21 @@ export async function getUserByProvider(
   return await parseUser(key, userRaw);
 }
 
+/**
+ * 投稿者表示の公開/非公開判定専用。getUserById と違い取得失敗を握りつぶさず throw する
+ * （呼び出し側の maskPrivateAuthors が「伏せる側」に倒すため＝fail-closed）。
+ * ユーザーが存在しなければ null。
+ */
+export async function getUserVisibilityStrict(
+  userId: string,
+): Promise<{ nickname: string; isPublic?: boolean } | null> {
+  const key = `${USER_PREFIX}${userId}`;
+  const userRaw = await redis.get(key);
+  if (userRaw === null || userRaw === undefined) return null;
+  const user = (typeof userRaw === "string" ? JSON.parse(userRaw) : userRaw) as TsuriSpotUser;
+  return { nickname: user.nickname, isPublic: user.isPublic };
+}
+
 /** UUIDからユーザーを取得 */
 export async function getUserById(
   userId: string,

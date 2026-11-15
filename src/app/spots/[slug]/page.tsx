@@ -272,11 +272,12 @@ async function getInitialCommunityPhotos(slug: string): Promise<PublicSpotPhoto[
     const { dbGet } = await import("@/lib/dynamodb");
     const photos = await dbGet<SpotPhotoEntryLike[]>(`SPOT#${slug}`, "PHOTOS");
     if (!photos || photos.length === 0) return [];
-    const [{ getUserById }, { toPublicSpotPhotos }] = await Promise.all([
-      import("@/lib/user-store"),
+    // ISR 中の no-store fetch を避けるためキャッシュ境界内のルックアップを使う（private-author-lookup.ts 参照）
+    const [{ getUserVisibilityCached }, { toPublicSpotPhotos }] = await Promise.all([
+      import("@/lib/private-author-lookup"),
       import("@/lib/spot-photo-public"),
     ]);
-    return await toPublicSpotPhotos(photos, getUserById);
+    return await toPublicSpotPhotos(photos, getUserVisibilityCached);
   } catch {
     return [];
   }
