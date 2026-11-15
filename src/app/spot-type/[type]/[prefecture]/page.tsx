@@ -15,6 +15,7 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { MIN_SPOTS_PER_PREF } from "@/lib/data/spot-features";
 
 type PageProps = {
   params: Promise<{ type: string; prefecture: string }>;
@@ -75,6 +76,8 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://tsurispot.com/spot-type/${type}/${prefecture}`,
     },
+    // 薄い一覧（spot-feature と同じ最小件数ルール）は noindex,follow。sitemap からも除外済み。
+    robots: spots.length < MIN_SPOTS_PER_PREF ? { index: false, follow: true } : undefined,
   };
 }
 

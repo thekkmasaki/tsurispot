@@ -24,6 +24,7 @@ import {
   buildShopAreaTitle,
 } from "@/lib/seo/shop-meta";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { MIN_SPOTS_PER_PREF } from "@/lib/data/spot-features";
 
 type Params = Promise<{ prefecture: string }>;
 
@@ -103,6 +104,8 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://tsurispot.com/shops/area/${prefecture}`,
     },
+    // 掲載店舗が少ない県は薄い一覧なので noindex,follow（spot-feature と同じ最小件数ルール。sitemap も同条件で除外）
+    robots: shops.length < MIN_SPOTS_PER_PREF ? { index: false, follow: true } : undefined,
   };
 }
 
