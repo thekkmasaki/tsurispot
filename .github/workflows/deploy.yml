@@ -26,6 +26,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        # sitemap lastmod / JSON-LD dateModified を git の実更新日から生成する（scripts/gen-content-dates.mjs）
+        # ため全履歴が必要。blob:none でコミットとツリーだけ取得し、転送量を抑える。
+        with:
+          fetch-depth: 0
+          filter: blob:none
 
       # ランナーのディスク解放（重いビルド対策）。
       # 2026-07: このリポジトリは next build(standalone) + docker build/push が重く、

@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "dev": "NODE_OPTIONS='--max-old-space-size=4096' next dev --turbopack",
+    "prebuild": "node scripts/gen-content-dates.mjs",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start",
     "lint": "eslint",
