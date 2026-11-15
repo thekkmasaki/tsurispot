@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
-import { getStripeCustomerId, setStripeCustomerId, getShopSubscription, verifyShopToken } from "@/lib/shop-plan";
+import { getStripeCustomerId, setStripeCustomerId, getShopSubscription } from "@/lib/shop-plan";
+import { verifyShopAuth } from "@/lib/shop-session";
 import { checkStripeCheckoutEnv } from "@/lib/stripe-env";
 
 export async function POST(request: NextRequest) {
-  let body: { shopSlug: string; plan: string; token: string };
+  let body: { shopSlug?: unknown; plan?: unknown; token?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -13,8 +14,8 @@ export async function POST(request: NextRequest) {
   }
 
   const { shopSlug, plan, token } = body;
-  if (!shopSlug || !plan || !token) {
-    return NextResponse.json({ error: "shopSlug, plan, token required" }, { status: 400 });
+  if (typeof shopSlug !== "string" || !shopSlug || !plan) {
+    return NextResponse.json({ error: "shopSlug, plan required" }, { status: 400 });
   }
   if (plan !== "basic" && plan !== "pro") {
     return NextResponse.json({ error: "invalid plan" }, { status: 400 });
@@ -33,10 +34,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // トークン認証
+  // 認証（shop_session Cookie または後方互換の body.token）
   let tokenOk = false;
   try {
-    tokenOk = typeof token === "string" && typeof shopSlug === "string" && (await verifyShopToken(shopSlug, token));
+    tokenOk = await verifyShopAuth(request, shopSlug, token);
   } catch {
     return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
   }
@@ -75,8 +76,9 @@ export async function POST(request: NextRequest) {
     mode: "subscription",
     line_items: [{ price: priceId, quantity: 1 }],
     metadata: { shopSlug, plan },
-    success_url: `${origin}/shops/${shopSlug}/dashboard?token=${token}&subscribed=true&plan=${plan}`,
-    cancel_url: `${origin}/subscribe/${plan}?shop=${shopSlug}&token=${token}`,
+    // トークンは URL に載せない（Stripe 側ログ・履歴・Referer への漏えい防止）。戻り先では shop_session Cookie で認証する
+    success_url: `${origin}/shops/${shopSlug}/dashboard?subscribed=true&plan=${plan}`,
+    cancel_url: `${origin}/subscribe/${plan}?shop=${shopSlug}`,
     locale: "ja",
   };
 

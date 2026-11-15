@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { getFishSpeciesWithSpots } from "@/lib/data";
 import { CatchableNowClient } from "./catchable-now-client";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // 「今の月」がビルド時刻で焼き付かないよう日次ISR + リクエスト時算出
 export const revalidate = 86400;
@@ -62,7 +63,7 @@ export default function CatchableNowPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <InArticleAd className="my-8" />
       {/* useSearchParams を使う Client Component は Suspense 境界が必須 */}

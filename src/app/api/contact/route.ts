@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { dbIncr } from "@/lib/dynamodb";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { sendToInbox } from "@/lib/gas-inbox";
 
 const GAS_URL = process.env.GAS_CATCH_REPORT_URL;
@@ -9,27 +9,13 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-// IPベースのレート制限（1IP 1分間に5回まで）
-async function checkRateLimit(ip: string): Promise<boolean> {
-  try {
-    const count = await dbIncr(`RATELIMIT#${ip}`, "CONTACT", 1, 60);
-    return count <= 5;
-  } catch {
-    return true; // DB障害時は通す
-  }
-}
-
 export async function POST(request: Request) {
   if (!GAS_URL) {
     return NextResponse.json({ error: "Not configured" }, { status: 503 });
   }
 
-  // Cloudflare 前段のため cf-connecting-ip を優先
-  const ip =
-    request.headers.get("cf-connecting-ip") ||
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    "unknown";
-  const allowed = await checkRateLimit(ip);
+  // IPベースのレート制限（1IP 1分間に5回まで・共有の固定ウィンドウ方式）
+  const allowed = await checkRateLimit(getClientIp(request), "CONTACT", 5, 60);
   if (!allowed) {
     return NextResponse.json(
       { error: "送信回数の上限に達しました。しばらくしてからお試しください。" },

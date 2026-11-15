@@ -36,6 +36,7 @@ import { type LucideIcon } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { GuideListFilter } from "@/components/guide/guide-list-filter";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface GuideItem {
   href: string;
@@ -287,7 +288,7 @@ export default function GuidePage() {
     <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageJsonLd) }}
       />
       <div className="mb-4">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りガイド" }]} />

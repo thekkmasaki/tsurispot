@@ -33,6 +33,7 @@ import {
 } from "@/components/fishing/spot-list-with-filter";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface Props {
   params: Promise<{ method: string; month: string }>;
@@ -169,7 +170,7 @@ export default async function MethodMonthPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
+          __html: safeJsonLd(
             [breadcrumbJsonLd, faqJsonLd, howToJsonLd].filter(Boolean)
           ),
         }}

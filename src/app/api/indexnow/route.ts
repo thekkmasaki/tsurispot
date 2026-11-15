@@ -3,7 +3,9 @@
 //（.github/workflows/deploy.yml の「IndexNow 差分送信」ステップ）へ移行した。
 // かつて存在した全量ping（GET ?full=true で 7,000+URL を一括バッチ送信）は、
 // Bing のバッチモード非推奨・未変更URL再送非推奨に反する上、無認証GETで誰でも誘発できたため廃止。
-// ここに残すのは GET（重要ナビゲーションページのみ・手動/補助用）と POST（指定URLの手動送信）のみ。
+// ここに残すのは POST（指定URLの手動送信）のみ。
+// 【2026-11】無認証で誰でも IndexNow 送信を誘発できた GET（重要ナビゲーションページ送信）は
+// 呼び出し元が無い（workflows/scripts を確認済み）ため削除した。GET は 405 になる。
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
@@ -49,43 +51,6 @@ async function submitToIndexNow(urlList: string[]): Promise<{ submitted: number;
   }
 
   return { submitted: urlList.length, batches, status: statuses };
-}
-
-/**
- * 重要ページのみを収集（デプロイ時のデフォルト送信用）
- * Bingの推奨: Batch Modeの過度な使用を避ける
- */
-function collectImportantUrls(): string[] {
-  const urls: string[] = [];
-
-  // トップページ・主要ナビゲーションページのみ
-  const importantPages = [
-    "", "/spots", "/fish", "/map", "/catchable-now", "/ranking",
-    "/fishing-calendar", "/for-beginners", "/fishing",
-    "/guide", "/gear", "/methods", "/glossary", "/seasonal",
-    "/fishing-rules", "/faq", "/shops", "/blog", "/area-guide",
-    "/monthly", "/prefecture", "/area",
-  ];
-  for (const page of importantPages) {
-    urls.push(`${BASE_URL}${page}`);
-  }
-
-  return urls;
-}
-
-/**
- * GET: 重要ナビゲーションページのみIndexNowに送信（手動/補助用）。
- * 全URL送信（旧 ?full=true）は廃止。新規/更新ページの通知はデプロイ時の差分送信が担う。
- */
-export async function GET() {
-  const urls = collectImportantUrls();
-  const result = await submitToIndexNow(urls);
-
-  return NextResponse.json({
-    success: true,
-    message: `IndexNowに${result.submitted}件の重要ページを送信しました`,
-    ...result,
-  });
 }
 
 /**

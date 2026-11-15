@@ -32,6 +32,7 @@ import {
   buildFaqJsonLd,
   buildItemListJsonLd,
 } from "@/lib/seo/article-jsonld";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ month: string; regionGroup: string }>;
@@ -429,7 +430,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbJsonLd, articleJsonLd, faqJsonLd, itemListJsonLd]),
+          __html: safeJsonLd([breadcrumbJsonLd, articleJsonLd, faqJsonLd, itemListJsonLd]),
         }}
       />
 

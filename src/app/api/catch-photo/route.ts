@@ -3,6 +3,8 @@ import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-use
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { readMultipartFile, validateAndUploadImage } from "@/lib/image-upload";
 import { rejectInactiveUser } from "@/lib/user-status";
+import { deleteFromS3 } from "@/lib/s3";
+import { recordUploadOwner, uploaderIdFor } from "@/lib/upload-owner";
 
 export async function POST(request: NextRequest) {
   // レート制限（S3 + Rekognition 課金の濫用防止）: 1IP 10分間に 20 枚まで
@@ -36,6 +38,18 @@ export async function POST(request: NextRequest) {
   const result = await validateAndUploadImage(parsed.file, "catch-reports", "catch-photo");
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: result.status });
+  }
+  // 誰がアップしたかを24時間控える（投稿時に他人の写真・放置写真の流用を防ぐ）。
+  // 控えられなかった写真は投稿に使えないので、ここで消して失敗を返す
+  try {
+    await recordUploadOwner(result.key, uploaderIdFor(tsuriId, getClientIp(request)));
+  } catch (err) {
+    console.error("[catch-photo] アップロード者の記録エラー:", err);
+    await deleteFromS3(result.url).catch(() => {});
+    return NextResponse.json(
+      { error: "アップロードに失敗しました。しばらくしてから再度お試しください。" },
+      { status: 503 },
+    );
   }
   return NextResponse.json({ ok: true, url: result.url });
 }

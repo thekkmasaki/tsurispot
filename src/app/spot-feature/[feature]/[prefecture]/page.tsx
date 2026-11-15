@@ -23,6 +23,7 @@ import {
 } from "@/lib/data/spot-features";
 import { WaterTypeFilter } from "@/components/spots/water-type-filter";
 import { countByWaterType, pickForWaterFilter } from "@/lib/water-type";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = { params: Promise<{ feature: string; prefecture: string }> };
 
@@ -167,7 +168,7 @@ export default async function SpotFeaturePrefPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
       <Breadcrumb
         items={[
           { label: "ホーム", href: "/" },

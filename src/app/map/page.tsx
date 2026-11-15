@@ -3,6 +3,7 @@ import { MapWrapper } from "@/components/map/map-wrapper";
 import { FeaturedAreas } from "@/components/map/featured-areas";
 import { fishingSpots } from "@/lib/data/spots";
 import { toMapSpots } from "@/lib/data/list-spot";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "地図で釣りスポットを探す - 全国の釣り場マップ",
@@ -47,7 +48,7 @@ export default function MapPage() {
     <main className="container mx-auto px-4 py-4 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <div className="mb-4 sm:mb-6">
         <h1 className="text-xl font-bold tracking-tight sm:text-3xl">

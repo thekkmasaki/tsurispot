@@ -38,6 +38,7 @@ import {
   buildHowToJsonLd,
 } from "@/lib/seo/article-jsonld";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ slug: string; fishSlug: string }>;
@@ -429,7 +430,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdArray) }}
       />
 
       {/* パンくず */}

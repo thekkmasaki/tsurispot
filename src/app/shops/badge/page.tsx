@@ -5,6 +5,7 @@ import { Award, ChevronRight, Mail } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { BadgeSnippet } from "@/components/shops/badge-snippet";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "掲載店バッジのご案内｜釣具店オーナー向け",
@@ -38,7 +39,7 @@ export default function ShopBadgePage() {
     <div className="min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <div className="container mx-auto max-w-3xl px-4 py-8">
         <Breadcrumb

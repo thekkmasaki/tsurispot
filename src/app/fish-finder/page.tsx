@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { fishSpecies } from "@/lib/data/fish";
 import type { FishSpecies } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // --- Metadata (handled via export below since this is "use client") ---
 // Metadata is set in layout or via generateMetadata in a separate file.
@@ -276,7 +277,7 @@ export default function FishFinderPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-cyan-50 to-white">

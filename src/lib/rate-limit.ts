@@ -1,5 +1,6 @@
 import { isIP } from "node:net";
 import { dbIncr } from "@/lib/dynamodb";
+import { safeEqual } from "@/lib/safe-compare";
 
 /**
  * IPベースの簡易レート制限（DynamoDBのカウンタ+TTLを利用）。
@@ -40,16 +41,33 @@ function validIp(raw: string | null | undefined): string | null {
 
 /**
  * リクエストヘッダからクライアントIPを推定する。
- * 本番は Cloudflare 前段のため cf-connecting-ip を最優先し、無ければ x-forwarded-for の先頭。
- * 注意: これらのヘッダはオリジン直アクセスでは偽装できる。偽装を防ぐには
- * ORIGIN_LOCKDOWN_MODE=enforce（Cloudflare経由のみ許可・src/proxy.ts）が前提となる。
  * 不正な値（IP形式でない文字列）はレート制限キーの汚染を防ぐため採用しない。
+ *
+ * ORIGIN_VERIFY_SECRET 設定時（Cloudflare が秘密ヘッダ x-origin-verify を付与する前提）:
+ *   - x-origin-verify が一致（定数時間比較）した場合のみ cf-connecting-ip を信頼する
+ *   - 一致しない（= オリジン直アクセス）場合は cf-connecting-ip / x-forwarded-for 先頭を
+ *     偽装可能とみなし、x-forwarded-for の右端（自前のロードバランサが付与した値）を使う
+ * ORIGIN_VERIFY_SECRET 未設定時: 従来どおり cf-connecting-ip → x-forwarded-for 先頭
+ *   （インフラ設定が完了するまで本番挙動を変えないため）。
  */
 export function getClientIp(request: Request): string {
+  const h = request.headers;
+  const secret = process.env.ORIGIN_VERIFY_SECRET;
+  if (secret) {
+    if (safeEqual(h.get("x-origin-verify"), secret)) {
+      const cf = validIp(h.get("cf-connecting-ip"));
+      if (cf) return cf;
+    }
+    return (
+      validIp(h.get("x-forwarded-for")?.split(",").pop()) ||
+      validIp(h.get("x-real-ip")) ||
+      "unknown"
+    );
+  }
   return (
-    validIp(request.headers.get("cf-connecting-ip")) ||
-    validIp(request.headers.get("x-forwarded-for")?.split(",")[0]) ||
-    validIp(request.headers.get("x-real-ip")) ||
+    validIp(h.get("cf-connecting-ip")) ||
+    validIp(h.get("x-forwarded-for")?.split(",")[0]) ||
+    validIp(h.get("x-real-ip")) ||
     "unknown"
   );
 }

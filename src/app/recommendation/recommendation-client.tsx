@@ -36,6 +36,7 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import type { ListSpot } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 // /recommendation はクライアントに全2,141スポット＋全100魚種を渡すため、RSCペイロード/
 // ハイドレーション削減用に必要フィールドだけの軽量型を定義する。特に cf.fish の完全 RecoFish
 // （24フィールド）が数千回直列化されるのを {slug,name} のみに削減するのが主目的。
@@ -847,7 +848,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">

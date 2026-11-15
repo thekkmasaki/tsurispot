@@ -30,6 +30,8 @@ import { verifyAppToken } from "@/lib/app-link/store";
 import { getUserById } from "@/lib/user-store";
 import { getUserStatus } from "@/lib/user-status";
 
+const OLD_ACCOUNT = "2025-01-01T00:00:00.000Z";
+
 const post = (body: unknown) =>
   POST(new Request("http://localhost/api/report-flag", { method: "POST", body: JSON.stringify(body) }));
 
@@ -40,7 +42,23 @@ describe("report-flag", () => {
     vi.mocked(getPostMeta).mockResolvedValue({ id: "tw-1" } as never);
     vi.mocked(dbConditionalPut).mockResolvedValue(true);
     vi.mocked(dbIncr).mockResolvedValue(1);
+    vi.mocked(getUserById).mockResolvedValue({ id: "u1", createdAt: OLD_ACCOUNT } as never);
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
+  });
+
+  it("登録7日未満・登録日不明のアカウントの通報は記録するが自動非表示の票に数えない", async () => {
+    vi.mocked(dbIncr).mockResolvedValue(3);
+    vi.mocked(getUserById).mockResolvedValue({
+      id: "u1",
+      createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    } as never);
+    expect((await post({ reportId: "tw-1" })).status).toBe(200);
+    vi.mocked(getUserById).mockResolvedValue({ id: "u1" } as never);
+    expect((await post({ reportId: "tw-1" })).status).toBe(200);
+    expect(dbConditionalPut).toHaveBeenCalledWith("REPORT#tw-1", "USERFLAG#u1", "1", expect.any(Number));
+    expect(dbIncr).toHaveBeenCalledWith("REPORT#tw-1", "FLAGCOUNT_NEWACCOUNT");
+    expect(dbIncr).not.toHaveBeenCalledWith("REPORT#tw-1", "FLAGCOUNT");
+    expect(dbPut).not.toHaveBeenCalled();
   });
 
   it("未ログインは 401 で何も記録しない", async () => {

@@ -4,13 +4,29 @@ import { dbConditionalPut, dbGet, dbIncr, dbPut, dbQuery } from "@/lib/dynamodb"
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { getPostMeta, type PostComment } from "@/lib/social-store";
 import { rejectInactiveUser } from "@/lib/user-status";
+import { getUserById } from "@/lib/user-store";
 import { readJsonBody, resolveSpot } from "@/lib/ugc-validation";
 
-// 自動非表示の閾値。通報者は【ログイン済みユニークユーザー】のみカウントする
+// 自動非表示の閾値。通報者は【登録7日以上のログイン済みユニークユーザー】のみカウントする
 // （匿名セッションIDは無限に作れるため、2件で他人の投稿を消せてしまっていた）。
 const FLAG_THRESHOLD = 3;
 
 const REPORT_ID_RE = /^(ugc|tw|cmt|contrib)-[0-9a-z-]{1,90}$/;
+
+// 自動非表示の票に数えるアカウントの最低登録日数
+const MIN_REPORTER_ACCOUNT_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+
+/** 登録から7日以上たったアカウントか。登録日が分からないときは数えない（fail-closed） */
+async function isTrustedReporter(tsuriId: string): Promise<boolean> {
+  try {
+    const user = await getUserById(tsuriId);
+    const created = user?.createdAt ? Date.parse(user.createdAt) : NaN;
+    if (!Number.isFinite(created)) return false;
+    return Date.now() - created >= MIN_REPORTER_ACCOUNT_AGE_MS;
+  } catch {
+    return false;
+  }
+}
 
 /**
  * 運営向けモデレーション通知（Discord・ベストエフォート）。
@@ -126,6 +142,21 @@ export async function POST(request: Request) {
     );
     if (!firstTime) {
       return NextResponse.json({ ok: true, message: "既に通報済みです" });
+    }
+
+    // 作ったばかりのアカウントを量産して他人の投稿を消せないよう、自動非表示の票に数えるのは
+    // 登録から7日以上たったアカウントだけ。新しいアカウントの通報は別カウンタに記録し、運営確認に回す
+    if (!(await isTrustedReporter(tsuriId))) {
+      const untrusted = await dbIncr(`REPORT#${reportId}`, "FLAGCOUNT_NEWACCOUNT");
+      if (untrusted === 1) {
+        notifyModeration(
+          `⚠️ 投稿に通報（登録7日未満のアカウントから・自動非表示の対象外）: reportId=${reportId}`,
+        );
+      }
+      return NextResponse.json({
+        ok: true,
+        message: "通報を受け付けました。ご協力ありがとうございます。",
+      });
     }
 
     // 通報カウントをインクリメント

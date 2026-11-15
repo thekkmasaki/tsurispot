@@ -7,6 +7,7 @@ import { checkNgWords } from "@/lib/moderation";
 import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { gasAuthField } from "@/lib/gas-inbox";
 import { savePostMeta, addToGlobalFeed, sanitizeTags, addTagsForPost } from "@/lib/social-store";
 import { fishSpecies } from "@/lib/data/fish";
 import { rejectInactiveUser } from "@/lib/user-status";
@@ -14,6 +15,7 @@ import { isReservedName, RESERVED_NAME_ERROR } from "@/lib/reserved-names";
 import { isOwnImageUrl, isRealDate, readJsonBody, resolveSpot, todayJst } from "@/lib/ugc-validation";
 import type { PostCatchResult } from "@/lib/catch-result";
 import { generateDeleteKey, saveDeleteKey } from "@/lib/ugc-delete-key";
+import { isUploadOwnedBy, UPLOAD_OWNER_ERROR } from "@/lib/upload-owner";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -167,6 +169,10 @@ export async function POST(request: Request) {
     // オプショナルフィールドのバリデーション
     if (photoUrl !== undefined && !isOwnImageUrl(photoUrl, "catch-reports/")) {
       return NextResponse.json({ error: "写真URLが不正です" }, { status: 400 });
+    }
+    // 自分が直近24時間にアップした写真だけ付けられる（他人の写真・放置写真の流用防止）
+    if (photoUrl !== undefined && !(await isUploadOwnedBy(photoUrl, tsuriId, getClientIp(request)))) {
+      return NextResponse.json({ error: UPLOAD_OWNER_ERROR }, { status: 400 });
     }
     if (sizeCm !== undefined && (typeof sizeCm !== "number" || sizeCm < 0 || sizeCm > 300)) {
       return NextResponse.json({ error: "サイズは0〜300cmの範囲で入力してください" }, { status: 400 });
@@ -397,6 +403,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           ...reportData,
           spotUrl: slug ? `https://tsurispot.com/spots/${slug}` : "",
+          ...gasAuthField(),
         }),
         redirect: "follow",
       }).catch((err) => {

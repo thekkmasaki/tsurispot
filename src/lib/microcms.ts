@@ -1,6 +1,7 @@
 import { createClient } from "microcms-js-sdk";
 import type { BlogPost } from "./data/blog";
 import { addSponsoredRel } from "./blog/affiliate-rel";
+import { sanitizeArticleHtml } from "./sanitize-html";
 
 type MicroCMSClient = ReturnType<typeof createClient>;
 
@@ -82,8 +83,9 @@ export function microCMSToBlogPost(item: MicroCMSBlogResponse): BlogPost {
     description: item.description || "",
     // 一覧フェッチ(fetchMicroCMSBlogPosts)は fields で content を除外するため undefined になり得る。
     // 詳細フェッチ(fetchMicroCMSBlogBySlug)では全文が入る。BlogPost.content:string を満たすため既定 ""。
-    // microCMS は保存時に rel="sponsored" を剥がすため、アフィリエイトリンクに表示時に付け直す
-    content: addSponsoredRel(item.content ?? ""),
+    // microCMS は保存時に rel="sponsored" を剥がすため、アフィリエイトリンクに表示時に付け直す。
+    // 本文は dangerouslySetInnerHTML で描画されるため、先に許可リストで無害化する（XSS 対策・表示は不変）
+    content: addSponsoredRel(sanitizeArticleHtml(item.content ?? "")),
     category,
     tags: item.tags ? item.tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
     publishedAt: item.publishedAt.split("T")[0],

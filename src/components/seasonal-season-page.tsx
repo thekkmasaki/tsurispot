@@ -21,6 +21,7 @@ import { seasons } from "@/lib/data/seasonal-data";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface SeasonPageProps {
   season: SeasonInfo;
@@ -116,11 +117,11 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleJsonLd) }}
       />
 
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">

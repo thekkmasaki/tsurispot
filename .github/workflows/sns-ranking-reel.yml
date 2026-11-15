@@ -4,15 +4,16 @@ name: SNS ランキング投稿（Instagramリール / Threads）
 # 生成器: scripts/sns/ranking-reel/（サイトの県×月×魚種ページと同じデータ・掲載基準）
 #
 # 投稿時刻: JST 20:00 ごろ（帰宅後のアクティブ帯）。
-# GitHub の定時実行は毎日5〜10時間遅れていた（20:00予定→実際は深夜1〜6時に投稿）ため、
-# 早めに2回起動し、gate ジョブで JST 19:55 まで待ってから投稿する。
-# 遅れすぎて日付をまたいだ（JST 0〜12時）起動は「前日の分」として投稿する（--date に前日を渡す。
-# 当日扱いにすると、その日の20時の分が投稿済み扱いでスキップされてしまうため）。
-# 2回目の起動は、その日すでに投稿済みなら run.mjs が何もしない。
+# GitHub の定時実行は 5〜15 時間も遅れ、ばらつく（2026-11: 15:17 指定が実際は翌3:30 起動＝未明に投稿されていた）。
+# 遅れが読めないので、毎時起動して gate ジョブで判定する（公開リポジトリなので Actions は無料）:
+#   - JST 12:00 前の起動 … 何もしない（未明・朝には投稿しない）
+#   - 14:55〜19:55 の起動 … 19:55 まで待って投稿（待ちは最長5時間。それより早い起動は次の回に任せる）
+#   - 19:55〜24:00 の起動 … すぐ投稿
+#   - その日すでに投稿済みなら、どの時間でも何もしない（台帳を見るだけなので数秒で終わる）
+# PC には頼らない（ユーザー方針）。
 on:
   schedule:
-    - cron: '17 6 * * *'   # JST 15:17 起動 → 19:55 まで待つ
-    - cron: '47 8 * * *'   # JST 17:47 起動（1回目が大きく遅れたときの保険）
+    - cron: '23 * * * *'   # 毎時（遅れても、どれかが JST 15〜24時に当たる）
   workflow_dispatch:
     inputs:
       dry_run:
@@ -36,25 +37,38 @@ concurrency:
 jobs:
   gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 320
     outputs:
       date: ${{ steps.wait.outputs.date }}
+      post: ${{ steps.wait.outputs.post }}
+    env:
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
     steps:
-      - name: 投稿時刻（JST 19:55）まで待つ
+      - name: 投稿するか判定（JST 19:55〜24:00 に投稿・投稿済みなら何もしない）
         id: wait
         run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then exit 0; fi
+          if [ "${{ github.event_name }}" != "schedule" ]; then echo "post=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          today=$(TZ=Asia/Tokyo date +%F)
+          posted() {
+            curl -sf -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN" "$UPSTASH_REDIS_REST_URL/lrange/sns:ranking:ledger/0/9" \
+              | jq -r '.result[]' | jq -s --arg d "$today" 'any(.date == $d and .ok == true)' | grep -q true
+          }
+          if posted; then echo "$today は投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           h=$(TZ=Asia/Tokyo date +%-H)
-          if [ "$h" -lt 12 ]; then
-            echo "JST ${h}時の起動（遅延で日付をまたいだ）→ 前日の分として投稿"
-            echo "date=$(TZ=Asia/Tokyo date -d yesterday +%F)" >> "$GITHUB_OUTPUT"; exit 0
-          fi
           now=$(date +%s); target=$(TZ=Asia/Tokyo date -d "today 19:55" +%s)
-          if [ "$now" -lt "$target" ]; then echo "JST 19:55 まで $(( (target-now)/60 ))分待つ"; sleep $((target-now)); fi
-          echo "date=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
+          if [ "$h" -lt 12 ]; then echo "JST ${h}時の起動 → 未明・朝は投稿しない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          wait=$((target - now))
+          if [ "$wait" -gt 18000 ]; then echo "19:55 まで $((wait/60))分（5時間超）→ 次の回に任せる"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ "$wait" -gt 0 ]; then echo "JST 19:55 まで $((wait/60))分待つ"; sleep "$wait"; fi
+          # 待っている間に別の回が投稿していたら何もしない
+          if posted; then echo "待機中に投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          echo "date=$today" >> "$GITHUB_OUTPUT"
+          echo "post=true" >> "$GITHUB_OUTPUT"
 
   post:
     needs: gate
+    if: needs.gate.outputs.post == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
