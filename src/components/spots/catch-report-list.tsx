@@ -144,7 +144,7 @@ export function CatchReportList({ spotSlug, initialReports, pioneer = null, allo
         {pioneerLine}
         <div className="flex flex-col items-center gap-2.5 rounded-lg border border-dashed border-primary/40 bg-primary/5 p-6 text-center">
           <Sakanacchi size={64} />
-          <p className="text-sm font-bold">このスポット、まだ誰も投稿していません</p>
+          <p className="text-sm font-bold">このスポットの最初の釣果を投稿しませんか？</p>
           <p className="max-w-md text-xs text-muted-foreground">
             最初の投稿者は<b className="text-foreground">開拓者</b>として、このページに表示され続けます。
             匿名OK・タップだけで投稿できます。
