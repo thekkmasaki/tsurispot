@@ -14,7 +14,7 @@ import { composeMetaDescription, joinNames } from "@/lib/seo/meta-description";
 import { monthSlugs } from "@/lib/data/monthly-guides";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
-import { getSpotsForArea, getAreaMunicipalityName, getAreaRepSlug } from "@/lib/data/area-groups";
+import { getSpotsForArea, getAreaMunicipalityName, getAreaRepSlug, getAllAreaGroups } from "@/lib/data/area-groups";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
@@ -242,9 +242,10 @@ export default async function AreaDetailPage({ params }: PageProps) {
   const description = generateAreaDescription(region, spots);
   const currentMonth = new Date().getMonth() + 1; // 1-12（ビルド時固定・既存の季節導線と同方式）
 
-  // Find other regions in the same prefecture for internal linking
-  const samePreRegions = regions.filter(
-    (r) => r.prefecture === region.prefecture && r.id !== region.id
+  // 同県の他エリア（市区町村の代表ページのみ）。非代表slugへリンクすると canonical で代表へ
+  // 集約されるURLをGoogleに大量発見させ、GSC「代替ページ」を積み増すため代表に限定する。
+  const samePreRegions = getAllAreaGroups().filter(
+    (g) => g.prefecture === region.prefecture && g.slug !== region.slug
   );
 
   // Calculate average geo coordinates for the area
@@ -532,16 +533,14 @@ export default async function AreaDetailPage({ params }: PageProps) {
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {samePreRegions.map((r) => {
-              const count = fishingSpots.filter(
-                (s) => s.region.id === r.id
-              ).length;
+              const count = r.count;
               return (
-                <Link prefetch={false} key={r.id} href={`/area/${r.slug}`}>
+                <Link prefetch={false} key={r.slug} href={`/area/${r.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-4">
                       <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
                         <MapPin className="mr-1 inline size-4" />
-                        {r.areaName}
+                        {r.municipalityName}
                       </h3>
                       <p className="mt-1 text-xs text-muted-foreground">
                         {count}件のスポット

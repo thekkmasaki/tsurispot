@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Map, MapPin, Fish, BookOpen, Anchor, ShieldCheck, Store, Globe, Building } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
-import { regions } from "@/lib/data/regions";
+import { getAllAreaGroups } from "@/lib/data/area-groups";
 import { tackleShops } from "@/lib/data/shops";
 import { prefectures } from "@/lib/data/prefectures";
 import { safeJsonLd } from "@/lib/safe-json-ld";
@@ -144,9 +144,10 @@ export default function SitemapPage() {
     {
       title: "エリア別",
       icon: <Map className="size-5 text-primary" />,
-      links: regions.map((region) => ({
-        href: `/area/${region.slug}`,
-        label: `${region.prefecture} ${region.areaName}`,
+      // 市区町村の代表エリアのみ（非代表slugは canonical で代表へ集約されるためリンクしない）
+      links: getAllAreaGroups().map((g) => ({
+        href: `/area/${g.slug}`,
+        label: `${g.prefecture} ${g.municipalityName}`,
       })),
     },
     {
