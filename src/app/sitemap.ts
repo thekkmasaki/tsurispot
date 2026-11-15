@@ -13,7 +13,7 @@ import { MAIN_WEEKLY_AREA_SLUGS, listWeeklyPostsForArea } from "@/lib/weekly-rep
 import { getFishWithLatestCatches } from "@/lib/data/weekly-fish-latest";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
-import { tackleShops } from "@/lib/data/shops";
+import { tackleShops, isSampleShopSlug } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 import {
@@ -371,7 +371,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
-    ...tackleShops.map((shop) => ({
+    ...tackleShops.filter((shop) => !isSampleShopSlug(shop.slug)).map((shop) => ({
       url: `${baseUrl}/shops/${shop.slug}`,
       lastModified: contentDate,
       changeFrequency: "monthly" as const,

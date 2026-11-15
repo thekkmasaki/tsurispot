@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2, X, Camera, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
+import { useEffectivePlan } from "./use-effective-plan";
 
 interface ShopInfoData {
   businessHours: string;
@@ -33,6 +35,9 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
   const searchParams = useSearchParams();
   const shop = searchParams.get("shop");
   const token = searchParams.get("token");
+  const isDemoShop = !!shop && shop.startsWith("sample-");
+  const effectivePlan = useEffectivePlan(shop ?? "", isDemoShop, "free");
+  const showPaidFeatures = !SHOP_PLANS_PAUSED || effectivePlan !== "free";
 
   const [info, setInfo] = useState<ShopInfoData>({
     businessHours: "",
@@ -319,6 +324,8 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
         </div>
       </div>
 
+      {/* 有料プラン機能（写真・店主メッセージ）。停止中は無料店舗には出さない（既契約店舗は維持） */}
+      {showPaidFeatures && (<>
       {/* 店舗写真（ベーシック以上） */}
       <div className="space-y-2">
         <label className="text-sm font-medium flex items-center gap-2">
@@ -402,6 +409,8 @@ export function ShopInfoForm({ shopName }: { shopName?: string }) {
           className="w-full text-sm border rounded-lg px-3 py-2.5 bg-white dark:bg-gray-800 resize-none"
         />
       </div>
+
+      </>)}
 
       {/* 保存ボタン */}
       <div className="sticky bottom-4 pt-2">

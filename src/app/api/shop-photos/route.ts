@@ -1,3 +1,4 @@
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { dbGet, dbPut } from "@/lib/dynamodb";
@@ -122,7 +123,7 @@ export async function POST(request: NextRequest) {
   const maxPhotos = PLAN_LIMITS[planLevel] || 0;
   if (maxPhotos === 0) {
     return NextResponse.json(
-      { error: "写真アップロードはベーシックプラン以上で利用できます" },
+      { error: SHOP_PLANS_PAUSED ? "写真アップロードは現在ご利用いただけません" : "写真アップロードはベーシックプラン以上で利用できます" },
       { status: 403 }
     );
   }
@@ -140,7 +141,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: `写真の上限（${maxPhotos}枚）に達しています。${
-          planLevel === "basic" ? "プロプランにアップグレードすると最大20枚まで可能です。" : ""
+          planLevel === "basic" && !SHOP_PLANS_PAUSED ? "プロプランにアップグレードすると最大20枚まで可能です。" : ""
         }`,
       },
       { status: 400 }

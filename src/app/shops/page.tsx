@@ -14,7 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { tackleShops } from "@/lib/data/shops";
+import { tackleShops, isSampleShopSlug } from "@/lib/data/shops";
 import { ShopsFilterList } from "@/components/shops/shops-filter-list";
 import { getMonthlyGuideByMonth, monthSlugs } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
@@ -24,7 +24,7 @@ import {
 } from "@/lib/data/prefectures";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
-const filteredShops = tackleShops.filter((s) => s.slug !== "sample-premium" && s.slug !== "sample-basic");
+const filteredShops = tackleShops.filter((s) => !isSampleShopSlug(s.slug));
 const shopCount = filteredShops.length;
 
 export const metadata: Metadata = {
@@ -288,7 +288,7 @@ export default function ShopsListPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-base leading-relaxed">
-                ツリスポは全国{tackleShops.length}店舗以上が掲載中の釣り情報サイトです。
+                ツリスポは全国{shopCount}店舗以上が掲載中の釣り情報サイトです。
                 <strong>初期費用0円・月額0円</strong>で貴店の情報を掲載して、地元の釣り人にアピールしませんか？
               </p>
 
