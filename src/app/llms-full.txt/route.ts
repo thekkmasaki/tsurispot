@@ -108,6 +108,7 @@ ${prefFiles.map((p) => `- ${p.name}（${p.spots.length}件）: ${prefFileUrl(p.s
 - URL: https://tsurispot.com
 - 開設: ${SITE_LAUNCHED}
 - 運営・編集: ツリスポ編集部（運営者情報: https://tsurispot.com/about）
+- 編集方針・データの作り方: https://tsurispot.com/about/editorial-policy
 - Instagram: https://www.instagram.com/tsurispotjapan/
 - お問い合わせ: https://tsurispot.com/contact
 `;

@@ -55,6 +55,7 @@ ${SITE_LAUNCHED}開設。運営はツリスポ編集部です。
 - 釣り禁止が確認されたスポット: ${st.bannedSpots}箇所（根拠URL・確認日付き）
 
 ## データの作り方・更新
+- 詳細: https://tsurispot.com/about/editorial-policy（編集方針・データの作り方）
 - スポット情報: ツリスポ編集部が、自治体・漁業協同組合・港湾管理者などの公開情報や地図データを確認して作成・修正しています
 - 釣れる魚: 地域・地形と魚種の生息域から判定し、生息域外の魚は一覧に出さないようにしています
 - ユーザー投稿: 釣果・スポット情報の投稿を受け付けています
@@ -176,6 +177,7 @@ A: ガイド一覧（https://tsurispot.com/guide）で、サビキ・エギン�
 - URL: https://tsurispot.com
 - 開設: ${SITE_LAUNCHED}
 - 運営・編集: ツリスポ編集部（運営者情報: https://tsurispot.com/about）
+- 編集方針・データの作り方: https://tsurispot.com/about/editorial-policy
 - お問い合わせ: https://tsurispot.com/contact
 - Instagram: https://www.instagram.com/tsurispotjapan/
 
