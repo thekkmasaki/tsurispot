@@ -23,6 +23,7 @@ import {
   buildShopAreaLead,
   buildShopAreaTitle,
 } from "@/lib/seo/shop-meta";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type Params = Promise<{ prefecture: string }>;
 
@@ -228,12 +229,12 @@ export default async function PrefectureShopsPage({
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       {itemListJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(itemListJsonLd) }}
         />
       )}
 

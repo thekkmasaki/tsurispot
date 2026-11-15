@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { areaGuides } from "@/lib/data/area-guides";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { fishingSpots } from "@/lib/data/spots";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "エリア別釣り場ガイド｜全国おすすめ釣りスポット完全攻略",
@@ -49,7 +50,7 @@ export default function AreaGuidePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <div className="min-h-screen bg-background">
         {/* Hero */}

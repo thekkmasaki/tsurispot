@@ -57,6 +57,8 @@ export async function GET() {
         redis.lrange(`auth:user_reports:${uid}`, 0, 9) as Promise<unknown[]>,
       ]);
       if (!user) return [] as FeedItem[];
+      // 非公開プロフィールの人の釣果は、フォローしていてもフィードに出さない（本人を除く）
+      if (user.isPublic === false && user.id !== viewerId) return [] as FeedItem[];
       const reports = parseReports(raw);
       return reports.map(
         (r): FeedItem => ({

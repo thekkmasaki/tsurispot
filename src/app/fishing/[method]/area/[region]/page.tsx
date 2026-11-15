@@ -45,6 +45,7 @@ import {
 } from "@/lib/seo/article-jsonld";
 import { DIFFICULTY_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface Props {
   params: Promise<{ method: string; region: string }>;
@@ -404,7 +405,7 @@ export default async function MethodRegionPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLdArray),
+          __html: safeJsonLd(jsonLdArray),
         }}
       />
 

@@ -8,6 +8,7 @@ import { ChevronLeft, Fish, AlertTriangle, CheckCircle2, MapPin } from "lucide-r
 import { Card, CardContent } from "@/components/ui/card";
 import { fishingSpots } from "@/lib/data/spots";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "泳がせ釣り入門ガイド - 生きエサで大物を狙う方法",
@@ -326,10 +327,10 @@ export default function OyogasePage() {
     <main className="container mx-auto max-w-3xl px-4 py-6 sm:py-10">
             <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
-<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(howToJsonLd) }} />
 
       <Breadcrumb items={[
         { label: "ホーム", href: "/" },

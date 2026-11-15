@@ -9,6 +9,7 @@ import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishingSpots } from "@/lib/data/spots";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type SpotType = FishingSpot["spotType"];
 
@@ -93,7 +94,7 @@ export default async function PrefectureAllSpotsPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <Breadcrumb

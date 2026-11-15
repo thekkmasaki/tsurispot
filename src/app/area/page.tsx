@@ -4,6 +4,7 @@ import { getSpotsForArea, getAllAreaGroups } from "@/lib/data/area-groups";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { AreaListFilter } from "@/components/area/area-list-filter";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "全国の釣りエリア一覧 - 都道府県別に釣りスポットを探す",
@@ -111,11 +112,11 @@ export default function AreaListPage() {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <Breadcrumb

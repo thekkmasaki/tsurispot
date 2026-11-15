@@ -52,6 +52,7 @@ import { MonthlyProductRecommend } from "@/components/monthly-product-recommend"
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
 import { getIndexablePrefMonthFishCombos } from "@/lib/data";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -414,7 +415,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[

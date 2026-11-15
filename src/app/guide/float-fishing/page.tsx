@@ -12,6 +12,7 @@ import { CatchableFishSection } from "@/components/guide/catchable-fish-section"
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "ウキ釣り完全ガイド - ウキの種類・仕掛け・アタリの取り方",
@@ -559,15 +560,15 @@ export default function FloatFishingGuidePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(howToJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りガイド", href: "/guide" }, { label: "ウキ釣り完全ガイド" }]} />

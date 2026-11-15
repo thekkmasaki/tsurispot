@@ -5,6 +5,8 @@
  * - そのスポットで最初に投稿された写真に first: true
  */
 
+import { PRIVATE_AUTHOR_NAME } from "@/lib/private-author";
+
 export interface SpotPhotoEntryLike {
   url: string;
   uploadedAt: number;
@@ -44,7 +46,7 @@ export async function toPublicSpotPhotos(
       try {
         const u = await lookup(id);
         if (!u || !u.nickname) return users.set(id, undefined);
-        users.set(id, u.isPublic === false ? { name: "非公開の釣り人" } : { name: u.nickname, tsuriId: id });
+        users.set(id, u.isPublic === false ? { name: PRIVATE_AUTHOR_NAME } : { name: u.nickname, tsuriId: id });
       } catch {
         users.set(id, undefined);
       }

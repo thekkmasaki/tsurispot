@@ -25,6 +25,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "釣りのやり方完全ガイド｜初めてでもわかる基本の釣り方【2026年版】",
@@ -429,19 +430,19 @@ export default function HowToFishPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(howToJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         <Breadcrumb

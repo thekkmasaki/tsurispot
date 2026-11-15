@@ -20,6 +20,7 @@ import {
 } from "@/lib/patent/load-analysis";
 import { isAnalysisLocationConsistent } from "@/lib/patent/normalize-analysis";
 import { getSpotBySlug } from "@/lib/data/spots";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "特許出願中のAI釣り場解析技術｜ツリスポ",
@@ -154,11 +155,11 @@ export default function TechnologyPage() {
     <div className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       {/* ヒーロー */}

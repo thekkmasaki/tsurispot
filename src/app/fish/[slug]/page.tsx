@@ -52,6 +52,7 @@ import { getPrefectureByName, prefectures } from "@/lib/data/prefectures";
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -399,31 +400,31 @@ export default async function FishDetailPage({ params }: PageProps) {
     <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(fishFaqJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(fishSpeakableJsonLd) }}
       />
       {howToJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(howToJsonLd) }}
         />
       )}
       {fishVideoJsonLd.map((vld, i) => (
         <script
           key={`video-${i}`}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(vld) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(vld) }}
         />
       ))}
       {/* パンくず */}

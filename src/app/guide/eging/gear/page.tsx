@@ -7,6 +7,7 @@ import { ProductList } from "@/components/affiliate/product-list";
 import { ShakurhythmPromo } from "@/components/promo/shakurhythm-promo";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { products } from "@/lib/data/products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const TITLE = "明石海峡でアオリイカを釣った道具、全部見せます｜初心者のエギングロッド・エギの選び方";
 const DESC =
@@ -149,9 +150,9 @@ function H2({ children }: { children: React.ReactNode }) {
 export default function EgingGearPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }} />
 
       <Link prefetch={false} href="/guide/eging" className="mb-4 inline-flex items-center text-sm text-muted-foreground hover:text-primary">
         <ChevronLeft className="size-4" />

@@ -77,7 +77,7 @@ describe("Stripe billing API（環境変数未設定時の防御）", () => {
 
   describe("portal", () => {
     it("必須フィールド欠落で 400", async () => {
-      const res = await portalPOST(makeReq("/api/stripe/portal", { shopSlug: "x" }));
+      const res = await portalPOST(makeReq("/api/stripe/portal", { token: "x" }));
       expect(res.status).toBe(400);
     });
 

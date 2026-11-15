@@ -7,6 +7,7 @@ import { QuizGame } from "@/components/quiz/quiz-game";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { QUIZ_CATEGORIES } from "@/types/quiz";
 import { getQuestions, getQuestionsByCategory } from "@/lib/data/quiz-questions";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -130,17 +131,17 @@ export default async function QuizCategoryPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
         />
       )}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(quizJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(quizJsonLd) }}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">

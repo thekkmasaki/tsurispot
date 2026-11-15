@@ -12,6 +12,7 @@ import {
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { LineChoukaCta } from "@/components/line/line-chouka-cta";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // エリアごとに「常に最新週の釣果」を出すページ。週報記事は毎週別URLで増えるため、
 // 「{地名} 釣果」の検索はこのページで受け、週報記事へ送る（週報記事側からもここへリンク）。
@@ -86,7 +87,7 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }} />
       <Breadcrumb
         items={[
           { label: "ホーム", href: "/" },

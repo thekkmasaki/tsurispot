@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "魚の締め方・持ち帰りガイド - 釣った魚を美味しく食べるために",
@@ -292,11 +293,11 @@ export default function HandlingGuidePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}

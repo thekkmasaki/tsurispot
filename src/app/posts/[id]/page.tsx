@@ -20,6 +20,8 @@ import {
   hasReposted,
   type PostMeta,
 } from "@/lib/social-store";
+import { getUserById } from "@/lib/user-store";
+import { maskPrivateAuthors } from "@/lib/private-author";
 
 // 釣果パーマリンク: 通知・シェアの着地点。
 // ISRは使わない(キャッシュ肥大回避)・検索インデックスにも載せない(UGC単体はnoindex一貫)
@@ -38,12 +40,14 @@ function formatDate(dateStr: string): string {
   return `${Number(parts[0])}年${Number(parts[1])}月${Number(parts[2])}日`;
 }
 
-async function fetchPost(id: string): Promise<PostMeta | null> {
+async function fetchPost(id: string, viewerId?: string): Promise<PostMeta | null> {
   if (!id || id.length > 100) return null;
   try {
     const [post, flagged] = await Promise.all([getPostMeta(id), isPostFlagged(id)]);
     if (!post || flagged) return null;
-    return post;
+    // プロフィール非公開の人の投稿は名前とプロフィール導線を伏せる（本人を除く）
+    const [masked] = await maskPrivateAuthors([post], getUserById, viewerId);
+    return masked;
   } catch {
     return null;
   }
@@ -85,11 +89,11 @@ export default async function PostPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const post = await fetchPost(decodeURIComponent(id));
-  if (!post) notFound();
-
   const session = await auth();
   const viewerId = session?.user?.tsuriId;
+  const post = await fetchPost(decodeURIComponent(id), viewerId);
+  if (!post) notFound();
+
   const [likeCount, liked, comments, repostCount, reposted] = await Promise.all([
     getLikeCount(post.id),
     viewerId ? hasLiked(post.id, viewerId) : Promise.resolve(false),

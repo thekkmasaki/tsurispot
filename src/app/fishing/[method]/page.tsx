@@ -21,6 +21,7 @@ import {
   getSpotsForMethodAndMonth,
 } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 interface Props {
   params: Promise<{ method: string }>;
@@ -130,7 +131,7 @@ export default async function MethodPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <div className="container mx-auto px-4 py-6 max-w-5xl">

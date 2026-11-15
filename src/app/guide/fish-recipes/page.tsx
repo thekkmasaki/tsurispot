@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { FishRecipeTabs } from "./fish-recipe-tabs";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 /* ------------------------------------------------------------------ */
 /*  Metadata                                                          */
@@ -1004,30 +1005,30 @@ export default function FishRecipesGuidePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd),
+          __html: safeJsonLd(breadcrumbJsonLd),
         }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleJsonLd),
+          __html: safeJsonLd(articleJsonLd),
         }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       {recipeJsonLdList.map((r, i) => (
         <script
           key={i}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(r) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(r) }}
         />
       ))}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd),
+          __html: safeJsonLd(faqJsonLd),
         }}
       />
 

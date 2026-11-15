@@ -18,6 +18,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { ProductList } from "@/components/affiliate/product-list";
 import { products } from "@/lib/data/products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "タチウオ釣り完全ガイド｜堤防からの釣り方4種・仕掛け・時間帯",
@@ -445,15 +446,15 @@ export default function TachiuoGuidePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}

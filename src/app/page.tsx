@@ -45,6 +45,7 @@ import { WantedBand } from "@/components/photo-wanted/wanted-band";
 import { getWantedSpots } from "@/lib/photo-wanted";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { DIFFICULTY_LABELS } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
@@ -300,7 +301,7 @@ export default async function Home() {
     <div className="flex flex-col">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLdArray) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(homeJsonLdArray) }}
       />
       {/* ヒーローセクション */}
       {/* ATFのLinkはprefetch={false}: 初期ロード中のRSC自動プリフェッチ(実測442KB、/spotsだけで354KB)が低速回線でLCPと帯域競合するため。タップ時取得に変更（体感+100-300msだが初期表示を優先） */}

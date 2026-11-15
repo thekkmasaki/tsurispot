@@ -15,7 +15,7 @@
  *   url: "https://tsurispot.com/guide/beginner-setup",
  *   datePublished: "2025-01-01",
  * });
- * // <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+ * // <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />  (safeJsonLd は @/lib/safe-json-ld)
  * ```
  *
  * HowTo schema は釣り方ガイド (sabiki, eging, casting 等) で利用:

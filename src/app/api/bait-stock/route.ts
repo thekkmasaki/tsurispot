@@ -2,7 +2,8 @@ import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
-import { getEffectivePlan, verifyShopToken, isDemoShop } from "@/lib/shop-plan";
+import { getEffectivePlan, isDemoShop } from "@/lib/shop-plan";
+import { verifyShopAuth } from "@/lib/shop-session";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export interface BaitStockEntry {
@@ -72,7 +73,7 @@ function timestamp(): string {
 }
 
 // POST /api/bait-stock
-// Body: { shop: string, token: string, stock: BaitStockEntry[] }
+// Body: { shop: string, token?: string, stock: BaitStockEntry[] }（token 省略時は shop_session Cookie で認証）
 export async function POST(request: NextRequest) {
   let body: Record<string, unknown>;
   try {
@@ -83,10 +84,11 @@ export async function POST(request: NextRequest) {
 
   const { shop, token, stock } = body as { shop?: unknown; token?: unknown; stock?: unknown };
 
-  if (typeof shop !== "string" || !SHOP_SLUG_RE.test(shop) || typeof token !== "string" || !stock) {
-    return NextResponse.json({ error: "shop, token, stock required" }, { status: 400 });
+  if (typeof shop !== "string" || !SHOP_SLUG_RE.test(shop) || !stock) {
+    return NextResponse.json({ error: "shop, stock required" }, { status: 400 });
   }
-  if (token.length > 200) {
+  // token は後方互換（省略時は shop_session Cookie で認証）
+  if (token != null && (typeof token !== "string" || token.length > 200)) {
     return NextResponse.json({ error: "invalid token" }, { status: 403 });
   }
 
@@ -108,7 +110,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    if (!(await verifyShopToken(shop, token))) {
+    if (!(await verifyShopAuth(request, shop, token))) {
       return NextResponse.json({ error: "invalid token" }, { status: 403 });
     }
   } catch {

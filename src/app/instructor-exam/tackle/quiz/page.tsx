@@ -4,6 +4,7 @@ import { ArrowLeft, ListOrdered } from "lucide-react";
 import { ExamQuiz } from "@/components/instructor-exam/exam-quiz";
 import { tackleQuestions } from "@/lib/data/instructor-exam/tackle-questions";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -37,7 +38,7 @@ export default function TackleQuizPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: safeJsonLd({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
@@ -52,7 +53,7 @@ export default function TackleQuizPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: safeJsonLd({
             "@context": "https://schema.org",
             "@type": "Quiz",
             name: "釣り具の知識 確認クイズ（全40問）",

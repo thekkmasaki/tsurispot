@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Point, Exam, TsuriSpotBox } from "@/components/instructor-exam/callouts";
 import { ArrowRight } from "lucide-react";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -41,7 +42,7 @@ export default function EnvironmentPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: safeJsonLd({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
@@ -66,7 +67,7 @@ export default function EnvironmentPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: safeJsonLd({
             "@context": "https://schema.org",
             "@type": "Article",
             headline: "第7章 水域の自然環境知識 | 公認釣りインストラクター試験対策",

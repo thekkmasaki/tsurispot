@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-import { getStripeCustomerId, verifyShopToken } from "@/lib/shop-plan";
+import { getStripeCustomerId } from "@/lib/shop-plan";
+import { verifyShopAuth } from "@/lib/shop-session";
 
 export async function POST(request: NextRequest) {
-  let body: { shopSlug: string; token: string };
+  let body: { shopSlug?: unknown; token?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -11,8 +12,8 @@ export async function POST(request: NextRequest) {
   }
 
   const { shopSlug, token } = body;
-  if (!shopSlug || !token) {
-    return NextResponse.json({ error: "shopSlug, token required" }, { status: 400 });
+  if (typeof shopSlug !== "string" || !shopSlug) {
+    return NextResponse.json({ error: "shopSlug required" }, { status: 400 });
   }
 
   // Stripe 環境変数チェック（未設定なら利用不可）
@@ -24,10 +25,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // トークン認証
+  // 認証（shop_session Cookie または後方互換の body.token）
   let tokenOk = false;
   try {
-    tokenOk = typeof token === "string" && typeof shopSlug === "string" && (await verifyShopToken(shopSlug, token));
+    tokenOk = await verifyShopAuth(request, shopSlug, token);
   } catch {
     return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
   }
@@ -43,7 +44,8 @@ export async function POST(request: NextRequest) {
   const origin = request.nextUrl.origin;
   const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
-    return_url: `${origin}/shops/${shopSlug}/dashboard?token=${token}`,
+    // トークンは URL に載せない。戻り先では shop_session Cookie で認証する
+    return_url: `${origin}/shops/${shopSlug}/dashboard`,
   });
 
   return NextResponse.json({ url: session.url });

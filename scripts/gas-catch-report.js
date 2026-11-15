@@ -19,8 +19,13 @@
  *    - アクセス: 全員
  *    → デプロイURLをコピー
  *
- * 6. Vercel環境変数に追加:
+ * 6. App Runner 環境変数に追加:
  *    GAS_CATCH_REPORT_URL=https://script.google.com/macros/s/XXXXX/exec
+ *
+ * 7. （推奨）共有キー: プロジェクトの設定 > スクリプト プロパティに SHARED_KEY を追加し、
+ *    同じ値を App Runner の GAS_SHARED_KEY に設定する。SHARED_KEY が設定されていると、
+ *    キー（data.k）が一致しない POST はシート記録・メール送信をせずに拒否する。
+ *    手順の詳細: docs/gas-update-2026-11.md
  */
 
 // === 設定 ===
@@ -30,6 +35,30 @@ const SHOP_SHEET_NAME = "店舗掲載申請";
 const BASIC_INQUIRY_SHEET = "ベーシック問い合わせ";
 const PRO_INQUIRY_SHEET = "プロ問い合わせ";
 const NOTIFY_EMAIL = "fishingspotjapan@gmail.com";
+
+// スプレッドシートの数式インジェクション対策。
+// = + - @ タブ CR で始まる文字列はセルに数式として解釈されうるため、先頭に ' を付けて文字列として保存する。
+// ユーザー由来の値は appendRow する前に必ずこれを通すこと。
+function safe(v) {
+  if (v === null || v === undefined) return "";
+  var s = typeof v === "string" ? v : String(v);
+  return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+}
+
+// 定数時間の文字列比較（共有キー照合用）
+function safeEqualStr(a, b) {
+  a = String(a);
+  b = String(b);
+  var diff = a.length ^ b.length;
+  for (var i = 0; i < b.length; i++) {
+    diff |= (i < a.length ? a.charCodeAt(i) : 0) ^ b.charCodeAt(i);
+  }
+  return diff === 0;
+}
+
+function jsonOut(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
 
 // UTF-8バイト列として解釈し直す（GASがLatin-1でデコードした場合の修正）
 function forceUTF8(str) {
@@ -54,23 +83,6 @@ function doPost(e) {
   try {
     var raw = e.postData.contents;
 
-    // デバッグモード: type=echo のときは受信データをそのまま返す
-    // これでエンコーディング問題の切り分けができる
-    try {
-      var peek = JSON.parse(raw);
-      if (peek.type === "echo") {
-        return ContentService.createTextOutput(
-          JSON.stringify({
-            ok: true,
-            rawLength: raw.length,
-            rawFirst100: raw.substring(0, 100),
-            parsed: peek,
-            charCodes: raw.substring(0, 30).split("").map(function(c) { return c.charCodeAt(0); })
-          })
-        ).setMimeType(ContentService.MimeType.JSON);
-      }
-    } catch (ignored) {}
-
     // 通常パース: まずそのまま試す
     var data = JSON.parse(raw);
 
@@ -89,6 +101,14 @@ function doPost(e) {
       var fixed = forceUTF8(raw);
       data = JSON.parse(fixed);
     }
+
+    // 共有キー照合（Script Property SHARED_KEY が設定されている場合のみ）。
+    // 不一致ならシート記録・メール送信をせずに拒否する。
+    var sharedKey = PropertiesService.getScriptProperties().getProperty("SHARED_KEY");
+    if (sharedKey && !(typeof data.k === "string" && safeEqualStr(data.k, sharedKey))) {
+      return jsonOut({ ok: false, error: "unauthorized" });
+    }
+    delete data.k;
 
     // type で分岐
     if (data.type === "shop_listing") {
@@ -132,13 +152,13 @@ function handleCatchReport(data) {
 
   sheet.appendRow([
     new Date().toLocaleString("ja-JP"),
-    data.spotName || "",
-    data.spotSlug || "",
-    data.fishName || "",
-    data.userName || "",
-    data.comment || "",
-    data.date || "",
-    data.spotUrl || "",
+    safe(data.spotName),
+    safe(data.spotSlug),
+    safe(data.fishName),
+    safe(data.userName),
+    safe(data.comment),
+    safe(data.date),
+    safe(data.spotUrl),
     "自動公開済み"
   ]);
 
@@ -181,10 +201,10 @@ function handleContact(data) {
   }
   sheet.appendRow([
     new Date().toLocaleString("ja-JP"),
-    data.name || "",
-    data.email || "",
-    data.category || "",
-    data.message || "",
+    safe(data.name),
+    safe(data.email),
+    safe(data.category),
+    safe(data.message),
     "未対応"
   ]);
 
@@ -196,7 +216,7 @@ function handleContact(data) {
     "メール: " + (data.email || ""),
     "種別: " + (data.category || ""),
     "",
-    data.message || "",
+    safe(data.message),
     "",
     "スプレッドシート: https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID
   ].join("\n");
@@ -226,14 +246,14 @@ function handleShopListing(data) {
 
   sheet.appendRow([
     new Date().toLocaleString("ja-JP"),
-    data.shopName || "",
-    data.address || "",
-    data.phone || "",
-    data.businessHours || "",
-    data.closedDays || "",
-    data.services || "",
-    data.nearbySpots || "",
-    data.email || "",
+    safe(data.shopName),
+    safe(data.address),
+    safe(data.phone),
+    safe(data.businessHours),
+    safe(data.closedDays),
+    safe(data.services),
+    safe(data.nearbySpots),
+    safe(data.email),
     "未対応"
   ]);
 
@@ -282,11 +302,11 @@ function handlePaidInquiry(data) {
 
   sheet.appendRow([
     new Date().toLocaleString("ja-JP"),
-    data.shopName || "",
-    data.contactName || "",
-    data.email || "",
-    data.phone || "",
-    data.message || "",
+    safe(data.shopName),
+    safe(data.contactName),
+    safe(data.email),
+    safe(data.phone),
+    safe(data.message),
     "未対応"
   ]);
 

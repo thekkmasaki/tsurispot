@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { QuizCategoryCard } from "@/components/quiz/quiz-category-card";
 import { QUIZ_CATEGORIES } from "@/types/quiz";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "釣りクイズ — 遊んで学べる釣り検定｜全240問 | ツリスポ",
@@ -143,11 +144,11 @@ export default function QuizListPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageJsonLd) }}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">

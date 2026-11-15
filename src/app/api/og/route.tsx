@@ -3,6 +3,22 @@ import type { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
 
+// 入力長の上限（巨大パラメータによるレンダリング負荷・画像の悪用を防ぐ）。
+// 実サイトで渡している最長タイトルは約60文字（動的メタ・ブログ記事）なので 80 文字で切っても
+// 通常の OGP 出力は変わらない。絵文字は ZWJ 合成（例: 👨‍👩‍👧‍👦 = 7 コードポイント）を
+// 壊さないよう 8 コードポイントまで許容する。
+const MAX_TITLE_CHARS = 80;
+const MAX_EMOJI_CODEPOINTS = 8;
+
+function capTitle(v: string): string {
+  return v.length > MAX_TITLE_CHARS ? v.slice(0, MAX_TITLE_CHARS) : v;
+}
+
+function capEmoji(v: string): string {
+  const cps = Array.from(v);
+  return cps.length > MAX_EMOJI_CODEPOINTS ? cps.slice(0, MAX_EMOJI_CODEPOINTS).join("") : v;
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get("type") || "default";
@@ -11,9 +27,9 @@ export async function GET(request: NextRequest) {
     return generateProfileImage(searchParams);
   }
 
-  const title = searchParams.get("title") || "ツリスポ 釣りガイド";
+  const title = capTitle(searchParams.get("title") || "ツリスポ 釣りガイド");
   const description = searchParams.get("description") || "";
-  const emoji = searchParams.get("emoji") || "🐟";
+  const emoji = capEmoji(searchParams.get("emoji") || "🐟");
 
   // Truncate description to 60 chars
   const truncatedDesc =
@@ -205,7 +221,7 @@ async function generateProfileImage(
 ): Promise<Response> {
   const nickname = (searchParams.get("nickname") || "釣り人").slice(0, 24);
   const titleLabel = (searchParams.get("title") || "新人釣り師").slice(0, 16);
-  const emoji = searchParams.get("emoji") || "🎒";
+  const emoji = capEmoji(searchParams.get("emoji") || "🎒");
   const reportCount = Number(searchParams.get("reportCount") || "0");
   const fishCount = Number(searchParams.get("fishCount") || "0");
   const maxSize = Number(searchParams.get("maxSize") || "0");

@@ -12,6 +12,7 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 import { toListSpot } from "@/lib/data/list-spot";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // ISR: 1時間ごとに再検証 (Cloudflare cache 効率と App Runner 負荷低減のため SSG/ISR を採用)
 export const revalidate = 3600;
@@ -185,19 +186,19 @@ export default function SpotsPage() {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(spotsFaqJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsItemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(spotsItemListJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsDatasetJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(spotsDatasetJsonLd) }}
       />
       <Breadcrumb
         items={[

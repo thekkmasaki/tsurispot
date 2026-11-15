@@ -41,6 +41,7 @@ import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS, type FishingSpot, type CatchableFi
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { buildMatrixDescription } from "@/lib/seo/meta-description";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string; fishSlug: string }>;
@@ -524,7 +525,7 @@ export default async function PrefectureMonthFishPage({
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdArray) }}
       />
 
       {/* パンくず */}

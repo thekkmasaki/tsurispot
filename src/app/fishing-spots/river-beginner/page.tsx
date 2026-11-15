@@ -3,6 +3,7 @@ import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { AreaFilteredSpotList, type SpotCardData } from "@/components/spots/area-filter";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const dynamic = "force-static";
 export const revalidate = 604800;
@@ -113,11 +114,11 @@ export default function RiverBeginnerPage() {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <Breadcrumb
         items={[

@@ -3,9 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
-import { getEffectivePlan, verifyShopToken, isDemoShop } from "@/lib/shop-plan";
+import { getEffectivePlan, isDemoShop } from "@/lib/shop-plan";
+import { verifyShopAuth } from "@/lib/shop-session";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { moderateImage } from "@/lib/rekognition";
+import { normalizeImage } from "@/lib/image-upload";
 
 // Rekognition が扱えるのは JPEG/PNG のみ。審査できない形式（WebP等）は fail-closed のため受け付けない。
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -28,10 +30,12 @@ function sniffImage(buf: Buffer): { mime: "image/jpeg" | "image/png"; ext: "jpg"
 }
 
 async function authenticate(
+  request: NextRequest,
   shop: unknown,
   token: unknown
 ): Promise<{ ok: boolean; error?: string; status?: number }> {
-  if (typeof shop !== "string" || !SHOP_SLUG_RE.test(shop) || typeof token !== "string" || token.length === 0 || token.length > 200) {
+  // token は後方互換（省略時は shop_session Cookie で認証）
+  if (typeof shop !== "string" || !SHOP_SLUG_RE.test(shop) || (token != null && (typeof token !== "string" || token.length > 200))) {
     return { ok: false, error: "invalid token", status: 403 };
   }
   // デモ店舗は書き込み不可（固定トークンは受け付けない）
@@ -39,7 +43,7 @@ async function authenticate(
     return { ok: false, error: "デモ店舗では写真をアップロードできません", status: 403 };
   }
   try {
-    if (!(await verifyShopToken(shop, token))) {
+    if (!(await verifyShopAuth(request, shop, token))) {
       return { ok: false, error: "invalid token", status: 403 };
     }
     return { ok: true };
@@ -83,15 +87,15 @@ export async function POST(request: NextRequest) {
   const token = formData.get("token");
   const file = formData.get("file");
 
-  if (typeof shop !== "string" || typeof token !== "string" || !shop || !token || !(file instanceof File)) {
+  if (typeof shop !== "string" || !shop || !(file instanceof File)) {
     return NextResponse.json(
-      { error: "shop, token, file required" },
+      { error: "shop, file required" },
       { status: 400 }
     );
   }
 
   // 認証
-  const auth = await authenticate(shop, token);
+  const auth = await authenticate(request, shop, token);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.error }, { status: auth.status });
   }
@@ -109,14 +113,23 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     );
   }
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const sniffed = sniffImage(buffer);
+  const rawBuffer = Buffer.from(await file.arrayBuffer());
+  const sniffed = sniffImage(rawBuffer);
   if (!sniffed) {
     return NextResponse.json(
       { error: "JPG、PNGのみアップロード可能です" },
       { status: 400 }
     );
   }
+  // 再エンコードして EXIF（GPS 位置情報など）を落とす。形式は JPEG/PNG のまま
+  const normalized = await normalizeImage(rawBuffer, sniffed.ext === "png" ? "png" : "jpeg");
+  if (!normalized) {
+    return NextResponse.json(
+      { error: "画像を読み込めませんでした。別の写真をお試しください。" },
+      { status: 400 }
+    );
+  }
+  const buffer = normalized.buffer;
 
   // プラン制限チェック（課金状態を加味した実効プラン）
   const planLevel = await getEffectivePlan(shop);
@@ -202,7 +215,7 @@ export async function POST(request: NextRequest) {
 }
 
 // DELETE /api/shop-photos
-// Body: { shop, token, url }
+// Body: { shop, token?, url }（token 省略時は shop_session Cookie で認証）
 export async function DELETE(request: NextRequest) {
   if (!(await checkRateLimit(getClientIp(request), "SHOPPHOTOS", 20, 600))) {
     return NextResponse.json({ error: "リクエストが多すぎます。しばらくしてからお試しください。" }, { status: 429 });
@@ -220,14 +233,14 @@ export async function DELETE(request: NextRequest) {
     url?: unknown;
   };
 
-  if (typeof shop !== "string" || typeof token !== "string" || typeof url !== "string" || !shop || !token || !url) {
+  if (typeof shop !== "string" || typeof url !== "string" || !shop || !url) {
     return NextResponse.json(
-      { error: "shop, token, url required" },
+      { error: "shop, url required" },
       { status: 400 }
     );
   }
 
-  const auth = await authenticate(shop, token);
+  const auth = await authenticate(request, shop, token);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.error }, { status: auth.status });
   }

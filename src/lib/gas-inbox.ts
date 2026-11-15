@@ -36,6 +36,16 @@ export interface InboxPayload {
   fields: Record<string, string>;
 }
 
+/**
+ * GAS 側の共有キー照合用フィールド。GAS_SHARED_KEY が設定されていれば { k } を返す（未設定なら空）。
+ * GAS の Script Property SHARED_KEY と一致しない POST は GAS 側で拒否される。
+ * GAS_CATCH_REPORT_URL へ POST する全箇所で body に展開すること。
+ */
+export function gasAuthField(): { k?: string } {
+  const k = process.env.GAS_SHARED_KEY;
+  return k ? { k } : {};
+}
+
 export function buildGasBody(p: InboxPayload): Record<string, string> {
   const comment = p.details
     .filter(([, v]) => v)
@@ -50,6 +60,7 @@ export function buildGasBody(p: InboxPayload): Record<string, string> {
     userName: p.senderName,
     comment,
     date: new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10),
+    ...gasAuthField(),
   };
 }
 

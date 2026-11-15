@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { getFollowingList } from "@/lib/user-store";
+import { getFollowingList, getUserById } from "@/lib/user-store";
+import { findPrivateAuthorIds, maskAuthor } from "@/lib/private-author";
 import { getEditorialCards, type EditorialCard } from "@/lib/editorial-feed";
 import {
   getGlobalFeedRefs,
@@ -66,7 +67,20 @@ export async function GET(request: NextRequest) {
   }
 
   const { refs, nextCursor } = await getGlobalFeedRefs(20, cursor, filter);
-  const posts = await resolveFeedPosts(refs);
+  const resolved = await resolveFeedPosts(refs);
+  // プロフィール非公開の人の投稿: 全体タブは名前とプロフィール導線を伏せて出す。
+  // フォロー中タブは /api/user/feed と揃えて出さない（本人の投稿はそのまま）
+  const hiddenAuthors = await findPrivateAuthorIds(
+    resolved.map((p) => p.tsuriId),
+    getUserById,
+    viewerId,
+  );
+  const posts =
+    hiddenAuthors.size === 0
+      ? resolved
+      : tab === "following"
+        ? resolved.filter((p) => !(p.tsuriId && hiddenAuthors.has(p.tsuriId)))
+        : resolved.map((p) => (p.tsuriId && hiddenAuthors.has(p.tsuriId) ? maskAuthor(p) : p));
   const ids = posts.map((p) => p.id);
   const [{ counts, likedIds }, commentCounts, reposts] = await Promise.all([
     getLikesBulk(ids, viewerId),

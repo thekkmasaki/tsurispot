@@ -16,6 +16,7 @@ import { getTidePhaseJST } from "@/lib/tide/moon";
 import { getSpotsForStation, getStationSpotCount } from "@/lib/tide/station-spots";
 import { StationTidesClient } from "./station-tides-client";
 import { SPOT_TYPE_LABELS } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 /**
  * 観測地点別の潮見表ページ（気象庁 潮位表の天文潮推算値・239地点SSG）。
@@ -115,7 +116,7 @@ export default async function StationTidePage({
     <div className="container mx-auto max-w-4xl px-4 py-6">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <Breadcrumb
         items={[

@@ -29,6 +29,7 @@ import {
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import type { FishingMethod } from "@/types";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 type PageProps = {
   params: Promise<{ slug: string; method: string }>;
@@ -312,7 +313,7 @@ export default async function FishMethodPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdArray) }}
       />
 
       {/* パンくず */}

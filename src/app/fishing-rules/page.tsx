@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { prefectures, regionGroupOrder } from "@/lib/data/prefectures";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const dynamic = "force-static";
 export const revalidate = 604800;
@@ -94,7 +95,7 @@ export default function FishingRulesPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
 
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">

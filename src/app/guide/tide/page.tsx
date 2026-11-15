@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronLeft, Waves, BookOpen, Clock, Sunrise, PauseCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const metadata: Metadata = {
   title: "潮汐表（潮見表）の読み方 - 大潮・小潮の違いと釣れるタイミング",
@@ -352,11 +353,11 @@ export default function TideGuidePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
