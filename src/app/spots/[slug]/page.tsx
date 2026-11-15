@@ -354,24 +354,20 @@ export default async function SpotDetailPage({ params }: PageProps) {
       ? getMonthlyTopFish(analysisResult, estimationCtx, 5)
       : [];
 
-  // 今月釣れる魚を算出（Event schema用）
   const currentMonth = new Date().getMonth() + 1; // 1-12
   const monthNames = ["", "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-  const currentMonthFish = spot.catchableFish.filter((cf) => {
-    if (cf.monthStart <= cf.monthEnd) {
-      return currentMonth >= cf.monthStart && currentMonth <= cf.monthEnd;
-    }
-    // 年をまたぐ場合（例: 11月〜3月）
-    return currentMonth >= cf.monthStart || currentMonth <= cf.monthEnd;
-  });
 
-  const currentYear = new Date().getFullYear();
-  const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
-  const eventStartDate = `${currentYear}-${String(currentMonth).padStart(2, "0")}-01`;
-  const eventEndYear = currentMonth === 12 ? currentYear + 1 : currentYear;
-  const eventEndDate = `${eventEndYear}-${String(nextMonth).padStart(2, "0")}-01`;
+  // 構造化データの image: 表示可能な実写真があれば優先（/api/og は robots で disallow のため）
+  const jsonLdImage = isDisplayableSpotImage(spot.mainImageUrl)
+    ? spot.mainImageUrl.startsWith("http")
+      ? spot.mainImageUrl
+      : `https://tsurispot.com${spot.mainImageUrl}`
+    : `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&emoji=${encodeURIComponent("🎣")}`;
 
   // TouristAttraction（観光地情報。aggregateRatingはGoogleが非対応なので含めない）
+  // 2026-11: 旧「◯月の釣りシーズン」Event（実在しないイベント＝Googleのイベント要件違反）と、
+  // 堤防・浜を LocalBusiness として二重定義していたブロック（Google評価転載の aggregateRating 含む）を削除。
+  // speakable は WebPage（spotSpeakableJsonLd）側の1箇所に集約。
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristAttraction",
@@ -403,7 +399,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     hasMap: `https://www.google.com/maps?q=${spot.latitude},${spot.longitude}`,
     isAccessibleForFree: spot.isFree,
     publicAccess: true,
-    image: `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&emoji=${encodeURIComponent("🎣")}`,
+    image: jsonLdImage,
     amenityFeature: [
       ...(spot.hasParking ? [{ "@type": "LocationFeatureSpecification", name: "駐車場", value: true, description: getParkingAmenityDescription(spot.hasParking, spot.parkingDetail, spot.parkingGuide) }] : []),
       ...(spot.hasToilet ? [{ "@type": "LocationFeatureSpecification", name: "トイレ", value: true }] : []),
@@ -411,86 +407,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
       ...(spot.hasFishingShop ? [{ "@type": "LocationFeatureSpecification", name: "釣具店", value: true }] : []),
     ],
     touristType: spot.difficulty === "beginner" ? "初心者" : spot.difficulty === "intermediate" ? "中級者" : "上級者",
-    speakable: {
-      "@type": "SpeakableSpecification",
-      cssSelector: ["h1", ".spot-description", ".catchable-fish-summary"],
-    },
-    ...(currentMonthFish.length > 0
-      ? {
-          event: {
-            "@type": "Event",
-            name: `${spot.name}｜${monthNames[currentMonth]}の釣りシーズン`,
-            description: `${monthNames[currentMonth]}に${spot.name}で狙える魚: ${currentMonthFish.map((cf) => cf.fish.name).join("、")}`,
-            startDate: eventStartDate,
-            endDate: eventEndDate,
-            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-            eventStatus: "https://schema.org/EventScheduled",
-            location: {
-              "@type": "Place",
-              name: spot.name,
-              address: spot.address,
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: spot.latitude,
-                longitude: spot.longitude,
-              },
-            },
-            organizer: {
-              "@type": "Organization",
-              name: "ツリスポ",
-              url: "https://tsurispot.com",
-            },
-            ...(spot.isFree
-              ? {
-                  offers: {
-                    "@type": "Offer",
-                    price: "0",
-                    priceCurrency: "JPY",
-                    availability: "https://schema.org/InStock",
-                  },
-                }
-              : {}),
-          },
-        }
-      : {}),
-  };
-
-  // LocalBusiness（Googleが aggregateRating をサポートするタイプ）
-  // aggregateRating は実レビューが存在する時のみ出力する。無レビューで ratingCount=1 の
-  // 自己評価(編集評価)を出すのは Google リッチリザルト規約違反で、構造化データ評価の毀損リスク。
-  const hasRealReviews = (spot.googleReviewCount ?? 0) > 0 || spot.reviewCount > 0;
-  const localBusinessJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    additionalType: "https://schema.org/SportsActivityLocation",
-    name: spot.name,
-    description: spot.description,
-    url: `https://tsurispot.com/spots/${spot.slug}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: spot.region.areaName,
-      addressRegion: spot.region.prefecture,
-      addressCountry: "JP",
-      streetAddress: spot.address,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: spot.latitude,
-      longitude: spot.longitude,
-    },
-    hasMap: `https://www.google.com/maps?q=${spot.latitude},${spot.longitude}`,
-    image: `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&emoji=${encodeURIComponent("🎣")}`,
-    ...(hasRealReviews
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: (spot.googleRating || spot.rating).toFixed(1),
-            bestRating: "5",
-            worstRating: "1",
-            ratingCount: spot.googleReviewCount || spot.reviewCount,
-          },
-        }
-      : {}),
     ...(spot.officialUrl ? { sameAs: spot.officialUrl } : {}),
   };
 
@@ -731,10 +647,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(localBusinessJsonLd) }}
       />
       <script
         type="application/ld+json"
