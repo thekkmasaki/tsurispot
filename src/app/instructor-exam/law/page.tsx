@@ -466,7 +466,7 @@ export default function LawPage() {
                   漁業権侵害（上記以外）
                 </td>
                 <td className="px-4 py-2.5">100万円以下の罰金</td>
-                <td className="px-4 py-2.5">漁業法第143条</td>
+                <td className="px-4 py-2.5">漁業法第197条</td>
               </tr>
               <tr>
                 <td className="px-4 py-2.5 font-semibold">
