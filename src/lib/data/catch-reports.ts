@@ -132,11 +132,13 @@ export async function getCatchReportsBySpotAsync(
       }
       // プロフィール非公開の人は「非公開の釣り人」表示にする（タイムライン等と同じルール）
       if (ugcReports.length > 0) {
-        const [{ maskPrivateAuthors }, { getUserById }] = await Promise.all([
+        // ISR ページから呼ばれるため、no-store fetch を unstable_cache の内側に閉じ込めたルックアップを使う
+        // （直接 getUserById を渡すと static→dynamic エラーで 500 になる。private-author-lookup.ts 参照）
+        const [{ maskPrivateAuthors }, { getUserVisibilityCached }] = await Promise.all([
           import("@/lib/private-author"),
-          import("@/lib/user-store"),
+          import("@/lib/private-author-lookup"),
         ]);
-        ugcReports = await maskPrivateAuthors(ugcReports, getUserById);
+        ugcReports = await maskPrivateAuthors(ugcReports, getUserVisibilityCached);
       }
     }
   } catch (err) {
@@ -164,11 +166,11 @@ export async function getSpotPioneerAsync(spotSlug: string): Promise<SpotPioneer
     const { dbGet } = await import("@/lib/dynamodb");
     const pioneer = await dbGet<SpotPioneer>(`SPOT#${spotSlug}`, "PIONEER");
     if (!pioneer?.tsuriId) return pioneer;
-    const [{ maskPrivateAuthors }, { getUserById }] = await Promise.all([
+    const [{ maskPrivateAuthors }, { getUserVisibilityCached }] = await Promise.all([
       import("@/lib/private-author"),
-      import("@/lib/user-store"),
+      import("@/lib/private-author-lookup"),
     ]);
-    const [masked] = await maskPrivateAuthors([pioneer], getUserById);
+    const [masked] = await maskPrivateAuthors([pioneer], getUserVisibilityCached);
     return masked;
   } catch (err) {
     console.error("[catch-reports] PIONEER fetch error:", err);
