@@ -434,7 +434,7 @@ export const eastAdd5Spots: FishingSpot[] = [
     latitude: 36.7770, longitude: 139.0010,
     address: "〒379-1721 群馬県利根郡みなかみ町寺間",
     accessInfo: "関越自動車道水上ICから約10分。JR水上駅から車で約5分。",
-    region: localRegion("re5010"), spotType: "river", difficulty: "beginner",
+    region: localRegion("re5010"), spotType: "river", isManagedPond: true, difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "施設内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     feeDetail: "入場料+釣り放題: 大人4,000円〜。レンタルタックルあり",
