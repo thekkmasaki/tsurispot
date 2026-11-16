@@ -102,6 +102,9 @@ import { westAdd13Spots } from "./spots-add13-west";
 // 全国メッカ照合レビューで判明した「DB未収録の全国区名所」10件（木更津沖堤・青岸・和田防・男女群島等）
 import { meccaEastSpots } from "./spots-mecca-east";
 import { meccaWestSpots } from "./spots-mecca-west";
+import { managedKansaiHyogoOsakaSpots } from "./spots-managed-kansai-hyogo-osaka";
+import { managedKansaiKyotoShigaSpots } from "./spots-managed-kansai-kyoto-shiga";
+import { managedKansaiWakayamaNaraSpots } from "./spots-managed-kansai-wakayama-nara";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -201,4 +204,8 @@ export const allRawSpots: FishingSpot[] = [
   ...westAdd13Spots,
   ...meccaEastSpots,
   ...meccaWestSpots,
+  // 管理釣り場・釣り堀（tsurispot-managed-fishing スキル）。末尾に置き、重複除去では既存を優先
+  ...managedKansaiHyogoOsakaSpots,
+  ...managedKansaiKyotoShigaSpots,
+  ...managedKansaiWakayamaNaraSpots,
 ];

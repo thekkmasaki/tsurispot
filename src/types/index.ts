@@ -51,6 +51,8 @@ export interface FishingSpot {
   name: string;
   slug: string;
   isManagedPond?: boolean; // 管理釣り場 (営業時間あり): 混雑予想・タマヅメ等のおすすめ時間帯を非表示
+  /** isManagedPond の施設の種類。managed=管理釣り場(トラウト等) / tsuribori=釣り堀(コイ・ヘラ・エビ等) / kaijo=海上釣り堀。省略時は managed */
+  facilityKind?: "managed" | "tsuribori" | "kaijo";
   description: string;
   latitude: number;
   longitude: number;
@@ -124,6 +126,9 @@ export interface ListSpot {
   latitude: number;
   longitude: number;
   spotType: FishingSpot["spotType"];
+  /** 大分類（海・川・湖池・釣り堀・管理釣り場）。サーバーで計算して渡す */
+  category: import("@/lib/spot-category").SpotCategoryKey;
+  categoryDetail: string | null;
   difficulty: FishingSpot["difficulty"];
   isFree: boolean;
   hasParking: boolean;

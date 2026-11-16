@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { PublicSpotPhoto, SpotPhotoEntryLike } from "@/lib/spot-photo-public";
 import { getShakurhythmSpotContext } from "@/lib/shakurhythm";
 import { ShakurhythmSpotNote } from "@/components/promo/shakurhythm-spot-note";
+import { SpotCategoryBadge } from "@/components/spots/spot-category-badge";
+import { getSpotCategory, getSpotCategoryDetail } from "@/lib/spot-category";
 import Link from "next/link";
 import nextDynamic from "next/dynamic";
 import { notFound } from "next/navigation";
@@ -725,6 +727,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
         {/* 種別 − エリア（サウナイキタイ式の1行サマリー） */}
         <p className="mt-1 text-sm text-muted-foreground">
+          <SpotCategoryBadge category={getSpotCategory(spot)} detail={getSpotCategoryDetail(spot)} className="mr-2 align-[1px] text-xs" />
           {SPOT_TYPE_LABELS[spot.spotType]} − {spot.region.prefecture} {spot.region.areaName}
         </p>
         {/* 実在する最新釣果があるときだけ冒頭に要約（title と同じデータ。詳細は「釣果・最近の様子」へ） */}
