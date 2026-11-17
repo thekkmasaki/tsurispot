@@ -128,6 +128,7 @@ import { managedShikokuSpots } from "./spots-managed-shikoku";
 import { managedKyushuNorthSpots } from "./spots-managed-kyushu-north";
 import { managedSanyoSpots } from "./spots-managed-sanyo";
 import { managedKyushuCentralSpots } from "./spots-managed-kyushu-central";
+import { managedKyushuSouthSpots } from "./spots-managed-kyushu-south";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -254,4 +255,5 @@ export const allRawSpots: FishingSpot[] = [
   ...managedKyushuNorthSpots,
   ...managedSanyoSpots,
   ...managedKyushuCentralSpots,
+  ...managedKyushuSouthSpots,
 ];
