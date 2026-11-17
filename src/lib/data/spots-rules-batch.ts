@@ -541,16 +541,8 @@ export const spotRulesBatch: Record<string, SpotRules> = {
     maxRods: 2,
     otherRules: ["施設利用料が必要", "営業時間内のみ利用可"],
   },
-  // 仮屋湾遊漁センター
-  "kariya-wan-yuugyou": {
-    castingAllowed: false,
-    lureAllowed: true,
-    chumAllowed: true,
-    nightFishing: false,
-    fishingLicenseRequired: false,
-    maxRods: 2,
-    otherRules: ["施設利用料が必要", "営業時間内のみ利用可"],
-  },
+  // 仮屋湾遊漁センター(kariya-wan-yuugyou): 出典で確かめられないルール(ルアー可など)だったため 2026-11-17 に削除
+
   // 館山港（館山夕日桟橋）
   "tateyama-port": {
     castingAllowed: false,
