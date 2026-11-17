@@ -4,6 +4,8 @@ import { fishSpecies } from "@/lib/data/fish";
 import { blogPosts } from "@/lib/data/blog";
 
 import { katakanaToHiragana } from "@/lib/search/spot-match";
+import { getSpotDepthKind } from "@/lib/spot-depth-terrain";
+import { terrainSearchText } from "@/lib/depth-terrain";
 
 type SearchItemType = "spot" | "fish" | "guide" | "blog" | "tool";
 
@@ -102,6 +104,8 @@ function getSearchIndex(): IndexItem[] {
         s.region.areaName,
         katakanaToHiragana(s.name),
         (s.address || "").replace(s.region.prefecture, ""),
+        // 地形（水深）: 「深場」「ドン深」「遠浅」等で引けるようにする（海しる等深線による目安）
+        terrainWords(s.slug),
       ].join(" ").toLowerCase(),
       pref: s.region.prefecture,
     })),
@@ -177,4 +181,9 @@ export async function GET(request: NextRequest) {
       "X-Spot-Total": String(spotTotal),
     },
   });
+}
+
+function terrainWords(slug: string): string {
+  const kind = getSpotDepthKind(slug);
+  return kind ? katakanaToHiragana(terrainSearchText(kind)) + " " + terrainSearchText(kind) : "";
 }

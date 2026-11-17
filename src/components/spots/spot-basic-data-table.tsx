@@ -9,6 +9,7 @@ import { getTideStationForSpot } from "@/lib/tide/nearest-station";
 import { getStationSlug } from "@/lib/tide/station-slugs";
 import { getParkingBadgeText } from "@/components/spots/parking-guide-card";
 import { getSpotDepthTerrain, MSIL_DISCLAIMER } from "@/lib/spot-depth-terrain";
+import { DEPTH_TERRAIN_SHORT_LABELS } from "@/lib/depth-terrain";
 import {
   formatMonthRanges,
   getSpotRestrictionSummary,
@@ -53,8 +54,15 @@ export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
           <span className="font-medium">{terrain.label}</span>
           {terrain.hint && <span className="text-muted-foreground">（{terrain.hint}）</span>}
           <span className="block text-xs text-muted-foreground">
-            {terrain.detail}・海しる等深線による目安で、足もとの水深ではありません
+            海しるの等深線から推定した地形の傾向で、足もとの水深ではありません
           </span>
+          <Link
+            prefetch={false}
+            href={`/spots?${new URLSearchParams({ prefecture: spot.region.prefecture, terrain: terrain.kind })}`}
+            className="mt-0.5 inline-block text-xs text-primary underline-offset-2 hover:underline"
+          >
+            {spot.region.prefecture}の「{DEPTH_TERRAIN_SHORT_LABELS[terrain.kind]}」スポットを探す
+          </Link>
         </>
       ),
     });
@@ -201,11 +209,11 @@ export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
       </p>
       {terrain && (
         <p className="mt-1 text-[11px] text-muted-foreground">
-          ※ 地形（水深）の出典:{" "}
+          ※ 地形（水深）は{" "}
           <a href="https://www.msil.go.jp/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
-            海洋状況表示システム（海しる）
+            海洋状況表示システム（https://www.msil.go.jp/）
           </a>
-          。{MSIL_DISCLAIMER}。航海には使用できません。
+          の等深線（提供：海上保安庁）を加工して作成。{MSIL_DISCLAIMER}。航海には使用できません。
         </p>
       )}
     </section>

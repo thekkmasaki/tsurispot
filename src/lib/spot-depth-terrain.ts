@@ -1,17 +1,17 @@
 /**
- * スポット周辺の「地形（水深）」の目安。
+ * サーバー専用: スポット周辺の「地形（水深）」の目安を引く。
  *
  * 海しるAPI（海上保安庁）の等深線から、スポット地点から水深20mラインまでの
  * 水平距離を一度だけバッチ取得し（scripts/fetch-spot-depth-contour.mjs）、
- * それを3段階の地形タイプに分けて表示する。
+ * それを3段階の地形タイプに分けて表示する。タイプの定義は lib/depth-terrain.ts。
  *
- * - 足もとの水深ではない（等深線は 20/50/100/150/200m しか無く、元は500m格子で沿岸は粗い）。
- *   そのため数字を主役にせず「地形のタイプ」で見せ、距離は補足に留める。
- * - データに無い slug（川・池・湖など）は null を返し、行を出さない。
+ * JSON（約4,000件）を import するので、クライアントコンポーネントから import しないこと。
+ * 一覧・検索へは ListSpot.depthTerrain（タイプ文字列だけ）として渡す。
  */
 import depthData from "@/lib/data/spot-depth-contour.json";
+import { classifyDepthKind, DEPTH_TERRAIN_LABELS, type DepthTerrainKind } from "@/lib/depth-terrain";
 
-export type DepthTerrainKind = "steep" | "moderate" | "shallow";
+export type { DepthTerrainKind } from "@/lib/depth-terrain";
 
 export interface DepthTerrain {
   kind: DepthTerrainKind;
@@ -19,46 +19,21 @@ export interface DepthTerrain {
   label: string;
   /** 釣りへの意味（無い場合は undefined） */
   hint?: string;
-  /** 補足: 20mラインまでの距離の説明 */
-  detail: string;
 }
-
-/** 20mラインがこの距離以内なら「岸近くから深い」 */
-export const STEEP_MAX_M = 300;
-/** 20mラインがこの距離以内なら「やや深場が近い」。超えたら（または見つからなければ）浅め */
-export const MODERATE_MAX_M = 1000;
 
 /**
- * 20mラインまでの距離（m）から地形タイプを決める。
+ * 20mラインまでの距離（m）から表示用の地形情報を作る。
  * null は「取得範囲（約1.4km）内に20mラインが無い」を意味する。
+ * 距離（100m〜1km）は投げて届く範囲（50〜80m）の外なので画面には出さず、
+ * 「急に深くなるか・遠浅か」という坂の傾向を測る物差しとしてだけ使う。
  */
 export function classifyDepthTerrain(distanceTo20m: number | null): DepthTerrain {
-  if (distanceTo20m != null && distanceTo20m <= STEEP_MAX_M) {
-    return {
-      kind: "steep",
-      label: "岸近くから深い地形",
-      hint: "冬に深場へ移るイカ・根魚を狙いやすい",
-      detail: `沖合${formatDistance(distanceTo20m)}で水深20m`,
-    };
-  }
-  if (distanceTo20m != null && distanceTo20m <= MODERATE_MAX_M) {
-    return {
-      kind: "moderate",
-      label: "やや深場が近い地形",
-      detail: `沖合${formatDistance(distanceTo20m)}で水深20m`,
-    };
-  }
+  const kind = classifyDepthKind(distanceTo20m);
   return {
-    kind: "shallow",
-    label: "周辺は浅めの地形",
-    detail: "約1km以内に水深20mの場所なし",
+    kind,
+    label: DEPTH_TERRAIN_LABELS[kind],
+    hint: kind === "steep" ? "冬の深場狙い（イカ・根魚）の候補" : undefined,
   };
-}
-
-function formatDistance(m: number): string {
-  // 100m未満は「100m以内」と丸める（座標の誤差を考えると細かい数字は意味が無い）
-  if (m < 100) return "100m以内";
-  return `約${Math.round(m / 50) * 50}m`;
 }
 
 const spots = depthData.spots as Record<string, number | null>;
@@ -67,6 +42,12 @@ const spots = depthData.spots as Record<string, number | null>;
 export function getSpotDepthTerrain(slug: string): DepthTerrain | null {
   if (!Object.prototype.hasOwnProperty.call(spots, slug)) return null;
   return classifyDepthTerrain(spots[slug]);
+}
+
+/** 一覧・検索用: 地形タイプだけ。データが無ければ undefined */
+export function getSpotDepthKind(slug: string): DepthTerrainKind | undefined {
+  if (!Object.prototype.hasOwnProperty.call(spots, slug)) return undefined;
+  return classifyDepthKind(spots[slug]);
 }
 
 /** 海しるAPI利用規約 第5条で明示が求められている文言 */

@@ -18,6 +18,7 @@ import { InFeedAd } from "@/components/ads/ad-unit";
 import { ListSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { regions } from "@/lib/data/regions";
 import { spotSearchMatch } from "@/lib/search/spot-match";
+import { DEPTH_TERRAIN_KINDS, DEPTH_TERRAIN_SHORT_LABELS, isDepthTerrainKind, type DepthTerrainKind } from "@/lib/depth-terrain";
 
 type RegionKey = "hokkaido" | "tohoku" | "kanto" | "chubu" | "kinki" | "chugoku" | "shikoku" | "kyushu";
 
@@ -60,6 +61,11 @@ const difficulties = Object.entries(DIFFICULTY_LABELS) as [ListSpot["difficulty"
 
 // Build unique prefecture list from regions
 const prefectures = Array.from(new Set(regions.map((r) => r.prefecture)));
+
+// ?terrain= の値を地形タイプに。不正値は無視（未選択）
+function parseTerrain(v: string | null): DepthTerrainKind | "" {
+  return isDepthTerrainKind(v) ? v : "";
+}
 
 type FacilityKey = "hasParking" | "hasToilet" | "hasConvenienceStore" | "hasFishingShop" | "hasRentalRod";
 
@@ -123,6 +129,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedType, setSelectedType] = useState<ListSpot["spotType"] | "">(() => (searchParams.get("type") ?? "") as ListSpot["spotType"] | "");
   const [selectedDifficulty, setSelectedDifficulty] = useState<ListSpot["difficulty"] | "">(() => (searchParams.get("difficulty") ?? "") as ListSpot["difficulty"] | "");
+  const [selectedTerrain, setSelectedTerrain] = useState<DepthTerrainKind | "">(() => parseTerrain(searchParams.get("terrain")));
   const [selectedFacilities, setSelectedFacilities] = useState<FacilityKey[]>([]);
   const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
   const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
@@ -153,6 +160,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
       if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
       if (selectedType) params.set("type", selectedType);
       if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
+      if (selectedTerrain) params.set("terrain", selectedTerrain);
       if (page > 1) params.set("page", String(page));
       const query = params.toString();
       const url = query ? `${pathname}?${query}` : pathname;
@@ -165,7 +173,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
       if (mode === "push") window.history.pushState(null, "", url);
       else window.history.replaceState(null, "", url);
     },
-    [searchText, selectedPrefecture, selectedType, selectedDifficulty, pathname],
+    [searchText, selectedPrefecture, selectedType, selectedDifficulty, selectedTerrain, pathname],
   );
 
   // ページ送りリンクの href（writeUrl と同じ組み立て。クローラ・新規タブ用）
@@ -176,11 +184,12 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
       if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
       if (selectedType) params.set("type", selectedType);
       if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
+      if (selectedTerrain) params.set("terrain", selectedTerrain);
       if (page > 1) params.set("page", String(page));
       const query = params.toString();
       return query ? `${pathname}?${query}` : pathname;
     },
-    [searchText, selectedPrefecture, selectedType, selectedDifficulty, pathname],
+    [searchText, selectedPrefecture, selectedType, selectedDifficulty, selectedTerrain, pathname],
   );
 
   const [viewMode, setViewMode] = useState<"list" | "map">("list");
@@ -207,6 +216,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
     setSelectedPrefecture(searchParams.get("prefecture") ?? "");
     setSelectedType((searchParams.get("type") ?? "") as ListSpot["spotType"] | "");
     setSelectedDifficulty((searchParams.get("difficulty") ?? "") as ListSpot["difficulty"] | "");
+    setSelectedTerrain(parseTerrain(searchParams.get("terrain")));
     const page = Number.parseInt(searchParams.get("page") ?? "", 10);
     setCurrentPage(Number.isFinite(page) && page > 1 ? page : 1);
   }, [searchParams]);
@@ -288,8 +298,8 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
     return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).map(([n]) => n);
   }, [spots]);
 
-  const hasFilters = searchText || selectedRegion || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedFacilities.length > 0 || selectedFree || selectedMethods.length > 0 || selectedFishNames.length > 0;
-  const activeFilterCount = [selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFree].filter(Boolean).length + selectedFacilities.length + selectedMethods.length + selectedFishNames.length;
+  const hasFilters = searchText || selectedRegion || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedTerrain || selectedFacilities.length > 0 || selectedFree || selectedMethods.length > 0 || selectedFishNames.length > 0;
+  const activeFilterCount = [selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedTerrain, selectedFree].filter(Boolean).length + selectedFacilities.length + selectedMethods.length + selectedFishNames.length;
 
   // Precompute distances for all spots if user location is available
   const distanceMap = useMemo(() => {
@@ -311,6 +321,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
       if (selectedArea && spot.region.areaName !== selectedArea) return false;
       if (selectedType && spot.spotType !== selectedType) return false;
       if (selectedDifficulty && spot.difficulty !== selectedDifficulty) return false;
+      if (selectedTerrain && spot.depthTerrain !== selectedTerrain) return false;
       if (selectedFree === "free" && !spot.isFree) return false;
       if (selectedFree === "paid" && spot.isFree) return false;
       for (const fac of selectedFacilities) {
@@ -337,7 +348,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
     }
 
     return filtered;
-  }, [spots, deferredSearchText, selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, sortByRating, distanceMap]);
+  }, [spots, deferredSearchText, selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedTerrain, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, sortByRating, distanceMap]);
 
   // 全件取得前は、絞り込みなしなら全体件数（totalCount）でページ数・件数を出す
   const resultCount = allSpots === null && !hasFilters ? totalCount : filteredSpots.length;
@@ -356,6 +367,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
       setSelectedArea("");
       setSelectedType("");
       setSelectedDifficulty("");
+      setSelectedTerrain("");
       setSelectedFacilities([]);
       setSelectedFree("");
       setSelectedMethods([]);
@@ -610,6 +622,27 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
                 </Button>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* 地形（水深）filter: 海しる等深線による目安（海のスポットのみ） */}
+        <div>
+          <p className="mb-2 text-sm font-medium text-muted-foreground">
+            地形（水深）
+            <span className="ml-1.5 text-xs font-normal">海のスポットのみ・水深20mラインまでの距離による目安</span>
+          </p>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {DEPTH_TERRAIN_KINDS.map((key) => (
+              <Button
+                key={key}
+                variant={selectedTerrain === key ? "default" : "outline"}
+                size="sm"
+                onClick={() => handleFilterChange(setSelectedTerrain, selectedTerrain === key ? "" : key)}
+                className="min-h-[40px] text-xs sm:text-sm"
+              >
+                {DEPTH_TERRAIN_SHORT_LABELS[key]}
+              </Button>
+            ))}
           </div>
         </div>
 
