@@ -5,10 +5,14 @@ name: SNS ランキング投稿（Instagramリール / Threads）
 #
 # 投稿時刻: JST 20:00 ごろ（帰宅後のアクティブ帯）。
 # GitHub の定時実行は 5〜15 時間も遅れ、ばらつく（2026-11: 15:17 指定が実際は翌3:30 起動＝未明に投稿されていた）。
-# 遅れが読めないので、毎時起動して gate ジョブで判定する（公開リポジトリなので Actions は無料）:
+# しかも毎時の cron も大半が実行されない（1日24回中4回程度。2026-11-17 は午後に1回も来ず投稿漏れ）。
+#
+# 本命: Cloudflare Worker の Cron（ops/cloudflare/reel-trigger-worker.js）が毎日 JST 19:55 に
+#       workflow_dispatch（dry_run=false, only_if_not_posted=true）で起動する。遅れも抜けもない。
+# 予備: 下の毎時 schedule。gate ジョブで判定する（公開リポジトリなので Actions は無料）:
 #   - JST 12:00 前の起動 … 何もしない（未明・朝には投稿しない）
-#   - 14:55〜19:55 の起動 … 19:55 まで待って投稿（待ちは最長5時間。それより早い起動は次の回に任せる）
-#   - 19:55〜24:00 の起動 … すぐ投稿
+#   - 15:30〜20:30 の起動 … 20:30 まで待ち、まだ未投稿なら投稿（Worker が失敗した日だけ動く）
+#   - 20:30〜24:00 の起動 … 未投稿ならすぐ投稿
 #   - その日すでに投稿済みなら、どの時間でも何もしない（台帳を見るだけなので数秒で終わる）
 # PC には頼らない（ユーザー方針）。
 on:
@@ -29,10 +33,10 @@ on:
       platforms:
         description: '投稿先'
         default: 'instagram,threads'
-
-concurrency:
-  group: sns-ranking-reel
-  cancel-in-progress: false
+      only_if_not_posted:
+        description: '今日すでに投稿済みなら何もしない（Cloudflare Worker からの定時起動用）'
+        type: boolean
+        default: false
 
 jobs:
   gate:
@@ -45,22 +49,25 @@ jobs:
       UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
       UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
     steps:
-      - name: 投稿するか判定（JST 19:55〜24:00 に投稿・投稿済みなら何もしない）
+      - name: 投稿するか判定（Worker は 19:55 に即投稿・予備の毎時起動は 20:30 以降・投稿済みなら何もしない）
         id: wait
         run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then echo "post=true" >> "$GITHUB_OUTPUT"; exit 0; fi
           today=$(TZ=Asia/Tokyo date +%F)
           posted() {
             curl -sf -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN" "$UPSTASH_REDIS_REST_URL/lrange/sns:ranking:ledger/0/9" \
               | jq -r '.result[]' | jq -s --arg d "$today" 'any(.date == $d and .ok == true)' | grep -q true
           }
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            if [ "${{ inputs.only_if_not_posted }}" = "true" ] && posted; then echo "$today は投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+            echo "post=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
           if posted; then echo "$today は投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           h=$(TZ=Asia/Tokyo date +%-H)
-          now=$(date +%s); target=$(TZ=Asia/Tokyo date -d "today 19:55" +%s)
+          now=$(date +%s); target=$(TZ=Asia/Tokyo date -d "today 20:30" +%s)
           if [ "$h" -lt 12 ]; then echo "JST ${h}時の起動 → 未明・朝は投稿しない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           wait=$((target - now))
-          if [ "$wait" -gt 18000 ]; then echo "19:55 まで $((wait/60))分（5時間超）→ 次の回に任せる"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
-          if [ "$wait" -gt 0 ]; then echo "JST 19:55 まで $((wait/60))分待つ"; sleep "$wait"; fi
+          if [ "$wait" -gt 18000 ]; then echo "20:30 まで $((wait/60))分（5時間超）→ 次の回に任せる"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ "$wait" -gt 0 ]; then echo "JST 20:30 まで $((wait/60))分待つ（Worker が投稿していればその後スキップ）"; sleep "$wait"; fi
           # 待っている間に別の回が投稿していたら何もしない
           if posted; then echo "待機中に投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           echo "date=$today" >> "$GITHUB_OUTPUT"
@@ -69,6 +76,11 @@ jobs:
   post:
     needs: gate
     if: needs.gate.outputs.post == 'true'
+    # 投稿だけを直列化する（gate の待機は並行で良い。ワークフロー全体を直列にすると、
+    # 予備の待機中に Worker の起動が 20:30 まで待たされてしまう）
+    concurrency:
+      group: sns-ranking-reel-post
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
