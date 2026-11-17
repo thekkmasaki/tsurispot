@@ -55,7 +55,7 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "kure-kou-nakatosa-w6": "kochi-nakatosa-kure-bulk", // 中土佐・久礼港 → 中土佐町・久礼港：久礼港＝久礼漁港（座標同一）
   "otomo-gyokou": "saga-karatsu-kotomo-bulk", // 小友漁港 → 唐津・小友漁港：小友漁港（唐津市呼子町）。一方の住所が誤り
   "karatsu-higashinohama": "karatsu-higashinohama-w6", // 唐津東の浜海水浴場 → 唐津・東の浜：唐津・東の浜の表記違い
-  "daiozaki-mie": "shima-daiozaki", // 大王崎 → 志摩大王崎：大王崎の地名接頭辞違い
+  "shima-daiozaki": "daiozaki-mie", // 志摩大王崎 → 大王崎：大王崎の地名接頭辞違い（県概要が「大王崎」を参照するため一般名側を残す）
   "tobishima-katsuura-e8": "tobishima-katsuura-kou", // 飛島勝浦漁港 → 飛島勝浦港：飛島勝浦港＝勝浦漁港
   "sakata-honko-wharf-a10": "sakata-honko-quay-a13", // 酒田本港埠頭 → 酒田市本港岸壁：酒田本港の埠頭/岸壁表記違い（同住所）
   "shimonoseki-kanmon-c8": "shimonoseki-kanmon-gogan", // 下関・関門海峡釣り場 → 下関・関門海峡護岸：関門海峡（みもすそ川）の護岸表記違い（唐戸の釣り公園は別扱い）
