@@ -2266,22 +2266,6 @@ export const eastAdd12Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "ss12331", name: "南伊豆・妻良港", slug: "minamiizu-mera-kou-a12",
-    description: "南伊豆の入り江にある静かな港で、メジナやイシダイの実績が高い。磯に隣接した好ポイントで上級者にも人気。",
-    latitude: 34.6480, longitude: 138.8880,
-    address: "〒415-0531 静岡県賀茂郡南伊豆町妻良",
-    accessInfo: "伊豆急下田駅からバスで約30分",
-    region: localRegion("rs12129"), spotType: "port", difficulty: "intermediate",
-    isFree: true, hasParking: true, parkingDetail: "港近くに駐車可能",
-    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
-      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
-  },
-  {
     id: "ss12332", name: "掛川・大東海岸", slug: "kakegawa-daito-kaigan-a12",
     description: "掛川市南部のサーフポイントで、キスの投げ釣りとヒラメのルアーが楽しめる。広い砂浜で思い切り遠投できる爽快なフィールド。",
     latitude: 34.6780, longitude: 138.0280,
