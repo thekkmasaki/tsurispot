@@ -16,6 +16,7 @@ import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-sectio
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 import { MIN_SPOTS_PER_PREF } from "@/lib/data/spot-features";
+import { getManagedByPrefecture, MIN_MANAGED_PER_PREF } from "@/lib/managed-pond-hub";
 
 type PageProps = {
   params: Promise<{ type: string; prefecture: string }>;
@@ -50,11 +51,14 @@ export async function generateMetadata({
   }
 
   const label = SPOT_TYPE_LABELS[type as FishingSpot["spotType"]];
+  // 「管理釣り場（ポンド）の釣り場」のような重複表現を避ける
+  const place = type === "pond" ? label : `${label}の釣り場`;
+  const placeShort = type === "pond" ? label : `${label}釣り場`;
   const spots = fishingSpots.filter(
     (s) => s.spotType === type && s.region.prefecture === pref.name
   );
-  const title = `${pref.name}の${label}釣り場${spots.length}選【2026年最新】`;
-  const description = `${pref.name}の${label}の釣り場${spots.length}件を紹介。釣れる魚・難易度・設備・アクセス情報を完全ガイド。初心者から上級者まで${pref.name}の${label}で釣りをするならツリスポ。`;
+  const title = `${pref.name}の${placeShort}${spots.length}選【2026年最新】`;
+  const description = `${pref.name}の${place}${spots.length}件を紹介。釣れる魚・難易度・設備・アクセス情報を完全ガイド。初心者から上級者まで${pref.name}の${label}で釣りをするならツリスポ。`;
 
   return {
     title,
@@ -90,6 +94,14 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
 
   const spotType = type as FishingSpot["spotType"];
   const label = SPOT_TYPE_LABELS[spotType];
+  // 「管理釣り場（ポンド）の釣り場」のような重複表現を避ける
+  const place = spotType === "pond" ? label : `${label}の釣り場`;
+  const placeShort = spotType === "pond" ? label : `${label}釣り場`;
+  // ポンド一覧は池型だけ。渓流型・釣り堀・海上釣り堀も含む県の管理釣り場ハブ（index 対象の件数の県だけ）へつなぐ
+  const managedPrefCount =
+    spotType === "pond"
+      ? getManagedByPrefecture().find((g) => g.pref.slug === pref.slug)?.spots.length ?? 0
+      : 0;
   const spots = fishingSpots.filter(
     (s) => s.spotType === spotType && s.region.prefecture === pref.name
   );
@@ -197,8 +209,8 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
   // FAQ
   const faqItems = [
     {
-      question: `${pref.name}の${label}の釣り場は何件ありますか？`,
-      answer: `現在、${pref.name}の${label}の釣り場は${spots.length}件掲載しています。${difficultyCount.beginner > 0 ? `初心者向けは${difficultyCount.beginner}件です。` : ""}`,
+      question: `${pref.name}の${place}は何件ありますか？`,
+      answer: `現在、${pref.name}の${place}は${spots.length}件掲載しています。${difficultyCount.beginner > 0 ? `初心者向けは${difficultyCount.beginner}件です。` : ""}`,
     },
     {
       question: `${pref.name}の${label}ではどんな魚が釣れますか？`,
@@ -236,7 +248,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 3,
-        name: `${label}の釣り場`,
+        name: `${place}`,
         item: `https://tsurispot.com/spot-type/${type}`,
       },
       {
@@ -261,7 +273,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${pref.name}の${label}の釣り場`,
+    name: `${pref.name}の${place}`,
     numberOfItems: spots.length,
     itemListElement: spots.slice(0, 30).map((spot, index) => ({
       "@type": "ListItem",
@@ -284,7 +296,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
         items={[
           { label: "ホーム", href: "/" },
           { label: "釣り場タイプ別", href: "/spot-type" },
-          { label: `${label}の釣り場`, href: `/spot-type/${type}` },
+          { label: `${place}`, href: `/spot-type/${type}` },
           { label: `${pref.name}` },
         ]}
       />
@@ -294,19 +306,19 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
         <ChevronLeft className="size-4" />
-        {label}の釣り場一覧に戻る
+        {place}一覧に戻る
       </Link>
 
       {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の{label}釣り場・釣りスポット
+          {pref.name}の{placeShort}・釣りスポット
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           {spots.length}件の{label}スポットを掲載
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {pref.name}にある{label}の釣り場を{spots.length}件掲載しています。
+          {pref.name}にある{place}を{spots.length}件掲載しています。
           {topFish.length > 0 &&
             `主に${topFish
               .slice(0, 4)
@@ -315,6 +327,13 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
           {difficultyCount.beginner > 0 &&
             `初心者向けのスポットは${difficultyCount.beginner}件あります。`}
         </p>
+        {managedPrefCount >= MIN_MANAGED_PER_PREF && (
+          <p className="mt-3 text-sm">
+            <Link prefetch={false} href={`/managed-ponds/${pref.slug}`} className="font-medium text-primary underline">
+              {pref.name}の管理釣り場・釣り堀{managedPrefCount}件を料金・営業時間つきで比べる（渓流型・海上釣り堀も含む）
+            </Link>
+          </p>
+        )}
       </div>
 
       {/* サマリカード */}
@@ -454,7 +473,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
       {relatedPrefs.length > 0 && (
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-3 text-base font-bold sm:text-lg">
-            {label}の釣り場がある他の都道府県
+            {place}がある他の都道府県
           </h2>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
             {relatedPrefs.map((p) => (
@@ -510,7 +529,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
             href={`/spot-type/${type}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
-            {label}の釣り場一覧
+            {place}一覧
           </Link>
           <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
