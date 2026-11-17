@@ -33,7 +33,7 @@ const fwAdd2Regions: Region[] = [
   { id: "r5012", prefecture: "愛知県", areaName: "北方マス釣り場", slug: "aichi-kitakata-masu" },
   { id: "r5013", prefecture: "岐阜県", areaName: "美濃フィッシングエリア", slug: "gifu-mino-fa" },
   { id: "r5014", prefecture: "長野県", areaName: "平谷湖フィッシングスポット", slug: "nagano-hirayako-fs" },
-  { id: "r5015", prefecture: "福島県", areaName: "フォレストパークあだたら", slug: "fukushima-fp-adatara" },
+  // r5015(フォレストパークあだたら)は 2026-11-17 に fw-514 とともに削除(実在の同名施設は大玉村のオートキャンプ場で釣り場の記載なし)
   { id: "r5016", prefecture: "栃木県", areaName: "加賀フィッシングエリア", slug: "tochigi-kaga-fa" },
   // r5017「上野村フィッシングリゾート」は実在しない施設名の region だったため、唯一の利用元 fw-512 の削除に合わせて 2026-11-17 に削除
   { id: "r5018", prefecture: "山梨県", areaName: "忍野フィッシングエリア", slug: "yamanashi-oshino-fa" },
@@ -420,29 +420,6 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["山間部のため天候変化に注意"],
     managementInfo: { organizationName: "平谷湖フィッシングスポット", contactPhone: "0265-48-1127", openingHours: "7:00〜17:00", closedDays: "火曜日（冬季休業）", fishingFee: "1日券4,000円", notes: ["確認日 2026-11-17(公式サイト https://hirayako.com/)。2026年シーズンは4月4日開業。電話・公式URLを確認。料金・営業時間・定休日は旧データのままで未確認(番地は公式トップに記載なし)"] },
-  },
-  {
-    id: "fw-514", name: "フォレストパークあだたら", slug: "fukushima-forest-park-adatara",
-    description: "福島県安達太良山の麓に位置する管理釣り場。ポンドタイプとストリームタイプの2つのフィールドがあり、安達太良山の清流を利用した水質の良さが自慢。東北エリアトラウトの人気スポットで、大型のニジマスやイワナが狙える。",
-    latitude: 37.6447, longitude: 140.3153, address: "〒964-0075 福島県二本松市田沢蟹沢口",
-    accessInfo: "東北自動車道二本松ICから約20分。JR東北本線二本松駅から車約25分。",
-    region: lr("r5015"), spotType: "pond", isManagedPond: true, difficulty: "beginner",
-    isFree: false, feeDetail: "1日券 大人4,000円",
-    hasParking: true, parkingDetail: "無料駐車場あり（約40台）",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルロッドあり",
-    mainImageUrl: "", images: [],
-    rating: 4.2, reviewCount: 82,
-    catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
-      { fish: fish("iwana"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー" },
-      { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
-    ],
-    bestTimes: [{ label: "朝一番", timeRange: "06:30〜08:30", rating: "best" }, { label: "夕方", timeRange: "15:00〜17:00", rating: "good" }],
-    tackleRecommendations: [],
-    tideAdvice: tideFresh,
-    mazumeInfo: { springSunrise: "05:05", springSunset: "18:20", summerSunrise: "04:20", summerSunset: "19:05", autumnSunrise: "05:15", autumnSunset: "17:15", winterSunrise: "06:40", winterSunset: "16:30", tip: "安達太良山の雪解け水で水温が安定。ストリームエリアは本格渓流の趣。" },
-    safetyLevel: "safe", safetyNotes: ["バーブレスフック限定", "熊注意（山麓エリア）"],
-    managementInfo: { organizationName: "フォレストパークあだたら", openingHours: "6:30〜17:00", closedDays: "不定休（冬季休業）", fishingFee: "1日券4,000円" },
   },
   {
     id: "fw-515", name: "北方マス釣り場", slug: "aichi-kitakata-masu-fishing",

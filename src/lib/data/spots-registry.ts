@@ -122,6 +122,7 @@ import { managedMieSpots } from "./spots-managed-mie";
 import { managedHokkaidoSpots } from "./spots-managed-hokkaido";
 import { managedTohokuNorthSpots } from "./spots-managed-tohoku-north";
 import { managedMiyagiSpots } from "./spots-managed-miyagi";
+import { managedTohokuSouthSpots } from "./spots-managed-tohoku-south";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -242,4 +243,5 @@ export const allRawSpots: FishingSpot[] = [
   ...managedHokkaidoSpots,
   ...managedTohokuNorthSpots,
   ...managedMiyagiSpots,
+  ...managedTohokuSouthSpots,
 ];
