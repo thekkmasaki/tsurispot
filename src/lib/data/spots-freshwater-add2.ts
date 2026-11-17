@@ -29,6 +29,7 @@ const fwAdd2Regions: Region[] = [
   { id: "r5009", prefecture: "埼玉県", areaName: "プールフィッシング", slug: "saitama-pool-fishing" },
   { id: "r5010", prefecture: "神奈川県", areaName: "フィッシュオン王禅寺", slug: "kanagawa-ozenji" },
   { id: "r5011", prefecture: "東京都", areaName: "奥多摩フィッシングセンター", slug: "tokyo-okutama-fc" },
+  // r5012 は 2026-11-17 に唯一の利用元 fw-515 を尾張北部(rmp-aichi-owari-north)へ移したため現在未使用
   { id: "r5012", prefecture: "愛知県", areaName: "北方マス釣り場", slug: "aichi-kitakata-masu" },
   { id: "r5013", prefecture: "岐阜県", areaName: "美濃フィッシングエリア", slug: "gifu-mino-fa" },
   { id: "r5014", prefecture: "長野県", areaName: "平谷湖フィッシングスポット", slug: "nagano-hirayako-fs" },
@@ -75,6 +76,9 @@ const fwAdd2Regions: Region[] = [
   { id: "r5058", prefecture: "宮崎県", areaName: "耳川上流（椎葉）", slug: "miyazaki-mimikawa-shiiba" },
   { id: "r5059", prefecture: "熊本県", areaName: "菊池川上流", slug: "kumamoto-kikuchigawa-upper" },
 ];
+
+// 尾張北部の管理釣り場エリア。spots-managed-aichi.ts の R_OWARI_NORTH と同じ値(fw-515 北方マス釣り場の移設先)
+const R_AICHI_OWARI_NORTH: Region = { id: "rmp-aichi-owari-north", prefecture: "愛知県", areaName: "尾張北部（一宮・北名古屋・犬山）", slug: "aichi-owari-north-mp" };
 
 function lr(id: string) {
   return fwAdd2Regions.find((r) => r.id === id) || region(id);
@@ -197,24 +201,29 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
   {
     id: "fw-504", name: "すそのフィッシングパーク", slug: "shizuoka-susono-fishing-park",
     description: "富士山の裾野に広がる静岡県裾野市の管理釣り場。富士山の伏流水を利用した透明度の高い水質が特徴。ルアー・フライ専用ポンドとエサ釣りポンドが分かれており、幅広い層が楽しめる。冬季でも水温が安定しているため通年営業。",
-    latitude: 35.1733, longitude: 138.9061, address: "〒410-1231 静岡県裾野市須山2255-3139",
+    // 2026-11-17 修正: 住所 裾野市須山2255-3139 → 公式の「静岡県裾野市富沢589-1」(http://www.susono-f-park.com/)。
+    // 座標は国土地理院 住所検索「裾野市富沢」(大字中心。番地は当たらず)で取り直し(旧 35.1733,138.9061)
+    latitude: 35.179779, longitude: 138.880737, address: "静岡県裾野市富沢589-1",
     accessInfo: "東名高速裾野ICから約20分。JR御殿場線裾野駅から車約25分。",
-    region: lr("r5005"), spotType: "pond", isManagedPond: true, difficulty: "beginner",
-    isFree: false, feeDetail: "1日券 大人4,600円、半日券3,300円",
+    region: lr("r5005"), spotType: "pond", isManagedPond: true, facilityKind: "managed", difficulty: "beginner",
+    officialUrl: "http://www.susono-f-park.com/",
+    isFree: false, feeDetail: "ルアー・フライ 1日券 一般5,900円・女性/中学生4,900円・小学生3,500円・身障者4,500円、6時間券 5,200円・4,400円・3,100円・4,000円(〜1時間券 3,000円・2,700円・2,100円・2,600円)。エサ釣り 90分2,700円(5尾込み、以降1尾150円)",
     hasParking: true, parkingDetail: "無料駐車場あり（約80台）",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルセット1,500円",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックル800円",
     mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 165,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
       { fish: fish("brown-trout"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー（クランク）" },
+      { fish: fish("iwana"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー・フライ", source: "http://www.susono-f-park.com/" },
+      { fish: fish("amago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー・フライ", source: "http://www.susono-f-park.com/" },
     ],
-    bestTimes: [{ label: "朝一番", timeRange: "07:00〜09:00", rating: "best" }, { label: "日中", timeRange: "10:00〜14:00", rating: "good" }],
+    bestTimes: [{ label: "朝一番", timeRange: "08:00〜10:00", rating: "best" }, { label: "日中", timeRange: "10:00〜14:00", rating: "good" }],
     tackleRecommendations: [],
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:10", summerSunrise: "04:35", summerSunset: "19:00", autumnSunrise: "05:35", autumnSunset: "17:05", winterSunrise: "06:50", winterSunset: "16:30", tip: "富士山の伏流水で水温が安定。冬でも活性が落ちにくい。" },
     safetyLevel: "safe", safetyNotes: ["バーブレスフック限定（ルアーエリア）"],
-    managementInfo: { organizationName: "すそのフィッシングパーク", openingHours: "7:00〜17:00", closedDays: "なし（年中無休）", fishingFee: "1日券4,600円" },
+    managementInfo: { organizationName: "すそのフィッシングパーク", contactPhone: "055-993-5514", openingHours: "4〜11月 8:00〜20:00(夜間照明の復旧までは当面18:00まで)、12〜3月 8:00〜19:00", closedDays: "第3週木曜日(8月を除く。祝日は営業)", fishingFee: "ルアー・フライ1日券 一般5,900円", notes: ["確認日 2026-11-17(公式サイト http://www.susono-f-park.com/ 、http://www.susono-f-park.com/n_info.html)", "持ち帰りは1日券 大人7尾まで(50cm以上は2尾)", "レンタルタックル800円"] },
   },
   {
     id: "fw-505", name: "大芦川F&Cフィールドビレッジ", slug: "tochigi-oashigawa-fc-village",
@@ -341,25 +350,29 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
   },
   {
     id: "fw-510", name: "東山湖フィッシングエリア", slug: "shizuoka-higashiyamako-fa",
-    description: "静岡県御殿場市にある富士山を望む管理釣り場。大型ポンドが特徴で、放流量が多くコンスタントに釣果が出やすい。冬季のワカサギ釣りも好評。御殿場プレミアムアウトレットの近くにあり、家族での釣行にも便利。",
+    description: "静岡県御殿場市にある富士山を望む管理釣り場。大型ポンドが特徴で、放流量が多くコンスタントに釣果が出やすい。ニジマスを中心にしたルアー・フライ専用の釣り場で、夏(7〜9月)は高水温のため休業する。御殿場プレミアムアウトレットの近くにあり、家族での釣行にも便利。",
     latitude: 35.2847, longitude: 138.9192, address: "〒412-0024 静岡県御殿場市東山1077",
     accessInfo: "東名高速御殿場ICから約5分。JR御殿場線御殿場駅からバス約10分。",
-    region: lr("r5019"), spotType: "pond", isManagedPond: true, difficulty: "beginner",
-    isFree: false, feeDetail: "1日券 大人4,700円、半日券3,500円",
-    hasParking: true, parkingDetail: "無料駐車場あり（約100台）",
+    region: lr("r5019"), spotType: "pond", isManagedPond: true, facilityKind: "managed", difficulty: "beginner",
+    officialUrl: "https://www.higashiyamako.com/",
+    isFree: false, feeDetail: "1DAY券7,000円(12〜2月は販売なし)、A券6,000円、B券(12〜19時)5,500円、午後券(12〜2月)5,000円、3時間券4,500円(レンタル無料込み)",
+    hasParking: true, parkingDetail: "無料駐車場あり（250台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルセットあり",
     mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 188,
     catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
-      { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ仕掛け" },
+      { fish: fish("nijimasu"), monthStart: 10, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）", source: "https://www.higashiyamako.com/info/" },
     ],
     bestTimes: [{ label: "朝一番", timeRange: "06:30〜08:30", rating: "best" }, { label: "日中", timeRange: "10:00〜14:00", rating: "good" }],
     tackleRecommendations: [],
     tideAdvice: tideFresh,
-    mazumeInfo: { springSunrise: "05:25", springSunset: "18:10", summerSunrise: "04:35", summerSunset: "19:00", autumnSunrise: "05:35", autumnSunset: "17:05", winterSunrise: "06:50", winterSunset: "16:30", tip: "富士山を目の前に釣りが楽しめる贅沢なロケーション。冬ワカサギも人気。" },
-    safetyLevel: "safe", safetyNotes: ["バーブレスフック限定（ルアーエリア）"],
-    managementInfo: { organizationName: "東山湖フィッシングエリア", openingHours: "6:30〜17:00", closedDays: "なし（年中無休）", fishingFee: "1日券4,700円" },
+    mazumeInfo: { springSunrise: "05:25", springSunset: "18:10", summerSunrise: "04:35", summerSunset: "19:00", autumnSunrise: "05:35", autumnSunset: "17:05", winterSunrise: "06:50", winterSunset: "16:30", tip: "富士山を目の前に釣りが楽しめる贅沢なロケーション。" },
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false, fishingLicenseRequired: false,
+      otherRules: ["ルアー・フライのみ", "シングルバーブレスフックのみ(トレブル・ダブルフックは禁止)", "ワームなどソフトルアーは禁止", "桟橋沿いのキャスト・8の字・テクトロは禁止", "テントの設営は不可", "生きた魚の持ち出しは不可"],
+    },
+    safetyLevel: "safe", safetyNotes: ["シングルバーブレスフック限定"],
+    managementInfo: { organizationName: "東山湖フィッシングエリア", contactPhone: "0550-82-2161", openingHours: "3/1〜6/30・10/1〜11/30 5:00〜19:00、12/1〜2月末 6:00〜17:00(ゲート開門 4:30、冬は5:30)", closedDays: "7〜9月は高水温のため休業(2026-27シーズンは10/15開始)", fishingFee: "1DAY券7,000円", notes: ["確認日 2026-11-17(公式サイト https://www.higashiyamako.com/ 、/info/ 、/news/2026/122090/ 。料金改定 2026-09-14、ルール改定 2026-10-14)", "ワカサギは公式に記載がないため魚種から削除"] },
   },
   {
     // 2026-11-17 修正: 旧名「白馬フィッシングエリア」は実在が確認できず(検索でツリスポ自身のページのみ)。白馬村北城で営業する
@@ -433,47 +446,63 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
   },
   {
     id: "fw-515", name: "北方マス釣り場", slug: "aichi-kitakata-masu-fishing",
-    description: "愛知県北設楽郡にある豊川上流の管理釣り場。三河山間部の豊かな自然の中で、ニジマスやアマゴを手軽に楽しめる。エサ釣りがメインで、釣った魚は塩焼きにして食べられる。名古屋からの日帰り渓流釣りに最適な施設。",
-    latitude: 35.0567, longitude: 137.6178, address: "〒441-2513 愛知県北設楽郡設楽町田峯字小林",
-    accessInfo: "新東名高速新城ICから約40分。",
-    region: lr("r5012"), spotType: "river", isManagedPond: true, difficulty: "beginner",
-    isFree: false, feeDetail: "1日券 大人3,300円（持ち帰り含む）",
-    hasParking: true, parkingDetail: "無料駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿セットあり",
+    // 2026-11-17 修正: 旧データの「設楽町田峯・豊川上流・エサ釣りメイン」は誤り。公式(https://sites.google.com/view/kitagatakawaturi/)では
+    // 一宮市北方町の木曽川河川敷(北方・川釣り体験場)で、木曽川漁業協同組合が運営するルアー専用・冬期限定のマス釣り場。
+    // 座標は国土地理院 住所検索「一宮市北方町北方」(大字中心。木曽川沿いの釣り場の位置へは要微調整)で取り直し(旧 35.0567,137.6178)。
+    // region は設楽の r5012 から尾張北部(spots-managed-aichi.ts の rmp-aichi-owari-north と同じ値)へ移した
+    description: "愛知県一宮市北方町、木曽川の河川敷にある冬期限定のマス釣り場(北方・川釣り体験場)。木曽川漁業協同組合が運営し、川の区間に放流したニジマスをルアーで狙う。ルアー専用でエサ釣りはできない。開場期間や料金は年ごとに変わるため、出かける前に公式サイトで確かめたい。",
+    latitude: 35.361477, longitude: 136.78241, address: "愛知県一宮市北方町北方(木曽川河川敷)",
+    accessInfo: "一宮市北方町の木曽川河川敷。詳しい場所は公式サイトで確認。",
+    region: R_AICHI_OWARI_NORTH, spotType: "river", isManagedPond: true, facilityKind: "managed", difficulty: "beginner",
+    officialUrl: "https://sites.google.com/view/kitagatakawaturi/",
+    isFree: false, feeDetail: "料金は公式サイトで確認",
+    hasParking: false, parkingDetail: "駐車場の有無は未確認(公式サイトで確認)",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [],
     rating: 3.8, reviewCount: 72,
     catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
-      { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
+      { fish: fish("nijimasu"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー", source: "https://sites.google.com/view/kitagatakawaturi/" },
     ],
     bestTimes: [{ label: "朝マヅメ", timeRange: "06:30〜08:30", rating: "best" }, { label: "日中", timeRange: "09:00〜15:00", rating: "good" }],
     tackleRecommendations: [],
     tideAdvice: tideFresh,
-    mazumeInfo: { springSunrise: "05:25", springSunset: "18:15", summerSunrise: "04:40", summerSunset: "19:05", autumnSunrise: "05:35", autumnSunset: "17:10", winterSunrise: "06:50", winterSunset: "16:40", tip: "エサはイクラかブドウ虫が定番。浅瀬のポイントを狙うと数が出る。" },
-    safetyLevel: "safe", safetyNotes: ["子ども連れでも楽しめる浅い釣り場"],
-    managementInfo: { organizationName: "北方マス釣り場", openingHours: "7:30〜16:00", closedDays: "月曜日（祝日の場合翌日）", fishingFee: "1日券3,300円" },
+    mazumeInfo: { springSunrise: "05:25", springSunset: "18:15", summerSunrise: "04:40", summerSunset: "19:05", autumnSunrise: "05:35", autumnSunset: "17:10", winterSunrise: "06:50", winterSunset: "16:40", tip: "ルアー専用。冬の木曽川は風が冷たいので防寒をしっかり。" },
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false, fishingLicenseRequired: false,
+      otherRules: ["ルアー専用(エサ釣りは不可)", "冬期限定の営業"],
+    },
+    safetyLevel: "caution", safetyNotes: ["川の河川敷のため増水時は近づかない"],
+    managementInfo: { organizationName: "木曽川漁業協同組合(北方・川釣り体験場)", notes: ["確認日 2026-11-17(公式 Google サイト https://sites.google.com/view/kitagatakawaturi/ は「2025年11月1日オープン予定」までの更新。2026-27シーズンは二次情報で10/31開始)", "旧データの料金3,300円・月曜定休・営業時間は公式で確認できないため削除", "旧データのトイレ有りは未確認のまま"] },
   },
   {
     id: "fw-516", name: "美濃フィッシングエリア", slug: "gifu-mino-fishing-area",
-    description: "岐阜県美濃市にある長良川水系の湧水を利用した管理釣り場。クリアな水質で魚体のコンディションが良いと評判のルアー・フライ専用エリア。主力のニジマスは10〜5月がシーズンで朝一番のスプーンが定番。大型のブラウントラウトは10〜4月にミノーで、3〜9月はアマゴのフライフィッシングも楽しめる。料金は1日券大人4,500円、営業時間は7:00〜17:00で木曜定休。バーブレスフック限定のルールがある。無料駐車場約50台とトイレ、釣具店を備え、東海北陸道美濃ICから約10分とアクセスも良い。透明度の高い湧水ゆえ魚から見切られやすく、繊細なアプローチが求められる点も上達の好材料になる。",
-    latitude: 35.5461, longitude: 136.8989, address: "〒501-3714 岐阜県美濃市蕨生",
-    accessInfo: "東海北陸自動車道美濃ICから約10分。",
-    region: lr("r5013"), spotType: "river", isManagedPond: true, difficulty: "intermediate",
-    isFree: false, feeDetail: "1日券 大人4,500円",
-    hasParking: true, parkingDetail: "無料駐車場あり（約50台）",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
+    // 2026-11-17 修正: 住所 美濃市蕨生 → 公式アクセスページの「〒501-3781 岐阜県美濃市片知2533」(http://www.mino-fa.com/access.html)。
+    // 座標は国土地理院 住所検索「美濃市片知2533番地」(番地まで一致)で取り直し(旧 35.5461,136.8989 は約6km南の蕨生付近)。
+    // 種別: ポンドとストリームの両方を持つ施設なので river → pond
+    description: "岐阜県美濃市片知にある管理釣り場。高い透明度の水をたたえたポンドと、片知川の自然渓流を使ったストリームがある。ポンドはニジマスが通年、秋から初夏にかけてアマゴ・イワナも入り、ストリームではニジマス・アマゴ・イワナを狙える(アマゴ・イワナは2〜9月。10〜1月は禁漁)。釣り方はルアー・フライ・テンカラのほか、川でのニジマスの放流エサ釣りもでき、イクラや練りエサを用意している。料金は1日券が男性4,500円・女性4,000円・中学生以下3,500円で、半日券もある。年中無休で、営業時間は3〜10月が7:00〜17:00、11〜2月が8:00〜17:00。レンタルタックルやタックルショップ、BBQ施設があり、東海北陸自動車道美濃ICから約20分。",
+    latitude: 35.599911, longitude: 136.900818, address: "〒501-3781 岐阜県美濃市片知2533",
+    accessInfo: "東海北陸自動車道美濃ICから約20分。",
+    region: lr("r5013"), spotType: "pond", isManagedPond: true, facilityKind: "managed", difficulty: "intermediate",
+    officialUrl: "http://www.mino-fa.com/",
+    isFree: false, feeDetail: "1日券(朝〜17:00) 男性4,500円・女性4,000円・中学生以下3,500円、半日券(12:00〜17:00) 男性3,500円・女性3,000円・中学生以下2,500円、釣りをしない人の入場料500円(小学生以上、乳幼児無料)、ニジマス1kg放流エサ釣り3,800円・同伴釣り1,200円(2026年10月1日改定)",
+    hasParking: true, parkingDetail: "駐車場あり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルの貸し出しあり",
     mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 125,
     catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
-      { fish: fish("brown-trout"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "夕方", method: "ルアー（ミノー）" },
-      { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "フライ" },
+      { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝一番", method: "ルアー・フライ・テンカラ・エサ釣り(放流)", source: "http://www.mino-fa.com/" },
+      { fish: fish("amago"), monthStart: 2, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー・フライ・テンカラ", source: "http://www.mino-fa.com/" },
+      { fish: fish("iwana"), monthStart: 2, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー・フライ・テンカラ", source: "http://www.mino-fa.com/" },
     ],
     bestTimes: [{ label: "朝一番", timeRange: "07:00〜09:00", rating: "best" }, { label: "夕方", timeRange: "15:00〜17:00", rating: "good" }],
     tackleRecommendations: [],
     tideAdvice: tideFresh,
-    mazumeInfo: { springSunrise: "05:25", springSunset: "18:15", summerSunrise: "04:40", summerSunset: "19:05", autumnSunrise: "05:35", autumnSunset: "17:10", winterSunrise: "06:55", winterSunset: "16:40", tip: "長良川の伏流水を使ったクリアウォーター。繊細なアプローチが求められる。" },
-    safetyLevel: "safe", safetyNotes: ["バーブレスフック限定", "ルアー・フライ専用"],
-    managementInfo: { organizationName: "美濃フィッシングエリア", openingHours: "7:00〜17:00", closedDays: "木曜日", fishingFee: "1日券4,500円" },
+    mazumeInfo: { springSunrise: "05:25", springSunset: "18:15", summerSunrise: "04:40", summerSunset: "19:05", autumnSunrise: "05:35", autumnSunset: "17:10", winterSunrise: "06:55", winterSunset: "16:40", tip: "透明度の高いポンドと片知川の渓流。魚から見切られやすいので繊細なアプローチが効く。" },
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false, fishingLicenseRequired: false,
+      otherRules: ["ルアー・フライ・テンカラはシングルバーブレスフックのみ(トリプル・ダブル・返し付きは禁止。ミノーは前後2個まで可)", "ルアーの大きさの制限なし・トレーラー可", "ワーム・サビキなどソフトルアーは持ち込みも禁止", "リリースはネットを使う", "ポンドの魚をストリームに放すのは禁止", "ビクに入れた魚のリリース・入れ替えは禁止", "クーラーは釣り場に持ち込み禁止(駐車場のキッチンで入れ替え)", "魚をさばくのは16時まで", "釣り場は全面禁煙。ペットは駐車場・BBQ場のみ"],
+    },
+    safetyLevel: "safe", safetyNotes: ["ルアー・フライ・テンカラはシングルバーブレスフック限定", "ストリームは足元が滑りやすい"],
+    managementInfo: { organizationName: "美濃フィッシングエリア", contactPhone: "0575-37-2113", openingHours: "3〜10月 7:00〜17:00、11〜2月 8:00〜17:00", closedDays: "なし(年中無休)", fishingFee: "1日券 男性4,500円・女性4,000円・中学生以下3,500円", notes: ["確認日 2026-11-17(公式 http://www.mino-fa.com/ 、料金 /timefee.html 、レギュレーション /regur.html 、アクセス /access.html 、お知らせ /infom2026.html)", "持ち帰りは1日券 男性5匹・女性/中学生以下3匹、半日券3匹(魚種・サイズ問わず)。超過は別料金", "釣りの予約は受けていない(先着順)", "フライフィッシングスクールあり(要予約)。BBQ施設は食材なし", "駐車台数・トイレは公式に記載なし"] },
   },
 ];
