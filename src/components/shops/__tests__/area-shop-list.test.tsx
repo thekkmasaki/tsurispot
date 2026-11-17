@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { AreaShopList, type AreaShopItem } from "@/components/shops/area-shop-list";
 
 const base: AreaShopItem = {
@@ -8,6 +8,10 @@ const base: AreaShopItem = {
   hasLiveBait: true, hasFrozenBait: false, hasRentalRod: false, hasParking: false,
   is24h: true, early: false, lateNight: false, hoursLabels: ["24時間営業"], planLevel: "free",
 };
+
+// globals: false のため RTL の自動 cleanup が効かない。unmount しないと jsdom 破棄後に
+// React scheduler の残タスクが走り「window is not defined」の unhandled error で CI が落ちる
+afterEach(() => cleanup());
 
 describe("AreaShopList", () => {
   it("初期表示は全件、時間帯チップで絞り込める", () => {
