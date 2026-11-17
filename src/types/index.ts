@@ -146,6 +146,11 @@ export interface ListSpot {
   isHiddenGem: boolean;
   /** サーバー事前計算: 高級魚が釣れるか */
   hasPremiumFish: boolean;
+  /**
+   * サーバー事前計算: 地形（水深）タイプ（海しる等深線による目安。lib/depth-terrain.ts）。
+   * 海のスポットのみ。川・池・湖やデータが無いスポットは undefined
+   */
+  depthTerrain?: "steep" | "moderate" | "shallow";
 }
 
 /**

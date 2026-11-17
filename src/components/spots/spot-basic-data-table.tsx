@@ -8,6 +8,8 @@ import { getCatchTier } from "@/lib/data/fish-aptitude";
 import { getTideStationForSpot } from "@/lib/tide/nearest-station";
 import { getStationSlug } from "@/lib/tide/station-slugs";
 import { getParkingBadgeText } from "@/components/spots/parking-guide-card";
+import { getSpotDepthTerrain, MSIL_DISCLAIMER } from "@/lib/spot-depth-terrain";
+import { DEPTH_TERRAIN_SHORT_LABELS } from "@/lib/depth-terrain";
 import {
   formatMonthRanges,
   getSpotRestrictionSummary,
@@ -28,7 +30,7 @@ interface Row {
  * AI検索（AI Overviews / ChatGPT / Perplexity）や検索スニペットが「種別・駐車場・トイレ・
  * 夜釣り・ルール・対象魚・シーズン」を機械的に拾えるよう、1つの <table> にまとめる。
  * データに存在する項目だけで行を作り、値が無い行は出さない（推測値で埋めない）。
- * 水深はスポットデータに項目が無いため行自体を持たない。
+ * 地形（水深）は海のスポットのみ、海しる等深線から作った目安を出す（足もとの水深ではない）。
  */
 export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
   const rows: Row[] = [];
@@ -41,6 +43,29 @@ export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
   if (spot.familyInfo?.hasRailing) footing.push("柵あり");
   if (spot.familyInfo?.strollerAccessible) footing.push("ベビーカーで移動可");
   if (footing.length > 0) rows.push({ label: "足場", value: footing.join("・") });
+
+  // 地形（水深）: 海しる等深線のデータをそのまま事実として出す（解釈は付けない）
+  const terrain = getSpotDepthTerrain(spot.slug);
+  if (terrain) {
+    rows.push({
+      label: "地形（水深）",
+      value: (
+        <>
+          <span className="font-medium">{terrain.fact}</span>
+          <span className="block text-xs text-muted-foreground">
+            出典：海しる（海上保安庁）の等深線。足もとの水深ではありません
+          </span>
+          <Link
+            prefetch={false}
+            href={`/spots?${new URLSearchParams({ prefecture: spot.region.prefecture, terrain: terrain.kind })}`}
+            className="mt-0.5 inline-block text-xs text-primary underline-offset-2 hover:underline"
+          >
+            {spot.region.prefecture}で「{DEPTH_TERRAIN_SHORT_LABELS[terrain.kind]}」のスポットを探す
+          </Link>
+        </>
+      ),
+    });
+  }
 
   rows.push({ label: "難易度", value: DIFFICULTY_LABELS[spot.difficulty] });
 
@@ -181,6 +206,15 @@ export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
       <p className="mt-1.5 text-[11px] text-muted-foreground">
         ※ 掲載データにある項目のみ表示しています。現地の掲示・管理者の案内を優先してください。
       </p>
+      {terrain && (
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          ※ 地形（水深）は{" "}
+          <a href="https://www.msil.go.jp/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+            海洋状況表示システム（https://www.msil.go.jp/）
+          </a>
+          の等深線（提供：海上保安庁）を加工して作成。{MSIL_DISCLAIMER}。航海には使用できません。
+        </p>
+      )}
     </section>
   );
 }

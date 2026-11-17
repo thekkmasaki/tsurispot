@@ -9,6 +9,7 @@
 import type { FishingSpot, ListSpot, MapSpot } from "@/types";
 import { isHiddenGem, getPremiumFishForSpot } from "@/lib/hidden-gem";
 import { getSpotCategory, getSpotCategoryDetail } from "@/lib/spot-category";
+import { getSpotDepthKind } from "@/lib/spot-depth-terrain";
 
 export function toListSpot(spot: FishingSpot): ListSpot {
   // fishNames/methods は first-seen 順を保ったまま unique 化する
@@ -52,6 +53,7 @@ export function toListSpot(spot: FishingSpot): ListSpot {
     methods,
     isHiddenGem: isHiddenGem(spot),
     hasPremiumFish: getPremiumFishForSpot(spot).length > 0,
+    depthTerrain: getSpotDepthKind(spot.slug),
   };
 }
 

@@ -1,4 +1,5 @@
 import { ListSpot } from "@/types";
+import { terrainMatchesWord } from "@/lib/depth-terrain";
 
 // カタカナ → ひらがな変換
 export function katakanaToHiragana(str: string): string {
@@ -44,13 +45,16 @@ export function spotSearchMatch(query: string, spot: ListSpot): boolean {
     const addrWithoutPref = normalizeForSearch(spot.address.replace(spot.region.prefecture, ""));
     if (addrWithoutPref.includes(nq)) return true;
   }
-  // 複数語クエリ（「千葉 サビキ」等）は従来どおり全フィールド結合で全語一致を判定
+  // 地形（水深）: 「深場」「ドン深」「遠浅」等で地形タイプに当てる
+  if (spot.depthTerrain && terrainMatchesWord(spot.depthTerrain, nq.trim())) return true;
+  // 複数語クエリ（「千葉 サビキ」「千葉 深場」等）は全フィールド結合で全語一致を判定
   const words = nq.split(/\s+/).filter(Boolean);
   if (words.length > 1) {
     const combined = [spot.name, spot.region.areaName, spot.region.prefecture, spot.address || ""]
       .map(normalizeForSearch)
       .join(" ");
-    return words.every((w) => combined.includes(w));
+    const terrain = spot.depthTerrain;
+    return words.every((w) => combined.includes(w) || (terrain !== undefined && terrainMatchesWord(terrain, w)));
   }
   return false;
 }
