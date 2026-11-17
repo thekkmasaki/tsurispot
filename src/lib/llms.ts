@@ -15,6 +15,7 @@ import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { extractMunicipality } from "@/lib/geo/municipality";
 import { LATEST_CONTENT_DATE, filesLatestYmd } from "@/lib/content-dates";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS, type FishingSpot } from "@/types";
+import { facilityLabel, feeShortText, openingHoursText, closedDaysText } from "@/lib/managed-pond";
 
 export const SITE_URL = "https://tsurispot.com";
 /** ドメイン登録・リポジトリ作成ともに 2026-02-20（GitHub / WHOIS で確認） */
@@ -153,6 +154,27 @@ export function spotLine(spot: FishingSpot): string {
   const fish = listedFish(spot)
     .slice(0, 5)
     .map((cf) => cf.fish.name);
+  if (spot.isManagedPond) {
+    // 管理釣り場・釣り堀: 列数は共通の9列のまま、5列目に料金・営業時間・定休日、6列目に設備（「ある」ものだけ）を入れる。
+    // 海向けの「ベストシーズン」や「トイレなし」の断定は出さない。
+    const fee = feeShortText(spot);
+    const hours = openingHoursText(spot);
+    const closed = closedDaysText(spot);
+    const info = [fee ? `料金 ${fee}` : null, hours ? `営業 ${hours}` : null, closed ? `定休日 ${closed}` : null].filter(Boolean);
+    const equip = [spot.hasParking ? "駐車場あり" : null, spot.hasRentalRod ? "レンタルあり" : null].filter(Boolean);
+    const mp = [
+      spot.name,
+      muni,
+      facilityLabel(spot),
+      `主な魚: ${fish.length > 0 ? fish.join("・") : "—"}`,
+      info.length > 0 ? info.join("・") : "料金・営業時間: —",
+      equip.length > 0 ? equip.join("・") : "設備: —",
+      `難易度: ${DIFFICULTY_LABELS[spot.difficulty]}`,
+      `禁止・制限: ${spotRestrictions(spot)}`,
+      `${SITE_URL}/spots/${spot.slug}`,
+    ];
+    return `- ${mp.join(" | ")}`;
+  }
   const season = spotBestSeason(spot);
   const facilities = `駐車場${spot.hasParking ? "あり" : "なし"}・トイレ${spot.hasToilet ? "あり" : "なし"}`;
   const parts = [

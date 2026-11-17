@@ -63,7 +63,7 @@ ${SITE_LAUNCHED}開設。運営はツリスポ編集部です。
 - 注意: 釣り禁止区域・駐車場などの現地状況は変わります。釣行前に現地の表示や管理者の案内を確認してください
 
 ## 都道府県別スポット一覧（1スポット1行）
-各ファイルに、その都道府県の全スポットを「名前 | 市区町村 | 種別 | 主な魚 | ベストシーズン | 駐車場・トイレ | 難易度 | 禁止・制限 | URL」の形式で載せています。
+各ファイルに、その都道府県の全スポットを「名前 | 市区町村 | 種別 | 主な魚 | ベストシーズン | 駐車場・トイレ | 難易度 | 禁止・制限 | URL」の形式で載せています（管理釣り場・釣り堀は「ベストシーズン」の列に料金・営業時間・定休日、「駐車場・トイレ」の列に駐車場・レンタルの有無を、確認できた項目だけ載せています）。
 ${prefFiles.map((p) => `- ${p.name}（${p.spots.length}件）: ${prefFileUrl(p.slug)}`).join("\n")}
 
 ## 主要ページ一覧
@@ -81,6 +81,7 @@ ${prefFiles.map((p) => `- ${p.name}（${p.spots.length}件）: ${prefFileUrl(p.s
 - 海釣りおすすめ: https://tsurispot.com/fishing-spots/best-saltwater
 - 川釣り初心者向け: https://tsurispot.com/fishing-spots/river-beginner
 - 特徴から探す（駐車場・トイレ等）: https://tsurispot.com/spot-feature
+- 管理釣り場・釣り堀（料金・営業時間・定休日つき）: https://tsurispot.com/managed-ponds
 - スポット投稿: https://tsurispot.com/spots/submit
 
 ### 魚種図鑑

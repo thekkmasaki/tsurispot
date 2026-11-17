@@ -13,7 +13,7 @@
  *    （都道府県別一覧・関連スポット等）経由でのみクロールされる。
  *    Google に「積極的に推す品質ではないが、価値はある」と伝える層。
  *
- * 3. sitemap帯（description >= 100字 かつ 魚種 >= 2）
+ * 3. sitemap帯（description >= 100字 かつ 魚種 >= 2。管理釣り場は魚種 >= 1 かつ料金/営業時間あり）
  *    sitemap に掲載して優先的にクロール・インデックスさせる品質シグナル層。
  *    → src/app/sitemap.ts のスポット詳細フィルタで適用
  *
@@ -34,6 +34,10 @@
 export type SpotQualityInput = {
   description: string;
   catchableFish: readonly unknown[];
+  /** 管理釣り場・釣り堀。魚種が1種でも実データ（料金・営業時間）があれば sitemap 対象にする */
+  isManagedPond?: boolean;
+  feeDetail?: string;
+  managementInfo?: { openingHours?: string; fishingFee?: string };
 };
 
 /**
@@ -53,5 +57,11 @@ export function isLowQualitySpot(spot: SpotQualityInput): boolean {
 export function isSitemapEligible(spot: SpotQualityInput): boolean {
   const descLength = (spot.description || "").length;
   const fishCount = spot.catchableFish.length;
-  return descLength >= 100 && fishCount >= 2;
+  if (descLength >= 100 && fishCount >= 2) return true;
+  // 管理釣り場・釣り堀は対象魚が1種（ニジマスのみ・コイのみ等）でも実在する施設ページ。
+  // 料金か営業時間の裏取り済みデータがあるものは、需要の高い「料金・営業時間」クエリ向けに掲載する。
+  if (spot.isManagedPond && descLength >= 100 && fishCount >= 1) {
+    return Boolean(spot.feeDetail || spot.managementInfo?.fishingFee || spot.managementInfo?.openingHours);
+  }
+  return false;
 }

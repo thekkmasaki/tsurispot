@@ -239,6 +239,13 @@ export default async function SpotTypePage({ params }: PageProps) {
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {SPOT_TYPE_DESCRIPTIONS[spotType]}
         </p>
+        {spotType === "pond" && (
+          <p className="mt-3 text-sm">
+            <Link prefetch={false} href="/managed-ponds" className="font-medium text-primary underline">
+              全国の管理釣り場・釣り堀を料金・営業時間つきで探す（渓流型・海上釣り堀も含む）
+            </Link>
+          </p>
+        )}
       </div>
 
       {/* サマリカード */}

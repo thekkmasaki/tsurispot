@@ -10,6 +10,7 @@
 // @/ エイリアスではなく相対パスで参照する。
 import type { FishingSpot, CatchableFish } from "../../types";
 import { SPOT_TYPE_LABELS } from "../../types";
+import { buildManagedSummary, buildManagedFaqs } from "../managed-pond";
 
 // ── 型定義 ────────────────────────────────────
 type SpotType = FishingSpot["spotType"];
@@ -124,13 +125,13 @@ const SPOT_TYPE_FEATURES: Record<SpotType, {
 // 管理釣り場用のオーバーライド（descriptionに「管理釣り場」を含むスポットに適用）
 const MANAGED_POND_FEATURES = {
   atmosphere: "管理された釣り場で、足場がしっかりしており初心者やお子様でも安心安全",
-  merit: "ルアー・フライで数釣りが楽しめる。年中無休で誰でもいつでも釣りが楽しめる",
-  caution: "管理釣り場には明確なルールあり。釣行前にHPでレギュレーションを確認すること",
-  familyTip: "足場が安定しレンタル完備で手ぶらOK。スタッフ常駐で初心者の方でも安心",
+  merit: "放流された魚を狙える。釣法・時間券・持ち帰りなどは施設ごとに決まっている",
+  caution: "管理釣り場には明確なルールあり。釣行前に公式サイトでレギュレーションを確認すること",
+  familyTip: "足場が整った施設が多い。レンタルや子ども料金の有無は施設ごとに異なるので公式サイトで確認",
 };
 
 function getSpotTypeFeatures(spot: FishingSpot) {
-  if (spot.spotType === "pond" || spot.description.includes("管理釣り場")) return MANAGED_POND_FEATURES;
+  if (spot.isManagedPond || spot.spotType === "pond" || spot.description.includes("管理釣り場")) return MANAGED_POND_FEATURES;
   return SPOT_TYPE_FEATURES[spot.spotType];
 }
 
@@ -800,6 +801,8 @@ export function generateSpotSummary(spot: FishingSpot): {
   facilityOverview: string;
   difficultyComment: string;
 } {
+  // 管理釣り場・釣り堀は海向けテンプレ（トイレ×・ベストシーズン等の断定）を使わず、事実のある項目だけ出す
+  if (spot.isManagedPond) return buildManagedSummary(spot);
   const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
   const topFish = getTopFishNames(spot, 3);
   const bestMonths = getBestMonths(spot);
@@ -850,6 +853,8 @@ export function generateContextMethodBrief(method: string, spot: FishingSpot): s
  * 改善されたFAQ生成（6問、spotType/difficulty別に実用的アドバイス付き）
  */
 export function generateImprovedFAQs(spot: FishingSpot): { question: string; answer: string }[] {
+  // 管理釣り場・釣り堀は料金・営業時間・レンタル等、データにある事実だけで答える専用FAQ
+  if (spot.isManagedPond) return buildManagedFaqs(spot);
   const faqs: { question: string; answer: string }[] = [];
   const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
   const typeFeatures = getSpotTypeFeatures(spot);
