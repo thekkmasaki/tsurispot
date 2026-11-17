@@ -8,6 +8,7 @@
  */
 import type { FishingSpot, ListSpot, MapSpot } from "@/types";
 import { isHiddenGem, getPremiumFishForSpot } from "@/lib/hidden-gem";
+import { getSpotCategory, getSpotCategoryDetail } from "@/lib/spot-category";
 
 export function toListSpot(spot: FishingSpot): ListSpot {
   // fishNames/methods は first-seen 順を保ったまま unique 化する
@@ -36,6 +37,8 @@ export function toListSpot(spot: FishingSpot): ListSpot {
     latitude: spot.latitude,
     longitude: spot.longitude,
     spotType: spot.spotType,
+    category: getSpotCategory(spot),
+    categoryDetail: getSpotCategoryDetail(spot),
     difficulty: spot.difficulty,
     isFree: spot.isFree,
     hasParking: spot.hasParking,

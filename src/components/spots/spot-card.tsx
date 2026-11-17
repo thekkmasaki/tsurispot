@@ -6,6 +6,8 @@ import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
 import { FavoriteButton } from "@/components/spots/favorite-button";
 import { CompareToggleButton } from "@/components/spots/compare-bar";
 import { cn } from "@/lib/utils";
+import { SpotCategoryBadge } from "@/components/spots/spot-category-badge";
+import { getSpotCategory, getSpotCategoryDetail } from "@/lib/spot-category";
 
 /**
  * 正規スポットカード（UI/UX刷新Phase2: サウナイキタイ式の固定構成）
@@ -104,6 +106,7 @@ export function SpotCard({
 
         {/* 種別 − エリア ・ 距離 */}
         <p className="-mt-1 text-xs text-muted-foreground">
+          <SpotCategoryBadge category={spot.category} detail={spot.categoryDetail} className="mr-1.5 align-[1px]" />
           {SPOT_TYPE_LABELS[spot.spotType]} − {spot.region.prefecture} {spot.region.areaName}
           {distance != null && (
             <span className="ml-1.5 inline-flex items-center gap-0.5 font-bold text-primary">
@@ -171,6 +174,11 @@ export function SpotCard({
  */
 export type SpotCardCompactData = Pick<ListSpot, "slug" | "name" | "spotType"> & {
   region: Pick<ListSpot["region"], "prefecture" | "areaName">;
+  /** 大分類。ListSpot なら事前計算済み、FishingSpot なら isManagedPond / facilityKind から計算する */
+  category?: ListSpot["category"];
+  categoryDetail?: string | null;
+  isManagedPond?: boolean;
+  facilityKind?: "managed" | "tsuribori" | "kaijo";
   fishNames?: string[];
   rating?: number;
 };
@@ -218,6 +226,11 @@ export function SpotCardCompact({
           {headingSuffix && <span className="ml-1 text-xs font-normal text-muted-foreground">{headingSuffix}</span>}
         </Heading>
         <p className="mt-0.5 truncate text-xs text-muted-foreground">
+          <SpotCategoryBadge
+            category={spot.category ?? getSpotCategory(spot)}
+            detail={spot.category ? spot.categoryDetail : getSpotCategoryDetail(spot)}
+            className="mr-1.5 align-[1px]"
+          />
           {SPOT_TYPE_LABELS[spot.spotType]} − {spot.region.prefecture} {spot.region.areaName}
           {distance != null && (
             <span className="ml-1.5 font-bold text-primary">約{formatDistance(distance)}</span>

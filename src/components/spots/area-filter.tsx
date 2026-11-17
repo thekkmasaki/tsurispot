@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { SpotCard } from "@/components/spots/spot-card";
 import type { ListSpot } from "@/types";
+import { getSpotCategory, getSpotCategoryDetail } from "@/lib/spot-category";
 
 /** SpotCardに必要な最小限のフィールドだけを持つ軽量型 */
 export type SpotCardData = {
@@ -21,6 +22,8 @@ export type SpotCardData = {
   mainImageUrl?: string;
   region: { prefecture: string; areaName: string };
   fishNames: string[];
+  isManagedPond?: boolean;
+  facilityKind?: "managed" | "tsuribori" | "kaijo";
 };
 
 type RegionKey = "hokkaido" | "tohoku" | "kanto" | "chubu" | "kinki" | "chugoku" | "shikoku" | "kyushu";
@@ -84,6 +87,8 @@ function toCardSpot(spot: SpotCardData): ListSpot {
     latitude: 0,
     longitude: 0,
     spotType: spot.spotType as ListSpot["spotType"],
+    category: getSpotCategory({ ...spot, spotType: spot.spotType as ListSpot["spotType"] }),
+    categoryDetail: getSpotCategoryDetail({ ...spot, spotType: spot.spotType as ListSpot["spotType"] }),
     difficulty: spot.difficulty as ListSpot["difficulty"],
     isFree: spot.isFree,
     hasParking: spot.hasParking,

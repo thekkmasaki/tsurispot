@@ -785,7 +785,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     latitude: 36.0280, longitude: 139.7190,
     address: "〒345-0826 埼玉県南埼玉郡宮代町本田",
     accessInfo: "東武伊勢崎線和戸駅から徒歩約15分。東北自動車道久喜ICから約15分。",
-    region: localRegion("re5111"), spotType: "river", difficulty: "beginner",
+    region: localRegion("re5111"), spotType: "pond", isManagedPond: true, difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "専用無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     feeDetail: "入場料: 大人2,500円（1日）",

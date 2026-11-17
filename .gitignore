@@ -67,3 +67,6 @@ scripts/instagram/node_modules/
 /android/
 .audit-cache/
 .spots-bulk-cache/
+
+# 管理釣り場スキルの作業キャッシュ
+.managed-cache/

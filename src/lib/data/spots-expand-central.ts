@@ -795,7 +795,7 @@ const saitamaSpots: FishingSpot[] = [
     latitude: 35.9333, longitude: 138.9500,
     address: "〒369-1901 埼玉県秩父市大滝5199-1",
     accessInfo: "秩父鉄道三峰口駅から車で約15分。関越自動車道花園ICから約70分。",
-    region: localRegion("r4333"), spotType: "river", difficulty: "beginner",
+    region: localRegion("r4333"), spotType: "river", isManagedPond: true, difficulty: "beginner",
     isFree: false, feeDetail: "入場料＋釣り料金（3,000円〜）", hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     rentalDetail: "竿・仕掛けセットレンタルあり",

@@ -675,6 +675,9 @@ export const regions: Region[] = [
   { id: "r4101", prefecture: "兵庫県", areaName: "加古川下流", slug: "hyogo-kakogawa-lower-fw" },
   { id: "r4102", prefecture: "大阪府", areaName: "淀川下流", slug: "osaka-yodogawa-lower-fw" },
   { id: "r4103", prefecture: "大阪府", areaName: "大和川河口", slug: "osaka-yamatogawa-estuary-fw" },
+  // 内陸の管理釣り場・釣り堀用（海・河口のエリアに入れると場所を誤らせるため）
+  { id: "rmp-osaka-hokusetsu", prefecture: "大阪府", areaName: "北摂（高槻・茨木・箕面）", slug: "osaka-hokusetsu-mp" },
+  { id: "rmp-osaka-kawachi", prefecture: "大阪府", areaName: "河内（枚方・東大阪・八尾）", slug: "osaka-kawachi-mp" },
   { id: "r4110", prefecture: "徳島県", areaName: "吉野川下流", slug: "tokushima-yoshinogawa-lower-fw" },
   { id: "r4111", prefecture: "愛媛県", areaName: "肱川中流", slug: "ehime-hijikawa-fw" },
   { id: "r4121", prefecture: "宮崎県", areaName: "大淀川下流", slug: "miyazaki-ooyodogawa-lower-fw" },
