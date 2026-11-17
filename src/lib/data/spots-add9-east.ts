@@ -578,22 +578,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeKantoRiver,
   },
-  {
-    id: "ss9030", name: "湯ノ湖", slug: "yunoko-tochigi-a9",
-    description: "奥日光の標高1,478mに位置する湖。ニジマスやホンマスが放流されており、フライフィッシングの聖地として知られる。",
-    latitude: 36.8020, longitude: 139.4280,
-    address: "〒321-1662 栃木県日光市湯元",
-    accessInfo: "日光宇都宮道路清滝ICから車で約40分",
-    region: region("r672"), spotType: "river", difficulty: "intermediate",
-    isFree: false, feeDetail: "遊漁券が必要（日釣券1,500円前後）",
-    hasParking: true, parkingDetail: "湯元温泉駐車場あり（無料）",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeKantoRiver,
-  },
+  // 2026-11-17 削除: ss9030 湯ノ湖(yunoko-tochigi-a9)は同じ湖の重複。se6224 yunoko-tsuri6 に統合し spot-redirects.json で転送
 
   // =========================================
   // 群馬県（5スポット: ss9031〜ss9035）

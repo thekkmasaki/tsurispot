@@ -105,6 +105,15 @@ import { meccaWestSpots } from "./spots-mecca-west";
 import { managedKansaiHyogoOsakaSpots } from "./spots-managed-kansai-hyogo-osaka";
 import { managedKansaiKyotoShigaSpots } from "./spots-managed-kansai-kyoto-shiga";
 import { managedKansaiWakayamaNaraSpots } from "./spots-managed-kansai-wakayama-nara";
+import { managedYamanashiSpots } from "./spots-managed-yamanashi";
+import { managedNaganoNiigataSpots } from "./spots-managed-nagano-niigata";
+import { managedSaitamaSpots } from "./spots-managed-saitama";
+import { managedIbarakiSpots } from "./spots-managed-ibaraki";
+import { managedTochigiSpots } from "./spots-managed-tochigi";
+import { managedGunmaSpots } from "./spots-managed-gunma";
+import { managedTokyoSpots } from "./spots-managed-tokyo";
+import { managedKanagawaSpots } from "./spots-managed-kanagawa";
+import { managedChibaSpots } from "./spots-managed-chiba";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -208,4 +217,13 @@ export const allRawSpots: FishingSpot[] = [
   ...managedKansaiHyogoOsakaSpots,
   ...managedKansaiKyotoShigaSpots,
   ...managedKansaiWakayamaNaraSpots,
+  ...managedYamanashiSpots,
+  ...managedNaganoNiigataSpots,
+  ...managedSaitamaSpots,
+  ...managedIbarakiSpots,
+  ...managedTochigiSpots,
+  ...managedGunmaSpots,
+  ...managedTokyoSpots,
+  ...managedKanagawaSpots,
+  ...managedChibaSpots,
 ];
