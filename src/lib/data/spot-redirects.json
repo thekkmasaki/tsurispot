@@ -498,7 +498,7 @@
   "narusawa-ko": "narusawako-gunma",
   "katashina-gawa": "katashina-river",
   "oashigawa": "oashigawa-kanuma",
-  "yunoko": "yunoko-okunnikko",
+  "yunoko": "yunoko-tsuri6",
   "houkigawa": "houkigawa-river",
   "onahama-kou": "onahama-ko",
   "ena-kou": "ena-ko",
@@ -674,5 +674,13 @@
   "tappi-zaki": "tappizaki",
   "yoshinogawa-gojo-k8": "yoshinogawa-gojo",
   "yoshinogawa-gojo-detail": "yoshinogawa-gojo",
-  "kaga-fishing-area": "tochigi-kaga-fishing-area"
+  "kaga-fishing-area": "tochigi-kaga-fishing-area",
+  "yunoko-tochigi-a9": "yunoko-tsuri6",
+  "yunoko-okunnikko": "yunoko-tsuri6",
+  "tsuruta-lake-a10": "tsurutako-herabuna",
+  "yoshiba-en": "mikuniike-herabuna-kazo",
+  "gunma-uenomura-fishing-resort": "uenomura-kannagawa-winter-hakosuchi",
+  "oshino-hakkai-trout": "yamanashi-oshino-fishing-area",
+  "fukushima-forest-park-adatara": "fukushima-fukushima-masunoie",
+  "kariya-wan-yugyo-s8": "kariya-wan-yuugyou"
 }

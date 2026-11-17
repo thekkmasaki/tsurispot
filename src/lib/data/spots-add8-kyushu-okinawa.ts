@@ -676,23 +676,8 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKyushuN,
   },
-  {
-    id: "ss8035", name: "仮屋湾遊漁センター", slug: "kariya-wan-yugyo-s8",
-    description: "玄海町の仮屋湾に浮かぶ海上釣り堀。初心者でもマダイやシマアジが高確率で釣れる有料施設。レンタル完備でファミリーに最適。",
-    latitude: 33.485, longitude: 129.857,
-    address: "〒847-1433 佐賀県東松浦郡玄海町仮屋",
-    accessInfo: "JR唐津駅から車で約25分",
-    region: localRegion("rs8006"), spotType: "pier", difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "専用無料駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("madai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
-      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "探り釣り" },
-    ],
-    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKyushuN,
-  },
+  // ss8035「仮屋湾遊漁センター」(kariya-wan-yugyo-s8) は exp-k004 (kariya-wan-yuugyou) と同一施設の重複のため削除。
+  // 旧slugは spot-redirects.json で kariya-wan-yuugyou へ転送(2026-11-17, .managed-cache/candidates-kyushu-north.md)
   {
     id: "ss8036", name: "伊万里湾・浦ノ崎港", slug: "imari-uranosakikou-s8",
     description: "浦ノ崎港（伊万里湾）はアジ・アオリイカが狙える釣り場。伊万里湾の入口に位置し、穏やかな湾内でアジやメバルが安定して釣れ、春のアオリイカの実績も高い。クロダイも人気で、駐車場からすぐ竿出しできる手軽さが魅力。",
@@ -3576,9 +3561,14 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   // =========================================
   {
     id: "ss8201", name: "フィッシングパークひらの", slug: "fishing-park-hirano", isManagedPond: true,
+    // 2026-11-17 修正: facilityKind を明示(池型エリアトラウト)。出典 https://fishingparkhirano.com/ (.managed-cache/candidates-kyushu-north.md)
+    facilityKind: "managed",
     description: "標高約400mの山間部に位置する「天空のエリアトラウトフィッシング」。廃校になった旧厳木小学校平之分校のプールを活用して2018年に開園したポンド（池）型の管理釣り場で、国土交通省「水質が最も良好な河川」に選出された厳木川上流の清流で自家養殖したヒレピン（ヒレが欠けていない美しい個体）のニジマスやホウライマスが放流されている（今後サクラマス・ヒメマスも放流予定）。ルアー・フライで数釣りが楽しめ、年中無休で誰でもいつでも釣りが楽しめる。ハイシーズンは秋〜春で、特に冬場の水温が低い時期は渓流の禁漁期や他の釣り物がなくなった時期に釣りを楽しめる。施設内にエリアトラウト専門店が併設されており、ルアーやフライ用品が購入できる。レンタルロッド完備で手ぶらでもOK、予約不要。九州では数少ないエリアトラウトスポットで、福岡都市圏から約90分とアクセスも良好。バーブレスのシングルフック必須・ラバーネット使用など魚体保護のルールが徹底されており、釣りマナーを大切にする釣り場。初心者にはクランクベイトでのニジマス狙いがおすすめ。スプーンが人気だが難易度はやや高め。トップからボトムまで様々なルアーで釣りができ、シーズンで釣れるルアーが変化するので、今釣れているルアーはスタッフに聞くと良い。釣りを熟知したスタッフが常駐しており、初心者でも安心して最初の1匹に出会える。限界集落の維持・再生を目指す地域おこしプロジェクトとしての側面もある。釣行前にHP（fishingparkhirano.com）でレギュレーションを確認することを推奨。",
+    // 要再確認: 座標 33.2750,130.0550 は国土地理院の大字「唐津市厳木町平之」中心(33.34990,130.08000)から約8km離れる。
+    // 公式案内図からの値が未取得のため座標は変更していない(推測で上書きしない)。
     latitude: 33.2750, longitude: 130.0550,
-    address: "〒849-3115 佐賀県唐津市厳木町平之705-1",
+    // 2026-11-17 修正: 住所を公式表記(705、旧データは705-1)に合わせた。出典 https://fishingparkhirano.com/
+    address: "〒849-3115 佐賀県唐津市厳木町平之705",
     accessInfo: "厳木・多久道路 牧瀬ICから車で約10分。九州自動車道 多久ICから約20分。福岡市内から約90分。駐車場40台（無料）。",
     region: localRegion("rs8006"), spotType: "pond", difficulty: "all",
     isFree: false, feeDetail: "2時間券2,000円〜、半日券4,000円〜、1日券5,000円〜。レンタルロッド1,000円。釣り堀 基本料3,000円。",

@@ -161,16 +161,22 @@ export const expandKyushuSpots: FishingSpot[] = [
   },
   {
     id: "exp-k004", name: "仮屋湾遊漁センター", slug: "kariya-wan-yuugyou",
+    // 2026-11-17 修正: 海上釣り堀として isManagedPond/facilityKind を付与、住所を公式に、座標を国土地理院住所検索で取り直し、
+    // 公式で確認できない料金・口コミ件数を削除。ss8035 (kariya-wan-yugyo-s8) の重複を統合。
+    // 出典 http://www.kariyawan.com/ , http://www.kariyawan.com/annai/annai.html , http://www.kariyawan.com/tsuribori/tsuribori.html
+    isManagedPond: true, facilityKind: "kaijo",
+    officialUrl: "http://www.kariyawan.com/",
     description: "仮屋湾遊漁センターは佐賀・唐津の海上釣堀。マダイ・シマアジ・ブリなど大物が周年狙える管理釣り場で、ウキ釣りや泳がせ釣りで楽しめる。レンタルタックル完備で手ぶらでも参加でき、初心者やファミリーの釣行にも人気の施設。",
-    latitude: 33.5040, longitude: 129.9170,
-    address: "〒847-0135 佐賀県唐津市屋形石",
+    // 座標: 国土地理院 AddressSearch「佐賀県東松浦郡玄海町牟形1825-2」→「佐賀県玄海町牟形」(大字中心、番地まではヒットせず)
+    latitude: 33.454514, longitude: 129.868805,
+    address: "佐賀県東松浦郡玄海町牟形1825-2",
     accessInfo: "JR唐津駅から車で約20分。長崎自動車道多久ICから約45分。",
     region: localRegion("r4100"), spotType: "pier", difficulty: "beginner",
-    isFree: false, feeDetail: "大人5,500円程度、小学生3,300円程度",
+    isFree: false,
     hasParking: true, parkingDetail: "無料駐車場完備",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    rentalDetail: "竿・仕掛けセットレンタルあり",
-    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 165,
+    rentalDetail: "レンタルタックル500円(公式)",
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 0,
     catchableFish: [
       { fish: fish("madai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("buri"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "泳がせ釣り" },

@@ -430,21 +430,35 @@ export const eastAdd5Spots: FishingSpot[] = [
   },
   {
     id: "se5016", name: "奥利根フィッシングパーク", slug: "okutone-fishing-park",
-    description: "みなかみ町にある管理釣り場。ニジマスやイワナが放流されており、初心者から上級者まで楽しめる。BBQ施設も併設。",
-    latitude: 36.7770, longitude: 139.0010,
-    address: "〒379-1721 群馬県利根郡みなかみ町寺間",
-    accessInfo: "関越自動車道水上ICから約10分。JR水上駅から車で約5分。",
-    region: localRegion("re5010"), spotType: "river", isManagedPond: true, difficulty: "beginner",
+    description: "沼田市白沢町生枝にある、ルアー・フライ専用の池型管理釣り場。1号池・2号池の2つのポンドでトラウトを狙う。料金は1日リリース券や時間券(ペア券あり)のほか、釣った魚の買い取りもある。持ち帰りは券ごとに匹数が決まり、40cm以上は1匹まで。水曜・木曜は定休だが、無人のテスト営業日もあるので公式サイトの案内を確かめてから出かけたい。営業時間は7時から17時まで。",
+    // 2026-11-17 修正: 住所 みなかみ町寺間(約25km離れた別の町)→「群馬県沼田市白沢町生枝857」(公式 http://www7.wind.ne.jp/okutone/index_o.htm の地図=沼田市 378-0122、番地は一覧サイトの表記で一致)。
+    // 座標は国土地理院 住所検索「沼田市白沢町生枝」(大字中心。番地は当たらず)で取り直し(旧 36.7770,139.0010)。
+    // 種別: 公式に「１号池・２号池」とあるポンド型なので river → pond。BBQ施設は公式で確認できず説明から削除
+    latitude: 36.663074, longitude: 139.161194,
+    address: "〒378-0122 群馬県沼田市白沢町生枝857",
+    accessInfo: "沼田市白沢町生枝。関越自動車道沼田ICから車でアクセス。",
+    region: localRegion("re5010"), spotType: "pond", isManagedPond: true, facilityKind: "managed", difficulty: "beginner",
+    officialUrl: "http://www7.wind.ne.jp/okutone/index_o.htm",
     isFree: false, hasParking: true, parkingDetail: "施設内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    feeDetail: "入場料+釣り放題: 大人4,000円〜。レンタルタックルあり",
+    feeDetail: "1日リリース券(無人営業日)5,000円・女性/小学生3,000円、時間券ペア5,800〜8,200円、買い取り1kg 1,400円",
     mainImageUrl: "", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
-      { fish: fish("iwana"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
-      { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "エサ釣り" },
+      { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "放流後", method: "ルアー・フライ" },
     ],
-    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
+    bestTimes: [{ label: "開場直後", timeRange: "07:00〜09:00", rating: "best" }, { label: "放流後", timeRange: "日中", rating: "good" }],
+    tackleRecommendations: [],
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false, fishingLicenseRequired: false,
+      otherRules: ["ルアー・フライ専用", "ネオスタイル禁止", "持ち帰り 1日券10匹・5/7時間券7匹・2〜4時間券5匹(40cm以上は1匹)"],
+    },
+    managementInfo: {
+      organizationName: "奥利根フィッシングパーク",
+      openingHours: "7:00〜17:00",
+      closedDays: "水曜・木曜(無人のテスト営業日あり)",
+      fishingFee: "1日リリース券5,000円(無人営業日)",
+      notes: ["確認日 2026-11-17(公式サイト http://www7.wind.ne.jp/okutone/index_o.htm 、11/21〜23 放流告知)", "ヤマメ・イワナ(エサ釣り)は公式で確認できず削除"],
+    },
   },
   {
     id: "se5017", name: "碓氷川", slug: "usui-gawa",
@@ -630,24 +644,7 @@ export const eastAdd5Spots: FishingSpot[] = [
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
-  {
-    id: "se5031", name: "湯ノ湖", slug: "yunoko",
-    description: "奥日光の標高1,478mに位置する湖。ニジマスやヒメマスが放流されており、紅葉シーズンの釣りは格別の美しさ。",
-    latitude: 36.7990, longitude: 139.4240,
-    address: "〒321-1662 栃木県日光市湯元",
-    accessInfo: "JR日光駅からバスで約80分。日光宇都宮道路清滝ICから約50分。",
-    region: localRegion("re5021"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "湖畔に無料駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券1,800円",
-    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
-      { fish: fish("himemasu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("brown-trout"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
-  },
+  // 2026-11-17 削除: se5031 湯ノ湖(yunoko)は同じ湖の重複。se6224 yunoko-tsuri6 に統合し spot-redirects.json で転送
   {
     id: "se5032", name: "箒川", slug: "houkigawa",
     description: "那須塩原市を流れる箒川。冬季のニジマス釣り場として有名で、管理区間では大型のニジマスが放流される。温泉帰りにも。",

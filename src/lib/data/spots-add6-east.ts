@@ -4548,25 +4548,43 @@ export const eastAdd6Spots: FishingSpot[] = [
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
+  // 2026-11-17 修正: 湯ノ湖の同じ湖の重複4件(se5031 yunoko / se6224 yunoko-tsuri6 / ss9030 yunoko-tochigi-a9 / exp-c027 yunoko-okunnikko)を
+  // 現在公開されている(重複除去で勝ち残っていた)この se6224 に統合し、他3件は削除して spot-redirects.json で転送。
+  // 全国内水面漁連 日光支所が運営し専用の釣魚料金・期間・尾数制限を公開しているため、湖全体の有料釣り場として lake + isManagedPond。
+  // 住所・座標は据え置き
   {
     id: "se6224", name: "湯ノ湖", slug: "yunoko-tsuri6",
-    description: "日光湯元温泉に隣接する標高1478mの湖。ブルックトラウトやブラウントラウトが生息する冷水湖。温泉と釣りを同時に楽しめる高原リゾート。",
+    description: "奥日光・湯元温泉のすぐそばにある標高1,478mの湖。全国内水面漁業協同組合連合会の日光支所が管理し、専用の釣り券で5月1日から9月30日まで釣りができる。ヒメマスやニジマス、カワマス、ホンマスなどのマス類のほか、ワカサギやウグイ、コイも釣れる。岸からの釣りと舟釣りができ、釣り舟は湯元のレストハウスで予約できる。持ち帰りは20尾まで、生きた魚の持ち出しは禁止。現場で監視員から券を買うと割高になるので、事前に買っておきたい。",
     latitude: 36.798, longitude: 139.423,
     address: "〒321-1662 栃木県日光市湯元",
     accessInfo: "JR日光駅からバスで約1時間10分。日光宇都宮道路清滝ICから約35分。",
-    region: localRegion("re6024"), spotType: "river", difficulty: "intermediate",
+    region: localRegion("re6024"), spotType: "lake", isManagedPond: true, facilityKind: "managed", difficulty: "intermediate",
+    officialUrl: "https://www.naisuimen.or.jp/nikko/fishing/fee.html",
     isFree: false, hasParking: true, parkingDetail: "湯元温泉駐車場あり",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: true,
-    feeDetail: "遊漁券: 日券1,500円",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: true, rentalDetail: "貸し竿(エサ用4.5mのべ竿/ルアー用リール竿)各1,500円。釣り舟は湯元レストハウス(0288-62-2156)で予約、2人乗り1日3,700円・3人乗り5,000円",
+    feeDetail: "湯ノ湖(舟釣り・岸釣り共通)解禁日 1日3,600円、5/2〜9/30 1日2,600円・午後券2,000円(正午から発売)、小中高生 1日500円。現場で監視員から買うと1枚500円(小中高生300円)加算。6枚綴り回数券あり、湯元温泉の宿泊者割引あり",
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("brown-trout"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
-      { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
-      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("himemasu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "釣り始め", method: "舟釣り・岸釣り", source: "https://www.naisuimen.or.jp/nikko/fishing/fee.html" },
+      { fish: fish("nijimasu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "釣り始め", method: "ルアー・フライ・エサ釣り", source: "https://www.naisuimen.or.jp/nikko/fishing/fee.html" },
+      { fish: fish("wakasagi"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ仕掛け", source: "https://www.naisuimen.or.jp/nikko/fishing/fee.html" },
+      { fish: fish("ugui"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り", source: "https://www.naisuimen.or.jp/nikko/fishing/fee.html" },
+      { fish: fish("koi"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "エサ釣り", source: "https://www.naisuimen.or.jp/nikko/fishing/fee.html" },
     ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
+    bestTimes: [{ label: "釣り始め", timeRange: "07:00〜09:00", rating: "best" }, { label: "日中", timeRange: "09:00〜15:00", rating: "good" }, { label: "夕方", timeRange: "15:00〜17:00", rating: "good" }],
+    tackleRecommendations: [],
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false, fishingLicenseRequired: true,
+      otherRules: ["湯ノ湖の釣り券が必要(期間 5/1〜9/30)", "持ち帰りは20尾まで", "生きた魚の持ち出しは禁止"],
+    },
+    managementInfo: {
+      organizationName: "全国内水面漁業協同組合連合会 日光支所(湯ノ湖釣り事務所)",
+      contactPhone: "0288-62-2524",
+      openingHours: "原則7:00〜17:00(岸釣りは日の出〜日没)、解禁日は5:00〜17:00",
+      closedDays: "10/1〜4/30は禁漁",
+      fishingFee: "1日2,600円(解禁日3,600円)・午後券2,000円・小中高生500円",
+      notes: ["確認日 2026-11-17(全国内水面漁連 日光支所 https://www.naisuimen.or.jp/nikko/fishing/fee.html 、日光市 観光月報 2026-05-01)", "カワマス・ホンマス・フナも対象魚(サイトの魚種データに無いため一覧には出していない)", "湯川(C&R の河川区間)は対象外"],
+    },
   },
   {
     id: "se6225", name: "鬼怒川上流域", slug: "kinugawa-jouryuu6",
