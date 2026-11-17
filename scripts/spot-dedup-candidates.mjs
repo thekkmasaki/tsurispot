@@ -24,7 +24,18 @@ const argVal = (k, d) => {
   return i >= 0 ? args[i + 1] : d;
 };
 const MAX_KM = Number(argVal("--km", "0.5"));
-const OUT = path.resolve(ROOT, argVal("--out", "scripts/output/spot-dedup-candidates.json"));
+const SAME_CITY = args.includes("--same-city");
+const OUT = path.resolve(
+  ROOT,
+  argVal("--out", SAME_CITY ? "scripts/output/spot-dedup-candidates-same-city.json" : "scripts/output/spot-dedup-candidates.json"),
+);
+
+// 住所から市区町村（郡は除き、政令市は市まで）を取り出す
+function municipality(spot) {
+  const addr = (spot.address || "").normalize("NFKC").replace(/〒?\d{3}-?\d{4}/, "").replace(/\s/g, "");
+  const m = addr.match(/(?:都|道|府|県)(?:[^0-9市郡]+郡)?([^0-9市区町村郡]+?(?:市|区|町|村))/);
+  return m ? m[1] : "";
+}
 
 async function loadRuntimeData() {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "tsurispot-dupcand-"));
@@ -170,7 +181,11 @@ for (const list of byCore.values()) {
       const a = list[i], b = list[j];
       if (a.s.region.prefecture !== b.s.region.prefecture) continue;
       const d = km(a.s, b.s);
-      if (d > MAX_KM) continue;
+      if (SAME_CITY) {
+        // 座標誤りの重複は近接判定で漏れるため、同一市区町村（住所）なら距離不問で候補にする
+        const ca = municipality(a.s), cb = municipality(b.s);
+        if (!ca || ca !== cb) continue;
+      } else if (d > MAX_KM) continue;
       for (const x of [a.s.slug, b.s.slug]) if (!parent.has(x)) parent.set(x, x);
       union(a.s.slug, b.s.slug);
       pairs.push({ a: a.s.slug, b: b.s.slug, km: Number(d.toFixed(3)) });
