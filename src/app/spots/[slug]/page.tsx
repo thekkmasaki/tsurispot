@@ -1146,7 +1146,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
             <div className="space-y-3">
               {spot.rules ? (
-                <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} isFree={spot.isFree} feeDetail={spot.feeDetail} />
+                <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} isFree={spot.isFree} feeDetail={spot.feeDetail} isManagedPond={spot.isManagedPond} />
               ) : prefRule ? (
                 <SpotRulesPrefectureFallback rule={prefRule} />
               ) : null}

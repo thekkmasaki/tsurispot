@@ -11,6 +11,8 @@ interface SpotRulesCardProps {
   isFree?: boolean;
   /** 料金の説明（例: 大人900円 / 子供450円）。有料時の文言に使う */
   feeDetail?: string;
+  /** 管理釣り場・釣り堀。投げ釣り・コマセは施設の性質上意味がないので出さず、ルアー可否と施設独自ルールだけ表示する */
+  isManagedPond?: boolean;
 }
 
 interface RuleItem {
@@ -135,7 +137,7 @@ function statusLabel(value: boolean | "partial"): string {
   return "場所による";
 }
 
-export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail }: SpotRulesCardProps) {
+export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail, isManagedPond }: SpotRulesCardProps) {
   const isDefault = !rules;
   const spotTypeLabel = SPOT_TYPE_LABELS[spotType as keyof typeof SPOT_TYPE_LABELS] || spotType;
 
@@ -177,10 +179,15 @@ export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail }: 
           : "このスポットでは夜間の釣りが禁止されています",
       });
     }
+    if (isManagedPond) {
+      ruleItems = ruleItems.filter((item) => item.label === "ルアー釣り");
+    }
     showLicenseWarning = rules.fishingLicenseRequired;
     licenseLabel = rules.fishingLicenseRequired
       ? "遊漁券が必要です"
-      : "遊漁券は不要です";
+      : isManagedPond
+        ? "遊漁券は不要です（施設の利用料金のみ）"
+        : "遊漁券は不要です";
   } else {
     const defaults = getDefaultRules(spotType);
     ruleItems = defaults.items;
