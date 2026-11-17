@@ -1,50 +1,51 @@
 /**
- * サーバー専用: スポット周辺の「地形（水深）」の目安を引く。
+ * サーバー専用: スポット周辺の「地形（水深）」データを引く。
  *
- * 海しるAPI（海上保安庁）の等深線から、スポット地点から水深20mラインまでの
+ * 海しるAPI（海上保安庁）の等深線から、スポット地点から水深20mの等深線までの
  * 水平距離を一度だけバッチ取得し（scripts/fetch-spot-depth-contour.mjs）、
- * それを3段階の地形タイプに分けて表示する。タイプの定義は lib/depth-terrain.ts。
+ * その距離を事実として表示する（解釈は付けない）。区分の定義は lib/depth-terrain.ts。
  *
  * JSON（約4,000件）を import するので、クライアントコンポーネントから import しないこと。
- * 一覧・検索へは ListSpot.depthTerrain（タイプ文字列だけ）として渡す。
+ * 一覧・検索へは ListSpot.depthTerrain（区分の文字列だけ）として渡す。
  */
 import depthData from "@/lib/data/spot-depth-contour.json";
-import { classifyDepthKind, DEPTH_TERRAIN_LABELS, type DepthTerrainKind } from "@/lib/depth-terrain";
+import { classifyDepthKind, type DepthTerrainKind } from "@/lib/depth-terrain";
 
 export type { DepthTerrainKind } from "@/lib/depth-terrain";
 
 export interface DepthTerrain {
   kind: DepthTerrainKind;
-  /** 地形タイプの見出し */
-  label: string;
-  /** 釣りへの意味（無い場合は undefined） */
-  hint?: string;
+  /** 海しるの等深線から読める事実（例: 「水深20mの等深線まで 沖合約300m」） */
+  fact: string;
 }
 
 /**
- * 20mラインまでの距離（m）から表示用の地形情報を作る。
- * null は「取得範囲（約1.4km）内に20mラインが無い」を意味する。
- * 距離（100m〜1km）は投げて届く範囲（50〜80m）の外なので画面には出さず、
- * 「急に深くなるか・遠浅か」という坂の傾向を測る物差しとしてだけ使う。
+ * 20mの等深線までの距離（m）から表示用の文言を作る。
+ * null は「取得範囲（約1.4km四方）内に20mの等深線が無い」を意味する。
  */
 export function classifyDepthTerrain(distanceTo20m: number | null): DepthTerrain {
   const kind = classifyDepthKind(distanceTo20m);
-  return {
-    kind,
-    label: DEPTH_TERRAIN_LABELS[kind],
-    hint: kind === "steep" ? "冬の深場狙い（イカ・根魚）の候補" : undefined,
-  };
+  if (distanceTo20m == null || distanceTo20m > 1000) {
+    return { kind, fact: "沖合約1km以内に水深20mの等深線なし" };
+  }
+  return { kind, fact: `水深20mの等深線まで 沖合${formatDistance(distanceTo20m)}` };
+}
+
+function formatDistance(m: number): string {
+  // 座標は港の代表点などで誤差があるため、100m未満は「100m以内」、それ以上は50m単位に丸める
+  if (m < 100) return "100m以内";
+  return `約${Math.round(m / 50) * 50}m`;
 }
 
 const spots = depthData.spots as Record<string, number | null>;
 
-/** スポットの地形（水深）目安。データが無ければ null */
+/** スポットの地形（水深）データ。データが無ければ null */
 export function getSpotDepthTerrain(slug: string): DepthTerrain | null {
   if (!Object.prototype.hasOwnProperty.call(spots, slug)) return null;
   return classifyDepthTerrain(spots[slug]);
 }
 
-/** 一覧・検索用: 地形タイプだけ。データが無ければ undefined */
+/** 一覧・検索用: 区分だけ。データが無ければ undefined */
 export function getSpotDepthKind(slug: string): DepthTerrainKind | undefined {
   if (!Object.prototype.hasOwnProperty.call(spots, slug)) return undefined;
   return classifyDepthKind(spots[slug]);

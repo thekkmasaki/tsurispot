@@ -8,26 +8,29 @@ import { normalizeForSearch, spotSearchMatch } from "@/lib/search/spot-match";
 import type { ListSpot } from "@/types";
 
 describe("classifyDepthTerrain", () => {
-  it("20mラインが300m以内なら「急に深くなる」でイカ・根魚のヒントを付ける", () => {
+  it("300m以内は steep で、海しるの距離を事実として出す", () => {
     const t = classifyDepthTerrain(300);
     expect(t.kind).toBe("steep");
-    expect(t.label).toBe("急に深くなる地形");
-    expect(t.hint).toContain("イカ");
+    expect(t.fact).toBe("水深20mの等深線まで 沖合約300m");
   });
 
-  it("300m超〜1km以内は「ゆるやかに深くなる」でヒントなし", () => {
+  it("100m未満は「100m以内」に丸める", () => {
+    expect(classifyDepthTerrain(40).fact).toBe("水深20mの等深線まで 沖合100m以内");
+  });
+
+  it("300m超〜1km以内は moderate で50m単位に丸める", () => {
     const t = classifyDepthTerrain(720);
     expect(t.kind).toBe("moderate");
-    expect(t.hint).toBeUndefined();
+    expect(t.fact).toBe("水深20mの等深線まで 沖合約700m");
   });
 
-  it("1km超・線が見つからない場合は「遠浅」", () => {
+  it("1km超・線が見つからない場合は「なし」", () => {
     expect(classifyDepthTerrain(1010).kind).toBe("shallow");
-    expect(classifyDepthTerrain(null).label).toBe("遠浅の地形");
+    expect(classifyDepthTerrain(null).fact).toBe("沖合約1km以内に水深20mの等深線なし");
   });
 
-  it("投げて届かない距離の数字は表示データに含めない", () => {
-    expect(JSON.stringify(classifyDepthTerrain(40))).not.toMatch(/\d+m/);
+  it("「釣れる」等の解釈は付けない", () => {
+    for (const d of [40, 720, null]) expect(classifyDepthTerrain(d).fact).not.toMatch(/イカ|根魚|狙/);
   });
 });
 

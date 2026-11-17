@@ -44,24 +44,23 @@ export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
   if (spot.familyInfo?.strollerAccessible) footing.push("ベビーカーで移動可");
   if (footing.length > 0) rows.push({ label: "足場", value: footing.join("・") });
 
-  // 地形（水深）: 海しる等深線から作った目安。足もとの水深ではないので地形タイプを主役にする
+  // 地形（水深）: 海しる等深線のデータをそのまま事実として出す（解釈は付けない）
   const terrain = getSpotDepthTerrain(spot.slug);
   if (terrain) {
     rows.push({
       label: "地形（水深）",
       value: (
         <>
-          <span className="font-medium">{terrain.label}</span>
-          {terrain.hint && <span className="text-muted-foreground">（{terrain.hint}）</span>}
+          <span className="font-medium">{terrain.fact}</span>
           <span className="block text-xs text-muted-foreground">
-            海しるの等深線から推定した地形の傾向で、足もとの水深ではありません
+            出典：海しる（海上保安庁）の等深線。足もとの水深ではありません
           </span>
           <Link
             prefetch={false}
             href={`/spots?${new URLSearchParams({ prefecture: spot.region.prefecture, terrain: terrain.kind })}`}
             className="mt-0.5 inline-block text-xs text-primary underline-offset-2 hover:underline"
           >
-            {spot.region.prefecture}の「{DEPTH_TERRAIN_SHORT_LABELS[terrain.kind]}」スポットを探す
+            {spot.region.prefecture}で「{DEPTH_TERRAIN_SHORT_LABELS[terrain.kind]}」のスポットを探す
           </Link>
         </>
       ),

@@ -503,7 +503,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
       {/* すべての条件パネル（既定は閉じる。PCでも閉じてスッキリ見せる） */}
       <div className={cn(
         "space-y-4 overflow-hidden rounded-xl transition-all duration-200",
-        isFilterOpen ? "max-h-[1600px] border bg-muted/40 p-4 opacity-100" : "max-h-0 opacity-0"
+        isFilterOpen ? "max-h-[2000px] border bg-muted/40 p-4 opacity-100" : "max-h-0 opacity-0"
       )}>
         {/* Region block filter (1段目: 地方ブロック) */}
         <div>
@@ -629,7 +629,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
         <div>
           <p className="mb-2 text-sm font-medium text-muted-foreground">
             地形（水深）
-            <span className="ml-1.5 text-xs font-normal">海のスポットのみ・水深20mラインまでの距離による目安</span>
+            <span className="ml-1.5 text-xs font-normal">海のスポットのみ・水深20mの等深線までの距離（海しる／海上保安庁）</span>
           </p>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {DEPTH_TERRAIN_KINDS.map((key) => (
