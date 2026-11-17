@@ -17,6 +17,7 @@ import {
   Check,
   Minus,
   type LucideIcon,
+  Ticket,
 } from "lucide-react";
 import { SpotImage } from "@/components/ui/spot-image";
 import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
@@ -38,6 +39,7 @@ export const FEATURE_ICONS: Record<SpotFeatureIcon, LucideIcon> = {
   rental: Package,
   shop: Store,
   store: ShoppingBag,
+  managed: Ticket,
 };
 
 /** 特徴チップの一覧。prefSlug を渡すとその県の特徴ページへリンクする */

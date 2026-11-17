@@ -49,6 +49,7 @@ import { RelatedSpotsGeneric } from "@/components/spots/related-spots-generic";
 import { getNearbyShopsWithDistance } from "@/lib/data/shops";
 import { NearbyShops, type NearbyShopItem } from "@/components/spots/nearby-shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
+import { getSpotFeature, getFeatureSpots, MIN_SPOTS_PER_PREF } from "@/lib/data/spot-features";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { TackleCard } from "@/components/spots/tackle-card";
 import { TideMazumeInfo } from "@/components/spots/tide-mazume-info";
@@ -371,9 +372,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // 2026-11: 旧「◯月の釣りシーズン」Event（実在しないイベント＝Googleのイベント要件違反）と、
   // 堤防・浜を LocalBusiness として二重定義していたブロック（Google評価転載の aggregateRating 含む）を削除。
   // speakable は WebPage（spotSpeakableJsonLd）側の1箇所に集約。
+  // priceRange は Google の推奨どおり100文字未満の要約だけ（長い料金表はそのまま入れない）
+  const managedFee = spot.managementInfo?.fishingFee ?? spot.feeDetail;
+  const managedPriceRange = managedFee && managedFee.length < 100 ? managedFee : undefined;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TouristAttraction",
+    // 管理釣り場・釣り堀は営業する有料施設なので SportsActivityLocation（LocalBusiness 系）も併記する
+    "@type": spot.isManagedPond ? ["TouristAttraction", "SportsActivityLocation"] : "TouristAttraction",
     name: spot.name,
     description: spot.description,
     url: `https://tsurispot.com/spots/${spot.slug}`,
@@ -411,9 +416,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
     ],
     touristType: spot.difficulty === "beginner" ? "初心者" : spot.difficulty === "intermediate" ? "中級者" : "上級者",
     ...(spot.officialUrl ? { sameAs: spot.officialUrl } : {}),
+    // 施設の連絡先・料金は公式で確認した値があるときだけ出す（openingHours は自由記述で schema 形式に変換できないため出さない）
+    ...(spot.isManagedPond && spot.managementInfo?.contactPhone ? { telephone: spot.managementInfo.contactPhone } : {}),
+    ...(spot.isManagedPond && managedPriceRange ? { priceRange: managedPriceRange } : {}),
   };
 
   const prefForBreadcrumb = getPrefectureByName(spot.region.prefecture);
+  // 管理釣り場・釣り堀は同じ県の施設一覧（/spot-feature/managed/<県>）へつなぐ。県ページがある件数のときだけ
+  const managedFeature = spot.isManagedPond ? getSpotFeature("managed") : undefined;
+  const managedPrefCount =
+    managedFeature && prefForBreadcrumb ? getFeatureSpots(managedFeature, spot.region.prefecture).length : 0;
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -730,6 +742,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <SpotCategoryBadge category={getSpotCategory(spot)} detail={getSpotCategoryDetail(spot)} className="mr-2 align-[1px] text-xs" />
           {SPOT_TYPE_LABELS[spot.spotType]} − {spot.region.prefecture} {spot.region.areaName}
         </p>
+        {prefForBreadcrumb && managedPrefCount >= MIN_SPOTS_PER_PREF && (
+          <p className="mt-1 text-sm">
+            <Link
+              href={`/spot-feature/managed/${prefForBreadcrumb.slug}`}
+              className="text-primary underline underline-offset-2"
+            >
+              {spot.region.prefecture}の管理釣り場・釣り堀（{managedPrefCount}件）を比べる
+            </Link>
+          </p>
+        )}
         {/* 実在する最新釣果があるときだけ冒頭に要約（title と同じデータ。詳細は「釣果・最近の様子」へ） */}
         {latestCatch && (
           <p className="mt-1.5 text-sm">

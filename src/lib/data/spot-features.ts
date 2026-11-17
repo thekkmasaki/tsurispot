@@ -19,7 +19,8 @@ export type SpotFeatureIcon =
   | "chum"
   | "rental"
   | "shop"
-  | "store";
+  | "store"
+  | "managed";
 
 export interface SpotFeature {
   slug: string;
@@ -74,6 +75,20 @@ export const SPOT_FEATURES: SpotFeature[] = [
       "朝夕のマズメ時は魚の活性が上がりやすく、初心者でも釣りやすい時間帯です。",
     ],
     match: (s) => s.difficulty === "beginner",
+  },
+  {
+    slug: "managed",
+    label: "管理釣り場・釣り堀",
+    heading: "管理釣り場・釣り堀",
+    icon: "managed",
+    intro:
+      "料金を払って釣る管理釣り場（エリアトラウト・渓流型）と釣り堀（ヘラブナ・コイ・金魚・海上釣り堀など）の一覧です。運営者が魚を放流しているので季節を問わず釣果が出やすく、トイレや駐車場、レンタル竿が整った施設が多いのが特徴です。掲載は公式サイトなどで営業を確認できた施設に限っています。",
+    tips: [
+      "料金は1日券・半日券・時間制・重量制などさまざまで、持ち帰りの可否や匹数制限も施設ごとに違います。各施設ページの料金欄と公式サイトを確認しましょう。",
+      "冬季だけ営業する施設、逆に冬は休業する施設があります。営業期間と定休日は出かける前に公式サイトやSNSで確認してください。",
+      "エリアトラウトの多くはシングルバーブレスフックなどの規定があります。ルアーやエサの使用条件も施設ごとに決まっています。",
+    ],
+    match: (s) => s.isManagedPond === true,
   },
   {
     slug: "free",
