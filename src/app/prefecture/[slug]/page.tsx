@@ -51,6 +51,7 @@ import { FeatureChipGrid } from "@/components/spots/spot-feature-ui";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 import { spotsLatestYmd, fileYmd } from "@/lib/content-dates";
+import { getManagedByPrefecture, MIN_MANAGED_PER_PREF } from "@/lib/managed-pond-hub";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -1502,6 +1503,18 @@ export default async function PrefecturePage({ params }: PageProps) {
                               : `${pref.name}の${type}の釣り場${count}件`}
                         </Link>
                       ))}
+                      {(() => {
+                        const g = getManagedByPrefecture().find((x) => x.pref.slug === pref.slug);
+                        if (!g || g.spots.length < MIN_MANAGED_PER_PREF) return null;
+                        return (
+                          <Link prefetch={false}
+                            href={`/managed-ponds/${pref.slug}`}
+                            className="rounded-full border bg-muted/50 px-3 py-1 text-xs transition-colors hover:bg-muted hover:text-primary"
+                          >
+                            {pref.name}の管理釣り場・釣り堀の料金・営業時間一覧（{g.spots.length}件）
+                          </Link>
+                        );
+                      })()}
                     </div>
                   </div>
                 </CardContent>

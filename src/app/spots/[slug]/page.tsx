@@ -151,6 +151,13 @@ import {
 } from "@/lib/utils/spot-rule-consistency";
 import { METHOD_GUIDES, guidesForMethods } from "@/lib/data/method-guides";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { getManagedByPrefecture, MIN_MANAGED_PER_PREF } from "@/lib/managed-pond-hub";
+import {
+  buildManagedTitle,
+  buildManagedMetaDescription,
+  buildManagedLead,
+  managedJsonLdExtras,
+} from "@/lib/managed-pond";
 
 // Below-the-fold client components loaded lazily
 const SpotWeatherTide = nextDynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide), {
@@ -186,13 +193,20 @@ export async function generateMetadata({
   // title: striking-distance の実クエリ（[地名]+釣果/釣り情報）に合わせ「釣果」を前方化＋鮮度トークン。
   // 実在する最新釣果（UGC・釣果週報のスポット行）があるスポットだけ日付・件数・魚を title/description に出す。
   const latestCatch = await getSpotCatchSummary(slug);
-  const title = buildSpotTitle(spot, latestCatch);
+  // 管理釣り場・釣り堀は「料金・営業時間」が主な検索意図。実釣果がある場合だけ従来の釣果型 title を使う。
+  const title = spot.isManagedPond && !latestCatch ? buildManagedTitle(spot) : buildSpotTitle(spot, latestCatch);
   // description: 実データ（釣れる魚上位・魚種数・定番釣法・設備・固有の導入文）を織り込み 120-158 字化。
   // 従来の属性列挙（93字）だと Bing「description 短すぎ」に該当したため実データ駆動へ組み立て直す。
   // 週報エリアに属し最新週報が新鮮なスポットだけ「最新釣果週報も掲載」を足す（実在する場合のみ）。
   // 週報一覧は getAllBlogPosts の 1 時間キャッシュ共有で microCMS への追加リクエストは無い。
   const weekly = await getLatestWeeklyReportForSpot(spot);
-  const description = buildSpotMetaDescription(spot, { weeklyAreaLabel: weekly?.areaLabel, latestCatch });
+  const description = spot.isManagedPond
+    ? buildManagedMetaDescription(spot, {
+        latestSentence: latestCatch
+          ? `${spot.name}の最新釣果は${latestCatch.latestDate.replace(/^\d+-0?(\d+)-0?(\d+)$/, "$1月$2日")}（直近${latestCatch.count}件）。`
+          : false,
+      })
+    : buildSpotMetaDescription(spot, { weeklyAreaLabel: weekly?.areaLabel, latestCatch });
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
 
   // 本当に薄いページのみnoindex（判定基準は src/lib/seo-quality.ts に一元化）
@@ -373,7 +387,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // speakable は WebPage（spotSpeakableJsonLd）側の1箇所に集約。
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TouristAttraction",
+    // 管理釣り場・釣り堀は営業時間・電話・料金を持つ施設型も併記（Google の LocalBusiness 系プロパティが使える）
+    "@type": spot.isManagedPond ? ["TouristAttraction", "SportsActivityLocation"] : "TouristAttraction",
     name: spot.name,
     description: spot.description,
     url: `https://tsurispot.com/spots/${spot.slug}`,
@@ -411,6 +426,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     ],
     touristType: spot.difficulty === "beginner" ? "初心者" : spot.difficulty === "intermediate" ? "中級者" : "上級者",
     ...(spot.officialUrl ? { sameAs: spot.officialUrl } : {}),
+    ...(spot.isManagedPond ? managedJsonLdExtras(spot) : {}),
   };
 
   const prefForBreadcrumb = getPrefectureByName(spot.region.prefecture);
@@ -847,6 +863,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
             コアアップデート対策で廃止。実データ(下部の魚種カレンダー/施設/潮汐/釣果)を本体とする。 */}
         <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
           <p>{spot.description}</p>
+          {/* 管理釣り場・釣り堀: 料金・営業時間・定休日・魚を1段落で言い切る要約（AI検索・音声が引用しやすい形） */}
+          {spot.isManagedPond && (
+            <p className="rounded-lg border bg-muted/40 p-3 text-foreground">{buildManagedLead(spot)}</p>
+          )}
         </div>
 
         {layoutB ? (
@@ -2246,6 +2266,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
                           {spot.region.prefecture}の釣りルール
                         </Link>
                       </>
+                    );
+                  })()}
+                  {spot.isManagedPond && (() => {
+                    const pref = getPrefectureByName(spot.region.prefecture);
+                    const g = pref ? getManagedByPrefecture().find((x) => x.pref.slug === pref.slug) : undefined;
+                    if (!pref || !g || g.spots.length < MIN_MANAGED_PER_PREF) return null;
+                    return (
+                      <Link prefetch={false} href={`/managed-ponds/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                        <MapPin className="size-3" />
+                        {spot.region.prefecture}の管理釣り場・釣り堀一覧（料金比較）
+                      </Link>
                     );
                   })()}
                   <Link prefetch={false} href={`/area/${getAreaRepSlug(spot.region.slug)}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">

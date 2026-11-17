@@ -23,6 +23,7 @@ import {
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/user-store";
 import { isSitemapEligible } from "@/lib/seo-quality";
+import { getManagedByPrefecture, MIN_MANAGED_PER_PREF } from "@/lib/managed-pond-hub";
 import { monthLastModified } from "@/lib/sitemap-dates";
 import { STATION_SLUGS } from "@/lib/tide/station-slugs";
 import { SPOT_FEATURES, getFeaturePrefCombos, MIN_SPOTS_PER_PREF } from "@/lib/data/spot-features";
@@ -644,6 +645,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
+
+    // ===== 管理釣り場・釣り堀ハブ（全国＋件数が閾値以上の都道府県。県ページ側の noindex 条件と一致） =====
+    { url: `${baseUrl}/managed-ponds`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
+    ...getManagedByPrefecture()
+      .filter((g) => g.spots.length >= MIN_MANAGED_PER_PREF)
+      .map((g) => ({
+        url: `${baseUrl}/managed-ponds/${g.pref.slug}`,
+        lastModified: dynamicDate,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      })),
 
     // ===== 釣り場タイプ×都道府県ページ =====
     ...(() => {
