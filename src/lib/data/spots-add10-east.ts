@@ -630,22 +630,7 @@ export const eastAdd10Spots: FishingSpot[] = [
     ],
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeRiver,
   },
-  {
-    id: "ss10233", name: "円良田湖", slug: "tsuruta-lake-a10",
-    description: "寄居町にあるヘラブナ釣りの管理釣り場。桟橋やボートが整備され、のんびりとヘラブナの引きを楽しめる埼玉の定番フィールド。",
-    latitude: 36.1020, longitude: 139.1820,
-    address: "〒369-1200 埼玉県大里郡寄居町",
-    accessInfo: "関越道花園ICから車で約15分",
-    region: localRegion("rs10108"), spotType: "river", difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "管理釣り場駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("herabuna"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘラウキ釣り" },
-      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ワカサギ仕掛け" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeLake,
-  },
+  // 2026-11-17 削除: ss10233 円良田湖(tsuruta-lake-a10)は同名の重複。fw-017 tsurutako-herabuna に統合し spot-redirects.json で転送
   {
     id: "ss10234", name: "高麗川（日高地区）", slug: "komagawa-hidaka-a10",
     description: "日高市を流れる清流で、夏場はアユ釣りの人気河川。巾着田曼珠沙華公園付近は河原が広く、のんびり釣りが楽しめる。",

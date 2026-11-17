@@ -155,7 +155,7 @@ describe("配信セット = count>=MIN_SPOTS の全組合せ（301 されない�
       ).toBeGreaterThanOrEqual(MIN_SPOTS);
       expect(c.count).toBe(uniqueSpots);
     }
-  });
+  }, 30_000); // 全スポット×全組合せの集計で重い(単体約2秒、全テスト並列時に既定5秒を超える)
 
   it("事前生成(SSG)セットは配信セットの部分集合（事前生成ページは 301 されない）", () => {
     const eligibleKeys = new Set(

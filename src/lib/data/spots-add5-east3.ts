@@ -708,24 +708,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     ],
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
-  {
-    id: "se5135", name: "円良田湖", slug: "tsuruta-ko",
-    description: "寄居町にあるヘラブナ釣りの名湖。桟橋やボートからの釣りが楽しめ、冬はワカサギ釣りも解禁される。",
-    latitude: 36.1050, longitude: 139.2060,
-    address: "〒369-1204 埼玉県大里郡寄居町末野",
-    accessInfo: "関越自動車道花園ICから約20分。秩父鉄道波久礼駅から徒歩約20分。",
-    region: localRegion("re5110"), spotType: "river", difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券600円",
-    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
-      { fish: fish("wakasagi"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
-      { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
-  },
+  // 2026-11-17 削除: se5135 円良田湖(tsuruta-ko)は同名の重複。fw-017 tsurutako-herabuna に統合(spot-redirects.json に転送あり)
   {
     id: "se5136", name: "中川 越谷エリア", slug: "nakagawa-koshigaya",
     description: "越谷市を流れる中川。足場の良い護岸からヘラブナやコイが狙える都市型の釣り場。テナガエビ釣りの名所でもある。",
@@ -779,23 +762,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     ],
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
-  {
-    id: "se5140", name: "吉羽園", slug: "yoshiba-en",
-    description: "宮代町にある管理釣り場。ヘラブナ専用の釣り堀で、桟橋が充実。初心者からベテランまで楽しめる埼玉の老舗。",
-    latitude: 36.0280, longitude: 139.7190,
-    address: "〒345-0826 埼玉県南埼玉郡宮代町本田",
-    accessInfo: "東武伊勢崎線和戸駅から徒歩約15分。東北自動車道久喜ICから約15分。",
-    region: localRegion("re5111"), spotType: "pond", isManagedPond: true, difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "専用無料駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    feeDetail: "入場料: 大人2,500円（1日）",
-    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("herabuna"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
-      { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
-  },
+  // 2026-11-17 削除: se5140 吉羽園(yoshiba-en)は2018年に廃業(管理釣り場ドットコム・へら鮒天国の閉鎖欄)。住所(宮代町本田)も実所在地(幸手市上吉羽)と違っていた。spot-redirects.json で三国池 mikuniike-herabuna-kazo へ転送
 
   // =========================================
   // 北海道（10スポット: se5141〜se5150）

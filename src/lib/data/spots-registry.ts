@@ -105,6 +105,30 @@ import { meccaWestSpots } from "./spots-mecca-west";
 import { managedKansaiHyogoOsakaSpots } from "./spots-managed-kansai-hyogo-osaka";
 import { managedKansaiKyotoShigaSpots } from "./spots-managed-kansai-kyoto-shiga";
 import { managedKansaiWakayamaNaraSpots } from "./spots-managed-kansai-wakayama-nara";
+import { managedYamanashiSpots } from "./spots-managed-yamanashi";
+import { managedNaganoNiigataSpots } from "./spots-managed-nagano-niigata";
+import { managedSaitamaSpots } from "./spots-managed-saitama";
+import { managedIbarakiSpots } from "./spots-managed-ibaraki";
+import { managedTochigiSpots } from "./spots-managed-tochigi";
+import { managedGunmaSpots } from "./spots-managed-gunma";
+import { managedTokyoSpots } from "./spots-managed-tokyo";
+import { managedKanagawaSpots } from "./spots-managed-kanagawa";
+import { managedChibaSpots } from "./spots-managed-chiba";
+import { managedHokurikuSpots } from "./spots-managed-hokuriku";
+import { managedShizuokaSpots } from "./spots-managed-shizuoka";
+import { managedAichiSpots } from "./spots-managed-aichi";
+import { managedGifuSpots } from "./spots-managed-gifu";
+import { managedMieSpots } from "./spots-managed-mie";
+import { managedHokkaidoSpots } from "./spots-managed-hokkaido";
+import { managedTohokuNorthSpots } from "./spots-managed-tohoku-north";
+import { managedMiyagiSpots } from "./spots-managed-miyagi";
+import { managedTohokuSouthSpots } from "./spots-managed-tohoku-south";
+import { managedSaninKagawaSpots } from "./spots-managed-sanin-kagawa";
+import { managedShikokuSpots } from "./spots-managed-shikoku";
+import { managedKyushuNorthSpots } from "./spots-managed-kyushu-north";
+import { managedSanyoSpots } from "./spots-managed-sanyo";
+import { managedKyushuCentralSpots } from "./spots-managed-kyushu-central";
+import { managedKyushuSouthSpots } from "./spots-managed-kyushu-south";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -208,4 +232,28 @@ export const allRawSpots: FishingSpot[] = [
   ...managedKansaiHyogoOsakaSpots,
   ...managedKansaiKyotoShigaSpots,
   ...managedKansaiWakayamaNaraSpots,
+  ...managedYamanashiSpots,
+  ...managedNaganoNiigataSpots,
+  ...managedSaitamaSpots,
+  ...managedIbarakiSpots,
+  ...managedTochigiSpots,
+  ...managedGunmaSpots,
+  ...managedTokyoSpots,
+  ...managedKanagawaSpots,
+  ...managedChibaSpots,
+  ...managedHokurikuSpots,
+  ...managedShizuokaSpots,
+  ...managedAichiSpots,
+  ...managedGifuSpots,
+  ...managedMieSpots,
+  ...managedHokkaidoSpots,
+  ...managedTohokuNorthSpots,
+  ...managedMiyagiSpots,
+  ...managedTohokuSouthSpots,
+  ...managedSaninKagawaSpots,
+  ...managedShikokuSpots,
+  ...managedKyushuNorthSpots,
+  ...managedSanyoSpots,
+  ...managedKyushuCentralSpots,
+  ...managedKyushuSouthSpots,
 ];
