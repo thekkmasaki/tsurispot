@@ -1,0 +1,7458 @@
+{
+  "generatedAt": "2026-11-17T21:51:36.381Z",
+  "maxKm": 0.5,
+  "live": 6073,
+  "groups": [
+    {
+      "core": "竹島",
+      "prefecture": "愛知県",
+      "size": 2,
+      "maxKm": 0.481,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "gamagori-takeshima",
+          "name": "蒲郡竹島",
+          "core": "竹島",
+          "prefecture": "愛知県",
+          "area": "三河湾・西尾",
+          "address": "〒443-0031 愛知県蒲郡市竹島町",
+          "lat": 34.817,
+          "lng": 137.231,
+          "spotType": "beach",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 260,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "gamagori-takeshima-futo",
+          "name": "蒲郡 竹島埠頭",
+          "core": "竹島",
+          "prefecture": "愛知県",
+          "area": "蒲郡・西尾",
+          "address": "〒443-0031 愛知県蒲郡市竹島町",
+          "lat": 34.821,
+          "lng": 137.229,
+          "spotType": "pier",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 262,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "内海",
+      "prefecture": "愛知県",
+      "size": 2,
+      "maxKm": 0.183,
+      "flags": [
+        "distinguisher-differs",
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "utsumi-shinkou",
+          "name": "内海新港",
+          "core": "内海",
+          "prefecture": "愛知県",
+          "area": "知多半島",
+          "address": "〒470-3321 愛知県知多郡南知多町内海",
+          "lat": 34.717,
+          "lng": 136.877,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 222,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内",
+            "新"
+          ]
+        },
+        {
+          "slug": "utsumi-kaigan-aichi",
+          "name": "内海海岸",
+          "core": "内海",
+          "prefecture": "愛知県",
+          "area": "知多南部",
+          "address": "〒470-3321 愛知県知多郡南知多町内海",
+          "lat": 34.717,
+          "lng": 136.879,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 108,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "内海",
+      "prefecture": "愛知県",
+      "size": 3,
+      "maxKm": 0.38,
+      "flags": [
+        "distinguisher-differs",
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "chita-utsumi-kaigan-e8",
+          "name": "知多半島・内海海岸",
+          "core": "内海",
+          "prefecture": "愛知県",
+          "area": "知多半島",
+          "address": "〒470-3321 愛知県知多郡南知多町内海",
+          "lat": 34.725,
+          "lng": 136.88,
+          "spotType": "beach",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 223,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        },
+        {
+          "slug": "chita-utsumi-kou-a12",
+          "name": "知多・内海港",
+          "core": "内海",
+          "prefecture": "愛知県",
+          "area": "知多・南知多",
+          "address": "〒470-3321 愛知県知多郡南知多町内海",
+          "lat": 34.728,
+          "lng": 136.878,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 222,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        },
+        {
+          "slug": "minamichita-utsumi-shinkou-a13",
+          "name": "南知多・内海新港",
+          "core": "内海",
+          "prefecture": "愛知県",
+          "area": "名古屋港・港",
+          "address": "〒470-3321 愛知県知多郡南知多町内海",
+          "lat": 34.728,
+          "lng": 136.878,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 247,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内",
+            "南",
+            "新"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "表浜",
+      "prefecture": "愛知県",
+      "size": 2,
+      "maxKm": 0.334,
+      "flags": [],
+      "members": [
+        {
+          "slug": "toyohashi-omotehama-add3",
+          "name": "豊橋表浜海岸",
+          "core": "表浜",
+          "prefecture": "愛知県",
+          "area": "豊橋",
+          "address": "〒441-3211 愛知県豊橋市伊古部町枇杷ケ谷57",
+          "lat": 34.635,
+          "lng": 137.348,
+          "spotType": "beach",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 218,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "toyohashi-omotehama-surf-e8",
+          "name": "豊橋・表浜サーフ",
+          "core": "表浜",
+          "prefecture": "愛知県",
+          "area": "渥美半島・田原",
+          "address": "〒441-3143 愛知県豊橋市大崎町",
+          "lat": 34.632,
+          "lng": 137.348,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 219,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "豊浜",
+      "prefecture": "愛知県",
+      "size": 2,
+      "maxKm": 0.263,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "toyohama-fishing-pier",
+          "name": "豊浜釣り桟橋",
+          "core": "豊浜",
+          "prefecture": "愛知県",
+          "area": "知多半島",
+          "address": "〒470-3412 愛知県南知多町豊浜",
+          "lat": 34.7027,
+          "lng": 136.934,
+          "spotType": "pier",
+          "fish": 8,
+          "sourced": 0,
+          "descLen": 154,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "toyohama-gyokou-add5",
+          "name": "豊浜漁港",
+          "core": "豊浜",
+          "prefecture": "愛知県",
+          "area": "知多南部",
+          "address": "〒470-3412 愛知県知多郡南知多町豊浜",
+          "lat": 34.701,
+          "lng": 136.932,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 235,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "港大",
+      "prefecture": "愛媛県",
+      "size": 2,
+      "maxKm": 0.181,
+      "flags": [],
+      "members": [
+        {
+          "slug": "yawatahama-kou-ooteibou",
+          "name": "八幡浜市・八幡浜港大堤防",
+          "core": "港大",
+          "prefecture": "愛媛県",
+          "area": "佐田岬・八幡浜",
+          "address": "〒796-0087 愛媛県八幡浜市沖新田",
+          "lat": 33.462,
+          "lng": 132.425,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 271,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "ehime-yawatahama-obato-bulk",
+          "name": "八幡浜港大波止",
+          "core": "港大",
+          "prefecture": "愛媛県",
+          "area": "八幡浜・佐田岬",
+          "address": "〒796-0088 愛媛県八幡浜市沖新田",
+          "lat": 33.4628,
+          "lng": 132.4233,
+          "spotType": "breakwater",
+          "fish": 6,
+          "sourced": 6,
+          "descLen": 139,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "三津浜",
+      "prefecture": "愛媛県",
+      "size": 2,
+      "maxKm": 0.289,
+      "flags": [],
+      "members": [
+        {
+          "slug": "mitsuhama-port",
+          "name": "三津浜港",
+          "core": "三津浜",
+          "prefecture": "愛媛県",
+          "area": "松山・今治",
+          "address": "〒791-8060 愛媛県松山市三津ふ頭",
+          "lat": 33.859,
+          "lng": 132.71,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "mitsuhama-gyokou-a9",
+          "name": "三津浜漁港",
+          "core": "三津浜",
+          "prefecture": "愛媛県",
+          "area": "松山・三津浜",
+          "address": "愛媛県松山市三津",
+          "lat": 33.861,
+          "lng": 132.712,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 256,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "磯崎",
+      "prefecture": "茨城県",
+      "size": 2,
+      "maxKm": 0.357,
+      "flags": [],
+      "members": [
+        {
+          "slug": "isozaki-kou",
+          "name": "磯崎港",
+          "core": "磯崎",
+          "prefecture": "茨城県",
+          "area": "大洗・那珂湊",
+          "address": "〒311-1202 茨城県ひたちなか市磯崎町",
+          "lat": 36.385725,
+          "lng": 140.624633,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 258,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hitachinaka-isozaki-kou-a13",
+          "name": "ひたちなか・磯崎港",
+          "core": "磯崎",
+          "prefecture": "茨城県",
+          "area": "那珂・水戸",
+          "address": "〒311-1202 茨城県ひたちなか市磯崎町",
+          "lat": 36.384,
+          "lng": 140.628,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 225,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "鹿島港南",
+      "prefecture": "茨城県",
+      "size": 2,
+      "maxKm": 0.464,
+      "flags": [],
+      "members": [
+        {
+          "slug": "kashima-kou-minami-bouhatei",
+          "name": "鹿島港南防波堤",
+          "core": "鹿島港南",
+          "prefecture": "茨城県",
+          "area": "鹿島灘・神栖",
+          "address": "〒314-0253 茨城県神栖市居切",
+          "lat": 35.912,
+          "lng": 140.683,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 145,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        },
+        {
+          "slug": "kashima-minami-gampeki6",
+          "name": "鹿島港南岸壁",
+          "core": "鹿島港南",
+          "prefecture": "茨城県",
+          "area": "鹿嶋・神栖",
+          "address": "〒314-0198 茨城県鹿嶋市新浜",
+          "lat": 35.913,
+          "lng": 140.678,
+          "spotType": "breakwater",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 139,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "大洗",
+      "prefecture": "茨城県",
+      "size": 2,
+      "maxKm": 0.358,
+      "flags": [],
+      "members": [
+        {
+          "slug": "oarai-port",
+          "name": "大洗港",
+          "core": "大洗",
+          "prefecture": "茨城県",
+          "area": "大洗",
+          "address": "〒311-1301 茨城県大洗町磯浜町8249",
+          "lat": 36.313,
+          "lng": 140.577,
+          "spotType": "port",
+          "fish": 9,
+          "sourced": 9,
+          "descLen": 198,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "oarai-ko-add2",
+          "name": "大洗港（大洗漁港）",
+          "core": "大洗",
+          "prefecture": "茨城県",
+          "area": "大洗・ひたちなか",
+          "address": "〒311-1301 茨城県大洗町磯浜町8253-10",
+          "lat": 36.313,
+          "lng": 140.581,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 186,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "宇野",
+      "prefecture": "岡山県",
+      "size": 2,
+      "maxKm": 0.111,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tamano-uno-port",
+          "name": "玉野・宇野港",
+          "core": "宇野",
+          "prefecture": "岡山県",
+          "area": "玉野・直島",
+          "address": "〒706-0002 岡山県玉野市築港1丁目2",
+          "lat": 34.4921,
+          "lng": 133.9538,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 120,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "uno-kou-okayama",
+          "name": "宇野港",
+          "core": "宇野",
+          "prefecture": "岡山県",
+          "area": "玉野・渋川",
+          "address": "〒706-0002 岡山県玉野市築港",
+          "lat": 34.492,
+          "lng": 133.955,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 231,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "宇野",
+      "prefecture": "岡山県",
+      "size": 2,
+      "maxKm": 0.183,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "uno-kou-tamano-w6",
+          "name": "玉野市・宇野港",
+          "core": "宇野",
+          "prefecture": "岡山県",
+          "area": "玉野・児島",
+          "address": "〒706-0002 岡山県玉野市築港",
+          "lat": 34.487,
+          "lng": 133.948,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 253,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "uno-kou-gogan-a10",
+          "name": "宇野港護岸",
+          "core": "宇野",
+          "prefecture": "岡山県",
+          "area": "玉野・宇野",
+          "address": "〒706-0002 岡山県玉野市築港",
+          "lat": 34.487,
+          "lng": 133.95,
+          "spotType": "breakwater",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 236,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "虫明",
+      "prefecture": "岡山県",
+      "size": 2,
+      "maxKm": 0.454,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "setouchi-mushiake-kou",
+          "name": "瀬戸内市・虫明港堤防",
+          "core": "虫明",
+          "prefecture": "岡山県",
+          "area": "瀬戸内市・牛窓",
+          "address": "〒701-4214 岡山県瀬戸内市邑久町虫明",
+          "lat": 34.645,
+          "lng": 134.185,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 262,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        },
+        {
+          "slug": "mushiake-kou-c8",
+          "name": "虫明港",
+          "core": "虫明",
+          "prefecture": "岡山県",
+          "area": "瀬戸内・牛窓",
+          "address": "〒701-4501 岡山県瀬戸内市邑久町虫明",
+          "lat": 34.649,
+          "lng": 134.186,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 192,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "片上",
+      "prefecture": "岡山県",
+      "size": 2,
+      "maxKm": 0.325,
+      "flags": [],
+      "members": [
+        {
+          "slug": "bizen-katakami-kou",
+          "name": "備前・片上港",
+          "core": "片上",
+          "prefecture": "岡山県",
+          "area": "日生・備前",
+          "address": "〒705-0001 岡山県備前市片上",
+          "lat": 34.7361,
+          "lng": 134.1833,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 263,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "上"
+          ]
+        },
+        {
+          "slug": "katakami-kou-w6",
+          "name": "片上港",
+          "core": "片上",
+          "prefecture": "岡山県",
+          "area": "瀬戸内・牛窓",
+          "address": "〒705-0022 岡山県備前市東片上",
+          "lat": 34.735,
+          "lng": 134.18,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 233,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "上"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "奥武島",
+      "prefecture": "沖縄県",
+      "size": 2,
+      "maxKm": 0.305,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "nanjo-oku-island",
+          "name": "南城市奥武島",
+          "core": "奥武島",
+          "prefecture": "沖縄県",
+          "area": "中城・南城",
+          "address": "〒901-0614 沖縄県南城市玉城奥武",
+          "lat": 26.129628,
+          "lng": 127.773028,
+          "spotType": "rocky",
+          "fish": 8,
+          "sourced": 0,
+          "descLen": 208,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        },
+        {
+          "slug": "ou-jima-nanjo-w6",
+          "name": "南城・奥武島",
+          "core": "奥武島",
+          "prefecture": "沖縄県",
+          "area": "那覇・南部",
+          "address": "〒901-1400 沖縄県南城市玉城奥武",
+          "lat": 26.13,
+          "lng": 127.77,
+          "spotType": "pier",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 205,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "残波岬",
+      "prefecture": "沖縄県",
+      "size": 2,
+      "maxKm": 0.372,
+      "flags": [],
+      "members": [
+        {
+          "slug": "zanpa-misaki-w6",
+          "name": "残波岬",
+          "core": "残波岬",
+          "prefecture": "沖縄県",
+          "area": "那覇・南部",
+          "address": "〒904-0328 沖縄県中頭郡読谷村宇座",
+          "lat": 26.44,
+          "lng": 127.71,
+          "spotType": "rocky",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 143,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "yomitan-zanpamisaki-a9",
+          "name": "読谷村・残波岬",
+          "core": "残波岬",
+          "prefecture": "沖縄県",
+          "area": "読谷・残波",
+          "address": "沖縄県中頭郡読谷村宇座",
+          "lat": 26.442,
+          "lng": 127.713,
+          "spotType": "rocky",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 165,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "城港",
+      "prefecture": "沖縄県",
+      "size": 2,
+      "maxKm": 0.299,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "naha-miegusuku-port",
+          "name": "那覇市三重城港",
+          "core": "城港",
+          "prefecture": "沖縄県",
+          "area": "那覇",
+          "address": "〒900-0036 沖縄県那覇市 西3丁目20",
+          "lat": 26.218,
+          "lng": 127.668,
+          "spotType": "breakwater",
+          "fish": 7,
+          "sourced": 0,
+          "descLen": 203,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "miegusuku-kou-naha-w6",
+          "name": "那覇・三重城港",
+          "core": "城港",
+          "prefecture": "沖縄県",
+          "area": "那覇・南部",
+          "address": "〒900-0036 沖縄県那覇市西",
+          "lat": 26.22,
+          "lng": 127.67,
+          "spotType": "pier",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 168,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "真栄田岬",
+      "prefecture": "沖縄県",
+      "size": 2,
+      "maxKm": 0.334,
+      "flags": [],
+      "members": [
+        {
+          "slug": "onna-maeda-misaki-s8",
+          "name": "恩納村・真栄田岬",
+          "core": "真栄田岬",
+          "prefecture": "沖縄県",
+          "area": "中部・北谷",
+          "address": "〒904-0417 沖縄県国頭郡恩納村真栄田",
+          "lat": 26.439,
+          "lng": 127.767,
+          "spotType": "rocky",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 198,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "maeda-misaki-gogan-a10",
+          "name": "真栄田岬護岸",
+          "core": "真栄田岬",
+          "prefecture": "沖縄県",
+          "area": "恩納・真栄田",
+          "address": "〒904-0417 沖縄県国頭郡恩納村真栄田",
+          "lat": 26.436,
+          "lng": 127.767,
+          "spotType": "rocky",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 215,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "川平湾",
+      "prefecture": "沖縄県",
+      "size": 2,
+      "maxKm": 0.323,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "ishigaki-kabira-bay",
+          "name": "石垣島川平湾",
+          "core": "川平湾",
+          "prefecture": "沖縄県",
+          "area": "石垣島",
+          "address": "〒907-0453 沖縄県石垣市川平934",
+          "lat": 24.458,
+          "lng": 124.141,
+          "spotType": "rocky",
+          "fish": 7,
+          "sourced": 0,
+          "descLen": 174,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "kabira-shuhen-gogan-a10",
+          "name": "川平湾周辺護岸",
+          "core": "川平湾",
+          "prefecture": "沖縄県",
+          "area": "石垣島・川平",
+          "address": "〒907-0453 沖縄県石垣市川平",
+          "lat": 24.457,
+          "lng": 124.144,
+          "spotType": "breakwater",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 176,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "都屋",
+      "prefecture": "沖縄県",
+      "size": 3,
+      "maxKm": 0.448,
+      "flags": [],
+      "members": [
+        {
+          "slug": "yomitan-toya-port",
+          "name": "読谷村都屋漁港",
+          "core": "都屋",
+          "prefecture": "沖縄県",
+          "area": "読谷・恩納",
+          "address": "〒904-0305 沖縄県読谷村都屋450",
+          "lat": 26.399,
+          "lng": 127.726,
+          "spotType": "port",
+          "fish": 7,
+          "sourced": 0,
+          "descLen": 260,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "toya-gyokou-a11",
+          "name": "都屋漁港",
+          "core": "都屋",
+          "prefecture": "沖縄県",
+          "area": "読谷・都屋",
+          "address": "〒904-0305 沖縄県中頭郡読谷村都屋",
+          "lat": 26.402,
+          "lng": 127.728,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 208,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "toya-gyokou-yomitan-a13",
+          "name": "都屋漁港（読谷）",
+          "core": "都屋",
+          "prefecture": "沖縄県",
+          "area": "読谷・都屋",
+          "address": "〒904-0305 沖縄県中頭郡読谷村都屋",
+          "lat": 26.405,
+          "lng": 127.725,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 178,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "辺戸岬",
+      "prefecture": "沖縄県",
+      "size": 2,
+      "maxKm": 0.455,
+      "flags": [],
+      "members": [
+        {
+          "slug": "hedo-misaki-iso",
+          "name": "辺戸岬磯",
+          "core": "辺戸岬",
+          "prefecture": "沖縄県",
+          "area": "沖縄本島北部",
+          "address": "〒905-1421 沖縄県国頭郡国頭村辺戸",
+          "lat": 26.876,
+          "lng": 128.249,
+          "spotType": "rocky",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hedo-misaki-s8",
+          "name": "辺戸岬",
+          "core": "辺戸岬",
+          "prefecture": "沖縄県",
+          "area": "北部・名護",
+          "address": "〒905-1421 沖縄県国頭郡国頭村辺戸",
+          "lat": 26.874,
+          "lng": 128.253,
+          "spotType": "rocky",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 215,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "碁石",
+      "prefecture": "岩手県",
+      "size": 2,
+      "maxKm": 0.222,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "goishi-kaigan-e8",
+          "name": "大船渡碁石海岸",
+          "core": "碁石",
+          "prefecture": "岩手県",
+          "area": "大船渡・陸前高田",
+          "address": "〒022-0001 岩手県大船渡市末崎町大浜",
+          "lat": 39.03,
+          "lng": 141.738,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 220,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "ofunato-goishi-port-a12",
+          "name": "大船渡市末崎町碁石漁港",
+          "core": "碁石",
+          "prefecture": "岩手県",
+          "area": "大船渡・綾里",
+          "address": "〒022-0001 岩手県大船渡市末崎町碁石",
+          "lat": 39.028,
+          "lng": 141.738,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 221,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "小袖",
+      "prefecture": "岩手県",
+      "size": 2,
+      "maxKm": 0.439,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "kosode-gyokou6",
+          "name": "小袖漁港",
+          "core": "小袖",
+          "prefecture": "岩手県",
+          "area": "久慈・野田",
+          "address": "〒028-0071 岩手県久慈市宇部町",
+          "lat": 40.208,
+          "lng": 141.823,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 259,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        },
+        {
+          "slug": "kosode-kaigan-rocky-a10",
+          "name": "小袖海岸",
+          "core": "小袖",
+          "prefecture": "岩手県",
+          "area": "久慈・野田",
+          "address": "〒028-0002 岩手県久慈市宇部町",
+          "lat": 40.209,
+          "lng": 141.818,
+          "spotType": "rocky",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 211,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "小本",
+      "prefecture": "岩手県",
+      "size": 3,
+      "maxKm": 0,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "iwaizumi-omoto-kou",
+          "name": "岩泉 小本港",
+          "core": "小本",
+          "prefecture": "岩手県",
+          "area": "宮古・田老",
+          "address": "〒027-0421 岩手県下閉伊郡岩泉町小本",
+          "lat": 39.847295,
+          "lng": 141.976345,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 152,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小",
+            "本港"
+          ]
+        },
+        {
+          "slug": "iwaizumi-omoto-gyokou6",
+          "name": "岩泉小本漁港",
+          "core": "小本",
+          "prefecture": "岩手県",
+          "area": "宮古・山田",
+          "address": "〒027-0421 岩手県下閉伊郡岩泉町小本",
+          "lat": 39.847295,
+          "lng": 141.976345,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 200,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        },
+        {
+          "slug": "omoto-gyokou-e8",
+          "name": "小本漁港",
+          "core": "小本",
+          "prefecture": "岩手県",
+          "area": "宮古・田老",
+          "address": "〒027-0501 岩手県下閉伊郡岩泉町小本",
+          "lat": 39.847295,
+          "lng": 141.976345,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 227,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "盛川河口",
+      "prefecture": "岩手県",
+      "size": 2,
+      "maxKm": 0.334,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "sakarigawa-kakou6",
+          "name": "盛川河口",
+          "core": "盛川河口",
+          "prefecture": "岩手県",
+          "area": "大船渡・陸前高田",
+          "address": "〒022-0003 岩手県大船渡市盛町",
+          "lat": 39.055,
+          "lng": 141.715,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 187,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "河口"
+          ]
+        },
+        {
+          "slug": "ofunato-sakarigawa-river-a13",
+          "name": "大船渡市盛川河口",
+          "core": "盛川河口",
+          "prefecture": "岩手県",
+          "area": "大船渡北部",
+          "address": "〒022-0003 岩手県大船渡市盛町",
+          "lat": 39.058,
+          "lng": 141.715,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 199,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大",
+            "河口"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "宮川",
+      "prefecture": "岐阜県",
+      "size": 2,
+      "maxKm": 0.429,
+      "flags": [],
+      "members": [
+        {
+          "slug": "miyagawa-takayama-a11",
+          "name": "宮川（高山地区）",
+          "core": "宮川",
+          "prefecture": "岐阜県",
+          "area": "庄川・白川",
+          "address": "〒506-0011 岐阜県高山市本町",
+          "lat": 36.145,
+          "lng": 137.255,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 179,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "takayama-miyagawa-miyamaebashi-a13",
+          "name": "高山・宮川（宮前橋付近）",
+          "core": "宮川",
+          "prefecture": "岐阜県",
+          "area": "高山・宮川",
+          "address": "〒506-0841 岐阜県高山市下三之町",
+          "lat": 36.148,
+          "lng": 137.258,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 177,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "飛騨川下呂温泉",
+      "prefecture": "岐阜県",
+      "size": 2,
+      "maxKm": 0.377,
+      "flags": [],
+      "members": [
+        {
+          "slug": "hidagawa-gero-onsen",
+          "name": "飛騨川・下呂温泉",
+          "core": "飛騨川下呂温泉",
+          "prefecture": "岐阜県",
+          "area": "下呂",
+          "address": "〒509-2206 岐阜県下呂市幸田（飛騨川下呂地区）",
+          "lat": 35.805,
+          "lng": 137.245,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 188,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        },
+        {
+          "slug": "hidagawa-gero-gifu",
+          "name": "飛騨川・下呂温泉エリア",
+          "core": "飛騨川下呂温泉",
+          "prefecture": "岐阜県",
+          "area": "飛騨・高山",
+          "address": "〒509-2202 岐阜県下呂市森",
+          "lat": 35.806,
+          "lng": 137.241,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 164,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "木曽川",
+      "prefecture": "岐阜県",
+      "size": 2,
+      "maxKm": 0.371,
+      "flags": [],
+      "members": [
+        {
+          "slug": "kisogawa-middle-river",
+          "name": "木曽川（中流域）",
+          "core": "木曽川",
+          "prefecture": "岐阜県",
+          "area": "木曽川中流",
+          "address": "〒484-0081 愛知県犬山市犬山大門先40-3",
+          "lat": 35.3847,
+          "lng": 136.9386,
+          "spotType": "river",
+          "fish": 9,
+          "sourced": 0,
+          "descLen": 196,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "kisogawa-kakamigahara-inuyama-a12",
+          "name": "木曽川（各務原・犬山境）",
+          "core": "木曽川",
+          "prefecture": "岐阜県",
+          "area": "揖斐川・大垣",
+          "address": "〒509-0132 岐阜県各務原市鵜沼",
+          "lat": 35.388,
+          "lng": 136.938,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 171,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "青島",
+      "prefecture": "宮崎県",
+      "size": 3,
+      "maxKm": 0.222,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "aoshima-port",
+          "name": "青島港",
+          "core": "青島",
+          "prefecture": "宮崎県",
+          "area": "青島",
+          "address": "〒889-2162 宮崎県宮崎市青島3丁目2",
+          "lat": 31.8017,
+          "lng": 131.4712,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 3,
+          "descLen": 234,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "aoshima-kaigan-w6",
+          "name": "青島海岸",
+          "core": "青島",
+          "prefecture": "宮崎県",
+          "area": "宮崎市・青島",
+          "address": "〒889-2162 宮崎県宮崎市青島",
+          "lat": 31.8,
+          "lng": 131.47,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 208,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "aoshima-gyokou-w5",
+          "name": "青島漁港",
+          "core": "青島",
+          "prefecture": "宮崎県",
+          "area": "宮崎市・青島",
+          "address": "〒889-2162 宮崎県宮崎市青島",
+          "lat": 31.801,
+          "lng": 131.469,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 273,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "都井岬",
+      "prefecture": "宮崎県",
+      "size": 2,
+      "maxKm": 0.285,
+      "flags": [],
+      "members": [
+        {
+          "slug": "kushima-toimisaki-kou",
+          "name": "串間・都井岬港",
+          "core": "都井岬",
+          "prefecture": "宮崎県",
+          "area": "日南・串間",
+          "address": "〒888-0222 宮崎県串間市大納",
+          "lat": 31.368,
+          "lng": 131.328,
+          "spotType": "rocky",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 173,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "toimisaki-iso-a10",
+          "name": "都井岬磯",
+          "core": "都井岬",
+          "prefecture": "宮崎県",
+          "area": "串間・都井岬",
+          "address": "〒888-0221 宮崎県串間市大納",
+          "lat": 31.368,
+          "lng": 131.331,
+          "spotType": "rocky",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 249,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "油津",
+      "prefecture": "宮崎県",
+      "size": 3,
+      "maxKm": 0.001,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "nichinan-aburatsu-port",
+          "name": "日南油津港",
+          "core": "油津",
+          "prefecture": "宮崎県",
+          "area": "日南",
+          "address": "〒887-0001 宮崎県日南市油津3丁目12",
+          "lat": 31.568995,
+          "lng": 131.401506,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 210,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        },
+        {
+          "slug": "aburatsu-port",
+          "name": "油津港",
+          "core": "油津",
+          "prefecture": "宮崎県",
+          "area": "日南・油津",
+          "address": "〒887-0001 宮崎県日南市油津3丁目12",
+          "lat": 31.569,
+          "lng": 131.4015,
+          "spotType": "port",
+          "fish": 17,
+          "sourced": 0,
+          "descLen": 204,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "aburatsu-kou-nichinan",
+          "name": "日南市油津港",
+          "core": "油津",
+          "prefecture": "宮崎県",
+          "area": "日南・串間",
+          "address": "〒887-0001 宮崎県日南市油津",
+          "lat": 31.568995,
+          "lng": 131.401506,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 219,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "牡鹿半島鮎川",
+      "prefecture": "宮城県",
+      "size": 2,
+      "maxKm": 0.207,
+      "flags": [],
+      "members": [
+        {
+          "slug": "oshika-ayukawa-kou",
+          "name": "牡鹿半島 鮎川港",
+          "core": "牡鹿半島鮎川",
+          "prefecture": "宮城県",
+          "area": "石巻・牡鹿",
+          "address": "〒986-2523 宮城県石巻市鮎川浜",
+          "lat": 38.299,
+          "lng": 141.506,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 155,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "oshika-ayukawa-port-a11",
+          "name": "牡鹿半島鮎川漁港",
+          "core": "牡鹿半島鮎川",
+          "prefecture": "宮城県",
+          "area": "東松島・野蒜",
+          "address": "〒986-2523 宮城県石巻市鮎川浜",
+          "lat": 38.298,
+          "lng": 141.508,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 223,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "志津川",
+      "prefecture": "宮城県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "shizugawa-gyokou6",
+          "name": "志津川漁港",
+          "core": "志津川",
+          "prefecture": "宮城県",
+          "area": "気仙沼・本吉",
+          "address": "〒986-0752 宮城県本吉郡南三陸町志津川",
+          "lat": 38.678,
+          "lng": 141.448,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 124,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "minamisanriku-shizugawa-wharf-a11",
+          "name": "南三陸町志津川港",
+          "core": "志津川",
+          "prefecture": "宮城県",
+          "area": "南三陸・歌津",
+          "address": "〒986-0700 宮城県本吉郡南三陸町志津川",
+          "lat": 38.678,
+          "lng": 141.448,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 201,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "菖蒲田",
+      "prefecture": "宮城県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "shobutada-beach",
+          "name": "菖蒲田海岸",
+          "core": "菖蒲田",
+          "prefecture": "宮城県",
+          "area": "仙台湾",
+          "address": "〒985-0803 宮城県七ヶ浜町花渕浜長須賀",
+          "lat": 38.292216,
+          "lng": 141.068223,
+          "spotType": "beach",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 184,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "shobuta-kaigan-e8",
+          "name": "菖蒲田海水浴場",
+          "core": "菖蒲田",
+          "prefecture": "宮城県",
+          "area": "塩釜・松島",
+          "address": "〒985-0811 宮城県宮城郡七ヶ浜町菖蒲田浜",
+          "lat": 38.292216,
+          "lng": 141.068223,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 229,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "渡波",
+      "prefecture": "宮城県",
+      "size": 2,
+      "maxKm": 0.424,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "watanoha-gyokou6",
+          "name": "渡波漁港",
+          "core": "渡波",
+          "prefecture": "宮城県",
+          "area": "石巻・女川",
+          "address": "〒986-2135 宮城県石巻市渡波",
+          "lat": 38.403,
+          "lng": 141.353,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 227,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ishinomaki-watanoha-kaigan-e8",
+          "name": "石巻渡波海岸",
+          "core": "渡波",
+          "prefecture": "宮城県",
+          "area": "石巻・女川",
+          "address": "〒986-2135 宮城県石巻市渡波",
+          "lat": 38.406,
+          "lng": 141.35,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 186,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "閖上",
+      "prefecture": "宮城県",
+      "size": 2,
+      "maxKm": 0.262,
+      "flags": [],
+      "members": [
+        {
+          "slug": "yuriage-port",
+          "name": "閖上港",
+          "core": "閖上",
+          "prefecture": "宮城県",
+          "area": "仙台湾",
+          "address": "〒981-1204 宮城県名取市閖上東須賀",
+          "lat": 38.178,
+          "lng": 140.956,
+          "spotType": "port",
+          "fish": 9,
+          "sourced": 1,
+          "descLen": 206,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "上"
+          ]
+        },
+        {
+          "slug": "yuriage-gyokou6",
+          "name": "閖上漁港",
+          "core": "閖上",
+          "prefecture": "宮城県",
+          "area": "仙台・塩釜",
+          "address": "〒981-1213 宮城県名取市閖上",
+          "lat": 38.178,
+          "lng": 140.953,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 1,
+          "descLen": 229,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "上"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "マリーナ",
+      "prefecture": "熊本県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "uto-marina",
+          "name": "宇土マリーナ",
+          "core": "マリーナ",
+          "prefecture": "熊本県",
+          "area": "熊本港・宇土",
+          "address": "〒869-0401 熊本県宇土市住吉町",
+          "lat": 32.662242,
+          "lng": 130.522698,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 187,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "uto-marina-gogan",
+          "name": "宇土マリーナ護岸",
+          "core": "マリーナ",
+          "prefecture": "熊本県",
+          "area": "熊本港・宇土",
+          "address": "〒869-0454 熊本県宇土市戸口町",
+          "lat": 32.662242,
+          "lng": 130.522698,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 251,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "本渡",
+      "prefecture": "熊本県",
+      "size": 4,
+      "maxKm": 0.436,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "amakusa-hondo-port-breakwater",
+          "name": "天草市本渡港堤防",
+          "core": "本渡",
+          "prefecture": "熊本県",
+          "area": "天草",
+          "address": "〒863-0021 熊本県天草市港町1",
+          "lat": 32.463,
+          "lng": 130.189,
+          "spotType": "breakwater",
+          "fish": 11,
+          "sourced": 0,
+          "descLen": 257,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hondo-kou-amakusa-w6",
+          "name": "天草・本渡港",
+          "core": "本渡",
+          "prefecture": "熊本県",
+          "area": "天草・苓北",
+          "address": "〒863-0001 熊本県天草市本渡町",
+          "lat": 32.46,
+          "lng": 130.19,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 249,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hondo-gyokou-amakusa",
+          "name": "天草 本渡漁港",
+          "core": "本渡",
+          "prefecture": "熊本県",
+          "area": "天草・苓北",
+          "address": "〒863-0022 熊本県天草市栄町",
+          "lat": 32.458,
+          "lng": 130.194,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 273,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hondo-kou-a11",
+          "name": "本渡港",
+          "core": "本渡",
+          "prefecture": "熊本県",
+          "area": "天草・本渡",
+          "address": "〒863-0022 熊本県天草市栄町",
+          "lat": 32.457,
+          "lng": 130.191,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 213,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "烏川",
+      "prefecture": "群馬県",
+      "size": 2,
+      "maxKm": 0.291,
+      "flags": [],
+      "members": [
+        {
+          "slug": "karasugawa-takasaki",
+          "name": "烏川（高崎周辺）",
+          "core": "烏川",
+          "prefecture": "群馬県",
+          "area": "利根川中上流",
+          "address": "〒370-0816 群馬県高崎市常盤町",
+          "lat": 36.319,
+          "lng": 139.015,
+          "spotType": "river",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 103,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "takasaki-karasugawa-wadabashi-a13",
+          "name": "高崎・烏川（和田橋付近）",
+          "core": "烏川",
+          "prefecture": "群馬県",
+          "area": "伊勢崎・太田",
+          "address": "〒370-0862 群馬県高崎市片岡町",
+          "lat": 36.318,
+          "lng": 139.012,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 198,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "碓氷川",
+      "prefecture": "群馬県",
+      "size": 2,
+      "maxKm": 0.269,
+      "flags": [],
+      "members": [
+        {
+          "slug": "usui-gawa",
+          "name": "碓氷川",
+          "core": "碓氷川",
+          "prefecture": "群馬県",
+          "area": "榛名・赤城",
+          "address": "〒379-0116 群馬県安中市安中",
+          "lat": 36.328,
+          "lng": 138.887,
+          "spotType": "river",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 200,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "usui-river-annaka-a10",
+          "name": "碓氷川（安中地区）",
+          "core": "碓氷川",
+          "prefecture": "群馬県",
+          "area": "榛名湖・高崎",
+          "address": "〒379-0131 群馬県安中市",
+          "lat": 36.328,
+          "lng": 138.884,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 192,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "城沼",
+      "prefecture": "群馬県",
+      "size": 2,
+      "maxKm": 0.422,
+      "flags": [],
+      "members": [
+        {
+          "slug": "jounouma-tsuri6",
+          "name": "城沼",
+          "core": "城沼",
+          "prefecture": "群馬県",
+          "area": "榛名湖・赤城大沼",
+          "address": "〒374-0005 群馬県館林市花山町",
+          "lat": 36.243,
+          "lng": 139.538,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 194,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "jounuma-tatebayashi-a11",
+          "name": "城沼（館林市）",
+          "core": "城沼",
+          "prefecture": "群馬県",
+          "area": "渡良瀬川・桐生",
+          "address": "〒374-0005 群馬県館林市花山町",
+          "lat": 36.245,
+          "lng": 139.542,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 209,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "港宇品",
+      "prefecture": "広島県",
+      "size": 2,
+      "maxKm": 0.481,
+      "flags": [],
+      "members": [
+        {
+          "slug": "ujina-kou-hiroshima",
+          "name": "広島港宇品",
+          "core": "港宇品",
+          "prefecture": "広島県",
+          "area": "広島市・宇品",
+          "address": "〒734-0011 広島県広島市南区宇品海岸",
+          "lat": 34.354,
+          "lng": 132.466,
+          "spotType": "pier",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 232,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ujina-hatoba-w6",
+          "name": "広島港・宇品波止場",
+          "core": "港宇品",
+          "prefecture": "広島県",
+          "area": "広島市・宇品",
+          "address": "〒734-0011 広島県広島市南区宇品海岸",
+          "lat": 34.358,
+          "lng": 132.468,
+          "spotType": "pier",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 248,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "水道",
+      "prefecture": "広島県",
+      "size": 2,
+      "maxKm": 0.481,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "onomichi-suido-gokan",
+          "name": "尾道水道護岸",
+          "core": "水道",
+          "prefecture": "広島県",
+          "area": "尾道・福山",
+          "address": "〒722-0046 広島県尾道市長江3丁目6-52",
+          "lat": 34.409,
+          "lng": 133.202,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 254,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "onomichi-suido-w6",
+          "name": "尾道水道",
+          "core": "水道",
+          "prefecture": "広島県",
+          "area": "福山・尾道",
+          "address": "〒722-0035 広島県尾道市土堂",
+          "lat": 34.405,
+          "lng": 133.2,
+          "spotType": "pier",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 185,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "忠海",
+      "prefecture": "広島県",
+      "size": 2,
+      "maxKm": 0.348,
+      "flags": [],
+      "members": [
+        {
+          "slug": "takehara-tadanoumi-port",
+          "name": "竹原市忠海港",
+          "core": "忠海",
+          "prefecture": "広島県",
+          "area": "尾道・福山",
+          "address": "〒729-2316 広島県竹原市忠海中町1丁目2-1",
+          "lat": 34.3352,
+          "lng": 132.9941,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 262,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "takehara-tadanoumi-gyokou-a9",
+          "name": "竹原・忠海漁港",
+          "core": "忠海",
+          "prefecture": "広島県",
+          "area": "竹原",
+          "address": "広島県竹原市忠海中町",
+          "lat": 34.337,
+          "lng": 132.991,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 251,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "鞆の浦",
+      "prefecture": "広島県",
+      "size": 5,
+      "maxKm": 0.275,
+      "flags": [],
+      "members": [
+        {
+          "slug": "fukuyama-tomonoura-gokan",
+          "name": "福山市鞆の浦護岸",
+          "core": "鞆の浦",
+          "prefecture": "広島県",
+          "area": "尾道・福山",
+          "address": "〒720-0201 広島県福山市鞆町鞆",
+          "lat": 34.382,
+          "lng": 133.382,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 271,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tomonoura-port",
+          "name": "鞆の浦港",
+          "core": "鞆の浦",
+          "prefecture": "広島県",
+          "area": "尾道・福山",
+          "address": "〒720-0201 広島県FukuyamaTomocho鞆623-5 鞆町鞆の浦旅客船ターミナル（福山市）",
+          "lat": 34.383,
+          "lng": 133.384,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 265,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tomonoura-gyokou-w5",
+          "name": "鞆の浦漁港",
+          "core": "鞆の浦",
+          "prefecture": "広島県",
+          "area": "福山・尾道",
+          "address": "〒720-0201 広島県福山市鞆町鞆",
+          "lat": 34.383,
+          "lng": 133.381,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 261,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tomonoura-hiroshima-w6",
+          "name": "鞆の浦",
+          "core": "鞆の浦",
+          "prefecture": "広島県",
+          "area": "福山・尾道",
+          "address": "〒720-0201 広島県福山市鞆町",
+          "lat": 34.383,
+          "lng": 133.382,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 207,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "fukuyama-tomonoura-a9",
+          "name": "福山・鞆の浦",
+          "core": "鞆の浦",
+          "prefecture": "広島県",
+          "area": "福山・鞆の浦",
+          "address": "広島県福山市鞆町鞆",
+          "lat": 34.383,
+          "lng": 133.383,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 197,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "鞆の浦仙酔島渡船場",
+      "prefecture": "広島県",
+      "size": 2,
+      "maxKm": 0.092,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tomonoura-sensui-gokan",
+          "name": "鞆の浦仙酔島渡船場護岸",
+          "core": "鞆の浦仙酔島渡船場",
+          "prefecture": "広島県",
+          "area": "福山・鞆の浦",
+          "address": "〒720-0201 広島県福山市鞆町鞆",
+          "lat": 34.383,
+          "lng": 133.383,
+          "spotType": "port",
+          "fish": 7,
+          "sourced": 7,
+          "descLen": 261,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tomonoura-sensuijima-c8",
+          "name": "鞆の浦・仙酔島渡船場",
+          "core": "鞆の浦仙酔島渡船場",
+          "prefecture": "広島県",
+          "area": "福山・鞆の浦",
+          "address": "〒720-0201 広島県福山市鞆町鞆",
+          "lat": 34.383,
+          "lng": 133.382,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 241,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "サンポート高松",
+      "prefecture": "香川県",
+      "size": 3,
+      "maxKm": 0.381,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "takamatsu-sunport",
+          "name": "高松・サンポート高松周辺",
+          "core": "サンポート高松",
+          "prefecture": "香川県",
+          "area": "高松",
+          "address": "〒760-0019 香川県高松市サンポート",
+          "lat": 34.351,
+          "lng": 134.0465,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "takamatsu-sunport-gokan",
+          "name": "高松市サンポート高松護岸",
+          "core": "サンポート高松",
+          "prefecture": "香川県",
+          "area": "高松市",
+          "address": "〒760-0019 香川県高松市サンポート1-1",
+          "lat": 34.349,
+          "lng": 134.048,
+          "spotType": "breakwater",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 224,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "sunport-takamatsu-kagawa",
+          "name": "サンポート高松",
+          "core": "サンポート高松",
+          "prefecture": "香川県",
+          "area": "高松・庵治",
+          "address": "〒760-0019 香川県高松市サンポート",
+          "lat": 34.352,
+          "lng": 134.046,
+          "spotType": "pier",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 213,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "志度",
+      "prefecture": "香川県",
+      "size": 2,
+      "maxKm": 0.288,
+      "flags": [],
+      "members": [
+        {
+          "slug": "sanuki-shido-port",
+          "name": "さぬき市志度漁港",
+          "core": "志度",
+          "prefecture": "香川県",
+          "area": "高松市",
+          "address": "〒769-2101 香川県さぬき市志度",
+          "lat": 34.332,
+          "lng": 134.182,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 227,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "shido-kou-w6",
+          "name": "志度港",
+          "core": "志度",
+          "prefecture": "香川県",
+          "area": "高松・庵治",
+          "address": "〒769-2101 香川県さぬき市志度",
+          "lat": 34.33,
+          "lng": 134.18,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 213,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "詫間",
+      "prefecture": "香川県",
+      "size": 2,
+      "maxKm": 0.006,
+      "flags": [],
+      "members": [
+        {
+          "slug": "takuma-port",
+          "name": "詫間港",
+          "core": "詫間",
+          "prefecture": "香川県",
+          "area": "詫間",
+          "address": "〒769-1101 香川県三豊市詫間町詫間2112-106",
+          "lat": 34.239837,
+          "lng": 133.648143,
+          "spotType": "port",
+          "fish": 10,
+          "sourced": 0,
+          "descLen": 249,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "mitoyo-takuma-port",
+          "name": "三豊市詫間港",
+          "core": "詫間",
+          "prefecture": "香川県",
+          "area": "観音寺・三豊",
+          "address": "〒769-1101 香川県三豊市詫間町詫間",
+          "lat": 34.2398,
+          "lng": 133.6481,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 273,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "浦戸湾",
+      "prefecture": "高知県",
+      "size": 2,
+      "maxKm": 0.403,
+      "flags": [],
+      "members": [
+        {
+          "slug": "urado-bay",
+          "name": "浦戸湾",
+          "core": "浦戸湾",
+          "prefecture": "高知県",
+          "area": "土佐湾",
+          "address": "〒781-0262 高知県高知市浦戸",
+          "lat": 33.5333,
+          "lng": 133.5667,
+          "spotType": "port",
+          "fish": 8,
+          "sourced": 0,
+          "descLen": 107,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "kochi-urado-bay",
+          "name": "高知浦戸湾",
+          "core": "浦戸湾",
+          "prefecture": "高知県",
+          "area": "土佐湾",
+          "address": "〒780-8571 高知県高知市孕東町",
+          "lat": 33.5317,
+          "lng": 133.5628,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 4,
+          "descLen": 118,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "久礼",
+      "prefecture": "高知県",
+      "size": 3,
+      "maxKm": 0,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "nakatosa-kure-port",
+          "name": "中土佐町久礼漁港",
+          "core": "久礼",
+          "prefecture": "高知県",
+          "area": "土佐湾",
+          "address": "〒789-1301 高知県中土佐町久礼6372-1",
+          "lat": 33.326354,
+          "lng": 133.238945,
+          "spotType": "port",
+          "fish": 10,
+          "sourced": 0,
+          "descLen": 233,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "kure-kou-nakatosa-w6",
+          "name": "中土佐・久礼港",
+          "core": "久礼",
+          "prefecture": "高知県",
+          "area": "須崎・中土佐",
+          "address": "〒789-1301 高知県高岡郡中土佐町久礼",
+          "lat": 33.326354,
+          "lng": 133.238945,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 182,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "kochi-nakatosa-kure-bulk",
+          "name": "中土佐町・久礼港",
+          "core": "久礼",
+          "prefecture": "高知県",
+          "area": "須崎・中土佐・土佐",
+          "address": "〒789-1301 高知県高岡郡中土佐町久礼",
+          "lat": 33.326354,
+          "lng": 133.238945,
+          "spotType": "breakwater",
+          "fish": 6,
+          "sourced": 6,
+          "descLen": 141,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "小友",
+      "prefecture": "佐賀県",
+      "size": 2,
+      "maxKm": 0.378,
+      "flags": [],
+      "members": [
+        {
+          "slug": "otomo-gyokou",
+          "name": "小友漁港",
+          "core": "小友",
+          "prefecture": "佐賀県",
+          "area": "唐津・呼子",
+          "address": "〒847-1527 佐賀県唐津市肥前町星賀",
+          "lat": 33.546759,
+          "lng": 129.904291,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 222,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        },
+        {
+          "slug": "saga-karatsu-kotomo-bulk",
+          "name": "唐津・小友漁港",
+          "core": "小友",
+          "prefecture": "佐賀県",
+          "area": "唐津・呼子",
+          "address": "〒847-0303 佐賀県唐津市呼子町小友",
+          "lat": 33.5458,
+          "lng": 129.9082,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 5,
+          "descLen": 115,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "東の浜",
+      "prefecture": "佐賀県",
+      "size": 2,
+      "maxKm": 0.477,
+      "flags": [],
+      "members": [
+        {
+          "slug": "karatsu-higashinohama",
+          "name": "唐津東の浜海水浴場",
+          "core": "東の浜",
+          "prefecture": "佐賀県",
+          "area": "唐津・呼子",
+          "address": "〒847-0022 佐賀県唐津市東唐津",
+          "lat": 33.461,
+          "lng": 130.005,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 250,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "東"
+          ]
+        },
+        {
+          "slug": "karatsu-higashinohama-w6",
+          "name": "唐津・東の浜",
+          "core": "東の浜",
+          "prefecture": "佐賀県",
+          "area": "唐津・東松浦",
+          "address": "〒847-0022 佐賀県唐津市鏡",
+          "lat": 33.46,
+          "lng": 130,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 234,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "東"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "槻川",
+      "prefecture": "埼玉県",
+      "size": 2,
+      "maxKm": 0.334,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tsukigawa-ogawa-sengenyama-a11",
+          "name": "槻川（小川町・仙元山付近）",
+          "core": "槻川",
+          "prefecture": "埼玉県",
+          "area": "越辺川・坂戸",
+          "address": "〒355-0326 埼玉県比企郡小川町靭負",
+          "lat": 36.055,
+          "lng": 139.265,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 171,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        },
+        {
+          "slug": "tsukigawa-ogawa-ranzan-a12",
+          "name": "槻川（小川町・嵐山地区）",
+          "core": "槻川",
+          "prefecture": "埼玉県",
+          "area": "寄居・荒川上流",
+          "address": "〒355-0321 埼玉県比企郡小川町大字木部",
+          "lat": 36.052,
+          "lng": 139.265,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 219,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "大王崎",
+      "prefecture": "三重県",
+      "size": 2,
+      "maxKm": 0.36,
+      "flags": [],
+      "members": [
+        {
+          "slug": "shima-daiozaki",
+          "name": "志摩大王崎",
+          "core": "大王崎",
+          "prefecture": "三重県",
+          "area": "志摩",
+          "address": "〒517-0603 三重県志摩市大王町波切",
+          "lat": 34.2712,
+          "lng": 136.8912,
+          "spotType": "rocky",
+          "fish": 7,
+          "sourced": 0,
+          "descLen": 218,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "daiozaki-mie",
+          "name": "大王崎",
+          "core": "大王崎",
+          "prefecture": "三重県",
+          "area": "志摩",
+          "address": "〒517-0603 三重県志摩市大王町波切",
+          "lat": 34.272,
+          "lng": 136.895,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 184,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "飛島勝浦",
+      "prefecture": "山形県",
+      "size": 2,
+      "maxKm": 0.239,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tobishima-katsuura-kou",
+          "name": "飛島勝浦港",
+          "core": "飛島勝浦",
+          "prefecture": "山形県",
+          "area": "酒田・鶴岡",
+          "address": "〒998-0215 山形県酒田市飛島",
+          "lat": 39.195,
+          "lng": 139.557,
+          "spotType": "port",
+          "fish": 7,
+          "sourced": 1,
+          "descLen": 233,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tobishima-katsuura-e8",
+          "name": "飛島勝浦漁港",
+          "core": "飛島勝浦",
+          "prefecture": "山形県",
+          "area": "酒田・飛島",
+          "address": "〒998-0101 山形県酒田市飛島",
+          "lat": 39.193,
+          "lng": 139.558,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 171,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "本港",
+      "prefecture": "山形県",
+      "size": 2,
+      "maxKm": 0.282,
+      "flags": [],
+      "members": [
+        {
+          "slug": "sakata-honko-wharf-a10",
+          "name": "酒田本港埠頭",
+          "core": "本港",
+          "prefecture": "山形県",
+          "area": "酒田・飛島",
+          "address": "〒998-0036 山形県酒田市船場町",
+          "lat": 38.926,
+          "lng": 139.846,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 256,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "本港"
+          ]
+        },
+        {
+          "slug": "sakata-honko-quay-a13",
+          "name": "酒田市本港岸壁",
+          "core": "本港",
+          "prefecture": "山形県",
+          "area": "酒田北部",
+          "address": "〒998-0036 山形県酒田市船場町",
+          "lat": 38.928,
+          "lng": 139.848,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 212,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "本港"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "関門海峡",
+      "prefecture": "山口県",
+      "size": 3,
+      "maxKm": 0.431,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "shimonoseki-kanmon-gogan",
+          "name": "下関・関門海峡護岸",
+          "core": "関門海峡",
+          "prefecture": "山口県",
+          "area": "下関・関門",
+          "address": "〒751-0813 山口県下関市みもすそ川町22-22",
+          "lat": 33.9578,
+          "lng": 130.9412,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 235,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        },
+        {
+          "slug": "shimonoseki-kanmon-fishing-park",
+          "name": "下関市関門海峡釣り公園",
+          "core": "関門海峡",
+          "prefecture": "山口県",
+          "area": "下関",
+          "address": "〒750-0005 山口県下関市唐戸町6-1",
+          "lat": 33.958,
+          "lng": 130.942,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 279,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        },
+        {
+          "slug": "shimonoseki-kanmon-c8",
+          "name": "下関・関門海峡釣り場",
+          "core": "関門海峡",
+          "prefecture": "山口県",
+          "area": "下関・響灘",
+          "address": "〒751-0813 山口県下関市みもすそ川町",
+          "lat": 33.96,
+          "lng": 130.946,
+          "spotType": "breakwater",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 200,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "見島",
+      "prefecture": "山口県",
+      "size": 2,
+      "maxKm": 0.288,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "hagi-mishima-port",
+          "name": "萩市見島漁港",
+          "core": "見島",
+          "prefecture": "山口県",
+          "area": "萩・長門",
+          "address": "〒758-0701 山口県萩市見島",
+          "lat": 34.762,
+          "lng": 131.128,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 218,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "mishima-yamaguchi-w6",
+          "name": "見島",
+          "core": "見島",
+          "prefecture": "山口県",
+          "area": "萩・長門",
+          "address": "〒758-0701 山口県萩市見島",
+          "lat": 34.76,
+          "lng": 131.13,
+          "spotType": "rocky",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 246,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "須佐",
+      "prefecture": "山口県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "hagi-susa-port",
+          "name": "萩市須佐漁港",
+          "core": "須佐",
+          "prefecture": "山口県",
+          "area": "萩・長門",
+          "address": "〒759-3411 山口県萩市須佐4740-10",
+          "lat": 34.62698,
+          "lng": 131.598033,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 169,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "susa-gyokou-yamaguchi-w6",
+          "name": "須佐漁港",
+          "core": "須佐",
+          "prefecture": "山口県",
+          "area": "萩・長門",
+          "address": "〒759-3411 山口県萩市須佐",
+          "lat": 34.62698,
+          "lng": 131.598033,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 248,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "虹ヶ浜",
+      "prefecture": "山口県",
+      "size": 2,
+      "maxKm": 0.144,
+      "flags": [],
+      "members": [
+        {
+          "slug": "nijigahama-hikari-w6",
+          "name": "光市・虹ヶ浜",
+          "core": "虹ヶ浜",
+          "prefecture": "山口県",
+          "area": "周南・光・柳井",
+          "address": "〒743-0021 山口県光市虹ヶ浜",
+          "lat": 33.96,
+          "lng": 131.94,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 219,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hikari-nijigahama-c8",
+          "name": "光市・虹ヶ浜海岸",
+          "core": "虹ヶ浜",
+          "prefecture": "山口県",
+          "area": "周南・下松",
+          "address": "〒743-0021 山口県光市虹ヶ浜",
+          "lat": 33.959,
+          "lng": 131.941,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 207,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "由宇",
+      "prefecture": "山口県",
+      "size": 2,
+      "maxKm": 0.004,
+      "flags": [],
+      "members": [
+        {
+          "slug": "iwakuni-yuu-port",
+          "name": "岩国市由宇港",
+          "core": "由宇",
+          "prefecture": "山口県",
+          "area": "岩国・柳井",
+          "address": "〒740-1424 山口県岩国市由宇町港",
+          "lat": 34.0423,
+          "lng": 132.2189,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 218,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "yuu-kou-iwakuni-w6",
+          "name": "岩国・由宇港",
+          "core": "由宇",
+          "prefecture": "山口県",
+          "area": "周南・光・柳井",
+          "address": "〒740-1432 山口県岩国市由宇町",
+          "lat": 34.042323,
+          "lng": 132.218927,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 244,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "桂川",
+      "prefecture": "山梨県",
+      "size": 5,
+      "maxKm": 0.497,
+      "flags": [],
+      "members": [
+        {
+          "slug": "katsuragawa-otsuki",
+          "name": "桂川（大月〜都留）",
+          "core": "桂川",
+          "prefecture": "山梨県",
+          "area": "桂川",
+          "address": "〒401-0012 山梨県大月市大月1丁目2-5",
+          "lat": 35.6083,
+          "lng": 138.941217,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 156,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "katsuragawa-otsuki-tsuru",
+          "name": "桂川（大月・都留）",
+          "core": "桂川",
+          "prefecture": "山梨県",
+          "area": "桂川・大月",
+          "address": "〒401-0022 山梨県大月市初狩町中初狩3274 まるたの森クリーンセンタ",
+          "lat": 35.608,
+          "lng": 138.94,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 108,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "katsuragawa-otsuki6",
+          "name": "桂川（大月付近）",
+          "core": "桂川",
+          "prefecture": "山梨県",
+          "area": "富士五湖・本栖湖",
+          "address": "山梨県大月市大月町花咲",
+          "lat": 35.6118,
+          "lng": 138.9378,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 262,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "katsuragawa-otsuki-e8",
+          "name": "桂川（大月エリア）",
+          "core": "桂川",
+          "prefecture": "山梨県",
+          "area": "甲府・笛吹",
+          "address": "〒401-0013 山梨県大月市大月町",
+          "lat": 35.613,
+          "lng": 138.938,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 181,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "katsuragawa-otsuki-fishing-a10",
+          "name": "桂川（大月地区）",
+          "core": "桂川",
+          "prefecture": "山梨県",
+          "area": "桂川・大月",
+          "address": "〒401-0012 山梨県大月市御太刀",
+          "lat": 35.615,
+          "lng": 138.94,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 133,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "笛吹川",
+      "prefecture": "山梨県",
+      "size": 3,
+      "maxKm": 0.492,
+      "flags": [],
+      "members": [
+        {
+          "slug": "fuefukigawa-isawa-kofu",
+          "name": "笛吹川（石和・甲府）",
+          "core": "笛吹川",
+          "prefecture": "山梨県",
+          "area": "笛吹・甲府",
+          "address": "〒406-0031 山梨県笛吹市石和町市部788-10",
+          "lat": 35.655,
+          "lng": 138.644,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 104,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "fuefukigawa-isawa6",
+          "name": "笛吹川（石和付近）",
+          "core": "笛吹川",
+          "prefecture": "山梨県",
+          "area": "富士五湖・本栖湖",
+          "address": "山梨県笛吹市石和町市部",
+          "lat": 35.6548,
+          "lng": 138.6428,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 212,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "fuefukigawa-isawa-onsen-a12",
+          "name": "笛吹川（石和温泉地区）",
+          "core": "笛吹川",
+          "prefecture": "山梨県",
+          "area": "笛吹川・山梨市",
+          "address": "〒406-0024 山梨県笛吹市石和町川中島",
+          "lat": 35.658,
+          "lng": 138.648,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 169,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "琵琶湖大津",
+      "prefecture": "滋賀県",
+      "size": 2,
+      "maxKm": 0.215,
+      "flags": [],
+      "members": [
+        {
+          "slug": "biwako-otsu-port",
+          "name": "琵琶湖大津港周辺",
+          "core": "琵琶湖大津",
+          "prefecture": "滋賀県",
+          "area": "琵琶湖南",
+          "address": "〒520-0047 滋賀県〒520-0047 滋賀 県 大津 市 浜大津 5 丁目 3-10, 5丁目-3-10 浜大津 大津市",
+          "lat": 35.0117,
+          "lng": 135.8612,
+          "spotType": "river",
+          "fish": 6,
+          "sourced": 6,
+          "descLen": 230,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "biwako-otsu-ko",
+          "name": "琵琶湖大津港",
+          "core": "琵琶湖大津",
+          "prefecture": "滋賀県",
+          "area": "琵琶湖南岸",
+          "address": "〒520-0047 滋賀県〒520-0047 滋賀 県 大津 市 浜大津 5 丁目 3-10, 5丁目-3-10 浜大津 大津市",
+          "lat": 35.011,
+          "lng": 135.859,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 210,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "琵琶湖長浜",
+      "prefecture": "滋賀県",
+      "size": 2,
+      "maxKm": 0.445,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "biwako-nagahama",
+          "name": "琵琶湖長浜",
+          "core": "琵琶湖長浜",
+          "prefecture": "滋賀県",
+          "area": "琵琶湖東岸",
+          "address": "〒526-0065 滋賀県長浜市公園町（琵琶湖長浜）",
+          "lat": 35.38,
+          "lng": 136.27,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 203,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "biwako-nagahama-ko",
+          "name": "琵琶湖 長浜港",
+          "core": "琵琶湖長浜",
+          "prefecture": "滋賀県",
+          "area": "琵琶湖北湖",
+          "address": "〒526-0067 滋賀県長浜市港町",
+          "lat": 35.384,
+          "lng": 136.27,
+          "spotType": "lake",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 206,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "桜島袴腰",
+      "prefecture": "鹿児島県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "hakamakoshi-kou-sakurajima-w6",
+          "name": "桜島・袴腰港",
+          "core": "桜島袴腰",
+          "prefecture": "鹿児島県",
+          "area": "指宿・南薩",
+          "address": "〒891-1419 鹿児島県鹿児島市桜島横山町",
+          "lat": 31.592602,
+          "lng": 130.600053,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 230,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "sakurajima-hakamakoshi-s8",
+          "name": "桜島・袴腰海岸",
+          "core": "桜島袴腰",
+          "prefecture": "鹿児島県",
+          "area": "鹿児島市・錦江湾",
+          "address": "〒891-1419 鹿児島県鹿児島市桜島赤水町",
+          "lat": 31.592602,
+          "lng": 130.600053,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 192,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "内之浦",
+      "prefecture": "鹿児島県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "uchinoura-kou-kimotsuki-w6",
+          "name": "肝付・内之浦港",
+          "core": "内之浦",
+          "prefecture": "鹿児島県",
+          "area": "指宿・南薩",
+          "address": "〒893-1402 鹿児島県肝属郡肝付町南方",
+          "lat": 31.279255,
+          "lng": 131.08461,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 236,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        },
+        {
+          "slug": "uchinoura-kou-s8",
+          "name": "内之浦港",
+          "core": "内之浦",
+          "prefecture": "鹿児島県",
+          "area": "大隅半島",
+          "address": "〒893-1402 鹿児島県肝属郡肝付町南方",
+          "lat": 31.279255,
+          "lng": 131.08461,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 196,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "小木",
+      "prefecture": "新潟県",
+      "size": 2,
+      "maxKm": 0.475,
+      "flags": [],
+      "members": [
+        {
+          "slug": "sado-ogi-port",
+          "name": "佐渡小木港",
+          "core": "小木",
+          "prefecture": "新潟県",
+          "area": "柏崎",
+          "address": "〒952-0604 新潟県佐渡市小木町",
+          "lat": 37.808035,
+          "lng": 138.278891,
+          "spotType": "port",
+          "fish": 9,
+          "sourced": 0,
+          "descLen": 229,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        },
+        {
+          "slug": "ogi-kou-niigata",
+          "name": "小木港",
+          "core": "小木",
+          "prefecture": "新潟県",
+          "area": "新潟・寺泊",
+          "address": "〒952-0604 新潟県佐渡市小木町",
+          "lat": 37.811,
+          "lng": 138.275,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 247,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "信濃川河口",
+      "prefecture": "新潟県",
+      "size": 2,
+      "maxKm": 0.425,
+      "flags": [],
+      "members": [
+        {
+          "slug": "shinanogawa-kakou",
+          "name": "信濃川河口（新潟みなとタワー周辺）",
+          "core": "信濃川河口",
+          "prefecture": "新潟県",
+          "area": "下越・新発田",
+          "address": "〒951-8001 新潟県新潟市中央区海辺町1番町3781",
+          "lat": 37.921,
+          "lng": 139.038,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 114,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "新",
+            "河口"
+          ]
+        },
+        {
+          "slug": "niigata-shinanogawa-yasuragi-a13",
+          "name": "新潟・信濃川河口（やすらぎ堤付近）",
+          "core": "信濃川河口",
+          "prefecture": "新潟県",
+          "area": "新潟・中央",
+          "address": "〒951-8061 新潟県新潟市中央区西堀通",
+          "lat": 37.918,
+          "lng": 139.035,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 167,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "新",
+            "河口"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "金田",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.364,
+      "flags": [],
+      "members": [
+        {
+          "slug": "kaneda-ko",
+          "name": "金田港",
+          "core": "金田",
+          "prefecture": "神奈川県",
+          "area": "三浦半島",
+          "address": "〒238-0103 神奈川県三浦市南下浦町金田",
+          "lat": 35.168,
+          "lng": 139.677,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 221,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "kaneda-gyokou",
+          "name": "金田漁港",
+          "core": "金田",
+          "prefecture": "神奈川県",
+          "area": "三浦半島",
+          "address": "〒238-0104 神奈川県三浦市南下浦町金田",
+          "lat": 35.168,
+          "lng": 139.673,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 219,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "江の島",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.399,
+      "flags": [
+        "distinguisher-differs",
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "shonan-enoshima-breakwater",
+          "name": "湘南江の島堤防",
+          "core": "江の島",
+          "prefecture": "神奈川県",
+          "area": "湘南",
+          "address": "〒251-0036 神奈川県藤沢市江の島1丁目12-12",
+          "lat": 35.2978,
+          "lng": 139.4812,
+          "spotType": "breakwater",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 125,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南"
+          ]
+        },
+        {
+          "slug": "enoshima6",
+          "name": "江の島",
+          "core": "江の島",
+          "prefecture": "神奈川県",
+          "area": "湘南・大磯",
+          "address": "神奈川県藤沢市江の島",
+          "lat": 35.2978,
+          "lng": 139.4768,
+          "spotType": "rocky",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 209,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "三戸浜",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.091,
+      "flags": [],
+      "members": [
+        {
+          "slug": "mito-hama",
+          "name": "三戸浜",
+          "core": "三戸浜",
+          "prefecture": "神奈川県",
+          "area": "三浦半島",
+          "address": "〒238-0112 神奈川県三浦市初声町三戸1111-3",
+          "lat": 35.158,
+          "lng": 139.599,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 235,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "mitohama-kaigan-miura-a12",
+          "name": "三戸浜海岸（三浦）",
+          "core": "三戸浜",
+          "prefecture": "神奈川県",
+          "area": "三浦・毘沙門",
+          "address": "〒238-0224 神奈川県三浦市三崎町小網代",
+          "lat": 35.158,
+          "lng": 139.598,
+          "spotType": "beach",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 203,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "城ヶ島",
+      "prefecture": "神奈川県",
+      "size": 3,
+      "maxKm": 0.308,
+      "flags": [],
+      "members": [
+        {
+          "slug": "jogashima-wharf",
+          "name": "城ヶ島岸壁",
+          "core": "城ヶ島",
+          "prefecture": "神奈川県",
+          "area": "三浦半島",
+          "address": "〒238-0237 神奈川県三浦市三崎町城ヶ島650-70",
+          "lat": 35.1294,
+          "lng": 139.6167,
+          "spotType": "rocky",
+          "fish": 5,
+          "sourced": 5,
+          "descLen": 215,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "jogashima-iso-e8",
+          "name": "城ヶ島磯",
+          "core": "城ヶ島",
+          "prefecture": "神奈川県",
+          "area": "横須賀・三浦",
+          "address": "〒238-0237 神奈川県三浦市三崎町城ヶ島",
+          "lat": 35.127,
+          "lng": 139.615,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 1,
+          "descLen": 219,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "jogashima6",
+          "name": "城ヶ島",
+          "core": "城ヶ島",
+          "prefecture": "神奈川県",
+          "area": "湘南・大磯",
+          "address": "神奈川県三浦市三崎町城ヶ島",
+          "lat": 35.1268,
+          "lng": 139.6118,
+          "spotType": "rocky",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 216,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "真鶴",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.444,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "manazuru-port",
+          "name": "真鶴港",
+          "core": "真鶴",
+          "prefecture": "神奈川県",
+          "area": "西湘",
+          "address": "〒259-0201 神奈川県真鶴町",
+          "lat": 35.1568,
+          "lng": 139.1365,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 5,
+          "descLen": 112,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "manazuru-kou-iwabashi-a10",
+          "name": "真鶴港（岩大橋付近）",
+          "core": "真鶴",
+          "prefecture": "神奈川県",
+          "area": "真鶴",
+          "address": "〒259-0201 神奈川県足柄下郡真鶴町真鶴",
+          "lat": 35.153,
+          "lng": 139.138,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 252,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "半島三ツ石",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.334,
+      "flags": [],
+      "members": [
+        {
+          "slug": "manazuru-mitsuishi-e8",
+          "name": "真鶴半島・三ツ石",
+          "core": "半島三ツ石",
+          "prefecture": "神奈川県",
+          "area": "小田原・真鶴",
+          "address": "〒259-0201 神奈川県足柄下郡真鶴町真鶴",
+          "lat": 35.137,
+          "lng": 139.145,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 192,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "manazuru-mitsuishi-a10",
+          "name": "真鶴半島・三ツ石海岸",
+          "core": "半島三ツ石",
+          "prefecture": "神奈川県",
+          "area": "真鶴",
+          "address": "〒259-0201 神奈川県足柄下郡真鶴町真鶴",
+          "lat": 35.14,
+          "lng": 139.145,
+          "spotType": "rocky",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 164,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "毘沙門",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.247,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "bishamon-ko",
+          "name": "毘沙門港",
+          "core": "毘沙門",
+          "prefecture": "神奈川県",
+          "area": "三浦半島",
+          "address": "〒238-0105 神奈川県三浦市南下浦町毘沙門",
+          "lat": 35.138,
+          "lng": 139.652,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 233,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "bishamon-kaigan",
+          "name": "毘沙門海岸",
+          "core": "毘沙門",
+          "prefecture": "神奈川県",
+          "area": "三浦半島",
+          "address": "〒238-0105 神奈川県三浦市南下浦町毘沙門",
+          "lat": 35.1365,
+          "lng": 139.654,
+          "spotType": "rocky",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 189,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "片瀬",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.291,
+      "flags": [],
+      "members": [
+        {
+          "slug": "katase-port",
+          "name": "片瀬漁港",
+          "core": "片瀬",
+          "prefecture": "神奈川県",
+          "area": "湘南",
+          "address": "〒251-0035 神奈川県藤沢市 片瀬海岸2丁目20-25",
+          "lat": 35.3078,
+          "lng": 139.4812,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 204,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "fujisawa-katase-gyokou-a13",
+          "name": "藤沢・片瀬漁港",
+          "core": "片瀬",
+          "prefecture": "神奈川県",
+          "area": "湘南・藤沢",
+          "address": "〒251-0035 神奈川県藤沢市片瀬海岸",
+          "lat": 35.308,
+          "lng": 139.478,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 220,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "柳島",
+      "prefecture": "神奈川県",
+      "size": 2,
+      "maxKm": 0.294,
+      "flags": [],
+      "members": [
+        {
+          "slug": "yanagishima-beach",
+          "name": "柳島海岸",
+          "core": "柳島",
+          "prefecture": "神奈川県",
+          "area": "湘南",
+          "address": "〒253-0063 神奈川県茅ヶ崎市柳島海岸",
+          "lat": 35.326,
+          "lng": 139.387,
+          "spotType": "beach",
+          "fish": 9,
+          "sourced": 0,
+          "descLen": 230,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "yanagishima-kaigan-surf",
+          "name": "柳島海岸サーフ",
+          "core": "柳島",
+          "prefecture": "神奈川県",
+          "area": "湘南・茅ヶ崎",
+          "address": "〒253-0064 神奈川県茅ヶ崎市柳島海岸",
+          "lat": 35.325,
+          "lng": 139.384,
+          "spotType": "beach",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 202,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "漁港",
+      "prefecture": "青森県",
+      "size": 2,
+      "maxKm": 0.474,
+      "flags": [],
+      "members": [
+        {
+          "slug": "ajigasawa-port",
+          "name": "鰺ヶ沢漁港",
+          "core": "漁港",
+          "prefecture": "青森県",
+          "area": "陸奥湾",
+          "address": "〒038-2741 青森県鰺ヶ沢町浜町100-11",
+          "lat": 40.778,
+          "lng": 140.212,
+          "spotType": "port",
+          "fish": 8,
+          "sourced": 0,
+          "descLen": 243,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ajigasawa-maito-port-a13",
+          "name": "鰺ヶ沢町舞戸漁港",
+          "core": "漁港",
+          "prefecture": "青森県",
+          "area": "西津軽",
+          "address": "〒038-2753 青森県西津軽郡鰺ヶ沢町舞戸町",
+          "lat": 40.775,
+          "lng": 140.208,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 249,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "港館鼻",
+      "prefecture": "青森県",
+      "size": 2,
+      "maxKm": 0.405,
+      "flags": [],
+      "members": [
+        {
+          "slug": "hachinohe-tatehana-ganpeki",
+          "name": "八戸港館鼻岸壁",
+          "core": "港館鼻",
+          "prefecture": "青森県",
+          "area": "八戸",
+          "address": "〒031-0811 青森県八戸市新湊3丁目 館鼻岸壁内",
+          "lat": 40.531,
+          "lng": 141.528,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 180,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hachinohe-tatehana-gyokou6",
+          "name": "八戸港館鼻漁港",
+          "core": "港館鼻",
+          "prefecture": "青森県",
+          "area": "三沢・太平洋側",
+          "address": "〒031-0842 青森県八戸市湊町",
+          "lat": 40.533,
+          "lng": 141.532,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 190,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "十和田湖",
+      "prefecture": "青森県",
+      "size": 2,
+      "maxKm": 0.411,
+      "flags": [
+        "distinguisher-differs",
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "towadako-trout",
+          "name": "十和田湖",
+          "core": "十和田湖",
+          "prefecture": "青森県",
+          "area": "十和田湖",
+          "address": "〒018-5501 青森県十和田市奥瀬十和田湖畔休屋294-1",
+          "lat": 40.4517,
+          "lng": 140.8672,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 186,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "towadako-west-konokuchi",
+          "name": "十和田湖（西湖畔・子ノ口）",
+          "core": "十和田湖",
+          "prefecture": "青森県",
+          "area": "十和田湖西湖畔",
+          "address": "〒018-5501 青森県十和田市奥瀬十和田湖畔",
+          "lat": 40.4539,
+          "lng": 140.8711,
+          "spotType": "lake",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 161,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "西"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "稲取",
+      "prefecture": "静岡県",
+      "size": 3,
+      "maxKm": 0.115,
+      "flags": [],
+      "members": [
+        {
+          "slug": "inatori-port",
+          "name": "稲取港",
+          "core": "稲取",
+          "prefecture": "静岡県",
+          "area": "伊豆・熱海",
+          "address": "〒413-0411 静岡県東伊豆町稲取",
+          "lat": 34.7725,
+          "lng": 139.0419,
+          "spotType": "port",
+          "fish": 7,
+          "sourced": 0,
+          "descLen": 244,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "inatori-ko-teibo",
+          "name": "稲取港堤防",
+          "core": "稲取",
+          "prefecture": "静岡県",
+          "area": "下田・南伊豆",
+          "address": "〒413-0411 静岡県東伊豆町稲取",
+          "lat": 34.7725,
+          "lng": 139.0419,
+          "spotType": "port",
+          "fish": 8,
+          "sourced": 0,
+          "descLen": 231,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "inatori-gyokou",
+          "name": "稲取漁港",
+          "core": "稲取",
+          "prefecture": "静岡県",
+          "area": "伊豆東海岸",
+          "address": "〒413-0411 静岡県賀茂郡東伊豆町稲取",
+          "lat": 34.773,
+          "lng": 139.043,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 239,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "港外",
+      "prefecture": "静岡県",
+      "size": 3,
+      "maxKm": 0.364,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "numazu-gaiko-teibo",
+          "name": "沼津港外港堤防",
+          "core": "港外",
+          "prefecture": "静岡県",
+          "area": "沼津・戸田",
+          "address": "〒410-0867 静岡県沼津市本",
+          "lat": 35.092,
+          "lng": 138.862,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 252,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "外"
+          ]
+        },
+        {
+          "slug": "numazu-gaiko-add3",
+          "name": "沼津港外港",
+          "core": "港外",
+          "prefecture": "静岡県",
+          "area": "沼津",
+          "address": "〒410-0867 静岡県沼津市本",
+          "lat": 35.092,
+          "lng": 138.858,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 1,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "外"
+          ]
+        },
+        {
+          "slug": "numazu-sotobouchoutei-e8",
+          "name": "沼津港外防波堤",
+          "core": "港外",
+          "prefecture": "静岡県",
+          "area": "沼津・伊豆",
+          "address": "〒410-0845 静岡県沼津市千本港町",
+          "lat": 35.093,
+          "lng": 138.86,
+          "spotType": "breakwater",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 236,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "外"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "妻良",
+      "prefecture": "静岡県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "mera-port",
+          "name": "妻良港",
+          "core": "妻良",
+          "prefecture": "静岡県",
+          "area": "伊豆・熱海",
+          "address": "〒415-0533 静岡県南伊豆町妻良416",
+          "lat": 34.659482,
+          "lng": 138.779539,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 150,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "mera-gyokou-shizuoka",
+          "name": "妻良漁港",
+          "core": "妻良",
+          "prefecture": "静岡県",
+          "area": "伊豆西海岸",
+          "address": "〒415-0531 静岡県賀茂郡南伊豆町妻良",
+          "lat": 34.659482,
+          "lng": 138.779539,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 1,
+          "descLen": 146,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "初島",
+      "prefecture": "静岡県",
+      "size": 2,
+      "maxKm": 0.495,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "hatsushima-breakwater",
+          "name": "初島堤防",
+          "core": "初島",
+          "prefecture": "静岡県",
+          "area": "伊豆・熱海",
+          "address": "〒413-0004 静岡県熱海市初島800",
+          "lat": 35.0412,
+          "lng": 139.1658,
+          "spotType": "breakwater",
+          "fish": 11,
+          "sourced": 0,
+          "descLen": 154,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hatsushima-kou",
+          "name": "初島港",
+          "core": "初島",
+          "prefecture": "静岡県",
+          "area": "熱海・湯河原",
+          "address": "〒413-0004 静岡県熱海市初島",
+          "lat": 35.037,
+          "lng": 139.164,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 149,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "相良",
+      "prefecture": "静岡県",
+      "size": 2,
+      "maxKm": 0.458,
+      "flags": [],
+      "members": [
+        {
+          "slug": "sagara-ko-teibo",
+          "name": "相良港堤防",
+          "core": "相良",
+          "prefecture": "静岡県",
+          "area": "御前崎・相良",
+          "address": "〒421-0522 静岡県牧之原市相良",
+          "lat": 34.684902,
+          "lng": 138.209447,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 208,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "sagara-kou",
+          "name": "相良港",
+          "core": "相良",
+          "prefecture": "静岡県",
+          "area": "御前崎・牧之原",
+          "address": "〒421-0522 静岡県牧之原市相良",
+          "lat": 34.683,
+          "lng": 138.205,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 250,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "浜名湖舞阪",
+      "prefecture": "静岡県",
+      "size": 2,
+      "maxKm": 0.24,
+      "flags": [],
+      "members": [
+        {
+          "slug": "hamanako-maisaka-kou",
+          "name": "浜名湖・舞阪港",
+          "core": "浜名湖舞阪",
+          "prefecture": "静岡県",
+          "area": "浜名湖・湖西",
+          "address": "〒431-0211 静岡県浜松市中央区舞阪町舞阪",
+          "lat": 34.684,
+          "lng": 137.596,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 255,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hamanako-maisaka-e8",
+          "name": "浜名湖・舞阪漁港",
+          "core": "浜名湖舞阪",
+          "prefecture": "静岡県",
+          "area": "浜松・湖西",
+          "address": "〒431-0211 静岡県浜松市中央区舞阪町舞阪",
+          "lat": 34.682,
+          "lng": 137.595,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 1,
+          "descLen": 233,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "富戸",
+      "prefecture": "静岡県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "futo-port",
+          "name": "富戸港",
+          "core": "富戸",
+          "prefecture": "静岡県",
+          "area": "伊豆・熱海",
+          "address": "〒413-0231 静岡県伊東市富戸987-2",
+          "lat": 34.633573,
+          "lng": 138.794346,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 263,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "futo-gyokou",
+          "name": "富戸漁港",
+          "core": "富戸",
+          "prefecture": "静岡県",
+          "area": "伊豆東海岸",
+          "address": "〒413-0231 静岡県伊東市富戸",
+          "lat": 34.633573,
+          "lng": 138.794346,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 223,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "海岸",
+      "prefecture": "石川県",
+      "size": 2,
+      "maxKm": 0.29,
+      "flags": [],
+      "members": [
+        {
+          "slug": "uchinada-kaigan",
+          "name": "内灘海岸",
+          "core": "海岸",
+          "prefecture": "石川県",
+          "area": "金沢・内灘",
+          "address": "〒920-0266 石川県河北郡内灘町大学",
+          "lat": 36.651,
+          "lng": 136.628,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 260,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        },
+        {
+          "slug": "uchinada-kaigan-surf-e8",
+          "name": "内灘海岸サーフ",
+          "core": "海岸",
+          "prefecture": "石川県",
+          "area": "金沢・内灘",
+          "address": "〒920-0267 石川県河北郡内灘町大学",
+          "lat": 36.65,
+          "lng": 136.625,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "滝港",
+      "prefecture": "石川県",
+      "size": 2,
+      "maxKm": 0.003,
+      "flags": [],
+      "members": [
+        {
+          "slug": "hakui-taki-port",
+          "name": "羽咋市滝港",
+          "core": "滝港",
+          "prefecture": "石川県",
+          "area": "能登島",
+          "address": "〒925-0005 石川県羽咋市滝町レ101",
+          "lat": 36.9223,
+          "lng": 136.7543,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 107,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hakui-taki-kou-ishikawa",
+          "name": "羽咋・滝港",
+          "core": "滝港",
+          "prefecture": "石川県",
+          "area": "金沢・内灘",
+          "address": "〒925-0003 石川県羽咋市滝町",
+          "lat": 36.922296,
+          "lng": 136.754333,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 220,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "岩井袋",
+      "prefecture": "千葉県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "iwaibukuro-gyokou",
+          "name": "岩井袋漁港",
+          "core": "岩井袋",
+          "prefecture": "千葉県",
+          "area": "南房総・館山",
+          "address": "〒299-2115 千葉県南房総市富浦町多田良",
+          "lat": 35.101768,
+          "lng": 139.831421,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 205,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "iwaibukuro-kou-e8",
+          "name": "岩井袋港",
+          "core": "岩井袋",
+          "prefecture": "千葉県",
+          "area": "南房総・館山",
+          "address": "〒299-2216 千葉県南房総市久枝",
+          "lat": 35.101768,
+          "lng": 139.831421,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 209,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "漁港",
+      "prefecture": "千葉県",
+      "size": 2,
+      "maxKm": 0.212,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tokawa-gyokou",
+          "name": "外川漁港",
+          "core": "漁港",
+          "prefecture": "千葉県",
+          "area": "銚子・旭",
+          "address": "〒288-0014 千葉県銚子市外川町",
+          "lat": 35.707,
+          "lng": 140.854,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 248,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "外"
+          ]
+        },
+        {
+          "slug": "choshi-tokawa-gyokou-a13",
+          "name": "銚子・外川漁港",
+          "core": "漁港",
+          "prefecture": "千葉県",
+          "area": "館山・白浜",
+          "address": "〒288-0014 千葉県銚子市外川町",
+          "lat": 35.708,
+          "lng": 140.852,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 214,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "外"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "犬吠埼灯台下",
+      "prefecture": "千葉県",
+      "size": 2,
+      "maxKm": 0.143,
+      "flags": [],
+      "members": [
+        {
+          "slug": "inubosaki-todaishita-e8",
+          "name": "犬吠埼灯台下",
+          "core": "犬吠埼灯台下",
+          "prefecture": "千葉県",
+          "area": "銚子・旭",
+          "address": "〒288-0012 千葉県銚子市犬吠埼",
+          "lat": 35.708,
+          "lng": 140.868,
+          "spotType": "rocky",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 166,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        },
+        {
+          "slug": "inubosaki-iso-a10",
+          "name": "犬吠埼灯台下磯",
+          "core": "犬吠埼灯台下",
+          "prefecture": "千葉県",
+          "area": "銚子・犬吠埼",
+          "address": "〒288-0012 千葉県銚子市犬吠埼",
+          "lat": 35.707,
+          "lng": 140.869,
+          "spotType": "rocky",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 196,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "内港",
+      "prefecture": "千葉県",
+      "size": 2,
+      "maxKm": 0.143,
+      "flags": [],
+      "members": [
+        {
+          "slug": "kisarazu-naiko",
+          "name": "木更津内港",
+          "core": "内港",
+          "prefecture": "千葉県",
+          "area": "内房",
+          "address": "〒292-0066 千葉県木更津市内港1",
+          "lat": 35.374,
+          "lng": 139.921,
+          "spotType": "port",
+          "fish": 8,
+          "sourced": 8,
+          "descLen": 118,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        },
+        {
+          "slug": "kisarazu-naikou-park-a10",
+          "name": "木更津内港公園",
+          "core": "内港",
+          "prefecture": "千葉県",
+          "area": "内房・富津",
+          "address": "〒292-0067 千葉県木更津市中央",
+          "lat": 35.375,
+          "lng": 139.92,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 244,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "利根川下流",
+      "prefecture": "千葉県",
+      "size": 2,
+      "maxKm": 0.18,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tonegawa-sawara",
+          "name": "利根川下流（佐原）",
+          "core": "利根川下流",
+          "prefecture": "千葉県",
+          "area": "利根川下流（佐原）",
+          "address": "〒287-0003 千葉県香取市イ4149",
+          "lat": 35.8892,
+          "lng": 140.5,
+          "spotType": "river",
+          "fish": 8,
+          "sourced": 0,
+          "descLen": 188,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        },
+        {
+          "slug": "tonegawa-lower-chiba",
+          "name": "利根川下流（千葉県側・佐原〜銚子）",
+          "core": "利根川下流",
+          "prefecture": "千葉県",
+          "area": "利根川下流（千葉）",
+          "address": "〒287-0003 千葉県香取市佐原",
+          "lat": 35.8908,
+          "lng": 140.4997,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 227,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "深日",
+      "prefecture": "大阪府",
+      "size": 3,
+      "maxKm": 0.44,
+      "flags": [],
+      "members": [
+        {
+          "slug": "misaki-fuke",
+          "name": "岬町・深日港",
+          "core": "深日",
+          "prefecture": "大阪府",
+          "area": "大阪湾",
+          "address": "〒599-0303 大阪府岬町深日",
+          "lat": 34.3206,
+          "lng": 135.1384,
+          "spotType": "port",
+          "fish": 10,
+          "sourced": 0,
+          "descLen": 240,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "fuke-port",
+          "name": "深日漁港",
+          "core": "深日",
+          "prefecture": "大阪府",
+          "area": "岬町",
+          "address": "〒599-0303 大阪府岬町深日",
+          "lat": 34.3195,
+          "lng": 135.143,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 204,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "fuke-kou-osaka",
+          "name": "深日港",
+          "core": "深日",
+          "prefecture": "大阪府",
+          "area": "泉南・岸和田",
+          "address": "〒599-0303 大阪府泉南郡岬町深日",
+          "lat": 34.32,
+          "lng": 135.137,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 268,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "大和川河口",
+      "prefecture": "大阪府",
+      "size": 2,
+      "maxKm": 0.492,
+      "flags": [],
+      "members": [
+        {
+          "slug": "yamatogawa-estuary-tenaga",
+          "name": "大和川河口（堺市）",
+          "core": "大和川河口",
+          "prefecture": "大阪府",
+          "area": "大和川河口",
+          "address": "〒590-0011 大阪府堺市堺区香ヶ丘町5丁1-1",
+          "lat": 34.5783,
+          "lng": 135.4841,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 101,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大",
+            "河口"
+          ]
+        },
+        {
+          "slug": "yamatogawa-estuary-sakai",
+          "name": "大和川河口（堺〜松原）",
+          "core": "大和川河口",
+          "prefecture": "大阪府",
+          "area": "大和川河口",
+          "address": "〒590-0906 大阪府堺市堺区三宝町",
+          "lat": 34.5769,
+          "lng": 135.4892,
+          "spotType": "river",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 227,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大",
+            "河口"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "淡輪",
+      "prefecture": "大阪府",
+      "size": 2,
+      "maxKm": 0.149,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tannowa-gyoko",
+          "name": "淡輪漁港",
+          "core": "淡輪",
+          "prefecture": "大阪府",
+          "area": "岬町・淡輪",
+          "address": "〒599-0301 大阪府岬町淡輪4601",
+          "lat": 34.3289,
+          "lng": 135.1712,
+          "spotType": "port",
+          "fish": 9,
+          "sourced": 0,
+          "descLen": 191,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tannowa-kou",
+          "name": "淡輪港",
+          "core": "淡輪",
+          "prefecture": "大阪府",
+          "area": "岬町",
+          "address": "〒599-0301 大阪府泉南郡岬町淡輪",
+          "lat": 34.328,
+          "lng": 135.17,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 210,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "埠頭",
+      "prefecture": "大阪府",
+      "size": 2,
+      "maxKm": 0.105,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "izumiotsu-shiomi",
+          "name": "泉大津・汐見埠頭",
+          "core": "埠頭",
+          "prefecture": "大阪府",
+          "area": "大阪湾",
+          "address": "〒595-0054 大阪府泉大津市汐見町106",
+          "lat": 34.5052,
+          "lng": 135.3856,
+          "spotType": "port",
+          "fish": 12,
+          "sourced": 1,
+          "descLen": 213,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "shiomi-futou-osaka",
+          "name": "汐見埠頭（大阪）",
+          "core": "埠頭",
+          "prefecture": "大阪府",
+          "area": "泉大津",
+          "address": "〒595-0054 大阪府泉大津市汐見町",
+          "lat": 34.506,
+          "lng": 135.385,
+          "spotType": "beach",
+          "fish": 4,
+          "sourced": 1,
+          "descLen": 239,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "蒲江波当津",
+      "prefecture": "大分県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "kamae-hatozu-gyokou",
+          "name": "蒲江・波当津漁港",
+          "core": "蒲江波当津",
+          "prefecture": "大分県",
+          "area": "佐伯・臼杵",
+          "address": "〒876-2301 大分県佐伯市蒲江大字波当津浦",
+          "lat": 32.839637,
+          "lng": 132.004218,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 191,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "oita-kamae-hatozu-port-bulk",
+          "name": "蒲江・波当津港",
+          "core": "蒲江波当津",
+          "prefecture": "大分県",
+          "area": "佐伯・米水津・蒲江",
+          "address": "大分県佐伯市蒲江波当津浦",
+          "lat": 32.839637,
+          "lng": 132.004218,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 5,
+          "descLen": 128,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "日出",
+      "prefecture": "大分県",
+      "size": 2,
+      "maxKm": 0.482,
+      "flags": [],
+      "members": [
+        {
+          "slug": "hiji-kou-w6",
+          "name": "日出・日出港",
+          "core": "日出",
+          "prefecture": "大分県",
+          "area": "別府・大分市",
+          "address": "〒879-1502 大分県速見郡日出町",
+          "lat": 33.36,
+          "lng": 131.53,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 164,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hiji-kou-a11",
+          "name": "日出港",
+          "core": "日出",
+          "prefecture": "大分県",
+          "area": "日出・暘谷",
+          "address": "〒879-1504 大分県速見郡日出町",
+          "lat": 33.364,
+          "lng": 131.528,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 236,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "米水津",
+      "prefecture": "大分県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "yonozu-gyokou-w6",
+          "name": "佐伯・米水津漁港",
+          "core": "米水津",
+          "prefecture": "大分県",
+          "area": "佐伯・臼杵",
+          "address": "〒876-1300 大分県佐伯市米水津",
+          "lat": 32.978619,
+          "lng": 131.915348,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 183,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "saiki-yonouzu-kou-s8",
+          "name": "佐伯・米水津港",
+          "core": "米水津",
+          "prefecture": "大分県",
+          "area": "佐伯・蒲江",
+          "address": "〒876-0100 大分県佐伯市米水津大字浦代浦",
+          "lat": 32.978619,
+          "lng": 131.915348,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 1,
+          "descLen": 178,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "漁港",
+      "prefecture": "長崎県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "miyanoura-hirado-w6",
+          "name": "平戸・宮ノ浦漁港",
+          "core": "漁港",
+          "prefecture": "長崎県",
+          "area": "平戸・生月",
+          "address": "〒859-5374 長崎県平戸市宮ノ浦町",
+          "lat": 33.37096,
+          "lng": 129.553782,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 175,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "nagasaki-hirado-shimonakano-bulk",
+          "name": "平戸・下中野漁港",
+          "core": "漁港",
+          "prefecture": "長崎県",
+          "area": "平戸島",
+          "address": "〒859-5371 長崎県平戸市下中野町",
+          "lat": 33.37096,
+          "lng": 129.553782,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 6,
+          "descLen": 121,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "下"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "厳原",
+      "prefecture": "長崎県",
+      "size": 2,
+      "maxKm": 0.433,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tsushima-izuhara-w6",
+          "name": "対馬・厳原港",
+          "core": "厳原",
+          "prefecture": "長崎県",
+          "area": "佐世保・五島",
+          "address": "〒817-0013 長崎県対馬市厳原町今屋敷",
+          "lat": 34.2,
+          "lng": 129.29,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 3,
+          "descLen": 239,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "izuhara-kou-a10",
+          "name": "厳原港",
+          "core": "厳原",
+          "prefecture": "長崎県",
+          "area": "対馬・厳原",
+          "address": "〒817-0016 長崎県対馬市厳原町東里",
+          "lat": 34.203,
+          "lng": 129.287,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 232,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "島舘浦",
+      "prefecture": "長崎県",
+      "size": 2,
+      "maxKm": 0.29,
+      "flags": [],
+      "members": [
+        {
+          "slug": "ikitsuki-tateura-port",
+          "name": "生月島・舘浦漁港",
+          "core": "島舘浦",
+          "prefecture": "長崎県",
+          "area": "五島・平戸",
+          "address": "〒859-5705 長崎県平戸市生月町舘浦",
+          "lat": 33.393,
+          "lng": 129.442,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 261,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ikitsukijima-tateura-a10",
+          "name": "生月島・舘浦港",
+          "core": "島舘浦",
+          "prefecture": "長崎県",
+          "area": "平戸・生月島",
+          "address": "〒859-5707 長崎県平戸市生月町舘浦",
+          "lat": 33.395,
+          "lng": 129.444,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 1,
+          "descLen": 207,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "諏訪湖",
+      "prefecture": "長野県",
+      "size": 2,
+      "maxKm": 0.27,
+      "flags": [],
+      "members": [
+        {
+          "slug": "suwako-wakasagi",
+          "name": "諏訪湖（ワカサギ）",
+          "core": "諏訪湖",
+          "prefecture": "長野県",
+          "area": "諏訪湖",
+          "address": "〒392-0027 長野県諏訪市湖岸通り5丁目2-10",
+          "lat": 36.05,
+          "lng": 138.0833,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 221,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "suwako-nagano-add5",
+          "name": "諏訪湖",
+          "core": "諏訪湖",
+          "prefecture": "長野県",
+          "area": "犀川・千曲川",
+          "address": "〒392-0027 長野県諏訪市湖岸通り",
+          "lat": 36.048,
+          "lng": 138.085,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 286,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "夏泊",
+      "prefecture": "鳥取県",
+      "size": 2,
+      "maxKm": 0.212,
+      "flags": [],
+      "members": [
+        {
+          "slug": "natsudumari-gyokou-w7",
+          "name": "夏泊漁港",
+          "core": "夏泊",
+          "prefecture": "鳥取県",
+          "area": "大山・淀江",
+          "address": "〒689-2221 鳥取県東伯郡北栄町",
+          "lat": 35.504,
+          "lng": 133.767,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 196,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "natsudomari-kou-tottori-c8",
+          "name": "夏泊港",
+          "core": "夏泊",
+          "prefecture": "鳥取県",
+          "area": "鳥取中部・倉吉",
+          "address": "〒689-2103 鳥取県東伯郡北栄町島",
+          "lat": 35.505,
+          "lng": 133.769,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 198,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "公共マリーナ",
+      "prefecture": "鳥取県",
+      "size": 2,
+      "maxKm": 0.466,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "sakaiminato-marina-gokan",
+          "name": "境港公共マリーナ護岸",
+          "core": "公共マリーナ",
+          "prefecture": "鳥取県",
+          "area": "米子・境港",
+          "address": "〒684-0051 鳥取県境港市新屋町3458",
+          "lat": 35.538,
+          "lng": 133.226,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 262,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "sakaiminato-marina-c8",
+          "name": "境港公共マリーナ",
+          "core": "公共マリーナ",
+          "prefecture": "鳥取県",
+          "area": "鳥取西部・境港",
+          "address": "〒684-0034 鳥取県境港市昭和町",
+          "lat": 35.539,
+          "lng": 133.231,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 257,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "赤碕",
+      "prefecture": "鳥取県",
+      "size": 2,
+      "maxKm": 0.293,
+      "flags": [],
+      "members": [
+        {
+          "slug": "akasaki-kou-w6",
+          "name": "赤碕港",
+          "core": "赤碕",
+          "prefecture": "鳥取県",
+          "area": "倉吉・琴浦",
+          "address": "〒689-2501 鳥取県東伯郡琴浦町赤碕",
+          "lat": 35.508,
+          "lng": 133.695,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 250,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "akasaki-gyokou-tottori",
+          "name": "赤碕漁港",
+          "core": "赤碕",
+          "prefecture": "鳥取県",
+          "area": "鳥取中部・琴浦",
+          "address": "〒689-2501 鳥取県東伯郡琴浦町赤碕",
+          "lat": 35.509,
+          "lng": 133.692,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 169,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "田後",
+      "prefecture": "鳥取県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tago-kou-iwami-w6",
+          "name": "岩美・田後港",
+          "core": "田後",
+          "prefecture": "鳥取県",
+          "area": "鳥取砂丘・岩美",
+          "address": "〒681-0072 鳥取県岩美郡岩美町田後",
+          "lat": 35.596,
+          "lng": 134.344,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 245,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tago-gyokou-tottori",
+          "name": "田後漁港",
+          "core": "田後",
+          "prefecture": "鳥取県",
+          "area": "鳥取東部・岩美",
+          "address": "〒681-0072 鳥取県岩美郡岩美町田後",
+          "lat": 35.596,
+          "lng": 134.344,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 241,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "稲佐の浜",
+      "prefecture": "島根県",
+      "size": 2,
+      "maxKm": 0.467,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "izumo-inasa-beach",
+          "name": "出雲大社稲佐の浜",
+          "core": "稲佐の浜",
+          "prefecture": "島根県",
+          "area": "出雲大社",
+          "address": "〒699-0702 島根県出雲市大社町杵築北",
+          "lat": 35.398,
+          "lng": 132.659,
+          "spotType": "beach",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 245,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "大"
+          ]
+        },
+        {
+          "slug": "inasa-no-hama-w6",
+          "name": "稲佐の浜",
+          "core": "稲佐の浜",
+          "prefecture": "島根県",
+          "area": "出雲・大社",
+          "address": "〒699-0702 島根県出雲市大社町杵築北",
+          "lat": 35.399,
+          "lng": 132.664,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 222,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "漁港",
+      "prefecture": "島根県",
+      "size": 2,
+      "maxKm": 0.334,
+      "flags": [],
+      "members": [
+        {
+          "slug": "gotsu-kuromatsu-port",
+          "name": "江津市黒松漁港",
+          "core": "漁港",
+          "prefecture": "島根県",
+          "area": "浜田・江津",
+          "address": "〒699-2831 島根県江津市黒松町",
+          "lat": 35.038,
+          "lng": 132.182,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 217,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hashi-gyokou-a12",
+          "name": "波子漁港",
+          "core": "漁港",
+          "prefecture": "島根県",
+          "area": "江津・波子",
+          "address": "〒695-0002 島根県江津市波子町",
+          "lat": 35.035,
+          "lng": 132.182,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 204,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "十六島鼻",
+      "prefecture": "島根県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "izumo-jushimanohana",
+          "name": "出雲市・十六島鼻",
+          "core": "十六島鼻",
+          "prefecture": "島根県",
+          "area": "出雲市",
+          "address": "〒691-0042 島根県出雲市十六島町",
+          "lat": 35.468587,
+          "lng": 132.731826,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 211,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "upurui-hana",
+          "name": "十六島鼻",
+          "core": "十六島鼻",
+          "prefecture": "島根県",
+          "area": "出雲・大社",
+          "address": "〒691-0042 島根県出雲市十六島町",
+          "lat": 35.468587,
+          "lng": 132.731826,
+          "spotType": "rocky",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 212,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "隅田川テラス",
+      "prefecture": "東京都",
+      "size": 2,
+      "maxKm": 0.298,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "sumidagawa-terrace-asakusa",
+          "name": "隅田川テラス（浅草周辺）",
+          "core": "隅田川テラス",
+          "prefecture": "東京都",
+          "area": "江戸川・葛飾",
+          "address": "〒111-0043 東京都台東区駒形2丁目1",
+          "lat": 35.71,
+          "lng": 139.795,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 205,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "sumidagawa-terrace",
+          "name": "隅田川テラス（台東〜中央区）",
+          "core": "隅田川テラス",
+          "prefecture": "東京都",
+          "area": "隅田川・台東",
+          "address": "〒111-0033 東京都台東区花川戸 隅田川テラス",
+          "lat": 35.71,
+          "lng": 139.7983,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 236,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": [
+            "東"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "新中川",
+      "prefecture": "東京都",
+      "size": 2,
+      "maxKm": 0.213,
+      "flags": [],
+      "members": [
+        {
+          "slug": "shin-nakagawa6",
+          "name": "新中川",
+          "core": "新中川",
+          "prefecture": "東京都",
+          "area": "伊豆諸島",
+          "address": "東京都江戸川区松本1丁目",
+          "lat": 35.7068,
+          "lng": 139.8688,
+          "spotType": "river",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 235,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": [
+            "新"
+          ]
+        },
+        {
+          "slug": "shin-nakagawa-edogawa-a11",
+          "name": "新中川（江戸川区）",
+          "core": "新中川",
+          "prefecture": "東京都",
+          "area": "品川・天王洲",
+          "address": "〒132-0024 東京都江戸川区一之江",
+          "lat": 35.705,
+          "lng": 139.868,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 228,
+          "hasToilet": false,
+          "hasParking": false,
+          "file": "",
+          "dist": [
+            "新"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "新木場",
+      "prefecture": "東京都",
+      "size": 2,
+      "maxKm": 0.181,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "shinkiba-park",
+          "name": "新木場公園",
+          "core": "新木場",
+          "prefecture": "東京都",
+          "area": "東京湾岸・品川",
+          "address": "〒136-0082 東京都江東区新木場2丁目1-1",
+          "lat": 35.635,
+          "lng": 139.83,
+          "spotType": "breakwater",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 274,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": [
+            "新"
+          ]
+        },
+        {
+          "slug": "shinkiba-koen-e8",
+          "name": "新木場公園護岸",
+          "core": "新木場",
+          "prefecture": "東京都",
+          "area": "東京湾奥・江東",
+          "address": "〒136-0082 東京都江東区新木場",
+          "lat": 35.635,
+          "lng": 139.832,
+          "spotType": "pier",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 215,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "新"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "天王洲運河",
+      "prefecture": "東京都",
+      "size": 2,
+      "maxKm": 0.362,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "tennouzu-unga-a11",
+          "name": "天王洲運河",
+          "core": "天王洲運河",
+          "prefecture": "東京都",
+          "area": "品川・天王洲",
+          "address": "〒140-0002 東京都品川区東品川",
+          "lat": 35.628,
+          "lng": 139.752,
+          "spotType": "pier",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 171,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "shinagawa-tennouzu-boardwalk-a13",
+          "name": "品川・天王洲運河（ボードウォーク）",
+          "core": "天王洲運河",
+          "prefecture": "東京都",
+          "area": "大田・羽田",
+          "address": "〒140-0002 東京都品川区東品川",
+          "lat": 35.628,
+          "lng": 139.748,
+          "spotType": "breakwater",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 182,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "宍喰",
+      "prefecture": "徳島県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "kaiyo-shishikui-port",
+          "name": "海陽町宍喰港",
+          "core": "宍喰",
+          "prefecture": "徳島県",
+          "area": "小松島",
+          "address": "〒775-0501 徳島県海陽町宍喰浦正梶",
+          "lat": 33.561718,
+          "lng": 134.309213,
+          "spotType": "port",
+          "fish": 9,
+          "sourced": 0,
+          "descLen": 244,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "kaiyo-shishikui-kou-teihou",
+          "name": "海陽町・宍喰港堤防",
+          "core": "宍喰",
+          "prefecture": "徳島県",
+          "area": "牟岐・海陽",
+          "address": "〒775-0501 徳島県海部郡海陽町宍喰浦",
+          "lat": 33.561718,
+          "lng": 134.309213,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 210,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "撫養",
+      "prefecture": "徳島県",
+      "size": 2,
+      "maxKm": 0.184,
+      "flags": [],
+      "members": [
+        {
+          "slug": "muya-kou-w6",
+          "name": "撫養港",
+          "core": "撫養",
+          "prefecture": "徳島県",
+          "area": "鳴門・北灘",
+          "address": "〒772-0002 徳島県鳴門市撫養町",
+          "lat": 34.17,
+          "lng": 134.61,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 218,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tokushima-naruto-muya-bulk",
+          "name": "鳴門市・撫養港",
+          "core": "撫養",
+          "prefecture": "徳島県",
+          "area": "鳴門・北灘",
+          "address": "〒772-0003 徳島県鳴門市撫養町大桑島",
+          "lat": 34.17,
+          "lng": 134.608,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 6,
+          "descLen": 141,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "牟岐",
+      "prefecture": "徳島県",
+      "size": 2,
+      "maxKm": 0.426,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "mugi-port",
+          "name": "牟岐港",
+          "core": "牟岐",
+          "prefecture": "徳島県",
+          "area": "小松島",
+          "address": "〒775-0010 徳島県牟岐町牟岐浦浜崎",
+          "lat": 33.668,
+          "lng": 134.416,
+          "spotType": "port",
+          "fish": 9,
+          "sourced": 0,
+          "descLen": 200,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tokushima-mugi-port-bulk",
+          "name": "牟岐町・牟岐港",
+          "core": "牟岐",
+          "prefecture": "徳島県",
+          "area": "日和佐・牟岐・海陽",
+          "address": "〒775-0006 徳島県海部郡牟岐町中村",
+          "lat": 33.6682,
+          "lng": 134.4206,
+          "spotType": "breakwater",
+          "fish": 6,
+          "sourced": 6,
+          "descLen": 142,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "思川",
+      "prefecture": "栃木県",
+      "size": 2,
+      "maxKm": 0.106,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "omoigawa-river",
+          "name": "思川",
+          "core": "思川",
+          "prefecture": "栃木県",
+          "area": "思川",
+          "address": "〒323-0041 栃木県小山市大行寺1108-34",
+          "lat": 36.3131,
+          "lng": 139.7944,
+          "spotType": "river",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 155,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "omoigawa-oyama-a10",
+          "name": "思川（小山地区）",
+          "core": "思川",
+          "prefecture": "栃木県",
+          "area": "鬼怒川・宇都宮",
+          "address": "〒323-0820 栃木県小山市",
+          "lat": 36.314,
+          "lng": 139.794,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 193,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "中禅寺湖",
+      "prefecture": "栃木県",
+      "size": 2,
+      "maxKm": 0.278,
+      "flags": [],
+      "members": [
+        {
+          "slug": "chuzenji-lake-fishing",
+          "name": "中禅寺湖",
+          "core": "中禅寺湖",
+          "prefecture": "栃木県",
+          "area": "中禅寺湖",
+          "address": "〒321-1661 栃木県日光市",
+          "lat": 36.7381,
+          "lng": 139.4781,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 3,
+          "descLen": 198,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "chuzenji-trout",
+          "name": "中禅寺湖（トラウト）",
+          "core": "中禅寺湖",
+          "prefecture": "栃木県",
+          "area": "中禅寺湖",
+          "address": "〒321-1661 栃木県日光市",
+          "lat": 36.7378,
+          "lng": 139.4812,
+          "spotType": "river",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 191,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "初瀬川",
+      "prefecture": "奈良県",
+      "size": 2,
+      "maxKm": 0.129,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "hatsusegawa-river",
+          "name": "初瀬川（大和川上流）",
+          "core": "初瀬川",
+          "prefecture": "奈良県",
+          "area": "初瀬川・大和川上流",
+          "address": "〒633-0112 奈良県桜井市初瀬731-1",
+          "lat": 34.5356,
+          "lng": 135.9012,
+          "spotType": "river",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 270,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "上",
+            "大"
+          ]
+        },
+        {
+          "slug": "hasegawa-tsuri",
+          "name": "初瀬川",
+          "core": "初瀬川",
+          "prefecture": "奈良県",
+          "area": "大和高原",
+          "address": "〒633-0002 奈良県桜井市金屋172",
+          "lat": 34.535,
+          "lng": 135.9,
+          "spotType": "river",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 220,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "生地",
+      "prefecture": "富山県",
+      "size": 2,
+      "maxKm": 0.222,
+      "flags": [],
+      "members": [
+        {
+          "slug": "ikuji-gyokou-a9",
+          "name": "生地漁港",
+          "core": "生地",
+          "prefecture": "富山県",
+          "area": "黒部・生地",
+          "address": "〒938-0072 富山県黒部市生地中区",
+          "lat": 36.887,
+          "lng": 137.438,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 247,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ikuji-gyokou-kurobe-a12",
+          "name": "生地漁港（黒部）",
+          "core": "生地",
+          "prefecture": "富山県",
+          "area": "入善・朝日",
+          "address": "〒938-0072 富山県黒部市生地",
+          "lat": 36.885,
+          "lng": 137.438,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "犬熊",
+      "prefecture": "福井県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [],
+      "members": [
+        {
+          "slug": "obama-inokuma-kaigan",
+          "name": "小浜・犬熊海岸",
+          "core": "犬熊",
+          "prefecture": "福井県",
+          "area": "小浜",
+          "address": "〒917-0003 福井県小浜市犬熊",
+          "lat": 35.491976,
+          "lng": 135.733841,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 244,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        },
+        {
+          "slug": "obama-inokuma-fukui",
+          "name": "小浜・犬熊海水浴場",
+          "core": "犬熊",
+          "prefecture": "福井県",
+          "area": "小浜・高浜",
+          "address": "〒917-0024 福井県小浜市犬熊",
+          "lat": 35.491976,
+          "lng": 135.733841,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 227,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "日向",
+      "prefecture": "福井県",
+      "size": 2,
+      "maxKm": 0,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "mihama-higa-gyokou",
+          "name": "美浜日向漁港",
+          "core": "日向",
+          "prefecture": "福井県",
+          "area": "敦賀・美浜",
+          "address": "〒919-1124 福井県三方郡美浜町日向",
+          "lat": 35.613313,
+          "lng": 135.894372,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 247,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "mihama-higa-kaigan-fukui",
+          "name": "美浜・日向海岸",
+          "core": "日向",
+          "prefecture": "福井県",
+          "area": "敦賀・美浜",
+          "address": "〒919-1124 福井県三方郡美浜町日向",
+          "lat": 35.613313,
+          "lng": 135.894372,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 254,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "沖端",
+      "prefecture": "福岡県",
+      "size": 2,
+      "maxKm": 0.357,
+      "flags": [],
+      "members": [
+        {
+          "slug": "okibata-kou-yanagawa-w6",
+          "name": "柳川・沖端港",
+          "core": "沖端",
+          "prefecture": "福岡県",
+          "area": "福岡市・博多湾",
+          "address": "〒832-0066 福岡県柳川市沖端町",
+          "lat": 33.14,
+          "lng": 130.4,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 252,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "沖"
+          ]
+        },
+        {
+          "slug": "okibata-gyokou-a10",
+          "name": "沖端漁港",
+          "core": "沖端",
+          "prefecture": "福岡県",
+          "area": "柳川・沖端",
+          "address": "〒832-0067 福岡県柳川市稲荷町",
+          "lat": 33.142,
+          "lng": 130.403,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 228,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "沖"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "港レトロ",
+      "prefecture": "福岡県",
+      "size": 3,
+      "maxKm": 0.454,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "moji-retro-wharf",
+          "name": "門司港レトロ波止場",
+          "core": "港レトロ",
+          "prefecture": "福岡県",
+          "area": "北九州",
+          "address": "〒801-0852 福岡県北九州市門司区港町",
+          "lat": 33.9512,
+          "lng": 130.9612,
+          "spotType": "breakwater",
+          "fish": 10,
+          "sourced": 0,
+          "descLen": 222,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "mojikou-retro-gogan-w6",
+          "name": "門司港レトロ護岸",
+          "core": "港レトロ",
+          "prefecture": "福岡県",
+          "area": "北九州・門司",
+          "address": "〒801-0852 福岡県北九州市門司区港町",
+          "lat": 33.95,
+          "lng": 130.96,
+          "spotType": "pier",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 215,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "moji-retro-ganpeki-s8",
+          "name": "門司港レトロ岸壁",
+          "core": "港レトロ",
+          "prefecture": "福岡県",
+          "area": "北九州・門司",
+          "address": "〒801-0852 福岡県北九州市門司区港町",
+          "lat": 33.946,
+          "lng": 130.961,
+          "spotType": "pier",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 218,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "相島",
+      "prefecture": "福岡県",
+      "size": 2,
+      "maxKm": 0.023,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "ainoshima-gyoko-teibo",
+          "name": "相島漁港堤防",
+          "core": "相島",
+          "prefecture": "福岡県",
+          "area": "宗像・福間",
+          "address": "〒811-0118 福岡県新宮町相島1559",
+          "lat": 33.717851,
+          "lng": 130.423829,
+          "spotType": "breakwater",
+          "fish": 4,
+          "sourced": 4,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ainoshima-gyokou-s8",
+          "name": "相島漁港",
+          "core": "相島",
+          "prefecture": "福岡県",
+          "area": "博多湾・福岡市",
+          "address": "〒811-0118 福岡県糟屋郡新宮町相島",
+          "lat": 33.718,
+          "lng": 130.424,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 157,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "相島",
+      "prefecture": "福岡県",
+      "size": 2,
+      "maxKm": 0.434,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "ainoshima-kou",
+          "name": "相島港",
+          "core": "相島",
+          "prefecture": "福岡県",
+          "area": "博多・福岡市",
+          "address": "〒811-0118 福岡県糟屋郡新宮町相島",
+          "lat": 33.733,
+          "lng": 130.477,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 216,
+          "hasToilet": true,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ainoshima-fukuoka-w6",
+          "name": "相島",
+          "core": "相島",
+          "prefecture": "福岡県",
+          "area": "福岡市・博多湾",
+          "address": "〒811-0118 福岡県糟屋郡新宮町相島",
+          "lat": 33.73,
+          "lng": 130.48,
+          "spotType": "rocky",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 202,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "箱崎",
+      "prefecture": "福岡県",
+      "size": 2,
+      "maxKm": 0.145,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "hakozaki-futo-s8",
+          "name": "箱崎ふ頭",
+          "core": "箱崎",
+          "prefecture": "福岡県",
+          "area": "博多湾・福岡市",
+          "address": "〒812-0051 福岡県福岡市東区箱崎ふ頭",
+          "lat": 33.627,
+          "lng": 130.42,
+          "spotType": "pier",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 106,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hakozaki-futou-a12",
+          "name": "箱崎埠頭",
+          "core": "箱崎",
+          "prefecture": "福岡県",
+          "area": "福岡・箱崎",
+          "address": "〒812-0053 福岡県福岡市東区箱崎ふ頭",
+          "lat": 33.626,
+          "lng": 130.419,
+          "spotType": "breakwater",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 255,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "百道浜",
+      "prefecture": "福岡県",
+      "size": 3,
+      "maxKm": 0.387,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "momochihama-gokan",
+          "name": "百道浜護岸",
+          "core": "百道浜",
+          "prefecture": "福岡県",
+          "area": "博多湾",
+          "address": "〒814-0001 福岡県福岡市早良区百道浜1丁目4-1 ももち福祉プラザ",
+          "lat": 33.593,
+          "lng": 130.352,
+          "spotType": "breakwater",
+          "fish": 9,
+          "sourced": 9,
+          "descLen": 242,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "momochihama-w6",
+          "name": "福岡・百道浜",
+          "core": "百道浜",
+          "prefecture": "福岡県",
+          "area": "福岡市・博多湾",
+          "address": "〒814-0001 福岡県福岡市早良区百道浜",
+          "lat": 33.59,
+          "lng": 130.35,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 238,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "momochihama-kaigan-s8",
+          "name": "百道浜海岸",
+          "core": "百道浜",
+          "prefecture": "福岡県",
+          "area": "博多湾・福岡市",
+          "address": "〒814-0001 福岡県福岡市早良区百道浜",
+          "lat": 33.592,
+          "lng": 130.348,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 215,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "門司",
+      "prefecture": "福岡県",
+      "size": 2,
+      "maxKm": 0.497,
+      "flags": [
+        "distinguisher-differs"
+      ],
+      "members": [
+        {
+          "slug": "kitakyushu-moji-port",
+          "name": "北九州・門司港",
+          "core": "門司",
+          "prefecture": "福岡県",
+          "area": "博多湾・北九州",
+          "address": "〒800-0063 福岡県北九州市門司区大里本町3丁目13",
+          "lat": 33.946,
+          "lng": 130.957,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 247,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "北"
+          ]
+        },
+        {
+          "slug": "moji-kou-w5",
+          "name": "門司港",
+          "core": "門司",
+          "prefecture": "福岡県",
+          "area": "北九州・門司",
+          "address": "〒801-0841 福岡県北九州市門司区西海岸",
+          "lat": 33.949,
+          "lng": 130.961,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 251,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "漁港",
+      "prefecture": "福島県",
+      "size": 2,
+      "maxKm": 0.287,
+      "flags": [],
+      "members": [
+        {
+          "slug": "minamisoma-odaka-gyokou-e8",
+          "name": "南相馬小高漁港",
+          "core": "漁港",
+          "prefecture": "福島県",
+          "area": "南相馬・浪江",
+          "address": "〒979-2124 福島県南相馬市小高区村上",
+          "lat": 37.556,
+          "lng": 141.012,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 203,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南",
+            "小"
+          ]
+        },
+        {
+          "slug": "minamisoma-odaka-port-a13",
+          "name": "南相馬市小高漁港",
+          "core": "漁港",
+          "prefecture": "福島県",
+          "area": "南相馬南部",
+          "address": "〒979-2113 福島県南相馬市小高区",
+          "lat": 37.555,
+          "lng": 141.015,
+          "spotType": "port",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 204,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "南",
+            "小"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "江名",
+      "prefecture": "福島県",
+      "size": 2,
+      "maxKm": 0.178,
+      "flags": [],
+      "members": [
+        {
+          "slug": "iwaki-ena-kou-e8",
+          "name": "いわき江名港",
+          "core": "江名",
+          "prefecture": "福島県",
+          "area": "いわき・小名浜",
+          "address": "〒970-0317 福島県いわき市江名",
+          "lat": 36.914,
+          "lng": 140.903,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 104,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "ena-port-a10",
+          "name": "江名漁港",
+          "core": "江名",
+          "prefecture": "福島県",
+          "area": "いわき・小名浜",
+          "address": "〒970-0224 福島県いわき市江名",
+          "lat": 36.914,
+          "lng": 140.901,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 186,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "豊間",
+      "prefecture": "福島県",
+      "size": 2,
+      "maxKm": 0.222,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "iwaki-toyoma-kaigan-e8",
+          "name": "いわき豊間海岸",
+          "core": "豊間",
+          "prefecture": "福島県",
+          "area": "いわき・小名浜",
+          "address": "〒970-0223 福島県いわき市平豊間",
+          "lat": 36.966,
+          "lng": 140.935,
+          "spotType": "beach",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 199,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "iwaki-toyoma-breakwater-a13",
+          "name": "いわき市豊間漁港堤防",
+          "core": "豊間",
+          "prefecture": "福島県",
+          "area": "いわき東部",
+          "address": "〒970-0223 福島県いわき市平豊間",
+          "lat": 36.968,
+          "lng": 140.935,
+          "spotType": "breakwater",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 202,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "勿来",
+      "prefecture": "福島県",
+      "size": 2,
+      "maxKm": 0.479,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "iwaki-nakoso-kaigan-e8",
+          "name": "いわき勿来海岸",
+          "core": "勿来",
+          "prefecture": "福島県",
+          "area": "いわき・小名浜",
+          "address": "〒974-8232 福島県いわき市錦町須賀",
+          "lat": 36.849,
+          "lng": 140.828,
+          "spotType": "beach",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 240,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "iwaki-nakoso-kou-e8",
+          "name": "いわき勿来港",
+          "core": "勿来",
+          "prefecture": "福島県",
+          "area": "いわき・小名浜",
+          "address": "〒974-8232 福島県いわき市錦町",
+          "lat": 36.845,
+          "lng": 140.83,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 255,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "海岸",
+      "prefecture": "兵庫県",
+      "size": 2,
+      "maxKm": 0.476,
+      "flags": [],
+      "members": [
+        {
+          "slug": "suma-senmori-tottei",
+          "name": "須磨海岸（千守突堤）",
+          "core": "海岸",
+          "prefecture": "兵庫県",
+          "area": "神戸・須磨",
+          "address": "〒654-0055 兵庫県神戸市須磨区須磨浦通3丁目9",
+          "lat": 34.6355,
+          "lng": 135.133,
+          "spotType": "beach",
+          "fish": 5,
+          "sourced": 5,
+          "descLen": 231,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "suma-kaigan-k8",
+          "name": "須磨海岸",
+          "core": "海岸",
+          "prefecture": "兵庫県",
+          "area": "須磨・神戸",
+          "address": "〒654-0055 兵庫県神戸市須磨区須磨浦通",
+          "lat": 34.632,
+          "lng": 135.13,
+          "spotType": "beach",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 234,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "岩屋",
+      "prefecture": "兵庫県",
+      "size": 2,
+      "maxKm": 0.346,
+      "flags": [],
+      "members": [
+        {
+          "slug": "iwaya-gyoko",
+          "name": "岩屋漁港",
+          "core": "岩屋",
+          "prefecture": "兵庫県",
+          "area": "淡路島北部",
+          "address": "〒656-2401 兵庫県淡路市岩屋",
+          "lat": 34.595,
+          "lng": 135.018,
+          "spotType": "port",
+          "fish": 16,
+          "sourced": 13,
+          "descLen": 217,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "iwaya-kou-a12",
+          "name": "岩屋港",
+          "core": "岩屋",
+          "prefecture": "兵庫県",
+          "area": "淡路島・岩屋",
+          "address": "〒656-2401 兵庫県淡路市岩屋",
+          "lat": 34.598,
+          "lng": 135.019,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 183,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "漁港",
+      "prefecture": "兵庫県",
+      "size": 2,
+      "maxKm": 0.432,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "tarumi-gyoko",
+          "name": "垂水漁港",
+          "core": "漁港",
+          "prefecture": "兵庫県",
+          "area": "明石",
+          "address": "〒655-0892 兵庫県神戸市垂水区平磯",
+          "lat": 34.631,
+          "lng": 135.052,
+          "spotType": "port",
+          "fish": 10,
+          "sourced": 10,
+          "descLen": 138,
+          "hasToilet": false,
+          "hasParking": false,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tarumi-gyokou-gogan-a13",
+          "name": "垂水漁港護岸",
+          "core": "漁港",
+          "prefecture": "兵庫県",
+          "area": "垂水・舞子",
+          "address": "〒655-0036 兵庫県神戸市垂水区海岸通",
+          "lat": 34.628,
+          "lng": 135.055,
+          "spotType": "breakwater",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 106,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "洲本",
+      "prefecture": "兵庫県",
+      "size": 2,
+      "maxKm": 0.124,
+      "flags": [],
+      "members": [
+        {
+          "slug": "sumoto-kou-add4",
+          "name": "洲本港",
+          "core": "洲本",
+          "prefecture": "兵庫県",
+          "area": "淡路島",
+          "address": "〒656-0021 兵庫県洲本市塩屋",
+          "lat": 34.343,
+          "lng": 134.898,
+          "spotType": "port",
+          "fish": 8,
+          "sourced": 4,
+          "descLen": 285,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "本港"
+          ]
+        },
+        {
+          "slug": "awaji-sumoto-port",
+          "name": "淡路島洲本港",
+          "core": "洲本",
+          "prefecture": "兵庫県",
+          "area": "淡路島",
+          "address": "〒656-0022 兵庫県洲本市海岸通1丁目11",
+          "lat": 34.3433,
+          "lng": 134.8967,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 4,
+          "descLen": 284,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "本港"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "津名",
+      "prefecture": "兵庫県",
+      "size": 2,
+      "maxKm": 0.383,
+      "flags": [],
+      "members": [
+        {
+          "slug": "tsuna-port-shizuki",
+          "name": "津名港（志筑）",
+          "core": "津名",
+          "prefecture": "兵庫県",
+          "area": "淡路島北部",
+          "address": "〒656-2133 兵庫県淡路市志筑新浜",
+          "lat": 34.432445,
+          "lng": 134.916949,
+          "spotType": "port",
+          "fish": 16,
+          "sourced": 6,
+          "descLen": 157,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "tsuna-kou-a10",
+          "name": "津名港",
+          "core": "津名",
+          "prefecture": "兵庫県",
+          "area": "淡路島・津名",
+          "address": "〒656-2131 兵庫県淡路市志筑",
+          "lat": 34.43,
+          "lng": 134.914,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 229,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "港第3",
+      "prefecture": "北海道",
+      "size": 2,
+      "maxKm": 0.159,
+      "flags": [],
+      "members": [
+        {
+          "slug": "monbetsu-ko-dai3-futo",
+          "name": "紋別港第3ふ頭",
+          "core": "港第3",
+          "prefecture": "北海道",
+          "area": "紋別",
+          "address": "〒094-0000 北海道紋別市",
+          "lat": 44.353,
+          "lng": 143.353,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 0,
+          "descLen": 237,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "第3"
+          ]
+        },
+        {
+          "slug": "monbetsu-daisan-futou6",
+          "name": "紋別港第3埠頭",
+          "core": "港第3",
+          "prefecture": "北海道",
+          "area": "網走・知床",
+          "address": "〒094-0011 北海道紋別市港町",
+          "lat": 44.353,
+          "lng": 143.351,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 0,
+          "descLen": 260,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "第3"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "港北防波堤ドーム",
+      "prefecture": "北海道",
+      "size": 2,
+      "maxKm": 0.234,
+      "flags": [
+        "spotType-differs"
+      ],
+      "members": [
+        {
+          "slug": "wakkanai-kita-bouhatei-dome",
+          "name": "稚内港北防波堤ドーム",
+          "core": "港北防波堤ドーム",
+          "prefecture": "北海道",
+          "area": "稚内",
+          "address": "〒097-0023 北海道稚内市開運1丁目2-2",
+          "lat": 45.417,
+          "lng": 141.681,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 202,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内",
+            "北"
+          ]
+        },
+        {
+          "slug": "wakkanai-dome-breakwater-a10",
+          "name": "稚内港北防波堤ドーム周辺",
+          "core": "港北防波堤ドーム",
+          "prefecture": "北海道",
+          "area": "稚内・宗谷",
+          "address": "〒097-0023 北海道稚内市開運",
+          "lat": 45.417,
+          "lng": 141.678,
+          "spotType": "breakwater",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 215,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "内",
+            "北"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "美国",
+      "prefecture": "北海道",
+      "size": 2,
+      "maxKm": 0.041,
+      "flags": [],
+      "members": [
+        {
+          "slug": "shakotan-bikuni-port",
+          "name": "積丹美国港",
+          "core": "美国",
+          "prefecture": "北海道",
+          "area": "小樽・石狩",
+          "address": "〒046-0201 北海道積丹町美国町",
+          "lat": 43.3347,
+          "lng": 140.5683,
+          "spotType": "port",
+          "fish": 4,
+          "sourced": 4,
+          "descLen": 188,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "bikuni-gyoko",
+          "name": "美国漁港",
+          "core": "美国",
+          "prefecture": "北海道",
+          "area": "積丹",
+          "address": "〒046-0201 北海道積丹郡積丹町積丹町美国町",
+          "lat": 43.335,
+          "lng": 140.568,
+          "spotType": "port",
+          "fish": 6,
+          "sourced": 1,
+          "descLen": 225,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "湾新港東",
+      "prefecture": "北海道",
+      "size": 2,
+      "maxKm": 0.236,
+      "flags": [],
+      "members": [
+        {
+          "slug": "ishikari-east-wharf",
+          "name": "石狩湾新港東埠頭",
+          "core": "湾新港東",
+          "prefecture": "北海道",
+          "area": "小樽・石狩",
+          "address": "〒061-3243 北海道石狩市新港東4丁目",
+          "lat": 43.2192,
+          "lng": 141.3089,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 5,
+          "descLen": 231,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "新",
+            "東"
+          ]
+        },
+        {
+          "slug": "ishikaribay-higashi-futo",
+          "name": "石狩湾新港東ふ頭",
+          "core": "湾新港東",
+          "prefecture": "北海道",
+          "area": "石狩",
+          "address": "〒061-3243 北海道石狩市新港東4丁目",
+          "lat": 43.219,
+          "lng": 141.306,
+          "spotType": "port",
+          "fish": 5,
+          "sourced": 0,
+          "descLen": 261,
+          "hasToilet": false,
+          "hasParking": true,
+          "file": "",
+          "dist": [
+            "新",
+            "東"
+          ]
+        }
+      ]
+    },
+    {
+      "core": "潮岬",
+      "prefecture": "和歌山県",
+      "size": 2,
+      "maxKm": 0.387,
+      "flags": [],
+      "members": [
+        {
+          "slug": "shionomisaki-k8",
+          "name": "潮岬",
+          "core": "潮岬",
+          "prefecture": "和歌山県",
+          "area": "串本・すさみ",
+          "address": "〒649-3502 和歌山県東牟婁郡串本町潮岬",
+          "lat": 33.438,
+          "lng": 135.754,
+          "spotType": "rocky",
+          "fish": 5,
+          "sourced": 2,
+          "descLen": 225,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "shionomisaki-iso-a13",
+          "name": "潮岬磯",
+          "core": "潮岬",
+          "prefecture": "和歌山県",
+          "area": "串本・潮岬",
+          "address": "〒649-3502 和歌山県東牟婁郡串本町潮岬",
+          "lat": 33.437,
+          "lng": 135.758,
+          "spotType": "rocky",
+          "fish": 2,
+          "sourced": 0,
+          "descLen": 188,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    },
+    {
+      "core": "日高",
+      "prefecture": "和歌山県",
+      "size": 2,
+      "maxKm": 0.004,
+      "flags": [],
+      "members": [
+        {
+          "slug": "gobo-hidaka-port",
+          "name": "御坊・日高港",
+          "core": "日高",
+          "prefecture": "和歌山県",
+          "area": "御坊・日高",
+          "address": "〒644-0024 和歌山県御坊市塩屋町450-23",
+          "lat": 33.871,
+          "lng": 135.1425,
+          "spotType": "port",
+          "fish": 11,
+          "sourced": 0,
+          "descLen": 240,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        },
+        {
+          "slug": "hidaka-kou-k8",
+          "name": "日高港",
+          "core": "日高",
+          "prefecture": "和歌山県",
+          "area": "御坊・日高",
+          "address": "〒649-1213 和歌山県日高郡日高町方杭",
+          "lat": 33.871032,
+          "lng": 135.142529,
+          "spotType": "port",
+          "fish": 3,
+          "sourced": 0,
+          "descLen": 193,
+          "hasToilet": true,
+          "hasParking": true,
+          "file": "",
+          "dist": []
+        }
+      ]
+    }
+  ]
+}
