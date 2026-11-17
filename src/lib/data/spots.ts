@@ -6,6 +6,7 @@ import { spotRulesBatch } from "./spots-rules-batch";
 import { generateSpotIntro } from "../utils/spot-content-generator";
 import { isSameSpotName } from "./spot-name-normalize";
 import { spotTipsAdd } from "./spot-tips-add";
+import { spotMergeMap } from "./spot-merge-map";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
 export const dedupRedirects = new Map<string, string>();
@@ -123,6 +124,26 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
   }
   const unique = slugDupFound ? merged.filter((s) => bySlug.get(s.slug) === s) : merged;
 
+  // Pass5: 人手判定済みの同一施設統合（spot-merge-map.ts）。
+  // 「妻良港 / 妻良漁港」「油津港 / 日南市油津港」のように接尾辞（港/漁港）や
+  // 地名接頭辞だけが違う同一施設は Pass1-3 では安全に機械判定できないため、
+  // 判定済みの表で敗者→勝者を明示する。勝者が生存していない場合は何もしない
+  // （テストで全エントリが有効であることを保証する）。
+  const liveBySlug = new Map(unique.map((s) => [s.slug, s] as const));
+  const mergedAway = new Set<string>();
+  for (const [loserSlug, winnerSlug] of Object.entries(spotMergeMap)) {
+    const loser = liveBySlug.get(loserSlug);
+    const winner = liveBySlug.get(winnerSlug);
+    if (!loser || !winner || loser === winner) continue;
+    liveBySlug.set(winnerSlug, mergeSpotData(winner, loser));
+    mergedAway.add(loserSlug);
+    dedupRedirects.set(loserSlug, winnerSlug);
+  }
+  const consolidated =
+    mergedAway.size > 0
+      ? unique.filter((s) => !mergedAway.has(s.slug)).map((s) => liveBySlug.get(s.slug)!)
+      : unique;
+
   // チェーン解決: A→B→C の場合、A→C に修正
   for (const [loser, winner] of dedupRedirects) {
     let finalWinner = winner;
@@ -135,7 +156,23 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
       dedupRedirects.set(loser, finalWinner);
     }
   }
-  return unique;
+  return consolidated;
+}
+
+// 統合（Pass5）時に敗者の情報を勝者へ引き継ぐ。
+// - 釣れる魚: 勝者に無い魚種のみ追加（同じ魚種は勝者の記述＝出典付き優先を維持）
+// - ルール: 勝者にルール（個別・一括とも）が無い場合のみ敗者のものを採用
+// 施設の有無など食い違い得る事実は勝者側を維持し、ここでは上書きしない。
+function mergeSpotData(winner: FishingSpot, loser: FishingSpot): FishingSpot {
+  const have = new Set(winner.catchableFish.map((cf) => cf.fish.slug));
+  const extraFish = loser.catchableFish.filter((cf) => !have.has(cf.fish.slug));
+  const winnerHasRules = !!winner.rules || !!spotRulesBatch[winner.slug];
+  const loserRules = loser.rules ?? spotRulesBatch[loser.slug];
+  return {
+    ...winner,
+    catchableFish: extraFish.length > 0 ? [...winner.catchableFish, ...extraFish] : winner.catchableFish,
+    ...(!winnerHasRules && loserRules ? { rules: loserRules } : {}),
+  };
 }
 
 // ルールデータの一括適用（既にrulesが設定されているスポットは上書きしない）

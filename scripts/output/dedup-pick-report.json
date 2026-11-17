@@ -1,0 +1,885 @@
+[
+  {
+    "winner": "toyohashi-omotehama-add3（豊橋表浜海岸 s0/r2/f4）",
+    "losers": [
+      "toyohashi-omotehama-surf-e8（豊橋・表浜サーフ s0/r1/f3）"
+    ],
+    "reason": "表浜海岸と表浜サーフは同じ浜（334m）",
+    "conflicts": []
+  },
+  {
+    "winner": "ehime-yawatahama-obato-bulk（八幡浜港大波止 s6/r1/f6）",
+    "losers": [
+      "yawatahama-kou-ooteibou（八幡浜市・八幡浜港大堤防 s0/r1/f4）"
+    ],
+    "reason": "八幡浜港の大堤防＝大波止（同一構造物の呼び分け）",
+    "conflicts": []
+  },
+  {
+    "winner": "isozaki-kou（磯崎港 s0/r1/f5）",
+    "losers": [
+      "hitachinaka-isozaki-kou-a13（ひたちなか・磯崎港 s0/r1/f3）"
+    ],
+    "reason": "磯崎港の地名接頭辞違い",
+    "conflicts": []
+  },
+  {
+    "winner": "oarai-port（大洗港 s9/r4/f9）",
+    "losers": [
+      "oarai-ko-add2（大洗港（大洗漁港） s0/r1/f4）"
+    ],
+    "reason": "大洗港（大洗漁港）は同一港",
+    "conflicts": []
+  },
+  {
+    "winner": "uno-kou-tamano-w6（玉野市・宇野港 s0/r1/f5）",
+    "losers": [
+      "tamano-uno-port（玉野・宇野港 s0/r1/f4）",
+      "uno-kou-okayama（宇野港 s0/r1/f3）"
+    ],
+    "reason": "宇野港の地名接頭辞違い（同住所 玉野市築港）",
+    "conflicts": []
+  },
+  {
+    "winner": "katakami-kou-w6（片上港 s0/r1/f5）",
+    "losers": [
+      "bizen-katakami-kou（備前・片上港 s0/r1/f3）"
+    ],
+    "reason": "片上港の地名接頭辞違い",
+    "conflicts": [
+      "トイレ(katakami-kou-w6=true/bizen-katakami-kou=false)"
+    ]
+  },
+  {
+    "winner": "nanjo-oku-island（南城市奥武島 s0/r1/f8）",
+    "losers": [
+      "ou-jima-nanjo-w6（南城・奥武島 s0/r1/f5）"
+    ],
+    "reason": "奥武島（南城市）の地名接頭辞違い",
+    "conflicts": [
+      "トイレ(nanjo-oku-island=false/ou-jima-nanjo-w6=true)"
+    ]
+  },
+  {
+    "winner": "zanpa-misaki-w6（残波岬 s0/r1/f5）",
+    "losers": [
+      "yomitan-zanpamisaki-a9（読谷村・残波岬 s0/r1/f2）"
+    ],
+    "reason": "残波岬の地名接頭辞違い",
+    "conflicts": []
+  },
+  {
+    "winner": "naha-miegusuku-port（那覇市三重城港 s0/r1/f7）",
+    "losers": [
+      "miegusuku-kou-naha-w6（那覇・三重城港 s0/r1/f5）"
+    ],
+    "reason": "三重城港の地名接頭辞違い",
+    "conflicts": []
+  },
+  {
+    "winner": "yomitan-toya-port（読谷村都屋漁港 s0/r3/f7）",
+    "losers": [
+      "toya-gyokou-a11（都屋漁港 s0/r1/f2）",
+      "toya-gyokou-yomitan-a13（都屋漁港（読谷） s0/r1/f2）"
+    ],
+    "reason": "都屋漁港の表記違い",
+    "conflicts": []
+  },
+  {
+    "winner": "hedo-misaki-s8（辺戸岬 s0/r1/f3）",
+    "losers": [
+      "hedo-misaki-iso（辺戸岬磯 s0/r1/f3）"
+    ],
+    "reason": "辺戸岬と辺戸岬磯（同じ岬の磯）",
+    "conflicts": []
+  },
+  {
+    "winner": "iwaizumi-omoto-gyokou6（岩泉小本漁港 s0/r1/f5）",
+    "losers": [
+      "iwaizumi-omoto-kou（岩泉 小本港 s0/r1/f4）",
+      "omoto-gyokou-e8（小本漁港 s0/r1/f3）"
+    ],
+    "reason": "小本港＝小本漁港（座標同一）",
+    "conflicts": [
+      "トイレ(iwaizumi-omoto-gyokou6=true/iwaizumi-omoto-kou=false)"
+    ]
+  },
+  {
+    "winner": "sakarigawa-kakou6（盛川河口 s0/r1/f5）",
+    "losers": [
+      "ofunato-sakarigawa-river-a13（大船渡市盛川河口 s0/r1/f2）"
+    ],
+    "reason": "盛川河口の地名接頭辞違い",
+    "conflicts": [
+      "トイレ(sakarigawa-kakou6=true/ofunato-sakarigawa-river-a13=false)"
+    ]
+  },
+  {
+    "winner": "miyagawa-takayama-a11（宮川（高山地区） s0/r1/f2）",
+    "losers": [
+      "takayama-miyagawa-miyamaebashi-a13（高山・宮川（宮前橋付近） s0/r1/f2）"
+    ],
+    "reason": "宮川の高山市街区間（429m）",
+    "conflicts": []
+  },
+  {
+    "winner": "hidagawa-gero-gifu（飛騨川・下呂温泉エリア s0/r1/f5）",
+    "losers": [
+      "hidagawa-gero-onsen（飛騨川・下呂温泉 s0/r1/f3）"
+    ],
+    "reason": "飛騨川・下呂温泉（エリア表記違い）",
+    "conflicts": []
+  },
+  {
+    "winner": "aoshima-port（青島港 s3/r1/f3）",
+    "losers": [
+      "aoshima-gyokou-w5（青島漁港 s0/r1/f3）"
+    ],
+    "reason": "青島港＝青島漁港（同住所）",
+    "conflicts": []
+  },
+  {
+    "winner": "aburatsu-port（油津港 s0/r5/f17）",
+    "losers": [
+      "aburatsu-kou-nichinan（日南市油津港 s0/r1/f3）",
+      "nichinan-aburatsu-port（日南油津港 s0/r1/f2）"
+    ],
+    "reason": "油津港の地名接頭辞違い（座標ほぼ同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "oshika-ayukawa-kou（牡鹿半島 鮎川港 s0/r1/f4）",
+    "losers": [
+      "oshika-ayukawa-port-a11（牡鹿半島鮎川漁港 s0/r1/f3）"
+    ],
+    "reason": "鮎川港＝鮎川漁港",
+    "conflicts": []
+  },
+  {
+    "winner": "shizugawa-gyokou6（志津川漁港 s0/r1/f5）",
+    "losers": [
+      "minamisanriku-shizugawa-wharf-a11（南三陸町志津川港 s0/r1/f3）"
+    ],
+    "reason": "志津川漁港＝志津川港（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "shobutada-beach（菖蒲田海岸 s0/r2/f6）",
+    "losers": [
+      "shobuta-kaigan-e8（菖蒲田海水浴場 s0/r1/f3）"
+    ],
+    "reason": "菖蒲田海岸＝菖蒲田海水浴場（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "yuriage-port（閖上港 s1/r3/f9）",
+    "losers": [
+      "yuriage-gyokou6（閖上漁港 s1/r1/f5）"
+    ],
+    "reason": "閖上港＝閖上漁港",
+    "conflicts": []
+  },
+  {
+    "winner": "hondo-kou-amakusa-w6（天草・本渡港 s0/r1/f5）",
+    "losers": [
+      "hondo-gyokou-amakusa（天草 本渡漁港 s0/r1/f3）",
+      "hondo-kou-a11（本渡港 s0/r1/f2）"
+    ],
+    "reason": "本渡港＝本渡漁港（堤防エントリは別扱い）",
+    "conflicts": []
+  },
+  {
+    "winner": "karasugawa-takasaki（烏川（高崎周辺） s0/r1/f4）",
+    "losers": [
+      "takasaki-karasugawa-wadabashi-a13（高崎・烏川（和田橋付近） s0/r1/f3）"
+    ],
+    "reason": "烏川の高崎区間（291m）",
+    "conflicts": []
+  },
+  {
+    "winner": "usui-gawa（碓氷川 s0/r3/f4）",
+    "losers": [
+      "usui-river-annaka-a10（碓氷川（安中地区） s0/r1/f2）"
+    ],
+    "reason": "碓氷川の安中区間",
+    "conflicts": []
+  },
+  {
+    "winner": "jounouma-tsuri6（城沼 s0/r1/f5）",
+    "losers": [
+      "jounuma-tatebayashi-a11（城沼（館林市） s0/r1/f2）"
+    ],
+    "reason": "城沼（館林）",
+    "conflicts": []
+  },
+  {
+    "winner": "ujina-kou-hiroshima（広島港宇品 s0/r2/f4）",
+    "losers": [
+      "ujina-hatoba-w6（広島港・宇品波止場 s0/r1/f5）"
+    ],
+    "reason": "広島港宇品の表記違い",
+    "conflicts": []
+  },
+  {
+    "winner": "takehara-tadanoumi-port（竹原市忠海港 s0/r1/f3）",
+    "losers": [
+      "takehara-tadanoumi-gyokou-a9（竹原・忠海漁港 s0/r1/f2）"
+    ],
+    "reason": "忠海港＝忠海漁港",
+    "conflicts": []
+  },
+  {
+    "winner": "tomonoura-hiroshima-w6（鞆の浦 s0/r1/f5）",
+    "losers": [
+      "tomonoura-port（鞆の浦港 s0/r1/f4）",
+      "tomonoura-gyokou-w5（鞆の浦漁港 s0/r1/f3）",
+      "fukuyama-tomonoura-a9（福山・鞆の浦 s0/r1/f2）"
+    ],
+    "reason": "鞆の浦（港・漁港・総称）の表記違い（護岸エントリは別扱い）",
+    "conflicts": []
+  },
+  {
+    "winner": "tomonoura-sensui-gokan（鞆の浦仙酔島渡船場護岸 s7/r1/f7）",
+    "losers": [
+      "tomonoura-sensuijima-c8（鞆の浦・仙酔島渡船場 s0/r1/f4）"
+    ],
+    "reason": "仙酔島渡船場の護岸表記違い",
+    "conflicts": []
+  },
+  {
+    "winner": "sunport-takamatsu-kagawa（サンポート高松 s0/r2/f4）",
+    "losers": [
+      "takamatsu-sunport（高松・サンポート高松周辺 s0/r1/f3）"
+    ],
+    "reason": "サンポート高松の表記違い（護岸エントリは別扱い）",
+    "conflicts": []
+  },
+  {
+    "winner": "shido-kou-w6（志度港 s0/r1/f5）",
+    "losers": [
+      "sanuki-shido-port（さぬき市志度漁港 s0/r1/f3）"
+    ],
+    "reason": "志度漁港＝志度港",
+    "conflicts": [
+      "トイレ(shido-kou-w6=true/sanuki-shido-port=false)"
+    ]
+  },
+  {
+    "winner": "takuma-port（詫間港 s0/r1/f10）",
+    "losers": [
+      "mitoyo-takuma-port（三豊市詫間港 s0/r1/f3）"
+    ],
+    "reason": "詫間港の地名接頭辞違い（6m）",
+    "conflicts": [
+      "トイレ(takuma-port=false/mitoyo-takuma-port=true)"
+    ]
+  },
+  {
+    "winner": "kochi-urado-bay（高知浦戸湾 s4/r1/f4）",
+    "losers": [
+      "urado-bay（浦戸湾 s0/r2/f8）"
+    ],
+    "reason": "浦戸湾の地名接頭辞違い",
+    "conflicts": []
+  },
+  {
+    "winner": "kochi-nakatosa-kure-bulk（中土佐町・久礼港 s6/r1/f6）",
+    "losers": [
+      "nakatosa-kure-port（中土佐町久礼漁港 s0/r2/f10）",
+      "kure-kou-nakatosa-w6（中土佐・久礼港 s0/r1/f5）"
+    ],
+    "reason": "久礼港＝久礼漁港（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "saga-karatsu-kotomo-bulk（唐津・小友漁港 s5/r1/f5）",
+    "losers": [
+      "otomo-gyokou（小友漁港 s0/r2/f3）"
+    ],
+    "reason": "小友漁港（唐津市呼子町）。一方の住所が誤り",
+    "conflicts": [
+      "トイレ(saga-karatsu-kotomo-bulk=true/otomo-gyokou=false)"
+    ]
+  },
+  {
+    "winner": "karatsu-higashinohama-w6（唐津・東の浜 s0/r1/f5）",
+    "losers": [
+      "karatsu-higashinohama（唐津東の浜海水浴場 s0/r1/f3）"
+    ],
+    "reason": "唐津・東の浜の表記違い",
+    "conflicts": []
+  },
+  {
+    "winner": "shima-daiozaki（志摩大王崎 s0/r1/f7）",
+    "losers": [
+      "daiozaki-mie（大王崎 s0/r1/f4）"
+    ],
+    "reason": "大王崎の地名接頭辞違い",
+    "conflicts": []
+  },
+  {
+    "winner": "tobishima-katsuura-kou（飛島勝浦港 s1/r1/f7）",
+    "losers": [
+      "tobishima-katsuura-e8（飛島勝浦漁港 s0/r1/f4）"
+    ],
+    "reason": "飛島勝浦港＝勝浦漁港",
+    "conflicts": []
+  },
+  {
+    "winner": "sakata-honko-quay-a13（酒田市本港岸壁 s0/r1/f3）",
+    "losers": [
+      "sakata-honko-wharf-a10（酒田本港埠頭 s0/r1/f2）"
+    ],
+    "reason": "酒田本港の埠頭/岸壁表記違い（同住所）",
+    "conflicts": [
+      "トイレ(sakata-honko-quay-a13=false/sakata-honko-wharf-a10=true)"
+    ]
+  },
+  {
+    "winner": "shimonoseki-kanmon-gogan（下関・関門海峡護岸 s0/r1/f5）",
+    "losers": [
+      "shimonoseki-kanmon-c8（下関・関門海峡釣り場 s0/r1/f5）"
+    ],
+    "reason": "関門海峡（みもすそ川）の護岸表記違い（唐戸の釣り公園は別扱い）",
+    "conflicts": []
+  },
+  {
+    "winner": "susa-gyokou-yamaguchi-w6（須佐漁港 s0/r1/f5）",
+    "losers": [
+      "hagi-susa-port（萩市須佐漁港 s0/r1/f4）"
+    ],
+    "reason": "須佐漁港（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "nijigahama-hikari-w6（光市・虹ヶ浜 s0/r1/f5）",
+    "losers": [
+      "hikari-nijigahama-c8（光市・虹ヶ浜海岸 s0/r1/f3）"
+    ],
+    "reason": "虹ヶ浜の表記違い",
+    "conflicts": []
+  },
+  {
+    "winner": "yuu-kou-iwakuni-w6（岩国・由宇港 s0/r1/f5）",
+    "losers": [
+      "iwakuni-yuu-port（岩国市由宇港 s0/r1/f3）"
+    ],
+    "reason": "由宇港の地名接頭辞違い（4m）",
+    "conflicts": [
+      "トイレ(yuu-kou-iwakuni-w6=true/iwakuni-yuu-port=false)"
+    ]
+  },
+  {
+    "winner": "katsuragawa-otsuki6（桂川（大月付近） s0/r1/f5）",
+    "losers": [
+      "katsuragawa-otsuki（桂川（大月〜都留） s0/r1/f3）",
+      "katsuragawa-otsuki-tsuru（桂川（大月・都留） s0/r1/f3）",
+      "katsuragawa-otsuki-e8（桂川（大月エリア） s0/r1/f3）",
+      "katsuragawa-otsuki-fishing-a10（桂川（大月地区） s0/r1/f2）"
+    ],
+    "reason": "桂川の大月区間（5件が500m以内）",
+    "conflicts": [
+      "トイレ(katsuragawa-otsuki6=true/katsuragawa-otsuki=false)",
+      "トイレ(katsuragawa-otsuki6=true/katsuragawa-otsuki-tsuru=false)",
+      "トイレ(katsuragawa-otsuki6=true/katsuragawa-otsuki-e8=false)",
+      "トイレ(katsuragawa-otsuki6=true/katsuragawa-otsuki-fishing-a10=false)"
+    ]
+  },
+  {
+    "winner": "fuefukigawa-isawa6（笛吹川（石和付近） s0/r1/f5）",
+    "losers": [
+      "fuefukigawa-isawa-kofu（笛吹川（石和・甲府） s0/r1/f3）",
+      "fuefukigawa-isawa-onsen-a12（笛吹川（石和温泉地区） s0/r1/f2）"
+    ],
+    "reason": "笛吹川の石和区間",
+    "conflicts": [
+      "トイレ(fuefukigawa-isawa6=true/fuefukigawa-isawa-kofu=false)"
+    ]
+  },
+  {
+    "winner": "biwako-otsu-port（琵琶湖大津港周辺 s6/r1/f6）",
+    "losers": [
+      "biwako-otsu-ko（琵琶湖大津港 s0/r1/f3）"
+    ],
+    "reason": "琵琶湖大津港（同住所）",
+    "conflicts": []
+  },
+  {
+    "winner": "uchinoura-kou-kimotsuki-w6（肝付・内之浦港 s0/r1/f5）",
+    "losers": [
+      "uchinoura-kou-s8（内之浦港 s0/r1/f3）"
+    ],
+    "reason": "内之浦港（座標同一）",
+    "conflicts": [
+      "トイレ(uchinoura-kou-kimotsuki-w6=true/uchinoura-kou-s8=false)"
+    ]
+  },
+  {
+    "winner": "sado-ogi-port（佐渡小木港 s0/r2/f9）",
+    "losers": [
+      "ogi-kou-niigata（小木港 s0/r1/f6）"
+    ],
+    "reason": "佐渡・小木港",
+    "conflicts": []
+  },
+  {
+    "winner": "kaneda-gyokou（金田漁港 s0/r1/f4）",
+    "losers": [
+      "kaneda-ko（金田港 s0/r1/f3）"
+    ],
+    "reason": "金田港＝金田漁港（三浦市）",
+    "conflicts": [
+      "トイレ(kaneda-gyokou=true/kaneda-ko=false)"
+    ]
+  },
+  {
+    "winner": "mito-hama（三戸浜 s0/r1/f3）",
+    "losers": [
+      "mitohama-kaigan-miura-a12（三戸浜海岸（三浦） s0/r1/f2）"
+    ],
+    "reason": "三戸浜（91m）",
+    "conflicts": [
+      "トイレ(mito-hama=true/mitohama-kaigan-miura-a12=false)"
+    ]
+  },
+  {
+    "winner": "manazuru-port（真鶴港 s5/r6/f5）",
+    "losers": [
+      "manazuru-kou-iwabashi-a10（真鶴港（岩大橋付近） s0/r1/f3）"
+    ],
+    "reason": "真鶴港の位置補足表記違い",
+    "conflicts": []
+  },
+  {
+    "winner": "manazuru-mitsuishi-e8（真鶴半島・三ツ石 s0/r1/f4）",
+    "losers": [
+      "manazuru-mitsuishi-a10（真鶴半島・三ツ石海岸 s0/r1/f2）"
+    ],
+    "reason": "真鶴半島・三ツ石",
+    "conflicts": []
+  },
+  {
+    "winner": "fujisawa-katase-gyokou-a13（藤沢・片瀬漁港 s0/r1/f3）",
+    "losers": [
+      "katase-port（片瀬漁港 s0/r1/f2）"
+    ],
+    "reason": "片瀬漁港の地名接頭辞違い",
+    "conflicts": []
+  },
+  {
+    "winner": "yanagishima-kaigan-surf（柳島海岸サーフ s0/r2/f4）",
+    "losers": [
+      "yanagishima-beach（柳島海岸 s0/r1/f9）"
+    ],
+    "reason": "柳島海岸とそのサーフ（同一の浜）",
+    "conflicts": []
+  },
+  {
+    "winner": "inatori-port（稲取港 s0/r3/f7）",
+    "losers": [
+      "inatori-gyokou（稲取漁港 s0/r1/f4）"
+    ],
+    "reason": "稲取港＝稲取漁港（堤防エントリは別扱い）",
+    "conflicts": []
+  },
+  {
+    "winner": "hamanako-maisaka-e8（浜名湖・舞阪漁港 s1/r1/f3）",
+    "losers": [
+      "hamanako-maisaka-kou（浜名湖・舞阪港 s0/r1/f4）"
+    ],
+    "reason": "舞阪港＝舞阪漁港",
+    "conflicts": []
+  },
+  {
+    "winner": "futo-gyokou（富戸漁港 s0/r1/f4）",
+    "losers": [
+      "futo-port（富戸港 s0/r1/f3）"
+    ],
+    "reason": "富戸港＝富戸漁港（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "uchinada-kaigan（内灘海岸 s0/r1/f5）",
+    "losers": [
+      "uchinada-kaigan-surf-e8（内灘海岸サーフ s0/r1/f3）"
+    ],
+    "reason": "内灘海岸とそのサーフ",
+    "conflicts": []
+  },
+  {
+    "winner": "hakui-taki-kou-ishikawa（羽咋・滝港 s0/r1/f5）",
+    "losers": [
+      "hakui-taki-port（羽咋市滝港 s0/r1/f3）"
+    ],
+    "reason": "羽咋・滝港（3m）",
+    "conflicts": []
+  },
+  {
+    "winner": "iwaibukuro-gyokou（岩井袋漁港 s0/r1/f4）",
+    "losers": [
+      "iwaibukuro-kou-e8（岩井袋港 s0/r1/f3）"
+    ],
+    "reason": "岩井袋漁港＝岩井袋港（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "tokawa-gyokou（外川漁港 s0/r1/f4）",
+    "losers": [
+      "choshi-tokawa-gyokou-a13（銚子・外川漁港 s0/r1/f2）"
+    ],
+    "reason": "外川漁港の地名接頭辞違い",
+    "conflicts": []
+  },
+  {
+    "winner": "inubosaki-todaishita-e8（犬吠埼灯台下 s0/r1/f3）",
+    "losers": [
+      "inubosaki-iso-a10（犬吠埼灯台下磯 s0/r1/f3）"
+    ],
+    "reason": "犬吠埼灯台下の磯",
+    "conflicts": []
+  },
+  {
+    "winner": "fuke-kou-osaka（深日港 s0/r2/f6）",
+    "losers": [
+      "misaki-fuke（岬町・深日港 s0/r1/f10）",
+      "fuke-port（深日漁港 s0/r1/f5）"
+    ],
+    "reason": "深日港＝深日漁港",
+    "conflicts": []
+  },
+  {
+    "winner": "yamatogawa-estuary-sakai（大和川河口（堺〜松原） s0/r1/f4）",
+    "losers": [
+      "yamatogawa-estuary-tenaga（大和川河口（堺市） s0/r1/f3）"
+    ],
+    "reason": "大和川河口（堺側）",
+    "conflicts": []
+  },
+  {
+    "winner": "tannowa-gyoko（淡輪漁港 s0/r1/f9）",
+    "losers": [
+      "tannowa-kou（淡輪港 s0/r1/f4）"
+    ],
+    "reason": "淡輪漁港＝淡輪港",
+    "conflicts": [
+      "トイレ(tannowa-gyoko=false/tannowa-kou=true)"
+    ]
+  },
+  {
+    "winner": "izumiotsu-shiomi（泉大津・汐見埠頭 s1/r1/f12）",
+    "losers": [
+      "shiomi-futou-osaka（汐見埠頭（大阪） s1/r1/f4）"
+    ],
+    "reason": "汐見埠頭（泉大津）",
+    "conflicts": []
+  },
+  {
+    "winner": "oita-kamae-hatozu-port-bulk（蒲江・波当津港 s5/r1/f5）",
+    "losers": [
+      "kamae-hatozu-gyokou（蒲江・波当津漁港 s0/r1/f3）"
+    ],
+    "reason": "波当津漁港＝波当津港（座標同一）",
+    "conflicts": [
+      "トイレ(oita-kamae-hatozu-port-bulk=true/kamae-hatozu-gyokou=false)"
+    ]
+  },
+  {
+    "winner": "hiji-kou-w6（日出・日出港 s0/r1/f5）",
+    "losers": [
+      "hiji-kou-a11（日出港 s0/r1/f3）"
+    ],
+    "reason": "日出港",
+    "conflicts": [
+      "トイレ(hiji-kou-w6=true/hiji-kou-a11=false)"
+    ]
+  },
+  {
+    "winner": "saiki-yonouzu-kou-s8（佐伯・米水津港 s1/r1/f4）",
+    "losers": [
+      "yonozu-gyokou-w6（佐伯・米水津漁港 s0/r1/f5）"
+    ],
+    "reason": "米水津漁港＝米水津港（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "tsushima-izuhara-w6（対馬・厳原港 s3/r1/f6）",
+    "losers": [
+      "izuhara-kou-a10（厳原港 s0/r1/f3）"
+    ],
+    "reason": "対馬・厳原港",
+    "conflicts": []
+  },
+  {
+    "winner": "ikitsukijima-tateura-a10（生月島・舘浦港 s1/r1/f3）",
+    "losers": [
+      "ikitsuki-tateura-port（生月島・舘浦漁港 s0/r1/f4）"
+    ],
+    "reason": "生月島・舘浦漁港＝舘浦港",
+    "conflicts": []
+  },
+  {
+    "winner": "suwako-nagano-add5（諏訪湖 s0/r3/f5）",
+    "losers": [
+      "suwako-wakasagi（諏訪湖（ワカサギ） s0/r1/f2）"
+    ],
+    "reason": "諏訪湖（同住所）",
+    "conflicts": []
+  },
+  {
+    "winner": "natsudumari-gyokou-w7（夏泊漁港 s0/r1/f5）",
+    "losers": [
+      "natsudomari-kou-tottori-c8（夏泊港 s0/r1/f3）"
+    ],
+    "reason": "夏泊漁港＝夏泊港（北栄町）",
+    "conflicts": []
+  },
+  {
+    "winner": "akasaki-kou-w6（赤碕港 s0/r1/f5）",
+    "losers": [
+      "akasaki-gyokou-tottori（赤碕漁港 s0/r1/f4）"
+    ],
+    "reason": "赤碕港＝赤碕漁港",
+    "conflicts": []
+  },
+  {
+    "winner": "tago-kou-iwami-w6（岩美・田後港 s0/r1/f5）",
+    "losers": [
+      "tago-gyokou-tottori（田後漁港 s0/r1/f3）"
+    ],
+    "reason": "田後港＝田後漁港（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "izumo-inasa-beach（出雲大社稲佐の浜 s0/r2/f4）",
+    "losers": [
+      "inasa-no-hama-w6（稲佐の浜 s0/r1/f5）"
+    ],
+    "reason": "稲佐の浜",
+    "conflicts": []
+  },
+  {
+    "winner": "upurui-hana（十六島鼻 s0/r1/f4）",
+    "losers": [
+      "izumo-jushimanohana（出雲市・十六島鼻 s0/r1/f4）"
+    ],
+    "reason": "十六島鼻（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "shin-nakagawa6（新中川 s0/r1/f5）",
+    "losers": [
+      "shin-nakagawa-edogawa-a11（新中川（江戸川区） s0/r1/f2）"
+    ],
+    "reason": "新中川（江戸川区）",
+    "conflicts": [
+      "トイレ(shin-nakagawa6=true/shin-nakagawa-edogawa-a11=false)"
+    ]
+  },
+  {
+    "winner": "shinkiba-park（新木場公園 s0/r2/f3）",
+    "losers": [
+      "shinkiba-koen-e8（新木場公園護岸 s0/r1/f3）"
+    ],
+    "reason": "新木場公園とその護岸（同一施設）",
+    "conflicts": [
+      "駐車場(shinkiba-park=false/shinkiba-koen-e8=true)"
+    ]
+  },
+  {
+    "winner": "tennouzu-unga-a11（天王洲運河 s0/r1/f2）",
+    "losers": [
+      "shinagawa-tennouzu-boardwalk-a13（品川・天王洲運河（ボードウォーク） s0/r1/f2）"
+    ],
+    "reason": "天王洲運河",
+    "conflicts": []
+  },
+  {
+    "winner": "tokushima-naruto-muya-bulk（鳴門市・撫養港 s6/r1/f6）",
+    "losers": [
+      "muya-kou-w6（撫養港 s0/r1/f5）"
+    ],
+    "reason": "撫養港",
+    "conflicts": [
+      "トイレ(tokushima-naruto-muya-bulk=false/muya-kou-w6=true)"
+    ]
+  },
+  {
+    "winner": "tokushima-mugi-port-bulk（牟岐町・牟岐港 s6/r1/f6）",
+    "losers": [
+      "mugi-port（牟岐港 s0/r3/f9）"
+    ],
+    "reason": "牟岐港",
+    "conflicts": []
+  },
+  {
+    "winner": "omoigawa-river（思川 s0/r1/f6）",
+    "losers": [
+      "omoigawa-oyama-a10（思川（小山地区） s0/r1/f2）"
+    ],
+    "reason": "思川（小山）",
+    "conflicts": []
+  },
+  {
+    "winner": "chuzenji-lake-fishing（中禅寺湖 s3/r2/f3）",
+    "losers": [
+      "chuzenji-trout（中禅寺湖（トラウト） s0/r1/f2）"
+    ],
+    "reason": "中禅寺湖",
+    "conflicts": []
+  },
+  {
+    "winner": "hatsusegawa-river（初瀬川（大和川上流） s0/r1/f4）",
+    "losers": [
+      "hasegawa-tsuri（初瀬川 s0/r1/f3）"
+    ],
+    "reason": "初瀬川（桜井市、129m）",
+    "conflicts": []
+  },
+  {
+    "winner": "ikuji-gyokou-a9（生地漁港 s0/r1/f3）",
+    "losers": [
+      "ikuji-gyokou-kurobe-a12（生地漁港（黒部） s0/r1/f2）"
+    ],
+    "reason": "生地漁港",
+    "conflicts": [
+      "トイレ(ikuji-gyokou-a9=false/ikuji-gyokou-kurobe-a12=true)"
+    ]
+  },
+  {
+    "winner": "obama-inokuma-fukui（小浜・犬熊海水浴場 s0/r1/f5）",
+    "losers": [
+      "obama-inokuma-kaigan（小浜・犬熊海岸 s0/r1/f3）"
+    ],
+    "reason": "犬熊海岸＝犬熊海水浴場（座標同一）",
+    "conflicts": []
+  },
+  {
+    "winner": "okibata-kou-yanagawa-w6（柳川・沖端港 s0/r1/f5）",
+    "losers": [
+      "okibata-gyokou-a10（沖端漁港 s0/r1/f2）"
+    ],
+    "reason": "沖端港＝沖端漁港",
+    "conflicts": [
+      "トイレ(okibata-kou-yanagawa-w6=true/okibata-gyokou-a10=false)"
+    ]
+  },
+  {
+    "winner": "moji-retro-wharf（門司港レトロ波止場 s0/r1/f10）",
+    "losers": [
+      "mojikou-retro-gogan-w6（門司港レトロ護岸 s0/r1/f5）",
+      "moji-retro-ganpeki-s8（門司港レトロ岸壁 s0/r1/f4）"
+    ],
+    "reason": "門司港レトロの波止場/護岸/岸壁表記違い（同住所）",
+    "conflicts": []
+  },
+  {
+    "winner": "ainoshima-gyokou-s8（相島漁港 s0/r1/f5）",
+    "losers": [
+      "ainoshima-kou（相島港 s0/r1/f4）"
+    ],
+    "reason": "相島港＝相島漁港（島内唯一の港）",
+    "conflicts": []
+  },
+  {
+    "winner": "hakozaki-futo-s8（箱崎ふ頭 s0/r1/f3）",
+    "losers": [
+      "hakozaki-futou-a12（箱崎埠頭 s0/r1/f3）"
+    ],
+    "reason": "箱崎ふ頭＝箱崎埠頭",
+    "conflicts": []
+  },
+  {
+    "winner": "momochihama-w6（福岡・百道浜 s0/r1/f5）",
+    "losers": [
+      "momochihama-kaigan-s8（百道浜海岸 s0/r1/f3）"
+    ],
+    "reason": "百道浜海岸（護岸エントリは別扱い）",
+    "conflicts": []
+  },
+  {
+    "winner": "minamisoma-odaka-gyokou-e8（南相馬小高漁港 s0/r1/f3）",
+    "losers": [
+      "minamisoma-odaka-port-a13（南相馬市小高漁港 s0/r1/f2）"
+    ],
+    "reason": "南相馬・小高漁港",
+    "conflicts": [
+      "トイレ(minamisoma-odaka-gyokou-e8=true/minamisoma-odaka-port-a13=false)"
+    ]
+  },
+  {
+    "winner": "iwaki-ena-kou-e8（いわき江名港 s0/r1/f4）",
+    "losers": [
+      "ena-port-a10（江名漁港 s0/r1/f3）"
+    ],
+    "reason": "江名港＝江名漁港",
+    "conflicts": [
+      "トイレ(iwaki-ena-kou-e8=true/ena-port-a10=false)"
+    ]
+  },
+  {
+    "winner": "sumoto-kou-add4（洲本港 s4/r2/f8）",
+    "losers": [
+      "awaji-sumoto-port（淡路島洲本港 s4/r1/f4）"
+    ],
+    "reason": "洲本港",
+    "conflicts": []
+  },
+  {
+    "winner": "tsuna-port-shizuki（津名港（志筑） s6/r1/f16）",
+    "losers": [
+      "tsuna-kou-a10（津名港 s0/r1/f3）"
+    ],
+    "reason": "津名港（志筑）",
+    "conflicts": []
+  },
+  {
+    "winner": "monbetsu-ko-dai3-futo（紋別港第3ふ頭 s0/r2/f4）",
+    "losers": [
+      "monbetsu-daisan-futou6（紋別港第3埠頭 s0/r1/f6）"
+    ],
+    "reason": "紋別港第3ふ頭＝第3埠頭",
+    "conflicts": []
+  },
+  {
+    "winner": "wakkanai-kita-bouhatei-dome（稚内港北防波堤ドーム s0/r1/f3）",
+    "losers": [
+      "wakkanai-dome-breakwater-a10（稚内港北防波堤ドーム周辺 s0/r1/f2）"
+    ],
+    "reason": "稚内港北防波堤ドーム",
+    "conflicts": []
+  },
+  {
+    "winner": "shakotan-bikuni-port（積丹美国港 s4/r1/f4）",
+    "losers": [
+      "bikuni-gyoko（美国漁港 s1/r1/f6）"
+    ],
+    "reason": "美国港＝美国漁港（41m）",
+    "conflicts": []
+  },
+  {
+    "winner": "ishikari-east-wharf（石狩湾新港東埠頭 s5/r2/f5）",
+    "losers": [
+      "ishikaribay-higashi-futo（石狩湾新港東ふ頭 s0/r2/f5）"
+    ],
+    "reason": "石狩湾新港東埠頭＝東ふ頭（同住所）",
+    "conflicts": [
+      "トイレ(ishikari-east-wharf=true/ishikaribay-higashi-futo=false)"
+    ]
+  },
+  {
+    "winner": "shionomisaki-k8（潮岬 s2/r1/f5）",
+    "losers": [
+      "shionomisaki-iso-a13（潮岬磯 s0/r1/f2）"
+    ],
+    "reason": "潮岬の磯",
+    "conflicts": []
+  },
+  {
+    "winner": "gobo-hidaka-port（御坊・日高港 s0/r2/f11）",
+    "losers": [
+      "hidaka-kou-k8（日高港 s0/r1/f3）"
+    ],
+    "reason": "日高港（4m、住所表記違い）",
+    "conflicts": []
+  }
+]
