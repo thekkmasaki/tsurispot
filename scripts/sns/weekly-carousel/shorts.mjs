@@ -10,7 +10,7 @@
  * 構成: つかみ(2.2秒) → 5位 → … → 2位 → 「そして1位は…」 → 1位 → 締め。
  *   伸びているショートは最初の1〜2秒で「続きが気になる」を作る（2026-11 調査）。
  *   つかみは1位の写真をぼかして「1位は…？」。タイトルでも1位を明かさない。
- * 釣り場はエリアの週報の釣果表から、好調度順に最大5か所（areas[].spots。同じ釣り場は1回）。
+ * 釣り場はエリアの週報の釣果表から、好調度順に最大5か所（areas[].spots。同じ釣り場は1回、同じ魚も1回）。
  * 3か所に満たないエリアは作らない（数合わせをしない）。
  * 写真は週報に載っている魚種の実写だけ（photo）。無い魚は写真なしのカード。
  * 画像は静止（ズームしない＝ユーザー指示 2026-11）。切り替えだけスライド。
@@ -40,6 +40,16 @@ const cut = (s, n) => (s.length > n ? s.slice(0, n - 1) + "…" : s);
 const fishLabel = (f) => {
   const parts = f.replace(/[（(][^）)]*[）)]/g, "").trim().split(/[・／/、]/).map((x) => x.trim()).filter(Boolean);
   return parts.length > 1 ? `${parts[0]}など` : parts[0] ?? f;
+};
+const fishKey = (f) => fishLabel(f).replace(/など$/, "");
+// 画面は魚名が主役なので、同じ魚は1回まで（2026-11 ユーザー指摘「1位と2位どっちもアジ」）。
+// 魚ごとにいちばん好調な釣り場を残す。別の魚で MIN_RANK に届かないときだけ、同じ魚で埋める。
+const pickUniqueFish = (sorted) => {
+  const seen = new Set();
+  const uniq = sorted.filter((r) => !seen.has(fishKey(r.fish)) && seen.add(fishKey(r.fish))).slice(0, MAX_RANK);
+  if (uniq.length >= MIN_RANK) return uniq;
+  const fill = sorted.filter((r) => !uniq.includes(r)).slice(0, MIN_RANK - uniq.length);
+  return sorted.filter((r) => uniq.includes(r) || fill.includes(r));
 };
 const first = (s) => String(s ?? "").split(/[／/（(、,]/)[0].trim();
 const noInfo = (s) => !s || /^(情報なし|記載なし|不明|—|-)/.test(s);
@@ -112,9 +122,9 @@ const made = [];
 try {
   for (const a of targets) {
     // 好調度が同じなら、写真のある釣り場→サイズの分かる釣り場を上に
-    const picked = [...(a.spots ?? a.rows)]
-      .sort((x, y) => y.heat - x.heat || Number(!!y.photo) - Number(!!x.photo) || Number(noInfo(x.size)) - Number(noInfo(y.size)))
-      .slice(0, MAX_RANK);
+    const sorted = [...(a.spots ?? a.rows)]
+      .sort((x, y) => y.heat - x.heat || Number(!!y.photo) - Number(!!x.photo) || Number(noInfo(x.size)) - Number(noInfo(y.size)));
+    const picked = pickUniqueFish(sorted);
     if (picked.length < MIN_RANK) { console.warn(`${a.area}: 釣り場が${picked.length}か所のためショートは作らない`); continue; }
     made.push(await makeShort(a, picked));
   }
