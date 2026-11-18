@@ -51,9 +51,11 @@ export async function generateMetadata({
     return { title: "ページが見つかりません" };
   }
   const label = SPOT_TYPE_LABELS[type as FishingSpot["spotType"]];
+  // 「管理釣り場（ポンド）の釣り場」のような重複表現を避ける
+  const place = type === "pond" ? label : `${label}の釣り場`;
   const spots = fishingSpots.filter((s) => s.spotType === type);
-  const title = `${label}の釣り場一覧 - 全国${spots.length}件【2026年最新】`;
-  const description = `全国の${label}の釣り場${spots.length}件を都道府県別に紹介。${label}で釣れる魚・難易度・設備情報を完全ガイド。`;
+  const title = `${place}一覧 - 全国${spots.length}件【2026年最新】`;
+  const description = `全国の${place}${spots.length}件を都道府県別に紹介。${label}で釣れる魚・難易度・設備情報を完全ガイド。`;
 
   return {
     title,
@@ -85,6 +87,8 @@ export default async function SpotTypePage({ params }: PageProps) {
 
   const spotType = type as FishingSpot["spotType"];
   const label = SPOT_TYPE_LABELS[spotType];
+  // 「管理釣り場（ポンド）の釣り場」のような重複表現を避ける
+  const place = spotType === "pond" ? label : `${label}の釣り場`;
   const spots = fishingSpots.filter((s) => s.spotType === spotType);
   if (spots.length === 0) permanentRedirect("/spot-type");
 
@@ -154,12 +158,12 @@ export default async function SpotTypePage({ params }: PageProps) {
   // FAQ
   const faqItems = [
     {
-      question: `全国に${label}の釣り場は何件ありますか？`,
-      answer: `現在、全国の${label}の釣り場は${spots.length}件掲載しています。${regionData.length > 0 ? `${regionData.map((r) => r.group).join("・")}の各地方にスポットがあります。` : ""}`,
+      question: `全国に${place}は何件ありますか？`,
+      answer: `現在、全国の${place}は${spots.length}件掲載しています。${regionData.length > 0 ? `${regionData.map((r) => r.group).join("・")}の各地方にスポットがあります。` : ""}`,
     },
     {
       question: `${label}での釣りは初心者でも楽しめますか？`,
-      answer: `${label}の釣り場のうち${difficultyCount.beginner}件が初心者向けです。${freeCount > 0 ? `無料で釣りができるスポットも${freeCount}件あります。` : ""}初めての方でも安心して楽しめるスポットが多数あります。`,
+      answer: `${place}のうち${difficultyCount.beginner}件が初心者向けです。${freeCount > 0 ? `無料で釣りができるスポットも${freeCount}件あります。` : ""}初めての方でも安心して楽しめるスポットが多数あります。`,
     },
     {
       question: `${label}ではどんな魚が釣れますか？`,
@@ -176,7 +180,7 @@ export default async function SpotTypePage({ params }: PageProps) {
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "ホーム", item: "https://tsurispot.com" },
       { "@type": "ListItem", position: 2, name: "釣り場タイプ別", item: "https://tsurispot.com/spot-type" },
-      { "@type": "ListItem", position: 3, name: `${label}の釣り場`, item: pageUrl },
+      { "@type": "ListItem", position: 3, name: `${place}`, item: pageUrl },
     ],
   };
 
@@ -193,7 +197,7 @@ export default async function SpotTypePage({ params }: PageProps) {
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${label}の釣り場一覧`,
+    name: `${place}一覧`,
     numberOfItems: spots.length,
     itemListElement: spots.slice(0, 30).map((spot, index) => ({
       "@type": "ListItem",
@@ -216,7 +220,7 @@ export default async function SpotTypePage({ params }: PageProps) {
         items={[
           { label: "ホーム", href: "/" },
           { label: "釣り場タイプ別", href: "/spot-type" },
-          { label: `${label}の釣り場` },
+          { label: `${place}` },
         ]}
       />
 
@@ -231,7 +235,7 @@ export default async function SpotTypePage({ params }: PageProps) {
       {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {label}の釣り場一覧
+          {place}一覧
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           全国{spots.length}件の{label}スポットを都道府県別に紹介
@@ -380,7 +384,7 @@ export default async function SpotTypePage({ params }: PageProps) {
       <section className="mb-8 sm:mb-10">
         <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
           <HelpCircle className="size-5 text-primary" />
-          {label}の釣り場に関するよくある質問
+          {place}に関するよくある質問
         </h2>
         <div className="space-y-4">
           {faqItems.map((item, idx) => (
