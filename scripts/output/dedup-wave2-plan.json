@@ -3141,17 +3141,17 @@
       "prefecture": "千葉県",
       "kind": "port:興津港",
       "maxKm": 7.034,
-      "winner": "okitsu-port",
-      "winnerName": "興津漁港",
+      "winner": "okitsu-kou-chiba",
+      "winnerName": "興津港",
       "losers": [
         {
-          "slug": "okitsu-kou-chiba",
-          "name": "興津港"
+          "slug": "okitsu-port",
+          "name": "興津漁港"
         }
       ],
       "coord": null,
       "conflicts": [
-        "トイレ(okitsu-port=true/okitsu-kou-chiba=false)"
+        "トイレ(okitsu-kou-chiba=false/okitsu-port=true)"
       ]
     },
     {
@@ -11654,11 +11654,11 @@
       ]
     },
     {
-      "winner": "okitsu-port",
-      "name": "興津漁港",
+      "winner": "okitsu-kou-chiba",
+      "name": "興津港",
       "members": [
-        "okitsu-port:35.138,140.349(score0)",
-        "okitsu-kou-chiba:35.132,140.272(score0)"
+        "okitsu-kou-chiba:35.132,140.272(score0)",
+        "okitsu-port:35.138,140.349(score0)"
       ]
     },
     {

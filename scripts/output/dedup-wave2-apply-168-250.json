@@ -1,0 +1,13 @@
+{
+  "label": "(3/3)",
+  "losers": 100,
+  "skipped": [],
+  "coordDone": [
+    "tottori-hakuto-coast: 35.511,134.121 → 35.513,134.11（hakuto-kaigan-w6 の座標・鳥取市白兎・標高7.1m）",
+    "tokushima-minami-hiwasa-bulk: 33.7265,134.5384 → 33.734,134.538（hiwasa-gyokou-w5 の座標・美波町日和佐浦・標高3.4m）",
+    "onahama-ko: 36.9455,140.9164 → 36.9412,140.8912（iwaki-onahama-port の座標・いわき市小名浜・標高2.1m）"
+  ],
+  "coordSkipped": [
+    "ohara-port: 定義が2件"
+  ]
+}
