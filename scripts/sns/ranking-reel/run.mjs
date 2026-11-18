@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
- * SNSランキング投稿（1日1本）: お題選定 → 画像 → リール動画 → Instagram/Threads 投稿 → 台帳 → Discord
+ * SNSランキング投稿（1日2本: 朝 am / 夜 pm）: お題選定 → 画像 → リール動画 → Instagram/Threads 投稿 → 台帳 → Discord
  *
  *   node scripts/sns/ranking-reel/run.mjs [--dry-run] [--date YYYY-MM-DD] [--pref hyogo --fish tachiuo]
- *                                         [--platforms instagram,threads] [--out out/sns-ranking]
+ *                                         [--platforms instagram,threads] [--out out/sns-ranking] [--slot am|pm]
  *   --dry-run: 投稿・台帳書き込みをせず、画像をDiscordにプレビュー送信するだけ
+ *   --slot: 朝の枠(am)か夜の枠(pm、既定)か。投稿済み判定は日付×枠ごと（slot の無い古い台帳行は pm 扱い）
  *
  * 必要な環境変数: INSTAGRAM_USER_ID / INSTAGRAM_ACCESS_TOKEN, THREADS_USER_ID / THREADS_ACCESS_TOKEN,
  *   AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY, UPSTASH_REDIS_REST_URL / _TOKEN, DISCORD_WEBHOOK_URL（任意）
@@ -22,8 +23,10 @@ const argv = process.argv.slice(2);
 const arg = (k) => { const i = argv.indexOf(`--${k}`); return i >= 0 ? argv[i + 1] : undefined; };
 const dryRun = argv.includes("--dry-run");
 const date = arg("date") ?? new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+const slot = arg("slot") === "am" ? "am" : "pm";
+const slotOf = (e) => e.slot ?? "pm";
 const platforms = new Set((arg("platforms") ?? "instagram,threads").split(","));
-const outDir = path.resolve(arg("out") ?? `out/sns-ranking/${date}`);
+const outDir = path.resolve(arg("out") ?? `out/sns-ranking/${date}-${slot}`);
 fs.mkdirSync(outDir, { recursive: true });
 
 // 1) 台帳から重複回避条件を作る: 同じ県×魚は60日空ける / 直近4本の魚種・直近2本の県は避ける
@@ -32,8 +35,8 @@ const since = Date.parse(date) - 60 * 864e5;
 const exclude = ledger.filter((e) => Date.parse(e.date) >= since).map((e) => `${e.pref}/${e.fish}`);
 const recentFish = ledger.slice(0, 4).map((e) => e.fish);
 const recentPref = ledger.slice(0, 2).map((e) => e.pref);
-if (!dryRun && ledger.some((e) => e.date === date && e.ok)) {
-  console.log(`${date} は投稿済みのためスキップ`);
+if (!dryRun && ledger.some((e) => e.date === date && slotOf(e) === slot && e.ok)) {
+  console.log(`${date} ${slot} は投稿済みのためスキップ`);
   process.exit(0);
 }
 if (!dryRun) {
@@ -59,7 +62,7 @@ console.log(`お題: ${label}（${topic.spots.length}件）`);
 // 3) 画像・キャプション・動画
 execFileSync("node", [path.join(here, "render.mjs"), topicPath, outDir], { stdio: "inherit" });
 // BGM: SNS_BGM_DIR 内の mp3 を日替わりで選ぶ。ファイル名の「@秒数」をサビ等の開始位置として使う（例: track@32.5.mp3）
-const bgm = pickBgm(process.env.SNS_BGM_DIR, date);
+const bgm = pickBgm(process.env.SNS_BGM_DIR, `${date}-${slot}`);
 if (bgm) console.log(`BGM: ${path.basename(bgm.file)}（${bgm.offset}秒から）`);
 execFileSync("bash", [path.join(here, "make-video.sh"), path.join(outDir, "post.png"), path.join(outDir, "reel.mp4"), bgm?.file ?? "", String(bgm?.offset ?? 0)], { stdio: "inherit" });
 const igCaption = fs.readFileSync(path.join(outDir, "caption-instagram.txt"), "utf8");
@@ -72,7 +75,7 @@ if (dryRun) {
 }
 
 // 4) 公開URLを用意して投稿
-const base = `sns/ranking/${date}-${topic.pref.slug}-${topic.fish.slug}`;
+const base = `sns/ranking/${date}-${slot}-${topic.pref.slug}-${topic.fish.slug}`;
 const videoUrl = await uploadPublic(path.join(outDir, "reel.mp4"), `${base}.mp4`, "video/mp4");
 const imageUrl = await uploadPublic(path.join(outDir, "post.png"), `${base}.png`, "image/png");
 const result = {};
@@ -97,7 +100,7 @@ await removePublic(`${base}.png`);
 // 5) 台帳・通知
 const posted = Object.values(result).filter((r) => r.id);
 const failed = Object.entries(result).filter(([, r]) => r.error);
-await appendLedger({ date, pref: topic.pref.slug, fish: topic.fish.slug, month: topic.month.num, ok: posted.length > 0,
+await appendLedger({ date, slot, pref: topic.pref.slug, fish: topic.fish.slug, month: topic.month.num, ok: posted.length > 0,
   instagram: result.instagram?.permalink ?? result.instagram?.id ?? null, threads: result.threads?.permalink ?? result.threads?.id ?? null });
 const fmt = (k) => { const r = result[k]; return !r ? "" : r.id ? `✅ ${k}: ${r.permalink ?? r.id}` : r.error ? `❌ ${k}: ${r.error}` : `⏭️ ${k}: ${r.skipped}`; };
 await discord(`${failed.length ? "⚠️" : "📣"} **SNSランキング投稿** ${label}\n${["instagram", "threads"].map(fmt).filter(Boolean).join("\n")}\n${topic.url}`);
