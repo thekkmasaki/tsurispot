@@ -665,7 +665,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   {
     id: "scs4030", name: "長門市・仙崎漁港", slug: "nagato-senzaki-gyokou",
     description: "仙崎漁港（山口県長門市）はエギングが盛んな釣り場。9〜12月はアオリイカ、5〜11月はアジのサビキ釣り、4〜11月はクロダイのフカセ釣り、7〜11月はサバが狙える。無料駐車場とトイレがあり、コンビニと釣具店も近い。JR仙崎駅から徒歩約10分、中国自動車道美祢ICから約50分でアクセスできる。",
-    latitude: 34.3980, longitude: 131.1920,
+    latitude: 34.397, longitude: 131.199,
     address: "〒759-4106 山口県長門市仙崎",
     accessInfo: "JR仙崎駅から徒歩約10分。中国自動車道美祢ICから約50分。",
     region: localRegion("rcs4022"), spotType: "port", difficulty: "beginner",

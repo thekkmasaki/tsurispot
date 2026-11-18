@@ -28,14 +28,19 @@ describe("spot-merge-map（同一施設の重複統合）", () => {
   });
 
   it("勝者は敗者の釣れる魚をすべて引き継いでいる", () => {
-    const rawBySlug = new Map(allRawSpots.map((s) => [s.slug, s]));
+    // 同じ slug の生データが複数ファイルにある場合（例: hashidate-gyoko）、dedup Pass4 で
+    // 生き残ったどれか1つが統合元の実体になる。その実体の魚種が全て引き継がれていればよい。
+    const rawDefs = new Map<string, typeof allRawSpots>();
+    for (const s of allRawSpots) rawDefs.set(s.slug, [...(rawDefs.get(s.slug) ?? []), s]);
     for (const [loser, winner] of entries) {
-      const raw = rawBySlug.get(loser);
-      expect(raw, `${loser} の生データが無い`).toBeDefined();
+      const defs = rawDefs.get(loser);
+      expect(defs, `${loser} の生データが無い`).toBeDefined();
       const winnerFish = new Set(live.get(winner)!.catchableFish.map((cf) => cf.fish.slug));
-      for (const cf of raw!.catchableFish) {
-        expect(winnerFish.has(cf.fish.slug), `${winner} に ${loser} の ${cf.fish.slug} が無い`).toBe(true);
-      }
+      const missing = defs!.map((d) => d.catchableFish.filter((cf) => !winnerFish.has(cf.fish.slug)).map((cf) => cf.fish.slug));
+      expect(
+        missing.some((m) => m.length === 0),
+        `${winner} に ${loser} の魚種が無い: ${missing.map((m) => m.join(",")).join(" / ")}`,
+      ).toBe(true);
     }
   });
 
