@@ -288,7 +288,6 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "usami-port": "usami-gyokou", // 宇佐美港 → 宇佐美漁港：同一市区町村の同名施設（3.144km離れて登録）
   "heda-kou-numazu-a13": "heda-gyokou", // 戸田港（沼津市） → 戸田港：同一市区町村の同名施設（2.844km離れて登録）
   "miho-kaigan-surf-a10": "miho-kaigan-e8", // 三保海岸サーフ → 三保海岸：同一市区町村の同名施設（3.901km離れて登録）
-  "shizuura-gyokou": "shizuura-port", // 静浦漁港 → 静浦港：同一市区町村の同名施設（1.032km離れて登録）
   "taga-gyokou": "taga-port", // 多賀漁港 → 多賀港：同一市区町村の同名施設（3.503km離れて登録）
   "tago-port": "tago-gyokou", // 田子港 → 田子漁港：同一市区町村の同名施設（5.5km離れて登録）
   "toi-gyokou": "toi-kou", // 土肥漁港 → 土肥港：同一市区町村の同名施設（0.603km離れて登録）
@@ -432,4 +431,5 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "shibayama-port": "shibayama-gyokou-hyogo", // GSC直近3か月クリック 12 < 統合元 38 のため勝者を入れ替え（2026-11）
   "okura-kaigan": "akashi-okura-coast", // GSC直近3か月クリック 11 < 統合元 41 のため勝者を入れ替え（2026-11）
   "awaji-kariya-gyokou-a13": "awaji-kariya-gyokou-k8", // GSC直近3か月クリック 6 < 統合元 32 のため勝者を入れ替え（2026-11）
+  "shizuura-port": "shizuura-gyokou", // GSC直近3か月クリック 11 < 統合元 68 のため勝者を入れ替え（2026-11）
 };

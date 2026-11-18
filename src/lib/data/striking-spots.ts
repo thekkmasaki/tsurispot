@@ -64,7 +64,7 @@ export const strikingSpots: StrikingSpot[] = [
   { slug: "katayamatsu-shibayamagata", prefSlug: "ishikawa", pos: 7.6, imp: 195, topQuery: "柴山潟 釣り" },
   { slug: "fukui-shinkou", prefSlug: "fukui", pos: 7.6, imp: 209, topQuery: "福井新港" },
   { slug: "yuriage-port", prefSlug: "miyagi", pos: 5.6, imp: 284, topQuery: "閖上 釣果" },
-  { slug: "shizuura-port", prefSlug: "shizuoka", pos: 9.6, imp: 169, topQuery: "静浦漁港 釣り" },
+  { slug: "shizuura-gyokou", prefSlug: "shizuoka", pos: 9.6, imp: 169, topQuery: "静浦漁港 釣り" },
 ];
 
 /** 指定県（prefSlug）の striking spot を impression 降順で返す。県ハブの「注目の釣り場」用。 */
