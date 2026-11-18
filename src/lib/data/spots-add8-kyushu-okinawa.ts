@@ -1861,7 +1861,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8103", name: "天草・大江港", slug: "amakusa-oe-kou-s8",
     description: "天草下島西岸の大江港。大江天主堂を見上げるロマンチックな港で、堤防からアジやメバルが釣れる。観光の合間に竿を出せる手軽さが魅力。",
-    latitude: 32.448512, longitude: 130.418318,
+    latitude: 32.319, longitude: 129.994,
     address: "〒863-2801 熊本県天草市天草町大江",
     accessInfo: "天草市中心部から車で約40分",
     region: localRegion("rs8014"), spotType: "port", difficulty: "beginner",

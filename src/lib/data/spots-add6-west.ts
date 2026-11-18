@@ -1421,7 +1421,7 @@ export const westAdd6Spots: FishingSpot[] = [
   {
     id: "sw6067", name: "片上港", slug: "katakami-kou-w6",
     description: "岡山県備前市、備前焼の窯元が集まる東片上に位置する港。堤防から手軽にサビキ釣りが楽しめ、5〜11月はアジ、4〜10月はイワシが数釣りでき、ファミリーフィッシングに最適だ。4〜11月はフカセ釣りでチヌ（クロダイ）、夏から晩秋はハゼのちょい投げ、冬から春はメバリングでメバルと季節ごとに狙いも変わる。伝統工芸の里を訪ねる観光と組み合わせた釣行も楽しい。港付近に駐車スペースとトイレがあり無料で竿を出せる。JR備前片上駅から徒歩約10分と電車でも通いやすい初心者向けの港。",
-    latitude: 34.735, longitude: 134.18,
+    latitude: 34.742, longitude: 134.182,
     address: "〒705-0022 岡山県備前市東片上",
     accessInfo: "JR備前片上駅から徒歩約10分",
     region: localRegion("rw6009"), spotType: "port", difficulty: "beginner",
