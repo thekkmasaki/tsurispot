@@ -14,7 +14,7 @@
  *    途中でぶつ切りにしないので SERP で不自然な切れ方をしない。データが薄い場合は fallbackTail で
  *    最低長を担保する。
  */
-import { DESCRIPTION_MAX, trimDescription } from "@/lib/utils/seo";
+import { DESCRIPTION_MAX, trimDescription } from "../utils/seo";
 
 /** description の最小長（Bing 警告回避の安全圏。コードポイント基準）。 */
 export const DESCRIPTION_MIN = 120;
