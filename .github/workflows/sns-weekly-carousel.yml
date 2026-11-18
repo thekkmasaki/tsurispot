@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   gate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
     timeout-minutes: 300
     steps:
       - name: 投稿時刻（JST 18:55）まで待つ
@@ -43,7 +43,7 @@ jobs:
 
   post:
     needs: gate
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
     timeout-minutes: 20
     env:
       INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}

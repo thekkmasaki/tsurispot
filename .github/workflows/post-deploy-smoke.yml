@@ -16,7 +16,7 @@ jobs:
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.head_branch == 'master'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
     timeout-minutes: 15
     steps:
       - name: Checkout

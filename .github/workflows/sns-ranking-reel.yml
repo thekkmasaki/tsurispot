@@ -40,7 +40,7 @@ on:
 
 jobs:
   gate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
     timeout-minutes: 320
     outputs:
       date: ${{ steps.wait.outputs.date }}
@@ -81,7 +81,7 @@ jobs:
     concurrency:
       group: sns-ranking-reel-post
       cancel-in-progress: false
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
     timeout-minutes: 30
     env:
       INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
