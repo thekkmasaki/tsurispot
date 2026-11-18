@@ -1,19 +1,20 @@
 name: SNS ランキング投稿（Instagramリール / Threads）
 
-# 毎日1本「◯月に△△が釣れる□□県の釣り場TOP10」を自動生成して投稿する。
+# 毎日2本（朝 am・夜 pm）「◯月に△△が釣れる□□県の釣り場TOP10」を自動生成して投稿する。
 # 生成器: scripts/sns/ranking-reel/（サイトの県×月×魚種ページと同じデータ・掲載基準）
 #
-# 投稿時刻: JST 20:00 ごろ（帰宅後のアクティブ帯）。
+# 投稿時刻: 朝 JST 7:30 ごろ（通勤・始業前）と 夜 JST 20:00 ごろ（帰宅後のアクティブ帯）。
 # GitHub の定時実行は 5〜15 時間も遅れ、ばらつく（2026-11: 15:17 指定が実際は翌3:30 起動＝未明に投稿されていた）。
 # しかも毎時の cron も大半が実行されない（1日24回中4回程度。2026-11-17 は午後に1回も来ず投稿漏れ）。
 #
-# 本命: Cloudflare Worker の Cron（ops/cloudflare/reel-trigger-worker.js）が毎日 JST 19:55 に
-#       workflow_dispatch（dry_run=false, only_if_not_posted=true）で起動する。遅れも抜けもない。
-# 予備: 下の毎時 schedule。gate ジョブで判定する（公開リポジトリなので Actions は無料）:
+# 本命: Cloudflare Worker の Cron（ops/cloudflare/reel-trigger-worker.js）が毎日 JST 7:30（slot=am）と
+#       19:55（slot=pm）に workflow_dispatch（dry_run=false, only_if_not_posted=true）で起動する。
+# 予備（夜の枠だけ）: 下の毎時 schedule。gate ジョブで判定する（公開リポジトリなので Actions は無料）:
 #   - JST 12:00 前の起動 … 何もしない（未明・朝には投稿しない）
 #   - 15:30〜20:30 の起動 … 20:30 まで待ち、まだ未投稿なら投稿（Worker が失敗した日だけ動く）
 #   - 20:30〜24:00 の起動 … 未投稿ならすぐ投稿
-#   - その日すでに投稿済みなら、どの時間でも何もしない（台帳を見るだけなので数秒で終わる）
+#   - その日の夜の枠が投稿済みなら、どの時間でも何もしない（台帳を見るだけなので数秒で終わる）
+# 投稿済み判定は「日付×枠」ごと。台帳の slot の無い古い行は pm 扱い。
 # PC には頼らない（ユーザー方針）。
 on:
   schedule:
@@ -34,9 +35,14 @@ on:
         description: '投稿先'
         default: 'instagram,threads'
       only_if_not_posted:
-        description: '今日すでに投稿済みなら何もしない（Cloudflare Worker からの定時起動用）'
+        description: '今日のこの枠がすでに投稿済みなら何もしない（Cloudflare Worker からの定時起動用）'
         type: boolean
         default: false
+      slot:
+        description: '朝の枠(am)か夜の枠(pm)か'
+        type: choice
+        options: [pm, am]
+        default: pm
 
 jobs:
   gate:
@@ -45,23 +51,26 @@ jobs:
     outputs:
       date: ${{ steps.wait.outputs.date }}
       post: ${{ steps.wait.outputs.post }}
+      slot: ${{ steps.wait.outputs.slot }}
     env:
       UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
       UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
     steps:
-      - name: 投稿するか判定（Worker は 19:55 に即投稿・予備の毎時起動は 20:30 以降・投稿済みなら何もしない）
+      - name: 投稿するか判定（Worker は朝 7:30・夜 19:55 に即投稿・予備の毎時起動は夜の枠だけ 20:30 以降・投稿済みなら何もしない）
         id: wait
         run: |
           today=$(TZ=Asia/Tokyo date +%F)
+          slot="${{ inputs.slot }}"; [ "$slot" = "am" ] || slot=pm   # schedule 起動は常に夜の枠
+          echo "slot=$slot" >> "$GITHUB_OUTPUT"
           posted() {
             curl -sf -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN" "$UPSTASH_REDIS_REST_URL/lrange/sns:ranking:ledger/0/9" \
-              | jq -r '.result[]' | jq -s --arg d "$today" 'any(.date == $d and .ok == true)' | grep -q true
+              | jq -r '.result[]' | jq -s --arg d "$today" --arg s "$slot" 'any(.date == $d and (.slot // "pm") == $s and .ok == true)' | grep -q true
           }
           if [ "${{ github.event_name }}" != "schedule" ]; then
-            if [ "${{ inputs.only_if_not_posted }}" = "true" ] && posted; then echo "$today は投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+            if [ "${{ inputs.only_if_not_posted }}" = "true" ] && posted; then echo "$today $slot は投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
             echo "post=true" >> "$GITHUB_OUTPUT"; exit 0
           fi
-          if posted; then echo "$today は投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if posted; then echo "$today 夜の枠は投稿済み → 何もしない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           h=$(TZ=Asia/Tokyo date +%-H)
           now=$(date +%s); target=$(TZ=Asia/Tokyo date -d "today 20:30" +%s)
           if [ "$h" -lt 12 ]; then echo "JST ${h}時の起動 → 未明・朝は投稿しない"; echo "post=false" >> "$GITHUB_OUTPUT"; exit 0; fi
@@ -129,6 +138,7 @@ jobs:
             ARGS+=(--platforms "${{ inputs.platforms }}")
           fi
           [ -n "${{ needs.gate.outputs.date }}" ] && ARGS+=(--date "${{ needs.gate.outputs.date }}")
+          ARGS+=(--slot "${{ needs.gate.outputs.slot }}")
           node scripts/sns/ranking-reel/run.mjs "${ARGS[@]}"
 
       - name: 生成物を保存（確認用・7日）
