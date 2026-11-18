@@ -195,7 +195,6 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "watanoha-ko": "watanoha-gyokou6", // 渡波港 → 渡波漁港：同一市区町村の同名施設（3.063km離れて登録）
   "ishinomaki-watanoha-port-a11": "watanoha-gyokou6", // 石巻市渡波漁港 → 渡波漁港：同一市区町村の同名施設（3.063km離れて登録）
   "nobiru-beach-a11": "higashimatsushima-nobiru-e8", // 東松島市野蒜海岸 → 東松島野蒜海岸：同一市区町村の同名施設（5.685km離れて登録）
-  "natori-yuriage-gyokou-e8": "yuriage-port", // 名取閖上漁港 → 閖上港：同一市区町村の同名施設（2.184km離れて登録）
   "amakusa-shimoda-iso-s8": "shimoda-onsen-iso-w6", // 天草・下田温泉周辺磯 → 天草・下田温泉磯：同一市区町村の同名施設（39.1km離れて登録）
   "amakusa-ushibuka-port": "ushibuka-port", // 天草牛深港 → 牛深港：同一市区町村の同名施設（2.409km離れて登録）
   "goshoura-kou-a12": "goshoura-kou-w6", // 御所浦港 → 天草・御所浦港：同一市区町村の同名施設（9.699km離れて登録）

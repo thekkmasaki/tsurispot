@@ -1020,22 +1020,6 @@
       "conflicts": []
     },
     {
-      "core": "閖上",
-      "prefecture": "宮城県",
-      "kind": "port:閖上港",
-      "maxKm": 2.184,
-      "winner": "yuriage-port",
-      "winnerName": "閖上港",
-      "losers": [
-        {
-          "slug": "natori-yuriage-gyokou-e8",
-          "name": "名取閖上漁港"
-        }
-      ],
-      "coord": null,
-      "conflicts": []
-    },
-    {
       "core": "下田温泉",
       "prefecture": "熊本県",
       "kind": "rocky:下田温泉",
@@ -5676,6 +5660,22 @@
       "prefecture": "宮城県",
       "slugs": [
         "shichigahama-minatohama-port-a13（七ヶ浜町湊浜漁港）"
+      ],
+      "reason": "正規化名が一致しない（港と堤防・海岸、別地区名など）"
+    },
+    {
+      "core": "閖上",
+      "prefecture": "宮城県",
+      "slugs": [
+        "natori-yuriage-gyokou-e8（名取閖上漁港）"
+      ],
+      "reason": "UGC釣果2件あり。統合先 yuriage-port（striking-spots）へ寄せるにはDB移行が必要なため保留"
+    },
+    {
+      "core": "閖上",
+      "prefecture": "宮城県",
+      "slugs": [
+        "yuriage-port（閖上港）"
       ],
       "reason": "正規化名が一致しない（港と堤防・海岸、別地区名など）"
     },
@@ -10926,14 +10926,6 @@
       "members": [
         "higashimatsushima-nobiru-e8:38.358,141.128(score0)",
         "nobiru-beach-a11:38.338,141.188(score0)"
-      ]
-    },
-    {
-      "winner": "yuriage-port",
-      "name": "閖上港",
-      "members": [
-        "yuriage-port:38.178,140.956(score1)",
-        "natori-yuriage-gyokou-e8:38.189,140.951(score1)"
       ]
     },
     {

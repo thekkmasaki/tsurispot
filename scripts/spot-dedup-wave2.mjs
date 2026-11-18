@@ -105,6 +105,7 @@ const EXCLUDE = new Map([
   ["kameura-gyokou-a12", "住所が瀬戸町堂浦（鳴門町土佐泊浦の亀浦港とは別地区の可能性）"],
   ["kitadomari-gyokou-tokushima", "北泊の住所が北灘町と里浦町で食い違う"],
   ["naruto-kitatomari-c8", "北泊の住所が北灘町と里浦町で食い違う"],
+  ["natori-yuriage-gyokou-e8", "UGC釣果2件あり。統合先 yuriage-port（striking-spots）へ寄せるにはDB移行が必要なため保留"],
 ]);
 
 // DB（SPOT#<slug>）に UGC 釣果投稿・開拓者記録がある slug。DB を書き換えずに投稿を表示し続けるため
