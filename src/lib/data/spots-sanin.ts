@@ -370,7 +370,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s1151", name: "鳥取市白兎海岸", slug: "tottori-hakuto-coast",
     description: "因幡の白うさぎ神話で有名な白兎海岸。鳥取砂丘の西に位置する砂浜で、キスの投げ釣りが盛んなことで知られる。夏場はシロギスの数釣りが楽しめ、秋にはカレイ・ヒラメも回遊する好ポイント。",
-    latitude: 35.5110, longitude: 134.1210,
+    latitude: 35.513, longitude: 134.11,
     address: "〒689-0206 鳥取県鳥取市白兎613",
     accessInfo: "JR鳥取駅から車で約20分。山陰自動車道鳥取西ICから約10分。",
     region: region("r27"), spotType: "beach", difficulty: "beginner",

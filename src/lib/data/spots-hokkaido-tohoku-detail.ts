@@ -1844,8 +1844,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "onahama-ko",
     description:
       "いわき市の中心港湾で、アクアマリンふくしま（水族館）に隣接する東北有数の大型港。いわき・ら・ら・ミュウ（物産館）も近く、観光と釣りを同時に楽しめる。カレイ・アイナメ・メバルの根魚が好調で、夏にはサバ・アジの回遊もある。",
-    latitude: 36.94550,
-    longitude: 140.91640,
+    latitude: 36.9412, longitude: 140.8912,
     address: "〒970-0316 福島県いわき市小名浜下神白綱取177",
     accessInfo:
       "JRいわき駅から車で約20分。常磐自動車道いわき湯本ICから約15分。ら・ら・ミュウ駐車場（無料）を利用可。",
