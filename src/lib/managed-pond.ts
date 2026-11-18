@@ -6,9 +6,9 @@
  * 純関数のみ。Next.js API やデータ層は import しない（テスト・クライアントからも使える）。
  */
 import type { FishingSpot } from "@/types";
-import { getSpotCategory, getSpotCategoryDetail, SPOT_CATEGORY_LABELS } from "@/lib/spot-category";
-import { composeMetaDescription } from "@/lib/seo/meta-description";
-import { TITLE_MAX } from "@/lib/utils/seo";
+import { getSpotCategory, getSpotCategoryDetail, SPOT_CATEGORY_LABELS } from "./spot-category";
+import { composeMetaDescription } from "./seo/meta-description";
+import { TITLE_MAX } from "./utils/seo";
 
 type ManagedInput = Pick<
   FishingSpot,
