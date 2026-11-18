@@ -35,6 +35,7 @@ const month = MONTHS.find((m) => m.num === monthNum)!;
 const exclude = list(arg("exclude"));
 const recentFish = list(arg("recent-fish"));
 const recentPref = list(arg("recent-pref"));
+const lastFish = [...recentFish][0]; // 台帳は新しい順なので先頭が前日の魚
 
 function matchingSpots(prefName: string, fishSlug: string) {
   return fishingSpots
@@ -63,6 +64,10 @@ function usablePhoto(spot: (typeof fishingSpots)[number]) {
 
 // 釣り人口（検索需要）の大きい県を優先する
 const DEMAND_TIER1 = new Set(["tokyo", "kanagawa", "chiba", "osaka", "hyogo", "aichi", "shizuoka", "fukuoka"]);
+// 重点魚種: 最盛期（fish.peakMonths）の間だけ最優先し、旬が終われば自動で通常の選定に戻る。
+// 2026-11 の初期実績でアオリイカ(1.5万再生)・タチウオ(1万)が他魚種(400〜500)を大きく上回ったため。
+// 重点魚種どうしは「前日と同じ魚」だけ避けて交互に回す（県×魚の60日重複回避はそのまま）
+const FOCUS_FISH = new Set(["aoriika", "tachiuo"]);
 const DEMAND_TIER2 = new Set(["ibaraki", "wakayama", "mie", "hiroshima", "kyoto", "miyagi", "hokkaido", "niigata", "nagasaki", "yamaguchi", "okayama", "kagawa", "ehime", "oita", "kumamoto", "kagoshima", "ishikawa", "toyama", "fukui", "shimane", "tokushima", "kochi"]);
 
 /** 同じ場所の言い換え（「〇〇河口」と「〇〇市〇〇河口左岸」等）を同一視するキー */
@@ -120,7 +125,11 @@ const scored = candidates
     s += isPeakMonth ? 25 : 0; // 旬の月
     s += Math.min(c.count, 20); // 掲載スポットが多いほどランキングが充実
     s += DEMAND_TIER1.has(c.prefSlug) ? 15 : DEMAND_TIER2.has(c.prefSlug) ? 7 : 0;
-    if (recentFish.has(c.fishSlug)) s -= 60; // 連日同じ魚は避ける
+    const focus = FOCUS_FISH.has(c.fishSlug) && isPeakMonth;
+    if (focus) {
+      s += 100;
+      if (c.fishSlug === lastFish) s -= 60; // 重点魚種は前日と同じ魚だけ避ける
+    } else if (recentFish.has(c.fishSlug)) s -= 60; // 連日同じ魚は避ける
     if (recentPref.has(c.prefSlug)) s -= 30;
     s += hash(`${dateStr}|${c.prefSlug}|${c.fishSlug}`) * 12; // 日替わりの揺らぎ
     return { c, fish, pref, isPeakMonth, s };
