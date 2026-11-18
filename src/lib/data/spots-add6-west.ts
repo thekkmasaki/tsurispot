@@ -2133,7 +2133,7 @@ export const westAdd6Spots: FishingSpot[] = [
   {
     id: "sw6104", name: "長門・仙崎港", slug: "senzaki-kou-w6",
     description: "金子みすゞの故郷として知られる仙崎の漁港。仙崎イカの水揚げで有名で、堤防からのエギングやサビキ釣りが楽しめる。青海島観光と合わせた釣りに最適。",
-    latitude: 34.389, longitude: 131.185,
+    latitude: 34.397, longitude: 131.199,
     address: "〒759-4106 山口県長門市仙崎",
     accessInfo: "JR仙崎駅から徒歩約10分",
     region: localRegion("rw6014"), spotType: "port", difficulty: "beginner",
@@ -7897,7 +7897,7 @@ export const westAdd6Spots: FishingSpot[] = [
   {
     id: "sw6403", name: "指宿・山川港", slug: "yamagawa-kou-ibusuki-w6",
     description: "指宿市山川の港。薩摩半島最南端の港で、開聞岳を望む絶景ロケーション。カツオの水揚げが盛んで、堤防からのサビキやエギングが楽しめる。",
-    latitude: 31.2, longitude: 130.63,
+    latitude: 31.202, longitude: 130.642,
     address: "〒891-0504 鹿児島県指宿市山川新生町",
     accessInfo: "JR山川駅から徒歩約15分",
     region: localRegion("rw6045"), spotType: "port", difficulty: "intermediate",

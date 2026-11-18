@@ -965,7 +965,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2537", name: "戸田港", slug: "heda-ko",
     description: "駿河湾西岸の小さな港町。タカアシガニで有名だが、釣りではアオリイカの実績が非常に高い。堤防からのサビキや根魚釣りも楽しめ、穴場感が魅力。",
-    latitude: 34.9750, longitude: 138.7630, address: "〒410-3402 静岡県沼津市戸田",
+    latitude: 34.972, longitude: 138.783, address: "〒410-3402 静岡県沼津市戸田",
     accessInfo: "東名高速沼津ICから約50分。JR沼津駅からバスで約90分。",
     region: localRegion("r2512"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",

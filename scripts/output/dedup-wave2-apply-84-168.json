@@ -1,0 +1,14 @@
+{
+  "label": "(2/3)",
+  "losers": 107,
+  "skipped": [],
+  "coordDone": [
+    "senzaki-kou-w6: 34.389,131.185 → 34.397,131.199（senzaki-gyokou-yamaguchi の座標・長門市仙崎・標高1.8m）",
+    "yamagawa-kou-ibusuki-w6: 31.2,130.63 → 31.202,130.642（ibusuki-yamagawa-gyokou-a9 の座標・指宿市山川福元・標高11.2m）",
+    "heda-ko: 34.975,138.763 → 34.972,138.783（heda-gyokou の座標・沼津市戸田・標高6.9m）",
+    "taga-port: 35.0745,139.0812 → 35.043,139.081（taga-gyokou の座標・熱海市下多賀・標高11.2m）"
+  ],
+  "coordSkipped": [
+    "wakinosawa-gyoko: 定義が2件"
+  ]
+}

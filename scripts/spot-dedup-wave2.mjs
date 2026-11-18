@@ -113,6 +113,8 @@ const EXCLUDE = new Map([
 // ※ natori-yuriage-gyokou-e8（UGC 2件）は統合先 yuriage-port が striking-spots（検索上位候補）のため
 //   統合先を変えず、UGC は DB 移行の要否として報告する。
 const PREFER = new Set(["morozaki-port"]);
+// striking-spots（GSCで上位に近く内部リンクを集中させている slug）も統合先として優先する
+for (const m of fs.readFileSync(path.join(ROOT, "src/lib/data/striking-spots.ts"), "utf8").matchAll(/"([a-z0-9-]+)"/g)) PREFER.add(m[1]);
 
 const plan = { merge: [], review: [], coordUnverified: [] };
 for (const g of geo) {
