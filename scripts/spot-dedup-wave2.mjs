@@ -107,6 +107,12 @@ const EXCLUDE = new Map([
   ["naruto-kitatomari-c8", "北泊の住所が北灘町と里浦町で食い違う"],
 ]);
 
+// DB（SPOT#<slug>）に UGC 釣果投稿・開拓者記録がある slug。DB を書き換えずに投稿を表示し続けるため
+// 統合先として残す（scripts/output/ の DynamoDB 確認結果より）。
+// ※ natori-yuriage-gyokou-e8（UGC 2件）は統合先 yuriage-port が striking-spots（検索上位候補）のため
+//   統合先を変えず、UGC は DB 移行の要否として報告する。
+const PREFER = new Set(["morozaki-port"]);
+
 const plan = { merge: [], review: [], coordUnverified: [] };
 for (const g of geo) {
   const reason = [];
@@ -146,7 +152,7 @@ for (const g of geo) {
     const ranked = ms
       .map((m) => ({ ...m, refs: refs(m.slug), quoted: all.includes(`「${m.name}」`) ? 1 : 0, cs: coordScore(m, g.core) }))
       // 県概要などの本文が「名称」で引用しているメンバーを最優先（引用先が消えると本文が宙に浮く）
-      .sort((a, b) => b.quoted - a.quoted || b.sourced - a.sourced || b.refs - a.refs || b.fish - a.fish || a.name.length - b.name.length);
+      .sort((a, b) => (PREFER.has(b.slug) ? 1 : 0) - (PREFER.has(a.slug) ? 1 : 0) || b.quoted - a.quoted || b.sourced - a.sourced || b.refs - a.refs || b.fish - a.fish || a.name.length - b.name.length);
     const [w, ...losers] = ranked;
     const bestCoord = [...ranked].sort((a, b) => b.cs - a.cs || precise(b.lat) - precise(a.lat))[0];
     let coord = null;

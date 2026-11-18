@@ -41,7 +41,15 @@ const skipped = [];
 const coordDone = [];
 const coordSkipped = [];
 for (const g of plan.merge.slice(from, to)) {
-  const bad = [g.winner, ...g.losers.map((l) => l.slug)].filter((s) => existing.has(s) || (s !== g.winner && existingWinners.has(s)));
+  // 既存統合表の勝者が今回の敗者になる場合は、既存エントリの統合先を今回の勝者へ付け替える（チェーン防止）
+  for (const l of g.losers) {
+    if (!existingWinners.has(l.slug)) continue;
+    mapSrc = mapSrc.replace(new RegExp(`(^ {2}"[^"]+": )"${l.slug}"`, "gm"), `$1"${g.winner}"`);
+    for (const [k, v] of existing) if (v === l.slug) existing.set(k, g.winner);
+    existingWinners.delete(l.slug);
+    existingWinners.add(g.winner);
+  }
+  const bad = [g.winner, ...g.losers.map((l) => l.slug)].filter((s) => existing.has(s));
   if (bad.length) {
     skipped.push(`${g.winner}: 既存統合表と衝突 ${bad.join(",")}`);
     continue;

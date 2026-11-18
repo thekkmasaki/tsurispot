@@ -5,12 +5,12 @@
       "prefecture": "愛知県",
       "kind": "port:師崎港",
       "maxKm": 6.67,
-      "winner": "morozaki-fishing-port",
-      "winnerName": "師崎港",
+      "winner": "morozaki-port",
+      "winnerName": "師崎漁港",
       "losers": [
         {
-          "slug": "morozaki-port",
-          "name": "師崎漁港"
+          "slug": "morozaki-fishing-port",
+          "name": "師崎港"
         }
       ],
       "coord": null,
@@ -10588,11 +10588,11 @@
   ],
   "coordUnverified": [
     {
-      "winner": "morozaki-fishing-port",
-      "name": "師崎港",
+      "winner": "morozaki-port",
+      "name": "師崎漁港",
       "members": [
-        "morozaki-fishing-port:34.6967,136.9467(score0)",
-        "morozaki-port:34.6899,136.9306(score0)"
+        "morozaki-port:34.6899,136.9306(score0)",
+        "morozaki-fishing-port:34.6967,136.9467(score0)"
       ]
     },
     {

@@ -128,7 +128,7 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "shionomisaki-iso-a13": "shionomisaki-k8", // 潮岬磯 → 潮岬：潮岬の磯
   "hidaka-kou-k8": "gobo-hidaka-port", // 日高港 → 御坊・日高港：日高港（4m、住所表記違い）
   // ---- 第2弾 (1/3): 同一市区町村・同名施設で500m超離れて重複登録（座標誤り由来）----
-  "morozaki-port": "morozaki-fishing-port", // 師崎漁港 → 師崎港：同一市区町村の同名施設（6.67km離れて登録）
+  "morozaki-fishing-port": "morozaki-port", // 師崎港 → 師崎漁港：同一市区町村の同名施設（6.67km離れて登録）
   "chita-toyohama-port": "toyohama-gyokou-add5", // 知多半島豊浜漁港 → 豊浜漁港：同一市区町村の同名施設（2.261km離れて登録）
   "iyoshi-gunchu-kou-c8": "gunchu-kou-a12", // 伊予市・郡中港 → 郡中港：同一市区町村の同名施設（3.639km離れて登録）
   "misho-gyokou-ainan": "ainan-misho-kou-w6", // 愛南町御荘漁港 → 愛南町・御荘港：同一市区町村の同名施設（0.755km離れて登録）
