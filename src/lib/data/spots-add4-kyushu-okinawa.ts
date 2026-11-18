@@ -1289,7 +1289,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   {
     id: "sks4061", name: "日向市細島港", slug: "hyuga-hososhima-kou",
     description: "日向市の工業港で、大きな波止から多彩な釣りが楽しめる。青物の回遊ルート上にあり、秋のショアジギングが特に人気の実力派釣り場。",
-    latitude: 32.4350, longitude: 131.6630,
+    latitude: 32.426, longitude: 131.66,
     address: "〒883-0001 宮崎県日向市細島",
     accessInfo: "JR日向市駅から車で約10分。東九州道日向ICから約15分。",
     region: localRegion("rks4051"), spotType: "port", difficulty: "intermediate",
