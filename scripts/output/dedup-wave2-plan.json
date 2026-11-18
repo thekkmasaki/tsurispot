@@ -2866,17 +2866,17 @@
       "prefecture": "静岡県",
       "kind": "port:静浦港",
       "maxKm": 1.032,
-      "winner": "shizuura-gyokou",
-      "winnerName": "静浦漁港",
+      "winner": "shizuura-port",
+      "winnerName": "静浦港",
       "losers": [
         {
-          "slug": "shizuura-port",
-          "name": "静浦港"
+          "slug": "shizuura-gyokou",
+          "name": "静浦漁港"
         }
       ],
       "coord": null,
       "conflicts": [
-        "トイレ(shizuura-gyokou=true/shizuura-port=false)"
+        "トイレ(shizuura-port=false/shizuura-gyokou=true)"
       ]
     },
     {
@@ -11571,11 +11571,11 @@
       ]
     },
     {
-      "winner": "shizuura-gyokou",
-      "name": "静浦漁港",
+      "winner": "shizuura-port",
+      "name": "静浦港",
       "members": [
-        "shizuura-gyokou:35.056,138.868(score0)",
-        "shizuura-port:35.0525,138.8785(score0)"
+        "shizuura-port:35.0525,138.8785(score0)",
+        "shizuura-gyokou:35.056,138.868(score0)"
       ]
     },
     {

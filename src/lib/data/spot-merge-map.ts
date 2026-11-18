@@ -69,7 +69,7 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "fuefukigawa-isawa-kofu": "fuefukigawa-isawa6", // 笛吹川（石和・甲府） → 笛吹川（石和付近）：笛吹川の石和区間
   "fuefukigawa-isawa-onsen-a12": "fuefukigawa-isawa6", // 笛吹川（石和温泉地区） → 笛吹川（石和付近）：笛吹川の石和区間
   "biwako-otsu-ko": "biwako-otsu-port", // 琵琶湖大津港 → 琵琶湖大津港周辺：琵琶湖大津港（同住所）
-  "uchinoura-kou-s8": "uchinoura-kou-kimotsuki-w6", // 内之浦港 → 肝付・内之浦港：内之浦港（座標同一）
+  "uchinoura-kou-s8": "kagoshima-uchinoura-port-bulk", // 内之浦港 → 肝付・内之浦港：内之浦港（座標同一）
   "ogi-kou-niigata": "sado-ogi-port", // 小木港 → 佐渡小木港：佐渡・小木港
   "kaneda-ko": "kaneda-gyokou", // 金田港 → 金田漁港：金田港＝金田漁港（三浦市）
   "mitohama-kaigan-miura-a12": "mito-hama", // 三戸浜海岸（三浦） → 三戸浜：三戸浜（91m）
@@ -223,4 +223,112 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "irino-gyokou-a11": "kuroshio-irino-port", // 入野漁港 → 黒潮町入野漁港：同一市区町村の同名施設（4.732km離れて登録）
   "sukumo-katashima-kou-a9": "katashima-kou-a10", // 宿毛湾・片島港 → 片島港：同一市区町村の同名施設（2.037km離れて登録）
   "susaki-nomi-gyokou-a9": "nomi-gyokou-a10", // 須崎・野見漁港 → 野見漁港：同一市区町村の同名施設（1.68km離れて登録）
+  // ---- 第2弾 (2/3): 同一市区町村・同名施設で500m超離れて重複登録（座標誤り由来）----
+  "nanaura-gyokou-a10": "kashima-nanaura-gyokou-saga", // 七浦漁港 → 鹿島市七浦漁港：同一市区町村の同名施設（5.145km離れて登録）
+  "ouka-gyokou-a13": "ouka-gyokou-w6", // 相賀漁港 → 唐津・相賀漁港：同一市区町村の同名施設（17.624km離れて登録）
+  "tara-takezaki-port": "saga-tara-takezaki-bulk", // 太良町竹崎港 → 太良・竹崎港：同一市区町村の同名施設（8.488km離れて登録）
+  "takesaki-gyokou-tara": "saga-tara-takezaki-bulk", // 竹崎漁港 → 太良・竹崎港：同一市区町村の同名施設（8.488km離れて登録）
+  "tara-takezaki-gyokou": "saga-tara-takezaki-bulk", // 太良町竹崎漁港 → 太良・竹崎港：同一市区町村の同名施設（8.488km離れて登録）
+  "takezaki-kou-a10": "saga-tara-takezaki-bulk", // 竹崎港 → 太良・竹崎港：同一市区町村の同名施設（8.488km離れて登録）
+  "hama-gyokou-kashima-a11": "kashima-hama-gyokou-w6", // 浜漁港 → 鹿島・浜漁港：同一市区町村の同名施設（3.247km離れて登録）
+  "hama-gyokou-kashima-a13": "kashima-hama-gyokou-w6", // 浜漁港（鹿島） → 鹿島・浜漁港：同一市区町村の同名施設（3.247km離れて登録）
+  "minato-gyokou-karatsu-a13": "minato-gyokou-karatsu-w6", // 湊漁港（唐津） → 唐津・湊漁港：同一市区町村の同名施設（12.13km離れて登録）
+  "shima-wagu-gyokou": "wagu-gyokou-k8", // 志摩・和具漁港 → 和具漁港：同一市区町村の同名施設（2.914km離れて登録）
+  "atsumi-gyokou6": "atsumi-kou", // 温海漁港 → 温海港：同一市区町村の同名施設（3.731km離れて登録）
+  "kamo-gyokou-yamagata6": "kamo-port-yamagata", // 加茂漁港 → 加茂港：同一市区町村の同名施設（3.587km離れて登録）
+  "tsuruoka-kamo-gyokou-e8": "kamo-port-yamagata", // 鶴岡加茂漁港 → 加茂港：同一市区町村の同名施設（3.587km離れて登録）
+  "miyaumi-beach-a10": "sakata-miyaumi-kaigan-e8", // 宮海海岸 → 酒田宮海海岸：同一市区町村の同名施設（6.862km離れて登録）
+  "sakata-miyaumi-surf-a12": "sakata-miyaumi-kaigan-e8", // 酒田市宮海海岸サーフ → 酒田宮海海岸：同一市区町村の同名施設（6.862km離れて登録）
+  "tsuruoka-katanosawa-e8": "katatoisawa-gyokou", // 鶴岡堅苔沢漁港 → 堅苔沢漁港：同一市区町村の同名施設（16.7km離れて登録）
+  "tsuruoka-katanosawa-port-a12": "katatoisawa-gyokou", // 鶴岡市堅苔沢港 → 堅苔沢漁港：同一市区町村の同名施設（16.7km離れて登録）
+  "tsuruoka-sanze-gyokou-e8": "sanze-gyokou6", // 鶴岡三瀬漁港 → 三瀬漁港：同一市区町村の同名施設（16.807km離れて登録）
+  "yuza-mega-port-a12": "yuza-mega-gyokou-e8", // 遊佐町女鹿漁港 → 遊佐女鹿漁港：同一市区町村の同名施設（6.961km離れて登録）
+  "tsuruoka-kobanato-e8": "kobato-gyokou", // 鶴岡小波渡漁港 → 小波渡漁港：同一市区町村の同名施設（13.243km離れて登録）
+  "yuza-fukura-gyokou-e8": "fukura-gyokou", // 遊佐吹浦漁港 → 吹浦漁港：同一市区町村の同名施設（6.617km離れて登録）
+  "nezugaseki-gyokou6": "nezugaseki-ko", // 鼠ヶ関漁港 → 鼠ヶ関港：同一市区町村の同名施設（1.617km離れて登録）
+  "tsuruoka-wada-gyokou-e8": "wasada-port-a10", // 鶴岡早田漁港 → 早田漁港：同一市区町村の同名施設（26.206km離れて登録）
+  "yura-gyokou-yamagata": "tsuruoka-yura-port", // 由良漁港 → 鶴岡市由良漁港：同一市区町村の同名施設（9.876km離れて登録）
+  "tsuruoka-yura-gyokou-e8": "tsuruoka-yura-port", // 鶴岡由良漁港 → 鶴岡市由良漁港：同一市区町村の同名施設（9.876km離れて登録）
+  "agematsura-gyokou-suooshima": "akage-kou-suooshima-w6", // 周防大島 安下庄漁港 → 周防大島・安下庄港：同一市区町村の同名施設（5.643km離れて登録）
+  "suo-oshima-ihotata-port": "suooshima-ihotada-c8", // 周防大島町伊保田漁港 → 周防大島・伊保田港：同一市区町村の同名施設（12.762km離れて登録）
+  "hofu-mitajiri-kou": "mitajiri-kou-w6", // 防府・三田尻港 → 防府市・三田尻港：同一市区町村の同名施設（3.984km離れて登録）
+  "mitajiri-kou-a12": "mitajiri-kou-w6", // 三田尻港 → 防府市・三田尻港：同一市区町村の同名施設（3.984km離れて登録）
+  "murozumi-gyokou-hikari": "hikari-murozumi-kou", // 光市室積漁港 → 光市・室積港：同一市区町村の同名施設（3.769km離れて登録）
+  "murozumi-gyokou-a11": "hikari-murozumi-kou", // 室積漁港 → 光市・室積港：同一市区町村の同名施設（3.769km離れて登録）
+  "kaminoseki-murotsu-port": "kaminoseki-murotsu-w6", // 上関町室津港 → 上関・室津港：同一市区町村の同名施設（1.835km離れて登録）
+  "yamaguchi-aio-kou-c8": "aio-gyokou-w6", // 山口・秋穂港 → 秋穂漁港：同一市区町村の同名施設（7.549km離れて登録）
+  "yamaguchi-aio-port": "aio-gyokou-w6", // 山口市秋穂漁港 → 秋穂漁港：同一市区町村の同名施設（7.549km離れて登録）
+  "kogushi-kou-c8": "kogushi-gyokou-w6", // 小串港 → 小串漁港：同一市区町村の同名施設（7.426km離れて登録）
+  "sanyo-onoda-habu-port": "sanyo-onoda-habu-kou", // 山陽小野田市埴生港 → 山陽小野田・埴生港：同一市区町村の同名施設（3.267km離れて登録）
+  "senzaki-port": "senzaki-kou-w6", // 仙崎港 → 長門・仙崎港：同一市区町村の同名施設（3.678km離れて登録）
+  "nagato-senzaki-gyokou": "senzaki-kou-w6", // 長門市・仙崎漁港 → 長門・仙崎港：同一市区町村の同名施設（3.678km離れて登録）
+  "senzaki-gyokou-yamaguchi": "senzaki-kou-w6", // 仙崎漁港 → 長門・仙崎港：同一市区町村の同名施設（3.678km離れて登録）
+  "hagi-ooi-port": "ooi-gyokou-hagi-a13", // 萩市大井漁港 → 大井漁港：同一市区町村の同名施設（17.041km離れて登録）
+  "tokuyama-kou-yamaguchi": "tokuyama-kou-w6", // 周南市徳山港 → 周南・徳山港：同一市区町村の同名施設（2.453km離れて登録）
+  "akune-kou-s8": "akune-kou-w6", // 阿久根港 → 阿久根・阿久根港：同一市区町村の同名施設（1.304km離れて登録）
+  "yakushima-anbo-port": "anbo-kou-a12", // 屋久島安房港 → 安房港：同一市区町村の同名施設（2.601km離れて登録）
+  "kaigata-gyokou-tarumizu-w6": "kinkowan-umigata-port", // 垂水・海潟漁港 → 錦江湾海潟漁港：同一市区町村の同名施設（47.744km離れて登録）
+  "tarumizu-kaikata-kou-s8": "kinkowan-umigata-port", // 垂水・海潟港 → 錦江湾海潟漁港：同一市区町村の同名施設（47.744km離れて登録）
+  "minami-satsuma-kasasa-port": "minami-satsuma-kasasa-kou-s8", // 南さつま市笠沙港 → 南さつま・笠沙港：同一市区町村の同名施設（2.668km離れて登録）
+  "kagoshima-kamoike-port": "kamoike-kou", // 鹿児島・鴨池港 → 鴨池港：同一市区町村の同名施設（1.066km離れて登録）
+  "miyanoura-kou-yakushima-a10": "yakushima-miyanoura", // 宮之浦港 → 鹿児島屋久島宮之浦港：同一市区町村の同名施設（10.101km離れて登録）
+  "furue-kou-kanoya-w6": "kanoya-furue-port", // 鹿屋・古江港 → 鹿屋市古江港：同一市区町村の同名施設（5.699km離れて登録）
+  "kokubu-kou-a11": "kokubu-kou-kirishima-w6", // 国分港 → 霧島・国分港：同一市区町村の同名施設（1.238km離れて登録）
+  "satamisaki-iso-s8": "satamisaki-iso", // 佐多岬周辺磯 → 佐多岬磯：同一市区町村の同名施設（1.256km離れて登録）
+  "yamagawa-gyokou-a10": "yamagawa-kou-ibusuki-w6", // 山川漁港 → 指宿・山川港：同一市区町村の同名施設（2.838km離れて登録）
+  "ibusuki-yamagawa-gyokou-a9": "yamagawa-kou-ibusuki-w6", // 指宿・山川漁港 → 指宿・山川港：同一市区町村の同名施設（2.838km離れて登録）
+  "fukiagehama-s8": "fukiage-hama-hioki-w6", // 吹上浜 → 日置・吹上浜：同一市区町村の同名施設（3.357km離れて登録）
+  "nishinoomote-kou-a10": "tanegashima-nishinoomote", // 西之表港 → 種子島西之表港：同一市区町村の同名施設（1.008km離れて登録）
+  "taniyama-kou-w6": "taniyama-port", // 鹿児島・谷山港 → 谷山港：同一市区町村の同名施設（2.63km離れて登録）
+  "uchinoura-kou-kimotsuki-w6": "kagoshima-uchinoura-port-bulk", // 肝付・内之浦港 → 肝付・内之浦漁港：同一市区町村の同名施設（0.534km離れて登録）
+  "shimohama-beach-a10": "akita-shimohama-kaigan-e8", // 下浜海岸 → 秋田下浜海岸：同一市区町村の同名施設（3.366km離れて登録）
+  "akita-shimohama-surf-a13": "akita-shimohama-kaigan-e8", // 秋田市下浜海岸サーフ → 秋田下浜海岸：同一市区町村の同名施設（3.366km離れて登録）
+  "mitane-kamayahama-surf-a12": "mitane-kamayahama-beach-a11", // 三種町釜谷浜サーフ → 三種町釜谷浜海岸：同一市区町村の同名施設（2.907km離れて登録）
+  "happo-iwadate-gyokou-e8": "iwadate-port-a10", // 八峰町岩館漁港 → 岩館漁港：同一市区町村の同名施設（8.12km離れて登録）
+  "iwaki-gyokou-akita-e8": "iwaki-kou-akita6", // 岩城漁港 → 岩城港：同一市区町村の同名施設（6.377km離れて登録）
+  "yurihonjo-iwaki-port-a12": "iwaki-kou-akita6", // 由利本荘市岩城港 → 岩城港：同一市区町村の同名施設（6.377km離れて登録）
+  "konoura-ko": "konoura-gyokou6", // 金浦港 → 金浦漁港：同一市区町村の同名施設（5.566km離れて登録）
+  "nikaho-konoura-port": "konoura-gyokou6", // にかほ市金浦漁港 → 金浦漁港：同一市区町村の同名施設（5.566km離れて登録）
+  "toga-gyokou": "oga-toga", // 戸賀漁港 → 男鹿・戸賀漁港：同一市区町村の同名施設（8.928km離れて登録）
+  "oga-toga-gyokou-e8": "oga-toga", // 男鹿戸賀漁港 → 男鹿・戸賀漁港：同一市区町村の同名施設（8.928km離れて登録）
+  "oga-tsubaki-gyokou-e8": "tsubaki-gyokou", // 男鹿椿漁港 → 椿漁港：同一市区町村の同名施設（6.242km離れて登録）
+  "happo-hachimori-gyokou-e8": "hachimori-gyokou6", // 八峰町八森漁港 → 八森漁港：同一市区町村の同名施設（3.859km離れて登録）
+  "kitaura-gyokou-akita": "kitaura-ko", // 北浦漁港 → 北浦港：同一市区町村の同名施設（8.204km離れて登録）
+  "honjou-kou6": "akita-honjoko", // 本荘港 → 秋田本荘港：同一市区町村の同名施設（3.386km離れて登録）
+  "yurihonjo-honjo-kou-e8": "akita-honjoko", // 由利本荘本荘港 → 秋田本荘港：同一市区町村の同名施設（3.386km離れて登録）
+  "oga-monzen-gyokou": "oga-monzen-gyokou6", // 男鹿半島・門前漁港 → 男鹿門前漁港：同一市区町村の同名施設（3.811km離れて登録）
+  "maze-gyokou": "maze-kou-niigata", // 間瀬漁港 → 間瀬港：同一市区町村の同名施設（4.782km離れて登録）
+  "sekiya-hama-surf-e8": "sekiya-hama-niigata", // 関屋浜サーフ → 関屋浜：同一市区町村の同名施設（1.416km離れて登録）
+  "kashiwazaki-arahama-gyokou-a13": "arahama-kou-niigata", // 柏崎・荒浜漁港 → 荒浜港：同一市区町村の同名施設（30.12km離れて登録）
+  "sado-akadomari-gyokou-a13": "sado-akadomari-kou", // 佐渡・赤泊漁港 → 佐渡・赤泊港：同一市区町村の同名施設（5.328km離れて登録）
+  "nou-kou-niigata": "nou-gyoko", // 能生港 → 能生漁港：同一市区町村の同名施設（3.422km離れて登録）
+  "sado-ryotsu-kou-niigata": "sado-ryotsu-kou", // 佐渡 両津港周辺 → 佐渡・両津港：同一市区町村の同名施設（0.835km離れて登録）
+  "ryotsu-ko-add2": "sado-ryotsu-kou", // 両津港 → 佐渡・両津港：同一市区町村の同名施設（0.835km離れて登録）
+  "miura-miyagawa-kou-a13": "miyagawa-ko", // 三浦・宮川港 → 宮川港：同一市区町村の同名施設（0.906km離れて登録）
+  "enoura-port": "enoura-gyokou", // 江之浦港 → 江之浦漁港：同一市区町村の同名施設（0.673km離れて登録）
+  "sajima-ko": "sajima-gyokou", // 佐島港 → 佐島漁港：同一市区町村の同名施設（1.729km離れて登録）
+  "hashirimizu-gyokou": "hashirimizu-ko", // 走水漁港 → 走水港：同一市区町村の同名施設（0.807km離れて登録）
+  "bishamon-gyokou-miura-a12": "bishamon-ko", // 毘沙門漁港（三浦） → 毘沙門港：同一市区町村の同名施設（2.831km離れて登録）
+  "fukuura-port": "fukuura-gyokou-kanagawa", // 福浦港 → 福浦漁港：同一市区町村の同名施設（4.298km離れて登録）
+  "chigasaki-yanagishima-kaigan-a13": "yanagishima-kaigan-surf", // 茅ヶ崎・柳島海岸 → 柳島海岸サーフ：同一市区町村の同名施設（0.784km離れて登録）
+  "hachinohe-ferry-futo": "hachinohe-ferry-futou6", // 八戸港フェリーふ頭 → 八戸港フェリー埠頭：同一市区町村の同名施設（1.02km離れて登録）
+  "aomori-okidate-wharf-a10": "aomori-okidate-futo", // 青森港沖館埠頭 → 青森港沖館ふ頭：同一市区町村の同名施設（1.063km離れて登録）
+  "tsugaru-dekishima-surf-a12": "dekishima-beach-a11", // つがる市出来島海岸サーフ → 出来島海岸：同一市区町村の同名施設（7.949km離れて登録）
+  "kodomari-kou-aomori": "kodomari-gyokou6", // 小泊港 → 小泊漁港：同一市区町村の同名施設（3.081km離れて登録）
+  "mutsu-ominato-port-a12": "mutsu-ominato-kou-e8", // むつ市大湊港 → むつ大湊港：同一市区町村の同名施設（2.695km離れて登録）
+  "oirase-momoishi-gyoko": "momoishi-gyokou6", // おいらせ町百石漁港 → 百石漁港：同一市区町村の同名施設（2.152km離れて登録）
+  "wakinosawa-kou6": "wakinosawa-gyoko", // 脇野沢港 → 脇野沢漁港：同一市区町村の同名施設（26.627km離れて登録）
+  "usami-port": "usami-gyokou", // 宇佐美港 → 宇佐美漁港：同一市区町村の同名施設（3.144km離れて登録）
+  "heda-gyokou": "heda-ko", // 戸田漁港 → 戸田港：同一市区町村の同名施設（2.844km離れて登録）
+  "heda-kou-numazu-a13": "heda-ko", // 戸田港（沼津市） → 戸田港：同一市区町村の同名施設（2.844km離れて登録）
+  "miho-kaigan-surf-a10": "miho-kaigan-e8", // 三保海岸サーフ → 三保海岸：同一市区町村の同名施設（3.901km離れて登録）
+  "shizuura-gyokou": "shizuura-port", // 静浦漁港 → 静浦港：同一市区町村の同名施設（1.032km離れて登録）
+  "taga-gyokou": "taga-port", // 多賀漁港 → 多賀港：同一市区町村の同名施設（3.503km離れて登録）
+  "tago-port": "tago-gyokou", // 田子港 → 田子漁港：同一市区町村の同名施設（5.5km離れて登録）
+  "toi-gyokou": "toi-kou", // 土肥漁港 → 土肥港：同一市区町村の同名施設（0.603km離れて登録）
+  "yawatano-gyokou": "yahawano-port", // 八幡野漁港 → 八幡野港：同一市区町村の同名施設（2.061km離れて登録）
+  "fukude-gyoko-add3": "fukude-port", // 福田漁港 → 福田港：同一市区町村の同名施設（8.267km離れて登録）
+  "iwata-fukude-gyokou-a13": "fukude-port", // 磐田・福田漁港 → 福田港：同一市区町村の同名施設（8.267km離れて登録）
+  "yui-kou": "yui-gyokou-shizuoka", // 由比港 → 由比漁港：同一市区町村の同名施設（8.007km離れて登録）
+  "ushitsu-kou-a9": "noto-ushitsu-kou", // 宇出津港 → 能登・宇出津港：同一市区町村の同名施設（7.324km離れて登録）
 };

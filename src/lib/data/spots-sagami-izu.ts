@@ -137,7 +137,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si2", name: "多賀港", slug: "taga-port",
     description: "熱海と網代の間に位置する小さな漁港。混雑が少なく穴場的存在。テトラ帯でのカサゴやメバル釣りが楽しめる。",
-    latitude: 35.0745, longitude: 139.0812, address: "〒413-0101 静岡県熱海市上多賀842",
+    latitude: 35.043, longitude: 139.081, address: "〒413-0101 静岡県熱海市上多賀842",
     accessInfo: "JR網代駅から車で約5分。国道135号沿い。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
