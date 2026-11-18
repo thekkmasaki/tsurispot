@@ -28,7 +28,7 @@ jobs:
       github.event_name == 'schedule' ||
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' && github.event.label.name == 'run-e2e')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
     timeout-minutes: 30
     env:
       # playwright.config.ts の webServer が起動する next dev 用（runner側なのでローカルビルド禁止に抵触しない）
