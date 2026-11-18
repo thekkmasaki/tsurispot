@@ -1451,7 +1451,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4068", name: "戸田漁港", slug: "heda-gyokou",
     description: "駿河湾の西伊豆に位置する深い入り江の港。高足ガニで有名だが、堤防釣りではアジやカマスが狙え、湾奥の穏やかな水面はカワハギの好ポイント。",
-    latitude: 34.9720, longitude: 138.7830,
+    latitude: 34.972, longitude: 138.783,
     address: "〒410-3402 静岡県沼津市戸田",
     accessInfo: "伊豆箱根鉄道修善寺駅からバスで約50分。東名沼津ICから約60分。",
     region: localRegion("rk4031"), spotType: "port", difficulty: "beginner",

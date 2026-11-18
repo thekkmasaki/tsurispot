@@ -1105,7 +1105,7 @@ export const expandWestSpots: FishingSpot[] = [
   {
     id: "exp-w049", name: "備前・片上港", slug: "bizen-katakami-kou",
     description: "備前焼の里・備前市の片上港。備前焼の窯元が点在する歴史あるエリアの港で、サビキ釣りでアジ、投げ釣りでカレイやキスが楽しめる。穏やかな瀬戸内の海で初心者にもおすすめ。",
-    latitude: 34.7361, longitude: 134.1833,
+    latitude: 34.742, longitude: 134.182,
     address: "〒705-0001 岡山県備前市片上",
     accessInfo: "JR備前片上駅から徒歩約10分。山陽自動車道備前ICから約10分。",
     region: localRegion("r4040"), spotType: "port", difficulty: "beginner",
