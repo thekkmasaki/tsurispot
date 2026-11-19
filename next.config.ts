@@ -3,6 +3,7 @@ import path from "node:path";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import spotRedirects from "./src/lib/data/spot-redirects.json";
 import { dedupRedirects, fishingSpots } from "./src/lib/data/spots";
+import { STATIC_HTML_CACHE_CONTROL, STATIC_HTML_ROUTES } from "./src/lib/cache/static-html-routes";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -236,15 +237,13 @@ const nextConfig: NextConfig = {
         { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
       ],
     },
-    // 件数を載せる一覧ページ。revalidate も Cache-Control も無かったため Next 既定の
-    // s-maxage=31536000（1年）になり、Cloudflare に2か月前のHTMLが残って
-    // 「全国5,349件／北海道183件」と、トップの「5,653件／204件」が食い違っていた（2026-11 監査）。
-    // デプロイで内容が変わるページなので、エッジは1日＋SWRにする（どれも軽い静的ページ）。
-    ...["/prefecture", "/prefecture/:slug/all", "/area", "/sitemap-page"].map((source) => ({
+    // revalidate も dynamic も無い完全静的ページ。Next 既定の s-maxage=31536000（1年）だと
+    // Cloudflare に何か月も前のHTMLが残り、件数の食い違い（5,349件など）や、古いHTMLが
+    // デプロイで消えたJSチャンクを読んで /map が白紙になる障害を起こしていた（2026-11 監査）。
+    // エッジは1日＋SWRにする。対象と除外は src/lib/cache/static-html-routes.ts（テストで網羅を検証）。
+    ...STATIC_HTML_ROUTES.map((source) => ({
       source,
-      headers: [
-        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=604800" },
-      ],
+      headers: [{ key: "Cache-Control", value: STATIC_HTML_CACHE_CONTROL }],
     })),
     {
       source: "/prefecture/:slug",
