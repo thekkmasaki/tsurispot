@@ -114,6 +114,13 @@ const nextConfig: NextConfig = {
       destination: '/monthly/:month',
       permanent: true,
     },
+    // 釣果週報の旧URL形式。サイト内には存在しないが外部から参照されて 404 になっていた
+    // （2026-11 監査）。週報の実体はブログ記事なので、週報の一覧へ送る。
+    {
+      source: '/fishing-reports/:path*',
+      destination: '/blog?tag=%E9%87%A3%E6%9E%9C%E9%80%B1%E5%A0%B1',
+      permanent: true,
+    },
     // 重複除去で消失したslug → 正しいslugへ301リダイレクト
     ...spotRedirectEntries,
   ],
@@ -229,6 +236,16 @@ const nextConfig: NextConfig = {
         { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
       ],
     },
+    // 件数を載せる一覧ページ。revalidate も Cache-Control も無かったため Next 既定の
+    // s-maxage=31536000（1年）になり、Cloudflare に2か月前のHTMLが残って
+    // 「全国5,349件／北海道183件」と、トップの「5,653件／204件」が食い違っていた（2026-11 監査）。
+    // デプロイで内容が変わるページなので、エッジは1日＋SWRにする（どれも軽い静的ページ）。
+    ...["/prefecture", "/prefecture/:slug/all", "/area", "/sitemap-page"].map((source) => ({
+      source,
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=604800" },
+      ],
+    })),
     {
       source: "/prefecture/:slug",
       headers: [
