@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { randomBytes, timingSafeEqual } from "crypto";
 import { auth } from "@/lib/auth";
 import { deleteFromS3 } from "@/lib/s3";
-import { dbGet, dbPut } from "@/lib/dynamodb";
+import { dbGet, dbUpdateList } from "@/lib/dynamodb";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { readMultipartFile, validateAndUploadImage } from "@/lib/image-upload";
 import { rejectInactiveUser } from "@/lib/user-status";
@@ -109,12 +109,27 @@ export async function POST(request: NextRequest) {
     // 削除用トークン（暗号論的乱数）
     const token = randomBytes(16).toString("hex");
     const entry: SpotPhotoEntry = { url: result.url, token, uploadedAt: Date.now(), uploaderId: tsuriId };
-    await dbPut(`SPOT#${slug}`, "PHOTOS", [...currentPhotos, entry]);
+    // 同時アップロードで上限（全体20枚・1人5枚）をすり抜けたり、他人の写真を上書きしたりしないよう、
+    // 最新の一覧で上限を再確認しつつ楽観ロックで追加する
+    let wasFirst = false;
+    const saved = await dbUpdateList<SpotPhotoEntry>(`SPOT#${slug}`, "PHOTOS", (list) => {
+      if (list.length >= MAX_PHOTOS_PER_SPOT) return null;
+      if (list.filter((p) => p.uploaderId === tsuriId).length >= MAX_PHOTOS_PER_USER_PER_SPOT) return null;
+      wasFirst = list.length === 0;
+      return [...list, entry];
+    });
+    if (!saved) {
+      await deleteFromS3(result.url).catch(() => {});
+      return NextResponse.json(
+        { error: "このスポットの写真の上限に達しました。時間をおいて再度お試しください" },
+        { status: 400 },
+      );
+    }
     await indexUserSpotPhoto(tsuriId, slug, result.url).catch((err) =>
       console.error("[spot-photo] 退会用索引の書込エラー:", err),
     );
     // first: このスポットで最初の1枚（投稿完了時に「一番乗り」を伝える）
-    return NextResponse.json({ ok: true, url: result.url, token, first: currentPhotos.length === 0 });
+    return NextResponse.json({ ok: true, url: result.url, token, first: wasFirst });
   } catch (e) {
     console.error("[spot-photo] 保存エラー:", e);
     await deleteFromS3(result.url).catch(() => {});
@@ -146,8 +161,9 @@ export async function DELETE(request: NextRequest) {
 
     try { await deleteFromS3(url); } catch { /* S3削除失敗は無視 */ }
 
-    const updatedPhotos = currentPhotos.filter((p) => p.url !== url);
-    await dbPut(`SPOT#${slug}`, "PHOTOS", updatedPhotos);
+    await dbUpdateList<SpotPhotoEntry>(`SPOT#${slug}`, "PHOTOS", (list) =>
+      list.some((p) => p.url === url) ? list.filter((p) => p.url !== url) : null,
+    );
 
     return NextResponse.json({ ok: true });
   } catch {

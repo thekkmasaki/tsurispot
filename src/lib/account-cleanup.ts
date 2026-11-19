@@ -4,7 +4,7 @@
 //
 // 既知の限界: 索引導入前に作られたコメント/いいね、スポット共同編集メモ(SPOT_CONTRIB)、リポスト以外の
 // 旧データはユーザーIDから列挙できない（全表Scanが必要）。新規データは索引で追跡される。
-import { dbDelete, dbGet, dbPut, dbQuery } from "@/lib/dynamodb";
+import { dbDelete, dbPut, dbQuery, dbUpdateList } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { deleteFromS3, ownS3KeyFromUrl } from "@/lib/s3";
 import {
@@ -91,11 +91,15 @@ export async function cleanupUserContent(
   );
   for (const slug of slugs) {
     await safe(`スポット別ビュー(${slug})`, async () => {
-      const list = (await dbGet<StoredReport[]>(`SPOT#${slug}`, "UGC_REPORTS")) ?? [];
-      const filtered = list.filter((r) => !(r.id && ids.has(r.id)) && r.tsuriId !== tsuriId);
-      if (filtered.length !== list.length) {
-        await dbPut(`SPOT#${slug}`, "UGC_REPORTS", filtered, SPOT_UGC_TTL);
-      }
+      await dbUpdateList<StoredReport>(
+        `SPOT#${slug}`,
+        "UGC_REPORTS",
+        (list) => {
+          const filtered = list.filter((r) => !(r.id && ids.has(r.id)) && r.tsuriId !== tsuriId);
+          return filtered.length !== list.length ? filtered : null;
+        },
+        SPOT_UGC_TTL,
+      );
     });
   }
 
@@ -139,9 +143,9 @@ export async function cleanupUserContent(
     for (const it of items) {
       const { slug, url } = it.data ?? ({} as { slug: string; url: string });
       if (slug && SPOT_SLUG_RE.test(slug) && url) {
-        const list = (await dbGet<SpotPhotoEntry[]>(`SPOT#${slug}`, "PHOTOS")) ?? [];
-        const filtered = list.filter((p) => p.url !== url);
-        if (filtered.length !== list.length) await dbPut(`SPOT#${slug}`, "PHOTOS", filtered);
+        await dbUpdateList<SpotPhotoEntry>(`SPOT#${slug}`, "PHOTOS", (list) =>
+          list.some((p) => p.url === url) ? list.filter((p) => p.url !== url) : null,
+        );
         await safe(`スポット写真S3(${slug})`, () => deleteOwnImage(url));
       }
       await dbDelete(it.pk, it.sk);

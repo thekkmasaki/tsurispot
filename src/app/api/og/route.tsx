@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
+import { getClientIp, rateLimitKey } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -19,7 +20,34 @@ function capEmoji(v: string): string {
   return cps.length > MAX_EMOJI_CODEPOINTS ? cps.slice(0, MAX_EMOJI_CODEPOINTS).join("") : v;
 }
 
+// 認証なしで呼べる画像生成なので、パラメータを毎回変えて Cloudflare のキャッシュを外し
+// 連打されると CPU が張り付く（2026-06 の CPU100% 障害と同系統）。IP（IPv6 は /64）ごとに
+// 1分あたりの生成回数を制限する。DynamoDB を使うと OG 1枚ごとに書き込み課金が増えるため、
+// インスタンス内のメモリで数える（インスタンス数ぶん緩くなるが、連打の抑止には十分）。
+const OG_LIMIT_PER_MIN = 120;
+const OG_MAX_TRACKED = 10_000;
+const ogHits = new Map<string, { win: number; n: number }>();
+
+function ogRateLimited(request: NextRequest): boolean {
+  const win = Math.floor(Date.now() / 60_000);
+  const key = rateLimitKey(getClientIp(request));
+  const cur = ogHits.get(key);
+  if (!cur || cur.win !== win) {
+    if (ogHits.size >= OG_MAX_TRACKED) ogHits.clear();
+    ogHits.set(key, { win, n: 1 });
+    return false;
+  }
+  cur.n += 1;
+  return cur.n > OG_LIMIT_PER_MIN;
+}
+
 export async function GET(request: NextRequest) {
+  if (ogRateLimited(request)) {
+    return new Response("Too Many Requests", {
+      status: 429,
+      headers: { "Cache-Control": "no-store", "Retry-After": "60" },
+    });
+  }
   const { searchParams } = new URL(request.url);
   const type = searchParams.get("type") || "default";
 
@@ -35,20 +63,7 @@ export async function GET(request: NextRequest) {
   const truncatedDesc =
     description.length > 60 ? description.slice(0, 57) + "..." : description;
 
-  // Load Noto Sans JP font from Google Fonts
-  const fontData = await fetch(
-    "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap"
-  )
-    .then((res) => res.text())
-    .then((css) => {
-      const match = css.match(
-        /src:\s*url\(([^)]+)\)\s*format\(['"]?woff2['"]?\)/
-      );
-      if (!match) throw new Error("Font URL not found");
-      return fetch(match[1]);
-    })
-    .then((res) => res.arrayBuffer())
-    .catch(() => null);
+  const fontData = await loadNotoSansFont();
 
   const fonts: { name: string; data: ArrayBuffer; style: "normal"; weight: 700 }[] = [];
   if (fontData) {
@@ -203,7 +218,15 @@ export async function GET(request: NextRequest) {
   );
 }
 
-async function loadNotoSansFont(): Promise<ArrayBuffer | null> {
+// フォントはプロセス内で1回だけ取りに行く（以前は OG 1枚ごとに Google Fonts へ2回 fetch していた）。
+// 失敗・未検出（null）も覚えておき、毎回の外部 fetch を発生させない。
+let fontPromise: Promise<ArrayBuffer | null> | null = null;
+function loadNotoSansFont(): Promise<ArrayBuffer | null> {
+  fontPromise ??= fetchNotoSansFont();
+  return fontPromise;
+}
+
+async function fetchNotoSansFont(): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
       "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap",

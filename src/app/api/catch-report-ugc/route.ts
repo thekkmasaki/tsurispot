@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { purgeCloudflareUrls } from "@/lib/cloudflare";
-import { dbGet, dbPut } from "@/lib/dynamodb";
+import { dbGet, dbPut, dbUpdateList } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
 import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
@@ -293,8 +293,13 @@ export async function POST(request: Request) {
           }
         }
 
-        const updated = [reportData, ...existing].slice(0, 200); // 最大200件保持
-        await dbPut(`SPOT#${slug}`, "UGC_REPORTS", updated, TTL_SECONDS);
+        // 最大200件保持。同時投稿で他人の投稿を上書きしないよう楽観ロックで先頭に追加する
+        await dbUpdateList<CatchReport>(
+          `SPOT#${slug}`,
+          "UGC_REPORTS",
+          (list) => [reportData, ...list.filter((r) => r.id !== reportData.id)].slice(0, 200),
+          TTL_SECONDS,
+        );
         // オリジンISR＋Cloudflareエッジ(s-maxage=24h)の両方を該当スポットだけ無効化し、新しい釣果を即反映。
         // CF purge は特定URLのみ（全体purge禁止）・CF env未設定時は no-op。
         revalidatePath(`/spots/${slug}`);

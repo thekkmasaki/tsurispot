@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { purgeCloudflareUrls } from "@/lib/cloudflare";
-import { dbGet, dbPut } from "@/lib/dynamodb";
+import { dbGet, dbUpdateList } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { getRequestUser, unauthorizedResponse } from "@/lib/app-link/request-user";
 import { checkNgWords } from "@/lib/moderation";
@@ -143,8 +143,18 @@ export async function PATCH(
   if (method !== undefined) updated.method = method ?? undefined;
   if (weather !== undefined) updated.weather = weather ?? undefined;
 
-  existing[idx] = updated;
-  await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", existing, TTL_SECONDS);
+  // 他人の同時投稿・編集を上書きしないよう、最新の一覧に対して置き換え直す（楽観ロック）
+  await dbUpdateList<CatchReport>(
+    `SPOT#${spotSlug}`,
+    "UGC_REPORTS",
+    (list) => {
+      const i = list.findIndex((r) => r.id === id);
+      if (i === -1) return null;
+      list[i] = updated;
+      return list;
+    },
+    TTL_SECONDS,
+  );
   await syncRedisItem(tsuriId, id, updated);
   try {
     await savePostMeta(updated);
@@ -233,10 +243,10 @@ async function deleteWithKey(request: NextRequest, id: string, key: string): Pro
     }
     if (target) {
       photoUrl = photoUrl ?? target.photoUrl;
-      await dbPut(
+      await dbUpdateList<CatchReport>(
         `SPOT#${spotSlug}`,
         "UGC_REPORTS",
-        existing.filter((r) => r.id !== id),
+        (list) => (list.some((r) => r.id === id) ? list.filter((r) => r.id !== id) : null),
         TTL_SECONDS,
       );
     }
@@ -334,8 +344,12 @@ export async function DELETE(
     return NextResponse.json({ error: "この釣果を削除する権限がありません" }, { status: 403 });
   }
 
-  const filtered = existing.filter((r) => r.id !== id);
-  await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", filtered, TTL_SECONDS);
+  await dbUpdateList<CatchReport>(
+    `SPOT#${spotSlug}`,
+    "UGC_REPORTS",
+    (list) => (list.some((r) => r.id === id) ? list.filter((r) => r.id !== id) : null),
+    TTL_SECONDS,
+  );
   await syncRedisItem(tsuriId, id, null);
   try {
     await deletePostMeta(id);

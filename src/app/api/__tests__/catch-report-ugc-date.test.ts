@@ -6,6 +6,9 @@ vi.mock("@/lib/cloudflare", () => ({ purgeCloudflareUrls: vi.fn() }));
 vi.mock("@/lib/dynamodb", () => ({
   dbGet: vi.fn().mockResolvedValue([]),
   dbPut: vi.fn(),
+  dbUpdateList: vi.fn(async (_pk: string, _sk: string, mutate: (l: unknown[]) => unknown[] | null) =>
+    mutate([]),
+  ),
 }));
 vi.mock("@/lib/redis", () => ({
   redis: {
