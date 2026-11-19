@@ -131,6 +131,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link></li>
               <li><Link href="/about/editorial-policy" prefetch={false} className="hover:text-white">編集方針・データの作り方</Link></li>
+              <li><Link href="/ai" prefetch={false} className="hover:text-white">AIで使う（Claude・ChatGPT連携）</Link></li>
               <li><Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術（特許出願中）</Link></li>
               {!SHOP_PLANS_PAUSED && (
                 <li><Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け（掲載案内）</Link></li>
@@ -314,6 +315,7 @@ export function Footer() {
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-blue-100/80 [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center [&>a]:px-1">
           <Link href="/blog" prefetch={false} className="hover:text-white">エリア釣果レポート</Link>
           <Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link>
+          <Link href="/ai" prefetch={false} className="hover:text-white">AIで使う</Link>
           <Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術</Link>
           {!SHOP_PLANS_PAUSED && (
             <Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け</Link>

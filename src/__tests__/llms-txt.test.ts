@@ -18,6 +18,9 @@ describe("llms.txt / llms-full.txt / llms/{pref}.txt", () => {
     expect(body).toContain("2026年2月");
     expect(body).toContain(fishingSpots.length.toLocaleString());
     expect(body).toContain("https://tsurispot.com/llms/tokyo.txt");
+    // MCP / AI連携の案内（エンドポイントと /ai ページ）
+    expect(body).toContain("https://tsurispot.com/api/mcp");
+    expect(body).toContain("https://tsurispot.com/ai");
   });
 
   it("llms-full.txt は索引サイズに縮小され、内部実装の説明を含まない", async () => {
