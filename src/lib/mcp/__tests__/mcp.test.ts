@@ -4,6 +4,7 @@ vi.mock("@/lib/rate-limit", () => ({
   checkRateLimit: vi.fn().mockResolvedValue(true),
   getClientIp: vi.fn().mockReturnValue("1.2.3.4"),
 }));
+vi.mock("@/lib/dynamodb", () => ({ dbIncr: vi.fn().mockResolvedValue(1) }));
 
 import { handleBody, handleMessage } from "../protocol";
 import { searchSpots, getSpotDetails, getTide, getCatchableFish, resolveFishSlugs, isMonthInRange } from "../tools";
@@ -11,30 +12,42 @@ import { fishingSpots } from "@/lib/data/spots";
 import { POST, GET } from "@/app/api/mcp/route";
 
 type Ok = { result: Record<string, unknown> };
-const call = (name: string, args: Record<string, unknown>) =>
-  (handleMessage({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name, arguments: args } }) as Ok).result;
+const call = async (name: string, args: Record<string, unknown>) =>
+  ((await handleMessage({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name, arguments: args } })) as Ok).result;
 
 const seaSpot = fishingSpots.find(
   (s) => ["port", "breakwater"].includes(s.spotType) && s.region.prefecture === "神奈川県" && !s.fishingBan,
 )!;
 
 describe("MCP protocol", () => {
-  it("initialize: 対応バージョンはそのまま返し、未知のバージョンは既定に落とす", () => {
-    const r1 = handleMessage({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-03-26" } }) as Ok;
+  it("initialize: 対応バージョンはそのまま返し、未知のバージョンは既定に落とす", async () => {
+    const r1 = (await handleMessage({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-03-26" } })) as Ok;
     expect(r1.result.protocolVersion).toBe("2025-03-26");
     expect(r1.result.capabilities).toEqual({ tools: { listChanged: false } });
-    const r2 = handleMessage({ jsonrpc: "2.0", id: 2, method: "initialize", params: { protocolVersion: "1999-01-01" } }) as Ok;
+    const r2 = (await handleMessage({ jsonrpc: "2.0", id: 2, method: "initialize", params: { protocolVersion: "1999-01-01" } })) as Ok;
     expect(r2.result.protocolVersion).toBe("2025-06-18");
   });
 
-  it("通知（id なし）には応答しない", () => {
-    expect(handleMessage({ jsonrpc: "2.0", method: "notifications/initialized" })).toBeNull();
+  it("通知（id なし）には応答しない", async () => {
+    expect(await handleMessage({ jsonrpc: "2.0", method: "notifications/initialized" })).toBeNull();
   });
 
-  it("tools/list は4ツールを読み取り専用として返し、内部関数は漏らさない", () => {
-    const r = handleMessage({ jsonrpc: "2.0", id: 1, method: "tools/list" }) as Ok;
+  it("tools/list は全ツールを読み取り専用として返し、内部関数は漏らさない", async () => {
+    const r = (await handleMessage({ jsonrpc: "2.0", id: 1, method: "tools/list" })) as Ok;
     const tools = r.result.tools as Record<string, unknown>[];
-    expect(tools.map((t) => t.name)).toEqual(["search_spots", "get_spot_details", "get_tide", "get_catchable_fish"]);
+    expect(tools.map((t) => t.name)).toEqual([
+      "search_spots",
+      "get_spot_details",
+      "get_tide",
+      "get_catchable_fish",
+      "find_nearby_spots",
+      "get_fishing_forecast",
+      "get_recent_catches",
+      "find_tackle_shops",
+      "recommend_gear",
+      "get_fish_info",
+      "check_fishing_rules",
+    ]);
     for (const t of tools) {
       expect(t).not.toHaveProperty("run");
       expect((t.annotations as Record<string, unknown>).readOnlyHint).toBe(true);
@@ -42,17 +55,17 @@ describe("MCP protocol", () => {
     }
   });
 
-  it("未知のメソッド・不正リクエスト", () => {
-    expect(handleMessage({ jsonrpc: "2.0", id: 1, method: "resources/list" })).toMatchObject({ error: { code: -32601 } });
-    expect(handleMessage({ foo: 1 })).toMatchObject({ error: { code: -32600 } });
-    expect(handleBody([])).toMatchObject({ error: { code: -32600 } });
+  it("未知のメソッド・不正リクエスト", async () => {
+    expect(await handleMessage({ jsonrpc: "2.0", id: 1, method: "resources/list" })).toMatchObject({ error: { code: -32601 } });
+    expect(await handleMessage({ foo: 1 })).toMatchObject({ error: { code: -32600 } });
+    expect(await handleBody([])).toMatchObject({ error: { code: -32600 } });
   });
 
-  it("入力ミスは isError のツール結果で返す（AI が直して再試行できる）", () => {
-    const r = call("get_spot_details", { slug: "no-such-spot-xyz" });
+  it("入力ミスは isError のツール結果で返す（AI が直して再試行できる）", async () => {
+    const r = await call("get_spot_details", { slug: "no-such-spot-xyz" });
     expect(r.isError).toBe(true);
-    expect(call("search_spots", {}).isError).toBe(true);
-    expect(call("get_tide", { slug: seaSpot.slug, date: "明日" }).isError).toBe(true);
+    expect((await call("search_spots", {})).isError).toBe(true);
+    expect((await call("get_tide", { slug: seaSpot.slug, date: "明日" })).isError).toBe(true);
   });
 });
 

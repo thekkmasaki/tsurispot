@@ -114,7 +114,8 @@ const WEATHER_LABELS: [number, string][] = [
   [95, "雷雨"],
 ];
 
-function weatherLabel(code: number): string {
+/** WMO 天気コード → 指数の内訳と同じ表記（MCP の予報ツールでも使う） */
+export function weatherLabel(code: number): string {
   let label = "曇り";
   for (const [c, l] of WEATHER_LABELS) {
     if (code >= c) label = l;
