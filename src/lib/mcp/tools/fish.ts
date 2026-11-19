@@ -4,8 +4,6 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
 import { getHookSizeData } from "@/lib/data/hook-sizes";
-import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
-import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
 import { formatMonthRanges } from "@/lib/spot-restrictions";
 import {
   type ToolDef,
@@ -179,7 +177,10 @@ const methodMatches = (a: string, b: string) => {
 };
 
 const MAX_METHODS = 3;
-const MAX_PRODUCTS = 4;
+
+// 商品・通販リンク（アフィリエイト）は MCP の応答に含めない。
+// Claude のコネクタディレクトリは広告・プロモーションの表示を禁止しているため。
+// 道具の選び方と、ツリスポのガイドページ（サイト側に関連商品がある）へのリンクだけを返す。
 
 export function recommendGear(args: Record<string, unknown>) {
   const { fish } = pickFish(args);
@@ -198,16 +199,8 @@ export function recommendGear(args: Record<string, unknown>) {
     (r) => r.fishSlug === fish.slug && (!methodQuery || methodMatches(r.method, methodQuery)),
   );
 
-  // 商品は「この魚 or この釣り方」に効くものだけ（無関係な商品は出さない＝アフィリエイト運用ルール）
   const methodNames = [...methods.map(({ fm }) => fm.methodName), ...rigs.map((r) => r.method)];
   if (methodQuery) methodNames.push(methodQuery);
-  const fishNames = [fish.name, ...(fish.aliases ?? [])];
-  const isRelevant = (p: { methodKeywords: string[]; fishKeywords?: string[] }) =>
-    (p.fishKeywords ?? []).some((k) => fishNames.some((n) => n.includes(k) || k.includes(n))) ||
-    p.methodKeywords.some((k) => methodNames.some((n) => n.includes(k)));
-  const products = getRelevantAffiliateProducts(methodNames, m, 30, false, undefined, fishNames)
-    .filter(isRelevant)
-    .slice(0, MAX_PRODUCTS);
 
   const guideSet = new Map<string, string>();
   for (const r of rigs) if (r.guideLink) guideSet.set(r.guideLink, r.guideLinkLabel ?? "解説ガイド");
@@ -235,31 +228,17 @@ export function recommendGear(args: Record<string, unknown>) {
           ? { type: hook.hookType, size: hm.size === "-" ? "オフシーズン" : hm.size, note: hm.note || undefined }
           : undefined,
         tips: fm.tips.slice(0, 2).map((t) => truncate(t, 120)),
-        shopSearch: {
-          amazon: getAmazonUrl(`${fish.name} ${fm.methodName} 仕掛け`),
-          rakuten: getRakutenUrl(`${fish.name} ${fm.methodName} 仕掛け`),
-        },
       };
     }),
     monthlyRig: rigs.slice(0, MAX_METHODS).map((r) => ({
       method: r.method,
       items: r.items.map((i) => `${i.name}: ${i.spec}`),
     })),
-    products: products.map((p) => ({
-      name: p.name,
-      description: truncate(p.description, 100),
-      priceRange: p.priceRange,
-      url: p.url,
-    })),
     methodNote,
     guides: [
       { label: `${fish.name}の釣り方・仕掛け（ツリスポ魚図鑑）`, url: siteUrl(`/fish/${fish.slug}`) },
       ...[...guideSet.entries()].map(([path, label]) => ({ label, url: siteUrl(path) })),
     ],
-    disclosure:
-      products.length > 0 || methods.length > 0
-        ? "products と shopSearch の URL はツリスポのアフィリエイトリンク（広告）です。紹介する場合はその旨を添えてください"
-        : undefined,
   };
 }
 
@@ -301,8 +280,8 @@ export const FISH_TOOLS: ToolDef[] = [
     name: "recommend_gear",
     title: "おすすめの仕掛け・道具",
     description:
-      "狙う魚（と釣り方・月）に合ったタックル（竿・リール・道糸・針/ルアー）、その月の針サイズ、月別の定番仕掛け、関連商品と解説ガイドを返します。" +
-      "商品はその魚・釣り方に関係するものだけです。例: {\"fish\":\"アジ\",\"method\":\"サビキ\",\"month\":7}",
+      "狙う魚（と釣り方・月）に合ったタックル（竿・リール・道糸・針/ルアー）、その月の針サイズ、月別の定番仕掛けと、ツリスポの解説ガイドへのリンクを返します。" +
+      "例: {\"fish\":\"アジ\",\"method\":\"サビキ\",\"month\":7}",
     inputSchema: {
       type: "object",
       properties: {

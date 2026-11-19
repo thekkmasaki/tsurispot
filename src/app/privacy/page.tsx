@@ -268,7 +268,7 @@ export default function PrivacyPage() {
                 <p className="font-medium text-foreground">提供するデータ</p>
                 <ul className="list-inside list-disc space-y-1 pl-2">
                   <li>
-                    MCPコネクタは読み取り専用で、当サイトが一般に公開している釣り場・魚種・潮汐・天気・釣果・釣具店などの情報のみを返します。
+                    MCPコネクタは読み取り専用で、当サイトが一般に公開している釣り場・魚種・潮汐・釣果・釣具店などの情報のみを返します。広告や商品の購入リンクは返しません。
                   </li>
                   <li>
                     認証は不要で、ユーザーのアカウント情報、マイページ、お気に入り、投稿者の個人情報などにはアクセスしません。

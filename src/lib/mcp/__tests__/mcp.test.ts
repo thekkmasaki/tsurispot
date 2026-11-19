@@ -41,7 +41,6 @@ describe("MCP protocol", () => {
       "get_tide",
       "get_catchable_fish",
       "find_nearby_spots",
-      "get_fishing_forecast",
       "get_recent_catches",
       "find_tackle_shops",
       "recommend_gear",
