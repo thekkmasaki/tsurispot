@@ -51,3 +51,31 @@ describe("spotSearchMatch: 地名検索", () => {
     }
   });
 });
+
+describe("spotSearchMatch: 魚名・釣法（2026-11 監査: タチウオが0件）", () => {
+  it("「タチウオ」で、タチウオが釣れるスポットが全件ヒットする", () => {
+    const expected = listSpots.filter((s) => s.fishNames.includes("タチウオ"));
+    expect(expected.length).toBeGreaterThan(100);
+    const hits = listSpots.filter((s) => spotSearchMatch("タチウオ", s));
+    expect(hits.length).toBeGreaterThanOrEqual(expected.length);
+  });
+
+  it("ひらがなの「たちうお」でも同じ件数", () => {
+    const a = listSpots.filter((s) => spotSearchMatch("タチウオ", s)).length;
+    const b = listSpots.filter((s) => spotSearchMatch("たちうお", s)).length;
+    expect(b).toBe(a);
+  });
+
+  it("「明石 タチウオ」は明石かつタチウオのスポットだけ", () => {
+    const hits = listSpots.filter((s) => spotSearchMatch("明石 タチウオ", s));
+    expect(hits.length).toBeGreaterThan(0);
+    for (const s of hits) expect(s.fishNames.some((f) => f.includes("タチウオ"))).toBe(true);
+  });
+
+  it("1文字（「イ」）では魚名に当てない", () => {
+    const viaFish = listSpots.filter(
+      (s) => spotSearchMatch("イ", s) && !/[イい]/.test(s.name + s.region.areaName + (s.address ?? "")),
+    );
+    expect(viaFish).toEqual([]);
+  });
+});
