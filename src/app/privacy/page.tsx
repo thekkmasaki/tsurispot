@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -27,7 +28,7 @@ export default function PrivacyPage() {
             プライバシーポリシー
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            最終更新日: 2026年3月11日
+            最終更新日: 2026年11月19日
           </p>
         </div>
       </section>
@@ -242,6 +243,68 @@ export default function PrivacyPage() {
                 <p>
                   当サイトは、必要に応じて本プライバシーポリシーを変更することがあります。
                   変更後のプライバシーポリシーは、当サイトに掲載した時点から効力を生じるものとします。
+                </p>
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* 9. AIアシスタント連携（MCPコネクタ） */}
+            <div id="ai-connector" className="scroll-mt-24">
+              <div className="mb-4 flex items-center gap-2">
+                <Badge variant="secondary" className="text-xs">
+                  第9条
+                </Badge>
+                <h2 className="text-lg font-semibold">
+                  AIアシスタント連携（MCPコネクタ）における情報の取り扱い
+                </h2>
+              </div>
+              <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                <p>
+                  当サイトは、Claude・ChatGPT などの AI アシスタントから釣り場情報を参照できる MCP（Model Context Protocol）サーバー
+                  （エンドポイント: https://tsurispot.com/api/mcp、以下「MCPコネクタ」）を提供しています。
+                  MCPコネクタにおける情報の取り扱いは以下のとおりです。
+                </p>
+                <p className="font-medium text-foreground">提供するデータ</p>
+                <ul className="list-inside list-disc space-y-1 pl-2">
+                  <li>
+                    MCPコネクタは読み取り専用で、当サイトが一般に公開している釣り場・魚種・潮汐・天気・釣果・釣具店などの情報のみを返します。
+                  </li>
+                  <li>
+                    認証は不要で、ユーザーのアカウント情報、マイページ、お気に入り、投稿者の個人情報などにはアクセスしません。
+                    データの書き込み・変更・削除も行いません。
+                  </li>
+                </ul>
+                <p className="font-medium text-foreground">処理する情報</p>
+                <ul className="list-inside list-disc space-y-1 pl-2">
+                  <li>
+                    AI アシスタントから送られる検索条件（地名・魚種・座標・日付など）は、応答を作成するためだけに処理し、保存しません。
+                  </li>
+                  <li>
+                    障害調査と利用状況の把握のため、リクエストごとに「呼び出されたメソッド名・ツール名」「User-Agent（先頭80文字）」
+                    「Authorization ヘッダーの有無」をサーバーログに記録します。このログに IP アドレス、検索条件の内容、会話の内容、個人を特定する情報は含みません。
+                  </li>
+                  <li>
+                    過剰なアクセスを防ぐため、送信元 IP アドレス単位のアクセス回数カウンタを一時的に保持します。
+                    カウンタは約20分で失効し、その後自動的に削除されます。
+                  </li>
+                </ul>
+                <p className="font-medium text-foreground">保存期間</p>
+                <p>
+                  上記のサーバーログは、当サイトのホスティング環境（AWS）のログ保存設定に従い一定期間（現在は3日間）保存した後、自動的に削除されます。
+                </p>
+                <p className="font-medium text-foreground">リンクの計測</p>
+                <p>
+                  MCPコネクタが返す当サイトへのリンクには、AI アシスタント経由の訪問であることを識別するパラメータ（utm_source=ai_mcp）が付与されます。
+                  リンク先のページを閲覧した場合は、第2条・第3条に記載のアクセス解析の対象となります。
+                </p>
+                <p>
+                  AI アシスタント側での会話内容やデータの取り扱いは、各 AI サービス提供者のプライバシーポリシーに従います。
+                  MCPコネクタについてのお問い合わせは、
+                  <Link href="/contact" prefetch={false} className="text-primary underline">お問い合わせフォーム</Link>
+                  よりご連絡ください。使い方は
+                  <Link href="/ai" prefetch={false} className="text-primary underline">「AIアシスタントでツリスポを使う」</Link>
+                  をご覧ください。
                 </p>
               </div>
             </div>

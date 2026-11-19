@@ -2,6 +2,7 @@ import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import {
   LLMS_LAST_UPDATED,
+  MCP_SECTION,
   SITE_LAUNCHED,
   TEXT_HEADERS,
   getSiteStats,
@@ -61,6 +62,8 @@ ${SITE_LAUNCHED}開設。運営はツリスポ編集部です。
 - ユーザー投稿: 釣果・スポット情報の投稿を受け付けています
 - 更新: 不定期（データの最終更新日はこのファイル冒頭と sitemap.xml の lastmod に反映）
 - 注意: 釣り禁止区域・駐車場などの現地状況は変わります。釣行前に現地の表示や管理者の案内を確認してください
+
+${MCP_SECTION}
 
 ## 都道府県別スポット一覧（1スポット1行）
 各ファイルに、その都道府県の全スポットを「名前 | 市区町村 | 種別 | 主な魚 | ベストシーズン | 駐車場・トイレ | 難易度 | 禁止・制限 | URL」の形式で載せています（管理釣り場・釣り堀は「ベストシーズン」の列に料金・営業時間・定休日、「駐車場・トイレ」の列に駐車場・レンタルの有無を、確認できた項目だけ載せています）。
@@ -150,6 +153,7 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 
 ### 運営情報
 - サイトについて: https://tsurispot.com/about
+- AIアシスタントで使う（Claude・ChatGPT 連携）: https://tsurispot.com/ai
 - お問い合わせ: https://tsurispot.com/contact
 - 利用規約: https://tsurispot.com/terms
 - プライバシーポリシー: https://tsurispot.com/privacy

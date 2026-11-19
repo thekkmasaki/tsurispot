@@ -3,6 +3,7 @@ import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import {
   LLMS_LAST_UPDATED,
+  MCP_SECTION,
   SITE_LAUNCHED,
   TEXT_HEADERS,
   getSiteStats,
@@ -97,6 +98,8 @@ ${prefFiles.map((p) => `- ${p.name}（${p.spots.length}件）: ${prefFileUrl(p.s
 - /monthly/{month} — 月別ガイド
 - /guide/{topic} — 釣り方・仕掛けガイド
 - /blog/{slug} — ブログ記事
+
+${MCP_SECTION}
 
 ## 引用・利用について
 - サイトの情報はリンク付きで引用いただけます
