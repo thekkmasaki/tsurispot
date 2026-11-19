@@ -118,7 +118,13 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
 
   // --- 天気の自動推定 ---
   // weatherCodeが直接指定されていない場合、monthから推定する
+  // 推定値のときは要因に天気名を出さない。当日が雨でも「晴れ」と表示され、
+  // 同じページの天気予報（小雨）と矛盾していた（2026-11 監査・福岡市海づり公園）。
+  const weatherEstimated = input.weatherCode === undefined;
   const weatherCode = input.weatherCode ?? estimateWeather(input.month);
+  const pushWeatherFactor = (label: string) => {
+    if (!weatherEstimated) factors.push(label);
+  };
 
   // --- 曜日の影響 (最大+30) ---
   if (input.dayOfWeek === 0 || input.dayOfWeek === 6 || input.isHoliday) {
@@ -152,18 +158,18 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
     switch (weatherCode) {
       case "clear":
         score += 15;
-        factors.push("晴れ");
+        pushWeatherFactor("晴れ");
         break;
       case "clouds":
         score += 5;
         break;
       case "rain":
         score -= 20;
-        factors.push("雨で空きやすい");
+        pushWeatherFactor("雨で空きやすい");
         break;
       case "storm":
         score -= 35;
-        factors.push("荒天で人が少ない");
+        pushWeatherFactor("荒天で人が少ない");
         break;
     }
   }
