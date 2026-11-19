@@ -1,0 +1,1137 @@
+{
+ "aburatsu-kou-nichinan": {
+  "region": {
+   "id": "rs77114",
+   "prefecture": "宮崎県",
+   "areaName": "日南・南郷",
+   "slug": "miyazaki-nichinan-nango-bulk"
+  },
+  "note": "日南市油津港: 日南・串間(中央値から103km) → 日南・南郷(2km)"
+ },
+ "akigawa-akiruno-e8": {
+  "region": {
+   "id": "r610",
+   "prefecture": "東京都",
+   "areaName": "秋川",
+   "slug": "tokyo-akigawa"
+  },
+  "note": "秋川（あきる野エリア）: 東京湾奥・江東(中央値から57km) → 秋川(1km)"
+ },
+ "akigawa-keikoku6": {
+  "region": {
+   "id": "r610",
+   "prefecture": "東京都",
+   "areaName": "秋川",
+   "slug": "tokyo-akigawa"
+  },
+  "note": "秋川渓谷: 神奈川県 横浜・川崎 → 東京都 秋川(1km・座標と住所が一致)"
+ },
+ "akkagawa-river-a11": {
+  "region": {
+   "id": "rs12017",
+   "prefecture": "岩手県",
+   "areaName": "普代・田野畑",
+   "slug": "iwate-fudai-tanohata-s12"
+  },
+  "note": "安家川河口: 洋野・種市(中央値から56km) → 普代・田野畑(7km)"
+ },
+ "amatsu-gyoko6": {
+  "region": {
+   "id": "re5141",
+   "prefecture": "千葉県",
+   "areaName": "勝浦・御宿",
+   "slug": "chiba-katsuura-onjuku"
+  },
+  "note": "天津漁港: 東京都 湾奥・江東 → 千葉県 勝浦・御宿(21km・座標と住所が一致)"
+ },
+ "anamizu-boramachi-kou-a13": {
+  "address": "〒927-0027 石川県穴水町大町"
+ },
+ "anan-tachibana-kou-c8": {
+  "address": "〒774-0017 徳島県阿南市見能林町"
+ },
+ "atsumi-onsen-kaigan": {
+  "region": {
+   "id": "rs11021",
+   "prefecture": "山形県",
+   "areaName": "鶴岡北部",
+   "slug": "yamagata-tsuruoka-north-s11"
+  },
+  "note": "温海温泉海岸: 酒田・鶴岡(中央値から55km) → 鶴岡北部(19km)"
+ },
+ "chikura-gyoko6": {
+  "region": {
+   "id": "rs13109",
+   "prefecture": "千葉県",
+   "areaName": "館山・白浜",
+   "slug": "chiba-tateyama-shirahama-s13"
+  },
+  "note": "千倉漁港: 東京都 湾奥・江東 → 千葉県 館山・白浜(7km・座標と住所が一致)"
+ },
+ "choshi-marina6": {
+  "region": {
+   "id": "r1055",
+   "prefecture": "千葉県",
+   "areaName": "銚子",
+   "slug": "chiba-choshi-detail"
+  },
+  "note": "銚子マリーナ: 東京都 湾奥・江東 → 千葉県 銚子(2km・座標と住所が一致)"
+ },
+ "daisen-mikuriya-port": {
+  "region": {
+   "id": "rw7003",
+   "prefecture": "鳥取県",
+   "areaName": "大山・淀江",
+   "slug": "tottori-daisen-yodoe-w7"
+  },
+  "note": "大山町御来屋漁港: 境港(中央値から67km) → 大山・淀江(9km)"
+ },
+ "edogawa-hosuiro6": {
+  "region": {
+   "id": "r1050",
+   "prefecture": "千葉県",
+   "areaName": "東京湾奥・千葉港",
+   "slug": "chiba-tokyowan"
+  },
+  "note": "江戸川放水路: 東京都 大田・城南島 → 千葉県 東京湾奥・千葉港(11km・座標と住所が一致)"
+ },
+ "edogawa-housui-ichikawa-a11": {
+  "region": {
+   "id": "r1050",
+   "prefecture": "千葉県",
+   "areaName": "東京湾奥・千葉港",
+   "slug": "chiba-tokyowan"
+  },
+  "note": "江戸川放水路（市川市）: 東京都 品川・天王洲 → 千葉県 東京湾奥・千葉港(12km・座標と住所が一致)"
+ },
+ "edogawa-lower-unagi": {
+  "region": {
+   "id": "rs13111",
+   "prefecture": "東京都",
+   "areaName": "江東・豊洲",
+   "slug": "tokyo-koto-toyosu-s13"
+  },
+  "note": "江戸川下流（柴又〜市川）: 千葉県 江戸川下流 → 東京都 江東・豊洲(5km・座標と住所が一致)"
+ },
+ "fukue-kou-w6": {
+  "region": {
+   "id": "r4152",
+   "prefecture": "長崎県",
+   "areaName": "五島列島",
+   "slug": "nagasaki-goto"
+  },
+  "note": "五島・福江港: 佐世保・五島(中央値から89km) → 五島列島(12km)"
+ },
+ "funabashi-shinsuikouen6": {
+  "region": {
+   "id": "r1050",
+   "prefecture": "千葉県",
+   "areaName": "東京湾奥・千葉港",
+   "slug": "chiba-tokyowan"
+  },
+  "note": "船橋港親水公園: 東京都 大田・城南島 → 千葉県 東京湾奥・千葉港(8km・座標と住所が一致)"
+ },
+ "fushiki-kou-e8": {
+  "address": "〒933-0116 富山県高岡市伏木湊町"
+ },
+ "futtsu-shinko6": {
+  "region": {
+   "id": "r3112",
+   "prefecture": "千葉県",
+   "areaName": "内房・富津",
+   "slug": "chiba-uchibou-futtsu-3"
+  },
+  "note": "富津新港: 東京都 大田・城南島 → 千葉県 内房・富津(4km・座標と住所が一致)"
+ },
+ "gujo-nagarakawa-minami-a13": {
+  "region": {
+   "id": "rs12127",
+   "prefecture": "岐阜県",
+   "areaName": "郡上・和良川",
+   "slug": "gifu-gujo-waragawa-s12"
+  },
+  "note": "郡上・長良川（美並地区）: 高山・宮川(中央値から60km) → 郡上・和良川(7km)"
+ },
+ "hakata-chuo-futo": {
+  "region": {
+   "id": "rw6028",
+   "prefecture": "福岡県",
+   "areaName": "福岡市・博多湾",
+   "slug": "fukuoka-city-hakatawan-w6"
+  },
+  "note": "博多湾中央ふ頭: 博多湾・北九州(中央値から51km) → 福岡市・博多湾(0km)"
+ },
+ "hakodate-irifune-gyokou6": {
+  "region": {
+   "id": "rs13005",
+   "prefecture": "北海道",
+   "areaName": "函館・戸井",
+   "slug": "hokkaido-hakodate-toi-s13"
+  },
+  "note": "函館港入舟漁港: 稚内・宗谷(中央値から179km) → 函館・戸井(21km)"
+ },
+ "hakodate-midorinoshima6": {
+  "region": {
+   "id": "rs13005",
+   "prefecture": "北海道",
+   "areaName": "函館・戸井",
+   "slug": "hokkaido-hakodate-toi-s13"
+  },
+  "note": "函館港緑の島: 稚内・宗谷(中央値から178km) → 函館・戸井(20km)"
+ },
+ "hamanako-bentenjima": {
+  "region": {
+   "id": "r1060",
+   "prefecture": "静岡県",
+   "areaName": "浜名湖・遠州",
+   "slug": "shizuoka-hamanako-enshu"
+  },
+  "note": "浜名湖弁天島: 駿河湾(中央値から77km) → 浜名湖・遠州(5km)"
+ },
+ "hamura-seki-shita6": {
+  "region": {
+   "id": "r610",
+   "prefecture": "東京都",
+   "areaName": "秋川",
+   "slug": "tokyo-akigawa"
+  },
+  "note": "羽村堰下: 神奈川県 横浜・川崎 → 東京都 秋川(10km・座標と住所が一致)"
+ },
+ "hayakawa-minami-alps-a10": {
+  "region": {
+   "id": "rmp-yamanashi-kyonan",
+   "prefecture": "山梨県",
+   "areaName": "峡南（早川・富士川・南部）",
+   "slug": "yamanashi-kyonan-mp"
+  },
+  "note": "早川（南アルプス入口）: 桂川・大月(中央値から67km) → 峡南（早川・富士川・南部）(7km)"
+ },
+ "himi-nadaura-kaigan-a13": {
+  "address": "〒935-0001 富山県氷見市灘浦"
+ },
+ "hota-gyoko6": {
+  "region": {
+   "id": "r873",
+   "prefecture": "千葉県",
+   "areaName": "南房総",
+   "slug": "chiba-minamiboso"
+  },
+  "note": "保田漁港: 東京都 湾奥・江東 → 千葉県 南房総(10km・人手確認)"
+ },
+ "ichihara-umizuri6": {
+  "region": {
+   "id": "rs13110",
+   "prefecture": "千葉県",
+   "areaName": "市原・姉崎",
+   "slug": "chiba-ichihara-anesaki-s13"
+  },
+  "note": "市原海釣り施設跡地: 東京都 大田・城南島 → 千葉県 市原・姉崎(3km・座標と住所が一致)"
+ },
+ "iioka-gyoko6": {
+  "region": {
+   "id": "r4",
+   "prefecture": "千葉県",
+   "areaName": "房総半島",
+   "slug": "chiba-boso"
+  },
+  "note": "飯岡漁港: 東京都 湾奥・江東 → 千葉県 房総半島(11km・座標と住所が一致)"
+ },
+ "imafuku-kou-matsuura-w6": {
+  "region": {
+   "id": "r4151",
+   "prefecture": "長崎県",
+   "areaName": "平戸・松浦",
+   "slug": "nagasaki-hirado-matsuura"
+  },
+  "address": "〒848-0131 長崎県松浦市今福町",
+  "note": "松浦・今福港: 佐賀県 唐津・東松浦 → 長崎県 平戸・松浦(4km・人手確認)"
+ },
+ "inbanuma-bass": {
+  "region": {
+   "id": "rmp-chiba-chiba-inland",
+   "prefecture": "千葉県",
+   "areaName": "千葉市・八千代(内陸)",
+   "slug": "chiba-chiba-inland-mp"
+  },
+  "note": "印旛沼: 房総半島(中央値から60km) → 千葉市・八千代(内陸)(12km)"
+ },
+ "iwai-kaigan6": {
+  "region": {
+   "id": "r873",
+   "prefecture": "千葉県",
+   "areaName": "南房総",
+   "slug": "chiba-minamiboso"
+  },
+  "note": "岩井海岸: 東京都 湾奥・江東 → 千葉県 南房総(5km・座標と住所が一致)"
+ },
+ "iwanai-port": {
+  "region": {
+   "id": "rs11004",
+   "prefecture": "北海道",
+   "areaName": "岩内・寿都",
+   "slug": "hokkaido-iwanai-suttsu-s11"
+  },
+  "note": "岩内港: 小樽・石狩(中央値から67km) → 岩内・寿都(22km)"
+ },
+ "joetsu-port": {
+  "region": {
+   "id": "rc6001",
+   "prefecture": "新潟県",
+   "areaName": "上越・直江津",
+   "slug": "niigata-joetsu-naoetsu"
+  },
+  "note": "上越港: 新潟(中央値から110km) → 上越・直江津(6km)"
+ },
+ "joetsu-tanihama-kaigan-a13": {
+  "region": {
+   "id": "rc6001",
+   "prefecture": "新潟県",
+   "areaName": "上越・直江津",
+   "slug": "niigata-joetsu-naoetsu"
+  },
+  "note": "上越・谷浜海岸: 新潟・中央(中央値から123km) → 上越・直江津(6km)"
+ },
+ "kamakitako-tsuri6": {
+  "address": "〒350-0456 埼玉県入間郡毛呂山町宿谷"
+ },
+ "kanna-river-ueno-a10": {
+  "region": {
+   "id": "r2421",
+   "prefecture": "群馬県",
+   "areaName": "神流川流域",
+   "slug": "gunma-kanna-area"
+  },
+  "note": "神流川（上野村地区）: 利根川上流・沼田(中央値から78km) → 神流川流域(14km)"
+ },
+ "kannagawa-keiryu6": {
+  "region": {
+   "id": "r2421",
+   "prefecture": "群馬県",
+   "areaName": "神流川流域",
+   "slug": "gunma-kanna-area"
+  },
+  "note": "神流川渓流: 利根川・みなかみ(中央値から60km) → 神流川流域(2km)"
+ },
+ "kannoura-kou-w6": {
+  "region": {
+   "id": "rs77334",
+   "prefecture": "高知県",
+   "areaName": "室戸・東洋",
+   "slug": "kochi-muroto-bulk"
+  },
+  "note": "東洋町・甲浦港: 高知市・浦戸湾(中央値から55km) → 室戸・東洋(24km)"
+ },
+ "karatsu-kou-w6": {
+  "address": "〒847-0014 佐賀県唐津市西城内"
+ },
+ "katsuura-port": {
+  "region": {
+   "id": "r46",
+   "prefecture": "千葉県",
+   "areaName": "外房",
+   "slug": "chiba-sotobo"
+  },
+  "note": "勝浦漁港: 房総半島(中央値から81km) → 外房(1km)"
+ },
+ "kazaose-gyokou6": {
+  "region": {
+   "id": "rs11009",
+   "prefecture": "青森県",
+   "areaName": "鯵ヶ沢・岩崎",
+   "slug": "aomori-ajigasawa-iwasaki-s11"
+  },
+  "note": "風合瀬漁港: 津軽・西海岸(中央値から57km) → 鯵ヶ沢・岩崎(2km)"
+ },
+ "kinokawa-hashimoto-a9": {
+  "region": {
+   "id": "r49",
+   "prefecture": "和歌山県",
+   "areaName": "紀北",
+   "slug": "wakayama-kihoku"
+  },
+  "address": "〒648-0073 和歌山県橋本市市脇",
+  "note": "紀ノ川・橋本市付近: 奈良県 橋本・紀ノ川 → 和歌山県 紀北(27km・人手確認)"
+ },
+ "kinuta-tamagawa6": {
+  "region": {
+   "id": "rmp-tokyo-23ku",
+   "prefecture": "東京都",
+   "areaName": "東京23区(市街地)",
+   "slug": "tokyo-23ku-mp"
+  },
+  "note": "砧公園内の多摩川: 神奈川県 横浜・川崎 → 東京都 東京23区(市街地)(8km・座標と住所が一致)"
+ },
+ "kisakata-gyoko": {
+  "region": {
+   "id": "rs13023",
+   "prefecture": "秋田県",
+   "areaName": "にかほ東部",
+   "slug": "akita-nikaho-east-s13"
+  },
+  "note": "象潟漁港: 能代(中央値から64km) → にかほ東部(0km)"
+ },
+ "kishuku-kou-goto-w6": {
+  "region": {
+   "id": "rs77003",
+   "prefecture": "長崎県",
+   "areaName": "五島列島・福江島",
+   "slug": "nagasaki-goto-fukue-bulk"
+  },
+  "note": "五島・岐宿港: 佐世保・五島(中央値から90km) → 五島列島・福江島(12km)"
+ },
+ "kisogawa-kisofukushima-a10": {
+  "region": {
+   "id": "r87",
+   "prefecture": "長野県",
+   "areaName": "木曽",
+   "slug": "nagano-kiso"
+  },
+  "note": "木曽川（木曽福島地区）: 犀川・安曇野(中央値から59km) → 木曽(17km)"
+ },
+ "kisogawa-middle-river": {
+  "region": {
+   "id": "rmp-aichi-owari-north",
+   "prefecture": "愛知県",
+   "areaName": "尾張北部（一宮・北名古屋・犬山）",
+   "slug": "aichi-owari-north-mp"
+  },
+  "note": "木曽川（中流域）: 岐阜県 木曽川中流 → 愛知県 尾張北部（一宮・北名古屋・犬山）(14km・座標と住所が一致)"
+ },
+ "kitakami-oppa-wan6": {
+  "region": {
+   "id": "re5072",
+   "prefecture": "宮城県",
+   "areaName": "気仙沼・南三陸",
+   "slug": "miyagi-kesennuma-minamisanriku"
+  },
+  "note": "北上川追波湾: 岩手県 大船渡・陸前高田 → 宮城県 気仙沼・南三陸(10km・座標と住所が一致)"
+ },
+ "kominato-gyoko6": {
+  "region": {
+   "id": "re5141",
+   "prefecture": "千葉県",
+   "areaName": "勝浦・御宿",
+   "slug": "chiba-katsuura-onjuku"
+  },
+  "note": "小湊漁港: 東京都 湾奥・江東 → 千葉県 勝浦・御宿(15km・人手確認)"
+ },
+ "kuji-port": {
+  "region": {
+   "id": "re6007",
+   "prefecture": "岩手県",
+   "areaName": "久慈・野田",
+   "slug": "iwate-kuji-noda"
+  },
+  "note": "久慈港: 久慈(中央値から126km) → 久慈・野田(2km)"
+ },
+ "kujukurihama-katakai6": {
+  "region": {
+   "id": "r1054",
+   "prefecture": "千葉県",
+   "areaName": "九十九里",
+   "slug": "chiba-kujukuri-detail"
+  },
+  "note": "九十九里浜片貝海岸: 東京都 湾奥・江東 → 千葉県 九十九里(4km・人手確認)"
+ },
+ "kumamoto-shinkou-w6": {
+  "region": {
+   "id": "r846",
+   "prefecture": "熊本県",
+   "areaName": "熊本市",
+   "slug": "kumamoto-city"
+  },
+  "note": "熊本新港: 天草・苓北(中央値から60km) → 熊本市(10km)"
+ },
+ "kurobe-gyoko": {
+  "region": {
+   "id": "rc5031",
+   "prefecture": "富山県",
+   "areaName": "魚津・黒部",
+   "slug": "toyama-uozu-kurobe"
+  },
+  "note": "黒部漁港: 新潟県 寺泊 → 富山県 魚津・黒部(6km・座標と住所が一致)"
+ },
+ "kushiro-nishikouku6": {
+  "region": {
+   "id": "rs13006",
+   "prefecture": "北海道",
+   "areaName": "釧路東部",
+   "slug": "hokkaido-kushiro-east-s13"
+  },
+  "note": "釧路港西港区: 釧路・根室(中央値から98km) → 釧路東部(5km)"
+ },
+ "kushiro-port": {
+  "region": {
+   "id": "rs13006",
+   "prefecture": "北海道",
+   "areaName": "釧路東部",
+   "slug": "hokkaido-kushiro-east-s13"
+  },
+  "note": "釧路港: 小樽・石狩(中央値から250km) → 釧路東部(7km)"
+ },
+ "kushirogawa-kakou-e8": {
+  "region": {
+   "id": "rs13006",
+   "prefecture": "北海道",
+   "areaName": "釧路東部",
+   "slug": "hokkaido-kushiro-east-s13"
+  },
+  "note": "釧路川河口: 釧路・根室(中央値から98km) → 釧路東部(4km)"
+ },
+ "kyouden-gyokou-toyama": {
+  "address": "〒937-0012 富山県魚津市経田"
+ },
+ "kyu-edogawa-mouth": {
+  "region": {
+   "id": "r1050",
+   "prefecture": "千葉県",
+   "areaName": "東京湾奥・千葉港",
+   "slug": "chiba-tokyowan"
+  },
+  "note": "旧江戸川河口: 東京都 東京湾 → 千葉県 東京湾奥・千葉港(15km・座標と住所が一致)"
+ },
+ "makuhari-no-hama6": {
+  "region": {
+   "id": "r1050",
+   "prefecture": "千葉県",
+   "areaName": "東京湾奥・千葉港",
+   "slug": "chiba-tokyowan"
+  },
+  "note": "幕張の浜: 東京都 大田・城南島 → 千葉県 東京湾奥・千葉港(3km・座標と住所が一致)"
+ },
+ "marina-city-fishing": {
+  "region": {
+   "id": "r887",
+   "prefecture": "和歌山県",
+   "areaName": "和歌山市",
+   "slug": "wakayama-city"
+  },
+  "note": "和歌山マリーナシティ釣り公園: 南紀(中央値から58km) → 和歌山市(5km)"
+ },
+ "meizu-kou": {
+  "region": {
+   "id": "rs77114",
+   "prefecture": "宮崎県",
+   "areaName": "日南・南郷",
+   "slug": "miyazaki-nichinan-nango-bulk"
+  },
+  "note": "目井津港: 日南・串間(中央値から104km) → 日南・南郷(4km)"
+ },
+ "michidairagawa-dam6": {
+  "region": {
+   "id": "r2421",
+   "prefecture": "群馬県",
+   "areaName": "神流川流域",
+   "slug": "gunma-kanna-area"
+  },
+  "note": "道平川ダム湖: 利根川・みなかみ(中央値から59km) → 神流川流域(16km)"
+ },
+ "midorikawa-kakou-w6": {
+  "region": {
+   "id": "r846",
+   "prefecture": "熊本県",
+   "areaName": "熊本市",
+   "slug": "kumamoto-city"
+  },
+  "note": "緑川河口: 天草・苓北(中央値から66km) → 熊本市(12km)"
+ },
+ "mihara-kou-w6": {
+  "region": {
+   "id": "r58",
+   "prefecture": "広島県",
+   "areaName": "尾道",
+   "slug": "hiroshima-onomichi"
+  },
+  "note": "三原港: 広島市・宇品(中央値から57km) → 尾道(10km)"
+ },
+ "mikuni-sunset-beach-a10": {
+  "region": {
+   "id": "r149",
+   "prefecture": "福井県",
+   "areaName": "三国",
+   "slug": "fukui-mikuni"
+  },
+  "note": "三国サンセットビーチ: 敦賀(中央値から58km) → 三国(2km)"
+ },
+ "mizumoto-koen6": {
+  "region": {
+   "id": "rs13111",
+   "prefecture": "東京都",
+   "areaName": "江東・豊洲",
+   "slug": "tokyo-koto-toyosu-s13"
+  },
+  "note": "水元公園: 神奈川県 横浜・川崎 → 東京都 江東・豊洲(8km・人手確認)"
+ },
+ "mukogawa-ichimonji-k8": {
+  "region": {
+   "id": "r402",
+   "prefecture": "兵庫県",
+   "areaName": "阪神（西宮・芦屋・尼崎）",
+   "slug": "hyogo-hanshin"
+  },
+  "address": "〒660-0000 兵庫県西宮市・尼崎市沖（武庫川河口）",
+  "note": "武庫川一文字: 大阪府 大阪市港湾 → 兵庫県 阪神（西宮・芦屋・尼崎）(1km・人手確認)"
+ },
+ "murakami-kou-niigata": {
+  "region": {
+   "id": "r523",
+   "prefecture": "新潟県",
+   "areaName": "村上・岩船",
+   "slug": "niigata-murakami-iwafune"
+  },
+  "note": "村上港: 新潟・寺泊(中央値から56km) → 村上・岩船(4km)"
+ },
+ "murakami-neya-port": {
+  "region": {
+   "id": "r523",
+   "prefecture": "新潟県",
+   "areaName": "村上・岩船",
+   "slug": "niigata-murakami-iwafune"
+  },
+  "note": "村上市寝屋漁港: 新潟(中央値から58km) → 村上・岩船(10km)"
+ },
+ "muroran-port": {
+  "region": {
+   "id": "rn8004",
+   "prefecture": "北海道",
+   "areaName": "室蘭・登別",
+   "slug": "hokkaido-muroran-noboribetsu-e8"
+  },
+  "note": "室蘭港: 小樽・石狩(中央値から99km) → 室蘭・登別(6km)"
+ },
+ "muroran-sakimori-futou6": {
+  "region": {
+   "id": "rn8004",
+   "prefecture": "北海道",
+   "areaName": "室蘭・登別",
+   "slug": "hokkaido-muroran-noboribetsu-e8"
+  },
+  "note": "室蘭港崎守埠頭: 釧路・根室(中央値から370km) → 室蘭・登別(5km)"
+ },
+ "muroto-misaki-w6": {
+  "region": {
+   "id": "rcs4071",
+   "prefecture": "高知県",
+   "areaName": "室戸・安芸",
+   "slug": "kochi-muroto-aki"
+  },
+  "note": "室戸岬: 高知市・浦戸湾(中央値から54km) → 室戸・安芸(9km)"
+ },
+ "nabakigawa-kakko6": {
+  "region": {
+   "id": "r1054",
+   "prefecture": "千葉県",
+   "areaName": "九十九里",
+   "slug": "chiba-kujukuri-detail"
+  },
+  "note": "南白亀川河口: 東京都 湾奥・江東 → 千葉県 九十九里(11km・座標と住所が一致)"
+ },
+ "nagaragawa-gujo": {
+  "region": {
+   "id": "rs12127",
+   "prefecture": "岐阜県",
+   "areaName": "郡上・和良川",
+   "slug": "gifu-gujo-waragawa-s12"
+  },
+  "note": "長良川郡上: 長良川下流(中央値から69km) → 郡上・和良川(0km)"
+ },
+ "naoetsu-port": {
+  "region": {
+   "id": "rc6001",
+   "prefecture": "新潟県",
+   "areaName": "上越・直江津",
+   "slug": "niigata-joetsu-naoetsu"
+  },
+  "note": "直江津港: 新潟(中央値から108km) → 上越・直江津(8km)"
+ },
+ "naruto-uchinomi-c8": {
+  "address": "〒772-0011 徳島県鳴門市鳴門町土佐泊浦"
+ },
+ "nasu-yozasagawa-jouryu-a13": {
+  "region": {
+   "id": "r2413",
+   "prefecture": "栃木県",
+   "areaName": "那須・塩原",
+   "slug": "tochigi-nasu-shiobara"
+  },
+  "note": "那須・余笹川上流: 小山・栃木(中央値から73km) → 那須・塩原(6km)"
+ },
+ "noda-tamakawa-beach-a11": {
+  "region": {
+   "id": "rs12017",
+   "prefecture": "岩手県",
+   "areaName": "普代・田野畑",
+   "slug": "iwate-fudai-tanohata-s12"
+  },
+  "note": "野田玉川海岸: 洋野・種市(中央値から59km) → 普代・田野畑(10km)"
+ },
+ "nojima-zaki6": {
+  "region": {
+   "id": "r3111",
+   "prefecture": "千葉県",
+   "areaName": "南房総・館山",
+   "slug": "chiba-minamiboso-tateyama-3"
+  },
+  "note": "野島崎: 東京都 湾奥・江東 → 千葉県 南房総・館山(6km・人手確認)"
+ },
+ "nou-gyoko": {
+  "region": {
+   "id": "rc6001",
+   "prefecture": "新潟県",
+   "areaName": "上越・直江津",
+   "slug": "niigata-joetsu-naoetsu"
+  },
+  "note": "能生漁港: 柏崎(中央値から55km) → 上越・直江津(14km)"
+ },
+ "nyuzen-kaigan-surf-e8": {
+  "address": "〒939-0626 富山県下新川郡入善町芦崎"
+ },
+ "obitsu-kakko6": {
+  "region": {
+   "id": "r3112",
+   "prefecture": "千葉県",
+   "areaName": "内房・富津",
+   "slug": "chiba-uchibou-futtsu-3"
+  },
+  "note": "小櫃川河口: 東京都 大田・城南島 → 千葉県 内房・富津(13km・人手確認)"
+ },
+ "oki-beppu-kou-w6": {
+  "region": {
+   "id": "rcs4030",
+   "prefecture": "島根県",
+   "areaName": "隠岐・西ノ島",
+   "slug": "shimane-oki-nishinoshima"
+  },
+  "note": "隠岐島前・別府港: 松江・美保関(中央値から61km) → 隠岐・西ノ島(4km)"
+ },
+ "okitsugawa-shimizu-okitsu-a12": {
+  "region": {
+   "id": "r820",
+   "prefecture": "静岡県",
+   "areaName": "清水・三保",
+   "slug": "shizuoka-shimizu-miho"
+  },
+  "note": "興津川（清水区・興津地区）: 掛川・菊川(中央値から51km) → 清水・三保(6km)"
+ },
+ "okura-kaigan-gogan-a12": {
+  "address": "〒673-0879 兵庫県明石市大蔵海岸通"
+ },
+ "okurigawa-goryuten-e8": {
+  "region": {
+   "id": "rmp-tokyo-tama-city",
+   "prefecture": "東京都",
+   "areaName": "多摩の市街地(府中・調布・東久留米)",
+   "slug": "tokyo-tama-city-mp"
+  },
+  "note": "大栗川合流点: 埼玉県 川越・入間 → 東京都 多摩の市街地(府中・調布・東久留米)(7km・座標と住所が一致)"
+ },
+ "okutama-ko6": {
+  "region": {
+   "id": "r609",
+   "prefecture": "東京都",
+   "areaName": "奥多摩",
+   "slug": "tokyo-okutama"
+  },
+  "note": "奥多摩湖: 神奈川県 横浜・川崎 → 東京都 奥多摩(5km・座標と住所が一致)"
+ },
+ "okutama-nipparagawa-e8": {
+  "region": {
+   "id": "r609",
+   "prefecture": "東京都",
+   "areaName": "奥多摩",
+   "slug": "tokyo-okutama"
+  },
+  "note": "奥多摩・日原川: 東京湾奥・江東(中央値から73km) → 奥多摩(6km)"
+ },
+ "omoigawa-oyama": {
+  "region": {
+   "id": "r4323",
+   "prefecture": "栃木県",
+   "areaName": "渡良瀬遊水地・栃木",
+   "slug": "tochigi-watarase-yusuichi"
+  },
+  "note": "思川 小山エリア: 鬼怒川・那珂川(中央値から55km) → 渡良瀬遊水地・栃木(6km)"
+ },
+ "onomichi-port": {
+  "region": {
+   "id": "rc8012",
+   "prefecture": "広島県",
+   "areaName": "尾道・しまなみ",
+   "slug": "hiroshima-onomichi-shimanami-c8"
+  },
+  "note": "尾道港: 瀬戸内(中央値から67km) → 尾道・しまなみ(1km)"
+ },
+ "oodotsu-kou": {
+  "region": {
+   "id": "rs77114",
+   "prefecture": "宮崎県",
+   "areaName": "日南・南郷",
+   "slug": "miyazaki-nichinan-nango-bulk"
+  },
+  "note": "大堂津港: 日南・串間(中央値から100km) → 日南・南郷(2km)"
+ },
+ "rumoi-minami-gampeki6": {
+  "region": {
+   "id": "r64",
+   "prefecture": "北海道",
+   "areaName": "留萌",
+   "slug": "hokkaido-rumoi"
+  },
+  "note": "留萌港南岸壁: 稚内・宗谷(中央値から75km) → 留萌(1km)"
+ },
+ "sakaiminato-gaiko": {
+  "region": {
+   "id": "rw6002",
+   "prefecture": "鳥取県",
+   "areaName": "境港・米子",
+   "slug": "tottori-sakaiminato-yonago-w6"
+  },
+  "note": "境港外港: 境港(中央値から84km) → 境港・米子(1km)"
+ },
+ "sakaiminato-mihonoseki": {
+  "region": {
+   "id": "rw6004",
+   "prefecture": "島根県",
+   "areaName": "松江・美保関",
+   "slug": "shimane-matsue-mihonoseki-w6"
+  },
+  "note": "境港・美保関漁港: 鳥取県 境港 → 島根県 松江・美保関(10km・人手確認)"
+ },
+ "sakaiminato-nakano-kou": {
+  "address": "〒684-0071 鳥取県境港市中野町"
+ },
+ "sakaiminato-port": {
+  "region": {
+   "id": "r2801",
+   "prefecture": "鳥取県",
+   "areaName": "米子・境港",
+   "slug": "tottori-yonago-sakai"
+  },
+  "note": "境港: 境港(中央値から87km) → 米子・境港(1km)"
+ },
+ "sakaiminato-yumeminato-gogan": {
+  "address": "〒684-0046 鳥取県境港市竹内団地"
+ },
+ "sasagawa-nagare-surf": {
+  "region": {
+   "id": "r523",
+   "prefecture": "新潟県",
+   "areaName": "村上・岩船",
+   "slug": "niigata-murakami-iwafune"
+  },
+  "note": "笹川流れサーフ: 下越・新潟市(中央値から55km) → 村上・岩船(22km)"
+ },
+ "shakujii-sanpoji6": {
+  "region": {
+   "id": "rmp-tokyo-23ku",
+   "prefecture": "東京都",
+   "areaName": "東京23区(市街地)",
+   "slug": "tokyo-23ku-mp"
+  },
+  "note": "石神井公園三宝寺池: 神奈川県 横浜・川崎 → 東京都 東京23区(市街地)(7km・座標と住所が一致)"
+ },
+ "shikabe-gyokou6": {
+  "region": {
+   "id": "rmp-hokkaido-onuma",
+   "prefecture": "北海道",
+   "areaName": "大沼（七飯）",
+   "slug": "hokkaido-onuma-mp"
+  },
+  "note": "鹿部漁港: 釧路・根室(中央値から396km) → 大沼（七飯）(13km)"
+ },
+ "shimanour-nobeoka-w6": {
+  "address": "〒882-0096 宮崎県延岡市島浦町"
+ },
+ "shimizu-port": {
+  "region": {
+   "id": "rc4015",
+   "prefecture": "静岡県",
+   "areaName": "清水・由比",
+   "slug": "shizuoka-shimizu-yui"
+  },
+  "note": "清水港: 伊豆・熱海(中央値から53km) → 清水・由比(4km)"
+ },
+ "shinminato-east-breakwater": {
+  "region": {
+   "id": "rc5030",
+   "prefecture": "富山県",
+   "areaName": "新湊・射水",
+   "slug": "toyama-shinminato-imizu"
+  },
+  "note": "新湊漁港東堤防: 新潟県 寺泊 → 富山県 新湊・射水(1km・座標と住所が一致)"
+ },
+ "shinminato-gyokou-e8": {
+  "address": "〒934-0023 富山県射水市海王町"
+ },
+ "shiobara-damuko-momiji-a13": {
+  "region": {
+   "id": "rs12103",
+   "prefecture": "栃木県",
+   "areaName": "日光・大谷川",
+   "slug": "tochigi-nikko-daiyagawa-s12"
+  },
+  "note": "塩原ダム湖（もみじ谷大吊橋付近）: 小山・栃木(中央値から65km) → 日光・大谷川(8km)"
+ },
+ "shirako-kaigan6": {
+  "region": {
+   "id": "r1054",
+   "prefecture": "千葉県",
+   "areaName": "九十九里",
+   "slug": "chiba-kujukuri-detail"
+  },
+  "note": "白子海岸: 東京都 湾奥・江東 → 千葉県 九十九里(12km・座標と住所が一致)"
+ },
+ "shiraoi-kou6": {
+  "region": {
+   "id": "rmp-hokkaido-iburi-hidaka",
+   "prefecture": "北海道",
+   "areaName": "胆振・日高内陸（大滝・白老・平取）",
+   "slug": "hokkaido-iburi-hidaka-mp"
+  },
+  "note": "白老港: 釧路・根室(中央値から331km) → 胆振・日高内陸（大滝・白老・平取）(24km)"
+ },
+ "susaki-shinjo-river": {
+  "region": {
+   "id": "rcs4072",
+   "prefecture": "高知県",
+   "areaName": "須崎・中土佐",
+   "slug": "kochi-susaki-nakatosa"
+  },
+  "note": "須崎港新荘川河口: 宿毛(中央値から62km) → 須崎・中土佐(4km)"
+ },
+ "suttsu-gyokou6": {
+  "region": {
+   "id": "rs11004",
+   "prefecture": "北海道",
+   "areaName": "岩内・寿都",
+   "slug": "hokkaido-iwanai-suttsu-s11"
+  },
+  "note": "寿都漁港: 稚内・宗谷(中央値から104km) → 岩内・寿都(10km)"
+ },
+ "takaharagawa-hida-tochio-a12": {
+  "region": {
+   "id": "rs13128",
+   "prefecture": "岐阜県",
+   "areaName": "高山・宮川",
+   "slug": "gifu-takayama-miyagawa-s13"
+  },
+  "note": "高原川（飛騨市・栃尾地区）: 郡上・和良川(中央値から65km) → 高山・宮川(12km)"
+ },
+ "takahokonuma": {
+  "region": {
+   "id": "rs13013",
+   "prefecture": "青森県",
+   "areaName": "上北・三沢",
+   "slug": "aomori-kamikita-misawa-s13"
+  },
+  "note": "鷹架沼: 八戸・階上(中央値から54km) → 上北・三沢(8km)"
+ },
+ "takashima-saga-w6": {
+  "region": {
+   "id": "r4151",
+   "prefecture": "長崎県",
+   "areaName": "平戸・松浦",
+   "slug": "nagasaki-hirado-matsuura"
+  },
+  "note": "鷹島: 佐賀県 唐津・東松浦 → 長崎県 平戸・松浦(5km・人手確認)"
+ },
+ "takatakiko-bass": {
+  "region": {
+   "id": "rmp-chiba-boso-inland",
+   "prefecture": "千葉県",
+   "areaName": "房総内陸(君津・大多喜・茂原)",
+   "slug": "chiba-boso-inland-mp"
+  },
+  "note": "高滝湖: 房総半島(中央値から81km) → 房総内陸(君津・大多喜・茂原)(5km)"
+ },
+ "takato-mibugawa-a10": {
+  "region": {
+   "id": "r2442",
+   "prefecture": "長野県",
+   "areaName": "天竜川・伊那",
+   "slug": "nagano-tenryu-ina"
+  },
+  "note": "高遠・三峰川: 犀川・安曇野(中央値から59km) → 天竜川・伊那(10km)"
+ },
+ "tamagawa-mitake6": {
+  "region": {
+   "id": "r610",
+   "prefecture": "東京都",
+   "areaName": "秋川",
+   "slug": "tokyo-akigawa"
+  },
+  "note": "多摩川上流（御岳渓谷）: 神奈川県 横浜・川崎 → 東京都 秋川(8km・座標と住所が一致)"
+ },
+ "tanukiko6": {
+  "region": {
+   "id": "rmp-shizuoka-fuji-fujinomiya",
+   "prefecture": "静岡県",
+   "areaName": "富士・富士宮（内陸）",
+   "slug": "shizuoka-fuji-fujinomiya-mp"
+  },
+  "note": "田貫湖: 山梨県 富士五湖・本栖湖 → 静岡県 富士・富士宮（内陸）(4km・人手確認)",
+  "address": "静岡県富士宮市（田貫湖）"
+ },
+ "tateyama-jieitai-breakwater": {
+  "region": {
+   "id": "r873",
+   "prefecture": "千葉県",
+   "areaName": "南房総",
+   "slug": "chiba-minamiboso"
+  },
+  "note": "館山自衛隊堤防: 房総半島(中央値から122km) → 南房総(1km)"
+ },
+ "tateyama-ko6": {
+  "region": {
+   "id": "r873",
+   "prefecture": "千葉県",
+   "areaName": "南房総",
+   "slug": "chiba-minamiboso"
+  },
+  "note": "館山港: 東京都 湾奥・江東 → 千葉県 南房総(2km・座標と住所が一致)"
+ },
+ "tenryugawa-iida-kawaji-a12": {
+  "region": {
+   "id": "rmp-nagano-minamishinshu",
+   "prefecture": "長野県",
+   "areaName": "南信州（阿智・平谷・飯田）",
+   "slug": "nagano-minamishinshu-mp"
+  },
+  "note": "天竜川（飯田・川路地区）: 上田・千曲川中流(中央値から109km) → 南信州（阿智・平谷・飯田）(12km)"
+ },
+ "tone-watarase-yusuchi": {
+  "region": {
+   "id": "r3150",
+   "prefecture": "群馬県",
+   "areaName": "利根川・渡良瀬",
+   "slug": "gunma-tone-watarase-3"
+  },
+  "note": "利根川渡良瀬遊水地: 利根川(中央値から86km) → 利根川・渡良瀬(4km)"
+ },
+ "tonegawa-shibukawa-a9": {
+  "address": "〒377-0000 群馬県渋川市利根川沿い"
+ },
+ "toyama-kou": {
+  "address": "〒931-8321 富山県富山市岩瀬白山町"
+ },
+ "tsugaru-kizukuri-port-a12": {
+  "address": "〒038-3145 青森県つがる市木造出野里"
+ },
+ "tsukigawa-kou-w6": {
+  "region": {
+   "id": "r4151",
+   "prefecture": "長崎県",
+   "areaName": "平戸・松浦",
+   "slug": "nagasaki-hirado-matsuura"
+  },
+  "note": "松浦・調川港: 佐賀県 唐津・東松浦 → 長崎県 平戸・松浦(2km・人手確認)"
+ },
+ "uchibo-hota-port": {
+  "region": {
+   "id": "r872",
+   "prefecture": "千葉県",
+   "areaName": "内房",
+   "slug": "chiba-uchibou"
+  },
+  "note": "内房保田漁港: 房総半島(中央値から113km) → 内房(6km)"
+ },
+ "uchiumi-kou-miyazaki": {
+  "region": {
+   "id": "rw6042",
+   "prefecture": "宮崎県",
+   "areaName": "宮崎市・青島",
+   "slug": "miyazaki-city-aoshima-w6"
+  },
+  "note": "内海港: 日南・串間(中央値から81km) → 宮崎市・青島(4km)"
+ },
+ "ukedo-gyokou": {
+  "region": {
+   "id": "rn8033",
+   "prefecture": "福島県",
+   "areaName": "南相馬・浪江",
+   "slug": "fukushima-minamisoma-namie-e8"
+  },
+  "note": "請戸漁港: いわき・小名浜(中央値から59km) → 南相馬・浪江(16km)"
+ },
+ "uozu-hojo-port": {
+  "region": {
+   "id": "rc6004",
+   "prefecture": "富山県",
+   "areaName": "富山・滑川",
+   "slug": "toyama-namerikawa"
+  },
+  "note": "魚津補助港: 新潟県 寺泊 → 富山県 富山・滑川(10km・座標と住所が一致)"
+ },
+ "uozu-katakaigawa-kakou-a13": {
+  "address": "〒937-0805 富山県魚津市村木町"
+ },
+ "uozu-ko-toyama": {
+  "address": "〒937-0067 富山県魚津市港町"
+ },
+ "urayasu-takasu6": {
+  "region": {
+   "id": "r1050",
+   "prefecture": "千葉県",
+   "areaName": "東京湾奥・千葉港",
+   "slug": "chiba-tokyowan"
+  },
+  "note": "浦安高洲海浜公園: 東京都 大田・城南島 → 千葉県 東京湾奥・千葉港(14km・座標と住所が一致)"
+ },
+ "ushikunuma-tsuri6": {
+  "region": {
+   "id": "r2402",
+   "prefecture": "茨城県",
+   "areaName": "霞ヶ浦・北浦",
+   "slug": "ibaraki-kasumi-kitaura"
+  },
+  "note": "牛久沼: 大洗・ひたちなか(中央値から65km) → 霞ヶ浦・北浦(19km)"
+ },
+ "wadaura-gyoko6": {
+  "region": {
+   "id": "rs13109",
+   "prefecture": "千葉県",
+   "areaName": "館山・白浜",
+   "slug": "chiba-tateyama-shirahama-s13"
+  },
+  "note": "和田浦漁港: 東京都 湾奥・江東 → 千葉県 館山・白浜(9km・人手確認)"
+ },
+ "watarasegawa-ashikaga-a9": {
+  "region": {
+   "id": "r2412",
+   "prefecture": "栃木県",
+   "areaName": "渡良瀬川流域",
+   "slug": "tochigi-watarase-area"
+  },
+  "note": "渡良瀬川・足利市: 群馬県 渡良瀬川 → 栃木県 渡良瀬川流域(7km・座標と住所が一致)"
+ },
+ "yaizu-ko-shinko": {
+  "address": "〒425-0027 静岡県焼津市栄町"
+ },
+ "yonezawa-sasanogawa6": {
+  "region": {
+   "id": "rmp-yamagata-okitama",
+   "prefecture": "山形県",
+   "areaName": "置賜（米沢・南陽・長井）",
+   "slug": "yamagata-okitama-mp"
+  },
+  "note": "米沢市笹野川: 酒田・遊佐(中央値から120km) → 置賜（米沢・南陽・長井）(22km)"
+ },
+ "yorogawa-kakko6": {
+  "region": {
+   "id": "rs13110",
+   "prefecture": "千葉県",
+   "areaName": "市原・姉崎",
+   "slug": "chiba-ichihara-anesaki-s13"
+  },
+  "note": "養老川河口: 東京都 大田・城南島 → 千葉県 市原・姉崎(5km・座標と住所が一致)"
+ },
+ "zenpukujigawa6": {
+  "region": {
+   "id": "rmp-tokyo-23ku",
+   "prefecture": "東京都",
+   "areaName": "東京23区(市街地)",
+   "slug": "tokyo-23ku-mp"
+  },
+  "note": "善福寺川: 神奈川県 横浜・川崎 → 東京都 東京23区(市街地)(3km・座標と住所が一致)"
+ }
+}
