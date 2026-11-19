@@ -46,13 +46,23 @@ type PageProps = {
   params: Promise<{ slug: string; month: string }>;
 };
 
-// 一時的に force-dynamic (build時 SSG で空HTML 焼き付き問題対策)
-export const dynamic = "force-dynamic";
+// ISR（force-static + revalidate 6h）。
+// 旧 force-dynamic（build時 SSG の空HTML焼き付き対策の暫定措置）は、ISRキャッシュ外部化（cache-handler.js）で
+// 恒久解決済み（blog/[slug]・spots/[slug] と同じ経緯）。force-dynamic のままだと
+//  (1) 全リクエストが private, no-store になり Cloudflare にキャッシュされず毎回オリジンで集計・描画していた
+//  (2) 無効な月（/prefecture/kanagawa/zzz 等）でも root loading.tsx のストリーミング開始後に notFound() が
+//      呼ばれ、「ページが見つかりません」を status 200 で返すソフト404になっていた
+// ISR なら notFound() は正しく 404 を返し、正常ページは s-maxage 付きでエッジにキャッシュされる。
+// force-static: 将来どこかで cookies()/headers() が混入しても ISR 再生成が「static to dynamic」500
+// （#596→#602 型障害）にならないようにする。本ページはログイン状態・広告とも静的HTML依存なし（広告はクライアント側）。
+// revalidate 6h: 当月判定（「今釣れる魚」・来月導線）が月替わりに半日以内で切り替わるように。
+export const dynamic = "force-static";
+export const revalidate = 21600;
 export const maxDuration = 60;
 
 /**
  * この県・この月の「釣れる魚」「おすすめスポット」を集計。
- * force-dynamic のため generateMetadata と本体の二重集計を react cache() で 1 回にまとめる。
+ * generateMetadata と本体の二重集計を react cache() で 1 回にまとめる。
  */
 const getMonthAggregates = cache((prefName: string, monthNum: number) => {
   const prefSpots = fishingSpots.filter((s) => s.region.prefecture === prefName);
@@ -129,7 +139,7 @@ export async function generateMetadata({
   const { slug, month: monthSlug } = await params;
   const pref = getPrefectureBySlug(slug);
   const month = getMonthBySlug(monthSlug);
-  if (!pref || !month) return { title: "ページが見つかりません" };
+  if (!pref || !month) notFound();
 
   const year = new Date().getFullYear();
 
