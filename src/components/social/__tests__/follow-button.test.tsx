@@ -2,7 +2,7 @@
 // タイムラインはカードが並ぶため、1枚ごとに /api/follow を叩くとリクエストが件数ぶん増える。
 // 呼び出し側が状態を渡したときに取得が発生しないことを担保する。
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, waitFor, cleanup } from "@testing-library/react";
+import { act, render, screen, waitFor, cleanup } from "@testing-library/react";
 import { FollowButton } from "@/components/social/follow-button";
 
 const mockSession = vi.fn();
@@ -57,7 +57,11 @@ describe("FollowButton", () => {
       json: async () => ({ following: true }),
     } as Response);
 
-    render(<FollowButton tsuriId="other-1" />);
+    // fetch の解決→setFollowing を act 内で流し切る（act 外の更新は React Scheduler に積まれ、
+    // jsdom 破棄後に走ると「window is not defined」になり得る）
+    await act(async () => {
+      render(<FollowButton tsuriId="other-1" />);
+    });
 
     await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
     expect(vi.mocked(fetch).mock.calls[0][0]).toBe("/api/follow?tsuriId=other-1");
