@@ -22,6 +22,7 @@ const INSTRUCTIONS =
   "詳細は get_spot_details、潮は get_tide、天気と釣行指数は get_fishing_forecast、時期の魚は get_catchable_fish、" +
   "最近の釣果は get_recent_catches、釣具店は find_tackle_shops、魚の情報は get_fish_info、仕掛け・道具は recommend_gear、" +
   "釣り禁止やルールは check_fishing_rules を使ってください。" +
+  "ユーザーが釣果を投稿・記録したいときは draft_catch_report で下書きを作り、返された confirmUrl を開いて写真を付けて確定するよう案内してください（ツールだけでは投稿は完了しません）。" +
   "回答ではスポット名に url（ツリスポのページ）を添え、釣り禁止情報がある場合は必ず伝えてください。";
 
 type JsonRpcId = string | number | null;

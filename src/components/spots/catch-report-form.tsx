@@ -18,6 +18,7 @@ import { recordAction } from "@/hooks/use-activity";
 import { CatchReportResult } from "@/components/spots/catch-report-result";
 import { OPEN_CATCH_REPORT_EVENT } from "@/components/spots/catch-report-list";
 import type { PostCatchResult } from "@/lib/catch-result";
+import { CATCH_METHODS } from "@/lib/catch-report-options";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
 const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
@@ -26,7 +27,7 @@ const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", 
 // 「クソデカい」等のスラングに誤反応しない語彙のみを採用する
 const COMMENT_CHIPS = ["入れ食いだった！", "ぽつぽつ釣れた", "渋かった…", "ボウズ回避！", "サイズは小さめ", "群れが回ってきた"];
 
-const METHODS = ["サビキ", "投げ", "ルアー", "フカセ", "エギング", "ジギング", "穴釣り", "ウキ釣り", "その他"];
+const METHODS = CATCH_METHODS;
 const WEATHER_OPTIONS = [
   { value: "晴れ", label: "晴れ", icon: "☀️" },
   { value: "曇り", label: "曇り", icon: "☁️" },
@@ -38,6 +39,19 @@ interface CatchReportFormProps {
   spotSlug: string;
   spotName: string;
   catchableFishNames?: string[];
+  /** 下書きの初期値（AI アシスタントの下書き確認ページ /post/catch で使う） */
+  initial?: {
+    fishName?: string;
+    sizeCm?: number;
+    method?: string;
+    weather?: string;
+    date?: string;
+    comment?: string;
+  };
+  /** 最初からフォームを開いておく */
+  defaultOpen?: boolean;
+  /** 投稿経路の計測用（"mcp" = AI アシスタントの下書きから） */
+  via?: "mcp";
 }
 
 // 端末ローカルの「今日」を YYYY-MM-DD で返す。
@@ -47,12 +61,19 @@ function formatLocalDate(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
+export function CatchReportForm({
+  spotSlug,
+  spotName,
+  catchableFishNames = [],
+  initial,
+  defaultOpen = false,
+  via,
+}: CatchReportFormProps) {
   const { data: session, status: authStatus, update } = useSession();
   const router = useRouter();
   const fishInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
   const [userName, setUserName] = useState("");
   const [profileNickname, setProfileNickname] = useState<string>("");
 
@@ -89,15 +110,15 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     saveAnonNickname(name);
   };
 
-  const [fishName, setFishName] = useState("");
-  const [date, setDate] = useState(() => formatLocalDate(new Date()));
-  const [comment, setComment] = useState("");
+  const [fishName, setFishName] = useState(initial?.fishName ?? "");
+  const [date, setDate] = useState(() => initial?.date ?? formatLocalDate(new Date()));
+  const [comment, setComment] = useState(initial?.comment ?? "");
   const [photoUrl, setPhotoUrl] = useState("");
   const [photoPreview, setPhotoPreview] = useState("");
   const [photoUploading, setPhotoUploading] = useState(false);
-  const [sizeCm, setSizeCm] = useState("");
-  const [method, setMethod] = useState("");
-  const [weather, setWeather] = useState("");
+  const [sizeCm, setSizeCm] = useState(initial?.sizeCm !== undefined ? String(initial.sizeCm) : "");
+  const [method, setMethod] = useState(initial?.method ?? "");
+  const [weather, setWeather] = useState(initial?.weather ?? "");
   const [tagsInput, setTagsInput] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -198,6 +219,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         .filter(Boolean)
         .slice(0, 5);
       if (tags.length > 0) body.tags = tags;
+      if (via) body.via = via;
 
       const res = await fetch("/api/catch-report-ugc", {
         method: "POST",
@@ -217,6 +239,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
           hasComment: !!commentText,
           hasPhoto: !!photoUrl,
           pioneer,
+          via,
         });
 
         let anonSaved = false;

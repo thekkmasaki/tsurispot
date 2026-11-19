@@ -274,6 +274,10 @@ export default function PrivacyPage() {
                     認証は不要で、ユーザーのアカウント情報、マイページ、お気に入り、投稿者の個人情報などにはアクセスしません。
                     データの書き込み・変更・削除も行いません。
                   </li>
+                  <li>
+                    釣果の下書き機能（draft_catch_report）は、AI アシスタントが入力した魚名・サイズ・日付などを投稿確認ページのリンク（URL）にまとめて返すだけで、
+                    サーバーには保存しません。釣果が公開されるのは、利用者が確認ページで内容を確かめて投稿したときだけで、その投稿には通常の釣果投稿と同じ取り扱い（「収集する情報」「情報の利用目的」など）が適用されます。
+                  </li>
                 </ul>
                 <p className="font-medium text-foreground">処理する情報</p>
                 <ul className="list-inside list-disc space-y-1 pl-2">

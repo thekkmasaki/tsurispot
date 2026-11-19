@@ -197,7 +197,7 @@ export const AI_GUIDE_URL = `${SITE_URL}/ai`;
 
 /** llms.txt / llms-full.txt 共通の「MCP / AI連携」セクション */
 export const MCP_SECTION = `## MCP / AI連携
-ツリスポは MCP（Model Context Protocol）サーバーを公開しています。Claude・ChatGPT などの AI アシスタントにコネクタとして追加すると、釣り場検索・潮汐・釣れる魚などを会話の中で直接調べられます。
+ツリスポは MCP（Model Context Protocol）サーバーを公開しています。Claude・ChatGPT などの AI アシスタントにコネクタとして追加すると、釣り場検索・潮汐・釣れる魚などを会話の中で直接調べられます。釣果は draft_catch_report で下書きを作り、確認ページでユーザーが写真を付けて投稿します。
 - エンドポイント: ${MCP_ENDPOINT}（Streamable HTTP・認証なし・読み取り専用）
 - 設定方法・ツール一覧・プライバシー: ${AI_GUIDE_URL}
 - サーバー情報: ${SITE_URL}/.well-known/mcp.json`;

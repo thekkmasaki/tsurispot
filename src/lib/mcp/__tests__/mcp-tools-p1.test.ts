@@ -320,6 +320,7 @@ describe("認証なしで使える（回帰）", () => {
     recommend_gear: { fish: "アジ" },
     get_fish_info: { fish: "アジ" },
     check_fishing_rules: { slug: "daikoku-fishing-facility" },
+    draft_catch_report: { slug: "daikoku-fishing-facility", fishName: "アジ", sizeCm: 20 },
   };
 
   it("全ツールにサンプル引数がある", () => {
@@ -357,6 +358,7 @@ describe("認証なしで使える（回帰）", () => {
       recommend_gear: { fish: "アジ" },
       get_fish_info: { fish: "アジ" },
       check_fishing_rules: { prefecture: "北海道" },
+      draft_catch_report: { slug: "daikoku-fishing-facility", fishName: "アジ" },
     };
     const DETAIL = ["get_spot_details", "get_tide", "get_fishing_forecast", "get_fish_info", "recommend_gear"];
     const longest = (v: unknown): number =>
