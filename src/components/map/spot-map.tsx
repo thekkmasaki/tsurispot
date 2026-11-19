@@ -57,9 +57,10 @@ const DEFAULT_ZOOM = 5;
 const PREF_LABEL_MAX_ZOOM = 7;
 // 県を1つ選んだとき、離島の数件に引っ張られて引きすぎにならないよう両端5%を外して範囲を取る。
 const SINGLE_PREF_TRIM = 0.05;
+const DEFAULT_VIEW_TRIM = 0.05;
 
 type MapView =
-  | { kind: 'bounds'; bounds: BoundsTuple; maxZoom: number }
+  | { kind: 'bounds'; bounds: BoundsTuple; maxZoom: number; minZoom?: number }
   | { kind: 'center'; center: [number, number]; zoom: number };
 
 const PREF_BY_NAME = new Map(prefectures.map((p) => [p.name, p]));
@@ -79,7 +80,10 @@ function ViewController({ view }: { view: MapView }) {
   const map = useMap();
   useEffect(() => {
     if (view.kind === 'bounds') {
-      map.fitBounds(view.bounds, { padding: [24, 24], maxZoom: view.maxZoom });
+      const bounds = L.latLngBounds(view.bounds);
+      const fitZoom = map.getBoundsZoom(bounds, false, L.point(48, 48));
+      const zoom = Math.max(view.minZoom ?? 0, Math.min(view.maxZoom, fitZoom));
+      map.setView(bounds.getCenter(), zoom);
     } else {
       map.setView(view.center, view.zoom);
     }
@@ -118,7 +122,8 @@ function PrefectureLabelMarkers({
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const cluster = (L as any).markerClusterGroup({
-      maxClusterRadius: 44,
+      // ラベルは横72pxあるので、それより近い県どうしは1つにまとめる（44だと重なって読めなかった）
+      maxClusterRadius: 80,
       showCoverageOnHover: false,
       spiderfyOnMaxZoom: false,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -765,12 +770,14 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
     };
   }, [filteredSpots]);
 
-  // 何も絞っていないときは全スポットが収まる範囲（北海道〜沖縄）を表示する。
+  // 何も絞っていないときは、スポットの分布に合わせた範囲を表示する。
   // 以前は固定の中心座標で、画面の形によって日本が片側に寄っていた。
+  // 全件を収めるとスマホ幅では一段引いた縮尺になり海と大陸ばかりになるので、両端5%を外した範囲の
+  // 中心に合わせ、縮尺は DEFAULT_ZOOM より引かない（沖縄・道東は少し動かせば見える）。
   const defaultView = useMemo((): MapView => {
-    const bounds = spotBounds(spots);
+    const bounds = spotBounds(spots, DEFAULT_VIEW_TRIM);
     return bounds
-      ? { kind: 'bounds', bounds, maxZoom: 10 }
+      ? { kind: 'bounds', bounds, maxZoom: 10, minZoom: DEFAULT_ZOOM }
       : { kind: 'center', center: DEFAULT_CENTER, zoom: DEFAULT_ZOOM };
   }, [spots]);
 
