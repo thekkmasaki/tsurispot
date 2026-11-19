@@ -1,0 +1,45 @@
+{
+  "name": "tsurispot",
+  "title": "ツリスポ（釣り場・潮汐・釣れる魚）",
+  "description": "日本全国4,000箇所以上の釣り場を検索し、潮汐（気象庁潮位表）・天気と釣り指数・釣れる魚・最近の釣果・近くの釣具店・おすすめの仕掛け・釣りのルールを調べられる読み取り専用の MCP サーバーです。",
+  "version": "1.0.0",
+  "websiteUrl": "https://tsurispot.com",
+  "documentationUrl": "https://tsurispot.com/ai",
+  "privacyPolicyUrl": "https://tsurispot.com/privacy#ai-connector",
+  "termsOfServiceUrl": "https://tsurispot.com/terms",
+  "supportUrl": "https://tsurispot.com/contact",
+  "contact": {
+    "url": "https://tsurispot.com/contact",
+    "email": "fishingspotjapan@gmail.com"
+  },
+  "iconUrl": "https://tsurispot.com/icon-512.png",
+  "language": "ja",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://tsurispot.com/api/mcp"
+    }
+  ],
+  "transport": "streamable-http",
+  "endpoint": "https://tsurispot.com/api/mcp",
+  "authentication": {
+    "type": "none"
+  },
+  "capabilities": {
+    "tools": true,
+    "readOnly": true
+  },
+  "tools": [
+    "search_spots",
+    "get_spot_details",
+    "find_nearby_spots",
+    "get_tide",
+    "get_fishing_forecast",
+    "get_catchable_fish",
+    "get_recent_catches",
+    "find_tackle_shops",
+    "recommend_gear",
+    "get_fish_info",
+    "check_fishing_rules"
+  ]
+}
