@@ -9,6 +9,7 @@ import {
 import { getTideDisplayMode, getTideStationForSpot } from "@/lib/tide/nearest-station";
 import { getTideInfoForDate } from "@/lib/tide/tide-info";
 import { todayJST } from "@/lib/activity";
+import { isSpotClosedOn } from "@/lib/spot-closed-days";
 import {
   clusterByDistance,
   pickHomeClusterIndex,
@@ -44,6 +45,10 @@ interface SpotIndexPayload {
   dates: string[];
   today: FishingIndexResult | null;
   weatherOk: boolean;
+  /** dates と同じ並びの定休日フラグ（施設の定休曜日。該当日は指数を出さない） */
+  closed?: boolean[];
+  /** 定休日の原文（例「毎週木曜日（祝日は開園）」）。closed に true があるときだけ返す */
+  closedNote?: string;
   /** 天気取得失敗時のみ: 今日の潮回り（天気に依存しない部分） */
   tideToday?: {
     tideLabel: string;
@@ -145,6 +150,7 @@ export async function POST(request: Request) {
     const results = forecast.days.map((d) =>
       calcFishingIndex(getTideInfoForDate(tideCode, d.date), d),
     );
+    const closed = forecast.days.map((d) => isSpotClosedOn(spot, d.date));
     return {
       slug: spot.slug,
       name: spot.name,
@@ -153,6 +159,9 @@ export async function POST(request: Request) {
       dates: forecast.days.map((d) => d.date),
       today: results[0] ?? null,
       weatherOk: true,
+      ...(closed.some(Boolean)
+        ? { closed, closedNote: spot.managementInfo?.closedDays }
+        : {}),
     };
   });
 

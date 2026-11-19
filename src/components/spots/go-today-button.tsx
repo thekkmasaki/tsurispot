@@ -144,11 +144,13 @@ export function GoTodayButton({
 
   // Determine count text
   const countText = useMemo(() => {
-    if (count <= 0 || !selectedDate) return null;
-    if (selectedIndex === 0) return `${count}人が今日行く予定`;
-    if (selectedIndex === 1) return `${count}人が明日行く予定`;
-    return `${count}人が${selectedDate.label}に行く予定`;
-  }, [count, selectedIndex, selectedDate]);
+    // count はこのブラウザ（localStorage）だけの記録で、他の人の予定は含まれない。
+    // 以前の「N人が今日行く予定」は他の利用者の人数に見えて事実と異なるため、自分の予定として表示する。
+    if (count <= 0 || !isGoing || !selectedDate) return null;
+    if (selectedIndex === 0) return "今日の予定に入れました";
+    if (selectedIndex === 1) return "明日の予定に入れました";
+    return `${selectedDate.label}の予定に入れました`;
+  }, [count, isGoing, selectedIndex, selectedDate]);
 
   // aria-label for the toggle button
   const ariaLabel = useMemo(() => {
