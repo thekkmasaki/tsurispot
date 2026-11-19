@@ -8,7 +8,7 @@ const SpotMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-[60vh] w-full animate-pulse rounded-lg bg-muted sm:h-[70vh] md:h-[80vh]" />
+      <div className="map-viewport-h w-full animate-pulse rounded-lg bg-muted" />
     ),
   }
 );

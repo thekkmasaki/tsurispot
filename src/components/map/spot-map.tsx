@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster';
@@ -18,6 +18,17 @@ import { markerIconHtml, SPOT_TYPE_COLORS, CROWD_LEVEL_HEX } from '@/lib/map-mar
 import { getFavorites } from '@/hooks/use-favorites';
 import { SpotSearch } from '@/components/map/spot-search';
 import { SpotMapList } from '@/components/map/spot-map-list';
+import { prefectures } from '@/lib/data/prefectures';
+import { spotBounds, prefectureLabels } from '@/lib/geo/spot-bounds';
+import type { BoundsTuple, PrefectureLabel } from '@/lib/geo/spot-bounds';
+import {
+  MAP_PREFECTURE_CHANGED_EVENT,
+  MAP_SELECT_PREFECTURE_EVENT,
+} from '@/components/map/map-events';
+import type {
+  MapPrefectureChangedDetail,
+  MapSelectPrefectureDetail,
+} from '@/components/map/map-events';
 import { MapAffiliateRecommend } from '@/components/map/map-affiliate-recommend';
 import {
   Sheet,
@@ -41,14 +52,18 @@ L.Icon.Default.mergeOptions({
 const DEFAULT_CENTER: [number, number] = [36.5, 137.0];
 const DEFAULT_ZOOM = 5;
 
-const prefectureCenters: Record<string, { center: [number, number]; zoom: number }> = {
-  '神奈川県': { center: [35.35, 139.55], zoom: 10 },
-  '東京都': { center: [35.68, 139.77], zoom: 10 },
-  '千葉県': { center: [35.33, 140.18], zoom: 9 },
-  '大阪府': { center: [34.55, 135.35], zoom: 10 },
-  '兵庫県': { center: [34.70, 135.15], zoom: 9 },
-  '京都府': { center: [35.55, 135.30], zoom: 9 },
-};
+// これ未満まで引いたら、スポット単位のピンをやめて「県名＋件数」のラベルに切り替える。
+// 全国表示で数字だけの丸が並び、どこの県か分からなかった（2026-11 UX監査）。
+const PREF_LABEL_MAX_ZOOM = 7;
+// 県を1つ選んだとき、離島の数件に引っ張られて引きすぎにならないよう両端5%を外して範囲を取る。
+const SINGLE_PREF_TRIM = 0.05;
+const DEFAULT_VIEW_TRIM = 0.05;
+
+type MapView =
+  | { kind: 'bounds'; bounds: BoundsTuple; maxZoom: number; minZoom?: number }
+  | { kind: 'center'; center: [number, number]; zoom: number };
+
+const PREF_BY_NAME = new Map(prefectures.map((p) => [p.name, p]));
 
 const REGION_GROUPS: { label: string; prefectures: string[] }[] = [
   { label: '北海道', prefectures: ['北海道'] },
@@ -61,11 +76,92 @@ const REGION_GROUPS: { label: string; prefectures: string[] }[] = [
   { label: '九州沖縄', prefectures: ['福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'] },
 ];
 
-function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
+function ViewController({ view }: { view: MapView }) {
   const map = useMap();
-  useMemo(() => {
-    map.setView(center, zoom);
-  }, [map, center, zoom]);
+  useEffect(() => {
+    if (view.kind === 'bounds') {
+      const bounds = L.latLngBounds(view.bounds);
+      const fitZoom = map.getBoundsZoom(bounds, false, L.point(48, 48));
+      const zoom = Math.max(view.minZoom ?? 0, Math.min(view.maxZoom, fitZoom));
+      map.setView(bounds.getCenter(), zoom);
+    } else {
+      map.setView(view.center, view.zoom);
+    }
+  }, [map, view]);
+  return null;
+}
+
+function ZoomWatcher({ onZoom }: { onZoom: (zoom: number) => void }) {
+  const map = useMapEvents({
+    zoomend: () => onZoom(map.getZoom()),
+  });
+  return null;
+}
+
+function prefLabelIconHtml(label: string, count: number): string {
+  return (
+    '<div style="display:flex;align-items:center;justify-content:center;gap:4px;width:72px;height:26px;' +
+    'border-radius:9999px;background:#1d4ed8;color:#fff;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);' +
+    'font-size:11px;font-weight:700;white-space:nowrap;line-height:1">' +
+    `${escapeHtml(label)}<span style="font-weight:600;opacity:.9;font-variant-numeric:tabular-nums">${count}</span></div>`
+  );
+}
+
+/**
+ * 引いた地図で出す「県名＋件数」ラベル。タップするとその県に絞り込んで寄る。
+ * 関東・近畿のように密集する所は markercluster が「N県・合計件数」にまとめる。
+ */
+function PrefectureLabelMarkers({
+  labels,
+  onSelect,
+}: {
+  labels: PrefectureLabel[];
+  onSelect: (prefecture: string) => void;
+}) {
+  const map = useMap();
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const cluster = (L as any).markerClusterGroup({
+      // ラベルは横72pxあるので、それより近い県どうしは1つにまとめる（44だと重なって読めなかった）
+      maxClusterRadius: 80,
+      showCoverageOnHover: false,
+      spiderfyOnMaxZoom: false,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      iconCreateFunction: (c: any) => {
+        const total = c
+          .getAllChildMarkers()
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .reduce((sum: number, mk: any) => sum + (mk.spotCount || 0), 0);
+        return L.divIcon({
+          html: prefLabelIconHtml(`${c.getChildCount()}県`, total),
+          className: '',
+          iconSize: [72, 26],
+          iconAnchor: [36, 13],
+        });
+      },
+    });
+    for (const label of labels) {
+      const short = PREF_BY_NAME.get(label.name)?.nameShort ?? label.name;
+      const marker = L.marker([label.lat, label.lng], {
+        icon: L.divIcon({
+          html: prefLabelIconHtml(short, label.count),
+          className: '',
+          iconSize: [72, 26],
+          iconAnchor: [36, 13],
+        }),
+        title: `${label.name} ${label.count}件`,
+        keyboard: true,
+      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (marker as any).spotCount = label.count;
+      marker.on('click', () => onSelect(label.name));
+      cluster.addLayer(marker);
+    }
+    map.addLayer(cluster);
+    return () => {
+      map.removeLayer(cluster);
+    };
+  }, [labels, map, onSelect]);
   return null;
 }
 
@@ -240,8 +336,10 @@ function HeatLayer({
   return null;
 }
 
-function ClusteredSpotMarkers({ spots }: { spots: MapSpot[] }) {
+function ClusteredSpotMarkers({ spots, hidden }: { spots: MapSpot[]; hidden: boolean }) {
   const map = useMap();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const clusterRef = useRef<any>(null);
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -292,11 +390,24 @@ function ClusteredSpotMarkers({ spots }: { spots: MapSpot[] }) {
       cluster.addLayer(marker);
     });
 
-    map.addLayer(cluster);
+    clusterRef.current = cluster;
     return () => {
       map.removeLayer(cluster);
+      clusterRef.current = null;
     };
   }, [spots, map]);
+
+  // 県名ラベル表示中（引いた地図）はスポットのピンを地図から外す。作り直さず付け外しだけ行う。
+  // （上の effect が spots 変更で作り直した直後にも走るよう、spots を依存に入れている）
+  useEffect(() => {
+    const cluster = clusterRef.current;
+    if (!cluster) return;
+    if (hidden) {
+      map.removeLayer(cluster);
+    } else if (!map.hasLayer(cluster)) {
+      map.addLayer(cluster);
+    }
+  }, [spots, hidden, map]);
 
   // お気に入りクリックのイベントデリゲーション
   useEffect(() => {
@@ -347,6 +458,8 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
   const [showAllFish, setShowAllFish] = useState(false);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
+  const [locateError, setLocateError] = useState<string | null>(null);
+  const [zoom, setZoom] = useState(DEFAULT_ZOOM);
   const [nearbyMode, setNearbyMode] = useState(false);
   // スマホでは地図を先に見せる（絞り込みは開いて使う）。2026-11 ユーザー指摘で既定を閉に
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -422,25 +535,41 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // 位置情報をすでに許可済みの人だけ、開いた時点で「現在地の近く」にする。
+  // 未許可の人に、ページを開いた瞬間に許可ダイアログを出すのはやめた（2026-11 UX監査）。
   useEffect(() => {
-    if (navigator.geolocation) {
-      setLocating(true);
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setUserLocation([pos.coords.latitude, pos.coords.longitude]);
-          setNearbyMode(true);
-          setLocating(false);
-        },
-        () => {
-          setLocating(false);
-        },
-        { enableHighAccuracy: true, timeout: 10000 }
-      );
-    }
+    if (!navigator.geolocation || !navigator.permissions?.query) return;
+    let cancelled = false;
+    navigator.permissions
+      .query({ name: 'geolocation' })
+      .then((status) => {
+        if (cancelled || status.state !== 'granted') return;
+        setLocating(true);
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            if (cancelled) return;
+            setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+            setNearbyMode(true);
+            setLocating(false);
+          },
+          () => {
+            if (!cancelled) setLocating(false);
+          },
+          { enableHighAccuracy: true, timeout: 10000 }
+        );
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleLocate = useCallback(() => {
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation) {
+      setLocateError('このブラウザでは現在地を取得できません。');
+      return;
+    }
+    setLocateError(null);
     setLocating(true);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -452,8 +581,13 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
         setShowAllFish(false);
         setLocating(false);
       },
-      () => {
+      (err) => {
         setLocating(false);
+        setLocateError(
+          err.code === err.PERMISSION_DENIED
+            ? '現在地を取得できませんでした。ブラウザの設定で位置情報を許可してください。'
+            : '現在地を取得できませんでした。電波の良い場所でもう一度お試しください。'
+        );
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
@@ -487,6 +621,42 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
       return next;
     });
   };
+
+  // 注目エリアのチップ・県名ラベルから呼ぶ。その県だけを選び、もう一度選ぶと解除する。
+  const selectOnlyPrefecture = useCallback((pref: string) => {
+    setNearbyMode(false);
+    setSelectedAreas(new Set());
+    setSelectedFish(new Set());
+    setShowAllFish(false);
+    setShowAllAreas(false);
+    setSelectedSpot(null);
+    setSearchNotice(null);
+    setSelectedPrefectures((prev) =>
+      prev.size === 1 && prev.has(pref) ? new Set() : new Set([pref])
+    );
+  }, []);
+
+  // 注目エリアのチップ（地図の外・サーバー描画のリンク）からの選択を受ける。
+  // preventDefault することで、チップ側は「地図が処理した」と分かりリンク遷移を止める。
+  useEffect(() => {
+    const onSelect = (e: Event) => {
+      const pref = (e as CustomEvent<MapSelectPrefectureDetail>).detail?.prefecture;
+      if (!pref) return;
+      e.preventDefault();
+      selectOnlyPrefecture(pref);
+    };
+    window.addEventListener(MAP_SELECT_PREFECTURE_EVENT, onSelect);
+    return () => window.removeEventListener(MAP_SELECT_PREFECTURE_EVENT, onSelect);
+  }, [selectOnlyPrefecture]);
+
+  // 選択中の県をチップ側へ知らせる（選択中の見た目に使う）。
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent<MapPrefectureChangedDetail>(MAP_PREFECTURE_CHANGED_EVENT, {
+        detail: { prefectures: nearbyMode ? [] : Array.from(selectedPrefectures) },
+      })
+    );
+  }, [selectedPrefectures, nearbyMode]);
 
   const toggleArea = (area: string) => {
     setSelectedAreas((prev) => {
@@ -600,37 +770,46 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
     };
   }, [filteredSpots]);
 
-  const { mapCenter, mapZoom } = useMemo((): {
-    mapCenter: [number, number];
-    mapZoom: number;
-  } => {
+  // 何も絞っていないときは、スポットの分布に合わせた範囲を表示する。
+  // 以前は固定の中心座標で、画面の形によって日本が片側に寄っていた。
+  // 全件を収めるとスマホ幅では一段引いた縮尺になり海と大陸ばかりになるので、両端5%を外した範囲の
+  // 中心に合わせ、縮尺は DEFAULT_ZOOM より引かない（沖縄・道東は少し動かせば見える）。
+  const defaultView = useMemo((): MapView => {
+    const bounds = spotBounds(spots, DEFAULT_VIEW_TRIM);
+    return bounds
+      ? { kind: 'bounds', bounds, maxZoom: 10, minZoom: DEFAULT_ZOOM }
+      : { kind: 'center', center: DEFAULT_CENTER, zoom: DEFAULT_ZOOM };
+  }, [spots]);
+
+  const mapView = useMemo((): MapView => {
     if (nearbyMode && userLocation) {
-      if (locationFilteredSpots.length === spots.length) {
-        return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
-      }
-      return { mapCenter: userLocation, mapZoom: 12 };
+      if (locationFilteredSpots.length === spots.length) return defaultView;
+      return { kind: 'center', center: userLocation, zoom: 12 };
     }
-    if (selectedPrefectures.size === 0) {
-      return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
-    }
-    if (selectedPrefectures.size === 1) {
-      const pref = Array.from(selectedPrefectures)[0];
-      if (prefectureCenters[pref]) {
-        return {
-          mapCenter: prefectureCenters[pref].center,
-          mapZoom: prefectureCenters[pref].zoom,
-        };
-      }
-    }
-    if (filteredSpots.length > 0) {
-      const lats = filteredSpots.map((s) => s.latitude);
-      const lngs = filteredSpots.map((s) => s.longitude);
-      const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
-      const centerLng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
-      return { mapCenter: [centerLat, centerLng], mapZoom: 8 };
-    }
-    return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
-  }, [selectedPrefectures, filteredSpots, nearbyMode, userLocation, locationFilteredSpots, spots]);
+    if (selectedPrefectures.size === 0) return defaultView;
+    const trim =
+      selectedPrefectures.size === 1 && selectedAreas.size === 0 ? SINGLE_PREF_TRIM : 0;
+    const bounds = spotBounds(filteredSpots, trim);
+    return bounds ? { kind: 'bounds', bounds, maxZoom: 13 } : defaultView;
+  }, [
+    selectedPrefectures,
+    selectedAreas,
+    filteredSpots,
+    nearbyMode,
+    userLocation,
+    locationFilteredSpots,
+    spots,
+    defaultView,
+  ]);
+
+  // 県を選んでいない全国表示のときだけ、引いた地図で県名ラベルに切り替える。
+  const showPrefLabels =
+    zoom < PREF_LABEL_MAX_ZOOM && selectedPrefectures.size === 0 && !nearbyMode && !selectedSpot;
+  const prefLabels = useMemo(() => prefectureLabels(filteredSpots), [filteredSpots]);
+  const singleSelectedPref =
+    !nearbyMode && selectedPrefectures.size === 1
+      ? PREF_BY_NAME.get(Array.from(selectedPrefectures)[0])
+      : undefined;
 
   const nearbyEmpty =
     nearbyMode && userLocation && locationFilteredSpots.length === spots.length;
@@ -973,13 +1152,66 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
         </div>
       )}
 
+      {locateError && (
+        <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800" role="alert">
+          {locateError}
+        </p>
+      )}
+      {nearbyMode && !locating && (
+        <p className="text-xs font-medium text-blue-700" role="status">
+          {nearbyEmpty
+            ? '現在地から半径30km内にスポットがないため、全国を表示しています。'
+            : `現在地から半径30km内の${filteredSpots.length}件を表示しています。`}
+        </p>
+      )}
+      {singleSelectedPref && (
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" role="status">
+          <span className="font-medium">
+            {singleSelectedPref.name}の{filteredSpots.length.toLocaleString()}件を表示中
+          </span>
+          <a
+            href={`/prefecture/${singleSelectedPref.slug}`}
+            className="font-bold text-primary underline-offset-2 hover:underline"
+          >
+            {singleSelectedPref.name}の一覧を見る →
+          </a>
+        </p>
+      )}
+
+      <div className="relative">
+        {/* 現在地ボタンは絞り込みパネルの中にしか無く、閉じた状態では見つけられなかった（2026-11 UX監査）。 */}
+        <button
+          type="button"
+          onClick={() => {
+            if (nearbyMode) {
+              setNearbyMode(false);
+            } else {
+              handleLocate();
+            }
+          }}
+          disabled={locating}
+          aria-pressed={nearbyMode}
+          className={`absolute right-2.5 top-2.5 z-[1000] flex min-h-[40px] items-center gap-1.5 rounded-full border px-3 py-2 text-xs font-bold shadow-md transition-colors ${
+            nearbyMode
+              ? 'border-blue-600 bg-blue-600 text-white'
+              : 'border-border bg-white text-gray-800 hover:bg-blue-50'
+          }`}
+        >
+          {locating ? (
+            <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+          ) : (
+            <Navigation className="size-4" aria-hidden="true" />
+          )}
+          {nearbyMode ? '現在地の近くを表示中' : '現在地の近く'}
+        </button>
       <MapContainer
         center={DEFAULT_CENTER}
         zoom={DEFAULT_ZOOM}
-        className="h-[60vh] w-full rounded-lg sm:h-[70vh] md:h-[80vh]"
+        className="map-viewport-h w-full rounded-lg"
         scrollWheelZoom={true}
       >
-        <MapController center={mapCenter} zoom={mapZoom} />
+        <ViewController view={mapView} />
+        <ZoomWatcher onZoom={setZoom} />
         <FlyToHandler target={flyTarget} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -1005,7 +1237,10 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
           </>
         )}
         <HeatLayer spots={filteredSpots} enabled={heatEnabled} catchCounts={catchCounts} />
-        <ClusteredSpotMarkers spots={filteredSpots} />
+        <ClusteredSpotMarkers spots={filteredSpots} hidden={showPrefLabels} />
+        {showPrefLabels && (
+          <PrefectureLabelMarkers labels={prefLabels} onSelect={selectOnlyPrefecture} />
+        )}
         {selectedSpot && (
           <Marker
             key={selectedSpot.id}
@@ -1028,6 +1263,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
           </Marker>
         )}
       </MapContainer>
+      </div>
 
       <Sheet open={listOpen} onOpenChange={setListOpen}>
         <SheetContent

@@ -79,7 +79,7 @@ export function LocationPromptBanner() {
 
   return (
     // z-40: 一時UI層はナビ(z-50)より上に被せない（旧z-[60]は廃止）
-    <div className="fixed bottom-[68px] left-0 right-0 z-40 animate-in slide-in-from-bottom-4 duration-300 sm:hidden">
+    <div className="fixed bottom-[calc(68px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 animate-in slide-in-from-bottom-4 duration-300 sm:hidden">
       <div className="mx-2 rounded-2xl border border-sky-200 bg-white p-3 shadow-lg">
         <div className="flex items-start gap-3">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-100">

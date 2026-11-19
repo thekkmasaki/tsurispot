@@ -62,7 +62,7 @@ export function CompareBar() {
   if (!canShow) return null;
 
   return (
-    <div className="fixed bottom-[60px] left-0 right-0 z-40 border-t bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur-lg md:bottom-0">
+    <div className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 border-t bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur-lg md:bottom-0">
       <div className="container mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 text-sm">
           <GitCompareArrows className="size-4 text-primary" />
