@@ -24,15 +24,25 @@ interface SpotSearchFilterProps {
   regionGroups: RegionGroup[];
   ungroupedSpots: ListSpot[];
   totalSpots: number;
+  /** 全件を1ページで載せている一覧（/prefecture/[slug]/all）。「もっと見る」の横に出す */
+  allHref?: string;
 }
+
+/** 初期表示と「もっと見る」1回あたりの件数 */
+const PAGE_SIZE = 30;
 
 export function SpotSearchFilter({
   prefName,
   regionGroups,
   ungroupedSpots,
   totalSpots,
+  allHref,
 }: SpotSearchFilterProps) {
   const [query, setQuery] = useState("");
+  // 並び順: エリア別（既定）／評価の高い順（エリアをまたいだ1本の一覧）
+  const [sort, setSort] = useState<"area" | "rating">("area");
+  // 全件（多い県は200件超）を最初から描画しない。検索中は絞り込み結果を全件出す。
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const normalizedQuery = query.trim().toLowerCase();
 
@@ -84,6 +94,30 @@ export function SpotSearchFilter({
   const filteredAreaLinks = useMemo(
     () => filteredRegionGroups.filter((g) => g.region.slug !== null),
     [filteredRegionGroups],
+  );
+
+  const limit = normalizedQuery ? Infinity : visibleCount;
+  const hiddenCount = Math.max(0, filteredSpotCount - limit);
+
+  // エリア別表示: 上のエリアから順に limit 件まで
+  const visibleGroups = useMemo(() => {
+    let remaining = limit;
+    const out: RegionGroup[] = [];
+    for (const g of filteredRegionGroups) {
+      if (remaining <= 0) break;
+      out.push(remaining >= g.spots.length ? g : { region: g.region, spots: g.spots.slice(0, remaining) });
+      remaining -= g.spots.length;
+    }
+    return { groups: out, ungrouped: remaining > 0 ? filteredUngrouped.slice(0, remaining) : [] };
+  }, [filteredRegionGroups, filteredUngrouped, limit]);
+
+  // 評価順表示: エリアをまたいで評価の高い順（同点は名前順で安定させる）
+  const ratingSorted = useMemo(
+    () =>
+      [...filteredRegionGroups.flatMap((g) => g.spots), ...filteredUngrouped]
+        .sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name, "ja"))
+        .slice(0, limit),
+    [filteredRegionGroups, filteredUngrouped, limit],
   );
 
   return (
@@ -150,20 +184,44 @@ export function SpotSearchFilter({
       {/* Spots grouped by area */}
       {filteredRegionGroups.length > 0 || filteredUngrouped.length > 0 ? (
         <section className="mb-8 sm:mb-10">
-          <h2 className="mb-4 text-base font-bold sm:text-lg">
-            エリア別 釣りスポット一覧
-            {normalizedQuery ? (
-              <span>（{filteredSpotCount}/{totalSpots}件）</span>
-            ) : (
-              <span>（全{totalSpots}件）</span>
-            )}
-          </h2>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <h2 className="text-base font-bold sm:text-lg">
+              {sort === "area" ? "エリア別 釣りスポット一覧" : "釣りスポット一覧（評価の高い順）"}
+              {normalizedQuery ? (
+                <span>（{filteredSpotCount}/{totalSpots}件）</span>
+              ) : (
+                <span>（全{totalSpots}件）</span>
+              )}
+            </h2>
+            <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              並び順
+              <select
+                value={sort}
+                onChange={(e) => {
+                  setSort(e.target.value as "area" | "rating");
+                  setVisibleCount(PAGE_SIZE);
+                }}
+                className="rounded-md border border-input bg-background px-2 py-1.5 text-sm text-foreground"
+              >
+                <option value="area">エリア別</option>
+                <option value="rating">評価の高い順</option>
+              </select>
+            </label>
+          </div>
 
-          {filteredRegionGroups.map(({ region: r, spots: areaSpots }) => (
+          {sort === "rating" && (
+            <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {ratingSorted.map((spot) => (
+                <SpotCard key={spot.id} spot={spot} />
+              ))}
+            </div>
+          )}
+
+          {sort === "area" && visibleGroups.groups.map(({ region: r, spots: areaSpots }) => (
             <div key={r.id} className="mb-8">
               <h3 className="mb-3 flex items-center gap-2 border-l-4 border-primary pl-3 text-sm font-bold sm:text-base">
                 <MapPin className="size-4 text-primary" />
-                {r.areaName}（{areaSpots.length}件）
+                {r.areaName}（{filteredRegionGroups.find((g) => g.region.id === r.id)?.spots.length ?? areaSpots.length}件）
               </h3>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {areaSpots.map((spot) => (
@@ -173,17 +231,36 @@ export function SpotSearchFilter({
             </div>
           ))}
 
-          {filteredUngrouped.length > 0 && (
+          {sort === "area" && visibleGroups.ungrouped.length > 0 && (
             <div className="mb-8">
               <h3 className="mb-3 flex items-center gap-2 border-l-4 border-muted-foreground pl-3 text-sm font-bold sm:text-base">
                 <MapPin className="size-4" />
                 その他のエリア（{filteredUngrouped.length}件）
               </h3>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredUngrouped.map((spot) => (
+                {visibleGroups.ungrouped.map((spot) => (
                   <SpotCard key={spot.id} spot={spot} />
                 ))}
               </div>
+            </div>
+          )}
+
+          {hiddenCount > 0 && (
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+                className="rounded-lg border border-input bg-background px-6 py-3 text-sm font-medium shadow-sm hover:bg-muted"
+              >
+                もっと見る（残り{hiddenCount}件）
+              </button>
+              {allHref && (
+                <p className="mt-3 text-sm">
+                  <Link prefetch={false} href={allHref} className="text-primary underline-offset-2 hover:underline">
+                    {prefName}の全{totalSpots}件を一覧で見る
+                  </Link>
+                </p>
+              )}
             </div>
           )}
         </section>

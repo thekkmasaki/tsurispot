@@ -1357,6 +1357,7 @@ export const blogPosts: BlogPost[] = [
     category: "technique",
     tags: ["明石", "タチウオ", "太刀魚", "テンヤ", "ワインド", "ウキ釣り", "兵庫県", "秋釣り", "夜釣り"],
     publishedAt: "2026-02-23",
+    updatedAt: "2026-09-08", // 「2026年秋版」への改訂日（git履歴上の本文最終更新）
     relatedSpots: [
       "akashi-shinhato",
       "futami-port-bouhatei",
@@ -2590,9 +2591,18 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 const fetchBlogPostBySlugCached = unstable_cache(
   async (slug: string): Promise<BlogPost | undefined> => {
     const { fetchMicroCMSBlogBySlug } = await import("@/lib/microcms");
-    const cmsPost = await fetchMicroCMSBlogBySlug(slug);
-    if (cmsPost) return cmsPost;
-    return blogPosts.find((post) => post.slug === slug);
+    const staticPost = blogPosts.find((post) => post.slug === slug);
+    try {
+      const cmsPost = await fetchMicroCMSBlogBySlug(slug);
+      if (cmsPost) return cmsPost;
+    } catch (e) {
+      // microCMS の取得失敗（通信・5xx・タイムアウト）。静的記事があればそれを返す。
+      // 無ければ投げ直す: undefined を返すと「記事なし」として notFound() が ISR に
+      // 最大1時間キャッシュされる。例外なら unstable_cache に保存されず、ISR は前回の
+      // 正常なページを出し続け、次のリクエストで再取得される。
+      if (!staticPost) throw e;
+    }
+    return staticPost;
   },
   ["blog-post-by-slug"],
   { revalidate: 3600, tags: ["blog-posts"] }
