@@ -9,7 +9,8 @@ import type { ListSpot } from "@/types";
 
 interface RegionInfo {
   id: string;
-  slug: string;
+  /** /area/[slug] の代表 slug。エリアページを持たない市区町村は null（リンクを出さない） */
+  slug: string | null;
   areaName: string;
 }
 
@@ -20,7 +21,6 @@ interface RegionGroup {
 
 interface SpotSearchFilterProps {
   prefName: string;
-  prefRegions: RegionInfo[];
   regionGroups: RegionGroup[];
   ungroupedSpots: ListSpot[];
   totalSpots: number;
@@ -28,7 +28,6 @@ interface SpotSearchFilterProps {
 
 export function SpotSearchFilter({
   prefName,
-  prefRegions,
   regionGroups,
   ungroupedSpots,
   totalSpots,
@@ -36,13 +35,6 @@ export function SpotSearchFilter({
   const [query, setQuery] = useState("");
 
   const normalizedQuery = query.trim().toLowerCase();
-
-  const filteredRegions = useMemo(() => {
-    if (!normalizedQuery) return prefRegions;
-    return prefRegions.filter((r) =>
-      r.areaName.toLowerCase().includes(normalizedQuery)
-    );
-  }, [prefRegions, normalizedQuery]);
 
   const filteredRegionGroups = useMemo(() => {
     if (!normalizedQuery) return regionGroups;
@@ -84,14 +76,15 @@ export function SpotSearchFilter({
     return groupCount + filteredUngrouped.length;
   }, [filteredRegionGroups, filteredUngrouped]);
 
-  // エリアカードに表示するスポット数（フィルタ時）
-  const regionSpotCounts = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const g of filteredRegionGroups) {
-      counts.set(g.region.id, g.spots.length);
-    }
-    return counts;
-  }, [filteredRegionGroups]);
+  // エリア一覧カード: スポットが1件以上あり、エリアページを持つ市区町村だけ（0件エリアは出さない）
+  const areaLinks = useMemo(
+    () => regionGroups.filter((g) => g.region.slug !== null).length,
+    [regionGroups],
+  );
+  const filteredAreaLinks = useMemo(
+    () => filteredRegionGroups.filter((g) => g.region.slug !== null),
+    [filteredRegionGroups],
+  );
 
   return (
     <>
@@ -117,43 +110,39 @@ export function SpotSearchFilter({
         </div>
         {normalizedQuery && (
           <p className="mt-2 text-xs text-muted-foreground">
-            「{query}」の検索結果: エリア {filteredRegions.length}件、スポット {filteredSpotCount}件
+            「{query}」の検索結果: エリア {filteredAreaLinks.length}件、スポット {filteredSpotCount}件
           </p>
         )}
       </div>
 
       {/* Area list */}
-      {filteredRegions.length > 0 && (
+      {filteredAreaLinks.length > 0 && (
         <section className="mb-6 sm:mb-8">
           <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
             <MapPin className="size-5" />
             {prefName}のエリア一覧
             {normalizedQuery && (
               <span className="text-sm font-normal text-muted-foreground">
-                （{filteredRegions.length}/{prefRegions.length}件）
+                （{filteredAreaLinks.length}/{areaLinks}件）
               </span>
             )}
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredRegions.map((r) => {
-              const count = regionSpotCounts.get(r.id) ??
-                regionGroups.find((g) => g.region.id === r.id)?.spots.length ?? 0;
-              return (
-                <Link prefetch={false} key={r.id} href={`/area/${r.slug}`}>
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="p-4">
-                      <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
-                        <MapPin className="mr-1 inline size-4" />
-                        {r.areaName}
-                      </h3>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {count}件のスポット
-                      </p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              );
-            })}
+            {filteredAreaLinks.map(({ region: r, spots }) => (
+              <Link prefetch={false} key={r.id} href={`/area/${r.slug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-4">
+                    <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
+                      <MapPin className="mr-1 inline size-4" />
+                      {r.areaName}
+                    </h3>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {spots.length}件のスポット
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
           </div>
         </section>
       )}
@@ -174,7 +163,7 @@ export function SpotSearchFilter({
             <div key={r.id} className="mb-8">
               <h3 className="mb-3 flex items-center gap-2 border-l-4 border-primary pl-3 text-sm font-bold sm:text-base">
                 <MapPin className="size-4 text-primary" />
-                {r.areaName}エリア（{areaSpots.length}件）
+                {r.areaName}（{areaSpots.length}件）
               </h3>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {areaSpots.map((spot) => (

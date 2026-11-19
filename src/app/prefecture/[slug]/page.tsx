@@ -22,12 +22,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
-import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies, getFishSeasons } from "@/lib/data/fish";
 import { REGION_NAME_TO_SLUG } from "@/lib/data/fish-regional-seasons";
 import type { RegionSlug } from "@/types";
 import { toListSpot } from "@/lib/data/list-spot";
+import { getPrefectureAreaGroups } from "@/lib/data/area-groups";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from "@/lib/data/prefecture-info";
 import { getFishSlugByName } from "@/lib/data";
@@ -57,37 +57,8 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-function getRegionsForPrefecture(prefectureName: string) {
-  return regions.filter((r) => r.prefecture === prefectureName);
-}
-
 function getSpotsForPrefecture(prefectureName: string) {
   return fishingSpots.filter((s) => s.region.prefecture === prefectureName);
-}
-
-function getSpotsByRegion(prefectureName: string) {
-  const prefRegions = getRegionsForPrefecture(prefectureName);
-  const regionMap = new Map<
-    string,
-    { region: (typeof regions)[0]; spots: typeof fishingSpots }
-  >();
-
-  for (const r of prefRegions) {
-    const regionSpots = fishingSpots.filter((s) => s.region.id === r.id);
-    if (regionSpots.length > 0) {
-      regionMap.set(r.id, { region: r, spots: regionSpots });
-    }
-  }
-
-  // Region IDにマッチしないスポットを "その他" にまとめる
-  const allPrefSpots = getSpotsForPrefecture(prefectureName);
-  const regionedIds = new Set<string>();
-  for (const [, { spots }] of regionMap) {
-    for (const s of spots) regionedIds.add(s.id);
-  }
-  const ungroupedSpots = allPrefSpots.filter((s) => !regionedIds.has(s.id));
-
-  return { regionMap, ungroupedSpots };
 }
 
 function getCatchableFishForPrefecture(prefectureName: string) {
@@ -364,7 +335,6 @@ export default async function PrefecturePage({ params }: PageProps) {
   if (!pref) permanentRedirect("/prefecture");
 
   const spots = getSpotsForPrefecture(pref.name);
-  const prefRegions = getRegionsForPrefecture(pref.name);
   const catchableFish = getCatchableFishForPrefecture(pref.name);
   // この県の海釣りスポットが最寄りとする潮汐観測地点（/tides/[station] への導線。内陸県は空）
   const tideStations = getStationsForPrefecture(pref.name)
@@ -373,7 +343,7 @@ export default async function PrefecturePage({ params }: PageProps) {
   const prefInfo = getPrefectureInfoBySlug(slug);
   const prefFeatureLinks = getFeaturesForPref(pref.name);
 
-  const { regionMap, ungroupedSpots } = getSpotsByRegion(pref.name);
+  const { areaGroups, ungroupedSpots } = getPrefectureAreaGroups(pref.name);
 
   // この都道府県に関連するエリアガイド
   const prefAreaGuides = getAreaGuidesForPrefecture(pref.name);
@@ -829,9 +799,8 @@ export default async function PrefecturePage({ params }: PageProps) {
           旧位置は TOP10・注目・穴場・今月TOP5 等の後＝ページ中盤だった） */}
       <SpotSearchFilter
         prefName={pref.name}
-        prefRegions={prefRegions.map((r) => ({ id: r.id, slug: r.slug, areaName: r.areaName }))}
-        regionGroups={Array.from(regionMap.values()).map(({ region: r, spots: s }) => ({
-          region: { id: r.id, slug: r.slug, areaName: r.areaName },
+        regionGroups={areaGroups.map(({ area, spots: s }) => ({
+          region: area,
           spots: s.map(toListSpot),
         }))}
         ungroupedSpots={ungroupedSpots.map(toListSpot)}

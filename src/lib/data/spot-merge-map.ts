@@ -432,4 +432,10 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "okura-kaigan": "akashi-okura-coast", // GSC直近3か月クリック 11 < 統合元 41 のため勝者を入れ替え（2026-11）
   "awaji-kariya-gyokou-a13": "awaji-kariya-gyokou-k8", // GSC直近3か月クリック 6 < 統合元 32 のため勝者を入れ替え（2026-11）
   "shizuura-port": "shizuura-gyokou", // GSC直近3か月クリック 11 < 統合元 68 のため勝者を入れ替え（2026-11）
+  // 2026-11 UX監査: 兵庫県ページで同じ場所が別名で複数回出ていた（「淡路島・」接頭辞違い）。
+  // 名称が5文字未満のため自動判定（isSameSpotName）の対象外。勝者は一般名・魚種数の多い側。
+  "awaji-nushima-k8": "nushima", // 淡路島・沼島 → 沼島：同じ島（同住所 南あわじ市沼島）。沼島漁港は港単体のため別扱い
+  "awaji-tsubasa-kou-k8": "tsubasa-port", // 淡路島・翼港 → 翼港：淡路交流の翼港（夢舞台）。統合元は住所が岩屋で約3kmずれて登録
+  "awaji-fukura-kou-k8": "fukura-kou", // 淡路島・福良港 → 福良港：同一港（南あわじ市福良）。福良港護岸は別扱い
+  "amagasaki-tsuuri-park-k8": "amagasaki-fishing-park", // 尼崎魚つり公園 → 尼崎市立魚つり公園：同一施設（尼崎市平左衛門町）。統合元は座標が約2kmずれて登録
 };

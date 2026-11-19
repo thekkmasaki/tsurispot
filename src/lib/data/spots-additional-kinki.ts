@@ -314,7 +314,7 @@ export const additionalSpotsKinki: FishingSpot[] = [
     longitude: 135.0661,
     address: "〒655-0892 兵庫県神戸市垂水区平磯1丁目1-66",
     accessInfo: "JR垂水駅から徒歩約15分。第二神明道路名谷ICから約10分。",
-    region: region("r25"),
+    region: region("r401"),
     spotType: "breakwater",
     difficulty: "beginner",
     isFree: false,

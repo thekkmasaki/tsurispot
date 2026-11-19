@@ -6,6 +6,7 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 import { QuizCategoryCard } from "@/components/quiz/quiz-category-card";
 import { QUIZ_CATEGORIES } from "@/types/quiz";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 export const metadata: Metadata = {
   title: "釣りクイズ — 遊んで学べる釣り検定｜全240問 | ツリスポ",
@@ -123,7 +124,7 @@ const revenueLinks = [
     href: "/spots",
     icon: MapPin,
     label: "近くの釣りスポットを探す",
-    sub: "全国2,100箇所以上の釣り場データベース",
+    sub: `全国${SPOT_COUNT_FORMATTED}か所の釣り場データベース`,
   },
   {
     href: "/catchable-now",
@@ -197,7 +198,7 @@ export default function QuizListPage() {
           <section className="mt-8 rounded-xl border border-gray-200 bg-white p-5">
             <h2 className="text-lg font-bold text-gray-900">ツリスポ釣りクイズの特徴</h2>
             <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-              ツリスポの釣りクイズは、<strong>全国2,141か所以上の釣り場データ</strong>と<strong>115種以上の魚種データベース</strong>をもとに作成された本格的な釣り知識テストです。
+              ツリスポの釣りクイズは、<strong>全国{SPOT_COUNT_FORMATTED}か所の釣り場データ</strong>と<strong>115種以上の魚種データベース</strong>をもとに作成された本格的な釣り知識テストです。
               全{QUIZ_CATEGORIES.length}カテゴリ・{totalQuestions}問以上を収録し、初心者から上級者まで幅広いレベルに対応しています。
             </p>
             <ul className="mt-3 grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">

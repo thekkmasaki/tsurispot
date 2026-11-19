@@ -183,7 +183,7 @@ export const SPOT_TOOLS: ToolDef[] = [
     name: "search_spots",
     title: "釣り場を探す",
     description:
-      "日本全国の釣り場（約4,000か所）を、地名・都道府県・狙いたい魚・月・釣り場の種類で検索します。" +
+      "日本全国の釣り場を、地名・都道府県・狙いたい魚・月・釣り場の種類で検索します。" +
       "釣りに行く場所を提案するときに使ってください。各スポットの slug は他のツールに渡せます。" +
       "例: {\"prefecture\":\"神奈川\",\"fish\":\"アジ\",\"month\":7,\"beginnerFriendly\":true}",
     inputSchema: {

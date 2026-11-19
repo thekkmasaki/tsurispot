@@ -27,6 +27,7 @@ import { MONTHS } from "@/lib/data/fishing-methods";
 import { SeasonalSeasonPage } from "@/components/seasonal-season-page";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 interface PageProps {
   params: Promise<{ month: string }>;
@@ -624,7 +625,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
               >
                 <p className="font-semibold">全国釣りスポット</p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  1000件以上の釣りスポット
+                  {SPOT_COUNT_FORMATTED}件の釣りスポット
                 </p>
               </Link>
             </div>

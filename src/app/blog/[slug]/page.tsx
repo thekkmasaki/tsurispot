@@ -31,6 +31,7 @@ import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recomme
 import { MAIN_WEEKLY_AREA_SLUGS, matchWeeklyAreaForPost, weeklyAreaHubPath } from "@/lib/weekly-report-areas";
 import { LineChoukaCta } from "@/components/line/line-chouka-cta";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 // ISR: 静的記事は generateStaticParams で SSG、microCMS記事は dynamicParams で随時生成。
 // （旧 force-dynamic は2026-05-19の空HTML焼き付き対策の暫定措置。
@@ -445,7 +446,7 @@ export default async function BlogPostPage({
           近くの釣りスポットを探してみよう
         </h2>
         <p className="mb-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          ツリスポでは全国2,100か所以上の釣りスポット情報を掲載。今釣れる魚・混雑予想・アクセス情報をまとめてチェックできます。
+          ツリスポでは全国{SPOT_COUNT_FORMATTED}か所の釣りスポット情報を掲載。今釣れる魚・混雑予想・アクセス情報をまとめてチェックできます。
         </p>
         <div className="flex flex-wrap gap-3">
           <Link prefetch={false}

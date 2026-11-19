@@ -4,6 +4,7 @@ import { BookOpenText, Fish, Anchor, Waves, Moon, Cable } from "lucide-react";
 import { GlossaryClient } from "./glossary-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 export const metadata: Metadata = {
   title: "釣り用語集 - 初心者が知っておきたい釣りの基本用語",
@@ -208,7 +209,7 @@ export default function GlossaryPage() {
             >
               <p className="font-semibold text-blue-800">釣りスポットを探す</p>
               <p className="mt-1 text-xs text-muted-foreground">
-                全国2,100箇所以上の釣り場
+                全国{SPOT_COUNT_FORMATTED}か所の釣り場
               </p>
             </Link>
             <Link prefetch={false}
