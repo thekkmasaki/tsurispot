@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     `[mcp] POST ${methods}${toolName ? `:${String(toolName)}` : ""} ua=${(req.headers.get("user-agent") || "-").slice(0, 80)} auth=${req.headers.has("authorization")}`,
   );
 
-  const result = handleBody(body);
+  const result = await handleBody(body);
   if (result === null) return new NextResponse(null, { status: 202, headers: HEADERS });
   return NextResponse.json(result, { headers: HEADERS });
 }
