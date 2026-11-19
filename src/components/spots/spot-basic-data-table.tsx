@@ -79,6 +79,11 @@ export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
   if (spot.managementInfo?.closedDays) {
     rows.push({ label: "定休日", value: spot.managementInfo.closedDays });
   }
+  // 料金・営業時間を公式で確認した日。古い情報のまま信じて出かけないよう、いつの情報かを表に出す。
+  if (spot.managementInfo?.verifiedAt) {
+    const [y, m, d] = spot.managementInfo.verifiedAt.split("-").map(Number);
+    rows.push({ label: "情報の確認日", value: `${y}年${m}月${d}日（公式サイトで確認）` });
+  }
 
   if (spot.hasParking) {
     const text = getParkingBadgeText(spot.hasParking, spot.parkingDetail, spot.parkingGuide);

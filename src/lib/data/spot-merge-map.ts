@@ -438,4 +438,5 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "awaji-tsubasa-kou-k8": "tsubasa-port", // 淡路島・翼港 → 翼港：淡路交流の翼港（夢舞台）。統合元は住所が岩屋で約3kmずれて登録
   "awaji-fukura-kou-k8": "fukura-kou", // 淡路島・福良港 → 福良港：同一港（南あわじ市福良）。福良港護岸は別扱い
   "amagasaki-tsuuri-park-k8": "amagasaki-fishing-park", // 尼崎魚つり公園 → 尼崎市立魚つり公園：同一施設（尼崎市平左衛門町）。統合元は座標が約2kmずれて登録
+  "hekinan-umitsuri-park": "hekinan-fishing-park", // 碧南海釣り公園 → 碧南海釣り広場：「公園」は同じ無料の釣り広場の別称（碧南市公式）。有料（大人500円）・竿レンタルありの記載は実在しない施設の情報だった
 };

@@ -223,7 +223,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:10", summerSunrise: "04:35", summerSunset: "19:00", autumnSunrise: "05:35", autumnSunset: "17:05", winterSunrise: "06:50", winterSunset: "16:30", tip: "富士山の伏流水で水温が安定。冬でも活性が落ちにくい。" },
     safetyLevel: "safe", safetyNotes: ["バーブレスフック限定（ルアーエリア）"],
-    managementInfo: { organizationName: "すそのフィッシングパーク", contactPhone: "055-993-5514", openingHours: "4〜11月 8:00〜20:00(夜間照明の復旧までは当面18:00まで)、12〜3月 8:00〜19:00", closedDays: "第3週木曜日(8月を除く。祝日は営業)", fishingFee: "ルアー・フライ1日券 一般5,900円", notes: ["確認日 2026-11-17(公式サイト http://www.susono-f-park.com/ 、http://www.susono-f-park.com/n_info.html)", "持ち帰りは1日券 大人7尾まで(50cm以上は2尾)", "レンタルタックル800円"] },
+    managementInfo: { verifiedAt: "2026-11-20", sourceUrl: "http://www.susono-f-park.com/", organizationName: "すそのフィッシングパーク", contactPhone: "055-993-5514", openingHours: "4〜11月 8:00〜20:00(夜間照明の復旧までは当面18:00まで)、12〜3月 8:00〜19:00", closedDays: "第3週木曜日(8月を除く。祝日は営業)", fishingFee: "ルアー・フライ1日券 一般5,900円", notes: ["確認日 2026-11-17(公式サイト http://www.susono-f-park.com/ 、http://www.susono-f-park.com/n_info.html)", "持ち帰りは1日券 大人7尾まで(50cm以上は2尾)", "レンタルタックル800円"] },
   },
   {
     id: "fw-505", name: "大芦川F&Cフィールドビレッジ", slug: "tochigi-oashigawa-fc-village",
