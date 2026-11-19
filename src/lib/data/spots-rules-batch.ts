@@ -1281,14 +1281,22 @@ export const spotRulesBatch: Record<string, SpotRules> = {
     maxRods: 3,
     otherRules: ["施設利用料が必要", "営業時間内のみ利用可"],
   },
+  // 公式（https://kobeumiduri.jp/ 2026-11-19 確認）: 竿は1人3本まで。投げ・ルアー・エギングは
+  // 周囲の安全確認のうえ可。集魚剤・赤土・ぬかは禁止。
   "hiraiso-fishing-park": {
-    castingAllowed: false,
+    castingAllowed: true,
     lureAllowed: true,
     chumAllowed: true,
     nightFishing: false,
     fishingLicenseRequired: false,
-    maxRods: 2,
-    otherRules: ["施設利用料が必要", "営業時間内のみ利用可"],
+    maxRods: 3,
+    otherRules: [
+      "施設利用料が必要",
+      "営業時間内のみ利用可（毎週木曜は休園）",
+      "投げ・ルアー・エギングは周囲の安全を確認してから",
+      "置き竿・置き荷での場所取りは禁止",
+      "集魚剤・赤土・ぬかは使用禁止",
+    ],
   },
   "tarumizu-ferry": {
     castingAllowed: true,

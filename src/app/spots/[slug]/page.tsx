@@ -56,6 +56,7 @@ import { FavoriteButton } from "@/components/spots/favorite-button";
 import { WishlistButton } from "@/components/spots/wishlist-button";
 import { CheckinButton } from "@/components/spots/checkin-button";
 import { GoTodayButton } from "@/components/spots/go-today-button";
+import { parseClosedWeekdays } from "@/lib/spot-closed-days";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
 import { FishingBanNotice } from "@/components/spots/fishing-ban-notice";
@@ -776,15 +777,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* 評価 + エリア情報 */}
         <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1">
+            {/* ツリスポ評価と Google クチコミ評価は別の数字。並べると区別が付かないのでラベルを付ける */}
+            <div
+              className="flex items-center gap-1"
+              title="ツリスポ独自の総合評価（5点満点）。Google マップのクチコミ評価とは別の数字です"
+            >
+              <span className="text-xs">ツリスポ評価</span>
               <Star className="size-4 fill-yellow-400 text-yellow-400" />
               <span className="font-medium text-foreground">
                 {spot.rating.toFixed(1)}
               </span>
             </div>
             {spot.googleRating && (
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1 text-xs text-muted-foreground" title="Google マップのクチコミ評価">
                 <span className="text-[10px]">|</span>
+                <span>Googleクチコミ</span>
                 <svg viewBox="0 0 24 24" className="size-3.5" aria-hidden="true">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
                   <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -1249,7 +1256,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {!(spot.isManagedPond || spot.slug === "fishing-park-hirano") && (
           <section>
             <h3 className="mb-3 text-lg font-bold">混雑予想</h3>
-            <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} />
+            <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} nightFishingAllowed={spot.rules?.nightFishing === false ? false : undefined} closedWeekdays={parseClosedWeekdays(spot.managementInfo?.closedDays) ?? undefined} closedNote={spot.managementInfo?.closedDays} />
           </section>
           )}
           {/* ファミリー向け情報: トイレ・駐車場あり＋初心者向けの場合のみ表示 */}
