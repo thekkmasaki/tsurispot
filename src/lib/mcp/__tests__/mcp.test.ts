@@ -47,6 +47,7 @@ describe("MCP protocol", () => {
       "recommend_gear",
       "get_fish_info",
       "check_fishing_rules",
+      "draft_catch_report",
     ]);
     for (const t of tools) {
       expect(t).not.toHaveProperty("run");

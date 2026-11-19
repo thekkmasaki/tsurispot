@@ -82,9 +82,12 @@ export function trackPostSubmit(params: {
   hasComment: boolean;
   hasPhoto: boolean;
   pioneer?: boolean;
+  /** 投稿経路（"mcp" = AI アシスタントの下書きから） */
+  via?: string;
 }) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   window.gtag("event", "post_submit", {
+    ...(params.via ? { via: params.via } : {}),
     item_id: params.spotSlug,
     logged_in: params.loggedIn,
     has_comment: params.hasComment,

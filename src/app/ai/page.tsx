@@ -49,6 +49,7 @@ const TOOLS: Tool[] = [
   { name: "recommend_gear", title: "仕掛け・道具", description: "狙う魚や釣り方に合った仕掛け・道具の選び方を提案します。" },
   { name: "get_fish_info", title: "魚の情報", description: "魚種ごとの特徴・旬・釣り方・注意点（毒やトゲなど）を返します。" },
   { name: "check_fishing_rules", title: "釣りのルール", description: "釣り場の禁止事項（投げ釣り・ルアー・夜釣り等）や遊漁券の要否、釣り禁止情報の出典を確認します。" },
+  { name: "draft_catch_report", title: "釣果の下書き", description: "会話で伝えた釣果から投稿の下書きを作り、確認ページのリンクを返します。リンク先で写真を付けて「投稿する」を押すまで公開されません。" },
 ];
 
 const EXAMPLE_PROMPTS = [
@@ -60,6 +61,7 @@ const EXAMPLE_PROMPTS = [
   "北九州でエギングをしたい。近くの釣具店と必要な道具は？",
   "東京湾の釣り場でタチウオを狙うときの仕掛けを教えて",
   "この釣り場は夜釣りや投げ釣りをしてもいい？ルールを確認して",
+  "今日、大黒海づり施設でアジを12匹、最大22cm釣った。サビキで晴れ。ツリスポに投稿したい",
 ];
 
 const jsonLd = [
@@ -219,7 +221,10 @@ export default function AiConnectorPage() {
         </Section>
 
         <Section id="tools" icon={Wrench} title="使える機能（ツール一覧）">
-          <p>AI アシスタントは、質問に応じて次のツールを自動で使い分けます。すべて読み取り専用です。</p>
+          <p>
+            AI アシスタントは、質問に応じて次のツールを自動で使い分けます。すべて読み取り専用で、ツリスポのデータを書き換えることはありません。
+            釣果の投稿は、AI が作った下書きのリンクを開き、ご自身で写真を付けて確定したときだけ公開されます。
+          </p>
           <div className="-mx-4 overflow-x-auto sm:mx-0">
             <table className="w-full min-w-[520px] border-collapse text-left text-sm">
               <thead>
@@ -265,6 +270,7 @@ export default function AiConnectorPage() {
           <ul className="list-disc space-y-1 pl-5">
             <li>コネクタは公開情報を返すだけで、アカウント・お気に入り・投稿者の個人情報にはアクセスしません。</li>
             <li>AI から送られる検索条件（地名・魚種・座標など）は回答の作成にのみ使い、保存しません。</li>
+            <li>釣果の下書きはサーバーに保存せず、確認ページのリンクの中にだけ入っています。投稿するかどうかは確認ページでご自身が決めます。</li>
             <li>障害調査のため、呼び出されたツール名と User-Agent をサーバーログに記録します（IP アドレスや会話内容は記録しません）。</li>
             <li>回答に含まれるツリスポへのリンクには、AI 経由の訪問を識別するパラメータ（utm_source=ai_mcp）が付きます。</li>
           </ul>

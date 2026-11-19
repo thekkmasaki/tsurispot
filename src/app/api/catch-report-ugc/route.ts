@@ -16,6 +16,7 @@ import { isOwnImageUrl, isRealDate, readJsonBody, resolveSpot, todayJst } from "
 import type { PostCatchResult } from "@/lib/catch-result";
 import { generateDeleteKey, saveDeleteKey } from "@/lib/ugc-delete-key";
 import { isUploadOwnedBy, UPLOAD_OWNER_ERROR } from "@/lib/upload-owner";
+import { isCatchMethod, isCatchWeather } from "@/lib/catch-report-options";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -115,6 +116,7 @@ export async function POST(request: Request) {
       method?: string;
       weather?: string;
       tags?: string[];
+      via?: string;
     }>(request);
     if (!body) {
       return NextResponse.json({ error: "リクエスト形式が不正です" }, { status: 400 });
@@ -177,12 +179,10 @@ export async function POST(request: Request) {
     if (sizeCm !== undefined && (typeof sizeCm !== "number" || sizeCm < 0 || sizeCm > 300)) {
       return NextResponse.json({ error: "サイズは0〜300cmの範囲で入力してください" }, { status: 400 });
     }
-    const ALLOWED_METHODS = ["サビキ", "投げ", "ルアー", "フカセ", "エギング", "ジギング", "穴釣り", "ウキ釣り", "その他"];
-    if (method !== undefined && (typeof method !== "string" || !ALLOWED_METHODS.includes(method))) {
+    if (method !== undefined && !isCatchMethod(method)) {
       return NextResponse.json({ error: "釣法が不正です" }, { status: 400 });
     }
-    const ALLOWED_WEATHER = ["晴れ", "曇り", "雨", "風強い"];
-    if (weather !== undefined && (typeof weather !== "string" || !ALLOWED_WEATHER.includes(weather))) {
+    if (weather !== undefined && !isCatchWeather(weather)) {
       return NextResponse.json({ error: "天候が不正です" }, { status: 400 });
     }
 
@@ -213,7 +213,12 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
       tags: normTags.length > 0 ? normTags : undefined,
       // アプリは全リクエストに User-Agent「CatchLog/x.y (iOS)」を付けて送る
-      ...(isCatchlogApp(request) ? { via: "app" as const } : {}),
+      // AI アシスタント（MCP の下書き → /post/catch）経由は via:"mcp"。計測専用で、表示や権限には使わない
+      ...(isCatchlogApp(request)
+        ? { via: "app" as const }
+        : body.via === "mcp"
+          ? { via: "mcp" as const }
+          : {}),
     };
 
     // ログインしない投稿だけ削除キーを発行する。保存するのはハッシュだけで、置き場所は
