@@ -9,7 +9,8 @@
 // next.config.ts → spots.ts 経由でこのファイルがビルド時 transpile されるため、
 // @/ エイリアスではなく相対パスで参照する。
 import type { FishingSpot, CatchableFish } from "../../types";
-import { getAdvisableCatchableFish } from "@/lib/utils/spot-rule-consistency";
+// next.config.ts（→ spots.ts）から読まれるため @/ エイリアスは使えない。相対パスで書く。
+import { getAdvisableCatchableFish } from "./spot-rule-consistency";
 import { SPOT_TYPE_LABELS } from "../../types";
 import { buildManagedSummary, buildManagedFaqs } from "../managed-pond";
 
