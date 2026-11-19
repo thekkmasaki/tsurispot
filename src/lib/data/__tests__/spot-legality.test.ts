@@ -172,7 +172,7 @@ describe("所在地データの整合性", () => {
   ];
 
   /**
-   * 既知の不一致（2026-08-18 時点で 73 件）。
+   * 既知の不一致（2026-08-18 時点で 73 件 → 2026-11-20 に 5 件）。
    *
    * 修正方向がケースごとに違うため一括では直せない:
    * - 住所が誤り: 「鳥取県阿南市」（阿南市は徳島県）、「石川県魚津市」（魚津市は富山県）
@@ -186,25 +186,10 @@ describe("所在地データの整合性", () => {
    * 解消したものはリストから削除する（残っていると「掃除漏れ」として fail する）。
    */
   const KNOWN_REGION_MISMATCHES = new Set([
-    "akigawa-keikoku6", "amatsu-gyoko6", "anamizu-boramachi-kou-a13", "anan-tachibana-kou-c8",
-    "arakawa-iwabuchi-suimon6", "chikura-gyoko6", "choshi-marina6", "edogawa-hosuiro6",
-    "edogawa-housui-ichikawa-a11", "edogawa-lower-unagi", "funabashi-shinsuikouen6", "fushiki-kou-e8",
-    "futtsu-shinko6", "hamura-seki-shita6", "himi-nadaura-kaigan-a13",
-    "hota-gyoko6", "ichihara-umizuri6", "iioka-gyoko6", "iwai-kaigan6",
-    "kagoshima-sendaigawa-upper-stream", "kamakitako-tsuri6", "karatsu-kou-w6", "kinuta-tamagawa6",
-    "kisogawa-middle-river", "kitakami-oppa-wan6", "kominato-gyoko6", 
-    "kujukurihama-katakai6", "kurobe-gyoko", "kyouden-gyokou-toyama", "kyu-edogawa-mouth",
-    "makuhari-no-hama6", "mizumoto-koen6", "nabakigawa-kakko6", "naruto-uchinomi-c8",
-    "nojima-zaki6", "nyuzen-kaigan-surf-e8", "obitsu-kakko6",
-    "okura-kaigan-gogan-a12", "okurigawa-goryuten-e8", "okutama-ko6", 
-    "sakaiminato-gaiko", "sakaiminato-mihonoseki", "sakaiminato-nakano-kou", "sakaiminato-yumeminato-gogan",
-    "shakujii-sanpoji6", "shimanour-nobeoka-w6", "shinminato-east-breakwater", "shinminato-gyokou-e8",
-    "shinminato-gyokou-toyama", "shirako-kaigan6", "taito-gyoko6", "takashima-saga-w6",
-    "tamagawa-mitake6", "tateyama-ko6", "tomiura-shinko6", "tone-ozeki-gyoda-ora-a12",
-    "tone-river-mouth", "tonegawa-shibukawa-a9", "toyama-kou", "tsugaru-kizukuri-port-a12",
-    "tsukigawa-kou-w6", "uozu-hojo-port", "uozu-katakaigawa-kakou-a13", "uozu-ko-toyama",
-    "urayasu-takasu6", "wadaura-gyoko6", "watarasegawa-ashikaga-a9", "yaizu-ko-shinko",
-    "yorogawa-kakko6", "zenpukujigawa6",
+    // 2026-11-20: 座標（国土地理院の逆ジオコーダ）と住所の突き合わせで 73 件中 68 件を解消した
+    // （generated/spot-region-overrides.json）。残りは県境の川で判断が要るものと、移す先のエリアが無いもの。
+    "arakawa-iwabuchi-suimon6", "kagoshima-sendaigawa-upper-stream", "sakaiminato-gaiko",
+    "tone-ozeki-gyoda-ora-a12", "tone-river-mouth",
   ]);
 
   it("address の都道府県と region.prefecture が一致する（既知分を除く）", () => {

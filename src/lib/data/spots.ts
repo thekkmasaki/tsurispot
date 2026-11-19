@@ -1,4 +1,5 @@
-import { FishingSpot } from "@/types";
+import { FishingSpot, Region } from "@/types";
+import spotRegionOverrides from "./generated/spot-region-overrides.json";
 import { allRawSpots } from "./spots-registry";
 import { spotRulesBatch } from "./spots-rules-batch";
 // next.config.ts が spots.ts を import する都合上、@/ エイリアスではなく
@@ -210,8 +211,30 @@ function applyLocalTips(spots: FishingSpot[]): FishingSpot[] {
   });
 }
 
+/**
+ * 県・エリア・住所の誤りの補正表を適用する。
+ *
+ * 2026-11 監査: 千葉のスポットが東京都、富山のスポットが新潟県、函館が「稚内・宗谷」など、
+ * スポットファイルごとの region 定義の取り違えで県やエリアが誤っているものが約120件あった。
+ * 全スポットの座標を国土地理院の逆ジオコーダで引き、住所と突き合わせて確定したものを
+ * generated/spot-region-overrides.json に持つ（生成手順は同ファイルの note と PR 本文を参照）。
+ * 元データ80ファイルを個別に書き換える代わりに、ここで一括して差し替える。
+ */
+function applyRegionOverrides(spots: FishingSpot[]): FishingSpot[] {
+  const overrides = spotRegionOverrides as Record<string, { region?: Region; address?: string }>;
+  return spots.map((spot) => {
+    const o = overrides[spot.slug];
+    if (!o) return spot;
+    return {
+      ...spot,
+      ...(o.region ? { region: o.region } : {}),
+      ...(o.address ? { address: o.address } : {}),
+    };
+  });
+}
+
 export const fishingSpots: FishingSpot[] = applyLocalTips(
-  enrichDescriptions(applyBatchRules(deduplicateSpots(allRawSpots)))
+  enrichDescriptions(applyBatchRules(applyRegionOverrides(deduplicateSpots(allRawSpots))))
 );
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
