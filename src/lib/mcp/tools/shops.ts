@@ -93,7 +93,7 @@ export const SHOP_TOOLS: ToolDef[] = [
     description:
       "釣り場（slug）または緯度経度の近くの釣具店を返します（営業時間・早朝/24時間営業・活きエサ/冷凍エサ・レンタル竿・駐車場）。" +
       "「◯◯の近くで朝早く開いている釣具屋は？」「エサはどこで買える？」に使ってください。" +
-      "例: {\"slug\":\"daikoku-futo\",\"limit\":3} または {\"latitude\":35.44,\"longitude\":139.64}",
+      "例: {\"slug\":\"daikoku-fishing-facility\",\"limit\":3} または {\"latitude\":35.44,\"longitude\":139.64}",
     inputSchema: {
       type: "object",
       properties: {

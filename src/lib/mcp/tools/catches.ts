@@ -70,7 +70,7 @@ export const CATCH_TOOLS: ToolDef[] = [
     description:
       "釣り場の最近の釣果（ツリスポ利用者の釣果投稿と、編集部の釣果週報でこの釣り場に紐づく行）を新しい順に返します。" +
       "魚・サイズ・釣り方・日付・ニックネームのみで、写真や個人を特定できる情報は含みません。" +
-      "「最近◯◯で何が釣れてる？」に使ってください。例: {\"slug\":\"daikoku-futo\",\"limit\":5}",
+      "「最近◯◯で何が釣れてる？」に使ってください。例: {\"slug\":\"daikoku-fishing-facility\",\"limit\":5}",
     inputSchema: {
       type: "object",
       properties: {

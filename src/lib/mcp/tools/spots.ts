@@ -209,7 +209,7 @@ export const SPOT_TOOLS: ToolDef[] = [
     title: "釣り場の詳細",
     description:
       "釣り場1か所の詳細（アクセス・駐車場・トイレ・釣れる魚と時期・釣り方・ルール・釣り禁止情報）を返します。" +
-      "例: {\"slug\":\"daikoku-futo\"}（slug は search_spots / find_nearby_spots の結果から）",
+      "例: {\"slug\":\"daikoku-fishing-facility\"}（slug は search_spots / find_nearby_spots の結果から）",
     inputSchema: {
       type: "object",
       properties: { slug: { type: "string", description: "search_spots が返した slug" } },

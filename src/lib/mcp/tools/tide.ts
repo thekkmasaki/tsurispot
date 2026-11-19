@@ -4,8 +4,7 @@ import { getTideDay } from "@/lib/tide/tide-data";
 import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
 import { getTideInfoForDate } from "@/lib/tide/tide-info";
 import { fetchSpotForecast } from "@/lib/weather/open-meteo";
-import { calcFishingIndex } from "@/lib/weather/fishing-index";
-import { getWeatherInfo } from "@/lib/weather/calculations";
+import { calcFishingIndex, weatherLabel } from "@/lib/weather/fishing-index";
 import {
   type ToolDef,
   ToolError,
@@ -122,7 +121,7 @@ export async function getFishingForecast(args: Record<string, unknown>) {
     spot: spot.name,
     date,
     weather: {
-      summary: getWeatherInfo(day.weatherCode).label,
+      summary: weatherLabel(day.weatherCode),
       tempMaxC: round1(day.tempMax),
       windMaxMs: round1(day.windMaxMs),
       windDirection: daytimeWindDirection(day.hourly),
@@ -162,7 +161,7 @@ export const TIDE_TOOLS: ToolDef[] = [
     title: "潮汐（満潮・干潮）",
     description:
       "釣り場の指定日の潮回り（大潮・小潮など）と満潮・干潮の時刻・潮位を返します（気象庁の推算値、最寄り観測地点）。" +
-      "例: {\"slug\":\"daikoku-futo\",\"date\":\"2026-12-01\"}",
+      "例: {\"slug\":\"daikoku-fishing-facility\",\"date\":\"2026-12-01\"}",
     inputSchema: {
       type: "object",
       properties: {
@@ -179,7 +178,7 @@ export const TIDE_TOOLS: ToolDef[] = [
     description:
       "釣り場の今日〜7日先の天気・最大風速・風向・海面水温・潮回りと、0〜100点の釣行指数（内訳つき）・おすすめ時間帯を返します。" +
       "「明日◯◯に行って釣れそう？」「今週いつ行くのがいい？」に使ってください（weekOutlook に7日分の指数）。" +
-      "例: {\"slug\":\"daikoku-futo\",\"date\":\"2026-11-21\"}",
+      "例: {\"slug\":\"daikoku-fishing-facility\",\"date\":\"2026-11-21\"}",
     inputSchema: {
       type: "object",
       properties: {
