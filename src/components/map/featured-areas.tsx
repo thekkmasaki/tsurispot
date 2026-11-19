@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { prefectures } from "@/lib/data/prefectures";
+import { FeaturedAreaChips, type FeaturedAreaItem } from "./featured-area-chips";
 
 const FEATURED_PREFECTURE_SLUGS = [
   "chiba",
@@ -15,15 +15,14 @@ const FEATURED_PREFECTURE_SLUGS = [
 ];
 
 export function FeaturedAreas() {
-  const items = FEATURED_PREFECTURE_SLUGS.map((slug) => {
+  const items: FeaturedAreaItem[] = [];
+  for (const slug of FEATURED_PREFECTURE_SLUGS) {
     const pref = prefectures.find((p) => p.slug === slug);
-    if (!pref) return null;
-    const count = fishingSpots.filter(
-      (s) => s.region.prefecture === pref.name
-    ).length;
-    if (count === 0) return null;
-    return { pref, count };
-  }).filter((v): v is { pref: (typeof prefectures)[number]; count: number } => v !== null);
+    if (!pref) continue;
+    const count = fishingSpots.filter((s) => s.region.prefecture === pref.name).length;
+    if (count === 0) continue;
+    items.push({ slug: pref.slug, name: pref.name, nameShort: pref.nameShort, count });
+  }
 
   if (items.length === 0) return null;
 
@@ -32,23 +31,11 @@ export function FeaturedAreas() {
       <h2 className="mb-2 flex items-center gap-1.5 text-sm font-bold sm:text-base">
         <MapPin className="size-4 text-primary" />
         注目エリア
+        <span className="text-[11px] font-normal text-muted-foreground sm:text-xs">
+          タップすると地図がその県へ移動します
+        </span>
       </h2>
-      <div className="grid grid-cols-4 gap-2 sm:grid-cols-8">
-        {items.map(({ pref, count }) => (
-          <Link prefetch={false}
-            key={pref.slug}
-            href={`/prefecture/${pref.slug}`}
-            className="group rounded-lg border bg-card p-2 text-center transition-shadow hover:shadow-md sm:p-3"
-          >
-            <div className="text-xs font-semibold group-hover:text-primary sm:text-sm">
-              {pref.nameShort}
-            </div>
-            <div className="mt-0.5 text-[10px] text-muted-foreground sm:text-xs">
-              {count}件
-            </div>
-          </Link>
-        ))}
-      </div>
+      <FeaturedAreaChips items={items} />
     </section>
   );
 }

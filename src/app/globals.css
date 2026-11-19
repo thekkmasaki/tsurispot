@@ -457,3 +457,18 @@
   isolation: isolate;
 }
 
+/* /map の地図の高さ。
+   スマホでは画面下にボトムナビ(約68px)と固定広告(約99px)が常駐するため、60vh のままだと
+   地図の下端が固定帯の下に潜り、ズームや出典表示が隠れていた（2026-11 UX監査）。
+   固定広告は動かさず、地図のほうを「ヘッダー(57px)と下部固定帯(175px)の間」に収まる高さにする。
+   244px = 57 + 175 + 余白12。100dvh 非対応ブラウザは 1行目の 60vh にフォールバック。 */
+.map-viewport-h {
+  height: 60vh;
+  height: max(300px, calc(100dvh - 244px - env(safe-area-inset-bottom, 0px)));
+}
+@media (min-width: 768px) {
+  .map-viewport-h {
+    height: 80vh;
+  }
+}
+
