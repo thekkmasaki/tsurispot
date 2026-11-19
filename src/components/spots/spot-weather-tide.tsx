@@ -36,6 +36,7 @@ import { getStationSlug } from "@/lib/tide/station-slugs";
 import type { ResolvedTideStation, TideDisplayMode } from "@/lib/tide/nearest-station";
 import type { TideDay } from "@/lib/tide/tide-data";
 import { FishingScoreBar } from "./fishing-score-bar";
+import { isClosedOn } from "@/lib/spot-closed-days";
 
 interface SpotWeatherTideProps {
   lat: number;
@@ -45,6 +46,8 @@ interface SpotWeatherTideProps {
   tideMode: TideDisplayMode;
   /** 最寄りの気象庁 潮位表観測地点（tideMode=none のときは null） */
   tideStation: ResolvedTideStation | null;
+  /** 定休日の原文（managementInfo.closedDays）。選択日が休園日なら釣り日和・おすすめ時間帯を出さない */
+  closedDays?: string;
 }
 
 // 曜日ラベル
@@ -55,13 +58,15 @@ function fmtDateKey(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation }: SpotWeatherTideProps) {
+export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation, closedDays }: SpotWeatherTideProps) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedHour, setSelectedHour] = useState<number | null>(null); // null=終日
   const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
   const [tideDays, setTideDays] = useState<Record<string, TideDay> | null>(null);
+  // 満干時刻の取得に失敗したか（取得前の「—」と区別して表示する）
+  const [tideFailed, setTideFailed] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const hourScrollRef = useRef<HTMLDivElement>(null);
 
@@ -77,10 +82,13 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
     fetch(`/api/tide/${stationCode}`)
       .then((r) => (r.ok ? r.json() : null))
       .then((json) => {
-        if (!cancelled && json?.days) setTideDays(json.days as Record<string, TideDay>);
+        if (cancelled) return;
+        if (json?.days) setTideDays(json.days as Record<string, TideDay>);
+        else setTideFailed(true);
       })
       .catch(() => {
         // 取得失敗時は満干時刻なし（潮回りのみ）で表示
+        if (!cancelled) setTideFailed(true);
       });
     return () => {
       cancelled = true;
@@ -91,6 +99,10 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
   const dateKey = fmtDateKey(selectedDate);
   const tidePhase = getTideTypeFromMoonAge(getMoonAgeJST(dateKey));
   const tideDay = tideMode === "full" ? (tideDays?.[dateKey] ?? null) : null;
+  // 満干時刻が無いときの表示。以前は取得前も失敗時も同じ「—」で、欠損に見えていた（2026-11 監査）
+  const tideMissingLabel = tideDays ? "—（データ準備中）" : tideFailed ? "取得できませんでした" : "取得中…";
+  // 選択日が休園日か（休園日に「釣り日和」「おすすめ時間帯」を出さない）
+  const closedOnSelected = isClosedOn(closedDays, dateKey);
   const highTideStrs = tideDay ? tideDay.hi.map(([t]) => t) : [];
   const lowTideStrs = tideDay ? tideDay.lo.map(([t]) => t) : [];
 
@@ -208,8 +220,20 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
           <ThermometerSun className="h-5 w-5 text-sky-600" />
           <h3 className="font-bold text-sm">{getHeaderText()}</h3>
         </div>
-        {tideMode !== "none" && <FishingScoreBar score={tidePhase.fishingScore} />}
+        {closedOnSelected ? (
+          <span className="rounded-full bg-slate-700 px-2.5 py-1 text-xs font-bold text-white">休園日</span>
+        ) : (
+          tideMode !== "none" && <FishingScoreBar score={tidePhase.fishingScore} />
+        )}
       </div>
+      {closedOnSelected && (
+        <div className="border-b bg-slate-50 px-4 py-2.5 text-xs leading-relaxed text-slate-700" role="status">
+          <span className="font-bold">
+            {selectedIndex === 0 ? "本日は休園日です。" : "この日は休園日です。"}
+          </span>{" "}
+          定休日: {closedDays}。臨時の営業・休業は公式サイトでご確認ください。
+        </div>
+      )}
 
       {/* 14日間の日付セレクター */}
       <div
@@ -462,9 +486,7 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
                       満潮{" "}
                       {tideDay && tideDay.hi.length > 0
                         ? tideDay.hi.map(([t, cm]) => `${t}(${cm}cm)`).join(" / ")
-                        : tideDays
-                          ? "—（データ準備中）" // 取得済みだが選択日が未整備（翌年分の未取込など）
-                          : "—"}
+                        : tideMissingLabel}
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -473,9 +495,7 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
                       干潮{" "}
                       {tideDay && tideDay.lo.length > 0
                         ? tideDay.lo.map(([t, cm]) => `${t}(${cm}cm)`).join(" / ")
-                        : tideDays
-                          ? "—（データ準備中）"
-                          : "—"}
+                        : tideMissingLabel}
                     </span>
                   </div>
                   {tideStation && (
@@ -503,7 +523,7 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
         </div>
 
         {/* おすすめ時間帯 + 潮の解説 (管理釣り場では非表示) */}
-        {!hideBestTimes && dailyData && (() => {
+        {!hideBestTimes && !closedOnSelected && dailyData && (() => {
           const best = calcBestFishingTime(
             dailyData.hourly,
             dailyData.sunrise,

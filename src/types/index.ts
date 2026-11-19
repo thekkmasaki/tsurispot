@@ -278,6 +278,10 @@ export interface ManagementInfo {
   fishingFee?: string;
   licensingInfo?: string;
   notes?: string[];
+  /** 料金・営業時間・定休日を公式情報で確認した日（YYYY-MM-DD）。詳細ページに表示する */
+  verifiedAt?: string;
+  /** 確認に使った公式ページ */
+  sourceUrl?: string;
 }
 
 export interface FishSpecies {

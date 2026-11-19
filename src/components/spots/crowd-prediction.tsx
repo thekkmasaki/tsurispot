@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import { isClosedOn, ymdJst } from "@/lib/spot-closed-days";
 import { Users, Clock, Sun, CloudRain, Wind } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -21,9 +22,7 @@ interface CrowdPredictionProps {
    * 18時以降を「空いている」と見せると夜も入れると誤解されるため、その時間帯は予想を出さない。
    */
   nightFishingAllowed?: boolean;
-  /** 定休の曜日（0=日〜6=土）。今日が該当すれば予想の代わりに休園日と表示する */
-  closedWeekdays?: number[];
-  /** 定休日の原文（例「毎週木曜日（祝日は開園）」） */
+  /** 定休日の原文（例「毎週木曜日（祝日は開園）」）。今日が休園日なら予想の代わりに休園日と表示する */
   closedNote?: string;
 }
 
@@ -54,7 +53,6 @@ export function CrowdPredictionCard({
   hasParking,
   reviewCount,
   nightFishingAllowed,
-  closedWeekdays,
   closedNote,
 }: CrowdPredictionProps) {
   // Hydration対策: new Date()はクライアント側でのみ取得する
@@ -62,6 +60,7 @@ export function CrowdPredictionCard({
     hour: number;
     dayOfWeek: number;
     month: number;
+    ymd: string;
   } | null>(null);
 
   useEffect(() => {
@@ -70,6 +69,7 @@ export function CrowdPredictionCard({
       hour: now.getHours(),
       dayOfWeek: now.getDay(),
       month: now.getMonth() + 1,
+      ymd: ymdJst(now),
     });
   }, []);
 
@@ -145,7 +145,7 @@ export function CrowdPredictionCard({
   }
 
   // 今日が定休日なら混雑予想そのものを出さない（休園日に「空いている」と表示しない）
-  if (closedWeekdays?.includes(timeInfo.dayOfWeek)) {
+  if (isClosedOn(closedNote, timeInfo.ymd)) {
     return (
       <Card className="gap-0 py-0">
         <CardContent className="p-4 sm:p-5">

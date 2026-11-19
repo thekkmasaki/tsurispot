@@ -620,14 +620,15 @@ export const spotRulesBatch: Record<string, SpotRules> = {
     otherRules: ["施設利用料が必要", "営業時間内のみ利用可"],
   },
   // 福岡市海づり公園
+  // 公式（https://umizuri.com/pages/103/）で 2026-11-20 確認
   "fukuoka-umizuri-koen": {
-    castingAllowed: false,
+    castingAllowed: true,
     lureAllowed: true,
     chumAllowed: true,
     nightFishing: false,
     fishingLicenseRequired: false,
-    maxRods: 2,
-    otherRules: ["施設利用料が必要", "営業時間内のみ利用可"],
+    maxRods: 3,
+    otherRules: ["竿は1人3本まで（混雑時は1本）", "ルアーは指定場所で平日のみ（GW・お盆は平日も不可）", "投げ釣りは周囲を確認のうえ可。サビキ・アミカゴ・浮きかご仕掛けの遠投は禁止", "ヤエン釣りは禁止", "営業時間内のみ利用可"],
   },
   // 男鹿マリーナ
   "oga-marina": {
@@ -1262,15 +1263,6 @@ export const spotRulesBatch: Record<string, SpotRules> = {
     nightFishing: false,
     fishingLicenseRequired: false,
     otherRules: ["公園の開園時間内のみ"],
-  },
-  "hekinan-fishing-park": {
-    castingAllowed: false,
-    lureAllowed: true,
-    chumAllowed: true,
-    nightFishing: false,
-    fishingLicenseRequired: false,
-    maxRods: 2,
-    otherRules: ["施設利用無料", "営業時間内のみ利用可"],
   },
   "nanko-fishing-park": {
     castingAllowed: false,
