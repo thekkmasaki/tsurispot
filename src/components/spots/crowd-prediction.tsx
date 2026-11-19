@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { isClosedOn, ymdJst } from "@/lib/spot-closed-days";
+import { isClosedOn, isJapaneseHoliday, ymdJst } from "@/lib/spot-closed-days";
 import { Users, Clock, Sun, CloudRain, Wind } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -78,7 +78,7 @@ export function CrowdPredictionCard({
       timeInfo
         ? {
             month: timeInfo.month,
-            isHoliday: false,
+            isHoliday: isJapaneseHoliday(timeInfo.ymd),
             spotPopularity: rating,
             isFree,
             difficulty,
@@ -173,7 +173,7 @@ export function CrowdPredictionCard({
       <CardContent className="p-4 sm:p-5">
         <h3 className="mb-3 flex items-center gap-2 text-sm font-bold sm:text-base">
           <Users className="size-4 text-primary" />
-          混雑予想
+          今日の混雑予想
         </h3>
 
         {/* 現在の混雑予想 */}
@@ -261,7 +261,7 @@ export function CrowdPredictionCard({
         </div>
 
         <p className="mt-3 text-[10px] text-muted-foreground">
-          ※ 天気・曜日・時間帯・シーズンから推定した予測値です。実際の混雑状況とは異なる場合があります。
+          ※ 曜日・祝日・時間帯・季節から推定した予測値で、当日の天気は反映していません。実際の混雑状況とは異なる場合があります。
         </p>
       </CardContent>
     </Card>

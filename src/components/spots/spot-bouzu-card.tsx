@@ -161,10 +161,14 @@ function getDataDrivenTip(
   const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth, props.spotType, props.prefecture);
   const fishResult = getFishCatchabilityCorrection(props.catchableFishDetails, currentMonth);
 
+  // 根拠文はスポットの主な釣り方に合わせる。以前は群れ魚がいると一律「サビキ釣りなら」と書き、
+  // ショアジギングやウキフカセが主のスポットでも同じ文になっていた（2026-11 監査）。
+  // サビキ禁止のスポットもあるため、特定の釣法へ誘導せず「群れ魚」として書く。
   if (probability <= 30) {
     if (fishResult.hasSchoolingFish) {
       const names = fishResult.schoolingFishNames.slice(0, 2).join("・");
-      return `${names}などの群れ魚が狙えるため、サビキ釣りなら初心者でも高確率で釣果が期待できます。`;
+      const method = methodResult.primaryMethod ? `主な釣り方は${methodResult.primaryMethod}。` : "";
+      return `${method}${names}などの群れ魚が回る時期で、群れに当たれば数釣りが期待できます。`;
     }
     if (methodResult.primaryMethod && methodResult.primaryMethodRate && methodResult.primaryMethodRate <= 25) {
       return `${methodResult.primaryMethod}は比較的ボウズしにくい釣り方です。基本を押さえれば釣果が見込めます。`;
@@ -178,7 +182,8 @@ function getDataDrivenTip(
   } else if (probability <= 75) {
     if (fishResult.hasSchoolingFish) {
       const names = fishResult.schoolingFishNames.slice(0, 2).join("・");
-      return `${names}を狙ったサビキ釣りに切り替えることで、ボウズ回避の可能性が上がります。`;
+      const lead = methodResult.primaryMethod ? `${methodResult.primaryMethod}で難しいときは、` : "";
+      return `${lead}${names}などの群れ魚に狙いを切り替えると、ボウズ回避の可能性が上がります（釣り方はスポットのルールを確認）。`;
     }
     if (methodResult.primaryMethod) {
       return `${methodResult.primaryMethod}は技術と経験が求められます。時期やタイミングを工夫して挑みましょう。`;

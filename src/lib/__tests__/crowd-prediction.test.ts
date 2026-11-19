@@ -186,3 +186,18 @@ describe("crowd-prediction", () => {
     expect(["empty", "low", "moderate"]).toContain(result.level);
   });
 });
+
+describe("天気が推定値のとき要因に天気名を出さない（2026-11 監査: 小雨なのに「晴れ」）", () => {
+  it("weatherCode 未指定なら「晴れ」「雨で空きやすい」を factors に含めない", () => {
+    for (let month = 1; month <= 12; month++) {
+      const r = calculateCrowdScore({ month, dayOfWeek: 6, hour: 6, spotPopularity: 4, isFree: true, difficulty: "beginner" });
+      expect(r.factors).not.toContain("晴れ");
+      expect(r.factors).not.toContain("雨で空きやすい");
+    }
+  });
+
+  it("weatherCode を渡したときは天気の要因を出す", () => {
+    const r = calculateCrowdScore({ month: 11, dayOfWeek: 6, hour: 6, spotPopularity: 4, isFree: true, difficulty: "beginner", weatherCode: "rain" });
+    expect(r.factors).toContain("雨で空きやすい");
+  });
+});

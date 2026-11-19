@@ -163,7 +163,11 @@ export function GoTodayButton({
 
   return (
     <div className="flex flex-col items-center gap-2 w-full">
-      {/* Date selector chips */}
+      {/* 日付は「行く予定」を入れる日の選択。天気・潮や混雑予想の日付は切り替わらないため、
+          予報が切り替わると誤解されないよう用途を明記する（2026-11 監査）。 */}
+      <p className="w-full text-[11px] text-muted-foreground">
+        行く日を選んで予定に追加（天気・潮の日付は、天気・潮汐の欄で切り替えられます）
+      </p>
       <div className="relative w-full">
         <div
           className="flex gap-1 overflow-x-auto pb-1 scrollbar-none"
