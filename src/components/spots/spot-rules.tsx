@@ -145,6 +145,13 @@ export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail, is
   let showLicenseWarning: boolean;
   let licenseLabel: string;
 
+  // 公式で確認した日付が無いルールは断定しない。施設の種類ごとの一般的な値が入っているものがあり、
+  // 「禁止されています」と言い切ると実際には可の施設で誤案内になる（2026-11 監査）。
+  const banText = (what: string) =>
+    rules?.verifiedAt
+      ? `このスポットでは${what}が禁止されています（公式情報で確認）`
+      : `${what}は禁止とされています。変更されている場合があるので、現地の掲示・管理者の案内を優先してください`;
+
   if (rules) {
     ruleItems = [
       {
@@ -152,21 +159,21 @@ export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail, is
         value: rules.castingAllowed,
         description: rules.castingAllowed
           ? "振りかぶって遠くに投げる釣り方ができます"
-          : "このスポットでは投げ釣りが禁止されています",
+          : banText("投げ釣り"),
       },
       {
         label: "ルアー釣り",
         value: rules.lureAllowed,
         description: rules.lureAllowed
           ? "ルアーやワームを使った釣りができます"
-          : "このスポットではルアー釣りが禁止されています",
+          : banText("ルアー釣り"),
       },
       {
         label: "コマセ（撒き餌）",
         value: rules.chumAllowed,
         description: rules.chumAllowed
           ? "撒き餌を使った釣りができます"
-          : "このスポットではコマセ（撒き餌）が禁止されています",
+          : banText("コマセ（撒き餌）"),
       },
     ];
     // 夜釣り情報が定義されている場合のみ表示
@@ -176,7 +183,7 @@ export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail, is
         value: rules.nightFishing,
         description: rules.nightFishing
           ? "夜間も釣りができます"
-          : "このスポットでは夜間の釣りが禁止されています",
+          : banText("夜間の釣り"),
       });
     }
     if (isManagedPond) {

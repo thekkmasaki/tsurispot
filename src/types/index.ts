@@ -221,6 +221,8 @@ export interface SpotRules {
   minKeepSize?: string;
   restrictedAreas?: string[];
   otherRules?: string[];
+  /** 公式情報でルールを確認した日（YYYY-MM-DD）。無いものは表示で断定しない */
+  verifiedAt?: string;
 }
 
 export interface ParkingPeakInfo {

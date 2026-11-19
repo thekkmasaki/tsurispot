@@ -12,6 +12,9 @@
 import type { FishingSpot, StructureCategory } from "@/types";
 import { spotTypeToStructures } from "@/lib/data/structure-fish-mapping";
 
+/** 川のスポットを河口・汽水域とみなす目印になる魚 */
+const RIVER_MOUTH_FISH = new Set(["aji", "kurodai", "suzuki", "haze", "kibire", "bora", "hirame", "magochi"]);
+
 // ---------------------------------------------------------------------------
 // 1. enrichSpotWithStructures
 // ---------------------------------------------------------------------------
@@ -30,7 +33,18 @@ export function enrichSpotWithStructures(spot: FishingSpot): FishingSpot {
     return spot;
   }
 
-  const derived = spotTypeToStructures[spot.spotType] ?? [];
+  // 管理釣り場は構造物から魚種を推定する対象外（放流魚が対象で、海の構造物の説明は当てはまらない）
+  if (spot.isManagedPond) {
+    return { ...spot, structureTypes: [] };
+  }
+
+  let derived = spotTypeToStructures[spot.spotType] ?? [];
+
+  // 川のうち海の魚が1種も登録されていない純淡水の釣り場には、海の魚（アジ・クロダイ）を
+  // 「推定対象魚種」として出さない。河口・汽水域（スズキ・クロダイなどが登録済み）は従来どおり。
+  if (spot.spotType === "river" && !spot.catchableFish.some((cf) => RIVER_MOUTH_FISH.has(cf.fish.slug))) {
+    derived = [];
+  }
 
   return {
     ...spot,

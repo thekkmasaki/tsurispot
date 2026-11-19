@@ -21,6 +21,8 @@ interface MonthlyRecommendationFish {
 
 interface SatelliteAnalysisSectionProps {
   structureTypes: StructureCategory[];
+  /** 夜釣り禁止のスポットか。true のとき、構造物の説明から夜間・常夜灯の文を外す */
+  nightFishingBanned?: boolean;
   spotName: string;
   spotType: string;
   /** 実際に航空写真をAI解析した結果か（true=実解析スポット / false=釣り場タイプ由来の一般的想定）。
@@ -31,6 +33,14 @@ interface SatelliteAnalysisSectionProps {
     month: number;
     fish: MonthlyRecommendationFish[];
   };
+}
+
+/** 夜釣り禁止の施設に「夜間は常夜灯に…」と書かないよう、夜間前提の文を落とす */
+function withoutNightSentences(description: string): string {
+  const kept = description
+    .split("。")
+    .filter((sentence) => sentence && !/夜間|常夜灯|夜釣り/.test(sentence));
+  return kept.length > 0 ? `${kept.join("。")}。` : description;
 }
 
 const RECOMMEND_MARK: Record<MonthlyRecommendationFish["recommendLevel"], string> = {
@@ -101,6 +111,7 @@ const METHOD_SLUG_LABELS: Record<string, string> = {
 
 export function SatelliteAnalysisSection({
   structureTypes,
+  nightFishingBanned = false,
   spotName,
   isAnalyzed = false,
   monthlyRecommendation,
@@ -187,7 +198,7 @@ export function SatelliteAnalysisSection({
                 </h3>
               </div>
               <p className="text-sm leading-relaxed text-slate-600">
-                {info.description}
+                {nightFishingBanned ? withoutNightSentences(info.description) : info.description}
               </p>
             </div>
           );

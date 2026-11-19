@@ -9,6 +9,7 @@
 // next.config.ts → spots.ts 経由でこのファイルがビルド時 transpile されるため、
 // @/ エイリアスではなく相対パスで参照する。
 import type { FishingSpot, CatchableFish } from "../../types";
+import { getAdvisableCatchableFish } from "@/lib/utils/spot-rule-consistency";
 import { SPOT_TYPE_LABELS } from "../../types";
 import { buildManagedSummary, buildManagedFaqs } from "../managed-pond";
 
@@ -578,7 +579,9 @@ export function generateSeasonDetail(spot: FishingSpot): { season: string; fish:
         ? "水温の上昇とともにキスが接岸。投げ釣りシーズンの開幕"
         : spot.spotType === "rocky"
           ? "のっこみのチヌやグレが狙える好シーズン。産卵前の荒食いを狙う"
-          : "水温が上がり始め、魚の活性が徐々にアップ。新子のアオリイカも登場",
+          : isFreshwaterSpot(spot)
+            ? "水温が上がり始め、魚の活性が徐々にアップ。朝夕は冷えるので日中の暖かい時間帯が狙い目"
+            : "水温が上がり始め、魚の活性が徐々にアップ。新子のアオリイカも登場",
     });
   }
 
@@ -664,6 +667,20 @@ function cfInSeason(cf: CatchableFish, inSeason: (m: number) => boolean): boolea
   }
 }
 
+/**
+ * 淡水の釣り場か（川・湖・池・管理釣り場）。
+ * 海の魚を前提にした季節文（アオリイカ・青物・カレイなど）を淡水の釣り場に出さないために使う。
+ * 2026-11 監査: 山中のトラウト管理釣り場に「新子のアオリイカも登場」と表示していた。
+ */
+function isFreshwaterSpot(spot: FishingSpot): boolean {
+  return (
+    spot.isManagedPond === true ||
+    spot.spotType === "river" ||
+    spot.spotType === "lake" ||
+    spot.spotType === "pond"
+  );
+}
+
 /** 季節別の一言アドバイス（generateSeasonDetail と同方針。魚の有無で分岐） */
 function seasonAdvice(spot: FishingSpot, slug: SeasonSlug, hasFish: boolean): string {
   const region = getRegionGroup(spot.region.prefecture);
@@ -683,16 +700,23 @@ function seasonAdvice(spot: FishingSpot, slug: SeasonSlug, hasFish: boolean): st
         ? "水温の上昇とともにキスが接岸。投げ釣りシーズンの開幕"
         : spot.spotType === "rocky"
           ? "のっこみのチヌやグレが狙える好シーズン。産卵前の荒食いを狙う"
-          : "水温が上がり始め、魚の活性が徐々にアップ。新子のアオリイカも登場";
+          : isFreshwaterSpot(spot)
+            ? "水温が上がり始め、魚の活性が徐々にアップ。朝夕は冷えるので日中の暖かい時間帯が狙い目"
+            : "水温が上がり始め、魚の活性が徐々にアップ。新子のアオリイカも登場";
     case "summer":
       return spot.spotType === "river"
         ? "鮎やヤマメなど渓流魚のベストシーズン。日差しが強いので熱中症対策を"
-        : "青物の回遊が活発化。早朝の涼しい時間帯が特におすすめ。熱中症対策は必須";
+        : isFreshwaterSpot(spot)
+          ? "水温が高く日中は食いが落ちやすい。朝夕の涼しい時間帯が狙い目。熱中症対策は必須"
+          : "青物の回遊が活発化。早朝の涼しい時間帯が特におすすめ。熱中症対策は必須";
     case "autumn":
       return spot.spotType === "port" || spot.spotType === "breakwater"
         ? "最も魚種が豊富な時期。サビキ釣りの数釣りから青物まで多彩な釣りが楽しめる"
         : "年間で最も釣れる時期。気候も穏やかで一日中快適に楽しめる";
     case "winter":
+      if (isFreshwaterSpot(spot)) {
+        return "水温が下がり魚の動きは鈍くなる。日中の暖かい時間帯が狙い目。防寒対策を万全に";
+      }
       return region === "hokkaido" || region === "tohoku"
         ? "厳寒期は釣り物が限られるが、ワカサギやカレイなど冬ならではのターゲットも"
         : region === "kyushu" || region === "shikoku"
@@ -709,7 +733,8 @@ export function buildSeasonTable(spot: FishingSpot): SeasonTableRow[] {
   return SEASON_DEFS.map(({ slug, label, inSeason }) => {
     // 同一魚は季節内で1エントリに集約（旬を優先、次に難易度easy寄りの代表）
     const bySlug = new Map<string, SeasonTableFish>();
-    for (const cf of spot.catchableFish) {
+    // ルールで禁止されている釣り方（投げ釣り禁止の施設の投げ釣りなど）は季節表に出さない
+    for (const cf of getAdvisableCatchableFish(spot)) {
       if (!cfInSeason(cf, inSeason)) continue;
       const key = cf.fish.slug;
       const cand: SeasonTableFish = {

@@ -4,8 +4,10 @@ import {
   getForbiddenMethods,
   getAdvisableCatchableFish,
   isNightFishingAdvisable,
+  getAdvisableGearGuides,
 } from "@/lib/utils/spot-rule-consistency";
-import { generateTimeAdvice } from "@/lib/utils/spot-content-generator";
+import { generateTimeAdvice, buildSeasonTable } from "@/lib/utils/spot-content-generator";
+import { enrichSpotWithStructures } from "@/lib/patent/derive-structure-types";
 
 /**
  * ルール（禁止事項）とおすすめコンテンツの突合せ回帰テスト（2026-08 UX監査）。
@@ -83,5 +85,32 @@ describe("データ全体の矛盾規模（ガードレール・参考値）", (
     // 表示側は getAdvisableCatchableFish で防御済み。ここではデータ側の規模を可視化する
     console.info(`[rule-consistency] 禁止釣法がcatchableFishに残るスポット: ${spotsWithConflict}件 / ${fishingSpots.length}件`);
     expect(spotsWithConflict).toBeGreaterThanOrEqual(0);
+  });
+});
+
+describe("季節表・装備ガイド・構造物説明の整合性（2026-11 監査）", () => {
+  it("淡水の釣り場の季節表にアオリイカ・青物の文が出ない", () => {
+    for (const s of fishingSpots) {
+      if (!(s.isManagedPond || s.spotType === "river" || s.spotType === "lake" || s.spotType === "pond")) continue;
+      for (const row of buildSeasonTable(s)) {
+        expect(row.advice, `${s.slug} ${row.label}`).not.toMatch(/アオリイカ|青物/);
+      }
+    }
+  });
+
+  it("禁止釣法の装備ガイドは返さない", () => {
+    for (const s of fishingSpots) {
+      const forbidden = getForbiddenMethods(s);
+      if (forbidden.size === 0) continue;
+      for (const g of getAdvisableGearGuides(s)) {
+        expect(forbidden.has(g.method), `${s.slug}: ${g.method}`).toBe(false);
+      }
+    }
+  });
+
+  it("管理釣り場には構造物からの推定魚種を付けない", () => {
+    const susono = fishingSpots.find((s) => s.slug === "shizuoka-susono-fishing-park");
+    expect(susono).toBeDefined();
+    expect(enrichSpotWithStructures(susono!).structureTypes ?? []).toEqual([]);
   });
 });
