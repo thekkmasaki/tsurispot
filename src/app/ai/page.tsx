@@ -20,7 +20,7 @@ const MCP_ENDPOINT = "https://tsurispot.com/api/mcp";
 const LAST_REVIEWED = "2026-11-19";
 const TITLE = "AIアシスタントでツリスポを使う（Claude・ChatGPT 連携）";
 const DESCRIPTION =
-  "ツリスポの MCP コネクタを Claude や ChatGPT に追加すると、全国の釣り場検索・潮汐・天気と釣り指数・釣れる魚・最近の釣果・近くの釣具店を会話の中で調べられます。設定方法、質問例、ツール一覧、データの出典とプライバシーを説明します。";
+  "ツリスポの MCP コネクタを Claude や ChatGPT に追加すると、全国の釣り場検索・潮汐・釣れる魚・最近の釣果・近くの釣具店・釣りのルールを会話の中で調べられます。設定方法、質問例、ツール一覧、データの出典とプライバシーを説明します。";
 
 export const metadata: Metadata = {
   title: `${TITLE}｜ツリスポ`,
@@ -42,7 +42,6 @@ const TOOLS: Tool[] = [
   { name: "get_spot_details", title: "釣り場の詳細", description: "釣り場の住所・座標・設備（駐車場・トイレ）・釣れる魚と時期・ルールや禁止事項をまとめて返します。" },
   { name: "find_nearby_spots", title: "近くの釣り場", description: "現在地や指定した座標から近い順に釣り場を探します。" },
   { name: "get_tide", title: "潮汐（満潮・干潮）", description: "釣り場や地点の満潮・干潮の時刻と潮位、潮回り（大潮・小潮など）を返します。" },
-  { name: "get_fishing_forecast", title: "天気・風・釣り指数", description: "天気・気温・風速・波の予報と、それをもとにした釣りやすさの指数を返します。" },
   { name: "get_catchable_fish", title: "今釣れる魚", description: "地域・月を指定して、その時期に釣れる魚と旬の魚を返します。" },
   { name: "get_recent_catches", title: "最近の釣果", description: "ツリスポに投稿された最近の釣果やエリア別の釣果レポートを返します。" },
   { name: "find_tackle_shops", title: "釣具店・エサ", description: "釣り場の近くにある釣具店（エサの購入先）を探します。" },
@@ -55,7 +54,7 @@ const TOOLS: Tool[] = [
 const EXAMPLE_PROMPTS = [
   "今週末、湘南でアジ釣りをしたい。おすすめの釣り場と潮回りは？",
   "千葉で子ども連れでも安心な、トイレと駐車場がある堤防を3つ教えて",
-  "明日の朝、大阪湾の天気と風はどう？釣りに行けそう？",
+  "明日、大阪湾の釣り場の満潮と干潮は何時？",
   "11月の神奈川で今釣れる魚と、初心者向けの釣り方を教えて",
   "横浜の本牧周辺で最近どんな魚が釣れている？",
   "北九州でエギングをしたい。近くの釣具店と必要な道具は？",
@@ -133,7 +132,7 @@ export default function AiConnectorPage() {
       <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">{TITLE}</h1>
       <p className="mb-2 text-sm leading-relaxed text-muted-foreground">
         ツリスポのデータは、Claude や ChatGPT などの AI アシスタントから直接使えます。
-        コネクタを一度追加しておけば、「今週末どこで何が釣れる？」と話しかけるだけで、AI が全国の釣り場・潮汐・天気・釣れる魚・最近の釣果を調べて答えてくれます。
+        コネクタを一度追加しておけば、「今週末どこで何が釣れる？」と話しかけるだけで、AI が全国の釣り場・潮汐・釣れる魚・最近の釣果を調べて答えてくれます。
         無料・登録不要です。
       </p>
       <p className="mb-8 text-xs text-muted-foreground">最終更新日: {LAST_REVIEWED}</p>
@@ -255,7 +254,6 @@ export default function AiConnectorPage() {
               をご覧ください。
             </li>
             <li><strong>潮汐</strong>：気象庁の潮位表（推算値）にもとづいています。実際の潮位は気圧や風で変わります。</li>
-            <li><strong>天気・風・波</strong>：Open-Meteo の予報データを使っています。予報は外れることがあります。</li>
             <li><strong>釣果</strong>：ツリスポの利用者による投稿と、編集部のエリア別釣果レポートです。</li>
           </ul>
           <p className="rounded-lg bg-muted/50 p-3">

@@ -30,7 +30,8 @@ const ORDER = [
   "get_tide",
   "get_catchable_fish",
   "find_nearby_spots",
-  "get_fishing_forecast",
+  // get_fishing_forecast は非公開（天気データの提供元 Open-Meteo の無料版が非商用限定のため）。
+  // 実装とテストは残してあり、商用で使える天気データに切り替えたらここに戻す
   "get_recent_catches",
   "find_tackle_shops",
   "recommend_gear",

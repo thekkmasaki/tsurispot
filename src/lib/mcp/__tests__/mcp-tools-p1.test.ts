@@ -34,6 +34,7 @@ import {
   checkFishingRules,
   todayJST,
   TOOLS,
+  ToolInputError,
 } from "../tools";
 import { addDaysYmd } from "../tools/shared";
 import { fishingSpots } from "@/lib/data/spots";
@@ -145,16 +146,23 @@ describe("get_fishing_forecast", () => {
   });
 
   it("7日より先・過去の日付は入力エラー", async () => {
-    expect((await call("get_fishing_forecast", { slug: seaSpot.slug, date: addDaysYmd(todayJST(), 7) })).isError).toBe(true);
-    expect((await call("get_fishing_forecast", { slug: seaSpot.slug, date: addDaysYmd(todayJST(), -1) })).isError).toBe(true);
+    await expect(getFishingForecast({ slug: seaSpot.slug, date: addDaysYmd(todayJST(), 7) })).rejects.toThrow(ToolInputError);
+    await expect(getFishingForecast({ slug: seaSpot.slug, date: addDaysYmd(todayJST(), -1) })).rejects.toThrow(ToolInputError);
   });
 
-  it("Open-Meteo 障害時はクラッシュせず、分かりやすい isError を返す", async () => {
-    const r = await call("get_fishing_forecast", { slug: otherSpot.slug });
-    expect(r.isError).toBe(true);
-    const text = (r.content as { text: string }[])[0].text;
-    expect(text).toMatch(/天気予報サービス/);
-    expect(text).toMatch(/get_tide/);
+  it("Open-Meteo 障害時はクラッシュせず、分かりやすいツールエラーを返す", async () => {
+    await expect(getFishingForecast({ slug: otherSpot.slug })).rejects.toThrow(/天気予報サービス[\s\S]*get_tide/);
+  });
+
+  it("天気データのライセンス整理が済むまで MCP では公開しない（tools/list に出ず、呼んでもエラー）", async () => {
+    expect(TOOLS.map((t) => t.name)).not.toContain("get_fishing_forecast");
+    const res = (await handleMessage({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "tools/call",
+      params: { name: "get_fishing_forecast", arguments: { slug: seaSpot.slug } },
+    })) as { result?: { isError?: boolean }; error?: unknown };
+    expect(Boolean(res.error) || res.result?.isError === true).toBe(true);
   });
 });
 
@@ -228,26 +236,21 @@ describe("find_tackle_shops", () => {
 });
 
 describe("recommend_gear", () => {
-  const urlOf = (id: string) => affiliateProducts.find((p) => p.id === id)?.url;
 
-  it("アジ×サビキ: タックル・今月の針サイズ・月別仕掛け・関連商品・ガイドURL", () => {
+  it("アジ×サビキ: タックル・今月の針サイズ・月別仕掛け・ガイドURL", () => {
     const r = recommendGear({ fish: "アジ", method: "サビキ", month: 7 });
     expect(r.methods[0].method).toMatch(/サビキ/);
     expect(r.methods[0].hookSizeThisMonth?.size).toBeTruthy();
     expect(r.monthlyRig.length).toBeGreaterThan(0);
-    expect(r.products.length).toBeGreaterThan(0);
-    expect(r.products.map((p) => p.url)).not.toContain(urlOf("af-eging-rod")); // 無関係な商品は出さない
     expect(r.guides.some((g) => g.url.includes("/guide/sabiki?utm_source=ai_mcp"))).toBe(true);
-    expect(r.disclosure).toMatch(/アフィリエイト/);
   });
 
-  it("アオリイカ×エギング: サビキ用のコマセ等は出さない", () => {
-    const r = recommendGear({ fish: "アオリイカ", method: "エギング", month: 10 });
-    const urls = r.products.map((p) => p.url);
-    expect(urls).not.toContain(urlOf("af-amihime"));
-    // 釣法非依存の汎用品（キーワード無し）も「この魚・釣り方の道具」としては出さない
-    const generic = affiliateProducts.filter((p) => p.methodKeywords.length === 0 && !p.fishKeywords?.length).map((p) => p.url);
-    for (const u of urls) expect(generic).not.toContain(u);
+  it("広告・商品の購入リンクは返さない（コネクタディレクトリの掲載基準）", () => {
+    for (const [fish, method] of [["アジ", "サビキ"], ["アオリイカ", "エギング"], ["シーバス", "ルアー"]]) {
+      const json = JSON.stringify(recommendGear({ fish, method, month: 10 }));
+      expect(json).not.toMatch(/amazon|rakuten|amzn|affiliate|アフィリエイト|tag=|products|shopSearch/i);
+      for (const p of affiliateProducts) expect(json).not.toContain(p.url);
+    }
   });
 
   it("未登録の魚は入力エラー、未登録の釣り方は注記つきで主な釣り方を返す", async () => {
@@ -314,7 +317,6 @@ describe("認証なしで使える（回帰）", () => {
     get_tide: { slug: "daikoku-fishing-facility" },
     get_catchable_fish: { prefecture: "千葉県" },
     find_nearby_spots: { ...YOKOHAMA, limit: 2 },
-    get_fishing_forecast: { slug: "daikoku-fishing-facility" },
     get_recent_catches: { slug: "daikoku-fishing-facility" },
     find_tackle_shops: { slug: "daikoku-fishing-facility" },
     recommend_gear: { fish: "アジ" },
@@ -352,7 +354,6 @@ describe("認証なしで使える（回帰）", () => {
       get_tide: { slug: "daikoku-fishing-facility" },
       get_catchable_fish: { slug: richSpot.slug, month: 7 },
       find_nearby_spots: { ...big, ...YOKOHAMA },
-      get_fishing_forecast: { slug: "daikoku-fishing-facility" },
       get_recent_catches: { ...big, slug: "daikoku-fishing-facility" },
       find_tackle_shops: { ...big, ...YOKOHAMA },
       recommend_gear: { fish: "アジ" },
@@ -360,7 +361,7 @@ describe("認証なしで使える（回帰）", () => {
       check_fishing_rules: { prefecture: "北海道" },
       draft_catch_report: { slug: "daikoku-fishing-facility", fishName: "アジ" },
     };
-    const DETAIL = ["get_spot_details", "get_tide", "get_fishing_forecast", "get_fish_info", "recommend_gear"];
+    const DETAIL = ["get_spot_details", "get_tide", "get_fish_info", "recommend_gear"];
     const longest = (v: unknown): number =>
       Array.isArray(v)
         ? Math.max(v.length, ...v.map(longest))
@@ -387,9 +388,9 @@ describe("認証なしで使える（回帰）", () => {
     expect(Object.keys(WORST_ARGS).sort()).toEqual(TOOLS.map((t) => t.name).sort());
   });
 
-  it("外部APIを呼ぶ get_fishing_forecast だけ openWorldHint: true（どれも読み取り専用のまま）", () => {
+  it("公開ツールはすべて読み取り専用で、外部APIを呼ばない（openWorldHint: false）", () => {
     for (const t of TOOLS) {
-      expect(t.annotations.openWorldHint, t.name).toBe(t.name === "get_fishing_forecast");
+      expect(t.annotations.openWorldHint, t.name).toBe(false);
       expect(t.annotations.readOnlyHint, t.name).toBe(true);
       expect(t.annotations.destructiveHint, t.name).toBe(false);
     }
