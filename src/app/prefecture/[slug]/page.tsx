@@ -797,6 +797,12 @@ export default async function PrefecturePage({ params }: PageProps) {
 
       {/* エリア別の全スポット一覧（UI/UX刷新Phase3: 本命の一覧を順位系リストより上へ。
           旧位置は TOP10・注目・穴場・今月TOP5 等の後＝ページ中盤だった） */}
+      {/* 「ランキング」と題しつつ TOP10 が一覧の下にあるため、一覧の前から飛べる導線を置く */}
+      <p className="mb-4 text-sm">
+        <a href="#ranking" className="font-medium text-primary underline-offset-2 hover:underline">
+          {pref.name}の人気釣りスポットTOP10ランキングを見る ↓
+        </a>
+      </p>
       <SpotSearchFilter
         prefName={pref.name}
         regionGroups={areaGroups.map(({ area, spots: s }) => ({
@@ -805,6 +811,7 @@ export default async function PrefecturePage({ params }: PageProps) {
         }))}
         ungroupedSpots={ungroupedSpots.map(toListSpot)}
         totalSpots={spots.length}
+        allHref={`/prefecture/${pref.slug}/all`}
       />
 
       {/* エリア別の釣り場解説（定義した県のみ表示） */}

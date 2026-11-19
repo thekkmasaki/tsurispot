@@ -32,6 +32,7 @@ import { MAIN_WEEKLY_AREA_SLUGS, matchWeeklyAreaForPost, weeklyAreaHubPath } fro
 import { LineChoukaCta } from "@/components/line/line-chouka-cta";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
+import { addHeadingIds } from "@/lib/blog/toc";
 
 // ISR: 静的記事は generateStaticParams で SSG、microCMS記事は dynamicParams で随時生成。
 // （旧 force-dynamic は2026-05-19の空HTML焼き付き対策の暫定措置。
@@ -309,10 +310,29 @@ export default async function BlogPostPage({
       {/* 記事本文（h2で分割し、長い記事には中間広告を挿入） */}
       {(() => {
         const proseClass = "prose prose-gray max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-xl prose-h2:border-l-4 prose-h2:border-primary prose-h2:pl-3 prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-lg prose-p:leading-relaxed prose-p:text-gray-700 prose-li:text-gray-700 prose-ul:my-4 prose-li:my-1 sm:prose-h2:text-2xl sm:prose-h3:text-xl";
-        const sections = post.content.split(/(?=<h2[\s>])/);
+        // h2 に id を振って目次を作る（h2 が3つ以上の長い記事のみ表示）
+        const { html: contentHtml, toc } = addHeadingIds(post.content);
+        const tocNav = toc.length >= 3 && (
+          <nav aria-label="目次" className="mb-6 rounded-lg border bg-muted/40 p-4">
+            <p className="mb-2 text-sm font-bold">目次</p>
+            <ol className="list-decimal space-y-1 pl-5 text-sm">
+              {toc.map((t) => (
+                <li key={t.id}>
+                  <a href={`#${t.id}`} className="text-primary underline-offset-2 hover:underline">
+                    {t.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        );
+        const sections = contentHtml.split(/(?=<h2[\s>])/);
         if (sections.length <= 3) {
           return (
-            <article className={proseClass} dangerouslySetInnerHTML={{ __html: post.content }} />
+            <>
+              {tocNav}
+              <article className={proseClass} dangerouslySetInnerHTML={{ __html: contentHtml }} />
+            </>
           );
         }
         const insertAfter = 2;
@@ -320,6 +340,7 @@ export default async function BlogPostPage({
         const after = sections.slice(insertAfter).join("");
         return (
           <>
+            {tocNav}
             <article className={proseClass} dangerouslySetInnerHTML={{ __html: before }} />
             <InArticleAd className="my-8" />
             <article className={proseClass} dangerouslySetInnerHTML={{ __html: after }} />

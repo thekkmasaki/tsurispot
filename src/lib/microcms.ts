@@ -146,19 +146,46 @@ export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
   return posts;
 }
 
-/** microCMSからslug指定で1記事取得（slugフィールド → id フォールバック） */
+/**
+ * microCMS の「取得に失敗した」ことを表すエラー（記事が存在しない、とは区別する）。
+ *
+ * 以前は通信エラー・5xx・タイムアウトでも null（=記事なし）を返していたため、一時的な障害が
+ * /blog/[slug] の notFound() として ISR に最大1時間キャッシュされ、一覧（別キャッシュ）には
+ * リンクが出続ける＝「リンクはあるのに404」になり得た（2026-11 UX監査: 釣果週報の404）。
+ */
+export class MicroCMSFetchError extends Error {
+  constructor(slug: string, cause: unknown) {
+    super(`[microCMS] 記事の取得に失敗: ${slug}`, { cause });
+    this.name = "MicroCMSFetchError";
+  }
+}
+
+/** microCMS SDK のエラーが「該当コンテンツなし」（404/400）かどうか */
+function isNotFoundError(e: unknown): boolean {
+  const msg = e instanceof Error ? e.message : String(e);
+  return /\b(404|400)\b/.test(msg);
+}
+
+/**
+ * microCMSからslug指定で1記事取得（slugフィールド → id フォールバック）。
+ * 記事が存在しなければ null。取得自体に失敗したら MicroCMSFetchError を投げる。
+ */
 export async function fetchMicroCMSBlogBySlug(
   slug: string
 ): Promise<BlogPost | null> {
   const client = getClient();
   if (!client) return null;
 
+  // 応答停止で描画を長時間ブロックしないよう、一覧取得と同じ8秒で打ち切る
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  const customRequestInit = { next: { revalidate: 3600 }, signal: controller.signal };
   try {
     // まずslugフィールドで検索
     const data = await client.get<MicroCMSListResponse>({
       endpoint: "blogs",
       queries: { filters: `slug[equals]${slug}`, limit: 1 },
-      customRequestInit: { next: { revalidate: 3600 } },
+      customRequestInit,
     });
     if (data.contents.length > 0) {
       return microCMSToBlogPost(data.contents[0]);
@@ -169,14 +196,17 @@ export async function fetchMicroCMSBlogBySlug(
       const item = await client.get<MicroCMSBlogResponse>({
         endpoint: "blogs",
         contentId: slug,
-        customRequestInit: { next: { revalidate: 3600 } },
+        customRequestInit,
       });
       return microCMSToBlogPost(item);
-    } catch {
-      return null;
+    } catch (e) {
+      if (isNotFoundError(e)) return null; // 本当に存在しない
+      throw e;
     }
   } catch (e) {
     console.warn("[microCMS] slug検索失敗:", slug, e);
-    return null;
+    throw new MicroCMSFetchError(slug, e);
+  } finally {
+    clearTimeout(timeout);
   }
 }
