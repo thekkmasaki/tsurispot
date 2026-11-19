@@ -17,7 +17,7 @@ import { CopyEndpoint } from "./copy-endpoint";
 
 const PAGE_URL = "https://tsurispot.com/ai";
 const MCP_ENDPOINT = "https://tsurispot.com/api/mcp";
-const LAST_REVIEWED = "2026-11-19";
+const LAST_REVIEWED = "2026-11-20";
 const TITLE = "AIアシスタントでツリスポを使う（Claude・ChatGPT 連携）";
 const DESCRIPTION =
   "ツリスポの MCP コネクタを Claude や ChatGPT に追加すると、全国の釣り場検索・潮汐・釣れる魚・最近の釣果・近くの釣具店・釣りのルールを会話の中で調べられます。設定方法、質問例、ツール一覧、データの出典とプライバシーを説明します。";
@@ -142,7 +142,8 @@ export default function AiConnectorPage() {
           <li><a href="#what" className="text-primary hover:underline">ツリスポのコネクタとは</a></li>
           <li><a href="#claude" className="text-primary hover:underline">Claude での設定方法</a></li>
           <li><a href="#chatgpt" className="text-primary hover:underline">ChatGPT での設定方法</a></li>
-          <li><a href="#examples" className="text-primary hover:underline">質問の例</a></li>
+          <li><a href="#other-apps" className="text-primary hover:underline">Gemini などほかの AI アプリ</a></li>
+          <li><a href="#examples"className="text-primary hover:underline">質問の例</a></li>
           <li><a href="#tools" className="text-primary hover:underline">使える機能（ツール一覧）</a></li>
           <li><a href="#data" className="text-primary hover:underline">データの出典と注意事項</a></li>
           <li><a href="#privacy" className="text-primary hover:underline">プライバシー</a></li>
@@ -192,8 +193,20 @@ export default function AiConnectorPage() {
             <li>新しいチャットでツリスポのコネクタを選択してから質問します。</li>
           </ol>
           <p className="text-xs text-muted-foreground">
-            ※ 開発者モードやカスタムコネクタが使えるかどうかは、ChatGPT のプランや提供状況によって異なります。
+            ※ 開発者モードは有料プラン（Plus・Pro・Business など）向けの機能で、無料プランでは使えません。メニューの名称や位置は ChatGPT の更新で変わることがあります。Business／Enterprise では、管理者が開発者モードを許可する必要があることがあります。
           </p>
+        </Section>
+
+        <Section id="other-apps" icon={Plug} title="Gemini などほかの AI アプリ">
+          <p>
+            リモート MCP サーバー（Streamable HTTP）を URL で追加できる AI アプリなら、同じ URL
+            （<code className="rounded bg-muted px-1 py-0.5 text-xs">{MCP_ENDPOINT}</code>）を登録すれば使えます。認証は「なし」を選んでください。
+          </p>
+          <ul className="list-disc space-y-1 pl-5">
+            <li><strong>Gemini（個人向けアプリ）</strong>：設定の「接続済みアプリ」からカスタムアプリとして追加できます。ただし、現在は一部のプラン・地域・言語に限られた機能です。</li>
+            <li><strong>Gemini Enterprise</strong>：管理者が「接続済みアプリ」から MCP サーバーとして追加します。</li>
+            <li><strong>開発者向けツール</strong>（Claude Code、Cursor、VS Code など）：MCP の設定ファイルに上記の URL を HTTP サーバーとして登録します。</li>
+          </ul>
         </Section>
 
         <div className="flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-100">
