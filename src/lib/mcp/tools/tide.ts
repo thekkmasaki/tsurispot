@@ -188,5 +188,7 @@ export const TIDE_TOOLS: ToolDef[] = [
       required: ["slug"],
     },
     run: getFishingForecast,
+    // Open-Meteo（外部の天気予報API）を呼ぶため
+    annotations: { openWorldHint: true },
   },
 ];

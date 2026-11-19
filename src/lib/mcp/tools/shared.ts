@@ -66,6 +66,8 @@ export interface ToolDef {
   description: string;
   inputSchema: Record<string, unknown>;
   run: (args: Record<string, unknown>) => unknown | Promise<unknown>;
+  /** READ_ONLY の既定を上書きする注釈（例: 外部APIを呼ぶツールは openWorldHint: true） */
+  annotations?: Partial<typeof READ_ONLY>;
 }
 
 /** 1回の呼び出しで返す一覧の上限（一覧系ツール共通。詳細系は1件のみ返す） */

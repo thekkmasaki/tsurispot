@@ -40,5 +40,5 @@ const ALL: ToolDef[] = [...SPOT_TOOLS, ...TIDE_TOOLS, ...FISH_TOOLS, ...CATCH_TO
 export const TOOLS = ORDER.map((name) => {
   const t = ALL.find((x) => x.name === name);
   if (!t) throw new Error(`[mcp] tool not defined: ${name}`);
-  return { ...t, annotations: { title: t.title, ...READ_ONLY } };
+  return { ...t, annotations: { title: t.title, ...READ_ONLY, ...t.annotations } };
 });

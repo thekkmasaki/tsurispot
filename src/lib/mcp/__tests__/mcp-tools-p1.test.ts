@@ -385,6 +385,14 @@ describe("認証なしで使える（回帰）", () => {
     expect(Object.keys(WORST_ARGS).sort()).toEqual(TOOLS.map((t) => t.name).sort());
   });
 
+  it("外部APIを呼ぶ get_fishing_forecast だけ openWorldHint: true（どれも読み取り専用のまま）", () => {
+    for (const t of TOOLS) {
+      expect(t.annotations.openWorldHint, t.name).toBe(t.name === "get_fishing_forecast");
+      expect(t.annotations.readOnlyHint, t.name).toBe(true);
+      expect(t.annotations.destructiveHint, t.name).toBe(false);
+    }
+  });
+
   it("ツールの説明文はすべて日本語で使用例つき", () => {
     for (const t of TOOLS) {
       expect(t.description).toMatch(/例: \{/);
