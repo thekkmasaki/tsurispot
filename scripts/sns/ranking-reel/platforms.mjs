@@ -62,3 +62,42 @@ export async function postThreadsImage({ userId, token, imageUrl, text }) {
   const { permalink } = await call(`${host}/${id}`, { fields: "permalink", access_token: token }, "GET").catch(() => ({}));
   return { id, permalink };
 }
+
+// ── X ──
+/** X の重み付き文字数（全角2・半角1。上限280） */
+export const xLen = (s) => [...s].reduce((a, c) => a + (c.codePointAt(0) <= 0x10ff ? 1 : 2), 0);
+
+/** 行単位で 280 以内に分ける（1行が長すぎる場合は切り詰める） */
+export function splitForX(text) {
+  const out = [];
+  let cur = "";
+  for (let line of text.split("\n")) {
+    while (xLen(line) > 270) line = [...line].slice(0, -1).join("");
+    const next = cur ? `${cur}\n${line}` : line;
+    if (xLen(next) > 280) { out.push(cur); cur = line; } else cur = next;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+/**
+ * 動画付きで X に投稿する（URL を含めない＝API 料金の安い区分）。replyText があれば投稿への返信で続ける（写真の出典など）
+ * 必要: X_API_KEY / X_API_KEY_SECRET / X_ACCESS_TOKEN / X_ACCESS_TOKEN_SECRET（週報の X 投稿と同じ）
+ */
+export async function postXVideo({ videoBuffer, text, replyText }) {
+  const { X_API_KEY, X_API_KEY_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET } = process.env;
+  const { TwitterApi } = await import("twitter-api-v2");
+  const client = new TwitterApi({ appKey: X_API_KEY, appSecret: X_API_KEY_SECRET, accessToken: X_ACCESS_TOKEN, accessSecret: X_ACCESS_TOKEN_SECRET });
+  const mediaId = await client.v2.uploadMedia(videoBuffer, { media_type: "video/mp4", media_category: "tweet_video" });
+  const res = await client.v2.tweet({ text, media: { media_ids: [mediaId] } });
+  const id = res.data.id;
+  let parent = id;
+  for (const part of replyText ? splitForX(replyText) : []) {
+    try { parent = (await client.v2.reply(part, parent)).data.id; }
+    catch (e) { console.warn("X の返信（写真の出典）に失敗:", e.message); break; }
+  }
+  return { id, permalink: `https://x.com/i/status/${id}` };
+}
+
+export const xConfigured = () =>
+  ["X_API_KEY", "X_API_KEY_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"].every((k) => process.env[k]);

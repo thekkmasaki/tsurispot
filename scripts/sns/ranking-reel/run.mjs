@@ -16,7 +16,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { readLedger, appendLedger, getToken, discord, uploadPublic, removePublic } from "./lib.mjs";
-import { postInstagramReel, postThreadsImage } from "./platforms.mjs";
+import { postInstagramReel, postThreadsImage, postXVideo, xConfigured } from "./platforms.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -25,7 +25,7 @@ const dryRun = argv.includes("--dry-run");
 const date = arg("date") ?? new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
 const slot = arg("slot") === "am" ? "am" : "pm";
 const slotOf = (e) => e.slot ?? "pm";
-const platforms = new Set((arg("platforms") ?? "instagram,threads").split(","));
+const platforms = new Set((arg("platforms") ?? "instagram,threads,x").split(","));
 const outDir = path.resolve(arg("out") ?? `out/sns-ranking/${date}-${slot}`);
 fs.mkdirSync(outDir, { recursive: true });
 
@@ -93,6 +93,14 @@ const thToken = await getToken("threads");
 if (process.env.THREADS_USER_ID && thToken) {
   await attempt("threads", () => postThreadsImage({ userId: process.env.THREADS_USER_ID, token: thToken, imageUrl, text: thText }));
 } else if (platforms.has("threads")) result.threads = { skipped: "認証情報なし" };
+// X: 動画をそのまま投稿（本文に URL なし）。写真の出典は返信で出す
+if (platforms.has("x") && xConfigured()) {
+  await attempt("x", () => postXVideo({
+    videoBuffer: fs.readFileSync(path.join(outDir, "reel.mp4")),
+    text: fs.readFileSync(path.join(outDir, "caption-x.txt"), "utf8"),
+    replyText: fs.readFileSync(path.join(outDir, "caption-x-credits.txt"), "utf8"),
+  }));
+} else if (platforms.has("x")) result.x = { skipped: "認証情報なし" };
 
 await removePublic(`${base}.mp4`);
 await removePublic(`${base}.png`);
@@ -101,9 +109,10 @@ await removePublic(`${base}.png`);
 const posted = Object.values(result).filter((r) => r.id);
 const failed = Object.entries(result).filter(([, r]) => r.error);
 await appendLedger({ date, slot, pref: topic.pref.slug, fish: topic.fish.slug, month: topic.month.num, ok: posted.length > 0,
-  instagram: result.instagram?.permalink ?? result.instagram?.id ?? null, threads: result.threads?.permalink ?? result.threads?.id ?? null });
+  instagram: result.instagram?.permalink ?? result.instagram?.id ?? null, threads: result.threads?.permalink ?? result.threads?.id ?? null,
+  x: result.x?.permalink ?? result.x?.id ?? null });
 const fmt = (k) => { const r = result[k]; return !r ? "" : r.id ? `✅ ${k}: ${r.permalink ?? r.id}` : r.error ? `❌ ${k}: ${r.error}` : `⏭️ ${k}: ${r.skipped}`; };
-await discord(`${failed.length ? "⚠️" : "📣"} **SNSランキング投稿** ${label}\n${["instagram", "threads"].map(fmt).filter(Boolean).join("\n")}\n${topic.url}`);
+await discord(`${failed.length ? "⚠️" : "📣"} **SNSランキング投稿** ${label}\n${["instagram", "threads", "x"].map(fmt).filter(Boolean).join("\n")}\n${topic.url}`);
 if (posted.length === 0) process.exit(1);
 
 function pickBgm(dir, seed) {

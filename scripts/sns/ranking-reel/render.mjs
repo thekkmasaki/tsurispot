@@ -92,6 +92,18 @@ ${lines}
 ${credits ? `\n📷 写真\n${credits}\n` : ""}
 ${hashtags}`;
 const threadsText = `【${t.month.name}】${t.pref.name}で${t.fish.name}が釣れる釣り場TOP${n}🎣\n\n${t.spots.slice(0, 5).map((s, i) => `${i + 1}. ${s.name}`).join("\n")}\n…6位以下と駐車場・釣果情報はこちら👇\n${t.url}?utm_source=threads&utm_medium=social&utm_campaign=ranking`;
+// X: 本文に URL を入れない（外部リンク付きは表示が絞られやすく、API 料金も約13倍）。
+// 文字数は X の重み付き（全角2・半角1）で 280 以内。写真の出典は投稿への返信で別に出す（caption-x-credits.txt）
+const xLen = (s) => [...s].reduce((a, c) => a + (c.codePointAt(0) <= 0x10ff ? 1 : 2), 0);
+const xTags = `#${t.fish.name} #${t.pref.short}釣り #釣り`;
+let xTop = 5;
+let xText;
+do {
+  xText = `【${t.month.name}】${t.pref.name}で${t.fish.name}が釣れる釣り場TOP${n}🎣\n\n${t.spots.slice(0, xTop).map((s, i) => `${i + 1}. ${s.name}`).join("\n")}\n…${xTop + 1}位以下は動画で\n\n${xTags}`;
+} while (xLen(xText) > 280 && --xTop > 0);
+const xCredits = credits ? `📷 写真\n${credits}` : "";
 fs.writeFileSync(path.join(outDir, "caption-instagram.txt"), igCaption);
 fs.writeFileSync(path.join(outDir, "caption-threads.txt"), threadsText.slice(0, 500));
-console.log(`OK ${outDir}/post.png ig=${igCaption.length}字 threads=${threadsText.length}字`);
+fs.writeFileSync(path.join(outDir, "caption-x.txt"), xText);
+fs.writeFileSync(path.join(outDir, "caption-x-credits.txt"), xCredits);
+console.log(`OK ${outDir}/post.png ig=${igCaption.length}字 threads=${threadsText.length}字 x=${xLen(xText)}/280`);
