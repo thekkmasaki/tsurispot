@@ -21,14 +21,15 @@ import {
   FileText,
 } from "lucide-react";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 export const metadata: Metadata = {
   title: "ツリスポについて｜釣りスポット総合情報サイト",
   description:
-    "ツリスポは全国2,700箇所以上の釣りスポット・115魚種以上を掲載する日本最大級の釣り情報サイトです。編集部が全記事を監修し、地図検索・魚種図鑑・季節別ガイド・初心者向け解説で最高の釣り体験をサポートします。",
+    `ツリスポは全国${SPOT_COUNT_FORMATTED}か所の釣りスポット・115魚種以上を掲載する日本最大級の釣り情報サイトです。編集部が全記事を監修し、地図検索・魚種図鑑・季節別ガイド・初心者向け解説で最高の釣り体験をサポートします。`,
   openGraph: {
     title: "ツリスポについて｜釣りスポット総合情報サイト",
-    description: "全国2,700箇所以上の釣りスポット・115魚種を掲載する日本最大級の釣り総合情報サイト。地図検索・魚種図鑑・季節別ガイドで釣り体験をサポートします。",
+    description: `全国${SPOT_COUNT_FORMATTED}か所の釣りスポット・115魚種を掲載する日本最大級の釣り総合情報サイト。地図検索・魚種図鑑・季節別ガイドで釣り体験をサポートします。`,
     type: "website",
     url: "https://tsurispot.com/about",
     siteName: "ツリスポ",

@@ -119,3 +119,35 @@ export function getAllAreaGroups(): {
   }
   return out.sort((a, b) => b.count - a.count || a.slug.localeCompare(b.slug));
 }
+
+/**
+ * 県ページ用: 県内スポットを市区町村単位で束ねる（/area/[slug] と同じ単位）。
+ *
+ * 県ページは従来 regions.ts の region.id だけで照合していたため、
+ *  - スポットファイル独自の localRegion が同じ id を別の県で使っていると他県のスポットが混入した
+ *    （佐賀の伊万里港波止が兵庫「加古川下流」に表示された。同型の id 衝突は67件）
+ *  - 同じ市が「明石／明石市内／明石・播磨／明石・垂水」と複数エリアに割れ、0件のエリアも並んだ
+ * 県は region.prefecture、束ねる単位は住所の市区町村にすることで両方を解消する。
+ *
+ * area.slug はその市区町村の代表エリアページ。自前の slug を持たない市区町村は null（リンクなし）。
+ * 並びは件数降順。住所から市区町村を取れないスポットは ungroupedSpots に入る。
+ */
+export function getPrefectureAreaGroups(prefecture: string): {
+  areaGroups: { area: { id: string; slug: string | null; areaName: string }; spots: FishingSpot[] }[];
+  ungroupedSpots: FishingSpot[];
+} {
+  const prefix = `${prefecture}|`;
+  const areaGroups: { area: { id: string; slug: string | null; areaName: string }; spots: FishingSpot[] }[] = [];
+  for (const [k, spots] of spotsByMuni) {
+    if (!k.startsWith(prefix)) continue;
+    const areaName = k.slice(prefix.length);
+    areaGroups.push({ area: { id: areaName, slug: repSlugByMuni.get(k) ?? null, areaName }, spots });
+  }
+  areaGroups.sort(
+    (a, b) => b.spots.length - a.spots.length || a.area.areaName.localeCompare(b.area.areaName, "ja"),
+  );
+  const ungroupedSpots = fishingSpots.filter(
+    (s) => s.region.prefecture === prefecture && muniKeyOf(s) === null,
+  );
+  return { areaGroups, ungroupedSpots };
+}

@@ -16,7 +16,19 @@ interface CrowdPredictionProps {
   prefecture?: string;
   hasParking?: boolean;
   reviewCount?: number;
+  /**
+   * 夜釣り不可（営業時間内のみ等）のスポットは false を渡す。
+   * 18時以降を「空いている」と見せると夜も入れると誤解されるため、その時間帯は予想を出さない。
+   */
+  nightFishingAllowed?: boolean;
+  /** 定休の曜日（0=日〜6=土）。今日が該当すれば予想の代わりに休園日と表示する */
+  closedWeekdays?: number[];
+  /** 定休日の原文（例「毎週木曜日（祝日は開園）」） */
+  closedNote?: string;
 }
+
+/** 夜釣り不可のスポットで予想を出さない時間帯（営業時間外の可能性が高い） */
+const NIGHT_START_HOUR = 18;
 
 const LEVEL_COLORS: Record<CrowdLevel, string> = {
   empty: "bg-green-500",
@@ -41,6 +53,9 @@ export function CrowdPredictionCard({
   prefecture,
   hasParking,
   reviewCount,
+  nightFishingAllowed,
+  closedWeekdays,
+  closedNote,
 }: CrowdPredictionProps) {
   // Hydration対策: new Date()はクライアント側でのみ取得する
   const [timeInfo, setTimeInfo] = useState<{
@@ -129,6 +144,30 @@ export function CrowdPredictionCard({
     );
   }
 
+  // 今日が定休日なら混雑予想そのものを出さない（休園日に「空いている」と表示しない）
+  if (closedWeekdays?.includes(timeInfo.dayOfWeek)) {
+    return (
+      <Card className="gap-0 py-0">
+        <CardContent className="p-4 sm:p-5">
+          <h3 className="mb-3 flex items-center gap-2 text-sm font-bold sm:text-base">
+            <Users className="size-4 text-primary" />
+            混雑予想
+          </h3>
+          <div className="inline-block rounded-lg bg-muted px-3 py-1.5 text-sm font-bold">
+            今日は休園日です
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            定休日: {closedNote ?? "公式サイトでご確認ください"}
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const nightClosed = nightFishingAllowed === false;
+  const isOffHours = (hour: number) => nightClosed && (hour >= NIGHT_START_HOUR || hour < 5);
+  const nowOffHours = isOffHours(timeInfo.hour);
+
   return (
     <Card className="gap-0 py-0">
       <CardContent className="p-4 sm:p-5">
@@ -140,9 +179,9 @@ export function CrowdPredictionCard({
         {/* 現在の混雑予想 */}
         <div className="mb-4 flex items-center gap-3">
           <div
-            className={`rounded-lg px-3 py-1.5 text-sm font-bold ${LEVEL_BG[currentPrediction.level]}`}
+            className={`rounded-lg px-3 py-1.5 text-sm font-bold ${nowOffHours ? "bg-muted text-muted-foreground" : LEVEL_BG[currentPrediction.level]}`}
           >
-            {currentPrediction.label}
+            {nowOffHours ? "営業時間外の可能性" : currentPrediction.label}
           </div>
           <span className="text-xs text-muted-foreground">
             現在 ({timeInfo.hour}:00)
@@ -150,7 +189,7 @@ export function CrowdPredictionCard({
         </div>
 
         {/* 影響している要因 */}
-        {currentPrediction.factors.length > 0 && (
+        {!nowOffHours && currentPrediction.factors.length > 0 && (
           <div className="mb-4 flex flex-wrap gap-1.5">
             {currentPrediction.factors.map((factor) => (
               <span
@@ -172,11 +211,19 @@ export function CrowdPredictionCard({
           <div className="flex items-end gap-[2px]">
             {displayHours.map(({ hour, prediction }) => (
               <div key={hour} className="flex flex-1 flex-col items-center gap-0.5">
-                <div
-                  className={`w-full rounded-sm ${LEVEL_COLORS[prediction.level]} transition-all`}
-                  style={{ height: `${Math.max(4, prediction.score * 0.4)}px` }}
-                  title={`${hour}:00 - ${prediction.label} (スコア: ${prediction.score})`}
-                />
+                {isOffHours(hour) ? (
+                  <div
+                    className="w-full rounded-sm bg-muted"
+                    style={{ height: "4px" }}
+                    title={`${hour}:00 - 営業時間外の可能性（夜釣り不可）`}
+                  />
+                ) : (
+                  <div
+                    className={`w-full rounded-sm ${LEVEL_COLORS[prediction.level]} transition-all`}
+                    style={{ height: `${Math.max(4, prediction.score * 0.4)}px` }}
+                    title={`${hour}:00 - ${prediction.label} (スコア: ${prediction.score})`}
+                  />
+                )}
                 {hour % 3 === 0 && (
                   <span className="text-[9px] text-muted-foreground">
                     {hour}
@@ -186,6 +233,12 @@ export function CrowdPredictionCard({
             ))}
           </div>
         </div>
+
+        {nightClosed && (
+          <p className="mt-2 text-[11px] text-muted-foreground">
+            この釣り場は夜釣り不可（営業時間内のみ利用可）のため、{NIGHT_START_HOUR}時以降の予想は表示していません。閉園時刻は公式情報でご確認ください。
+          </p>
+        )}
 
         {/* 凡例 */}
         <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] text-muted-foreground">

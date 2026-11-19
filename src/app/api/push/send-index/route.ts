@@ -10,6 +10,7 @@ import {
   pickHomeClusterIndex,
 } from "@/lib/geo/activity-cluster";
 import { isBearerMatch, resolveAdminToken } from "@/lib/safe-compare";
+import { isSpotClosedOn } from "@/lib/spot-closed-days";
 
 /**
  * 毎朝の釣行指数 Push 送信（案③）。GitHub Actions (push-morning-index.yml) から毎朝叩かれる。
@@ -96,7 +97,8 @@ export async function POST(req: NextRequest) {
       if (!spot) return;
       const forecast = await fetchSpotForecast(spot.latitude, spot.longitude);
       const today = forecast?.days[0];
-      if (!today) {
+      // 定休日の施設は「今日が勝負」と通知しない（score null = 判定対象外）
+      if (!today || isSpotClosedOn(spot, today.date)) {
         scoreBySlug.set(slug, {
           slug,
           name: spot.name,

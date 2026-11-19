@@ -6,11 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { BadgeSnippet } from "@/components/shops/badge-snippet";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 export const metadata: Metadata = {
   title: "掲載店バッジのご案内｜釣具店オーナー向け",
   description:
-    "ツリスポに掲載中の釣具店・エサ店向けに「ツリスポ掲載店」バッジを無料配布しています。貴店のホームページやブログに貼るだけで、全国7,000ヶ所以上の釣り場情報と連携した掲載店であることをお客様にアピールできます。バッジ画像と貼り付け用HTMLをこのページで発行できます。",
+    `ツリスポに掲載中の釣具店・エサ店向けに「ツリスポ掲載店」バッジを無料配布しています。貴店のホームページやブログに貼るだけで、全国${SPOT_COUNT_FORMATTED}か所の釣り場情報と連携した掲載店であることをお客様にアピールできます。バッジ画像と貼り付け用HTMLをこのページで発行できます。`,
   alternates: {
     canonical: "https://tsurispot.com/shops/badge",
   },

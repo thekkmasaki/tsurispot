@@ -10,6 +10,7 @@ import { SPOT_TYPE_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 const SPOT_TYPE_ICONS: Record<FishingSpot["spotType"], typeof MapPin> = {
   port: Anchor,
@@ -50,11 +51,11 @@ const SPOT_TYPE_ORDER: FishingSpot["spotType"][] = [
 export const metadata: Metadata = {
   title: "釣り場タイプ別で探す - 堤防・漁港・砂浜・磯・河川・桟橋【全国】",
   description:
-    "全国 2,100 件超の釣り場を堤防・漁港・砂浜・磯・河川・桟橋・サーフ・湖沼・管理釣り場の 9 タイプ別に検索。 各タイプの特徴・狙える魚・初心者向けの堤防から上級者向けの磯まで、 地域別件数つきで網羅しています。",
+    `全国 ${SPOT_COUNT_FORMATTED} 件の釣り場を堤防・漁港・砂浜・磯・河川・桟橋・サーフ・湖沼・管理釣り場の 9 タイプ別に検索。 各タイプの特徴・狙える魚・初心者向けの堤防から上級者向けの磯まで、 地域別件数つきで網羅しています。`,
   openGraph: {
     title: "釣り場タイプ別で探す - 堤防・漁港・砂浜・磯・河川・桟橋【全国】",
     description:
-      "全国 2,100 件超の釣り場を 9 タイプ別に検索。 各タイプの特徴・狙える魚・初心者向けポイントを地域別件数つきで紹介します。",
+      `全国 ${SPOT_COUNT_FORMATTED} 件の釣り場を 9 タイプ別に検索。 各タイプの特徴・狙える魚・初心者向けポイントを地域別件数つきで紹介します。`,
     type: "website",
     url: "https://tsurispot.com/spot-type",
     siteName: "ツリスポ",

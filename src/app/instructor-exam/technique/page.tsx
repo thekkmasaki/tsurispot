@@ -4,6 +4,7 @@ import { Point, Exam, Warn, Analogy, TsuriSpotBox } from "@/components/instructo
 import { ArrowRight } from "lucide-react";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -627,7 +628,7 @@ export default function TechniquePage() {
             >
               スポット検索機能
             </Link>{" "}
-            では、全国2,000ヶ所以上の釣り場情報を掲載しています。対象魚・アクセス・設備情報を確認して釣行計画に役立ててください。
+            では、全国{SPOT_COUNT_FORMATTED}か所の釣り場情報を掲載しています。対象魚・アクセス・設備情報を確認して釣行計画に役立ててください。
           </p>
         </TsuriSpotBox>
 

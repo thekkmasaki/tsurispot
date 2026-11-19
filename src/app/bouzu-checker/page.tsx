@@ -5,6 +5,7 @@ import { ChevronRight } from "lucide-react";
 import { BouzuCheckerClient } from "./bouzu-checker-client";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 export const metadata: Metadata = {
   title: "ボウズ確率チェッカー｜釣れない対策を事前診断",
@@ -89,7 +90,7 @@ export default function BouzuCheckerPage() {
               >
                 <p className="font-semibold text-indigo-800">好条件のスポットを探す</p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  全国2,100箇所以上の釣り場
+                  全国{SPOT_COUNT_FORMATTED}か所の釣り場
                 </p>
               </Link>
               <Link prefetch={false}

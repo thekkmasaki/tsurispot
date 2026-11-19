@@ -23,6 +23,9 @@ interface SpotIndex {
   dates: string[];
   today: FishingIndexResult | null;
   weatherOk: boolean;
+  /** dates と同じ並びの定休日フラグ。該当日は点数・ベスト時間を出さない */
+  closed?: boolean[];
+  closedNote?: string;
   tideToday?: {
     tideLabel: string;
     moonAge: number;
@@ -151,12 +154,14 @@ export function FishingIndexCard({ className }: { className?: string }) {
     }
     const home = data.clusters.find((c) => c.isHome);
     const homeSet = new Set(home?.spotSlugs ?? data.spots.map((s) => s.slug));
+    // 今日が定休日の施設は順位の最後に回す（休園日の施設を「今日の1位」にしない）
+    const rank = (s: SpotIndex) => (s.closed?.[0] ? -2 : (s.today?.score ?? -1));
     const homeSpots = data.spots
       .filter((s) => homeSet.has(s.slug))
-      .sort((a, b) => (b.today?.score ?? -1) - (a.today?.score ?? -1));
+      .sort((a, b) => rank(b) - rank(a));
     const awaySpots = data.spots
       .filter((s) => !homeSet.has(s.slug))
-      .sort((a, b) => (b.today?.score ?? -1) - (a.today?.score ?? -1));
+      .sort((a, b) => rank(b) - rank(a));
     const awayLabel = data.clusters
       .filter((c) => !c.isHome)
       .map((c) => c.label)
@@ -214,13 +219,15 @@ export function FishingIndexCard({ className }: { className?: string }) {
 
   if (!data || !selected) return null;
 
-  const dayScore = selected.scores[dayIdx] ?? null;
+  const isClosedDay = selected.closed?.[dayIdx] === true;
+  const dayScore = isClosedDay ? null : (selected.scores[dayIdx] ?? null);
   const isToday = dayIdx === 0;
   const today = selected.today;
-  const homeTopScore = homeSpots[0]?.today?.score ?? null;
+  const homeTopScore = homeSpots[0]?.closed?.[0] ? null : (homeSpots[0]?.today?.score ?? null);
   const awayTop = awaySpots[0];
   const showAwayNote =
     awayTop?.today &&
+    !awayTop.closed?.[0] &&
     homeTopScore !== null &&
     awayTop.today.score > homeTopScore;
 
@@ -242,7 +249,9 @@ export function FishingIndexCard({ className }: { className?: string }) {
       )}
     >
       {s.name}
-      {s.today ? (
+      {s.closed?.[0] ? (
+        <span className="ml-1 font-bold">休</span>
+      ) : s.today ? (
         <span className={cn("ml-1 font-bold", selected.slug === s.slug ? "" : scoreTextClass(s.today.score))}>
           {s.today.score}
         </span>
@@ -315,6 +324,11 @@ export function FishingIndexCard({ className }: { className?: string }) {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-sm font-bold">
+                  {isClosedDay && (
+                    <span>
+                      {isToday ? "今日" : formatDateChip(selected.dates[dayIdx] ?? "")}は休園日
+                    </span>
+                  )}
                   {dayScore !== null && today
                     ? isToday
                       ? today.label
@@ -323,7 +337,7 @@ export function FishingIndexCard({ className }: { className?: string }) {
                   {!isToday && dayScore !== null && (
                     <span>{formatDateChip(selected.dates[dayIdx] ?? "")} の指数</span>
                   )}
-                  {isToday && homeSpots[0]?.slug === selected.slug && (
+                  {isToday && !isClosedDay && homeSpots[0]?.slug === selected.slug && (
                     <span className="ml-2 rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700">
                       お気に入り{data.spots.length}ヶ所で今日の1位
                     </span>
@@ -332,7 +346,12 @@ export function FishingIndexCard({ className }: { className?: string }) {
                 <div className="truncate text-xs text-muted-foreground">
                   {selected.name}（{selected.prefecture}）
                 </div>
-                {isToday && today.best && (
+                {isClosedDay && (
+                  <div className="mt-1 text-xs text-muted-foreground">
+                    定休日: {selected.closedNote ?? "公式サイトでご確認ください"}
+                  </div>
+                )}
+                {isToday && !isClosedDay && today.best && (
                   <div className="mt-1 text-xs">
                     <span className="font-medium text-ocean-mid">
                       今日のベスト {String(today.best.startHour).padStart(2, "0")}:00〜
@@ -347,7 +366,7 @@ export function FishingIndexCard({ className }: { className?: string }) {
             </div>
 
             {/* 内訳（今日のみ。合計は必ず総合点に一致する） */}
-            {isToday && (
+            {isToday && !isClosedDay && (
               <details className="group mt-3">
                 <summary className="flex cursor-pointer list-none items-center gap-1 text-xs font-medium text-muted-foreground">
                   <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
@@ -388,7 +407,8 @@ export function FishingIndexCard({ className }: { className?: string }) {
               <div className="mt-3 overflow-x-auto pb-1">
                 <div className="flex w-max gap-1.5">
                   {selected.dates.map((d, i) => {
-                    const v = selected.scores[i];
+                    const dayClosed = selected.closed?.[i] === true;
+                    const v = dayClosed ? null : selected.scores[i];
                     return (
                       <button
                         key={d}
@@ -408,7 +428,7 @@ export function FishingIndexCard({ className }: { className?: string }) {
                             v !== null ? scoreTextClass(v) : "",
                           )}
                         >
-                          {v ?? "—"}
+                          {dayClosed ? "休" : (v ?? "—")}
                         </span>
                       </button>
                     );

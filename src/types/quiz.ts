@@ -106,7 +106,7 @@ export const QUIZ_CATEGORIES: QuizCategoryMeta[] = [
     slug: "spot-detective",
     name: "スポット探偵クイズ",
     nameShort: "スポット",
-    description: "説明文や特徴からどの釣り場か当てよう！全国2,141スポットから出題",
+    description: "説明文や特徴からどの釣り場か当てよう！全国の釣り場から出題",
     icon: "🗺️",
     color: "purple",
     questionCount: 30,

@@ -682,7 +682,7 @@ export const blogPosts: BlogPost[] = [
 <li><strong>常夜灯がある</strong>：夜釣りでは常夜灯の下にプランクトンが集まり、それを追って魚が寄る</li>
 <li><strong>駐車場・トイレがある</strong>：特にファミリーには重要。漁港の隣に公共トイレがある場所を選ぶ</li>
 </ul>
-<p>「ツリスポ」では、全国1,000か所以上の釣りスポット情報を掲載しています。<a href="/spots">近くの釣り場を検索</a>して、サビキ釣りに最適なポイントを見つけましょう。</p>
+<p>「ツリスポ」では、全国の釣りスポット情報を掲載しています。<a href="/spots">近くの釣り場を検索</a>して、サビキ釣りに最適なポイントを見つけましょう。</p>
 
 <h2>時合いを制する者がサビキを制す</h2>
 <p>サビキ釣りで最も重要なのが<strong>「時合い（じあい）」</strong>のタイミングです。時合いとは、魚の活性が上がり、群れが堤防周りに回遊してくる時間帯のこと。</p>
@@ -1357,6 +1357,7 @@ export const blogPosts: BlogPost[] = [
     category: "technique",
     tags: ["明石", "タチウオ", "太刀魚", "テンヤ", "ワインド", "ウキ釣り", "兵庫県", "秋釣り", "夜釣り"],
     publishedAt: "2026-02-23",
+    updatedAt: "2026-09-08", // 「2026年秋版」への改訂日（git履歴上の本文最終更新）
     relatedSpots: [
       "akashi-shinhato",
       "futami-port-bouhatei",
@@ -1808,7 +1809,7 @@ export const blogPosts: BlogPost[] = [
 <p>A. 朝マズメ狙いなら<strong>日の出の30分〜1時間前</strong>に到着するのが理想です。人気ポイントの場合は、暗いうちに場所を確保しておく必要があります。初めての場所なら明るい時間帯に下見をしておくと、当日の釣行がスムーズです。</p>
 
 <h3>Q. 釣り場が見つからない時はどうすればいいですか？</h3>
-<p>A. 地元の釣具店で「初心者でも釣りやすい場所」を聞くのが最も確実です。また<a href="/spots">ツリスポの全国釣りスポット情報</a>では、1,000か所以上の釣り場をアクセス方法・設備・釣れる魚の情報つきで掲載しています。地域を絞って検索すれば近くの釣り場がすぐ見つかります。</p>
+<p>A. 地元の釣具店で「初心者でも釣りやすい場所」を聞くのが最も確実です。また<a href="/spots">ツリスポの全国釣りスポット情報</a>では、全国の釣り場をアクセス方法・設備・釣れる魚の情報つきで掲載しています。地域を絞って検索すれば近くの釣り場がすぐ見つかります。</p>
 
 <h3>Q. 堤防釣りにライフジャケットは必要ですか？</h3>
 <p>A. <strong>必ず着用してください</strong>。堤防は海面との高低差があり、落水すると自力で上がるのが困難です。膨張式のライフジャケットなら軽量・コンパクトで動きを妨げません。子供には必ずジュニア用のライフジャケットを着用させましょう。命に関わる装備なので、これだけは妥協しないでください。</p>
@@ -2004,7 +2005,7 @@ export const blogPosts: BlogPost[] = [
 <li><strong>トイレ・駐車場があること</strong>（特にファミリーやカップルは必須）</li>
 <li><strong>自宅から1時間以内</strong>で行けること（最初は近場でOK）</li>
 </ul>
-<p><a href="/spots">ツリスポの全国釣りスポット検索</a>では、1,000か所以上の釣り場をアクセス方法・設備・釣れる魚の情報つきで掲載しています。地域を絞って「初心者向け」のスポットを探してみてください。</p>
+<p><a href="/spots">ツリスポの全国釣りスポット検索</a>では、全国の釣り場をアクセス方法・設備・釣れる魚の情報つきで掲載しています。地域を絞って「初心者向け」のスポットを探してみてください。</p>
 
 <div class="my-6 rounded-xl border-2 border-blue-200 bg-blue-50 p-4">
   <p class="text-sm font-bold text-blue-800">📖 もっと詳しく知りたい方へ</p>
@@ -2559,7 +2560,7 @@ export const blogPosts: BlogPost[] = [
 
 <h2>まとめ：下調べが釣りの成功を決める</h2>
 <p>釣り場選びは、実は釣りの腕前と同じくらい<strong>釣果を左右する重要な要素</strong>です。特に初心者のうちは、「安全・快適・釣れる」の3条件を満たす釣り場を選ぶことが、釣りを楽しむための第一歩です。</p>
-<p><a href="/spots">ツリスポの全国釣りスポット検索</a>では、1,000か所以上の釣り場の詳細情報を掲載しています。あなたの近くの釣り場を探して、安全で快適な釣りデビューを楽しんでください。釣り場が決まったら、<a href="/blog/teibou-tsuri-hajimete">堤防釣り初心者ガイド</a>で持ち物と手順を確認してから出かけましょう。</p>
+<p><a href="/spots">ツリスポの全国釣りスポット検索</a>では、全国の釣り場の詳細情報を掲載しています。あなたの近くの釣り場を探して、安全で快適な釣りデビューを楽しんでください。釣り場が決まったら、<a href="/blog/teibou-tsuri-hajimete">堤防釣り初心者ガイド</a>で持ち物と手順を確認してから出かけましょう。</p>
 `,
   },
   ...blogArticles2,
@@ -2590,9 +2591,18 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 const fetchBlogPostBySlugCached = unstable_cache(
   async (slug: string): Promise<BlogPost | undefined> => {
     const { fetchMicroCMSBlogBySlug } = await import("@/lib/microcms");
-    const cmsPost = await fetchMicroCMSBlogBySlug(slug);
-    if (cmsPost) return cmsPost;
-    return blogPosts.find((post) => post.slug === slug);
+    const staticPost = blogPosts.find((post) => post.slug === slug);
+    try {
+      const cmsPost = await fetchMicroCMSBlogBySlug(slug);
+      if (cmsPost) return cmsPost;
+    } catch (e) {
+      // microCMS の取得失敗（通信・5xx・タイムアウト）。静的記事があればそれを返す。
+      // 無ければ投げ直す: undefined を返すと「記事なし」として notFound() が ISR に
+      // 最大1時間キャッシュされる。例外なら unstable_cache に保存されず、ISR は前回の
+      // 正常なページを出し続け、次のリクエストで再取得される。
+      if (!staticPost) throw e;
+    }
+    return staticPost;
   },
   ["blog-post-by-slug"],
   { revalidate: 3600, tags: ["blog-posts"] }

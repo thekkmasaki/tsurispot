@@ -215,8 +215,11 @@ export function SpotRecentCatch({
             <div className="border-t pt-4">
               <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-bold">
                 <Fish className="size-4 text-primary" aria-hidden="true" />
-                近くの釣り場の最新釣果
+                近くの別の釣り場の最新釣果
               </h3>
+              <p className="mb-1.5 text-xs text-muted-foreground">
+                この釣り場の最近の釣果報告はまだありません。以下は近くにある別の釣り場の釣果です。
+              </p>
               <ul className="space-y-1 text-sm">
                 {nearbyRecentCatches.map((n) => (
                   <li key={n.slug} className="flex flex-wrap items-baseline gap-x-2">

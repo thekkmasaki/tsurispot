@@ -32,8 +32,12 @@ function getRegionBySlug(slug: string) {
   return fishingSpots.find((s) => s.region.slug === slug)?.region;
 }
 
-function getSpotsForRegion(regionId: string) {
-  return fishingSpots.filter((s) => s.region.id === regionId);
+// region.id はスポットファイル独自の localRegion と regions.ts で衝突することがある
+// （例: r4101 = 兵庫「加古川下流」と 佐賀「伊万里・有田」）。県も一致するものだけを拾う。
+function getSpotsForRegion(region: { id: string; prefecture: string }) {
+  return fishingSpots.filter(
+    (s) => s.region.id === region.id && s.region.prefecture === region.prefecture,
+  );
 }
 
 function getCatchableFishFromSpots(spots: typeof fishingSpots) {
@@ -141,7 +145,7 @@ export async function generateMetadata({
   // region.areaName を市区町村名、region.slug を代表slug(canonical集約先)に差し替えることで、
   // 以降の title/description/canonical/JSON-LD が自動的に市区町村ベースになる。
   const areaSpots = getSpotsForArea(baseRegion.slug);
-  const spots = areaSpots.length > 0 ? areaSpots : getSpotsForRegion(baseRegion.id);
+  const spots = areaSpots.length > 0 ? areaSpots : getSpotsForRegion(baseRegion);
   const muniName = getAreaMunicipalityName(baseRegion.slug);
   const region = muniName
     ? { ...baseRegion, areaName: muniName, slug: getAreaRepSlug(baseRegion.slug) }
@@ -234,7 +238,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
   // 市区町村単位で束ね直す（generateMetadata と同じ差し替え。region.areaName=市区町村名、
   // region.slug=代表slug で canonical を集約し、薄い分割ページを1つに統合する）。
   const areaSpots = getSpotsForArea(baseRegion.slug);
-  const spots = areaSpots.length > 0 ? areaSpots : getSpotsForRegion(baseRegion.id);
+  const spots = areaSpots.length > 0 ? areaSpots : getSpotsForRegion(baseRegion);
   const muniName = getAreaMunicipalityName(baseRegion.slug);
   const region = muniName
     ? { ...baseRegion, areaName: muniName, slug: getAreaRepSlug(baseRegion.slug) }

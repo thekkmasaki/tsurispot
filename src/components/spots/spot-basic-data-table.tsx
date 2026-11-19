@@ -72,9 +72,20 @@ export function SpotBasicDataTable({ spot }: { spot: FishingSpot }) {
   if (spot.isFree) rows.push({ label: "料金", value: "無料" });
   else if (spot.feeDetail) rows.push({ label: "料金", value: spot.feeDetail });
 
+  // 営業時間・定休日（施設型のみ）。「何時から何時まで」は行く前に最初に知りたい情報なので表に出す。
+  if (spot.managementInfo?.openingHours) {
+    rows.push({ label: "営業時間", value: spot.managementInfo.openingHours });
+  }
+  if (spot.managementInfo?.closedDays) {
+    rows.push({ label: "定休日", value: spot.managementInfo.closedDays });
+  }
+
   if (spot.hasParking) {
     const text = getParkingBadgeText(spot.hasParking, spot.parkingDetail, spot.parkingGuide);
-    rows.push({ label: "駐車場", value: text === "駐車場" ? "あり" : `あり${text.replace(/^駐車場/, "")}` });
+    const summary = text === "駐車場" ? "あり" : `あり${text.replace(/^駐車場/, "")}`;
+    // 料金の金額は「有料/無料」の区分に丸めず、分かっていれば併記する（以前はFAQにしか金額が無かった）
+    const feeText = spot.parkingGuide?.feeDetail ?? (spot.parkingDetail && /\d\s*円/.test(spot.parkingDetail) ? spot.parkingDetail : undefined);
+    rows.push({ label: "駐車場", value: feeText ? `${summary} ／ ${feeText}` : summary });
   }
   if (spot.hasToilet) rows.push({ label: "トイレ", value: "あり" });
 

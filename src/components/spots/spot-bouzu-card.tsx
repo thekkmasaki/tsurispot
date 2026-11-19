@@ -91,18 +91,18 @@ function getBreakdown(
   // === 釣果データベースに基づく新しい根拠 ===
   if (props.catchableFishDetails && props.catchableFishDetails.length > 0) {
     // 釣り方別の根拠
-    const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth, props.spotType);
+    const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth, props.spotType, props.prefecture);
     if (methodResult.primaryMethod && methodResult.primaryMethodRate !== null) {
       const methodRate = methodResult.primaryMethodRate;
       items.push({
         label: `主な釣り方（${methodResult.primaryMethod}）`,
         effect: methodRate <= 20
-          ? `平均ボウズ率 約${methodRate}%（釣れやすい）`
+          ? `釣り方の全国平均 約${methodRate}%（釣れやすい）`
           : methodRate <= 35
-          ? `平均ボウズ率 約${methodRate}%（標準的）`
+          ? `釣り方の全国平均 約${methodRate}%（標準的）`
           : methodRate <= 50
-          ? `平均ボウズ率 約${methodRate}%（やや難しい）`
-          : `平均ボウズ率 約${methodRate}%（技術が必要）`,
+          ? `釣り方の全国平均 約${methodRate}%（やや難しい）`
+          : `釣り方の全国平均 約${methodRate}%（技術が必要）`,
         positive: methodRate <= 35,
       });
     }
@@ -158,7 +158,7 @@ function getDataDrivenTip(
 ): string | null {
   if (!props.catchableFishDetails || props.catchableFishDetails.length === 0) return null;
 
-  const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth, props.spotType);
+  const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth, props.spotType, props.prefecture);
   const fishResult = getFishCatchabilityCorrection(props.catchableFishDetails, currentMonth);
 
   if (probability <= 30) {
@@ -266,7 +266,7 @@ export function SpotBouzuCard(props: SpotBouzuCardProps) {
 
         {/* 釣果データに基づく統計情報 */}
         {hasDataEnhancement && (() => {
-          const methodResult = getMethodCorrection(props.catchableFishDetails!, currentMonth, props.spotType);
+          const methodResult = getMethodCorrection(props.catchableFishDetails!, currentMonth, props.spotType, props.prefecture);
           if (!methodResult.primaryMethod) return null;
           return (
             <div className="bg-blue-50 rounded-lg p-3">
@@ -275,8 +275,9 @@ export function SpotBouzuCard(props: SpotBouzuCardProps) {
                 釣果データに基づく参考情報
               </p>
               <p className="text-[11px] text-blue-600 leading-relaxed">
-                {methodResult.primaryMethod}の全国平均ボウズ率は約{methodResult.primaryMethodRate}%です。
+                {methodResult.primaryMethod}という釣り方の全国平均ボウズ率は約{methodResult.primaryMethodRate}%です（この釣り場に限らない参考値）。
                 {methodResult.methodDescription && ` ${methodResult.methodDescription}。`}
+                {" "}上の「今日のボウズ確率 {probability}%」は、この全国平均を出発点に、釣り場の種類・設備・魚種数・時期などで補正したこの釣り場向けの値です。
               </p>
             </div>
           );
