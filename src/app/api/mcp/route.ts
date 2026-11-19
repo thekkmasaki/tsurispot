@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { handleBody, SERVER_INFO } from "@/lib/mcp/protocol";
-import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { getClientIp } from "@/lib/rate-limit";
+import { checkMcpRateLimit } from "@/lib/mcp/rate-limit";
 
 /**
  * ツリスポ MCP サーバー（読み取り専用・認証なし）
@@ -10,12 +11,15 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
  *
  * Streamable HTTP のステートレス JSON 応答モード。GET（SSE ストリーム）は提供しない（405）。
  * 公開データのみを返すため認証は不要。濫用対策に IP 単位のレート制限をかける
- * （AI 事業者の送信元 IP は共有されるため上限は緩め）。
+ * （既知の AI クライアントは送信元 IP が共有されるため 10分3000回、それ以外は 10分300回。
+ *   詳細は src/lib/mcp/rate-limit.ts）。
  */
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
 const MAX_BODY_BYTES = 64 * 1024;
+/** protocol.ts の handleBody が処理するバッチの最大件数と同じ */
+const MAX_BATCH = 20;
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -31,20 +35,23 @@ function rpcError(code: number, message: string, status: number) {
 }
 
 export async function POST(req: Request) {
-  const ip = getClientIp(req);
-  if (!(await checkRateLimit(ip, "mcp", 600, 600))) {
-    return rpcError(-32000, "Rate limit exceeded", 429);
-  }
-
   const text = await req.text();
   if (text.length > MAX_BODY_BYTES) return rpcError(-32600, "Request too large", 413);
 
   let body: unknown;
+  let parsed = true;
   try {
     body = JSON.parse(text);
   } catch {
-    return rpcError(-32700, "Parse error", 400);
+    parsed = false;
   }
+
+  // バッチ（最大20件処理）は件数分を数える。壊れた JSON も1回として数える
+  const units = Array.isArray(body) ? Math.min(Math.max(body.length, 1), MAX_BATCH) : 1;
+  if (!(await checkMcpRateLimit(getClientIp(req), req.headers.get("user-agent"), units))) {
+    return rpcError(-32000, "Rate limit exceeded", 429);
+  }
+  if (!parsed) return rpcError(-32700, "Parse error", 400);
 
   // 接続トラブル調査・利用状況把握用（低頻度なので全件 1 行ログ）。個人情報は出さない
   const methods = (Array.isArray(body) ? body : [body])

@@ -8,6 +8,7 @@ vi.mock("@/lib/rate-limit", () => ({
 vi.mock("@/lib/dynamodb", () => ({
   dbGet: vi.fn(),
   dbBatchGet: vi.fn(async (keys: unknown[]) => keys.map(() => null)),
+  dbIncr: vi.fn().mockResolvedValue(1),
 }));
 vi.mock("@/lib/social-store", () => ({
   getOfficialRepliesBatch: vi.fn(async (ids: string[]) => ids.map(() => null)),
@@ -338,6 +339,50 @@ describe("認証なしで使える（回帰）", () => {
     const json = await res.json();
     expect(json.result.isError).toBe(false);
     expect(JSON.stringify(json.result.structuredContent)).toMatch(/https:\/\/tsurispot\.com\/[^"]*utm_source=ai_mcp/);
+  });
+
+  it("1回の呼び出しで返す件数: 一覧は最大20件、詳細は1件（limit を大きくしても超えない）", async () => {
+    // 釣れる魚が最も多いスポット（スポット×月の一覧が最長になる）
+    const richSpot = [...fishingSpots].sort((a, b) => b.catchableFish.length - a.catchableFish.length)[0];
+    const big = { limit: 999 };
+    const WORST_ARGS: Record<string, Record<string, unknown>> = {
+      search_spots: { ...big, prefecture: "北海道" },
+      get_spot_details: { slug: richSpot.slug },
+      get_tide: { slug: "daikoku-fishing-facility" },
+      get_catchable_fish: { slug: richSpot.slug, month: 7 },
+      find_nearby_spots: { ...big, ...YOKOHAMA },
+      get_fishing_forecast: { slug: "daikoku-fishing-facility" },
+      get_recent_catches: { ...big, slug: "daikoku-fishing-facility" },
+      find_tackle_shops: { ...big, ...YOKOHAMA },
+      recommend_gear: { fish: "アジ" },
+      get_fish_info: { fish: "アジ" },
+      check_fishing_rules: { prefecture: "北海道" },
+    };
+    const DETAIL = ["get_spot_details", "get_tide", "get_fishing_forecast", "get_fish_info", "recommend_gear"];
+    const longest = (v: unknown): number =>
+      Array.isArray(v)
+        ? Math.max(v.length, ...v.map(longest))
+        : v && typeof v === "object"
+          ? Math.max(0, ...Object.values(v).map(longest))
+          : 0;
+
+    // 大量の釣果が入っていても limit 上限で切る
+    const many = Array.from({ length: 50 }, (_, i) => ({
+      id: `m${i}`, spotSlug: "x", spotName: "x", fishName: "アジ", userName: "a", comment: "", date: "2026-11-01", approved: true,
+    }));
+    for (const name of Object.keys(WORST_ARGS)) {
+      vi.mocked(dbGet).mockResolvedValueOnce(name === "get_recent_catches" ? many : null);
+      const r = await call(name, WORST_ARGS[name]);
+      expect(r.isError, name).toBe(false);
+      const data = r.structuredContent as Record<string, unknown>;
+      expect(Array.isArray(data), name).toBe(false);
+      expect(longest(data), name).toBeLessThanOrEqual(20);
+      if (DETAIL.includes(name)) {
+        // 詳細系は対象1件（スポット名 or 魚名が1つ）
+        expect(typeof (data.name ?? data.spot ?? data.fish), name).toBe("string");
+      }
+    }
+    expect(Object.keys(WORST_ARGS).sort()).toEqual(TOOLS.map((t) => t.name).sort());
   });
 
   it("ツールの説明文はすべて日本語で使用例つき", () => {

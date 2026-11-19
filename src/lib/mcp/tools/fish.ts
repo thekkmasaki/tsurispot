@@ -19,6 +19,7 @@ import {
   requireSpot,
   fishInMonth,
   truncate,
+  MAX_LIST,
   siteUrl,
 } from "./shared";
 
@@ -34,7 +35,7 @@ export function getCatchableFish(args: Record<string, unknown>) {
     return {
       spot: spot.name,
       month: m,
-      fish: fishInMonth(spot, m).map((cf) => ({
+      fish: fishInMonth(spot, m).slice(0, MAX_LIST).map((cf) => ({
         fish: cf.fish.name,
         peakSeason: cf.peakSeason,
         method: cf.method,
@@ -240,7 +241,7 @@ export function recommendGear(args: Record<string, unknown>) {
         },
       };
     }),
-    monthlyRig: rigs.map((r) => ({
+    monthlyRig: rigs.slice(0, MAX_METHODS).map((r) => ({
       method: r.method,
       items: r.items.map((i) => `${i.name}: ${i.spec}`),
     })),

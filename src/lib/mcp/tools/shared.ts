@@ -68,6 +68,9 @@ export interface ToolDef {
   run: (args: Record<string, unknown>) => unknown | Promise<unknown>;
 }
 
+/** 1回の呼び出しで返す一覧の上限（一覧系ツール共通。詳細系は1件のみ返す） */
+export const MAX_LIST = 20;
+
 export const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 
 // ---------------------------------------------------------------------------

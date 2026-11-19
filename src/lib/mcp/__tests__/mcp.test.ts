@@ -4,6 +4,7 @@ vi.mock("@/lib/rate-limit", () => ({
   checkRateLimit: vi.fn().mockResolvedValue(true),
   getClientIp: vi.fn().mockReturnValue("1.2.3.4"),
 }));
+vi.mock("@/lib/dynamodb", () => ({ dbIncr: vi.fn().mockResolvedValue(1) }));
 
 import { handleBody, handleMessage } from "../protocol";
 import { searchSpots, getSpotDetails, getTide, getCatchableFish, resolveFishSlugs, isMonthInRange } from "../tools";

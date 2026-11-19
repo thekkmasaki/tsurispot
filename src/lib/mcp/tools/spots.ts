@@ -115,7 +115,7 @@ export function getSpotDetails(args: Record<string, unknown>) {
       bestTime: cf.recommendedTime,
       difficulty: cf.catchDifficulty,
     })),
-    bestTimes: spot.bestTimes.map((b) => `${b.label}（${b.timeRange}）`),
+    bestTimes: spot.bestTimes.slice(0, 10).map((b) => `${b.label}（${b.timeRange}）`),
     rules: spot.rules
       ? {
           castingAllowed: spot.rules.castingAllowed,
@@ -126,7 +126,7 @@ export function getSpotDetails(args: Record<string, unknown>) {
         }
       : undefined,
     fishingBan: banInfo(spot),
-    safetyNotes: spot.safetyNotes,
+    safetyNotes: spot.safetyNotes?.slice(0, 10),
     url: siteUrl(`/spots/${spot.slug}`),
     notice: RULES_NOTICE,
   };
