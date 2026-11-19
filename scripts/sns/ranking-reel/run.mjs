@@ -7,7 +7,7 @@
  *   --dry-run: 投稿・台帳書き込みをせず、画像をDiscordにプレビュー送信するだけ
  *   --slot: 朝の枠(am)か夜の枠(pm、既定)か。投稿済み判定は日付×枠ごと（slot の無い古い台帳行は pm 扱い）
  *
- * 必要な環境変数: INSTAGRAM_USER_ID / INSTAGRAM_ACCESS_TOKEN, THREADS_USER_ID / THREADS_ACCESS_TOKEN,
+ * 必要な環境変数: INSTAGRAM_USER_ID / INSTAGRAM_ACCESS_TOKEN, THREADS_ACCESS_TOKEN（THREADS_USER_ID は任意。無ければトークンから取得）,
  *   AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY, UPSTASH_REDIS_REST_URL / _TOKEN, DISCORD_WEBHOOK_URL（任意）
  *   未設定のプラットフォームは自動でスキップする。
  */
@@ -41,7 +41,7 @@ if (!dryRun && ledger.some((e) => e.date === date && slotOf(e) === slot && e.ok)
 }
 if (!dryRun) {
   const hasIg = platforms.has("instagram") && process.env.INSTAGRAM_USER_ID && (await getToken("instagram"));
-  const hasTh = platforms.has("threads") && process.env.THREADS_USER_ID && (await getToken("threads"));
+  const hasTh = platforms.has("threads") && (await getToken("threads"));
   if (!hasIg && !hasTh) {
     console.log("投稿先の認証情報が未登録のためスキップ");
     await discord("⏭️ **SNSランキング投稿** 認証情報（INSTAGRAM_USER_ID / INSTAGRAM_ACCESS_TOKEN 等）が未登録のためスキップしました");
@@ -90,8 +90,8 @@ if (process.env.INSTAGRAM_USER_ID && igToken) {
   await attempt("instagram", () => postInstagramReel({ userId: process.env.INSTAGRAM_USER_ID, token: igToken, videoUrl, caption: igCaption }));
 } else if (platforms.has("instagram")) result.instagram = { skipped: "認証情報なし" };
 const thToken = await getToken("threads");
-if (process.env.THREADS_USER_ID && thToken) {
-  await attempt("threads", () => postThreadsImage({ userId: process.env.THREADS_USER_ID, token: thToken, imageUrl, text: thText }));
+if (platforms.has("threads") && thToken) {
+  await attempt("threads", async () => postThreadsImage({ userId: await threadsUserId(thToken), token: thToken, imageUrl, text: thText }));
 } else if (platforms.has("threads")) result.threads = { skipped: "認証情報なし" };
 // X: 動画をそのまま投稿（本文に URL なし）。写真の出典は返信で出す
 if (platforms.has("x") && xConfigured()) {
@@ -114,6 +114,15 @@ await appendLedger({ date, slot, pref: topic.pref.slug, fish: topic.fish.slug, m
 const fmt = (k) => { const r = result[k]; return !r ? "" : r.id ? `✅ ${k}: ${r.permalink ?? r.id}` : r.error ? `❌ ${k}: ${r.error}` : `⏭️ ${k}: ${r.skipped}`; };
 await discord(`${failed.length ? "⚠️" : "📣"} **SNSランキング投稿** ${label}\n${["instagram", "threads", "x"].map(fmt).filter(Boolean).join("\n")}\n${topic.url}`);
 if (posted.length === 0) process.exit(1);
+
+/** Threads のユーザーID: Secret に無ければトークンの持ち主（/me）から取る */
+async function threadsUserId(token) {
+  if (process.env.THREADS_USER_ID) return process.env.THREADS_USER_ID;
+  const res = await fetch(`https://graph.threads.net/v1.0/me?fields=id&access_token=${encodeURIComponent(token)}`);
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok || !json.id) throw new Error(`Threads のユーザーID取得に失敗: ${res.status} ${json.error?.message ?? ""}`);
+  return json.id;
+}
 
 function pickBgm(dir, seed) {
   if (!dir || !fs.existsSync(dir)) return null;
