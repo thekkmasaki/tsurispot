@@ -22,20 +22,21 @@ describe("本牧海づり施設の整合性", () => {
     expect(honmoku).toBeDefined();
   });
 
-  it("禁止釣法に投げ釣り・タコエギ・夜釣りが含まれる", () => {
+  it("禁止釣法にタコエギ・夜釣りが含まれる", () => {
     const forbidden = getForbiddenMethods(honmoku!);
-    expect(forbidden.has("投げ釣り")).toBe(true);
     expect(forbidden.has("タコエギ")).toBe(true);
     expect(forbidden.has("夜釣り")).toBe(true);
-    // 「ちょい投げはOK」の明示が無いので ちょい投げ も禁止側
-    expect(forbidden.has("ちょい投げ")).toBe(true);
   });
 
-  it("おすすめ対象からタコエギ・投げ釣りが除外される", () => {
+  it("投げ釣りは一律禁止ではない（公式: 渡桟橋周辺のみ終日禁止。2026-11-20 確認）", () => {
+    expect(honmoku!.rules?.castingAllowed).toBe(true);
+    expect(honmoku!.rules?.otherRules?.some((r) => r.includes("渡桟橋"))).toBe(true);
+  });
+
+  it("おすすめ対象からタコエギが除外される", () => {
     const advisable = getAdvisableCatchableFish(honmoku!);
     const methods = new Set(advisable.map((cf) => cf.method));
     expect(methods.has("タコエギ")).toBe(false);
-    expect(methods.has("投げ釣り")).toBe(false);
   });
 
   it("夜釣りNGなのでナイトフィッシング訴求はしない", () => {
