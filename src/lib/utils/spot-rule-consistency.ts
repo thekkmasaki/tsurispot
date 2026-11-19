@@ -83,6 +83,15 @@ export function isNightFishingAdvisable(spot: FishingSpot): boolean {
 }
 
 /**
+ * 表示してよい装備ガイドだけを返す。禁止釣法のガイドを除外する。
+ * （投げ釣り禁止の施設で「キス・カレイ｜投げ釣り」の装備ガイドを出していた。2026-11 監査）
+ */
+export function getAdvisableGearGuides(spot: FishingSpot): NonNullable<FishingSpot["gearGuides"]> {
+  const forbidden = getForbiddenMethods(spot);
+  return (spot.gearGuides ?? []).filter((g) => !forbidden.has(g.method));
+}
+
+/**
  * おすすめとして表示してよい catchableFish エントリだけを返す。
  * 禁止釣法のエントリと、夜釣り禁止スポットでの夜専用おすすめを除外する。
  */

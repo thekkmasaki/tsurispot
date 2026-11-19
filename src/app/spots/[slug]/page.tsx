@@ -149,6 +149,7 @@ import {
   getForbiddenMethods,
   isNightFishingAdvisable,
   getAdvisableCatchableFish,
+  getAdvisableGearGuides,
 } from "@/lib/utils/spot-rule-consistency";
 import { METHOD_GUIDES, guidesForMethods } from "@/lib/data/method-guides";
 import { safeJsonLd } from "@/lib/safe-json-ld";
@@ -305,6 +306,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const rawSpot = getSpotBySlug(slug);
   if (!rawSpot) notFound();
   const spot = enrichSpotWithStructures(rawSpot);
+  // ルールで禁止されている釣り方の装備ガイドは出さない
+  const advisableGearGuides = getAdvisableGearGuides(spot);
   const prefectureRule = getFishingRuleByPrefName(spot.region.prefecture);
   // rules未設定スポット向け: 県レベルの公的釣りルールをフォールバック表示する
   const prefRule = spot.rules ? undefined : prefectureRule;
@@ -627,6 +630,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     <div className="mt-6">
       <SatelliteAnalysisSection
         structureTypes={spot.structureTypes}
+        nightFishingBanned={spot.rules?.nightFishing === false}
         spotName={spot.name}
         spotType={spot.spotType}
         isAnalyzed={!!analysisResult}
@@ -1396,11 +1400,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <p className="mt-3 text-xs text-muted-foreground">※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。</p>
             </section>
           )}
-          {spot.gearGuides && spot.gearGuides.length > 0 && (
+          {advisableGearGuides.length > 0 && (
             <section>
               <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />初心者向け装備ガイド</h3>
               <p className="mb-4 text-sm text-muted-foreground">このスポットでの釣りに必要な道具をわかりやすくまとめました。</p>
-              <GearGuideList guides={spot.gearGuides} />
+              <GearGuideList guides={advisableGearGuides} />
             </section>
           )}
           {/* 「この釣り場でおすすめの装備」は SpotDetailTabs の外（常時表示）へ移設した。

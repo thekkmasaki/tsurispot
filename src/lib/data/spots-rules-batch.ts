@@ -1284,6 +1284,7 @@ export const spotRulesBatch: Record<string, SpotRules> = {
   // 公式（https://kobeumiduri.jp/ 2026-11-19 確認）: 竿は1人3本まで。投げ・ルアー・エギングは
   // 周囲の安全確認のうえ可。集魚剤・赤土・ぬかは禁止。
   "hiraiso-fishing-park": {
+    verifiedAt: "2026-11-19",
     castingAllowed: true,
     lureAllowed: true,
     chumAllowed: true,
