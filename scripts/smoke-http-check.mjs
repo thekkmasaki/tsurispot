@@ -116,7 +116,7 @@ const STATIC_TARGETS = [
   { path: "/spots/fishing-park-hirano", label: "スポット詳細（管理釣り場）", kind: HTML },
   { path: "/fish/aji", label: "魚種詳細 /fish/aji", kind: HTML },
   { path: "/monthly", label: "月別ガイド ハブ", kind: HTML },
-  { path: "/prefecture/kanagawa/12", label: "県×月 /prefecture/[県]/[月]", kind: HTML },
+  { path: "/prefecture/kanagawa/december", label: "県×月 /prefecture/[県]/[月]", kind: HTML },
   { path: "/fishing-rules/kanagawa", label: "釣りルール /fishing-rules/[県]", kind: HTML },
   { path: "/tides/tokyo", label: "潮見表 /tides/[観測所]", kind: HTML },
   { path: "/chouka", label: "釣果ハブ /chouka", kind: HTML, must: [has(/最近釣果があった釣り場/, "「最近釣果があった釣り場」")] },
@@ -130,6 +130,9 @@ const STATIC_TARGETS = [
     expect: 308,
     location: "/spots/mera-gyokou-shizuoka",
   },
+  // 無効URLは 404 であること（ソフト404＝「見つかりません」を200で返す回帰の検知）
+  { path: "/spots/smoke-invalid-slug", label: "無効スポット（404期待）", expect: 404 },
+  { path: "/prefecture/kanagawa/smoke-invalid", label: "無効な県×月（404期待）", expect: 404 },
 ];
 
 // UGC 投稿のあるスポット（動的取得に失敗したときの予備）。
@@ -192,6 +195,7 @@ function validate(target, r, variant) {
     problems.push(msg);
     return problems;
   }
+  if (expect === 404) return problems; // 404 期待（ソフト404回帰の検知）はステータスだけ見る
   if (target.location) {
     const loc = r.headers.get("location") || "";
     const locPath = loc.replace(/^https?:\/\/[^/]+/, "").split("?")[0];
@@ -202,6 +206,12 @@ function validate(target, r, variant) {
   if (target.kind === HTML) {
     const title = body.match(/<title[^>]*>([^<]*)<\/title>/);
     if (!title || !title[1].trim()) problems.push("<title> が無い/空");
+    // ソフト404検知: 「見つかりません」ページを 200 で返している（/prefecture/kanagawa/12 で実際に発生）
+    if (title && /見つかりません|Not Found/i.test(title[1])) problems.push(`ソフト404（<title>「${title[1].trim().slice(0, 40)}」を status 200 で返却）`);
+    // 監視対象は全てインデックスされるべきページ。noindex はキャッシュ残存・誤設定・ソフト404の兆候
+    if (!target.allowNoindex && /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(body)) {
+      problems.push("meta robots が noindex（インデックス対象ページのはず）");
+    }
     if (!body.includes("application/ld+json")) problems.push("JSON-LD（application/ld+json）が無い");
     if (/Application error: a (server|client)-side exception/.test(body)) problems.push("Next.js のエラー画面");
   }
