@@ -1,21 +1,125 @@
-# デプロイ成功後、本番(tsurispot.com)の主要導線を Playwright smoke で検証する。
-# workflow_run トリガーを使うことで、障害回帰ガードの塊である deploy.yml には
-# 一切手を入れずに「デプロイ完了 → 本番smoke」を後続させる。
-# smoke は本番URL対象のため、デプロイが本番へ反映された後にのみ意味がある。
-# ここが失敗してもデプロイは既に完了済み（ロールバックはしない・警告通知のみ）。
+# 本番(tsurispot.com)の smoke 監視。
+#   - デプロイ完了後（workflow_run）: HTTP smoke ＋ Playwright smoke
+#   - 定期実行（6時間ごと・1日4回）  : HTTP smoke のみ（軽量）
+#   - 手動実行（workflow_dispatch）   : HTTP smoke ＋ Playwright smoke
+# workflow_run トリガーを使うことで、障害回帰ガードの塊である deploy.yml には一切手を入れない。
+# ここが失敗してもデプロイは既に完了済み（ロールバックはしない・通知のみ）。
+#
+# 【2026-11 強化】UGC 釣果投稿のあるスポット詳細が 500 のまま約1日気づけなかった（#596→#602）ため、
+# 代表URL群を「キャッシュバスタ付き（オリジン）」と「クエリ無し（エッジ）」の両方で確認する
+# scripts/smoke-http-check.mjs を追加し、定期実行と Issue 通知を付けた。
 name: Post-Deploy Smoke
 
 on:
   workflow_run:
     workflows: ['Deploy to App Runner']
     types: [completed]
+  schedule:
+    # 6時間ごと（UTC 03:17/09:17/15:17/21:17 = JST 12:17/18:17/0:17/6:17）。毎時0分の混雑を避けて17分。
+    - cron: '17 3,9,15,21 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: prod-smoke
+  cancel-in-progress: false
 
 jobs:
-  smoke:
-    # デプロイが master で成功した時のみ実行
+  http-smoke:
+    # デプロイ後: master のデプロイが完了したら成否を問わず実行する。
+    # Deploy の「失敗」は App Runner 待機タイムアウトの誤検知（実際は反映済み）のことがあり、
+    # その場合こそ本番の実状態を確認したい。テスト等で途中失敗した場合も本番は旧版のまま
+    # 稼働しているので、監視としてそのまま意味がある（cancelled/skipped のみ除外）。
     if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.head_branch == 'master'
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.head_branch == 'master' &&
+       (github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          sparse-checkout: scripts/smoke-http-check.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 本番 HTTP smoke（オリジン＋エッジ）
+        env:
+          SMOKE_BASE_URL: https://tsurispot.com
+          SMOKE_RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+          SMOKE_REPORT_FILE: ${{ runner.temp }}/smoke-report.md
+        run: node scripts/smoke-http-check.mjs
+
+      # 失敗時: open な監視 Issue があればコメント追記、無ければ新規作成（重複作成しない）。
+      # Discord は「新規発生」時のみ通知（障害継続中に6時間ごとに鳴らさない）。
+      - name: 失敗通知（Issue ＋ Discord）
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          TRIGGER: ${{ github.event_name }}
+          REPORT: ${{ runner.temp }}/smoke-report.md
+        run: |
+          LABEL="prod-smoke-failure"
+          gh label create "$LABEL" --repo "$GITHUB_REPOSITORY" --color B60205 \
+            --description "本番 smoke 監視の失敗（自動作成・復旧時に自動クローズ）" 2>/dev/null || true
+          [ -s "$REPORT" ] || echo "（smoke レポート無し。Run のログを確認してください）" > "$REPORT"
+          {
+            echo "トリガー: \`${TRIGGER}\` / Run: ${RUN_URL}"
+            echo
+            cat "$REPORT"
+            echo
+            echo "対処メモ: クエリ無しだけ失敗＝エッジに古い/壊れたキャッシュ（cf-purge.yml で該当パスを purge）。"
+            echo "バスタ付きも失敗＝オリジン（App Runner）側の障害。"
+          } > /tmp/issue-body.md
+          NUM=$(gh issue list --repo "$GITHUB_REPOSITORY" --label "$LABEL" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --repo "$GITHUB_REPOSITORY" --body-file /tmp/issue-body.md
+            echo "既存 Issue #$NUM にコメント追記"
+          else
+            URL=$(gh issue create --repo "$GITHUB_REPOSITORY" --label "$LABEL" \
+              --title "本番 smoke 失敗: tsurispot.com の主要ページに異常" --body-file /tmp/issue-body.md)
+            echo "Issue 作成: $URL"
+            if [ -n "$DISCORD_WEBHOOK_URL" ]; then
+              jq -n --arg trig "$TRIGGER" --arg rep "$(head -c 1200 "$REPORT")" --arg issue "$URL" --arg run "$RUN_URL" \
+                '{content: ("⚠️ **本番smoke失敗**（" + $trig + "）主要ページに異常の可能性\n" + $rep + "\nIssue: " + $issue + "\nRun: " + $run), allowed_mentions: {parse: []}}' \
+                | curl -s -H "Content-Type: application/json" -d @- "$DISCORD_WEBHOOK_URL" || true
+            fi
+          fi
+
+      # 成功時: open な監視 Issue があれば「復旧」としてクローズし、Discord に一言。
+      - name: 復旧通知（Issue クローズ）
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          NUMS=$(gh issue list --repo "$GITHUB_REPOSITORY" --label prod-smoke-failure --state open --json number --jq '.[].number' 2>/dev/null || true)
+          for N in $NUMS; do
+            gh issue close "$N" --repo "$GITHUB_REPOSITORY" --comment "✅ 本番 smoke が全項目パスしたため自動クローズ（復旧）: ${RUN_URL}"
+            if [ -n "$DISCORD_WEBHOOK_URL" ]; then
+              jq -n --arg c "✅ 本番smoke 復旧（Issue #${N} をクローズ） ${RUN_URL}" '{content: $c, allowed_mentions: {parse: []}}' \
+                | curl -s -H "Content-Type: application/json" -d @- "$DISCORD_WEBHOOK_URL" || true
+            fi
+          done
+
+  playwright-smoke:
+    # ブラウザ操作が要るもの（ログイン導線・画像配信）。デプロイ後と手動実行のみ（定期実行は HTTP smoke で軽く見る）。
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.head_branch == 'master' &&
+       (github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure'))
     runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
     timeout-minutes: 15
     steps:
@@ -47,6 +151,6 @@ jobs:
         run: |
           if [ -n "$DISCORD_WEBHOOK_URL" ]; then
             PAYLOAD=$(jq -n --arg url "$RUN_URL" \
-              '{content: ("⚠️ **本番smoke失敗** デプロイ完了後の主要導線に問題の可能性\n" + $url)}')
+              '{content: ("⚠️ **本番smoke失敗**（Playwright）ログイン導線・画像配信に問題の可能性\n" + $url)}')
             curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
           fi
