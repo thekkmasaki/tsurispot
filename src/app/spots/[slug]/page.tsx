@@ -56,7 +56,6 @@ import { FavoriteButton } from "@/components/spots/favorite-button";
 import { WishlistButton } from "@/components/spots/wishlist-button";
 import { CheckinButton } from "@/components/spots/checkin-button";
 import { GoTodayButton } from "@/components/spots/go-today-button";
-import { parseClosedWeekdays } from "@/lib/spot-closed-days";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
 import { FishingBanNotice } from "@/components/spots/fishing-ban-notice";
@@ -1076,6 +1075,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           hideBestTimes={spot.isManagedPond || spot.slug === "fishing-park-hirano"}
           tideMode={getTideDisplayMode(spot)}
           tideStation={getTideStationForSpot(spot)}
+          closedDays={spot.managementInfo?.closedDays}
         />
       </section>
 
@@ -1256,7 +1256,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {!(spot.isManagedPond || spot.slug === "fishing-park-hirano") && (
           <section>
             <h3 className="mb-3 text-lg font-bold">混雑予想</h3>
-            <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} nightFishingAllowed={spot.rules?.nightFishing === false ? false : undefined} closedWeekdays={parseClosedWeekdays(spot.managementInfo?.closedDays) ?? undefined} closedNote={spot.managementInfo?.closedDays} />
+            <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} nightFishingAllowed={spot.rules?.nightFishing === false ? false : undefined} closedNote={spot.managementInfo?.closedDays} />
           </section>
           )}
           {/* ファミリー向け情報: トイレ・駐車場あり＋初心者向けの場合のみ表示 */}
