@@ -4,7 +4,7 @@ vi.mock("@/lib/dynamodb", () => ({
   dbIncr: vi.fn(),
 }));
 
-import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { checkRateLimit, getClientIp, rateLimitKey } from "@/lib/rate-limit";
 import { dbIncr } from "@/lib/dynamodb";
 
 describe("checkRateLimit", () => {
@@ -124,5 +124,39 @@ describe("getClientIp（ORIGIN_VERIFY_SECRET 設定時）", () => {
     expect(getClientIp(req({ "x-origin-verify": "s3cret", "x-forwarded-for": "2.2.2.2" }))).toBe("2.2.2.2");
     expect(getClientIp(req({ "x-origin-verify": "s3cret", "x-real-ip": "3.3.3.3" }))).toBe("3.3.3.3");
     expect(getClientIp(req({ "x-origin-verify": "s3cret" }))).toBe("unknown");
+  });
+});
+
+describe("rateLimitKey（IPv6 は /64 単位で数える）", () => {
+  it("IPv4 はそのまま", () => {
+    expect(rateLimitKey("1.2.3.4")).toBe("1.2.3.4");
+    expect(rateLimitKey("unknown")).toBe("unknown");
+  });
+
+  it("同じ /64 内のアドレスは同じキーになる", () => {
+    const a = rateLimitKey("2001:db8:1234:5678:aaaa:bbbb:cccc:dddd");
+    const b = rateLimitKey("2001:0db8:1234:5678::1");
+    expect(a).toBe("2001:db8:1234:5678::/64");
+    expect(b).toBe(a);
+  });
+
+  it("別の /64 は別のキー", () => {
+    expect(rateLimitKey("2001:db8:1234:5679::1")).not.toBe(rateLimitKey("2001:db8:1234:5678::1"));
+  });
+
+  it("省略表記（::）を正しく展開する", () => {
+    expect(rateLimitKey("2001:db8::1")).toBe("2001:db8:0:0::/64");
+    expect(rateLimitKey("::1")).toBe("0:0:0:0::/64");
+    expect(rateLimitKey("fe80::")).toBe("fe80:0:0:0::/64");
+  });
+
+  it("IPv4 射影アドレスは IPv4 として扱う", () => {
+    expect(rateLimitKey("::ffff:1.2.3.4")).toBe("1.2.3.4");
+  });
+
+  it("checkRateLimit は /64 に丸めたキーで数える", async () => {
+    vi.mocked(dbIncr).mockResolvedValue(1);
+    await checkRateLimit("2001:db8:1:2:3:4:5:6", "B", 10, 600);
+    expect(vi.mocked(dbIncr).mock.calls.at(-1)?.[0]).toMatch(/^RATELIMIT#2001:db8:1:2::\/64#\d+$/);
   });
 });

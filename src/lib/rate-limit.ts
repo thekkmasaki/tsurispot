@@ -26,11 +26,32 @@ export async function checkRateLimit(
 ): Promise<boolean> {
   try {
     const window = Math.floor(Date.now() / 1000 / windowSeconds);
-    const count = await dbIncr(`RATELIMIT#${ip}#${window}`, bucket, 1, windowSeconds * 2);
+    const count = await dbIncr(`RATELIMIT#${rateLimitKey(ip)}#${window}`, bucket, 1, windowSeconds * 2);
     return count <= limit;
   } catch {
     return !opts?.failClosed;
   }
+}
+
+/**
+ * レート制限のキーにする IP の単位。
+ * IPv6 は一般の回線でも /64（2^64 個）単位で割り当てられ、末尾を変えるだけで別 IP になるため、
+ * アドレス丸ごとをキーにすると制限を無限に回避できる。先頭 64 ビット（/64）に丸めて数える。
+ * IPv4 射影アドレス（::ffff:1.2.3.4）は IPv4 として扱う。IPv4・"unknown" はそのまま。
+ */
+export function rateLimitKey(ip: string): string {
+  if (isIP(ip) !== 6) return ip;
+  const mapped = ip.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/i);
+  if (mapped) return mapped[1];
+  const [head, tail = ""] = ip.toLowerCase().split("::");
+  const h = head ? head.split(":") : [];
+  const t = tail ? tail.split(":") : [];
+  // 末尾が IPv4 表記（例 64:ff9b::1.2.3.4）でも先頭 4 グループの判定には影響しない
+  const groups = ip.includes("::") ? [...h, ...Array(Math.max(0, 8 - h.length - t.length)).fill("0"), ...t] : h;
+  return `${groups
+    .slice(0, 4)
+    .map((g) => (g.replace(/^0+/, "") || "0"))
+    .join(":")}::/64`;
 }
 
 function validIp(raw: string | null | undefined): string | null {

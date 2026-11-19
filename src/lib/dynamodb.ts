@@ -280,6 +280,51 @@ export async function dbConditionalPut(
   }
 }
 
+/**
+ * 配列データの read-modify-write を楽観ロックで行う（同時更新で他人の変更を上書きしないため）。
+ *
+ * アイテムに版番号 `ver` を持たせ、読んだ時点の版のままの時だけ書く。競合したら読み直して
+ * mutate をやり直す（最大 maxAttempts 回）。mutate が null を返したら書かずに終わる。
+ * 既存アイテムに ver が無い（この関数を使う前に書かれた）場合は「ver がまだ無いこと」を条件にする。
+ * 戻り値: 書いた後の配列。書かなかった場合は null。
+ */
+export async function dbUpdateList<T>(
+  pk: string,
+  sk: string,
+  mutate: (current: T[]) => T[] | null,
+  ttlSeconds?: number,
+  maxAttempts = 5,
+): Promise<T[] | null> {
+  for (let attempt = 1; ; attempt++) {
+    const res = await doc.send(
+      new GetCommand({ TableName: TABLE, Key: { pk, sk }, ConsistentRead: true }),
+    );
+    const current = (res.Item?.data as T[] | undefined) ?? [];
+    const ver = res.Item?.ver as number | undefined;
+    const next = mutate([...current]);
+    if (next === null) return null;
+
+    const item: Record<string, unknown> = { pk, sk, data: next, ver: (ver ?? 0) + 1 };
+    if (ttlSeconds) item.ttl = ttlEpoch(ttlSeconds);
+    const condition = !res.Item
+      ? { ConditionExpression: "attribute_not_exists(pk)" }
+      : ver === undefined
+        ? { ConditionExpression: "attribute_not_exists(ver)" }
+        : {
+            ConditionExpression: "ver = :v",
+            ExpressionAttributeValues: { ":v": ver },
+          };
+    try {
+      await doc.send(new PutCommand({ TableName: TABLE, Item: item, ...condition }));
+      return next;
+    } catch (e) {
+      const conflict = (e as { name?: string })?.name === "ConditionalCheckFailedException";
+      if (!conflict || attempt >= maxAttempts) throw e;
+      await new Promise((r) => setTimeout(r, 20 * attempt + Math.random() * 30));
+    }
+  }
+}
+
 /** 条件付き削除。アイテムが存在して実際に削除できた時だけ true（いいね等の増減競合防止に使う）。 */
 export async function dbConditionalDelete(pk: string, sk: string): Promise<boolean> {
   try {

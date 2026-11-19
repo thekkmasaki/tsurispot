@@ -295,10 +295,15 @@ jobs:
           # ランタイムは DynamoDB を読む」の不一致で新 buildId が完全コールドになり
           # 再生成ストーム(2026-06-23型)の条件が揃うため、deploy.yml を唯一の真実源にして毎デプロイ注入する。
           # ロールバックもこのファイルの revert 一発で build/runtime 両側が同時に戻る。
+          # ORIGIN_LOCKDOWN_MODE=enforce: Cloudflare を通らない App Runner 直アクセス（WAF・ボット遮断の素通り）を 403 にする。
+          # 2026-11-19 時点で log モードの記録は攻撃スキャナーのみ・正規アクセスは全て Cloudflare 経由。
+          # ヘルスチェックは TCP なので影響なし。ORIGIN_VERIFY_SECRET 未設定時は src/proxy.ts 側で無効（素通り）。
+          # 問題が出たら "log" に戻す（この行を変えて deploy、または App Runner の環境変数を手動で log に）。
           jq --arg img "$NEW_IMAGE" \
             '.ImageRepository.ImageIdentifier = $img
              | .ImageRepository.ImageConfiguration.RuntimeEnvironmentVariables.ISR_CACHE_BACKEND = "s3"
-             | .ImageRepository.ImageConfiguration.RuntimeEnvironmentVariables.ISR_CACHE_S3_BUCKET = "tsurispot-isr-cache"' \
+             | .ImageRepository.ImageConfiguration.RuntimeEnvironmentVariables.ISR_CACHE_S3_BUCKET = "tsurispot-isr-cache"
+             | .ImageRepository.ImageConfiguration.RuntimeEnvironmentVariables.ORIGIN_LOCKDOWN_MODE = "enforce"' \
             /tmp/source-config.json > /tmp/source-config-new.json
 
           echo "Calling update-service with new image: $NEW_IMAGE"

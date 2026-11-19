@@ -19,6 +19,15 @@ vi.mock("@/lib/dynamodb", () => {
       // 実物と同じく JSON 互換に落として保存（参照共有による誤検知を防ぐ）
       mem.db.set(k(pk, sk), { pk, sk, data: JSON.parse(JSON.stringify(data)) });
     }),
+    dbUpdateList: vi.fn(
+      async (pk: string, sk: string, mutate: (list: unknown[]) => unknown[] | null) => {
+        const cur = (mem.db.get(k(pk, sk))?.data as unknown[] | undefined) ?? [];
+        const next = mutate(JSON.parse(JSON.stringify(cur)));
+        if (next === null) return null;
+        mem.db.set(k(pk, sk), { pk, sk, data: JSON.parse(JSON.stringify(next)) });
+        return next;
+      },
+    ),
     dbDelete: vi.fn(async (pk: string, sk: string) => {
       mem.db.delete(k(pk, sk));
     }),
