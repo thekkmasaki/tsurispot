@@ -1,6 +1,6 @@
 name: SNS ランキング投稿（Instagramリール / Threads）
 
-# 毎日2本（朝 am・夜 pm）「◯月に△△が釣れる□□県の釣り場TOP10」を自動生成して投稿する。
+# 毎日2本（朝 am・夜 pm）「◯月に△△が釣れる□□県の釣り場TOP10」を自動生成して投稿する（Instagram リール / Threads / X 動画）。
 # 生成器: scripts/sns/ranking-reel/（サイトの県×月×魚種ページと同じデータ・掲載基準）
 #
 # 投稿時刻: 朝 JST 7:30 ごろ（通勤・始業前）と 夜 JST 20:00 ごろ（帰宅後のアクティブ帯）。
@@ -33,7 +33,7 @@ on:
         required: false
       platforms:
         description: '投稿先'
-        default: 'instagram,threads'
+        default: 'instagram,threads,x'
       only_if_not_posted:
         description: '今日のこの枠がすでに投稿済みなら何もしない（Cloudflare Worker からの定時起動用）'
         type: boolean
@@ -97,6 +97,10 @@ jobs:
       INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
       THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
       THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      X_API_KEY: ${{ secrets.X_API_KEY }}
+      X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
+      X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+      X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ap-northeast-1
