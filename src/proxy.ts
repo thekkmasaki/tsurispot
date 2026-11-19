@@ -112,6 +112,9 @@ export function proxy(req: NextRequest) {
 
   const ua = req.headers.get("user-agent") || "";
   if (ua && BLOCKED_UA_PATTERNS.some((p) => p.test(ua))) {
+    if (req.nextUrl.pathname.startsWith("/api/mcp")) {
+      console.warn(`[mcp] blocked by UA rule: ${ua.slice(0, 80)}`);
+    }
     return forbidden();
   }
 
