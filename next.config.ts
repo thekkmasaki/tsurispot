@@ -115,13 +115,8 @@ const nextConfig: NextConfig = {
       destination: '/monthly/:month',
       permanent: true,
     },
-    // 釣果週報の旧URL形式。サイト内には存在しないが外部から参照されて 404 になっていた
-    // （2026-11 監査）。週報の実体はブログ記事なので、週報の一覧へ送る。
-    {
-      source: '/fishing-reports/:path*',
-      destination: '/blog?tag=%E9%87%A3%E6%9E%9C%E9%80%B1%E5%A0%B1',
-      permanent: true,
-    },
+    // 釣果週報の旧URL（/fishing-reports/*）は src/app/fishing-reports/[[...path]]/route.ts で301する。
+    // ここで日本語クエリ付きの destination を書くと、Next がデコードしたまま Location に入れて500になる。
     // 重複除去で消失したslug → 正しいslugへ301リダイレクト
     ...spotRedirectEntries,
   ],
