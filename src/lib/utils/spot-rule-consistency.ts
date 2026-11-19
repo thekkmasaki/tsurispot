@@ -1,4 +1,4 @@
-import { FishingSpot } from "@/types";
+import type { FishingSpot } from "../../types";
 
 // スポットのルール（禁止事項）とおすすめコンテンツの突合せ（2026-08 UX監査）。
 // 従来 spot.rules は SpotRulesCard の描画専用で、おすすめ釣り方・使えるガイド・
