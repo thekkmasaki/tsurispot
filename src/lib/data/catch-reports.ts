@@ -1,4 +1,5 @@
 // ユーザー釣果投稿（UGC）データ定義
+import { maskAuthor, maskPrivateAuthors } from "@/lib/private-author";
 
 /** 運営からの公式返信（REPORT#{id}/OFFICIAL_REPLY。social-store.ts の OfficialReply と同形） */
 export interface OfficialReplyInfo {
@@ -121,28 +122,37 @@ export async function getCatchReportsBySpotAsync(
         const flags = await dbBatchGet(flagKeys);
         ugcReports = parsed.filter((_, i) => flags[i] === null);
       }
-      // 運営返信を付与（配列は書き換えず取得時にbatchGetで載せる）
-      if (ugcReports.length > 0) {
-        const { getOfficialRepliesBatch } = await import("@/lib/social-store");
-        const replies = await getOfficialRepliesBatch(ugcReports.map((r) => r.id));
-        ugcReports = ugcReports.map((r, i) => {
-          const reply = replies[i];
-          return reply ? { ...r, officialReply: reply } : r;
-        });
-      }
-      // プロフィール非公開の人は「非公開の釣り人」表示にする（タイムライン等と同じルール）
-      if (ugcReports.length > 0) {
-        // ISR ページから呼ばれるため、no-store fetch を unstable_cache の内側に閉じ込めたルックアップを使う
-        // （直接 getUserById を渡すと static→dynamic エラーで 500 になる。private-author-lookup.ts 参照）
-        const [{ maskPrivateAuthors }, { getUserVisibilityCached }] = await Promise.all([
-          import("@/lib/private-author"),
-          import("@/lib/private-author-lookup"),
-        ]);
-        ugcReports = await maskPrivateAuthors(ugcReports, getUserVisibilityCached);
-      }
     }
   } catch (err) {
     console.error("[catch-reports] DynamoDB fetch error:", err);
+    ugcReports = [];
+  }
+
+  if (ugcReports.length > 0) {
+    // 運営返信を付与（配列は書き換えず取得時にbatchGetで載せる）。
+    // 失敗しても返信なしで続行する（下の非公開マスクを必ず通すため、例外をここで止める）
+    try {
+      const { getOfficialRepliesBatch } = await import("@/lib/social-store");
+      const replies = await getOfficialRepliesBatch(ugcReports.map((r) => r.id));
+      ugcReports = ugcReports.map((r, i) => {
+        const reply = replies[i];
+        return reply ? { ...r, officialReply: reply } : r;
+      });
+    } catch (err) {
+      console.error("[catch-reports] official reply fetch error:", err);
+    }
+
+    // プロフィール非公開の人は「非公開の釣り人」表示にする（タイムライン等と同じルール）。
+    // ISR ページから呼ばれるため、no-store fetch を unstable_cache の内側に閉じ込めたルックアップを使う
+    // （直接 getUserById を渡すと static→dynamic エラーで 500 になる。private-author-lookup.ts 参照）
+    try {
+      const { getUserVisibilityCached } = await import("@/lib/private-author-lookup");
+      ugcReports = await maskPrivateAuthors(ugcReports, getUserVisibilityCached);
+    } catch (err) {
+      // マスク処理自体が失敗したら、公開設定を確認できないので投稿者を全員伏せる（fail-closed）
+      console.error("[catch-reports] private author mask error:", err);
+      ugcReports = ugcReports.map((r) => (r.tsuriId ? maskAuthor(r) : r));
+    }
   }
 
   const idSet = new Set(hardcoded.map((r) => r.id));
