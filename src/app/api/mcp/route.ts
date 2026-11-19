@@ -46,6 +46,15 @@ export async function POST(req: Request) {
     return rpcError(-32700, "Parse error", 400);
   }
 
+  // 接続トラブル調査・利用状況把握用（低頻度なので全件 1 行ログ）。個人情報は出さない
+  const methods = (Array.isArray(body) ? body : [body])
+    .map((m) => (m && typeof m === "object" ? String((m as { method?: unknown }).method ?? "-") : "?"))
+    .join(",");
+  const toolName = !Array.isArray(body) ? (body as { params?: { name?: unknown } })?.params?.name : undefined;
+  console.log(
+    `[mcp] POST ${methods}${toolName ? `:${String(toolName)}` : ""} ua=${(req.headers.get("user-agent") || "-").slice(0, 80)} auth=${req.headers.has("authorization")}`,
+  );
+
   const result = handleBody(body);
   if (result === null) return new NextResponse(null, { status: 202, headers: HEADERS });
   return NextResponse.json(result, { headers: HEADERS });
@@ -53,6 +62,7 @@ export async function POST(req: Request) {
 
 /** ブラウザで開いた人・疎通確認向けの説明（SSE ストリームは提供しない） */
 export async function GET(req: Request) {
+  console.log(`[mcp] GET accept=${(req.headers.get("accept") || "-").slice(0, 60)} ua=${(req.headers.get("user-agent") || "-").slice(0, 80)}`);
   if ((req.headers.get("accept") || "").includes("text/event-stream")) {
     return new NextResponse(null, { status: 405, headers: { ...HEADERS, Allow: "POST" } });
   }
