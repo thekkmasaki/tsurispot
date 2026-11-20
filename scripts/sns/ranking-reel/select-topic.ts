@@ -41,10 +41,21 @@ const groupOf = (slug: string) => FISH_GROUP[slug] ?? slug;
 // 台帳は新しい順。直近2本（朝夜2本なら前日夜と当日朝など）の魚
 const lastTwoFish = new Set([...recentFish].slice(0, 2).map(groupOf));
 
+// SNSは拡散されるため、禁止の気配があるスポットは安全側に倒して載せない（サイト上の表示は変えない）。
+// 2026-11-20 静岡タチウオの回で「田子の浦も沼津港も釣り禁止では？」と指摘。両港は港内の大半が
+// 釣り禁止・立入禁止との情報が複数あり（一次情報での全面禁止は未確認のため fishingBan は付けていない）、
+// 「〇〇港」とだけ載せると港全体で釣れるように見えてしまう。
+const SNS_EXCLUDE_NAME = /田子の浦|沼津(内|外)?港/;
+// 説明やルール欄に禁止・立入禁止の記載がある所も除く（全体の約3%）
+const BAN_HINT = /釣り禁止|立入禁止|立ち入り禁止/;
+function snsSafe(s: (typeof fishingSpots)[number]) {
+  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name)) return false;
+  return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
+}
+
 function matchingSpots(prefName: string, fishSlug: string) {
   return fishingSpots
-    // SNSは拡散されるため、一部禁止(partial)を含め釣り禁止情報のあるスポットは載せない
-    .filter((s) => s.region.prefecture === prefName && !s.fishingBan && isFishListedAtSpot(s, fishSlug))
+    .filter((s) => s.region.prefecture === prefName && snsSafe(s) && isFishListedAtSpot(s, fishSlug))
     .map((spot) => {
       const cfs = spot.catchableFish.filter(
         (cf) => cf.fish.slug === fishSlug && isMonthInRange(monthNum, cf.monthStart, cf.monthEnd)
