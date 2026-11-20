@@ -284,7 +284,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btNight,
     tackleRecommendations: [],
-    safetyLevel: "safe", safetyNotes: ["現在は神戸市港湾施設条例により釣り禁止（2019年10月〜）", "護岸は足場良好", "夜景が美しい"],
+    safetyLevel: "safe", safetyNotes: ["神戸市は神戸港の護岸・緑地での魚釣りを禁止しています", "護岸は足場良好", "夜景が美しい"],
     rules: {
       castingAllowed: false,
       lureAllowed: false,
