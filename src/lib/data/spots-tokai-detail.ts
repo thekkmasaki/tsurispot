@@ -377,8 +377,14 @@ export const tokaiDetailSpots: FishingSpot[] = [
   },
   {
     id: "s713", name: "田子の浦港堤防", slug: "tagonoura-ko-teibo",
-    description: "富士山を望む絶景の港。富士川と潤井川が合流する河口に近く、シーバスやクロダイが高実績。広い岸壁ではアジのサビキ釣りも盛ん。富士山の雄大な景色を背景に釣りができる静岡屈指の人気スポット。",
+    description: "富士市の重要港湾。港湾管理者の静岡県田子の浦港管理事務所が、釣り人を含む関係者以外の立入を断っているため、釣りはできない。港の様子を眺めるなら隣接する田子の浦みなと公園を利用したい。",
     latitude: 35.1490, longitude: 138.6890,
+    fishingBan: {
+      scope: "full",
+      reason: "港湾管理者の静岡県田子の浦港管理事務所は、船舶の通行・係留や荷役作業の安全のため、管理上、関係者以外（釣り人を含む）の立入を断っていると案内しています（同事務所「よくある質問」）。",
+      sourceUrls: ["https://doboku.pref.shizuoka.jp/desaki3/tagonoura/jigyo/yokuarushitumonA.html"],
+      confirmedAt: "2026-11-20",
+    },
     address: "〒417-0015 静岡県富士市前田",
     accessInfo: "JR富士駅から徒歩約30分またはバス利用。東名高速富士ICから約15分。",
     region: lr("r820"), spotType: "port", difficulty: "beginner",

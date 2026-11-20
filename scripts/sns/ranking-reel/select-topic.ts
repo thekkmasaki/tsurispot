@@ -40,11 +40,23 @@ const FISH_GROUP: Record<string, string> = { inada: "buri" };
 const groupOf = (slug: string) => FISH_GROUP[slug] ?? slug;
 // 台帳は新しい順。直近2本（朝夜2本なら前日夜と当日朝など）の魚
 const lastTwoFish = new Set([...recentFish].slice(0, 2).map(groupOf));
+// SNSは拡散されるため、禁止の気配があるスポットは安全側に倒して載せない（このフィルタ自体はサイト表示に影響しない）。
+// 2026-11-20 静岡タチウオの回で「田子の浦も沼津港も釣り禁止では？」と指摘された。
+// - 田子の浦港: 港湾管理者が釣り人を含む関係者以外の立入を断っている → 各スポットに fishingBan(full) を付与済み。
+// - 沼津港: 外港入口に「関係者以外立入禁止」の看板あり（県のパブコメ資料 2015）。港内の大半が禁止との民間情報が
+//   複数あるが現行の一次情報は未確認のため fishingBan は付けず、SNSでは名前で除外する。
+// 「〇〇港」とだけ載せると港全体で釣れるように見えてしまう。
+const SNS_EXCLUDE_NAME = /田子の浦|沼津(内|外)?港/;
+// 説明やルール欄に禁止・立入禁止の記載がある所も除く（全体の約3%）
+const BAN_HINT = /釣り禁止|立入禁止|立ち入り禁止/;
+function snsSafe(s: (typeof fishingSpots)[number]) {
+  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name)) return false;
+  return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
+}
 
 function matchingSpots(prefName: string, fishSlug: string) {
   return fishingSpots
-    // SNSは拡散されるため、一部禁止(partial)を含め釣り禁止情報のあるスポットは載せない
-    .filter((s) => s.region.prefecture === prefName && !s.fishingBan && isFishListedAtSpot(s, fishSlug))
+    .filter((s) => s.region.prefecture === prefName && snsSafe(s) && isFishListedAtSpot(s, fishSlug))
     .map((spot) => {
       const cfs = spot.catchableFish.filter(
         (cf) => cf.fish.slug === fishSlug && isMonthInRange(monthNum, cf.monthStart, cf.monthEnd)

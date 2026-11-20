@@ -1602,8 +1602,14 @@ export const kantoAdd4Spots: FishingSpot[] = [
   },
   {
     id: "sk4074", name: "静浦漁港", slug: "shizuura-gyokou",
-    description: "沼津市の駿河湾に面した中規模漁港。カゴ釣りのメッカとして名高く、マダイやイサキの大物実績が豊富な関東屈指の好釣り場。",
+    description: "沼津市の駿河湾に面した中規模漁港。かつてはカゴ釣りでマダイやイサキが狙える釣り場として知られていたが、現在は静岡県漁港管理条例により漁港施設内での釣りが禁止されている。釣行は不可。",
     latitude: 35.0560, longitude: 138.8680,
+    fishingBan: {
+      scope: "full",
+      reason: "静岡県沼津土木事務所は、静浦漁港の漁港施設内（漁港道路・防波堤・物揚場等）での漁業活動以外の行為（釣り・一般車両の駐車）を、静岡県漁港管理条例第9条により禁止していると案内しています。漁業活動以外の目的で漁港内に入らないよう呼びかけられています。",
+      sourceUrls: ["https://www.pref.shizuoka.jp/machizukuri/dobokujimusho/numazudoboku/1057379.html"],
+      confirmedAt: "2026-11-20",
+    },
     address: "〒410-0101 静岡県沼津市多比",
     accessInfo: "JR沼津駅からバスで約20分。東名沼津ICから約20分。",
     region: localRegion("rk4032"), spotType: "port", difficulty: "intermediate",
