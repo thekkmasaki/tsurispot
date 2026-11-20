@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Bot,
   Plug,
@@ -89,13 +90,26 @@ const jsonLd = [
     "@type": "HowTo",
     name: "Claude にツリスポのコネクタを追加する方法",
     step: [
-      { "@type": "HowToStep", position: 1, text: "Claude の「設定」を開き、「コネクタ」を選ぶ" },
-      { "@type": "HowToStep", position: 2, text: "「カスタムコネクタを追加」を押す" },
-      { "@type": "HowToStep", position: 3, text: `名前に「ツリスポ」、URL に ${MCP_ENDPOINT} を入力し、認証なしのまま追加する` },
-      { "@type": "HowToStep", position: 4, text: "チャット画面でツリスポのコネクタを有効にして、釣りについて質問する" },
+      { "@type": "HowToStep", position: 1, text: "Claude の「設定」→「コネクタ」を開き、「追加」から「カスタムコネクタを追加」を選ぶ", image: "https://tsurispot.com/images/ai/claude-add-menu.jpg" },
+      { "@type": "HowToStep", position: 2, text: `名前に「ツリスポ」、URL に ${MCP_ENDPOINT} を入力し、認証なしのまま追加する`, image: "https://tsurispot.com/images/ai/claude-add-connector.jpg" },
+      { "@type": "HowToStep", position: 3, text: "チャット入力欄の「＋」→「プラグイン」でツリスポがオンになっていることを確認する", image: "https://tsurispot.com/images/ai/claude-enable-connector.jpg" },
+      { "@type": "HowToStep", position: 4, text: "釣りについて質問し、ツリスポの使用確認が出たら許可する", image: "https://tsurispot.com/images/ai/claude-tool-permission.jpg" },
     ],
   },
 ];
+
+function Shot({ src, width, height, alt }: { src: string; width: number; height: number; alt: string }) {
+  return (
+    <Image
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      sizes="(max-width: 640px) 90vw, 360px"
+      className="mt-2 h-auto w-full max-w-[360px] rounded-lg border shadow-sm"
+    />
+  );
+}
 
 function Section({
   id,
@@ -171,17 +185,26 @@ export default function AiConnectorPage() {
         </Section>
 
         <Section id="claude" icon={Plug} title="Claude での設定方法">
-          <ol className="list-decimal space-y-2 pl-5">
-            <li>Claude（claude.ai またはデスクトップアプリ）で「設定」を開き、「コネクタ」を選びます。</li>
-            <li>「カスタムコネクタを追加」を押します。</li>
+          <ol className="list-decimal space-y-6 pl-5">
             <li>
-              名前に <strong>ツリスポ</strong>、リモート MCP サーバーの URL に <code className="rounded bg-muted px-1 py-0.5 text-xs">{MCP_ENDPOINT}</code> を入力します。
-              認証（OAuth）の項目は空欄のまま「追加」します。
+              Claude（claude.ai またはアプリ）で「設定」→「コネクタ」（画面によっては「プラグイン」）を開き、右上の「追加」から<strong>「カスタムコネクタを追加」</strong>を選びます。
+              <Shot src="/images/ai/claude-add-menu.jpg" width={720} height={630} alt="「追加」メニューの中の「カスタムコネクタを追加」" />
             </li>
-            <li>チャット画面の「ツール（＋ボタン）」からツリスポが有効になっていることを確認し、釣りについて質問します。</li>
+            <li>
+              名前に <strong>ツリスポ</strong>、MCP サーバー URL に <code className="rounded bg-muted px-1 py-0.5 text-xs">{MCP_ENDPOINT}</code> を入力し、「続ける」を押して追加します。認証の設定は不要です。
+              <Shot src="/images/ai/claude-add-connector.jpg" width={530} height={720} alt="カスタムコネクタの追加画面に名前「ツリスポ」と URL を入力したところ" />
+            </li>
+            <li>
+              チャット入力欄の「＋」→「プラグイン」で、ツリスポがオンになっていることを確認します。
+              <Shot src="/images/ai/claude-enable-connector.jpg" width={642} height={720} alt="チャットの＋メニューでツリスポのスイッチがオンになっている" />
+            </li>
+            <li>
+              釣りについて質問します。ツリスポを使う前に確認が表示されたら「1回だけ許可する」または「常に許可する」を押します（ツリスポのツールはすべて読み取り専用です）。
+              <Shot src="/images/ai/claude-tool-permission.jpg" width={686} height={720} alt="Claude がツリスポの「釣り場を探す」を使ってよいか確認している画面" />
+            </li>
           </ol>
           <p className="text-xs text-muted-foreground">
-            ※ 画面の名称は Claude のバージョンによって「コネクタ」「プラグイン」など異なる場合があります。チーム／企業プランでは、管理者がコネクタを追加する必要があることがあります。
+            ※ 画面の名称や位置は Claude の更新で変わることがあります。チーム／企業プランでは、管理者がコネクタを追加する必要があることがあります。
           </p>
         </Section>
 
@@ -227,6 +250,12 @@ export default function AiConnectorPage() {
               <li key={p} className="rounded-lg border bg-muted/30 px-3 py-2">「{p}」</li>
             ))}
           </ul>
+          <p className="pt-2 font-medium text-foreground">回答の例（Claude）</p>
+          <p>「今週末、湘南でアジ釣りをしたい。初心者でも釣れる釣り場と、土曜日の満潮・干潮の時刻を教えて」と聞いたときの回答です。釣り場ページへのリンク付きで、潮の時刻と狙い目の時間まで答えてくれます。</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Shot src="/images/ai/claude-answer-spots.jpg" width={587} height={720} alt="Claude がツリスポのデータから湘南の初心者向けアジ釣り場を表で提案している回答" />
+            <Shot src="/images/ai/claude-answer-tide.jpg" width={720} height={594} alt="Claude が湘南港の満潮・干潮の時刻と狙い目の時間を答えている回答" />
+          </div>
           <p className="text-xs text-muted-foreground">
             回答に含まれるツリスポのリンクから、釣り場の地図・写真・アクセスなどの詳しい情報を確認できます。
           </p>
