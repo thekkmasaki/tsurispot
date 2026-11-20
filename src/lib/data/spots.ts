@@ -7,6 +7,7 @@ import { spotRulesBatch } from "./spots-rules-batch";
 import { generateSpotIntro } from "../utils/spot-content-generator";
 import { isSameSpotName } from "./spot-name-normalize";
 import { spotTipsAdd } from "./spot-tips-add";
+import { spotBanOverrides } from "./spot-ban-overrides";
 import { spotMergeMap } from "./spot-merge-map";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
@@ -233,8 +234,26 @@ function applyRegionOverrides(spots: FishingSpot[]): FishingSpot[] {
   });
 }
 
+/**
+ * 釣り禁止の監査結果（spot-ban-overrides.ts）を適用する。
+ *
+ * 2026-11 監査: 港湾管理者が立入禁止・釣り禁止と公表している場所が、禁止情報なしで
+ * 通常の釣り場として掲載されていた。同じ場所が複数ファイルに重複して定義されているため、
+ * 元データを個別に書き換える代わりに、重複統合後の slug に対して一括で上書きする。
+ * - description があれば本文を差し替え、notice があれば本文の先頭に注記を足す
+ *   （禁止バナーと「〜が狙える」の本文が矛盾しないように）
+ */
+function applyBanOverrides(spots: FishingSpot[]): FishingSpot[] {
+  return spots.map((spot) => {
+    const o = spotBanOverrides[spot.slug];
+    if (!o) return spot;
+    const description = o.description ?? (o.notice ? `${o.notice}${spot.description ?? ""}` : spot.description);
+    return { ...spot, fishingBan: o.fishingBan, description };
+  });
+}
+
 export const fishingSpots: FishingSpot[] = applyLocalTips(
-  enrichDescriptions(applyBatchRules(applyRegionOverrides(deduplicateSpots(allRawSpots))))
+  enrichDescriptions(applyBatchRules(applyBanOverrides(applyRegionOverrides(deduplicateSpots(allRawSpots)))))
 );
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
