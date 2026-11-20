@@ -954,7 +954,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
   // --- 熱海・伊東エリア ---
   {
     id: "scs037", name: "伊東港白灯堤防", slug: "ito-port-hakuto-teibo",
-    description: "伊東港の東側に延びる白灯台のある大堤防。サビキでアジ・サバ・イワシが年間を通じて安定して釣れる伊東を代表する釣りポイント。夜のアジングやメバリングも好調で、カゴ釣りでのマダイ実績も高い。温泉街からのアクセスも良く、旅行中の釣りにも最適。",
+    description: "伊東市の県管理の港湾。港湾管理者の熱海土木事務所が、港湾・漁港の堤防・岸壁での釣りは管理上支障があるため全て禁止と案内しており、釣りはできない。近くで釣りをするなら熱海港の海釣り施設を利用したい。", fishingBan: { scope: "full", reason: "伊東港は静岡県（熱海土木事務所）が管理する港湾で、同事務所は「港湾・漁港の堤防・岸壁等施設は、管理上支障があるため、全て禁止」と案内しています。熱海港の海釣り施設が釣り場として案内されています。", sourceUrls: ["https://www.pref.shizuoka.jp/machizukuri/dobokujimusho/atamidoboku/1047126/1047133.html", "https://www.pref.shizuoka.jp/machizukuri/kowan/1003578/1029594.html"], confirmedAt: "2026-11-20" },
     latitude: 34.9715, longitude: 139.1029,
     address: "〒414-0043 静岡県伊東市新井2丁目4",
     accessInfo: "JR伊東駅から徒歩約15分。小田原厚木道路経由で伊豆縦貫道約60分。",

@@ -2551,7 +2551,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   },
   {
     id: "s3206", name: "伊東港", slug: "ito-kou",
-    description: "伊豆半島東部の港。堤防（白灯台堤防）からアジ・サバのサビキ釣りが好調で、冬にはメジナやカワハギも狙える。温泉街からのアクセスも良く、観光と釣りの両立が可能。",
+    description: "伊東市の県管理の港湾。港湾管理者の熱海土木事務所が、港湾・漁港の堤防・岸壁での釣りは管理上支障があるため全て禁止と案内しており、釣りはできない。近くで釣りをするなら熱海港の海釣り施設を利用したい。", fishingBan: { scope: "full", reason: "伊東港は静岡県（熱海土木事務所）が管理する港湾で、同事務所は「港湾・漁港の堤防・岸壁等施設は、管理上支障があるため、全て禁止」と案内しています。熱海港の海釣り施設が釣り場として案内されています。", sourceUrls: ["https://www.pref.shizuoka.jp/machizukuri/dobokujimusho/atamidoboku/1047126/1047133.html", "https://www.pref.shizuoka.jp/machizukuri/kowan/1003578/1029594.html"], confirmedAt: "2026-11-20" },
     latitude: 34.9721, longitude: 139.1047,
     address: "〒414-0022 静岡県伊東市東松原町12-13",
     accessInfo: "JR伊東線伊東駅から徒歩約15分。小田原厚木道路小田原西ICから約50分。",
