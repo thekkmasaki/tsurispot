@@ -37,14 +37,14 @@ const shortTip = (arr) => [...arr].sort((a, b) => a.length - b.length).slice(0, 
 const tipsHtml = t.method
   ? `<li><b>釣り方</b>${esc(t.method.name)}</li>${shortTip(t.method.tips).map((x) => `<li><b>コツ</b>${esc(x.length > 25 ? x.slice(0, 24) + "…" : x)}</li>`).join("")}`
   : "";
-const bubble = t.fish.isPeakMonth ? `${t.month.name}は<br>${t.fish.name}の最盛期！` : `${t.month.name}も<br>しっかり狙えるよ！`;
+const bubble = t.fish.isPeakMonth ? `${t.month.name}は<br>${t.fish.name}のシーズン中！` : `${t.month.name}も<br>しっかり狙えるよ！`;
 const hasPhotoCredit = t.spots.some((s) => s.photo);
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="file://${here}/post.css">
 <script src="file://${here}/mascot.js"></script><script src="file://${here}/scenes.js"></script></head>
 <body style="--big:${bigSize}px">
 <header><div class="chip">${t.month.name}｜${esc(t.pref.name)}</div>
-<h1><span class="s">${t.fish.isPeakMonth ? "今が旬！" : "今月狙える"}</span><span class="big">${esc(t.fish.name)}</span><span class="s2">が釣れる${esc(t.pref.short)}の釣り場 <span class="top">TOP${n}</span></span></h1>
+<h1><span class="s">${t.fish.isPeakMonth ? "今が狙い時！" : "今月狙える"}</span><span class="big">${esc(t.fish.name)}</span><span class="s2">が釣れる${esc(t.pref.short)}の釣り場 <span class="top">TOP${n}</span></span></h1>
 <p class="sub">ツリスポ掲載${t.totalSpots}か所から「釣れる度」順に厳選</p>
 <div class="mas" id="m1"></div><div class="bub">${bubble}</div></header>
 <main>${cards}</main>
@@ -81,7 +81,7 @@ const tag = (x) => "#" + x.replace(/[\s・（）()]/g, "");
 const hashtags = [tag(t.fish.name), tag(t.fish.name + "釣り"), tag(t.pref.short + "釣り"), tag(t.pref.short + "釣り場"), "#釣り", "#釣り場", "#釣り初心者", "#海釣り", "#堤防釣り", "#ツリスポ"].join(" ");
 const igCaption = `【${t.month.name}】${t.pref.name}で${t.fish.name}が釣れる釣り場TOP${n}🎣
 
-${t.fish.isPeakMonth ? `${t.month.name}は${t.fish.name}の最盛期！` : `${t.month.name}も${t.fish.name}が狙えます。`}ツリスポに掲載している${t.pref.short}の${t.totalSpots}か所から、釣れる度の高い順に選びました。
+${t.fish.isPeakMonth ? `${t.month.name}は${t.fish.name}のシーズン中！` : `${t.month.name}も${t.fish.name}が狙えます。`}ツリスポに掲載している${t.pref.short}の${t.totalSpots}か所から、釣れる度の高い順に選びました。
 
 ${lines}
 
