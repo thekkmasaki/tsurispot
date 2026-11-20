@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { fishingSpots } from "../spots";
 import { prefectureFishingRules } from "../fishing-rules-data";
+import { spotBanOverrides } from "../spot-ban-overrides";
 
 /**
  * 「そこで釣りが合法か」を検証するテスト。
@@ -75,6 +76,15 @@ describe("fishingBan の整合性", () => {
           `${spot.slug}: 代替スポット ${altSlug} 自体が釣り禁止になっている`
         ).toBeUndefined();
       }
+    }
+  });
+
+  it("釣り禁止の監査結果（spot-ban-overrides）がすべて公開中のスポットに効いている", () => {
+    // 重複統合で負けた slug に書くと何も起きない（禁止情報が黙って消える）ので検出する
+    const live = new Set(fishingSpots.map((s) => s.slug));
+    for (const slug of Object.keys(spotBanOverrides)) {
+      expect(live.has(slug), `${slug}: 公開中のスポットに無い（統合後の slug を指定する）`).toBe(true);
+      expect(fishingSpots.find((s) => s.slug === slug)!.fishingBan).toEqual(spotBanOverrides[slug].fishingBan);
     }
   });
 
