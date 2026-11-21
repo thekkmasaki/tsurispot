@@ -9,6 +9,7 @@
  *   npx --yes tsx@4.23.15 scripts/sns/ranking-reel/select-topic.ts [--date 2026-10-01] [--pref hyogo --fish tachiuo --month 10]
  *   [--exclude "hyogo/tachiuo,osaka/aji"]   … 直近投稿済みの 県/魚 を除外（publish 側が台帳から渡す）
  *   [--recent-fish "tachiuo,aji"] [--recent-pref "hyogo"] … 連日の同一魚種・同一県を避ける
+ *   [--block "kobe-wadabou,suma-ko-hitomoji"] … 投稿前の禁止チェック（check-bans.mjs）で外れたスポットの slug。次点から補充する
  * 出力: JSON（stdout）
  */
 import { fishingSpots } from "@/lib/data/spots";
@@ -49,7 +50,9 @@ const lastTwoFish = new Set([...recentFish].slice(0, 2).map(groupOf));
 const SNS_EXCLUDE_NAME = /田子の浦|沼津(内|外)?港/;
 // 説明やルール欄に禁止・立入禁止の記載がある所も除く（全体の約3%）
 const BAN_HINT = /釣り禁止|立入禁止|立ち入り禁止/;
+const blocked = new Set(list(arg("block")));
 function snsSafe(s: (typeof fishingSpots)[number]) {
+  if (blocked.has(s.slug)) return false;
   if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name)) return false;
   return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
 }
@@ -195,6 +198,9 @@ const out = {
     name: spot.name.replace(/（.*?）|\(.*?\)/g, "").trim(),
     slug: spot.slug,
     city: cityOf(spot),
+    // 投稿前の禁止チェック（check-bans.mjs）が検索に使う。画像・キャプションには出さない
+    address: spot.address,
+    access: spot.accessInfo,
     type: SPOT_TYPE_LABELS[spot.spotType] ?? "",
     difficulty: spot.difficulty,
     isPeak,

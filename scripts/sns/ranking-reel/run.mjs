@@ -7,7 +7,8 @@
  *   --dry-run: 投稿・台帳書き込みをせず、画像をDiscordにプレビュー送信するだけ
  *   --slot: 朝の枠(am)か夜の枠(pm、既定)か。投稿済み判定は日付×枠ごと（slot の無い古い台帳行は pm 扱い）
  *
- * 必要な環境変数: INSTAGRAM_USER_ID / INSTAGRAM_ACCESS_TOKEN, THREADS_ACCESS_TOKEN（THREADS_USER_ID は任意。無ければトークンから取得）,
+ * 投稿前に、載せるスポットが釣り禁止・立入禁止でないかを Claude のウェブ検索で確認する（check-bans.mjs。ANTHROPIC_API_KEY 必須）。
+ * 必要な環境変数: ANTHROPIC_API_KEY, INSTAGRAM_USER_ID / INSTAGRAM_ACCESS_TOKEN, THREADS_ACCESS_TOKEN（THREADS_USER_ID は任意。無ければトークンから取得）,
  *   AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY, UPSTASH_REDIS_REST_URL / _TOKEN, DISCORD_WEBHOOK_URL（任意）
  *   未設定のプラットフォームは自動でスキップする。
  */
@@ -16,6 +17,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { readLedger, appendLedger, getToken, discord, uploadPublic, removePublic } from "./lib.mjs";
+import { checkBans } from "./check-bans.mjs";
 import { postInstagramReel, postThreadsImage, postXVideo, xConfigured } from "./platforms.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -49,13 +51,58 @@ if (!dryRun) {
   }
 }
 
-// 2) お題選定（サイトと同じデータ・同じ掲載基準）
-const selArgs = ["--yes", "tsx@4.23.15", path.join(here, "select-topic.ts"), "--date", date,
-  "--exclude", exclude.join(","), "--recent-fish", recentFish.join(","), "--recent-pref", recentPref.join(",")];
-for (const k of ["pref", "fish", "month"]) if (arg(k)) selArgs.push(`--${k}`, arg(k));
+// 2) お題選定（サイトと同じデータ・同じ掲載基準）→ 投稿前の禁止チェック（check-bans.mjs）
+//    禁止・一部禁止・疑いありのスポットは外して次点から補充し、もう一度チェックする（最大4回）。
+//    チェックできなかった場合（API キー無し・API 失敗）は投稿しない。SNS は拡散されるので「確認できたものだけ載せる」。
 const topicPath = path.join(outDir, "topic.json");
-fs.writeFileSync(topicPath, execFileSync("npx", selArgs, { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] }));
-const topic = JSON.parse(fs.readFileSync(topicPath, "utf8"));
+const blocked = [];
+const dropped = []; // Discord に出す: 外したスポットと理由
+let topic;
+let fixedPref = arg("pref");
+let fixedFish = arg("fish");
+for (let round = 1; ; round++) {
+  const selArgs = ["--yes", "tsx@4.23.15", path.join(here, "select-topic.ts"), "--date", date,
+    "--exclude", exclude.join(","), "--recent-fish", recentFish.join(","), "--recent-pref", recentPref.join(","),
+    "--block", blocked.join(",")];
+  if (fixedPref) selArgs.push("--pref", fixedPref);
+  if (fixedFish) selArgs.push("--fish", fixedFish);
+  if (arg("month")) selArgs.push("--month", arg("month"));
+  fs.writeFileSync(topicPath, execFileSync("npx", selArgs, { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] }));
+  topic = JSON.parse(fs.readFileSync(topicPath, "utf8"));
+  // 補充の回はお題（県×魚）を変えない
+  fixedPref = topic.pref.slug;
+  fixedFish = topic.fish.slug;
+
+  const check = await checkBans(topic);
+  const ng = topic.spots.filter((s) => check.results[s.slug] && !check.results[s.slug].postable);
+  for (const s of ng) {
+    const r = check.results[s.slug];
+    blocked.push(s.slug);
+    dropped.push(`・${s.name}（${s.slug}）: ${r.verdict} — ${r.reason}${r.sources.length ? `\n  ${r.sources.join("\n  ")}` : ""}`);
+  }
+  console.log(`禁止チェック ${round}回目: ${topic.spots.length}件中 ${ng.length}件を除外${check.ok ? "" : `（${check.error}）`}`);
+  if (!check.ok && dryRun) {
+    console.warn(`dry-run のため禁止チェック未完了のまま続行: ${check.error}`);
+    break;
+  }
+  if (!check.ok) {
+    await discord(`🛑 **SNSランキング投稿** 投稿前の禁止チェックができなかったため投稿を中止しました\n${check.error}${dropped.length ? `\n\n除外したスポット:\n${dropped.join("\n")}` : ""}`);
+    process.exit(1);
+  }
+  if (ng.length === 0) break;
+  if (round >= 4) {
+    await discord(`🛑 **SNSランキング投稿** 禁止の疑いがあるスポットが多く、4回補充しても揃わないため投稿を中止しました（${topic.pref.name}×${topic.fish.name}）\n${dropped.join("\n")}`);
+    process.exit(1);
+  }
+}
+if (topic.spots.length < 5) {
+  await discord(`🛑 **SNSランキング投稿** 禁止チェック後の掲載が${topic.spots.length}件しかないため投稿を中止しました（${topic.pref.name}×${topic.fish.name}）\n${dropped.join("\n")}`);
+  process.exit(1);
+}
+if (dropped.length) {
+  // サイトの掲載も直す必要があるかもしれないので、毎回通知する（fishingBan の付与は人が一次情報を見て判断する）
+  await discord(`⚠️ **SNSランキング投稿** 禁止の疑いでリールから外したスポット（サイトの掲載も要確認）\n${dropped.join("\n")}`.slice(0, 1900));
+}
 const label = `${topic.month.name}×${topic.pref.name}×${topic.fish.name}`;
 console.log(`お題: ${label}（${topic.spots.length}件）`);
 

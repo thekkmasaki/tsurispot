@@ -91,7 +91,7 @@ jobs:
       group: sns-ranking-reel-post
       cancel-in-progress: false
     runs-on: ubuntu-24.04 # 26.04 は Playwright の Chromium 未対応（2026-11）
-    timeout-minutes: 30
+    timeout-minutes: 60 # 禁止チェック（ウェブ検索）が最大で数回走る
     env:
       INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
       INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
@@ -107,6 +107,8 @@ jobs:
       UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
       UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      # 投稿前の禁止チェック（check-bans.mjs）。未設定だと投稿しない
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -130,7 +132,7 @@ jobs:
           aws s3 sync s3://tsurispot-sns-assets/bgm/ /tmp/bgm/ --only-show-errors || echo "BGMなし（無音で続行）"
           ls /tmp/bgm
 
-      - name: 生成して投稿
+      - name: 生成して投稿（投稿前に掲載スポットの釣り禁止をウェブで確認）
         env:
           SNS_BGM_DIR: /tmp/bgm
         run: |
