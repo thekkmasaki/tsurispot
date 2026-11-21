@@ -1,6 +1,7 @@
 // 釣り場の検索・詳細・近く検索
 import type { FishingSpot } from "@/types";
 import { fishingSpots, getNearbySpots } from "@/lib/data/spots";
+import { prefectures } from "@/lib/data/prefectures";
 import {
   type ToolDef,
   ToolInputError,
@@ -28,9 +29,23 @@ import {
 // search_spots
 // ---------------------------------------------------------------------------
 
+/**
+ * query が都道府県名そのもの（「京都」「京都府」「東京」など）なら、その県名を返す。
+ * 地名の部分一致のままだと「京都」が「東京都」の住所・県名に当たってしまうため、県の絞り込みに振り替える。
+ */
+function prefectureFromQuery(query: string): string | undefined {
+  const q = query.normalize("NFKC").trim();
+  return prefectures.find((p) => q === p.name || q === p.nameShort)?.name;
+}
+
 export function searchSpots(args: Record<string, unknown>) {
-  const query = str(args.query);
-  const prefecture = str(args.prefecture, 10);
+  let query = str(args.query);
+  let prefecture = str(args.prefecture, 10);
+  const prefFromQuery = query ? prefectureFromQuery(query) : undefined;
+  if (prefFromQuery && (!prefecture || prefFromQuery.startsWith(prefecture.replace(/[都道府県]$/, "")))) {
+    prefecture = prefFromQuery;
+    query = undefined;
+  }
   const fish = str(args.fish, 30);
   const spotType = str(args.spotType, 20) as FishingSpot["spotType"] | undefined;
   const m = month(args.month);

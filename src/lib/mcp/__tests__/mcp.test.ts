@@ -95,6 +95,21 @@ describe("tools", () => {
     expect(r.spots.every((s) => s.prefecture === "京都府")).toBe(true);
   });
 
+  it("search_spots: query に「京都」を渡しても東京都が混ざらない（県名は県の絞り込みに振り替える）", () => {
+    for (const query of ["京都", "京都府"]) {
+      const r = searchSpots({ query, limit: 20 });
+      expect(r.total).toBeGreaterThan(0);
+      expect(r.spots.every((s) => s.prefecture === "京都府"), query).toBe(true);
+    }
+    const tokyo = searchSpots({ query: "東京", limit: 20 });
+    expect(tokyo.spots.every((s) => s.prefecture === "東京都")).toBe(true);
+  });
+
+  it("search_spots: 県名でない地名は従来どおり部分一致", () => {
+    const r = searchSpots({ query: "大黒", limit: 5 });
+    expect(r.spots.some((s) => s.name.includes("大黒"))).toBe(true);
+  });
+
   it("search_spots: 全面釣り禁止スポットは推薦しない", () => {
     const banned = fishingSpots.find((s) => s.fishingBan?.scope === "full");
     if (!banned) return;
