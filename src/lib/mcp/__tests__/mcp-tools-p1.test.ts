@@ -38,6 +38,7 @@ import {
 } from "../tools";
 import { addDaysYmd } from "../tools/shared";
 import { fishingSpots } from "@/lib/data/spots";
+import { isSpotClosedOn } from "@/lib/spot-closed-days";
 import { affiliateProducts } from "@/lib/data/affiliate-products";
 import { dbGet } from "@/lib/dynamodb";
 import { getOfficialRepliesBatch } from "@/lib/social-store";
@@ -136,13 +137,32 @@ describe("get_fishing_forecast", () => {
     expect(r.weather.seaSurfaceTempC).toBe(19.5);
     expect(r.tide.tideType).toBeTruthy();
     expect(r.tide.highTides.length).toBeGreaterThan(0);
-    expect(r.fishingIndex.score).toBeGreaterThanOrEqual(0);
-    expect(r.fishingIndex.score).toBeLessThanOrEqual(100);
+    expect(r.fishingIndex!.score).toBeGreaterThanOrEqual(0);
+    expect(r.fishingIndex!.score).toBeLessThanOrEqual(100);
     // 内訳の合計 = 総合点（fishing-index の設計原則がそのまま出ている）
-    const sum = r.fishingIndex.breakdown.reduce((a, b) => a + Number(b.points.split("/")[0]), 0);
-    expect(sum).toBe(r.fishingIndex.score);
+    const sum = r.fishingIndex!.breakdown.reduce((a, b) => a + Number(b.points.split("/")[0]), 0);
+    expect(sum).toBe(r.fishingIndex!.score);
     expect(r.weekOutlook).toHaveLength(7);
     expect(r.url).toMatch(UTM_URL);
+  });
+
+  it("休園日は釣行指数とおすすめ時間を返さず、休園日だと伝える", async () => {
+    const days = Array.from({ length: 7 }, (_, i) => addDaysYmd(todayJST(), i));
+    const spot = fishingSpots.find(
+      (s) => s.latitude.toFixed(2) !== otherSpot.latitude.toFixed(2) && days.some((d) => isSpotClosedOn(s, d)) && days.some((d) => !isSpotClosedOn(s, d)),
+    )!;
+    expect(spot).toBeDefined();
+    const closedDay = days.find((d) => isSpotClosedOn(spot, d))!;
+    const r = await getFishingForecast({ slug: spot.slug, date: closedDay });
+    expect(r.fishingIndex).toBeUndefined();
+    expect(r.closed?.closedDays).toBe(spot.managementInfo?.closedDays);
+    const w = r.weekOutlook.find((x) => x.date === closedDay)!;
+    expect(w.score).toBeNull();
+    const openDay = days.find((d) => !isSpotClosedOn(spot, d))!;
+    expect(r.weekOutlook.find((x) => x.date === openDay)!.score).not.toBeNull();
+    const open = await getFishingForecast({ slug: spot.slug, date: openDay });
+    expect(open.closed).toBeUndefined();
+    expect(open.fishingIndex?.score).toBeGreaterThanOrEqual(0);
   });
 
   it("7日より先・過去の日付は入力エラー", async () => {
