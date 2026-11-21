@@ -1,0 +1,62 @@
+name: 単発カルーセル（Instagram）
+
+# 作成済みの画像とキャプション（scripts/sns/manual-carousel/posts/<投稿名>/）を Instagram にそのまま投稿する。
+# 手動起動のみ。まず dry_run=true で Discord に全画像とキャプションを出して確認し、良ければ dry_run=false で投稿する。
+# 投稿済みの名前は Redis に記録し、二度目は何もしない（force=true で無視）。
+on:
+  workflow_dispatch:
+    inputs:
+      post:
+        description: '投稿名（posts/ のフォルダ名。例: connector-claude）'
+        required: true
+      dry_run:
+        description: '投稿せずDiscordに画像とキャプションだけ送る'
+        type: boolean
+        default: true
+      force:
+        description: '投稿済みでももう一度投稿する'
+        type: boolean
+        default: false
+
+concurrency:
+  group: sns-manual-carousel
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+      INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ap-northeast-1
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      POST_NAME: ${{ inputs.post }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: 依存インストール
+        run: npm ci
+
+      - name: 投稿
+        run: |
+          ARGS=()
+          [ "${{ inputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
+          [ "${{ inputs.force }}" = "true" ] && ARGS+=(--force)
+          node scripts/sns/manual-carousel/post.mjs "$POST_NAME" "${ARGS[@]}"
+
+      - name: Discord通知（異常終了）
+        if: failure() && env.DISCORD_WEBHOOK_URL != ''
+        run: |
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"❌ **単発カルーセル** ワークフロー失敗\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+            "$DISCORD_WEBHOOK_URL"
