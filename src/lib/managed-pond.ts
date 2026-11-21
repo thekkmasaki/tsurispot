@@ -228,6 +228,8 @@ export function buildManagedSummary(spot: ManagedInput): {
 } {
   const label = facilityLabel(spot);
   const fish = uniqueFishNames(spot, 3);
+  // 「ほかN種」= 重複除去後の総種数 − 実際に表示した種数
+  const remainingFish = uniqueFishNames(spot, Infinity).length - fish.length;
   const methods = uniqueMethods(spot, 3);
   const hours = openingHoursText(spot);
   const closed = closedDaysText(spot);
@@ -239,7 +241,7 @@ export function buildManagedSummary(spot: ManagedInput): {
   if (closed) facility.push(`定休日 ${trimStop(closed)}`);
   return {
     oneLineFeature: `${spot.region.areaName}エリアの${label}。${fee ? `料金は${fee}。` : "料金・ルールは施設ごとに異なります。"}`,
-    topFishAndSeason: `狙える魚: ${fish.join("・") || "—"}${spot.catchableFish.length > 3 ? `ほか${spot.catchableFish.length - 3}種` : ""}`,
+    topFishAndSeason: `狙える魚: ${fish.join("・") || "—"}${remainingFish > 0 ? `ほか${remainingFish}種` : ""}`,
     recommendedMethod: methods.length > 0 ? `釣り方: ${methods.join("・")}` : "釣り方は公式サイトで確認",
     facilityOverview: facility.length > 0 ? facility.join(" / ") : "設備・営業時間は公式サイトで確認",
     difficultyComment: `${spot.name}のレギュレーション（釣法・持ち帰り・時間券）は施設ごとに決まっています。釣行前に公式サイトで最新情報をご確認ください。`,
