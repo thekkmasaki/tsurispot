@@ -814,7 +814,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2232", name: "入間川（狭山市周辺）", slug: "iruma-gawa-sayama",
     description: "狭山市を流れる入間川は、オイカワやウグイなどの小物釣りからヤマメやニジマスの渓流釣りまで楽しめる変化に富んだ河川。上流域は渓流相、中流域はゆったりした瀬と淵が交互に現れ、初心者から上級者まで幅広く楽しめる。バーベキューと組み合わせる家族連れも多い。",
-    latitude: 35.8530, longitude: 139.4120,
+    latitude: 35.85822, longitude: 139.40252,
     address: "〒350-1305 埼玉県狭山市入間川",
     accessInfo: "西武新宿線狭山市駅から車で約10分。圏央道狭山日高ICから約10分。",
     region: localRegion("r2392"), spotType: "river", difficulty: "beginner",
@@ -880,7 +880,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2235", name: "柳瀬川（清瀬・所沢）", slug: "yanase-gawa-kiyose",
     description: "清瀬市から所沢市にかけて流れる柳瀬川。都心近郊ながらオイカワやカワムツなどの小物釣りが楽しめる。春にはウグイの群れが遡上し、餌釣りやフライフィッシングで狙える。河川敷は桜並木が美しく、散策と合わせて楽しめるのんびりスポット。",
-    latitude: 35.7800, longitude: 139.5060,
+    latitude: 35.78942, longitude: 139.51537,
     address: "〒359-0021 埼玉県所沢市東所沢5丁目",
     accessInfo: "JR武蔵野線東所沢駅から徒歩約10分。関越自動車道所沢ICから約10分。",
     region: localRegion("r2392"), spotType: "river", difficulty: "beginner",
@@ -901,7 +901,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2236", name: "元荒川（蓮田周辺）", slug: "motoarakawa-hasuda",
     description: "蓮田市を流れる元荒川は、ヘラブナやコイ釣りの好ポイント。穏やかな流れの中にワンドや淵が点在し、ヘラブナの魚影が濃い。春先のノッコミ時期は大型コイも狙える。ブラックバスやナマズも生息しルアーフィッシングも楽しめる。",
-    latitude: 35.9720, longitude: 139.6620,
+    latitude: 35.99907, longitude: 139.65056,
     address: "〒349-0104 埼玉県蓮田市城64-1番地先",
     accessInfo: "JR宇都宮線蓮田駅から車で約10分。東北自動車道岩槻ICから約15分。",
     region: localRegion("r2390"), spotType: "river", difficulty: "beginner",

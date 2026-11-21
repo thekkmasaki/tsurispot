@@ -359,7 +359,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk011", name: "由良川河口", slug: "yuragawa-kakou",
     description: "由良川河口はシーバス・キスが狙えるサーフの一級ポイント。宮津市と舞鶴市の境に流れ、広大な砂洲が広がるサーフフィッシングのメッカ。シーバスの魚影が濃くルアーマンに大人気で、投げ釣りではキスやヒラメ、マゴチも狙える。",
-    latitude: 35.5050, longitude: 135.2300,
+    latitude: 35.42566, longitude: 135.22025,
     address: "〒626-0000 京都府宮津市・舞鶴市境",
     accessInfo: "京都縦貫自動車道「舞鶴大江IC」から約15分。",
     region: lr("rnk02"), spotType: "river", difficulty: "intermediate",

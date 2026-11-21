@@ -1406,7 +1406,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-057", name: "入間川", slug: "irumagawa-fishing",
     description: "埼玉県を流れる荒川の支流。飯能〜狭山エリアは都心からのアクセスが良く、オイカワやヤマメが手軽に狙える。河川敷は整備されファミリーにも人気。秋にはアユの釣りも楽しめる。",
-    latitude: 35.8583, longitude: 139.3194, address: "〒358-0053 埼玉県入間市仏子64",
+    latitude: 35.83988, longitude: 139.35290, address: "〒358-0053 埼玉県入間市仏子64",
     accessInfo: "圏央道狭山日高ICから約10分。西武池袋線飯能駅から徒歩約15分。",
     region: lr("r683"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）",

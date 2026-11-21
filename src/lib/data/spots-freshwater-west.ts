@@ -325,7 +325,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-096", name: "由良川", slug: "yuragawa-river",
     description: "京都府北部を流れる一級河川・由良川です。6〜10月は日中の友釣りでアユ、3〜9月は朝マヅメのエサ釣りでアマゴが本命。コイは周年、オイカワ・ウグイ・マブナも春から秋まで狙え、5〜9月は夕マヅメのぶっ込み釣りでナマズも上がります。綾部市から福知山市にかけてがメインフィールドで、遊漁券は日券大人2,000円、河川敷に駐車スペースがあります。舞鶴若狭自動車道・綾部ICから約10分。大雨や台風のあとは急な増水に注意してください。",
-    latitude: 35.2981, longitude: 135.2456, address: "〒620-0013 京都府福知山市池部",
+    latitude: 35.33132, longitude: 135.11647, address: "〒620-0013 京都府福知山市池部",
     accessInfo: "舞鶴若狭自動車道綾部ICから約10分。JR綾部駅から車で約10分。",
     region: lr("r722"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券が必要（由良川漁協の漁業権の区域）",

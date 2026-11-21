@@ -5525,7 +5525,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6272", name: "秩父荒川渓流", slug: "chichibu-arakawa-keiryu6",
     description: "秩父市を流れる荒川上流域。秩父の山々に囲まれた渓流でヤマメやイワナが楽しめる。長瀞渓谷にも近く観光と釣りの組み合わせも可能。",
-    latitude: 36.003, longitude: 139.083,
+    latitude: 35.96050, longitude: 138.99246,
     address: "〒369-1803 埼玉県秩父市荒川白久",
     accessInfo: "秩父鉄道白久駅から徒歩約10分。関越道花園ICから約50分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
@@ -5545,7 +5545,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6273", name: "入間川飯能地区", slug: "irumagawa-hanno6",
     description: "飯能市を流れる入間川。ムーミンバレーパークにも近い緑豊かなエリアでオイカワやヤマメが楽しめる里川。",
-    latitude: 35.853, longitude: 139.328,
+    latitude: 35.85559, longitude: 139.30292,
     address: "〒357-0022 埼玉県飯能市大河原",
     accessInfo: "西武池袋線飯能駅から車で約15分。圏央道狭山日高ICから約15分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5565,7 +5565,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6274", name: "利根川加須地区", slug: "tonegawa-kazo6",
     description: "加須市を流れる利根川。河川敷が広大でコイやヘラブナの釣りが盛ん。渡良瀬遊水地にも近い関東平野ならではの大河川釣り。",
-    latitude: 36.153, longitude: 139.613,
+    latitude: 36.18711, longitude: 139.62385,
     address: "〒347-0010 埼玉県加須市大越",
     accessInfo: "東武伊勢崎線加須駅から車で約15分。東北道加須ICから約10分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
@@ -5609,7 +5609,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6276", name: "名栗川渓流", slug: "naguri-gawa-keiryu6",
     description: "飯能市名栗地区を流れる名栗川（入間川上流）。都心から約1時間半で到着できるアクセスの良い渓流。ヤマメやイワナが生息する清流。",
-    latitude: 35.878, longitude: 139.233,
+    latitude: 35.91145, longitude: 139.14663,
     address: "〒357-0112 埼玉県飯能市名栗",
     accessInfo: "西武池袋線飯能駅からバスで約40分。圏央道狭山日高ICから約30分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
@@ -5667,7 +5667,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6279", name: "荒川熊谷地区", slug: "arakawa-kumagaya6",
     description: "熊谷市を流れる荒川中流域。広大な河川敷でコイやヘラブナの大物釣りが楽しめる。暑さ日本一の街でも川風は涼しい。",
-    latitude: 36.143, longitude: 139.383,
+    latitude: 36.13600, longitude: 139.37934,
     address: "〒360-0035 埼玉県熊谷市河原町",
     accessInfo: "JR熊谷駅から車で約10分。関越道東松山ICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5692,7 +5692,7 @@ export const eastAdd6Spots: FishingSpot[] = [
       confirmedAt: "2026-11-21",
     },
     description: "さいたま市大宮区の大宮公園（第一公園）にある白鳥の池。管理者の埼玉県は、埼玉県都市公園条例にもとづき大宮公園内での釣りを禁止しています。",
-    latitude: 35.908, longitude: 139.628,
+    latitude: 35.91674, longitude: 139.63104,
     address: "〒330-0803 埼玉県さいたま市大宮区高鼻町",
     accessInfo: "JR大宮駅から徒歩約15分。首都高さいたま新都心線新都心ICから約10分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5730,7 +5730,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6282", name: "長瀞渓谷", slug: "nagatoro-keikoku6",
     description: "秩父郡長瀞町を流れる荒川の景勝地。国の天然記念物に指定された岩畳が有名。アユの友釣りやヤマメのルアー釣りが楽しめる関東屈指の渓流。",
-    latitude: 36.113, longitude: 139.113,
+    latitude: 36.09462, longitude: 139.11620,
     address: "〒369-1305 埼玉県秩父郡長瀞町長瀞",
     accessInfo: "秩父鉄道長瀞駅から徒歩約5分。関越道花園ICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
@@ -5769,7 +5769,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6284", name: "高麗川日高地区", slug: "komagawa-hidaka6",
     description: "日高市を流れる高麗川。巾着田の曼珠沙華（彼岸花）で有名な河川でオイカワやアユが楽しめる。清流が市街地を流れる贅沢な環境。",
-    latitude: 35.903, longitude: 139.338,
+    latitude: 35.89046, longitude: 139.32165,
     address: "〒350-1245 埼玉県日高市栗坪",
     accessInfo: "西武秩父線高麗駅から徒歩約15分。圏央道圏央鶴ヶ島ICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5865,7 +5865,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6289", name: "横瀬川渓流", slug: "yokozegawa-keiryu6",
     description: "横瀬町を流れる横瀬川の上流域。武甲山を望む渓流でヤマメやイワナが楽しめる。西武秩父線沿線で電車アクセスも可能。",
-    latitude: 35.978, longitude: 139.083,
+    latitude: 35.97423, longitude: 139.11645,
     address: "〒368-0073 埼玉県秩父郡横瀬町横瀬",
     accessInfo: "西武秩父線横瀬駅から車で約10分。秩父市街から車で約15分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
@@ -5885,7 +5885,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6290", name: "元荒川蓮田地区", slug: "motoarekawa-hasuda6",
     description: "蓮田市を流れる元荒川。テナガエビやハゼが楽しめる里川で市街地からのアクセスが良い。春はサクラ並木の下での釣りも風流。",
-    latitude: 35.973, longitude: 139.658,
+    latitude: 35.98203, longitude: 139.66208,
     address: "〒349-0115 埼玉県蓮田市蓮田",
     accessInfo: "JR蓮田駅から徒歩約15分。東北道蓮田SAスマートICから約5分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
@@ -5904,7 +5904,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6291", name: "鎌北湖", slug: "kamakitako-tsuri6",
     description: "毛呂山町にある灌漑用ダム湖。ヘラブナ釣りの名所として県内屈指の人気を誇る。紅葉の名所としても知られ秋は特に美しい。",
-    latitude: 35.918, longitude: 139.283,
+    latitude: 35.91587, longitude: 139.29114,
     address: "〒350-0456 群馬県入間郡毛呂山町宿谷",
     accessInfo: "東武越生線東毛呂駅から車で約15分。関越道坂戸西スマートICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5962,7 +5962,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6294", name: "浦山ダム秩父さくら湖", slug: "urayama-dam-sakurako6",
     description: "秩父市の浦山ダムが作る人工湖。ヤマメやイワナの釣りが楽しめるほかワカサギ釣りも人気。ダムの高さ156mは重力式では日本一。",
-    latitude: 35.968, longitude: 139.053,
+    latitude: 35.95312, longitude: 139.05367,
     address: "〒369-1803 埼玉県秩父市荒川久那",
     accessInfo: "秩父鉄道浦山口駅から徒歩約20分。関越道花園ICから約1時間。",
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
@@ -5982,7 +5982,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6295", name: "槻川小川町地区", slug: "tsukigawa-ogawa6",
     description: "小川町を流れる槻川。和紙の里として知られる小川町を流れるのどかな里川。オイカワやカワムツが手軽に楽しめる。",
-    latitude: 36.058, longitude: 139.263,
+    latitude: 36.05314, longitude: 139.25687,
     address: "〒355-0328 埼玉県比企郡小川町大塚",
     accessInfo: "東武東上線小川町駅から徒歩約15分。関越道嵐山小川ICから約10分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
