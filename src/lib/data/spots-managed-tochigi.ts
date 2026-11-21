@@ -1048,8 +1048,7 @@ export const managedTochigiSpots: FishingSpot[] = [
     isManagedPond: true,
     facilityKind: "managed",
     description:
-      "大田原市実取にあるルアー・フライの池型トラウト釣り場。施設のブログに11月の釣況が載り、2026年10月にはエリアトーナメントの会場にもなるなど、今も営業している。" +
-      "大会の対象魚はニジマス。公式サイトがなく、料金や営業時間、定休日、ルールは公式で確かめられていないので、出かける前に電話で問い合わせたい。電話番号は釣具店ブログに載っていた値。",
+      "大田原市実取にあるルアー・フライの池型トラウト釣り場。施設のブログによると、料金は2026年11月18日に改定され、1日券は一般5,500円、女性・中学生4,000円、小学生2,500円。午後券と、終了2時間前からのイブニング券3,000円もある。朝7時に始まり、終了は季節によって16時30分から18時のあいだ。第1・第3火曜が定休で、祝日は営業する。中学生以上はルアータックルを無料で借りられる。2026年10月にはエリアトーナメントの会場にもなった。",
     latitude: 36.833,
     longitude: 140.0066,
     address: "栃木県大田原市実取206",
@@ -1062,7 +1061,7 @@ export const managedTochigiSpots: FishingSpot[] = [
     hasToilet: false,
     hasConvenienceStore: false,
     hasFishingShop: false,
-    hasRentalRod: false,
+    hasRentalRod: true,
     mainImageUrl: "",
     images: [],
     rating: 3.5,
@@ -1088,7 +1087,17 @@ export const managedTochigiSpots: FishingSpot[] = [
       organizationName: "みどりフィッシングエリア",
       contactPhone: "0287-28-3334",
       contactUrl: "http://ms3103.blog.fc2.com/",
-      notes: ["確認日 2026-11-17(施設ブログ・大会情報)", "料金は施設に確認(公式サイトなし)", "営業期間・時間・定休日・ルールは未確認", "電話は釣具店ブログ(2024-08)の掲載値", "トイレ・駐車場の有無は未確認"],
+      openingHours: "7:00から。終了は季節により16:30〜18:00",
+      closedDays: "第1・第3火曜(祝日は営業)",
+      fishingFee: "1日券 一般5,500円／女性・中学生4,000円／小学生2,500円。午後券 一般4,000円／女性・中学生3,000円／小学生2,000円。イブニング券3,000円(2026年11月18日改定)",
+      verifiedAt: "2026-11-21",
+      sourceUrl: "http://ms3103.blog.fc2.com/blog-category-3.html",
+      notes: [
+        "確認日 2026-11-21(施設ブログ「営業・料金表」、2026-11-14 の日記)",
+        "住所・電話は施設ブログのプロフィールで確認",
+        "ルアータックルのレンタルは無料(中学生以上)",
+        "トイレ・駐車場の有無は未確認",
+      ],
     },
   },
 
