@@ -140,9 +140,9 @@ export const kobeKakogawaAddSpots: FishingSpot[] = [
     description: "須磨港沖に位置する沖堤防で、渡船「須磨丸」を利用して渡る。沖合に出ることで港内では出会えない良型のチヌやタチウオが狙えるのが最大の魅力。春〜秋はフカセ釣りでチヌの40cm級が安定して出る好ポイントで、秋口からはタチウオの引き釣り・ワインドで指3本〜4本クラスが連発することも。青物の回遊時期にはハマチクラスのショアジギングも成立し、足元ではメバル・カサゴの数釣りも楽しめる。渡船利用のためライフジャケット着用が必須。",
     latitude: 34.6330, longitude: 135.1310,
     address: "〒654-0055 兵庫県神戸市須磨区須磨浦通（須磨港渡船乗り場より渡船利用）",
-    accessInfo: "JR「須磨」駅から須磨港渡船乗り場まで徒歩約8分。第二神明道路須磨ICから約10分。渡船「須磨丸」で約5分。",
+    accessInfo: "神戸市が須磨海岸の防波堤を立入禁止区域としており、渡船（瀬渡し）で渡ることも禁止されているため、立ち入れません。",
     region: lr("r400"), spotType: "breakwater", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "須磨港周辺に有料駐車場あり（500〜800円/日）",
+    isFree: false, hasParking: false,
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.2, reviewCount: 198,
     catchableFish: [

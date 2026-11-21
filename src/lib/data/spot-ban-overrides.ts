@@ -43,6 +43,23 @@ const KOBE_PORT_FISHING_URLS = [
   "https://www.city.kobe.lg.jp/a42810/business/kowanjigyo/kobekukonishiryokuchi-tsuri.html",
 ];
 
+// ── 南芦屋浜・南護岸（兵庫県・芦屋市のエリア分け） ──
+const MINAMI_ASHIYA: SpotBanOverride = {
+  fishingBan: {
+    scope: "partial",
+    reason:
+      "兵庫県と芦屋市は、南芦屋浜の南護岸（約1.1km）を、釣りが「できるエリア」（東側）と「できないエリア」（西側）に分けて開放しています。開放は8時〜20時で、20時までに退出が必要です。ごみの不法投棄や釣りエサの悪臭が多い場合は閉鎖することがあるとしています。",
+    sourceUrls: [
+      "https://www.city.ashiya.lg.jp/gairoju/documents/minamigoganeria.pdf",
+      "https://www.city.ashiya.lg.jp/gairoju/documents/kaihouzikannohenkou.pdf",
+      "https://web.pref.hyogo.lg.jp/org/amagasakikokanri/documents/keiisaisyuu.pdf",
+    ],
+    confirmedAt: CONFIRMED,
+  },
+  notice:
+    "※南芦屋浜の南護岸は、釣りができるのは東側の「釣りができるエリア」だけで、西側は釣り禁止です。開放は8時〜20時（兵庫県・芦屋市）。夜釣りはできません。",
+};
+
 // ── 小田原漁港（神奈川県西部漁港事務所） ──
 const ODAWARA: SpotBanOverride = {
   fishingBan: {
@@ -111,6 +128,22 @@ export const spotBanOverrides: Record<string, SpotBanOverride> = {
     description:
       "神戸港・和田岬の沖にある防波堤（和田防）。港湾管理者の神戸市は、和田岬防波堤を含む神戸港の主要な防波堤を立入禁止区域としており、渡船（瀬渡し）で防波堤に渡ることも禁止しています。現在ここで釣りはできません。神戸港周辺で釣りをするなら、市が港湾施設で唯一釣りを認めている神戸空港島の親水護岸や、垂水区の平磯海づり公園を利用してください。",
   },
+  // SNS「タチウオが釣れる兵庫の釣り場TOP10」へのコメント指摘を受けて、掲載10件を公式資料で確認（2026-11-21）
+  "suma-ko-hitomoji": {
+    fishingBan: {
+      scope: "full",
+      reason:
+        "神戸市は、須磨港南防波堤・須磨港西波除堤など須磨海岸の各防波堤・離岸堤を立入禁止区域に指定しています。防波堤は一般の立ち入りを想定した施設ではなく転落の危険があるためで、遊漁船事業者などによる瀬渡しも禁止しています。",
+      sourceUrls: ["https://www.city.kobe.lg.jp/documents/37319/kisei2.pdf", "https://www.city.kobe.lg.jp/a42810/kouwanshisetu/tachiirikinnshi.html"],
+      confirmedAt: CONFIRMED,
+      alternativeSpotSlugs: ["kobe-airport-gogan"],
+    },
+    description:
+      "須磨港沖の防波堤（一文字）。港湾管理者の神戸市は、須磨港南防波堤・西波除堤など須磨海岸の防波堤・離岸堤を立入禁止区域としており、渡船（瀬渡し）で防波堤に渡ることも禁止しています。現在ここで釣りはできません。神戸周辺で釣りをするなら、市が港湾施設で唯一釣りを認めている神戸空港島の親水護岸や、垂水区の平磯海づり公園を利用してください。",
+  },
+  "minami-ashiyahama": MINAMI_ASHIYA,
+  "minami-ashiyahama-veranda": MINAMI_ASHIYA,
+
   "port-island-north-park": {
     fishingBan: {
       scope: "full",
