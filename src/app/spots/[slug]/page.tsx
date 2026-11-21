@@ -98,6 +98,8 @@ import { SpotContributionForm } from "@/components/spots/spot-contribution-form"
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
 import { SpotRulesPrefectureFallback } from "@/components/spots/spot-rules-prefecture-fallback";
+import { SpotInlandFisheryCard, SpotInlandFisheryUnknown } from "@/components/spots/spot-inland-fishery";
+import { getSpotInlandFishery } from "@/lib/data/inland-fishery";
 import { getFishingRuleByPrefName } from "@/lib/data/fishing-rules-data";
 const SpotPhotoGallery = nextDynamic(
   () => import("@/components/spots/spot-photo-gallery").then(m => ({ default: m.SpotPhotoGallery })),
@@ -310,6 +312,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const prefectureRule = getFishingRuleByPrefName(spot.region.prefecture);
   // rules未設定スポット向け: 県レベルの公的釣りルールをフォールバック表示する
   const prefRule = spot.rules ? undefined : prefectureRule;
+  // 河川・湖（管理釣り場を除く）は管轄漁協の遊漁規則を出す。未確認なら未確認と書く
+  const isInlandWater = (spot.spotType === "river" || spot.spotType === "lake") && !spot.isManagedPond;
+  const inlandFishery = isInlandWater ? getSpotInlandFishery(spot.slug) : undefined;
   const initialCommunityPhotos = await getInitialCommunityPhotos(slug);
   // 特許パイプライン: 自動生成ダイアグラム優先、なければ手動データにフォールバック
   // 座標整合ガード: 解析座標がスポット実座標と乖離している場合は表示しない（虚偽表示防止）
@@ -1172,10 +1177,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {!layoutB && facilitySection}
           {/* 釣りルール: 個別データがあれば優先表示。無ければ県レベルの公的ルール（出典付き）をフォールバック。
               推測のスポット固有ルールは誤情報源になるため出さない。 */}
-          {(spot.rules || prefRule || prefectureRule?.seaRules?.chumRegulation) && (
+          {(spot.rules || prefRule || prefectureRule?.seaRules?.chumRegulation || isInlandWater) && (
           <section>
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
             <div className="space-y-3">
+              {inlandFishery ? (
+                <SpotInlandFisheryCard fishery={inlandFishery} />
+              ) : isInlandWater ? (
+                <SpotInlandFisheryUnknown prefecture={spot.region.prefecture} />
+              ) : null}
               {spot.rules ? (
                 <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} isFree={spot.isFree} feeDetail={spot.feeDetail} isManagedPond={spot.isManagedPond} />
               ) : prefRule ? (
