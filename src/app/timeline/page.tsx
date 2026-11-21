@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Users, Send, FileText, Trophy, UserSearch, Map } from "lucide-react";
 import { TimelineFeed } from "@/components/social/timeline-feed";
 import { PreFooterAd, StickySidebarAd } from "@/components/ads/ad-unit";
+import { AD_MEDIA_DESKTOP } from "@/lib/ads-config";
 
 // タイムライン: ISR不使用（キャッシュ肥大回避）。SNSページはnoindex一貫。
 // h1はServer Componentで出す（SSR空HTML=CSR bailout前歴の回避）
@@ -81,7 +82,7 @@ export default function TimelinePage() {
                 </Link>
               ))}
             </nav>
-            <StickySidebarAd className="!static" />
+            <StickySidebarAd className="!static" media={AD_MEDIA_DESKTOP} />
           </div>
         </aside>
       </div>

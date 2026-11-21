@@ -46,6 +46,7 @@ import { getWantedSpots } from "@/lib/photo-wanted";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { DIFFICULTY_LABELS } from "@/types";
 import { safeJsonLd } from "@/lib/safe-json-ld";
+import { AD_MEDIA_MOBILE } from "@/lib/ads-config";
 
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
@@ -669,7 +670,7 @@ export default async function Home() {
       })()}
 
       {/* モバイル広告: おすすめ釣り場後 */}
-      <div className="lg:hidden"><NativeAdBreak /></div>
+      <div className="lg:hidden"><NativeAdBreak media={AD_MEDIA_MOBILE} /></div>
 
       {/* 人気のエリア */}
       <PageSection tone="gray">

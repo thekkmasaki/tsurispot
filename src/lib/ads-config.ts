@@ -48,3 +48,10 @@ export const AD_SLOTS = {
 } as const;
 
 export type AdSlotKey = keyof typeof AD_SLOTS;
+
+// 画面幅で出し分ける広告枠に渡すメディアクエリ（AdUnit の media）。
+// "use client" の ad-unit.tsx から export すると Server Component 側で値として使えないため、ここに置く。
+/** Tailwind の lg(1024px) 未満＝`lg:hidden` の中身が見えている画面幅 */
+export const AD_MEDIA_MOBILE = "(max-width: 1023px)";
+/** Tailwind の lg(1024px) 以上＝`hidden lg:block` の中身が見えている画面幅 */
+export const AD_MEDIA_DESKTOP = "(min-width: 1024px)";
