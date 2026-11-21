@@ -25,6 +25,7 @@ export interface SpotFacilityOverride {
   hasRentalRod?: boolean;
   rentalDetail?: string;
   officialUrl?: string;
+  safetyNotes?: string[];
   managementInfo?: FishingSpot["managementInfo"];
   rules?: Partial<SpotRules>;
 }
@@ -132,6 +133,9 @@ export const spotFacilityOverrides: Record<string, SpotFacilityOverride> = {
 
   // 若狭高浜海釣り公園: 料金・駐車場が「要確認」のまま。竿の貸出は中止中
   "wakasa-takahama-umizuri": {
+    description:
+      "高浜町塩土にある海釣り公園で、釣り桟橋からの釣りが楽しめる整備された施設。サビキでアジやマダイ、投げ釣りでキス、クロダイも狙える。足場が良く、釣り初心者やお子様連れにも向く。竿とライフジャケットの貸し出しは当面中止されているため、道具とライフジャケットは持参すること。入場料は1人200円、駐車場は清掃協力金として車1台1,000円。",
+    safetyNotes: ["整備された海釣り公園", "ライフジャケットは持参（貸し出しは当面中止）", "初心者・ファミリー向け", "釣り桟橋で安全"],
     isFree: false,
     feeDetail: "1人200円",
     hasParking: true,
@@ -317,6 +321,46 @@ export const spotFacilityOverrides: Record<string, SpotFacilityOverride> = {
       verifiedAt: VERIFIED,
       sourceUrl: "http://minamichita-kk.com/spot/%e3%81%a4%e3%82%8a%e6%a1%9f%e6%a9%8b",
     },
+  },
+
+  // 本牧海づり施設: 本文に古い料金（子供450円・竿600円/日・300台・駐車500円/日）が残っていた。駐車場は段階制
+  "honmoku-fishing": {
+    description:
+      "横浜の本牧ふ頭にある広々とした有料の海釣り施設。護岸と桟橋の2つのエリアがあり、5〜11月はサビキ釣りのアジやイワシ、秋はウキ釣りのサヨリ、10月〜4月は穴釣りのカサゴや足元の探り釣りで狙うカレイと、一年を通して多彩な魚種が狙える。夏〜秋はぶっこみ釣りのアナゴ、夕マヅメのルアーで狙うスズキも実績あり（タコ釣りは施設ルールで禁止、投げ釣りやルアーは区間・混雑状況による制限あり）。釣り料金は大人900円・中学生450円・小学生300円。管理棟の売店で竿とリールのセットをレンタルでき（有料）、釣具・エサも買える。駐車場は230台で、3時間以内250円・5時間以内350円・5時間以上500円。JR根岸線根岸駅からバス約15分、首都高本牧ふ頭出口すぐ。",
+    feeDetail: "大人900円・中学生450円・小学生300円（見学: 大人100円・中学生以下50円）",
+    hasParking: true,
+    parkingDetail: "230台。3時間以内250円・5時間以内350円・5時間以上500円",
+    hasRentalRod: true,
+    rentalDetail: "管理棟の売店で竿とリールのセットをレンタル（有料。エサ・仕掛けは別途購入。料金は売店 045-623-0028 に確認）",
+    officialUrl: "https://yokohama-fishingpiers.jp/honmoku/",
+  },
+
+  // 大黒海づり施設: 駐車場（3時間250円・以降30分100円）と営業時間（通年6:00〜19:00）が公式と違った
+  "daikoku-fishing-facility": {
+    feeDetail: "大人900円・中学生450円・小学生300円",
+    hasParking: true,
+    parkingDetail: "200台（福祉車両専用5台）。3時間以内250円・5時間以内350円・5時間以上500円",
+    hasRentalRod: true,
+    rentalDetail: "管理棟の売店で竿とリールのセットをレンタル（有料。エサ・仕掛けは別途購入。料金は売店に確認）",
+    officialUrl: "https://yokohama-fishingpiers.jp/daikoku/",
+    managementInfo: {
+      organizationName: "大黒海づり施設（横浜フィッシングピアーズ）",
+      contactUrl: "https://yokohama-fishingpiers.jp/daikoku/",
+      openingHours: "季節により変わる（4〜10月は6:00開場）。月ごとの時間は公式サイトで確認",
+      closedDays: "施設点検日、年末年始（公式サイトで確認）",
+      fishingFee: "大人900円・中学生450円・小学生300円",
+      notes: ["隣接の大黒緑地公園は工事のため閉鎖中", CHECK_NOTE],
+      verifiedAt: VERIFIED,
+      sourceUrl: "https://yokohama-fishingpiers.jp/daikoku/",
+    },
+  },
+
+  // とっとパーク小島: 駐車場は無料（100台以上）。掲載は「道の駅の駐車場（67台）」だった
+  "tottopark-kojima": {
+    hasParking: true,
+    parkingDetail: "無料駐車場あり（100台以上）",
+    hasRentalRod: false,
+    rentalDetail: "釣具の貸し出しはありません（公式）。竿・仕掛けは持参してください",
   },
 
   // 海辺つり公園（横須賀）: 駐車場を「無料」と掲載していたが有料
