@@ -87,9 +87,43 @@ interface AdUnitProps {
   houseFallback?: boolean;
   /** fallback 判定結果をラッパーに通知（"empty" 時に「スポンサー」ラベルを抑制するため） */
   onStatus?: (status: "filled" | "empty") => void;
+  /**
+   * この枠を出すブレークポイント（ads-config.ts の AD_MEDIA_MOBILE / AD_MEDIA_DESKTOP）。
+   * 親を `lg:hidden` や `hidden lg:block` で隠している枠には必ず指定する。
+   * 指定すると、一致しない画面幅では <ins> を DOM に出さず、同じ高さの空箱だけ置く。
+   */
+  media?: string;
 }
 
-export function AdUnit({
+/**
+ * 画面幅で出し分ける広告枠の入口。
+ *
+ * adsbygoogle.push({}) は「呼んだ枠」ではなく「DOM 順で最初の未処理 <ins>」を処理する。
+ * CSS で隠しただけの <ins> が DOM に残っていると、見えている枠の push がそれに食われ、
+ * 幅0の枠は TagError で落ちる。隠れ枠が2つ続くと再試行（ResizeObserver の初回通知1回）も
+ * 尽きて push が1回分消え、DOM 順で最後の見えている枠が未処理のまま残る。
+ * 実測（2026-11、PC のスポット詳細）: `lg:hidden` の5枠のうち4枠が幅0のまま処理済みになり、
+ * StickySidebarAd が毎回未処理。AdSense 上も sidebar-sticky の PC 表示は30日で947回
+ * （同じく PC 専用の header-banner は17,819回）。
+ *
+ * 一致しない画面幅では <ins> を出さず、className（min-h の予約を含む）だけ持つ空箱を置く。
+ * 空箱は親ごと CSS で隠れているので見た目は変わらず、SSR の HTML にも同じ高さの箱が入るため、
+ * 一致する画面幅でハイドレーション後に実枠へ差し替わっても高さは動かない（CLS なし）。
+ * media 未指定の枠は従来どおり AdUnitInner を直接描画する（挙動は1バイトも変えない）。
+ */
+export function AdUnit(props: AdUnitProps) {
+  if (props.media) return <MediaGatedAdUnit {...props} media={props.media} />;
+  return <AdUnitInner {...props} />;
+}
+
+function MediaGatedAdUnit({ media, ...rest }: AdUnitProps & { media: string }) {
+  const matches = useMediaQuery(media);
+  if (!ADSENSE_ID) return null;
+  if (!matches) return <div className={`w-full ${rest.className ?? ""}`} aria-hidden="true" />;
+  return <AdUnitInner {...rest} />;
+}
+
+function AdUnitInner({
   slot,
   placement,
   format = "auto",
@@ -383,7 +417,7 @@ function AdWrapper({
 }
 
 // ---- 記事内広告（コンテンツのセクション間） ----
-export function InArticleAd({ className = "" }: { className?: string }) {
+export function InArticleAd({ className = "", media }: { className?: string; media?: string }) {
   // ブロック/no-fill 時は自前ハウス広告に差し替え、ラベルは「スポンサー」→「TsuriSpot」に
   // テキストのみ差し替える（行は維持=シフト0）。実広告が遅延fillされたら自動で復帰する。
   const [empty, setEmpty] = useState(false);
@@ -399,6 +433,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
         className="min-h-[250px]"
         style={{ display: "block", textAlign: "center" }}
         houseFallback
+        media={media}
         onStatus={(s) => setEmpty(s === "empty")}
       />
     </AdWrapper>
@@ -406,7 +441,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 }
 
 // ---- ディスプレイ広告（レスポンシブ） ----
-export function DisplayAd({ className = "" }: { className?: string }) {
+export function DisplayAd({ className = "", media }: { className?: string; media?: string }) {
   const [empty, setEmpty] = useState(false);
   return (
     <AdWrapper className={`my-6 ${className}`} labelText={empty ? HOUSE_LABEL : AD_LABEL}>
@@ -417,6 +452,7 @@ export function DisplayAd({ className = "" }: { className?: string }) {
         placement="display"
         className="min-h-[250px]"
         houseFallback
+        media={media}
         onStatus={(s) => setEmpty(s === "empty")}
       />
     </AdWrapper>
@@ -424,7 +460,7 @@ export function DisplayAd({ className = "" }: { className?: string }) {
 }
 
 // ---- セクション間ネイティブ広告（波デザインでサイトに馴染む） ----
-export function NativeAdBreak({ className = "" }: { className?: string }) {
+export function NativeAdBreak({ className = "", media }: { className?: string; media?: string }) {
   // フック順序を保つため状態は早期 return より前で宣言する
   const [empty, setEmpty] = useState(false);
   if (!ADSENSE_ID) return null;
@@ -443,6 +479,7 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
           placement="native_break"
           className="min-h-[250px]"
           houseFallback
+          media={media}
           onStatus={(s) => setEmpty(s === "empty")}
         />
       </div>
@@ -525,12 +562,12 @@ export function SidebarAd({ className = "" }: { className?: string }) {
 }
 
 // ---- スティッキーサイドバー広告（スクロール追従） ----
-export function StickySidebarAd({ className = "" }: { className?: string }) {
+export function StickySidebarAd({ className = "", media }: { className?: string; media?: string }) {
   if (!ADSENSE_ID) return null;
   return (
     <div className={`sticky top-20 ${className}`}>
       <AdWrapper variant="sidebar" label={false}>
-        <AdUnit slot={AD_SLOTS.sidebar_sticky} placement="sidebar_sticky" format="auto" className="min-h-[250px]" houseFallback />
+        <AdUnit slot={AD_SLOTS.sidebar_sticky} placement="sidebar_sticky" format="auto" className="min-h-[250px]" houseFallback media={media} />
       </AdWrapper>
     </div>
   );
