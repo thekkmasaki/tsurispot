@@ -847,7 +847,8 @@ export function generateSpotSummary(spot: FishingSpot): {
 
   return {
     oneLineFeature,
-    topFishAndSeason: `狙える魚: ${topFish}${spot.catchableFish.length > 3 ? `ほか${spot.catchableFish.length}種` : ""} / ベストシーズン: ${bestMonths.slice(0, 3).join("・")}`,
+    // 「ほかN種」は表示した3種を除いた数（以前は総数を入れていて、総10種で「ほか10種」になっていた）
+    topFishAndSeason: `狙える魚: ${topFish}${spot.catchableFish.length > 3 ? `ほか${spot.catchableFish.length - 3}種` : ""} /ベストシーズン: ${bestMonths.slice(0, 3).join("・")}`,
     recommendedMethod: methods.length > 0 ? `おすすめ釣法: ${methods.slice(0, 3).join("・")}` : "多彩な釣り方に対応",
     facilityOverview: [
       spot.hasParking ? "駐車場○" : "駐車場×",

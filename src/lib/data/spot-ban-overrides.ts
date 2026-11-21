@@ -99,6 +99,169 @@ const HAKATA_SUZAKI: SpotBanOverride = {
     "※須崎ふ頭の一部の岸壁は港湾保安上の制限区域で、立入禁止です（福岡市港湾空港局）。荷役中の物流拠点なので、立入禁止の表示がある場所には入らないでください。",
 };
 
+// ── 2026-11-21 一斉監査（全5,610件）の反映分。港湾管理者・県の公式ページで確認できた港だけ ──
+// 監査で禁止と判定されたが公式で裏が取れなかったもの（福浦岸壁・名古屋港ガーデンふ頭・明石海峡大橋下の舞子側護岸）は載せない。
+
+/** 全面禁止の港をまとめて登録する。元の本文（釣行を勧める紹介文）は禁止の説明に差し替える */
+function fullBanGroup(
+  names: Record<string, string>,
+  fishingBan: FishingBan,
+  body: string
+): Record<string, SpotBanOverride> {
+  return Object.fromEntries(
+    Object.entries(names).map(([slug, name]) => [slug, { fishingBan, description: `${name}。${body}` }])
+  );
+}
+
+// 仙台塩釜港（宮城県仙台塩釜港湾事務所「仙台塩釜港内における釣りについて」2025-10-20 掲載）
+const SENDAI_SHIOGAMA_URLS = ["https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html"];
+const SENDAI_SHIOGAMA_FULL = fullBanGroup(
+  {
+    "shiogama-ko": "塩釜港",
+    "sendai-shiogama-port": "仙台塩釜港",
+    "sendai-nakanosakai-wharf": "仙台港中野栄岸壁",
+    "shiogama-marinegate": "塩釜港マリンゲート前",
+    "ishinomaki-ko": "石巻港",
+    "shiogama-higashi-bouhatei": "塩釜港東防波堤",
+    "shiogama-kou": "塩竈港",
+    "sendai-takasago-futou6": "仙台港高砂埠頭",
+    "shiogama-marinegate-e8": "塩釜港マリンゲート",
+    "sendai-nakano-wharf-a10": "仙台港中野埠頭",
+    "sendai-takasago-quay-a13": "仙台港高砂岸壁",
+  },
+  {
+    scope: "full",
+    reason:
+      "港湾管理者の宮城県は、仙台塩釜港の港内を全面釣り禁止としています。ふ頭では大型の重機やトラックが作業しているため関係者以外は立ち入れず、防波堤やテトラポットにも転落の危険があるため立ち入らないよう求めています。港内で釣りができるのは、NX仙台港パーク（仙台港中央公園）の「海の広場」だけです。",
+    sourceUrls: SENDAI_SHIOGAMA_URLS,
+    confirmedAt: CONFIRMED,
+  },
+  "港湾管理者の宮城県は、仙台塩釜港の港内を全面釣り禁止としており、岸壁・ふ頭・防波堤のいずれでも釣りはできません（関係者以外の立ち入りも禁止）。港内で釣りができるのは、NX仙台港パーク（仙台港中央公園）の「海の広場」だけです。釣りに行くなら、海の広場の利用ルールを確認してから利用してください。"
+);
+const SENDAI_PARK: SpotBanOverride = {
+  fishingBan: {
+    scope: "partial",
+    reason:
+      "宮城県は仙台塩釜港の港内を全面釣り禁止としていますが、NX仙台港パーク（仙台港中央公園）の「海の広場」だけは釣りができる場所としています。海の広場以外の岸壁・護岸では釣りはできません。",
+    sourceUrls: SENDAI_SHIOGAMA_URLS,
+    confirmedAt: CONFIRMED,
+  },
+  notice:
+    "※仙台塩釜港は港内全面釣り禁止で、釣りができるのはNX仙台港パーク（仙台港中央公園）の「海の広場」だけです（宮城県）。海の広場の利用ルールに従ってください。",
+};
+
+// 山形県の港湾（酒田港・加茂港・鼠ヶ関港。山形県「山形県の港湾」2026-07-10 更新）
+const YAMAGATA_FULL = fullBanGroup(
+  {
+    "sakata-ko": "酒田港",
+    "sakata-chuo-wharf": "酒田港中央埠頭",
+    "kamo-port-yamagata": "加茂港",
+    "nezugaseki-ko": "鼠ヶ関港",
+    "sakata-gaikou6": "酒田港外港",
+    "sakata-honkou6": "酒田港本港",
+    "sakata-kitako-port-a10": "酒田港北港",
+    "sakata-south-breakwater-a10": "酒田港南防波堤",
+    "nezugaseki-south-breakwater-a11": "鼠ヶ関港南堤防",
+    "sakata-gaiko-breakwater-a11": "酒田港外港堤防",
+    "tsuruoka-nezugaseki-north-a12": "鶴岡市鼠ヶ関港北堤防",
+    "tsuruoka-kamo-south-breakwater-a12": "鶴岡市加茂港南堤防",
+  },
+  {
+    scope: "full",
+    reason:
+      "港湾管理者の山形県は、酒田港・加茂港・鼠ヶ関港の3港について、船舶や荷役作業の事故を防ぎ利用者の安全を守るため、港内での釣りを禁止しています。",
+    sourceUrls: ["https://www.pref.yamagata.jp/180042/kurashi/kendo/kouwan/yamagataport/index.html"],
+    confirmedAt: CONFIRMED,
+  },
+  "港湾管理者の山形県は、酒田港・加茂港・鼠ヶ関港の3港で港内での釣りを禁止しています（船舶・荷役作業の事故防止と安全確保のため）。防波堤・岸壁を含め、現在ここで釣りはできません。"
+);
+
+// 新潟港（新潟県新潟港湾事務所「新潟港（西港区・東港区）の防波堤等で魚釣りはできません」2022-07-25 更新）
+const NIIGATA_PORT_URLS = ["https://www.pref.niigata.lg.jp/sec/niigata_kouwan/1356894878931.html"];
+const NIIGATA_PORT_REASON =
+  "新潟県新潟港湾事務所は、新潟港の西港区・東港区で、防波堤や護岸などの港湾管理施設に魚釣り等の目的で立ち入ることを禁止しています（事故防止・船舶の安全・テロ対策のため）。釣りができる場所として、西港区の新潟港海岸（西海岸地区）第1〜第4突堤と、東港区の第2東防波堤管理釣り場を案内しています。";
+const NIIGATA_FULL = fullBanGroup(
+  {
+    "niigata-yamashita-futo": "新潟港山の下埠頭",
+    "niigata-higashi-kou-dai3": "新潟東港第3東防波堤",
+    "niigata-nishikou-yamanoshita-a12": "新潟西港・山の下埠頭",
+  },
+  { scope: "full", reason: NIIGATA_PORT_REASON, sourceUrls: NIIGATA_PORT_URLS, confirmedAt: CONFIRMED },
+  "新潟県新潟港湾事務所は、新潟港の防波堤・護岸・ふ頭などの港湾管理施設に釣りの目的で立ち入ることを禁止しており、ここで釣りはできません。新潟港で釣りをするなら、県が案内している西海岸地区の第1〜第4突堤か、東港区の第2東防波堤管理釣り場を利用してください。"
+);
+const NIIGATA_PARTIAL: SpotBanOverride = {
+  fishingBan: { scope: "partial", reason: NIIGATA_PORT_REASON, sourceUrls: NIIGATA_PORT_URLS, confirmedAt: CONFIRMED },
+  notice:
+    "※新潟港の防波堤・護岸などは釣り目的の立ち入りが禁止です（新潟県新潟港湾事務所）。釣りができるのは西海岸地区の第1〜第4突堤と、東港区の第2東防波堤管理釣り場だけです。",
+};
+
+// 茨城港大洗港区（茨城県茨城港湾事務所大洗港区事業所。茨城県港湾施設管理条例第4条第7項）
+const OARAI_FULL = fullBanGroup(
+  { "oarai-port": "大洗港", "oarai-teiho": "大洗・大洗港堤防" },
+  {
+    scope: "full",
+    reason:
+      "茨城県茨城港湾事務所大洗港区事業所は、大洗港区内の岸壁・防波堤などでの魚釣りを禁止しています（茨城県港湾施設管理条例第4条第7項）。",
+    sourceUrls: ["https://www.pref.ibaraki.jp/doboku/ibako/okoku/index.html"],
+    confirmedAt: CONFIRMED,
+  },
+  "茨城県は、大洗港区内の岸壁・防波堤などでの魚釣りを禁止しています（茨城県港湾施設管理条例第4条第7項）。港の岸壁や堤防では釣りができません。"
+);
+
+// 鳥取県の漁港（鳥取県「遊漁者へのお願い」。新型コロナ対策の呼びかけページの中の記載で、条例・規則ではない）
+const TOTTORI_GYOKO: SpotBanOverride = {
+  fishingBan: {
+    scope: "partial",
+    reason:
+      "鳥取県は、遊漁者へのお願いの中で「県内の漁港は、原則、関係者以外立ち入り禁止」としています。釣りは岩場や砂浜など釣りが認められている場所で行い、釣り禁止・立入禁止の場所には入らないよう求めています。どこが立入禁止かは、漁港ごとに現地の掲示で確認する必要があります。",
+    sourceUrls: ["https://www.pref.tottori.lg.jp/299045.htm"],
+    confirmedAt: CONFIRMED,
+  },
+  notice:
+    "※鳥取県は「県内の漁港は、原則、関係者以外立ち入り禁止」としています。漁港の岸壁・防波堤で釣りをする前に、現地の掲示で立ち入りが認められているか必ず確認してください。",
+};
+// 焼津漁港（静岡県焼津漁港管理事務所「焼津漁港に釣り等で来訪される皆様にお願いです」2023-09-14。静岡県漁港管理条例第9条）
+// 図面の赤い区域（外側の防波堤）が立入禁止。どの堤防名が赤い区域かは図面の文字が読めず特定できないため partial にとどめる。
+const YAIZU_GYOKO: SpotBanOverride = {
+  fishingBan: {
+    scope: "partial",
+    reason:
+      "静岡県焼津漁港管理事務所は、高波を防ぐための外側の防波堤を立入禁止区域としています（静岡県漁港管理条例第9条）。水揚げ・せり・荷降ろしの周辺や漁業者の作業場所でも釣りを控えるよう求めており、処罰の対象になる場合があるとしています。釣り用に整備されているのは親水公園「ふぃしゅーな」の釣り護岸です。",
+    sourceUrls: [
+      "http://doboku.pref.shizuoka.jp/desaki2/yaizu/news/news230914.html",
+      "http://doboku.pref.shizuoka.jp/desaki2/yaizu/sisetsu.html",
+    ],
+    confirmedAt: CONFIRMED,
+  },
+  notice:
+    "※焼津漁港は外側の防波堤が立入禁止で、水揚げ場周辺や漁業者の作業場所での釣りも控えるよう求められています（静岡県焼津漁港管理事務所）。釣りは親水公園「ふぃしゅーな」の釣り護岸など、認められた場所で。",
+};
+
+// 玉原湖（利根漁業協同組合遊漁規則 第5条。群馬県が掲載する認可済み規則、2026-03-01 施行）
+const TAMBARA: SpotBanOverride = {
+  fishingBan: {
+    scope: "full",
+    reason:
+      "利根漁業協同組合の遊漁規則は、発知川の玉原ダム副ダムから上流の玉原ダム調整池内全域を、1月1日から12月31日まで遊漁の禁止区域としています。玉原湖では一年中、釣りができません。",
+    sourceUrls: ["https://www.pref.gunma.jp/page/217085.html", "https://www.pref.gunma.jp/uploaded/attachment/691065.pdf"],
+    confirmedAt: CONFIRMED,
+  },
+  description:
+    "玉原湖（たんばらダム湖）。群馬県沼田市の玉原ダム調整池。利根漁業協同組合の遊漁規則で、副ダムから上流の調整池全域が一年中遊漁禁止とされており、ここでは釣りができません。",
+};
+
+const TOTTORI_GYOKO_SLUGS = [
+  "sakaiminato-port", "tottori-port", "karo-port", "sakaiminato-gaiko", "iwami-tago-port", "kotoura-outtsuka-port",
+  "daisen-mikuriya-port", "tottori-karo-port", "uradome-ajiro-port", "natsudumari-gyokou-w7", "nakayama-ousaka-port",
+  "yodoe-gyokou-w7", "higashihama-port-tottori", "hashizu-port", "aoya-gyokou-w6", "daisen-shiotsu-port",
+  "yurihama-tomari-port", "hamamura-port", "iwado-port-tottori", "yonago-kou-w7", "nawa-gyokou-w7", "yura-port-tottori",
+  "sakaiminato-suido", "ajiro-gyokou-tottori", "mikuriya-gyokou-w6", "iwami-hao-gyokou", "tottori-sakatsu-gyokou",
+  "akasaki-gyokou-tottori", "sakatsu-gyokou-tottori-w6", "sotoe-kou-sakaiminato-w6", "funaiso-kou-w6", "igumi-kou-w7",
+  "hamamura-kou-w7", "tottori-iwami-makidani-bulk", "tottori-iwami-kugami-bulk", "tottori-aoya-nagawase-bulk",
+  "tottori-kotoura-bessho-bulk", "tottorikou-karo-a9", "kotoura-kou-a11", "tohaku-gyokou-a12", "fukube-gyokou-a13",
+  "watari-gyokou-sakaiminato-a13", "daiei-gyokou-a13", "nakayama-gyokou-daisen-a13",
+];
+
 export const spotBanOverrides: Record<string, SpotBanOverride> = {
   // ─────────── 全面禁止 ───────────
   "nanko-kita-breakwater": {
@@ -250,4 +413,22 @@ export const spotBanOverrides: Record<string, SpotBanOverride> = {
 
   "hakata-suzaki-futo-a9": HAKATA_SUZAKI,
   "hakata-suzaki-gokan": HAKATA_SUZAKI,
+
+  // ─────────── 2026-11-21 一斉監査の反映 ───────────
+  ...SENDAI_SHIOGAMA_FULL,
+  "sendai-ko-chuo-koen": SENDAI_PARK,
+  "sendai-chuo-park": SENDAI_PARK,
+  ...YAMAGATA_FULL,
+  ...NIIGATA_FULL,
+  "niigata-nishi-port": NIIGATA_PARTIAL,
+  "niigata-higashi-kou": NIIGATA_PARTIAL,
+  "niigata-higashiko-dai2-bohatei": NIIGATA_PARTIAL,
+  "niigata-higashikou-dai2-bouhatei": NIIGATA_PARTIAL,
+  "niigata-higashikou-daini-bohatei-a12": NIIGATA_PARTIAL,
+  ...OARAI_FULL,
+  "yaizu-ko": YAIZU_GYOKO,
+  "yaizu-shinko": YAIZU_GYOKO,
+  "yaizu-shinko-teibo": YAIZU_GYOKO,
+  "tambarako-dam-a12": TAMBARA,
+  ...Object.fromEntries(TOTTORI_GYOKO_SLUGS.map((slug) => [slug, TOTTORI_GYOKO])),
 };

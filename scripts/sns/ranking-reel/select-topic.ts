@@ -49,8 +49,36 @@ const lastTwoFish = new Set([...recentFish].slice(0, 2).map(groupOf));
 const SNS_EXCLUDE_NAME = /田子の浦|沼津(内|外)?港/;
 // 説明やルール欄に禁止・立入禁止の記載がある所も除く（全体の約3%）
 const BAN_HINT = /釣り禁止|立入禁止|立ち入り禁止/;
+// 2026-11-21 一斉監査（全5,610件）で禁止の疑いが出たが、公式で裏が取れず fishingBan を付けていない所。
+// サイトには載せたまま、SNSにだけは出さない（港湾管理者の公表がない＝釣りができる、ではないため）。
+// 未確認: 二次情報で禁止の指摘がある港（気仙沼・銚子・勝浦・下関・田原・鹿児島港など）
+// 一部禁止: 港湾ルールの一部区域に当たる港（長崎・壱岐・対馬・五島・水島・玉島・苅田・高松・清水・焼津・名古屋潮見・柏崎・直江津など）
+// 公式未確認の禁止判定: 福浦岸壁・名古屋港ガーデンふ頭・明石海峡大橋下・早川河口テトラ
+// （焼津漁港と玉原湖は公式で確認できたので spot-ban-overrides.ts で fishingBan を付けた。ここにも残すのは二重の安全策）
+const SNS_EXCLUDE_SLUGS = new Set([
+  // 未確認
+  "katsuura-port", "katsuura-suminawa-breakwater", "kesennuma-ko", "kesennuma-oshima-seto", "kesennuma-oshima-e8",
+  "kesennuma-oura-port-a11", "kesennuma-shishiori-port-a13", "kesennuma-karakuwa-kosaba-port-a13",
+  "kesennuma-motoyoshi-oya-port-a13", "choshi-gaiko", "choshi-kou", "choshi-soto-boutei-e8", "choshi-marina6",
+  "choshi-marina-teibo", "shimonoseki-port", "tahara-kou", "kagoshima-port", "kagoshima-kita-futo-w6",
+  // 一部禁止
+  "nagasaki-port", "nagasaki-mizubenomori-w6", "iki-gonoura-port", "iki-gounoura-w6", "tsushima-izuhara-w6",
+  "tsushima-hitakatsu-kou-s8", "fukue-kou-w6", "fukue-kou-terminal-s8", "mizushima-kou-c8", "tamashima-kou-okayama-w6",
+  "tamashima-e-chiku", "tamashima-kou-otoshima", "kurashiki-tamashima-e-ganpeki", "kurashiki-mizushima-nishi-futou",
+  "okayama-kurashiki-tamashima-kurosaki-bulk", "mizushima-kou-gogan-a12", "tamashima-kou-gogan-a13", "kanda-kou-s8",
+  "shiraishi-gyokou-kanda-w6", "kagawa-takamatsu-asahi-futo-bulk", "sunport-takamatsu-kagawa", "takamatsu-sunport-gokan",
+  "takamatsu-sunport-c8", "shimizu-hinode-futo", "shimizu-ejiri-futo", "yaizu-ko", "yaizu-shinko", "yaizu-kogawa-kou",
+  "yaizu-ogawa-kou-e8", "tsuruhama-gogan", "nagoyakou-shiomi-futou", "nagoyakou-shiomi-futou-a13", "shiomi-futo-nagoya",
+  "maiko-kouen-gogan-a12", "tarumi-gyokou-gogan-a13", "marinpia-kobe-gogan", "kanazawa-suisaisen-ryokuchi", "umi-no-koen",
+  "kashiwazaki-port", "kashiwazaki-nishi-bohatei-a10", "naoetsu-daisan-higashi-teibo", "joetsu-minatomachi-tottei",
+  "sado-ryotsu-higashi-futo", "shinminato-east-breakwater", "toyama-shinko-higashi-bohatei", "kaiomaru-park-gogan-imizu-a12",
+  "sakaiminato-mihonoseki", "sakaiminato-marina-c8",
+  // 公式未確認の禁止判定
+  "fukuura-ganpeki", "nagoya-garden-futo", "nagoya-garden-futou-e8", "akashi-kaikyo-bridge-shita", "yaizu-shinko-teibo",
+  "hayakawa-kakou-tetra-e8", "tambarako-dam-a12",
+]);
 function snsSafe(s: (typeof fishingSpots)[number]) {
-  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name)) return false;
+  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug)) return false;
   return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
 }
 
