@@ -854,15 +854,6 @@
  "shinminato-gyokou-e8": {
   "address": "〒934-0023 富山県射水市海王町"
  },
- "shiobara-damuko-momiji-a13": {
-  "region": {
-   "id": "rs12103",
-   "prefecture": "栃木県",
-   "areaName": "日光・大谷川",
-   "slug": "tochigi-nikko-daiyagawa-s12"
-  },
-  "note": "塩原ダム湖（もみじ谷大吊橋付近）: 小山・栃木(中央値から65km) → 日光・大谷川(8km)"
- },
  "shirako-kaigan6": {
   "region": {
    "id": "r1054",

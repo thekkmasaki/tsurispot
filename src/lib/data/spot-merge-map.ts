@@ -445,4 +445,38 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "hekinan-fishing-spot": "hekinan-fishing-park", // 碧南海つり公園跡地 → 碧南海釣り広場：同住所（港南町2丁目8-2）。別の閉鎖施設は公式・準公式に見当たらない
   "ichihara-umizuri6": "ichihara-sea-fishing", // 市原海釣り施設跡地 → 市原海釣り施設：施設は営業中で「跡地」ではない（公式サイトで確認）
   "hekinan-umitsuri-park": "hekinan-fishing-park", // 碧南海釣り公園 → 碧南海釣り広場：「公園」は同じ無料の釣り広場の別称（碧南市公式）。有料（大人500円）・竿レンタルありの記載は実在しない施設の情報だった
+  // 2026-11 一斉監査 4.4節: 名称・住所が一致する同一水域・同一港の重複（ダム湖系ほか）。
+  // 勝者は出典付き魚種数 → 内部参照数 → 魚種数 → 名称の一般性。座標が明らかにずれている側は勝者にしない。
+  // 同じ水域でも区間・地点が別のもの（安曇川上流の朽木、池原ダムの上池原ワンド、北山川下北山、高原川の飛騨市神岡、
+  // 木曽川の各務原・犬山境／三井山付近、男鹿川、箒川の矢板・那須塩原、大地蔵港と同港堤防）は残す。
+  "hamanako-miyakodagawa-kakou": "hamanako-miyakodagawa", // 浜名湖 都田川河口 → 浜名湖都田川河口：同じ河口（統合元は住所が三ヶ日町で誤り）
+  "biwako-adogawa-kakou-add5": "biwako-adogawa-kakou", // 琵琶湖 安曇川河口 → 琵琶湖・安曇川河口：同じ河口。統合元は座標が河口から約5km南
+  "adogawa-takashima": "adogawa-river", // 安曇川（高島） → 安曇川：どちらも安曇川町内の下流域
+  "shimokita-wakinosawa-ko": "wakinosawa-gyoko", // 下北半島脇野沢港 → 脇野沢漁港：同住所（むつ市脇野沢本村）
+  "wakinosawa-kou": "wakinosawa-gyoko", // 下北半島・脇野沢港 → 脇野沢漁港：同住所。勝者の座標はこの統合元の位置に直した
+  "shimokita-wakinosawa-kou": "wakinosawa-gyoko", // 下北脇野沢港 → 脇野沢漁港：同住所
+  "murakami-iwafune-ko": "iwafune-port-murakami", // 村上岩船港 → 岩船港：同じ港（村上市岩船）
+  "iwafune-kou-murakami": "iwafune-port-murakami", // 村上市岩船港 → 岩船港：同じ港（座標同一）
+  "murakami-iwafune-kou-e8": "iwafune-port-murakami", // 村上・岩船港 → 岩船港：同じ港（統合元は座標が約13km南）
+  "takaharagawa-river": "takaharagawa-okuhida", // 高原川 → 高原川 奥飛騨エリア：同じ奥飛騨温泉郷栃尾の区間
+  "takaharagawa-okuhida-gifu": "takaharagawa-okuhida", // 高原川・奥飛騨エリア → 高原川 奥飛騨エリア：表記違い
+  "takaharagawa-okuhida-e8": "takaharagawa-okuhida", // 高原川（奥飛騨） → 高原川 奥飛騨エリア：表記違い
+  "takaharagawa-okuhida-a10": "takaharagawa-okuhida", // 高原川（奥飛騨温泉郷） → 高原川 奥飛騨エリア：表記違い
+  "kisogawa-kakamigahara-gifu": "kisogawa-kakamigahara", // 木曽川・各務原エリア → 木曽川 各務原エリア：表記違い
+  "kisogawa-kakamigahara-a9": "kisogawa-kakamigahara", // 木曽川・各務原付近 → 木曽川 各務原エリア：表記違い（鵜沼）
+  "kamagari-mukai-gyokou-a9": "kamagari-mukai-kou-c8", // 蒲刈・向漁港 → 蒲刈島・向港：同じ港（呉市蒲刈町向）
+  "kamagari-mukou-a10": "kamagari-mukai-kou-c8", // 蒲刈島向港 → 蒲刈島・向港：同じ港（統合元は住所が下蒲刈町で誤り）
+  "kure-kamagari-ohashi": "kamagari-ohashi", // 呉市蒲刈島蒲刈大橋下 → 蒲刈大橋下：同じ橋の下（同住所 三之瀬）
+  "kamagari-ohashi-gogan-a13": "kamagari-ohashi", // 蒲刈大橋下護岸 → 蒲刈大橋下：同じ橋の下（統合元は座標が約6km東）
+  "ikehara-dam-bass-detail": "ikehara-dam", // 池原ダム（バス釣り） → 池原ダム：同じダム湖
+  "shimokitayama-ikehara-dam": "ikehara-dam", // 下北山村・池原ダム → 池原ダム：同じダム湖（地名接頭辞違い）
+  "chichibu-sakurako": "urayama-dam-sakurako6", // 秩父さくら湖（浦山ダム） → 浦山ダム秩父さくら湖：同じダム湖（同住所 荒川久那）
+  "chichibu-urayama-dam": "urayama-dam-sakurako6", // 秩父・浦山ダム → 浦山ダム秩父さくら湖：同じダム湖（同住所）
+  "gassan-dam-e8": "gassan-dam-gassanko6", // 月山ダム湖 → 月山ダム月山湖：同じダム湖（鶴岡市上名川）。西川町の寒河江ダムは別
+  "gifu-tokuyama-dam-lake": "tokuyama-dam-gifu", // 徳山ダム（徳山湖） → 徳山ダム：同じダム湖（揖斐川町開田）
+  "tochigi-kawaji-dam-lake": "kawaji-damuko", // 川治ダム（八汐湖） → 川治ダム湖：同じダム湖（川治温泉川治）
+  "shiobara-damuko-momiji-a13": "shiobara-dam-ko6", // 塩原ダム湖（もみじ谷大吊橋付近） → 塩原ダム湖：同じダム湖（那須塩原市関谷）
+  "houkigawa-shiobara": "shiobara-houkigawa6", // 箒川（塩原渓谷） → 塩原渓谷箒川：同じ区間（那須塩原市塩原）
+  "kameyama-dam": "kimitsu-kameyamako-a13", // 亀山ダム → 君津・亀山湖：同じダム湖（同住所 川俣旧川俣）
+  "kesennuma-oshima-kameyama-rocky-a13": "kesennuma-oshima-rocky-a10", // 気仙沼市大島亀山展望台下磯 → 気仙沼大島亀山磯：同じ亀山の下の磯
 };
