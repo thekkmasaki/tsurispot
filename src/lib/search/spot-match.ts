@@ -1,17 +1,9 @@
 import { ListSpot } from "@/types";
 import { terrainMatchesWord } from "@/lib/depth-terrain";
+import { normalizeForSearch } from "./normalize";
+import { fishNameMatches } from "./fish-terms";
 
-// カタカナ → ひらがな変換
-export function katakanaToHiragana(str: string): string {
-  return str.replace(/[ァ-ヶ]/g, (ch) =>
-    String.fromCharCode(ch.charCodeAt(0) - 0x60)
-  );
-}
-
-// 検索用正規化（小文字+ひらがな統一）
-export function normalizeForSearch(str: string): string {
-  return katakanaToHiragana(str).toLowerCase();
-}
+export { katakanaToHiragana, normalizeForSearch } from "./normalize";
 
 // あいまい検索：双方向部分一致 + かな正規化
 export function fuzzyMatch(query: string, ...targets: string[]): boolean {
@@ -53,7 +45,8 @@ export function spotSearchMatch(query: string, spot: ListSpot): boolean {
   // 魚図鑑で324件あるタチウオが一覧検索では0件だった（2026-11 監査）。1文字は誤一致が多いので2文字以上。
   const single = nq.trim();
   if (single.length >= 2 && !/\s/.test(single)) {
-    if (spot.fishNames.some((f) => normalizeForSearch(f).includes(single))) return true;
+    // 魚名は fishNameMatches（正式名は完全一致・別名対応）。部分一致だと「アジ」がシマアジを拾う
+    if (spot.fishNames.some((f) => fishNameMatches(single, f))) return true;
     if (spot.methods.some((m) => normalizeForSearch(m).includes(single))) return true;
   }
   // 複数語クエリ（「千葉 サビキ」「千葉 深場」「明石 タチウオ」等）は全フィールド結合で全語一致を判定
@@ -64,13 +57,17 @@ export function spotSearchMatch(query: string, spot: ListSpot): boolean {
       spot.region.areaName,
       spot.region.prefecture,
       spot.address || "",
-      ...spot.fishNames,
       ...spot.methods,
     ]
       .map(normalizeForSearch)
       .join(" ");
     const terrain = spot.depthTerrain;
-    return words.every((w) => combined.includes(w) || (terrain !== undefined && terrainMatchesWord(terrain, w)));
+    return words.every(
+      (w) =>
+        combined.includes(w) ||
+        spot.fishNames.some((f) => fishNameMatches(w, f)) ||
+        (terrain !== undefined && terrainMatchesWord(terrain, w)),
+    );
   }
   return false;
 }
