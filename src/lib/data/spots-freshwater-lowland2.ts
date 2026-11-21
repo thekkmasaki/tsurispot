@@ -96,7 +96,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-363", name: "びん沼川（富士見市）", slug: "binnumagawa-tanago",
     description: "埼玉県富士見市のびん沼川はタナゴ・ヘラブナ・コイの好釣り場。荒川の旧河道で流れが穏やかなため小物釣りに最適。タイリクバラタナゴが多数生息し、春から秋にかけて安定した釣果が期待できる。ヘラブナ釣りの名所としても全国的に有名。",
-    latitude: 35.8512, longitude: 139.5883, address: "〒354-0004 埼玉県富士見市下南畑地先",
+    latitude: 35.87084, longitude: 139.57140, address: "〒354-0004 埼玉県富士見市下南畑地先",
     accessInfo: "東武東上線みずほ台駅からバスで約15分。関越自動車道所沢ICから約20分。",
     region: lr("r2337"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）",

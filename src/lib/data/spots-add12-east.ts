@@ -667,7 +667,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   {
     id: "ss12235", name: "権現堂調節池（幸手市）", slug: "gongendo-chouseichi-satte-a12",
     description: "桜の名所として知られる権現堂の調節池で、ヘラブナ釣りが盛ん。春は花見をしながらの釣りが風情豊かで楽しい。",
-    latitude: 36.0680, longitude: 139.7280,
+    latitude: 36.09345, longitude: 139.72431,
     address: "〒340-0103 埼玉県幸手市内国府間",
     accessInfo: "東武日光線幸手駅から車で約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "beginner",

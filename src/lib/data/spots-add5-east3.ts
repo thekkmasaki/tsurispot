@@ -712,7 +712,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   {
     id: "se5136", name: "中川 越谷エリア", slug: "nakagawa-koshigaya",
     description: "越谷市を流れる中川。足場の良い護岸からヘラブナやコイが狙える都市型の釣り場。テナガエビ釣りの名所でもある。",
-    latitude: 35.8920, longitude: 139.7810,
+    latitude: 35.88310, longitude: 139.83807,
     address: "〒343-0845 埼玉県越谷市南越谷",
     accessInfo: "JR南越谷駅から徒歩約15分。東京外環道草加ICから約15分。",
     region: localRegion("re5111"), spotType: "river", difficulty: "beginner",

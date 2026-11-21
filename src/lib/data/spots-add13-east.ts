@@ -688,7 +688,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13236", name: "戸田・笹目川", slug: "toda-sasamegawa-a13",
     description: "荒川の支流である笹目川は都市型の釣り場。テナガエビやハゼが釣れ、夏場のテナガエビ釣りは子供連れに大人気。",
-    latitude: 35.8150, longitude: 139.6680,
+    latitude: 35.81868, longitude: 139.65864,
     address: "〒335-0023 埼玉県戸田市本町",
     accessInfo: "JR戸田公園駅から徒歩約15分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",

@@ -856,7 +856,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   {
     id: "se8244", name: "荒川（川越エリア）", slug: "arakawa-kawagoe-e8",
     description: "川越市周辺の荒川で、コイやフナの大物釣りが楽しめる。河川敷が広く整備されており、バーベキューエリアも近いためファミリーレジャーと合わせて楽しめる。",
-    latitude: 35.920, longitude: 139.460,
+    latitude: 35.91466, longitude: 139.54446,
     address: "〒350-0836 埼玉県川越市大字平塚",
     accessInfo: "西武新宿線南大塚駅から車で約10分",
     region: localRegion("re8009"), spotType: "river", difficulty: "beginner",

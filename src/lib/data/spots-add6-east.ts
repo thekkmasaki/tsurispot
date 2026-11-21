@@ -5506,7 +5506,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6271", name: "荒川秋ヶ瀬公園", slug: "arakawa-akigase-park6",
     description: "さいたま市の荒川河川敷にある大規模公園。ヘラブナやコイの釣りが楽しめるほかバス釣りポイントも点在。都心近郊で手軽にアクセスできる。",
-    latitude: 35.843, longitude: 139.613,
+    latitude: 35.84745, longitude: 139.59829,
     address: "〒338-0832 埼玉県さいたま市桜区道場",
     accessInfo: "JR中浦和駅から車で約10分。首都高埼玉新都心線与野ICから約15分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5565,7 +5565,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6274", name: "利根川加須地区", slug: "tonegawa-kazo6",
     description: "加須市を流れる利根川。河川敷が広大でコイやヘラブナの釣りが盛ん。渡良瀬遊水地にも近い関東平野ならではの大河川釣り。",
-    latitude: 36.18711, longitude: 139.62385,
+    latitude: 36.18594, longitude: 139.62293,
     address: "〒347-0010 埼玉県加須市大越",
     accessInfo: "東武伊勢崎線加須駅から車で約15分。東北道加須ICから約10分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
@@ -5629,7 +5629,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6277", name: "江戸川三郷地区", slug: "edogawa-misato6",
     description: "三郷市を流れる江戸川。東京都との県境に位置しハゼやテナガエビが人気の釣りスポット。都心からのアクセスが抜群。",
-    latitude: 35.833, longitude: 139.873,
+    latitude: 35.80232, longitude: 139.88994,
     address: "〒341-0035 埼玉県三郷市鷹野",
     accessInfo: "JR三郷駅から車で約10分。常磐道三郷ICから約5分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
@@ -5711,7 +5711,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6281", name: "びん沼川", slug: "binnuma-gawa6",
     description: "富士見市と川越市の間を流れるびん沼川。ヘラブナ釣りの超人気スポットで週末は多くの釣り人で賑わう。足場が良く初心者にもおすすめ。",
-    latitude: 35.863, longitude: 139.553,
+    latitude: 35.87097, longitude: 139.57184,
     address: "〒354-0014 埼玉県富士見市水谷",
     accessInfo: "東武東上線みずほ台駅から車で約10分。関越道所沢ICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5750,7 +5750,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6283", name: "柳瀬川清瀬地区", slug: "yanasegawa-kiyose6",
     description: "清瀬市と所沢市の境を流れる柳瀬川。東京と埼玉の県境にある清流でオイカワやカワムツが楽しめる。都市近郊の穴場的な釣りスポット。",
-    latitude: 35.773, longitude: 139.513,
+    latitude: 35.78531, longitude: 139.51233,
     address: "〒359-1114 埼玉県所沢市北野",
     accessInfo: "西武池袋線清瀬駅から徒歩約15分。関越道所沢ICから約10分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5808,7 +5808,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6286", name: "越辺川毛呂山地区", slug: "oppegawa-moroyama6",
     description: "毛呂山町を流れる越辺川。丘陵地帯の里川でオイカワやウグイが楽しめる。鎌北湖にも近い自然豊かなエリア。",
-    latitude: 35.933, longitude: 139.303,
+    latitude: 35.95705, longitude: 139.33717,
     address: "〒350-0465 埼玉県入間郡毛呂山町大谷木",
     accessInfo: "東武越生線東毛呂駅から車で約10分。関越道坂戸西スマートICから約15分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
@@ -5827,7 +5827,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6287", name: "古利根川北越谷地区", slug: "furutone-kitakoshigaya6",
     description: "越谷市を流れる古利根川。テナガエビの名所として知られ夏場は多くの釣り人で賑わう。ハゼやコイも楽しめる都市型河川。",
-    latitude: 35.893, longitude: 139.793,
+    latitude: 35.91727, longitude: 139.80624,
     address: "〒343-0025 埼玉県越谷市大沢",
     accessInfo: "東武伊勢崎線北越谷駅から徒歩約15分。外環道草加ICから約15分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",

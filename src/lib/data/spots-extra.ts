@@ -822,7 +822,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s255", name: "荒川温排水", slug: "arakawa-onpaisui",
     description: "埼玉県内の荒川にある温排水エリア。シーバスやハゼの好ポイントで、冬でも温排水の影響で魚の活性が高い。",
-    latitude: 35.819200, longitude: 139.628900,
+    latitude: 35.79891, longitude: 139.67836,
     address: "〒335-0037 埼玉県戸田市下笹目",
     accessInfo: "JR戸田公園駅から車で約10分。首都高速5号池袋線戸田南ICから約5分。",
     region: localRegion("r76"), spotType: "river", difficulty: "intermediate",

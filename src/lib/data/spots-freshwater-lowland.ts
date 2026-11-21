@@ -221,7 +221,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-332", name: "古利根川（越谷〜杉戸）", slug: "furutonegawa-unagi",
     description: "埼玉県東部を流れる古利根川はウナギ釣りの穴場的スポット。利根川の旧河道で流れが穏やかなため初心者でも釣りやすい。越谷から杉戸にかけて全域で実績があり、橋脚周辺やテトラ帯が好ポイント。ナマズやヘラブナも多く生息する。梅雨時期の夜釣りで特に好釣果。",
-    latitude: 35.9012, longitude: 139.7883, address: "〒343-0818 埼玉県越谷市越ヶ谷本町3-28",
+    latitude: 35.91689, longitude: 139.80683, address: "〒343-0818 埼玉県越谷市越ヶ谷本町3-28",
     accessInfo: "東武スカイツリーライン北越谷駅からバスで約10分。東北自動車道岩槻ICから約20分。",
     region: lr("r2306"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）",
