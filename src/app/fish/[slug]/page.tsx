@@ -48,7 +48,6 @@ import { getHookSizeData } from "@/lib/data/hook-sizes";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd } from "@/components/ads/ad-unit";
-import { AD_MEDIA_DESKTOP, AD_MEDIA_MOBILE } from "@/lib/ads-config";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getPrefectureByName, prefectures } from "@/lib/data/prefectures";
 import { MONTHS } from "@/lib/data/fishing-methods";
@@ -712,7 +711,7 @@ export default async function FishDetailPage({ params }: PageProps) {
 
       {/* モバイル広告（スポット一覧後） */}
       <div className="lg:hidden">
-        <LazyAd className="my-6"><InArticleAd media={AD_MEDIA_MOBILE} /></LazyAd>
+        <LazyAd className="my-6"><InArticleAd /></LazyAd>
       </div>
 
       <FishPrefectureTable fish={fish} />
@@ -1337,7 +1336,7 @@ export default async function FishDetailPage({ params }: PageProps) {
       {/* 関連コンテンツリンク */}
       {/* PC専用の追加広告枠（単一カラムの下部余白を収益化） */}
       <div className="hidden lg:block my-8">
-        <StickySidebarAd media={AD_MEDIA_DESKTOP} />
+        <StickySidebarAd />
       </div>
 
       <section className="mb-8">

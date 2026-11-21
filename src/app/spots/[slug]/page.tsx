@@ -72,7 +72,6 @@ import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd, NativeAdBreak, HeaderBannerAd } from "@/components/ads/ad-unit";
-import { AD_MEDIA_DESKTOP, AD_MEDIA_MOBILE } from "@/lib/ads-config";
 import { SpotAccommodations } from "@/components/spots/spot-accommodations";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
@@ -119,6 +118,7 @@ import { getRelatedBlogPostsForSpot, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { RecentlyViewedTracker } from "@/components/spots/recently-viewed-tracker";
 import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
+import { ContentDivider } from "@/components/ui/content-divider";
 import { PortMannerSection } from "@/components/spots/port-manner-section";
 import { UmigyoBadge } from "@/components/spots/umigyo-badge";
 import { umigyoDistricts } from "@/lib/data/umigyo";
@@ -1021,7 +1021,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       )}
 
       {/* モバイル広告A: ギャラリー・安全警告後 */}
-      <div className="lg:hidden"><InArticleAd className="my-4" media={AD_MEDIA_MOBILE} /></div>
+      <div className="lg:hidden"><InArticleAd className="my-4" /></div>
 
       {/* セクション区切り */}
       <div className="my-6 flex items-center gap-4" aria-hidden="true">
@@ -1187,12 +1187,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
           )}
           {spot.spotType === "port" && <PortMannerSection />}
-          {/* モバイル広告A: ルール・マナーの後。
-              以前はタブ末尾（YouTube動画の後）にあり、タブ直後の InArticleAd と本文を挟まず2枠連続していた。
-              広告のない区間（スマホで約3,000px）の途中へ上げ、枠数は変えずに連続を解消する。 */}
-          <div className="lg:hidden">
-            <LazyAd><DisplayAd media={AD_MEDIA_MOBILE} /></LazyAd>
-          </div>
           {/* みんなが教える釣り場情報（共同編集UGC・追記型・実体験でE-E-A-Tを底上げ） */}
           <section id="spot-tips">
             <h3 className="mb-1 flex items-center gap-2 text-lg font-bold"><Lightbulb className="size-5 text-amber-500" />みんなが教える釣り場情報</h3>
@@ -1257,7 +1251,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
             {/* モバイル広告B: エリア釣果傾向後 */}
             <div className="lg:hidden mt-4">
-              <LazyAd className="my-4"><DisplayAd media={AD_MEDIA_MOBILE} /></LazyAd>
+              <LazyAd className="my-4"><DisplayAd /></LazyAd>
             </div>
           </section>
           {/* 管理釣り場 (isManagedPond) は営業時間ベースで混雑予想が無意味なので非表示。
@@ -1320,6 +1314,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <ExternalLink className="size-3.5" />
             </a>
           </section>
+          {/* モバイル広告: YouTube動画セクション後 */}
+          <div className="lg:hidden mt-4">
+            <LazyAd className="my-4"><DisplayAd /></LazyAd>
+          </div>
         </>}
         fishTab={<>
           <h2 className="sr-only">{spot.name}の釣り情報</h2>
@@ -1885,7 +1883,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* モバイル広告: 近くのスポット後 */}
       <div className="lg:hidden my-4">
-        <LazyAd><InArticleAd media={AD_MEDIA_MOBILE} /></LazyAd>
+        <LazyAd><InArticleAd /></LazyAd>
       </div>
 
       {/* 関連スポット・ガイド（初期状態で展開）
@@ -1977,11 +1975,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
           if (fishSpots.length === 0) return null;
           return <RelatedSpotsByFish spots={fishSpots} fishName={topFishName} />;
         })()}
-
-        {/* 広告: 関連スポット一覧の途中。
-            以前は FAQ の後にあり、ページ末尾の約1,400pxに3枠（これ・モバイル広告C・フッター前）が
-            折りたたみ見出しだけを挟んで並んでいた。広告のない一覧区間（スマホで約3,500px）へ上げる。 */}
-        <LazyAd className="my-6"><InArticleAd /></LazyAd>
 
         {/* 同じ釣り方の他のスポット (Phase A 内部リンク強化) */}
         {(() => {
@@ -2092,9 +2085,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
         })()}
       </CollapsibleSection>
 
-      {/* モバイル広告C: 関連スポット一覧の後・FAQ の前（以前は関連コラムの後。フッター前広告との間隔を空けるため上げた） */}
-      <div className="lg:hidden my-6"><NativeAdBreak media={AD_MEDIA_MOBILE} /></div>
-
       {/* よくある質問（FAQ） */}
       <section className="mt-6 sm:mt-8">
         <CollapsibleSection
@@ -2122,6 +2112,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
       </section>
 
       {/* 都道府県ガイド・地域ガイドは上の折りたたみセクションに統合済み */}
+
+      {/* 広告（FAQ後） */}
+      <ContentDivider variant="dots" />
+      <LazyAd className="my-6"><InArticleAd /></LazyAd>
 
       {/* 関連コラム（ブログ記事への内部リンク — AdSense対策） */}
       {(() => {
@@ -2217,6 +2211,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* モバイル広告C: 関連コラム後 */}
+      <ContentDivider variant="dots" className="lg:hidden" />
+      <div className="lg:hidden my-6"><NativeAdBreak /></div>
 
       {/* 近くの釣り宿 (Phase 2: 旅行 affiliate 取り込み。 affiliate link 未設定なら自動 skip) */}
       <SpotAccommodations
@@ -2390,7 +2388,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           )}
 
           {/* サイドバー広告（デスクトップのみ） */}
-          <StickySidebarAd media={AD_MEDIA_DESKTOP} />
+          <StickySidebarAd />
         </div>
       </aside>
       </div>{/* 2カラムグリッド閉じ */}
