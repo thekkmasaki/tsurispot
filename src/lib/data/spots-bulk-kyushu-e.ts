@@ -1182,7 +1182,7 @@ export const bulkKyushuESpots: FishingSpot[] = [
     name: "沖縄市・泡瀬漁港（パヤオ前）",
     slug: "okinawa-awase-port-bulk",
     description:
-      "沖縄市、中城湾に面する人気の漁港。海底が砂地で根がかりが少なく、ぶっこみ釣りでキス・コチ・チヌが狙いやすい。タマンの実績ポイントとしても有名で、夜は打ち込み釣りの釣り人で賑わう。ミジュンを追ってガーラ（ロウニンアジ）が入ることもあり、本島中部を代表する好スポット。",
+      "沖縄市、中城湾に面する人気の漁港。海底が砂地で根がかりが少なく、ぶっこみ釣りでコチ・チヌが狙いやすい。タマンの実績ポイントとしても有名で、夜は打ち込み釣りの釣り人で賑わう。ミジュンを追ってガーラ（ロウニンアジ）が入ることもあり、本島中部を代表する好スポット。",
     latitude: 26.3213,
     longitude: 127.8374,
     address: "沖縄県沖縄市泡瀬",
@@ -1204,7 +1204,6 @@ export const bulkKyushuESpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("taman"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "夜", method: "打ち込み釣り", source: "うおそく 沖縄ミーバイ／泡瀬漁港" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ぶっこみ・ウキフカセ", source: "gonchan-okinawa 泡瀬漁港" },
-      { fish: fish("kisu"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ぶっこみ・投げ釣り", source: "gonchan-okinawa 泡瀬漁港" },
       { fish: fish("rounin-aji"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ", source: "gonchan-okinawa 泡瀬漁港" },
       { fish: fish("hata"), monthStart: 11, monthEnd: 1, peakSeason: false, catchDifficulty: "hard", recommendedTime: "夜", method: "打ち込み・ロックフィッシュ", source: "うおそく 沖縄ミーバイ" },
       { fish: fish("aoriika"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング", source: "gonchan-okinawa 泡瀬漁港" },

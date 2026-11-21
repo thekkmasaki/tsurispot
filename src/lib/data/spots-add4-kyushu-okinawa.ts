@@ -1738,7 +1738,6 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kisu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
     tideAdvice: tideReef, mazumeInfo: mazumeOkinawa,
