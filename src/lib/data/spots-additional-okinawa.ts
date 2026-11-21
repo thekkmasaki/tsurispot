@@ -110,7 +110,7 @@ export const additionalSpotsOkinawa: FishingSpot[] = [
     id: "s103",
     name: "石垣島底地ビーチ",
     slug: "ishigaki-sukuji-beach",
-    description: "石垣島西部の美しいビーチ。サンゴ礁の浅場で多彩な熱帯魚が狙える。投げ釣りでキスやコチ、リーフエッジではカスミアジも。リゾート釣りの決定版。",
+    description: "石垣島西部の美しいビーチ。サンゴ礁の浅場で多彩な熱帯魚が狙える。投げ釣りでコチ、サビキ釣りでアジ、リーフエッジではカスミアジも。リゾート釣りの決定版。",
     latitude: 24.451900,
     longitude: 124.1378,
     address: "〒907-0453 沖縄県石垣市川平",
@@ -142,7 +142,7 @@ export const additionalSpotsOkinawa: FishingSpot[] = [
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "サンゴ礁のリーフ内に魚が入ってくる。" },
     mazumeInfo: { springSunrise: "06:25", springSunset: "18:40", summerSunrise: "06:00", summerSunset: "19:25", autumnSunrise: "06:25", autumnSunset: "17:50", winterSunrise: "07:15", winterSunset: "17:40", tip: "透明度抜群の海で魚が見える。サイトフィッシング可能。" },
     gearGuides: [
-      { targetFish: "キス", method: "投げ釣り", difficulty: "beginner", rod: "投げ竿3.6m", reel: "スピニング3000番", line: "PE1号", hook: "キス仕掛け7号", otherItems: ["天秤", "ジャリメ"], tip: "サンゴ礁の切れ目を狙う。リーフエッジが好ポイント。" },
+      { targetFish: "アジ", method: "サビキ釣り", difficulty: "beginner", rod: "磯竿2号 3.0m", reel: "スピニング2500番", line: "ナイロン3号", hook: "サビキ仕掛け6号", otherItems: ["コマセカゴ", "アミエビ"], tip: "朝マヅメが狙い目。サンゴ礁で足元を切らないようマリンシューズで。" },
     ],
     safetyLevel: "caution",
     safetyNotes: ["サンゴ礁で足を切る恐れあり", "離岸流注意", "日焼け・熱中症対策必須", "マリンシューズ推奨"],

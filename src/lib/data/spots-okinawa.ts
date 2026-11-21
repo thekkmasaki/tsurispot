@@ -239,7 +239,7 @@ export const okinawaSpots: FishingSpot[] = [
   },
   {
     id: "s507", name: "中城湾", slug: "nakagusuku-bay",
-    description: "沖縄本島東部に広がる中城湾。湾内は穏やかで、砂浜からの投げ釣りでキスやハマフエフキが狙える。湾奥ではシーバス（タマン）の実績も高く、初心者から中級者まで楽しめる釣りエリア。",
+    description: "沖縄本島東部に広がる中城湾。湾内は穏やかで、砂浜からの投げ釣りでハゼやハマフエフキが狙える。湾奥ではシーバス（タマン）の実績も高く、初心者から中級者まで楽しめる釣りエリア。",
     latitude: 26.2410, longitude: 127.8120,
     address: "〒901-2406 沖縄県中頭郡中城村字奥間856",
     accessInfo: "沖縄自動車道北中城ICから約15分。国道329号中城方面から。",
@@ -262,7 +262,7 @@ export const okinawaSpots: FishingSpot[] = [
     safetyLevel: "safe",
     safetyNotes: ["サンゴ礁保護のため踏みつけ禁止", "夏場の日焼け・熱中症対策必須"],
     youtubeLinks: [
-      { label: "中城湾 キス 投げ釣り 沖縄", searchQuery: "沖縄 キス 投げ釣り 中城湾", description: "中城湾でのキス投げ釣り動画" },
+      { label: "中城湾 投げ釣り 沖縄", searchQuery: "沖縄 投げ釣り 中城湾", description: "中城湾での投げ釣り動画" },
     ],
   },
   // ========================================
@@ -352,7 +352,7 @@ export const okinawaSpots: FishingSpot[] = [
   },
   {
     id: "s511", name: "恩納村ムーンビーチ前", slug: "onna-moon-beach",
-    description: "沖縄の高級リゾートエリア・恩納村のビーチ前の釣りスポット。透明度の高い海でキスやハマフエフキの投げ釣りが楽しめる。夏場はナイトシュノーケルも盛んなエリアだが、早朝の磯際では良型魚も狙える。",
+    description: "沖縄の高級リゾートエリア・恩納村のビーチ前の釣りスポット。透明度の高い海でハゼやハマフエフキの投げ釣りが楽しめる。夏場はナイトシュノーケルも盛んなエリアだが、早朝の磯際では良型魚も狙える。",
     latitude: 26.4840, longitude: 127.8230,
     address: "〒904-0414 沖縄県恩納村前兼久523-2 1F",
     accessInfo: "沖縄自動車道石川ICから約20分。国道58号恩納方面から。",
@@ -374,7 +374,7 @@ export const okinawaSpots: FishingSpot[] = [
     safetyLevel: "safe",
     safetyNotes: ["海水浴シーズン（7〜9月）は釣り禁止エリアあり", "サンゴ礁の破壊禁止"],
     youtubeLinks: [
-      { label: "恩納村 キス 投げ釣り", searchQuery: "恩納村 キス 投げ釣り 沖縄 ビーチ", description: "恩納村ビーチでのキス投げ釣り動画" },
+      { label: "恩納村 投げ釣り", searchQuery: "恩納村 投げ釣り 沖縄 ビーチ", description: "恩納村ビーチでの投げ釣り動画" },
     ],
   },
   // ========================================
@@ -684,7 +684,7 @@ export const okinawaSpots: FishingSpot[] = [
     safetyLevel: "safe",
     safetyNotes: ["海水浴シーズンは遊泳エリア外で釣ること", "BBQの火の管理に注意"],
     youtubeLinks: [
-      { label: "西原ビーチ キス 投げ釣り", searchQuery: "西原 きらきらビーチ キス 投げ釣り 沖縄", description: "西原きらきらビーチでの投げ釣り動画" },
+      { label: "西原ビーチ 投げ釣り", searchQuery: "西原 きらきらビーチ 投げ釣り 沖縄", description: "西原きらきらビーチでの投げ釣り動画" },
     ],
   },
   {

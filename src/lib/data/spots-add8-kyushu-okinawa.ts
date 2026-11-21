@@ -3456,7 +3456,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   },
   {
     id: "ss8195", name: "名護・21世紀の森ビーチ", slug: "nago-21seiki-beach-s8",
-    description: "名護市中心部の人工ビーチ。整備された環境でファミリーのちょい投げに最適。キスや小魚が手軽に釣れ、海水浴と釣りを両方楽しめる。",
+    description: "名護市中心部の人工ビーチ。整備された環境でファミリーのちょい投げに最適。ハゼやアジなどの小魚が手軽に釣れ、海水浴と釣りを両方楽しめる。",
     latitude: 26.593, longitude: 127.966,
     address: "〒905-0011 沖縄県名護市宮里",
     accessInfo: "許田ICから車で約10分",
