@@ -627,7 +627,7 @@ export const eastAdd13Spots: FishingSpot[] = [
     address: "〒340-0103 埼玉県幸手市内国府間",
     accessInfo: "幸手ICから車で約5分",
     region: localRegion("rs13108"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "権現堂桜堤駐車場利用（無料）",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: true, parkingDetail: "権現堂桜堤駐車場利用（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -692,7 +692,7 @@ export const eastAdd13Spots: FishingSpot[] = [
     address: "〒335-0023 埼玉県戸田市本町",
     accessInfo: "JR戸田公園駅から徒歩約15分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: false, parkingDetail: "近隣コインパーキング利用",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: false, parkingDetail: "近隣コインパーキング利用",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.3, reviewCount: 0,
     catchableFish: [
@@ -708,7 +708,7 @@ export const eastAdd13Spots: FishingSpot[] = [
     address: "〒357-0021 埼玉県飯能市久下",
     accessInfo: "西武池袋線飯能駅から徒歩約15分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "飯能河原駐車場（有料）",
+    isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）", hasParking: true, parkingDetail: "飯能河原駐車場（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -724,7 +724,7 @@ export const eastAdd13Spots: FishingSpot[] = [
     address: "〒347-0002 埼玉県加須市外野",
     accessInfo: "東北道加須ICから車で約15分",
     region: localRegion("rs13108"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車可能",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉県北部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車可能",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -740,7 +740,7 @@ export const eastAdd13Spots: FishingSpot[] = [
     address: "〒343-0802 埼玉県越谷市小曽川",
     accessInfo: "東武伊勢崎線越谷駅から車で約10分",
     region: localRegion("rs13108"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "水上公園駐車場利用可（有料）",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: true, parkingDetail: "水上公園駐車場利用可（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.3, reviewCount: 0,
     catchableFish: [
@@ -756,7 +756,7 @@ export const eastAdd13Spots: FishingSpot[] = [
     address: "〒359-1145 埼玉県所沢市山口",
     accessInfo: "西武池袋線小手指駅から徒歩約15分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: false, parkingDetail: "近隣コインパーキング利用",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: false, parkingDetail: "近隣コインパーキング利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [

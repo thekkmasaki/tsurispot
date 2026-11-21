@@ -866,7 +866,13 @@ export const kantoDetailSpots: FishingSpot[] = [
   },
   {
     id: "s833", name: "彩湖（荒川調節池）", slug: "saiko-arakawa",
-    description: "戸田市と和光市にまたがる荒川調節池「彩湖」。都心から最も近いバスフィッシングのフィールドとして人気が高い。ブラックバス、ブルーギル、コイ、ワカサギなど多彩な魚種が生息。湖畔の遊歩道からのんびり釣りが楽しめる。冬場のワカサギ釣りも一興。",
+    fishingBan: {
+      scope: "full",
+      reason: "管理者の国土交通省 荒川上流河川事務所が「彩湖では魚釣りや遊泳が禁止されています」と案内しています。彩湖（荒川第一調節池）は漁業権の区域からも外されています。",
+      sourceUrls: ["https://www.ktr.mlit.go.jp/arajo/arajo00014.html", "https://www.pref.saitama.lg.jp/documents/20283/fishing_ground_no_2.pdf"],
+      confirmedAt: "2026-11-21",
+    },
+    description: "戸田市と和光市にまたがる荒川第一調節池「彩湖」。管理者の国土交通省 荒川上流河川事務所は、彩湖での魚釣りを禁止しています。釣りをする場合は、漁協の遊漁券を買ったうえで周辺の荒川本流など釣りができる場所を利用してください。",
     latitude: 35.80280, longitude: 139.621200,
     address: "〒335-0000 埼玉県戸田市",
     accessInfo: "JR埼京線武蔵浦和駅からバスで約15分。外環自動車道和光ICから約10分。",

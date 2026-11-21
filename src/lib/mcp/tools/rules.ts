@@ -56,7 +56,7 @@ const COMMON = [COMMON_RULES.fishingRights, COMMON_RULES.sizeLimit, COMMON_RULES
 
 /** 河川・湖の管轄漁協（一次情報で確認したものだけ）。管理釣り場・海は対象外 */
 function inlandFisherySummary(spot: FishingSpot) {
-  if ((spot.spotType !== "river" && spot.spotType !== "lake") || spot.isManagedPond) return undefined;
+  if ((spot.spotType !== "river" && spot.spotType !== "lake") || spot.isManagedPond || spot.fishingBan?.scope === "full") return undefined;
   const f = getSpotInlandFishery(spot.slug);
   if (!f) {
     return { status: "unconfirmed", note: "管轄の漁協はツリスポで未確認です。川・湖の多くは遊漁券が必要なので、現地の看板か県の漁業権の案内で確認してください" };

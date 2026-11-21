@@ -1,11 +1,13 @@
 import type { InlandFisheryCoop, InlandFisherySpotLink } from "./types";
 import { KYOTO_COOPS, KYOTO_SPOT_LINKS } from "./kyoto";
+import { SAITAMA_COOPS, SAITAMA_SPOT_LINKS } from "./saitama";
 
 export type { InlandFisheryCoop, InlandFisherySpotLink } from "./types";
 
 /** 都道府県ごとのデータ。県を足すときはここに並べる */
 const PREFECTURES: { coops: InlandFisheryCoop[]; links: Record<string, InlandFisherySpotLink> }[] = [
   { coops: KYOTO_COOPS, links: KYOTO_SPOT_LINKS },
+  { coops: SAITAMA_COOPS, links: SAITAMA_SPOT_LINKS },
 ];
 
 export const inlandFisheryCoops: InlandFisheryCoop[] = PREFECTURES.flatMap((p) => p.coops);

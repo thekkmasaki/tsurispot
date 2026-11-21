@@ -5510,7 +5510,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒338-0832 埼玉県さいたま市桜区道場",
     accessInfo: "JR中浦和駅から車で約10分。首都高埼玉新都心線与野ICから約15分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "公園駐車場あり（有料）",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: true, parkingDetail: "公園駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
@@ -5531,7 +5531,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "渓流沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券1,500円",
+    feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -5549,9 +5549,9 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒357-0022 埼玉県飯能市大河原",
     accessInfo: "西武池袋線飯能駅から車で約15分。圏央道狭山日高ICから約15分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車場あり",
+    isFree: false, hasParking: true, parkingDetail: "河川敷に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券1,000円",
+    feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -5569,7 +5569,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒347-0010 埼玉県加須市大越",
     accessInfo: "東武伊勢崎線加須駅から車で約15分。東北道加須ICから約10分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉県北部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
@@ -5583,7 +5583,13 @@ export const eastAdd6Spots: FishingSpot[] = [
   },
   {
     id: "se6275", name: "荒川彩湖", slug: "arakawa-saiko6",
-    description: "さいたま市の荒川調整池（彩湖）。都心に最も近いバス釣りフィールドの一つ。ヘラブナやコイも楽しめる整備された環境。",
+    fishingBan: {
+      scope: "full",
+      reason: "管理者の国土交通省 荒川上流河川事務所が「彩湖では魚釣りや遊泳が禁止されています」と案内しています。彩湖（荒川第一調節池）は漁業権の区域からも外されています。",
+      sourceUrls: ["https://www.ktr.mlit.go.jp/arajo/arajo00014.html", "https://www.pref.saitama.lg.jp/documents/20283/fishing_ground_no_2.pdf"],
+      confirmedAt: "2026-11-21",
+    },
+    description: "戸田市と和光市にまたがる荒川第一調節池「彩湖」。管理者の国土交通省 荒川上流河川事務所は、彩湖での魚釣りを禁止しています。釣りをする場合は、漁協の遊漁券を買ったうえで周辺の荒川本流など釣りができる場所を利用してください。",
     latitude: 35.813, longitude: 139.628,
     address: "〒335-0027 埼玉県戸田市氷川町",
     accessInfo: "JR武蔵浦和駅から車で約10分。外環道戸田西ICから約5分。",
@@ -5609,7 +5615,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "渓流沿いに駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券1,200円",
+    feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -5627,7 +5633,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒341-0035 埼玉県三郷市鷹野",
     accessInfo: "JR三郷駅から車で約10分。常磐道三郷ICから約5分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -5646,7 +5652,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒342-0015 埼玉県吉川市中野",
     accessInfo: "JR吉川駅から車で約10分。外環道草加ICから約15分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
@@ -5665,7 +5671,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒360-0035 埼玉県熊谷市河原町",
     accessInfo: "JR熊谷駅から車で約10分。関越道東松山ICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に広い駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉中央漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に広い駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -5679,7 +5685,13 @@ export const eastAdd6Spots: FishingSpot[] = [
   },
   {
     id: "se6280", name: "大宮公園白鳥の池", slug: "omiya-park-hakucho6",
-    description: "埼玉県さいたま市大宮区の大宮公園内にある白鳥の池は、JR大宮駅から徒歩約15分の都市公園に位置し、手ぶら感覚で立ち寄れるヘラブナ釣りの有名ポイント。4〜11月がシーズンで、桟橋や岸際からのヘラブナ釣りに多くの愛好家が集まる。コイの吸い込み釣り、マブナやタナゴのウキ釣りと小物の数釣りも楽しめ、初心者や親子連れの入門にも向く。武蔵一宮氷川神社の参道散策と合わせて楽しめるのも魅力。トイレ・駐車場・コンビニが近く快適で、都市の喧騒を離れてのんびり過ごせる。",
+    fishingBan: {
+      scope: "full",
+      reason: "管理者の埼玉県は、埼玉県都市公園条例第12条に基づき、大宮公園（第一公園）内で「釣りをすること」を禁止行為としています。",
+      sourceUrls: ["https://www.pref.saitama.lg.jp/omiya-park/oshirase/omiya-onegai.html"],
+      confirmedAt: "2026-11-21",
+    },
+    description: "さいたま市大宮区の大宮公園（第一公園）にある白鳥の池。管理者の埼玉県は、埼玉県都市公園条例にもとづき大宮公園内での釣りを禁止しています。",
     latitude: 35.908, longitude: 139.628,
     address: "〒330-0803 埼玉県さいたま市大宮区高鼻町",
     accessInfo: "JR大宮駅から徒歩約15分。首都高さいたま新都心線新都心ICから約10分。",
@@ -5703,7 +5715,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒354-0014 埼玉県富士見市水谷",
     accessInfo: "東武東上線みずほ台駅から車で約10分。関越道所沢ICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
@@ -5724,7 +5736,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "長瀞駅周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券2,000円（アユ）",
+    feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 4.0, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -5742,7 +5754,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒359-1114 埼玉県所沢市北野",
     accessInfo: "西武池袋線清瀬駅から徒歩約15分。関越道所沢ICから約10分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.2, reviewCount: 0,
     catchableFish: [
@@ -5761,9 +5773,9 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒350-1245 埼玉県日高市栗坪",
     accessInfo: "西武秩父線高麗駅から徒歩約15分。圏央道圏央鶴ヶ島ICから約20分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "巾着田駐車場あり",
+    isFree: false, hasParking: true, parkingDetail: "巾着田駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券1,000円",
+    feeDetail: "遊漁券が必要（埼玉西部漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -5800,7 +5812,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒350-0465 埼玉県入間郡毛呂山町大谷木",
     accessInfo: "東武越生線東毛呂駅から車で約10分。関越道坂戸西スマートICから約15分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉西部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.3, reviewCount: 0,
     catchableFish: [
@@ -5819,7 +5831,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒343-0025 埼玉県越谷市大沢",
     accessInfo: "東武伊勢崎線北越谷駅から徒歩約15分。外環道草加ICから約15分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -5859,7 +5871,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "渓流沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券1,200円",
+    feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -5877,7 +5889,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒349-0115 埼玉県蓮田市蓮田",
     accessInfo: "JR蓮田駅から徒歩約15分。東北道蓮田SAスマートICから約5分。",
     region: localRegion("re6029"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉県北部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.3, reviewCount: 0,
     catchableFish: [
@@ -5956,7 +5968,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     region: localRegion("re6028"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "ダム駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券1,000円",
+    feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -5974,9 +5986,9 @@ export const eastAdd6Spots: FishingSpot[] = [
     address: "〒355-0328 埼玉県比企郡小川町大塚",
     accessInfo: "東武東上線小川町駅から徒歩約15分。関越道嵐山小川ICから約10分。",
     region: localRegion("re6028"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
+    isFree: false, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券800円",
+    feeDetail: "遊漁券が必要（武蔵漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.2, reviewCount: 0,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },

@@ -1726,7 +1726,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     address: "〒369-1801 埼玉県秩父市荒川久那4041",
     accessInfo: "秩父鉄道浦山口駅から徒歩約20分。関越自動車道花園ICから約50分。",
     region: localRegion("r3161"), spotType: "river", difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "ダムサイトに無料駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）", hasParking: true, parkingDetail: "ダムサイトに無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.6, reviewCount: 105, googleRating: 4.1, googleReviewCount: 2067,
     catchableFish: [
@@ -1765,7 +1765,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     address: "〒357-0128 埼玉県飯能市赤沢166-1",
     accessInfo: "西武池袋線飯能駅からバスで約40分「名栗」下車。圏央道狭山日高ICから約40分。",
     region: localRegion("r3161"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 85,
     catchableFish: [

@@ -606,7 +606,7 @@ export const eastAdd11Spots: FishingSpot[] = [
     address: "〒349-1148 埼玉県加須市北川辺町",
     accessInfo: "東北道加須ICから車で約20分",
     region: localRegion("rs11108"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷広場に駐車可",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉県北部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷広場に駐車可",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -622,7 +622,7 @@ export const eastAdd11Spots: FishingSpot[] = [
     address: "〒355-0225 埼玉県比企郡嵐山町鎌形",
     accessInfo: "関越道嵐山小川ICから車で約10分",
     region: localRegion("rs11107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "嵐山渓谷駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（武蔵漁協の漁業権の区域）", hasParking: true, parkingDetail: "嵐山渓谷駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
@@ -638,7 +638,7 @@ export const eastAdd11Spots: FishingSpot[] = [
     address: "〒367-0211 埼玉県本庄市児玉町小平",
     accessInfo: "関越道本庄児玉ICから車で約20分",
     region: localRegion("rs11108"), spotType: "river", difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "湖畔駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（児玉郡市漁協の漁業権の区域）", hasParking: true, parkingDetail: "湖畔駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
@@ -671,7 +671,7 @@ export const eastAdd11Spots: FishingSpot[] = [
     address: "〒367-0313 埼玉県児玉郡神川町矢納",
     accessInfo: "関越道本庄児玉ICから車で約30分",
     region: localRegion("rs11108"), spotType: "river", difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "ダム下駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（神流川漁協の漁業権の区域）", hasParking: true, parkingDetail: "ダム下駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
@@ -688,7 +688,7 @@ export const eastAdd11Spots: FishingSpot[] = [
     address: "〒356-0011 埼玉県ふじみ野市福岡",
     accessInfo: "東武東上線ふじみ野駅から徒歩約15分",
     region: localRegion("rs11107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: false, parkingDetail: "近隣のコインパーキング利用",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: false, parkingDetail: "近隣のコインパーキング利用",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.3, reviewCount: 0,
     catchableFish: [
@@ -736,7 +736,7 @@ export const eastAdd11Spots: FishingSpot[] = [
     address: "〒355-0326 埼玉県比企郡小川町靭負",
     accessInfo: "東武東上線小川町駅から徒歩約15分",
     region: localRegion("rs11107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "仙元山見晴らしの丘公園駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（武蔵漁協の漁業権の区域）", hasParking: true, parkingDetail: "仙元山見晴らしの丘公園駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [

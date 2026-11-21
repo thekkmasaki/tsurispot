@@ -735,7 +735,7 @@ const saitamaSpots: FishingSpot[] = [
     address: "〒357-0021 埼玉県飯能市双柳 飯能河原付近",
     accessInfo: "西武池袋線飯能駅から徒歩約15分。圏央道入間ICから約15分。",
     region: localRegion("r4331"), spotType: "river", difficulty: "beginner",
-    isFree: false, feeDetail: "遊漁券が必要（アユ・渓流魚）", hasParking: true, parkingDetail: "飯能河原に有料駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）", hasParking: true, parkingDetail: "飯能河原に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 175, googleRating: 3.7, googleReviewCount: 140,
     catchableFish: [
@@ -756,7 +756,7 @@ const saitamaSpots: FishingSpot[] = [
     address: "〒357-0112 埼玉県飯能市下名栗 有間ダム",
     accessInfo: "西武池袋線飯能駅からバスで約40分。圏央道狭山日高ICから約40分。",
     region: localRegion("r4332"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "ダムサイトに無料駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）", hasParking: true, parkingDetail: "ダムサイトに無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 130, googleRating: 3.9, googleReviewCount: 100,
     catchableFish: [
@@ -847,7 +847,7 @@ const saitamaSpots: FishingSpot[] = [
     address: "〒353-0005 埼玉県志木市幸町 柳瀬川沿い",
     accessInfo: "東武東上線志木駅から徒歩約10分。関越自動車道所沢ICから約15分。",
     region: localRegion("r4334"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: false, parkingDetail: "駅周辺のコインパーキングを利用",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: false, parkingDetail: "駅周辺のコインパーキングを利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.3, reviewCount: 80, googleRating: 3.4, googleReviewCount: 60,
     catchableFish: [
@@ -868,7 +868,7 @@ const saitamaSpots: FishingSpot[] = [
     address: "〒350-1245 埼玉県日高市栗坪 巾着田付近",
     accessInfo: "西武池袋線高麗駅から徒歩約15分。圏央道狭山日高ICから約10分。",
     region: localRegion("r4331"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "巾着田に有料駐車場あり（500円）",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉西部漁協の漁業権の区域）", hasParking: true, parkingDetail: "巾着田に有料駐車場あり（500円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.6, reviewCount: 90, googleRating: 3.7, googleReviewCount: 70,
     catchableFish: [
@@ -888,7 +888,7 @@ const saitamaSpots: FishingSpot[] = [
     address: "〒368-0202 埼玉県秩父市上吉田 合角ダム",
     accessInfo: "秩父鉄道秩父駅から車で約30分。関越自動車道花園ICから約50分。",
     region: localRegion("r4333"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "ダムサイトに無料駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）", hasParking: true, parkingDetail: "ダムサイトに無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 65, googleRating: 3.6, googleReviewCount: 50,
     catchableFish: [

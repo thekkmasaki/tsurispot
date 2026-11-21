@@ -49,7 +49,7 @@ describe("内水面漁協データ", () => {
       expect(spot.isManagedPond, slug).toBeFalsy();
       const r = getSpotInlandFishery(slug);
       expect(r?.kind, `漁協が見つからない: ${slug} → ${link.coopId}`).toBe("coop");
-      if (r?.kind === "coop") expect(r.coop.prefecture, slug).toBe(spot.region.prefecture);
+      if (r?.kind === "coop") expect([r.coop.prefecture, ...(r.coop.alsoCovers ?? [])], slug).toContain(spot.region.prefecture);
     }
   });
 });

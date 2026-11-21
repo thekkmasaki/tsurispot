@@ -541,7 +541,7 @@ export const eastAdd10Spots: FishingSpot[] = [
     address: "〒369-1305 埼玉県秩父郡長瀞町長瀞",
     accessInfo: "秩父鉄道長瀞駅から徒歩約10分",
     region: localRegion("rs10108"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "有料駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）", hasParking: true, parkingDetail: "有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
@@ -654,7 +654,7 @@ export const eastAdd10Spots: FishingSpot[] = [
     address: "〒355-0137 埼玉県比企郡吉見町",
     accessInfo: "関越道東松山ICから車で約10分",
     region: localRegion("rs10109"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "公園駐車場あり（無料）",
+    isFree: false, feeDetail: "遊漁券が必要（武蔵漁協の漁業権の区域）", hasParking: true, parkingDetail: "公園駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [

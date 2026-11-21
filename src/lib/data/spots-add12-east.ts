@@ -621,7 +621,7 @@ export const eastAdd12Spots: FishingSpot[] = [
     address: "〒369-1203 埼玉県大里郡寄居町寄居",
     accessInfo: "JR寄居駅から徒歩約10分",
     region: localRegion("rs12108"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "玉淀河原駐車場あり（有料）",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉中央漁協の漁業権の区域）", hasParking: true, parkingDetail: "玉淀河原駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
@@ -654,7 +654,7 @@ export const eastAdd12Spots: FishingSpot[] = [
     address: "〒350-1306 埼玉県狭山市富士見",
     accessInfo: "西武新宿線狭山市駅から車で約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "intermediate",
-    isFree: true, hasParking: true, parkingDetail: "河原に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）", hasParking: true, parkingDetail: "河原に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
@@ -703,7 +703,7 @@ export const eastAdd12Spots: FishingSpot[] = [
     address: "〒355-0321 埼玉県比企郡小川町大字木部",
     accessInfo: "JR八高線小川町駅から車で約10分",
     region: localRegion("rs12108"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "橋付近に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（武蔵漁協の漁業権の区域）", hasParking: true, parkingDetail: "橋付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -719,7 +719,7 @@ export const eastAdd12Spots: FishingSpot[] = [
     address: "〒344-0061 埼玉県春日部市粕壁",
     accessInfo: "東武スカイツリーライン春日部駅から徒歩約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "周辺にコインパーキングあり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: true, parkingDetail: "周辺にコインパーキングあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.3, reviewCount: 0,
     catchableFish: [
@@ -735,7 +735,7 @@ export const eastAdd12Spots: FishingSpot[] = [
     address: "〒369-1503 埼玉県秩父市上吉田",
     accessInfo: "秩父鉄道秩父駅から車で約30分",
     region: localRegion("rs12108"), spotType: "river", difficulty: "beginner",
-    isFree: false, hasParking: true, parkingDetail: "ダムサイト駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）", hasParking: true, parkingDetail: "ダムサイト駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -751,7 +751,7 @@ export const eastAdd12Spots: FishingSpot[] = [
     address: "〒350-0062 埼玉県川越市元町",
     accessInfo: "西武新宿線本川越駅から徒歩約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "川越市内にコインパーキング多数",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: true, parkingDetail: "川越市内にコインパーキング多数",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.3, reviewCount: 0,
     catchableFish: [

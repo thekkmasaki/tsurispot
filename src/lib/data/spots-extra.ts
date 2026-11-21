@@ -851,7 +851,7 @@ export const extraSpots: FishingSpot[] = [
     address: "〒357-0031 埼玉県飯能市",
     accessInfo: "西武池袋線飯能駅から車で約30分。圏央道狭山日高ICから約40分。",
     region: localRegion("r76"), spotType: "river", difficulty: "intermediate",
-    isFree: false, feeDetail: "遊漁券 日券1,500円",
+    isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）",
     hasParking: true, parkingDetail: "河川沿い駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.9, reviewCount: 55, googleRating: 3.7, googleReviewCount: 35,
