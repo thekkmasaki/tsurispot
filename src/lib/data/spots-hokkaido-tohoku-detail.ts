@@ -999,8 +999,9 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "wakinosawa-gyoko",
     description:
       "下北半島の西側、陸奥湾に面した静かな漁港。メバル・ソイ・アイナメなどの根魚が豊富で、穴釣りやワームでの釣りが中心。ニホンザルの北限地としても知られる自然豊かなエリア。穏やかな湾内のため初心者でも安心。",
-    latitude: 41.1680,
-    longitude: 140.5030,
+    // 2026-11: 旧座標（41.1680, 140.5030）は脇野沢から約26km西の海上だったため、脇野沢本村の港に直した
+    latitude: 41.1448,
+    longitude: 140.8267,
     address: "〒039-5327 青森県むつ市脇野沢本村",
     accessInfo:
       "むつ市中心部から国道338号で約30分。漁港内に駐車スペースあり。",
