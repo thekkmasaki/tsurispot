@@ -44,6 +44,8 @@ export interface InlandFisheryCoop {
   /** 通称（例: "賀茂川漁協"） */
   shortName: string;
   prefecture: string;
+  /** 他県知事の免許だが、この県の水域にも区域がある場合（例: 群馬県の神流川漁協が埼玉県側の神流湖も管轄） */
+  alsoCovers?: string[];
   /** 公式サイト（無ければ県の漁協一覧など、連絡先が分かる一次情報） */
   officialUrl: string;
   /** 管轄区域（出典の表現を要約） */

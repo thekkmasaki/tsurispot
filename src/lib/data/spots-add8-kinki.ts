@@ -3329,7 +3329,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
     address: "〒620-0000 京都府福知山市猪崎",
     accessInfo: "JR福知山駅から車で約10分",
     region: localRegion("rk8031"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（由良川漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [

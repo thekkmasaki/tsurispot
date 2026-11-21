@@ -293,7 +293,7 @@ export const freshwaterSpotsAdd4: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:20", springSunset: "18:15", summerSunrise: "04:30", summerSunset: "19:00", autumnSunrise: "05:30", autumnSunset: "17:05", winterSunrise: "06:45", winterSunset: "16:30", tip: "ヘラブナは春の乗っ込み期が最も釣りやすい。底釣りが基本。" },
-    safetyLevel: "safe", safetyNotes: ["遊漁券必要（名栗漁協）", "ボート進入禁止"],
+    safetyLevel: "safe", safetyNotes: ["遊漁券必要（入間漁協）", "ボート進入禁止"],
   },
   {
     id: "fw-551", name: "丹沢湖", slug: "kanagawa-tanzawako-lake",

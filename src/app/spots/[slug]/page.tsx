@@ -313,7 +313,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // rules未設定スポット向け: 県レベルの公的釣りルールをフォールバック表示する
   const prefRule = spot.rules ? undefined : prefectureRule;
   // 河川・湖（管理釣り場を除く）は管轄漁協の遊漁規則を出す。未確認なら未確認と書く
-  const isInlandWater = (spot.spotType === "river" || spot.spotType === "lake") && !spot.isManagedPond;
+  // 釣り自体が禁止の場所（彩湖など）には漁協・遊漁券の案内を出さない
+  const isInlandWater = (spot.spotType === "river" || spot.spotType === "lake") && !spot.isManagedPond && spot.fishingBan?.scope !== "full";
   const inlandFishery = isInlandWater ? getSpotInlandFishery(spot.slug) : undefined;
   const initialCommunityPhotos = await getInitialCommunityPhotos(slug);
   // 特許パイプライン: 自動生成ダイアグラム優先、なければ手動データにフォールバック

@@ -724,7 +724,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     address: "〒369-1305 埼玉県秩父郡長瀞町長瀞",
     accessInfo: "秩父鉄道長瀞駅から徒歩約10分",
     region: localRegion("re8008"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "長瀞周辺に有料駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）", hasParking: true, parkingDetail: "長瀞周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0,
     catchableFish: [
@@ -759,7 +759,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     address: "〒351-0034 埼玉県朝霞市膝折町",
     accessInfo: "東武東上線朝霞台駅から徒歩約20分",
     region: localRegion("re8009"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "彩湖・道満グリーンパーク駐車場あり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: true, parkingDetail: "彩湖・道満グリーンパーク駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
@@ -844,7 +844,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     address: "〒369-1903 埼玉県秩父市中津川",
     accessInfo: "秩父鉄道三峰口駅から車で約30分",
     region: localRegion("re8008"), spotType: "river", difficulty: "advanced",
-    isFree: false, hasParking: true, parkingDetail: "中津峡周辺に駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）", hasParking: true, parkingDetail: "中津峡周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [

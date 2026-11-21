@@ -51,6 +51,8 @@ export function SpotInlandFisheryCard({ fishery }: { fishery: SpotInlandFishery 
   }
 
   const { coop, link } = fishery;
+  // 確認時点で現行の規則が前年以前の施行なら「2024年施行の規則」と書き、その年の料金に見えないようにする
+  const yearLabel = coop.seasonYear === coop.verifiedAt.slice(0, 4) ? `${coop.seasonYear}年` : `${coop.seasonYear}年施行の規則`;
   const sources = [...new Set([link.evidence.source, coop.jurisdiction.source, ...coop.fees.map((f) => f.source), ...coop.seasons.map((s) => s.source), ...coop.rules.map((r) => r.source)])];
 
   return (
@@ -73,7 +75,7 @@ export function SpotInlandFisheryCard({ fishery }: { fishery: SpotInlandFishery 
 
         {coop.fees.length > 0 && (
           <div>
-            <p className="mb-1.5 text-xs font-semibold text-muted-foreground">遊漁料（{coop.seasonYear}年）</p>
+            <p className="mb-1.5 text-xs font-semibold text-muted-foreground">遊漁料（{yearLabel}）</p>
             <ul className="grid gap-1 text-xs sm:grid-cols-2 sm:text-sm">
               {coop.fees.map((f, i) => (
                 <li key={i} className="flex justify-between gap-2 rounded bg-white/70 px-2 py-1">
@@ -91,7 +93,7 @@ export function SpotInlandFisheryCard({ fishery }: { fishery: SpotInlandFishery 
         {coop.seasons.length > 0 && (
           <div>
             <p className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-              <CalendarRange className="size-3.5" />釣りができる期間（{coop.seasonYear}年）
+              <CalendarRange className="size-3.5" />釣りができる期間（{yearLabel}）
             </p>
             <ul className="space-y-0.5 text-xs sm:text-sm">
               {coop.seasons.map((s, i) => (

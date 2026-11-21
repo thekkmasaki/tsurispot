@@ -697,7 +697,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     address: "〒349-1103 埼玉県久喜市栗橋中央",
     accessInfo: "JR栗橋駅から車で約5分。東北自動車道加須ICから約15分。",
     region: localRegion("re5111"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉県北部漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
@@ -716,7 +716,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     address: "〒343-0845 埼玉県越谷市南越谷",
     accessInfo: "JR南越谷駅から徒歩約15分。東京外環道草加ICから約15分。",
     region: localRegion("re5111"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: false, parkingDetail: "周辺のコインパーキングを利用",
+    isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: false, parkingDetail: "周辺のコインパーキングを利用",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
@@ -753,7 +753,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     region: localRegion("re5110"), spotType: "river", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "ダム下に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    feeDetail: "遊漁券: 日券600円",
+    feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）",
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },

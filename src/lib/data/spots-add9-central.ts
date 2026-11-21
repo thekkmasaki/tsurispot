@@ -1052,7 +1052,7 @@ export const centralAdd9Spots: FishingSpot[] = [
     address: "〒615-8036 京都府京都市西京区嵐山",
     accessInfo: "阪急嵐山線嵐山駅から徒歩約5分",
     region: localRegion("rs9053"), spotType: "river", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "嵐山周辺の有料駐車場を利用",
+    isFree: false, feeDetail: "遊漁券が必要（保津川漁協の漁業権の区域）", hasParking: true, parkingDetail: "嵐山周辺の有料駐車場を利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
