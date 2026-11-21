@@ -479,4 +479,5 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "houkigawa-shiobara": "shiobara-houkigawa6", // 箒川（塩原渓谷） → 塩原渓谷箒川：同じ区間（那須塩原市塩原）
   "kameyama-dam": "kimitsu-kameyamako-a13", // 亀山ダム → 君津・亀山湖：同じダム湖（同住所 川俣旧川俣）
   "kesennuma-oshima-kameyama-rocky-a13": "kesennuma-oshima-rocky-a10", // 気仙沼市大島亀山展望台下磯 → 気仙沼大島亀山磯：同じ亀山の下の磯
+  "arakawa-iwabuchi-suimon6": "arakawa-iwabuchi-tenaga", // 荒川岩淵水門 → 荒川・岩淵水門：同じ水門（1.1km）。所在地監査で県を埼玉県→東京都に直したら重複が表面化。勝者は水門の所在地（北区志茂5丁目）を持つ側
 };
