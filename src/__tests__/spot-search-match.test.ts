@@ -1,7 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { fishingSpots } from "@/lib/data/spots";
 import { toListSpot } from "@/lib/data/list-spot";
-import { spotSearchMatch } from "@/lib/search/spot-match";
+import { spotSearchMatch, normalizeForSearch } from "@/lib/search/spot-match";
+import { fishNameMatches } from "@/lib/search/fish-terms";
+import { buildFishSearchTerms } from "@/lib/search/fish-terms-build";
+import { fishSpecies } from "@/lib/data/fish";
+import generatedFishTerms from "@/lib/data/generated/fish-search-terms.json";
 
 /**
  * /spots のテキスト検索の回帰テスト（2026-08 UX監査）。
@@ -77,5 +81,76 @@ describe("spotSearchMatch: 魚名・釣法（2026-11 監査: タチウオが0件
       (s) => spotSearchMatch("イ", s) && !/[イい]/.test(s.name + s.region.areaName + (s.address ?? "")),
     );
     expect(viaFish).toEqual([]);
+  });
+});
+
+describe("spotSearchMatch: 魚名の完全一致と別名（2026-11 監査: アジでシマアジを拾う）", () => {
+  const norm = (s: string) => normalizeForSearch(s);
+  /** 名前・エリア・住所・釣法に語を含まない（＝魚名でしか当たり得ない）スポット */
+  const onlyViaFish = (s: (typeof listSpots)[number], word: string) =>
+    ![s.name, s.region.areaName, s.address ?? "", ...s.methods].some((t) => norm(t).includes(norm(word)));
+
+  it("「アジ」はシマアジ・ロウニンアジだけのスポットに当たらない", () => {
+    const others = listSpots.filter(
+      (s) =>
+        !s.fishNames.includes("アジ") &&
+        s.fishNames.some((f) => f === "シマアジ" || f === "ロウニンアジ") &&
+        onlyViaFish(s, "アジ"),
+    );
+    expect(others.length).toBeGreaterThan(0);
+    for (const s of others) expect(spotSearchMatch("アジ", s), s.name).toBe(false);
+  });
+
+  it("「アジ」はアジのいるスポットを全部拾う", () => {
+    const aji = listSpots.filter((s) => s.fishNames.includes("アジ"));
+    for (const s of aji) expect(spotSearchMatch("アジ", s), s.name).toBe(true);
+  });
+
+  it("「シマアジ」はシマアジのスポットを拾い、アジだけのスポットは拾わない", () => {
+    const shima = listSpots.filter((s) => s.fishNames.includes("シマアジ"));
+    for (const s of shima) expect(spotSearchMatch("シマアジ", s)).toBe(true);
+    const ajiOnly = listSpots.filter(
+      (s) => s.fishNames.includes("アジ") && !s.fishNames.includes("シマアジ") && onlyViaFish(s, "シマアジ"),
+    );
+    for (const s of ajiOnly.slice(0, 50)) expect(spotSearchMatch("シマアジ", s)).toBe(false);
+  });
+
+  it("別名「チヌ」「ガシラ」で正式名のスポットが出る", () => {
+    for (const [alias, name] of [["チヌ", "クロダイ"], ["ガシラ", "カサゴ"]] as const) {
+      const target = listSpots.filter((s) => s.fishNames.includes(name));
+      expect(target.length).toBeGreaterThan(0);
+      for (const s of target.slice(0, 50)) expect(spotSearchMatch(alias, s), `${alias}→${s.name}`).toBe(true);
+    }
+  });
+
+  it("別名を含む複数語（「明石 チヌ」）も効く", () => {
+    const hits = listSpots.filter((s) => spotSearchMatch("明石 チヌ", s));
+    expect(hits.length).toBeGreaterThan(0);
+    for (const s of hits) expect(s.fishNames).toContain("クロダイ");
+  });
+
+  it("総称（「イカ」）は従来どおり部分一致でアオリイカ等を拾う", () => {
+    const aori = listSpots.filter((s) => s.fishNames.includes("アオリイカ"));
+    for (const s of aori.slice(0, 50)) expect(spotSearchMatch("イカ", s)).toBe(true);
+  });
+
+  it("別名「マス」はニジマス等の部分一致も残す（別名データの地方名重複で取りこぼさない）", () => {
+    const niji = listSpots.filter((s) => s.fishNames.includes("ニジマス"));
+    for (const s of niji.slice(0, 50)) expect(spotSearchMatch("マス", s)).toBe(true);
+  });
+
+  it("検索用の魚名・別名JSONが魚種データと一致している（ずれたら scripts/gen-fish-search-terms.ts を実行）", () => {
+    expect(generatedFishTerms).toEqual(buildFishSearchTerms(fishSpecies));
+  });
+});
+
+describe("fishNameMatches", () => {
+  it("正式名は完全一致、別名は指す魚に一致", () => {
+    expect(fishNameMatches(normalizeForSearch("アジ"), "アジ")).toBe(true);
+    expect(fishNameMatches(normalizeForSearch("アジ"), "シマアジ")).toBe(false);
+    expect(fishNameMatches(normalizeForSearch("あじ"), "アジ")).toBe(true);
+    expect(fishNameMatches(normalizeForSearch("チヌ"), "クロダイ")).toBe(true);
+    expect(fishNameMatches(normalizeForSearch("シーバス"), "シーバス")).toBe(true);
+    expect(fishNameMatches(normalizeForSearch("イカ"), "アオリイカ")).toBe(true);
   });
 });
