@@ -1078,9 +1078,7 @@ export const managedTohokuSouthSpots: FishingSpot[] = [
     isManagedPond: true,
     facilityKind: "managed",
     description:
-      "塙町片貝の山あいにある、キャンプ場を併設したルアー・フライ専用の釣り池。池は長辺80m・幅20〜36m・水深約2mで、原則として釣った魚はすべてリリースする。" +
-      "シングルバーブレスの徹底など独自の決まりがある。水温が上がる時期は釣りだけ休みになり、臨時休業はカレンダーで知らせている。" +
-      "料金や営業時間は公式で読み取れなかったので、事前に確認したい。",
+      "塙町片貝の山あいにある、キャンプ場を併設したルアー・フライ専用の釣り池。池は長辺80m・幅20〜36m・水深約2mで、原則として釣った魚はすべてリリースする。シングルバーブレスの徹底など独自の決まりがある。料金は2024年9月に改定され、一般は1日券5,000円、6時間券4,000円、3時間券3,000円で、中学生は各1,000円安く、小学生は1,000円。明るくなってから暗くなるまで釣りができ、7月から9月中旬は高水温のため釣りを休む。",
     latitude: 36.874008,
     longitude: 140.539612,
     address: "福島県東白川郡塙町大字片貝字長久木471",
@@ -1126,10 +1124,13 @@ export const managedTohokuSouthSpots: FishingSpot[] = [
       organizationName: "Fishing Bums WaDoNa",
       contactPhone: "0247-57-8742",
       contactUrl: "https://www.wadonanikko.com",
+      openingHours: "明るくなってから暗くなるまで",
+      closedDays: "7月〜9月中旬は高水温のため釣りを休止。臨時休業は公式カレンダーで告知",
+      fishingFee: "一般 1日券5,000円・6時間券4,000円・3時間券3,000円／中学生 1日券4,000円・6時間券3,000円・3時間券2,000円／小学生1,000円(2024年9月改定)",
+      verifiedAt: "2026-11-21",
+      sourceUrl: "https://www.wadonanikko.com/about",
       notes: [
-        `${D}(公式サイト・公式ブログ 2026-11-08)`,
-        "営業期間は未確認(高水温期は釣りのみクローズ、臨時休業はカレンダーで告知)",
-        "料金・営業時間・定休日は公式ページで読み取れず未確認",
+        "確認日 2026-11-21(公式サイトのAboutページ。料金表は画像)",
         "魚種は公式に記載なし(ニジマスは一覧サイトの記述)",
         "駐車場・トイレの有無は未確認(キャンプ場併設)",
       ],
@@ -1540,9 +1541,7 @@ export const managedTohokuSouthSpots: FishingSpot[] = [
     isManagedPond: true,
     facilityKind: "managed",
     description:
-      "郡山市熱海町石筵にある、ニジマスをキロ単位で釣るタイプの釣り堀。釣った魚は塩焼きや唐揚げ、フライにしてもらえ、" +
-      "ジンギスカンなどの食事も出す。公式サイトは無いが、2026年も訪問した人の動画や投稿が見られる。料金や営業日は確かめられていないので、" +
-      "電話で確認してから出かけたい。",
+      "郡山市熱海町石筵にある、ニジマスを重さで買い取るタイプの釣り堀。釣った魚は塩焼きや唐揚げ、フライにしてもらえ、ジンギスカンなどの食事も出す。磐梯熱海温泉観光協会の案内では営業は10時から17時までで、冬は15時に終わる。休みは不定休とされ、水曜休みとする情報もあるので、出かける前に電話で確かめたい。買い取りの単価は確かめられていない。",
     latitude: 37.570606,
     longitude: 140.260117,
     address: "福島県郡山市熱海町石筵腰切8-4",
@@ -1573,11 +1572,13 @@ export const managedTohokuSouthSpots: FishingSpot[] = [
     managementInfo: {
       organizationName: "橋本つり堀ガーデン",
       contactPhone: "024-984-2012",
+      openingHours: "10:00〜17:00(冬期は15時まで)",
+      closedDays: "不定休(水曜休みとする情報もある。要電話確認)",
+      verifiedAt: "2026-11-21",
+      sourceUrl: "https://www.bandaiatami.or.jp/spot/hashimoto_tsuribori/",
       notes: [
-        `${D}(公式なし。TikTok・Instagram の訪問投稿、Yahoo!マップのメニュー 2026-04-17)`,
-        "営業期間は未確認",
-        "料金・営業時間・定休日は未確認",
-        "電話番号は地図・一覧サイトの表記",
+        "確認日 2026-11-21(磐梯熱海温泉観光協会 2023-05-23 更新・施設のグーペ)",
+        "魚代は重量による買い取り制。単価は未確認",
         "駐車場・トイレの有無は未確認",
       ],
     },
@@ -1650,9 +1651,7 @@ export const managedTohokuSouthSpots: FishingSpot[] = [
     isManagedPond: true,
     facilityKind: "managed",
     description:
-      "猪苗代町蚕養にある養魚場のニジマス釣り堀。猪苗代観光協会ではニジマスが釣り放題と紹介されており、釣った魚は持ち帰るのが基本で、" +
-      "その場で食べることもできる。2026年夏にも訪問動画が公開されている。公式サイトは中身が読めず、料金や営業日は確かめられていない。" +
-      "近くのペンションの案内では土日に勧められている。",
+      "猪苗代町蚕養にある養魚場のニジマス釣り堀。公式サイトによると1人1時間1,800円の釣り放題で、釣ったニジマスは追加料金なしで持ち帰れる。貸し竿は無料、エサのぶどう虫は650円で、塩焼きや唐揚げにしてもらうこともできる。営業は土日・祝日とお盆期間で、受付は10時から15時まで。2026年の営業は10月12日で終わっており、来季の開始日は公式で確かめたい。",
     latitude: 37.602009,
     longitude: 140.198227,
     address: "福島県耶麻郡猪苗代町蚕養三方平北通乙2964-1",
@@ -1665,7 +1664,7 @@ export const managedTohokuSouthSpots: FishingSpot[] = [
     hasToilet: false,
     hasConvenienceStore: false,
     hasFishingShop: false,
-    hasRentalRod: false,
+    hasRentalRod: true,
     mainImageUrl: "",
     images: [],
     rating: 3.5,
@@ -1685,11 +1684,15 @@ export const managedTohokuSouthSpots: FishingSpot[] = [
       organizationName: "小田養魚場",
       contactPhone: "0242-64-2853",
       contactUrl: "https://tsuribori.bandaisan.jp/",
+      openingHours: "受付 10:00〜15:00(天候などで変更・休業あり)",
+      closedDays: "営業は土日・祝日とお盆期間。2026年は10月12日で終了(来季の開始日は未確認)",
+      fishingFee: "釣り放題 1人1時間1,800円(釣ったニジマスは追加料金なしで持ち帰り可)。エサのぶどう虫650円、貸し竿無料、塩焼き・唐揚げは1匹100円",
+      verifiedAt: "2026-11-21",
+      sourceUrl: "https://tsuribori.bandaisan.jp/ryoukin.html",
       notes: [
-        `${D}(猪苗代観光協会、ペンション見鳥 2026-04-01、訪問動画 2026-08-08)`,
-        "営業期間は未確認(土日祝営業と読める記述がペンションのページにある)",
-        "料金・営業時間は未確認(公式サイトは本文が空)",
-        "電話番号は地図の表記",
+        "確認日 2026-11-21(公式サイトの料金ページ 2026-09-29 更新)",
+        "エサはぶどう虫のみ。練り餌・川虫・毛針・ルアーは不可、竿は4.5mまで(公式)",
+        "公式の主な電話は 080-1805-6400",
         "駐車場・トイレの有無は未確認",
       ],
     },
