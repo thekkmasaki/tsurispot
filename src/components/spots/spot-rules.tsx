@@ -338,3 +338,30 @@ export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail, is
     </Card>
   );
 }
+
+/**
+ * 一部の区域・時間帯・釣法だけが禁止されている条件（2026-11 監査）。
+ * rules（SpotRules）の有無に関わらず、ルール欄の先頭に出す。
+ * 禁止区域・禁止時間帯で釣りをしてしまわないよう、条件を一覧で明記する。
+ */
+export function SpotAreaConditions({ conditions, spotName }: { conditions: string[]; spotName: string }) {
+  if (conditions.length === 0) return null;
+  return (
+    <Card className="border-red-200 py-4 dark:border-red-900">
+      <CardContent className="px-4">
+        <div className="mb-2 flex items-center gap-2">
+          <AlertTriangle className="size-5 shrink-0 text-red-600" />
+          <h3 className="text-base font-bold sm:text-lg">{spotName}で釣りが禁止・制限される区域と条件</h3>
+        </div>
+        <p className="mb-2 text-xs text-muted-foreground">
+          この釣り場は全面禁止ではありませんが、一部の区域・時間帯・釣り方で釣りが禁止されています。
+        </p>
+        <ul className="list-disc space-y-1.5 pl-5 text-sm">
+          {conditions.map((c, i) => (
+            <li key={i}>{c}</li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
+  );
+}

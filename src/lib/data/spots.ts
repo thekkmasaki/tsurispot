@@ -10,6 +10,7 @@ import { spotTipsAdd } from "./spot-tips-add";
 import { spotBanOverrides } from "./spot-ban-overrides";
 import { spotMergeMap } from "./spot-merge-map";
 import { spotFacilityOverrides } from "./spot-facility-overrides";
+import { spotAreaConditions } from "./spot-area-conditions";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
 export const dedupRedirects = new Map<string, string>();
@@ -279,9 +280,24 @@ function applyFacilityOverrides(spots: FishingSpot[]): FishingSpot[] {
   });
 }
 
+/**
+ * 一部区域・時間帯・釣法のみ禁止の「禁止の条件」（spot-area-conditions.ts）を付与する。
+ *
+ * 2026-11 監査: 部分禁止・条件付きのスポットで、その条件がルール欄に出ていなかった。
+ * rules が無いスポットにも付けられるよう、rules.restrictedAreas ではなく別フィールドに持つ。
+ */
+function applyAreaConditions(spots: FishingSpot[]): FishingSpot[] {
+  return spots.map((spot) => {
+    const conditions = spotAreaConditions[spot.slug];
+    return conditions && conditions.length > 0 ? { ...spot, restrictedAreaConditions: conditions } : spot;
+  });
+}
+
 export const fishingSpots: FishingSpot[] = applyLocalTips(
   enrichDescriptions(
-    applyFacilityOverrides(applyBatchRules(applyBanOverrides(applyRegionOverrides(deduplicateSpots(allRawSpots)))))
+    applyAreaConditions(
+      applyFacilityOverrides(applyBatchRules(applyBanOverrides(applyRegionOverrides(deduplicateSpots(allRawSpots)))))
+    )
   )
 );
 
