@@ -130,7 +130,6 @@ export const additionalSpotsOkinawa: FishingSpot[] = [
     rating: 4.0,
     reviewCount: 45, googleRating: 4.3, googleReviewCount: 639,
     catchableFish: [
-      { fish: fish("kisu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
     ],
     bestTimes: [

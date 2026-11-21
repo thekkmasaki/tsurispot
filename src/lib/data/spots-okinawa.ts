@@ -248,7 +248,6 @@ export const okinawaSpots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.7, reviewCount: 76, googleRating: 3.7, googleReviewCount: 15,
     catchableFish: [
-      { fish: fish("kisu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "チョイ投げ" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -362,7 +361,6 @@ export const okinawaSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/onna-moon-beach.webp", imageAttribution: "Photo: Neil Dalphin / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 65, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
-      { fish: fish("kisu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "早朝", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "チョイ投げ" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
@@ -677,7 +675,6 @@ export const okinawaSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/nishihara-kirakira-beach.webp", imageAttribution: "Photo: Kugel~commonswiki / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.5, reviewCount: 64, googleRating: 4.1, googleReviewCount: 1005,
     catchableFish: [
-      { fish: fish("kisu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "チョイ投げ" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
     ],

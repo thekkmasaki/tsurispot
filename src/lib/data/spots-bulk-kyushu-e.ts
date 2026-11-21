@@ -1204,7 +1204,6 @@ export const bulkKyushuESpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("taman"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "夜", method: "打ち込み釣り", source: "うおそく 沖縄ミーバイ／泡瀬漁港" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ぶっこみ・ウキフカセ", source: "gonchan-okinawa 泡瀬漁港" },
-      { fish: fish("kisu"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ぶっこみ・投げ釣り", source: "gonchan-okinawa 泡瀬漁港" },
       { fish: fish("rounin-aji"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ", source: "gonchan-okinawa 泡瀬漁港" },
       { fish: fish("hata"), monthStart: 11, monthEnd: 1, peakSeason: false, catchDifficulty: "hard", recommendedTime: "夜", method: "打ち込み・ロックフィッシュ", source: "うおそく 沖縄ミーバイ" },
       { fish: fish("aoriika"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング", source: "gonchan-okinawa 泡瀬漁港" },

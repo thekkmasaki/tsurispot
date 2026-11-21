@@ -3465,7 +3465,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("kisu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
     ],
