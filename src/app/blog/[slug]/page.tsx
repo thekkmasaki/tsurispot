@@ -26,7 +26,6 @@ import {
   Search,
 } from "lucide-react";
 import { InArticleAd, StickySidebarAd, MultiplexAd } from "@/components/ads/ad-unit";
-import { AD_MEDIA_DESKTOP } from "@/lib/ads-config";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recommend";
 import { MAIN_WEEKLY_AREA_SLUGS, matchWeeklyAreaForPost, weeklyAreaHubPath } from "@/lib/weekly-report-areas";
@@ -605,7 +604,7 @@ export default async function BlogPostPage({
       </div>
       </div>{/* min-w-0 閉じ */}
       <aside className="hidden lg:block mt-8">
-        <StickySidebarAd media={AD_MEDIA_DESKTOP} />
+        <StickySidebarAd />
       </aside>
       </div>{/* lg:grid 閉じ */}
     </div>

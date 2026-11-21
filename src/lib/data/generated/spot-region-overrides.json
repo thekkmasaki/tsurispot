@@ -218,15 +218,6 @@
   },
   "note": "保田漁港: 東京都 湾奥・江東 → 千葉県 南房総(10km・人手確認)"
  },
- "ichihara-umizuri6": {
-  "region": {
-   "id": "rs13110",
-   "prefecture": "千葉県",
-   "areaName": "市原・姉崎",
-   "slug": "chiba-ichihara-anesaki-s13"
-  },
-  "note": "市原海釣り施設跡地: 東京都 大田・城南島 → 千葉県 市原・姉崎(3km・座標と住所が一致)"
- },
  "iioka-gyoko6": {
   "region": {
    "id": "r4",

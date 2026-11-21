@@ -38,7 +38,6 @@ import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { InArticleAd, DisplayAd, StickySidebarAd } from "@/components/ads/ad-unit";
-import { AD_MEDIA_DESKTOP } from "@/lib/ads-config";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { ShoppingBag, ArrowRight, Gem, Crown } from "lucide-react";
 import { RecommendProductCard } from "@/components/affiliate/recommend-product-card";
@@ -1530,7 +1529,7 @@ export default async function PrefecturePage({ params }: PageProps) {
       <InArticleAd className="my-8" />
 
       <div className="hidden lg:block mt-8">
-        <StickySidebarAd media={AD_MEDIA_DESKTOP} />
+        <StickySidebarAd />
       </div>
 
       {/* FAQ Section */}

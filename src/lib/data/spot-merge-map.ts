@@ -438,5 +438,11 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "awaji-tsubasa-kou-k8": "tsubasa-port", // 淡路島・翼港 → 翼港：淡路交流の翼港（夢舞台）。統合元は住所が岩屋で約3kmずれて登録
   "awaji-fukura-kou-k8": "fukura-kou", // 淡路島・福良港 → 福良港：同一港（南あわじ市福良）。福良港護岸は別扱い
   "amagasaki-tsuuri-park-k8": "amagasaki-fishing-park", // 尼崎魚つり公園 → 尼崎市立魚つり公園：同一施設（尼崎市平左衛門町）。統合元は座標が約2kmずれて登録
+  // 2026-11 一斉監査: 公式サイトのある釣り施設が別名で2ページあった（施設情報は spot-facility-overrides.ts で公式値に更新）
+  "nanko-fishing-park": "osaka-nanko-fishing-park", // 南港魚つり園護岸 → 大阪南港魚つり園：同じ施設（同住所 住之江区南港南6丁目9-3）。統合元は「無料の管理釣り場」「施設利用料が必要」と矛盾
+  "shinchi-tsuri-kouen": "shinchi-umizuri-park-a11", // 新地町釣り公園 → 新地町海釣り公園：同じ施設（新地町の公式の釣り施設は1つ）。統合元は「無料」の記載だった
+  "atami-ko-umitsuri-park": "atami-fishing-pier", // 熱海港海釣り公園 → 熱海港海釣り施設：同じ施設（同住所 和田浜南町1694-32）。統合元の料金（大人1,000円）は公式（500円）と違った
+  "hekinan-fishing-spot": "hekinan-fishing-park", // 碧南海つり公園跡地 → 碧南海釣り広場：同住所（港南町2丁目8-2）。別の閉鎖施設は公式・準公式に見当たらない
+  "ichihara-umizuri6": "ichihara-sea-fishing", // 市原海釣り施設跡地 → 市原海釣り施設：施設は営業中で「跡地」ではない（公式サイトで確認）
   "hekinan-umitsuri-park": "hekinan-fishing-park", // 碧南海釣り公園 → 碧南海釣り広場：「公園」は同じ無料の釣り広場の別称（碧南市公式）。有料（大人500円）・竿レンタルありの記載は実在しない施設の情報だった
 };

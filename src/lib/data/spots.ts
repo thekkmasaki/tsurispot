@@ -1,4 +1,4 @@
-import { FishingSpot, Region } from "@/types";
+import { FishingSpot, Region, SpotRules } from "@/types";
 import spotRegionOverrides from "./generated/spot-region-overrides.json";
 import { allRawSpots } from "./spots-registry";
 import { spotRulesBatch } from "./spots-rules-batch";
@@ -9,6 +9,7 @@ import { isSameSpotName } from "./spot-name-normalize";
 import { spotTipsAdd } from "./spot-tips-add";
 import { spotBanOverrides } from "./spot-ban-overrides";
 import { spotMergeMap } from "./spot-merge-map";
+import { spotFacilityOverrides } from "./spot-facility-overrides";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
 export const dedupRedirects = new Map<string, string>();
@@ -252,8 +253,36 @@ function applyBanOverrides(spots: FishingSpot[]): FishingSpot[] {
   });
 }
 
+/**
+ * 公式サイトのある釣り施設の料金・駐車場・営業時間などを、公式の値で上書きする（spot-facility-overrides.ts）。
+ *
+ * 2026-11 監査: 海づり公園などの掲載情報が公式と食い違っていた（料金が古い・別施設のコピー・
+ * 有料なのに「無料」など）。rules は一括ルール（applyBatchRules）の後に部分的に重ねる。
+ * 既存の rules が無いスポットには、上書き側が必須項目をすべて書いているときだけ付ける。
+ */
+function applyFacilityOverrides(spots: FishingSpot[]): FishingSpot[] {
+  return spots.map((spot) => {
+    const o = spotFacilityOverrides[spot.slug];
+    if (!o) return spot;
+    const { rules: ruleOverride, ...fields } = o;
+    let rules = spot.rules;
+    if (ruleOverride) {
+      const merged = { ...(spot.rules ?? {}), ...ruleOverride };
+      const complete =
+        typeof merged.castingAllowed === "boolean" &&
+        typeof merged.lureAllowed === "boolean" &&
+        typeof merged.chumAllowed === "boolean" &&
+        typeof merged.fishingLicenseRequired === "boolean";
+      if (complete) rules = merged as SpotRules;
+    }
+    return { ...spot, ...fields, rules };
+  });
+}
+
 export const fishingSpots: FishingSpot[] = applyLocalTips(
-  enrichDescriptions(applyBatchRules(applyBanOverrides(applyRegionOverrides(deduplicateSpots(allRawSpots)))))
+  enrichDescriptions(
+    applyFacilityOverrides(applyBatchRules(applyBanOverrides(applyRegionOverrides(deduplicateSpots(allRawSpots)))))
+  )
 );
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
