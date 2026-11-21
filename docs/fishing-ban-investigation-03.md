@@ -196,6 +196,35 @@
 | kesennuma-oshima-rocky-a10 / -kameyama-rocky-a13 | 同一地点の重複の可能性 |
 | shimonoseki-port | 住所・座標（彦島本村町）が、本港（大和町）とも南風泊（彦島西山町）とも一致しない |
 
+## 元データCSV（prohibition_classification_all.csv）との照合
+
+CSVの総数は5,611件。内訳は ok_checked 5,364件、partial 97件、prohibited 90件、unconfirmed 35件、page_note 24件。
+
+### 1. 対象件数の一致
+CSVで `category=unconfirmed` の35件は、本調査の対象35件と slug が完全に一致する（過不足なし）。
+
+### 2. CSVの根拠文の誤った割り当て
+CSVは地名のキーワードで根拠文をまとめて付けているとみられ、別の場所のスポットに同じ根拠文が付いている。
+- **「銚子漁港（外港・黒生・夫婦ヶ鼻）」の根拠文が付いた8件のうち5件は、銚子漁港ではない**
+  - choshigawa-river-mie: 三重県紀北町の銚子川
+  - tonegawa-lower-unagi / tonegawa-lower-chiba: 香取市佐原付近の利根川
+  - choshi-marina-teibo / choshi-marina6: 名洗港（港湾）
+  - 銚子漁港の規制とは無関係なので、別々に分類した。
+- **「気仙沼漁港の施設エリア」の根拠文が付いた12件のうち、気仙沼漁港の区域は3件だけ**
+  - 気仙沼漁港の区域: kesennuma-ko、kesennuma-oura-port-a11、kesennuma-shishiori-port-a13
+  - 残り9件: 大島の浦の浜漁港・磯・浜、岩井崎、小鯖漁港、大谷漁港など
+
+### 3. 同じ場所なのに分類が食い違う別スポット（unconfirmed 以外）
+本調査の結果を当てはめると、次のスポットも再分類の対象になりうる（今回は調査範囲外のため未変更）。
+
+| slug | 名称 | CSVの分類 | 食い違い |
+|---|---|---|---|
+| katsuura-kou-e8 | 勝浦港（千葉県勝浦市浜勝浦、35.143, 140.319） | ok_checked | katsuura-port と同じ勝浦漁港。#1・#2 と同様に「確認できず」とするのが整合的 |
+| choshi-port | 銚子漁港（銚子市竹町） | page_note | #17・#21・#24 と同じ漁港 |
+| kagoshima-shinko | 鹿児島新港 | ok_checked | 県の「港湾の岸壁は原則関係者以外立入禁止」は新港区（奄美・沖縄フェリーターミナル）についての告知の中の記述。#3 と同様に「部分禁止・条件付き」とするのが整合的 |
+| hikoshima-hayatomari-w6 | 彦島・南風泊港 | ok_checked | 下関漁港の分港。#25 と同じく「確認できず」とするのが整合的 |
+| tonegawa-sawara | 利根川下流（佐原） | ok_checked | #20・#22 と同じ区間で、遊漁券が必要（禁止ではない） |
+
 ## 未確認事項と再調査の方法
 
 - **漁協サイト**（勝浦漁協、銚子市漁協、塩原漁協、鬼怒川漁協）、**www.water.go.jp**、**奈良県サイト**、**みちのく公園**は今回本文を取得できなかった。
