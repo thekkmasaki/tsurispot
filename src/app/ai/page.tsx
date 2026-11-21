@@ -209,14 +209,18 @@ export default function AiConnectorPage() {
         </Section>
 
         <Section id="chatgpt" icon={Plug} title="ChatGPT での設定方法">
+          <p>
+            <strong>PC のブラウザ（chatgpt.com）で設定します。スマホアプリからは追加できません。</strong>
+          </p>
           <ol className="list-decimal space-y-2 pl-5">
-            <li>ChatGPT の「設定」を開き、「アプリとコネクタ」を選びます。</li>
-            <li>「詳細設定」で<strong>開発者モード</strong>をオンにします。</li>
-            <li>「作成」を押し、名前に <strong>ツリスポ</strong>、MCP サーバーの URL に <code className="rounded bg-muted px-1 py-0.5 text-xs">{MCP_ENDPOINT}</code> を入力し、認証は「なし」を選んで作成します。</li>
-            <li>新しいチャットでツリスポのコネクタを選択してから質問します。</li>
+            <li>PC のブラウザで ChatGPT を開き、左のメニューの「プラグイン」（<code className="rounded bg-muted px-1 py-0.5 text-xs">chatgpt.com/plugins</code>）を選びます。</li>
+            <li>右上の「追加」から<strong>「カスタム MCP サーバーを追加」</strong>を選びます。</li>
+            <li>名前に <strong>ツリスポ</strong>、サーバー URL に <code className="rounded bg-muted px-1 py-0.5 text-xs">{MCP_ENDPOINT}</code> を入力し、認証を<strong>「認証なし」</strong>に変えます（初期値は OAuth です）。</li>
+            <li>「理解したうえで続けます」にチェックを入れて「プラグインとして作成」を押し、続けて表示される「ツリスポに接続」を押します。</li>
+            <li>チャットの入力欄で <strong>@ツリスポ</strong> と入力してツリスポを選び、釣りについて質問します。</li>
           </ol>
           <p className="text-xs text-muted-foreground">
-            ※ 開発者モードは有料プラン（Plus・Pro・Business など）向けの機能で、無料プランでは使えません。メニューの名称や位置は ChatGPT の更新で変わることがあります。Business／Enterprise では、管理者が開発者モードを許可する必要があることがあります。
+            ※ 2026年11月に無料プランでこの手順で追加できることを確認しています。以前必要だった「開発者モード」をオンにする操作は不要です。ただし、利用できるプランやメニューの名称・位置は ChatGPT の更新で変わることがあり、プランによっては「カスタム MCP サーバーを追加」が表示されないことがあります。Business／Enterprise／Edu では、管理者が追加・公開する必要があることがあります。
           </p>
         </Section>
 
