@@ -873,7 +873,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       confirmedAt: "2026-11-21",
     },
     description: "戸田市と和光市にまたがる荒川第一調節池「彩湖」。管理者の国土交通省 荒川上流河川事務所は、彩湖での魚釣りを禁止しています。釣りをする場合は、漁協の遊漁券を買ったうえで周辺の荒川本流など釣りができる場所を利用してください。",
-    latitude: 35.80280, longitude: 139.621200,
+    latitude: 35.81635, longitude: 139.63256,
     address: "〒335-0000 埼玉県戸田市",
     accessInfo: "JR埼京線武蔵浦和駅からバスで約15分。外環自動車道和光ICから約10分。",
     region: lr("r876"), spotType: "river", difficulty: "beginner",
@@ -892,7 +892,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s834", name: "入間川（豊水橋付近）", slug: "iruma-river-hosui-bridge",
     description: "埼玉県を流れる入間川の中流域、豊水橋付近は川釣りの好ポイント。スモールマウスバスの聖地として関東のバサーに知られるほか、オイカワ、アユ、コイ、ナマズなども生息。川幅が広く開放的な雰囲気で、都心から約1時間でアクセスできる手軽さが魅力。",
-    latitude: 35.8350, longitude: 139.4620,
+    latitude: 35.85128, longitude: 139.38311,
     address: "〒350-0846 埼玉県川越市中老袋",
     accessInfo: "西武新宿線狭山市駅から徒歩約15分。圏央道狭山日高ICから約10分。",
     region: lr("r876"), spotType: "river", difficulty: "intermediate",

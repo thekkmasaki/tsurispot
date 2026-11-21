@@ -860,7 +860,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-358", name: "荒川（秋ヶ瀬橋付近）", slug: "arakawa-akigase-tenaga",
     description: "埼玉県さいたま市の秋ヶ瀬橋付近はテナガエビ釣りの好ポイント。秋ヶ瀬公園に隣接し、護岸やテトラ帯にテナガエビが多数生息。都心部より上流のためプレッシャーが低く、良型が多い。ヘラブナやコイの名所でもある。",
-    latitude: 35.8412, longitude: 139.6183, address: "〒338-0824 埼玉県さいたま市桜区上大久保1099",
+    latitude: 35.83564, longitude: 139.60695, address: "〒338-0824 埼玉県さいたま市桜区上大久保1099",
     accessInfo: "JR武蔵野線西浦和駅から徒歩約20分。秋ヶ瀬公園内。",
     region: lr("r2332"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）",

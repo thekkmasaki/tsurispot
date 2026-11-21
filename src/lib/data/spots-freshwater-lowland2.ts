@@ -121,7 +121,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-364", name: "見沼代用水（さいたま市）", slug: "minumadai-tanago",
     description: "さいたま市を流れる見沼代用水はタナゴ釣りの好フィールド。江戸時代に開削された歴史ある用水路で、東縁・西縁の両水路にタナゴやマブナが生息。都市部にありながら豊かな水辺環境が残る。見沼田んぼの中を流れる区間は特に生き物が豊富。",
-    latitude: 35.8912, longitude: 139.6683, address: "〒336-0923 埼玉県さいたま市緑区大字大間木地先",
+    latitude: 35.86532, longitude: 139.70762, address: "〒336-0923 埼玉県さいたま市緑区大字大間木地先",
     accessInfo: "JR武蔵野線東浦和駅から徒歩約10分。",
     region: lr("r2338"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -196,7 +196,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-367", name: "びん沼川（ライギョ釣り場）", slug: "binnumagawa-raigyo",
     description: "埼玉県富士見市のびん沼川は関東屈指の雷魚（ライギョ）ポイント。ハスやヒシモなどの水草が茂るエリアに大型のライギョが潜む。フロッグゲームの聖地的存在で、80cmオーバーの実績も。ヘラブナやコイも多く、多魚種が楽しめるフィールド。",
-    latitude: 35.8552, longitude: 139.5933, address: "〒350-0012 埼玉県さいたま市西区飯田新田334",
+    latitude: 35.88740, longitude: 139.55562, address: "〒350-0012 埼玉県さいたま市西区飯田新田334",
     accessInfo: "東武東上線みずほ台駅からバスで約15分。関越自動車道所沢ICから約20分。",
     region: lr("r2341"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）",
