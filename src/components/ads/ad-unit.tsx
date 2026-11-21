@@ -139,6 +139,8 @@ export function AdUnit({
       // 最小の明示スロットは SideRail の 160px なので 120px 未満では push せず
       // ResizeObserver で幅が確保されるまで待つ。
       if (el.offsetWidth >= MIN_AD_WIDTH) {
+        // push の直前に自分の <ins> へ adsbygoogle クラスを付ける（下の JSX のコメント参照）。
+        el.querySelector("ins")?.classList.add("adsbygoogle");
         try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           pushed.current = true;
@@ -240,7 +242,8 @@ export function AdUnit({
     if (!ADSENSE_ID || suppressed || !houseFallback) return;
     const el = containerRef.current;
     if (!el) return;
-    const ins = el.querySelector("ins.adsbygoogle");
+    // クラスは push 直前に付くので、ここではタグ名だけで引く
+    const ins = el.querySelector("ins");
     if (!ins) return;
 
     let disposed = false;
@@ -329,8 +332,15 @@ export function AdUnit({
           - unfilled: ビューポート内では公式挙動で枠の空白が温存されるため、
             globals.css の ins.adsbygoogle[data-ad-status="unfilled"] { display:none } で折りたたむ
           実広告が遅れて fill された場合は fallback エンジンが HouseAd を撤去する（併存しない）。 */}
+      {/* className="adsbygoogle" は付けずに出力し、tryPush が push の直前に付ける。
+          adsbygoogle.push({}) は「DOM 順で最初の未処理 ins.adsbygoogle」を処理するため、
+          サーバー出力の時点でクラスがあると、先にハイドレーションした枠（レイアウト内の
+          PreFooterAd 等）の push が、まだハイドレーションされていない本文の <ins> に広告を入れる。
+          その <ins> は直後に React が作り直して捨てるので広告リクエストが1回無駄になり、
+          push が1回足りなくなって DOM 順で最後の枠（PC は pre_footer、スマホは mobile_sticky）が
+          未処理のまま残る（2026-11 本番で push を記録して確認）。
+          クラスを push 直前に付ければ、push が当たるのはマウント済みの枠の <ins> だけになる。 */}
       <ins
-        className="adsbygoogle"
         style={style || { display: "block", width: "100%" }}
         data-ad-client={ADSENSE_ID}
         data-ad-slot={slot}

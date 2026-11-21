@@ -63,6 +63,7 @@ test.describe("/spots ページ送り", () => {
     // ハイドレーション前の生 HTML に本文と広告が含まれていること
     expect(html).toMatch(/<h1/);
     expect(html.match(/href="\/spots\//g)?.length ?? 0).toBeGreaterThan(10);
-    expect(html.match(/class="adsbygoogle/g)?.length ?? 0).toBeGreaterThan(1);
+    // adsbygoogle クラスは push 直前にクライアントで付くため、生 HTML では data-ad-slot で数える
+    expect(html.match(/<ins [^>]*data-ad-slot=/g)?.length ?? 0).toBeGreaterThan(1);
   });
 });
