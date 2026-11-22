@@ -606,7 +606,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13231", name: "川越・入間川（初雁橋付近）", slug: "kawagoe-irumagawa-hatsukari-a13",
     description: "川越市街からほど近い入間川中流域、初雁橋周辺の穏やかな流れが釣り場。4月〜10月は朝マヅメの吸い込み釣りでコイ、3月〜11月はヘラウキ釣りでヘラブナが狙え、じっくり腰を据える釣りに向く。4月〜10月は日中の毛鉤釣りでオイカワの数釣りも楽しめ、手軽な川釣り入門にも良い。料金は無料で河川敷に駐車スペースがあり、川越ICから車で約10分。コンビニは近いがトイレはないため事前に済ませたい。小江戸川越の観光と組み合わせて楽しめる初心者向けの釣り場。",
-    latitude: 35.9180, longitude: 139.4850,
+    latitude: 35.91872, longitude: 139.45151,
     address: "〒350-0053 埼玉県川越市郭町",
     accessInfo: "川越ICから車で約10分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
@@ -623,7 +623,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13232", name: "幸手・中川（権現堂桜堤付近）", slug: "satte-nakagawa-gongendo-a13",
     description: "埼玉県幸手市を流れる中川の権現堂桜堤付近は、無料で楽しめる川釣りポイント。3月〜11月はヘラブナが盛期で、朝マヅメのヘラウキ釣りが定番。4月〜10月は日中の吸い込み釣りでコイ、5月〜10月はルアーでブラックバスも狙える。権現堂桜堤の駐車場（無料）が利用でき、トイレやコンビニも近く初心者や家族連れでも安心。圏央道幸手ICから車で約5分とアクセスも良好で、春は桜堤の花見と合わせて楽しめるのどかな釣り場だ。",
-    latitude: 36.0850, longitude: 139.7280,
+    latitude: 36.09384, longitude: 139.72387,
     address: "〒340-0103 埼玉県幸手市内国府間",
     accessInfo: "幸手ICから車で約5分",
     region: localRegion("rs13108"), spotType: "river", difficulty: "beginner",
@@ -640,7 +640,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13233", name: "荒川・大芦橋付近（吉見町）", slug: "arakawa-oashibashi-yoshimi-a13",
     description: "吉見町の荒川河川敷は広大なフィールドが広がり、コイ釣りの大物狙いに最適。冬でも陽当たりが良く通年楽しめる。",
-    latitude: 36.0520, longitude: 139.4380,
+    latitude: 36.08589, longitude: 139.43654,
     address: "〒355-0107 埼玉県比企郡吉見町大串",
     accessInfo: "東松山ICから車で約15分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
@@ -656,7 +656,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13234", name: "さいたま・見沼代用水（七里付近）", slug: "saitama-minuma-nanasato-a13",
     description: "見沼代用水の七里地区はコイやフナが手軽に釣れる都市型水路。住宅街の中だが魚影は意外に濃い。",
-    latitude: 35.9080, longitude: 139.6450,
+    latitude: 35.92934, longitude: 139.67858,
     address: "〒337-0012 埼玉県さいたま市見沼区東宮下",
     accessInfo: "東武アーバンパークライン七里駅から徒歩約10分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
@@ -688,7 +688,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13236", name: "戸田・笹目川", slug: "toda-sasamegawa-a13",
     description: "荒川の支流である笹目川は都市型の釣り場。テナガエビやハゼが釣れ、夏場のテナガエビ釣りは子供連れに大人気。",
-    latitude: 35.8150, longitude: 139.6680,
+    latitude: 35.81868, longitude: 139.65864,
     address: "〒335-0023 埼玉県戸田市本町",
     accessInfo: "JR戸田公園駅から徒歩約15分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
@@ -704,7 +704,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13237", name: "飯能・名栗川（飯能河原）", slug: "hanno-naguri-kawaharaa13",
     description: "飯能河原はBBQや川遊びの名所だが、オイカワやヤマメも狙えるポイント。電車でアクセスしやすいのが魅力。",
-    latitude: 35.8580, longitude: 139.3280,
+    latitude: 35.85504, longitude: 139.31223,
     address: "〒357-0021 埼玉県飯能市久下",
     accessInfo: "西武池袋線飯能駅から徒歩約15分",
     region: localRegion("rs13107"), spotType: "river", difficulty: "beginner",
@@ -720,7 +720,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13238", name: "加須・利根川（加須未来館付近）", slug: "kazo-tonegawa-miraikan-a13",
     description: "加須市の利根川河川敷は広大なスケールでコイ釣りが楽しめる。ジャンボこいのぼりで有名な地域だけあり大物が潜む。",
-    latitude: 36.1420, longitude: 139.5850,
+    latitude: 36.18185, longitude: 139.63460,
     address: "〒347-0002 埼玉県加須市外野",
     accessInfo: "東北道加須ICから車で約15分",
     region: localRegion("rs13108"), spotType: "river", difficulty: "beginner",
@@ -736,7 +736,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   {
     id: "ss13239", name: "越谷・元荒川（しらこばと水上公園付近）", slug: "koshigaya-motoarakawa-shirakobato-a13",
     description: "越谷市内を流れる元荒川はコイやフナが多い穏やかな川。しらこばと水上公園近くで家族でのレジャーと合わせて楽しめる。",
-    latitude: 35.8920, longitude: 139.7850,
+    latitude: 35.91777, longitude: 139.75753,
     address: "〒343-0802 埼玉県越谷市小曽川",
     accessInfo: "東武伊勢崎線越谷駅から車で約10分",
     region: localRegion("rs13108"), spotType: "river", difficulty: "beginner",

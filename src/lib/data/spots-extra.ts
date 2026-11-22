@@ -822,7 +822,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s255", name: "荒川温排水", slug: "arakawa-onpaisui",
     description: "埼玉県内の荒川にある温排水エリア。シーバスやハゼの好ポイントで、冬でも温排水の影響で魚の活性が高い。",
-    latitude: 35.819200, longitude: 139.628900,
+    latitude: 35.79891, longitude: 139.67836,
     address: "〒335-0037 埼玉県戸田市下笹目",
     accessInfo: "JR戸田公園駅から車で約10分。首都高速5号池袋線戸田南ICから約5分。",
     region: localRegion("r76"), spotType: "river", difficulty: "intermediate",
@@ -847,7 +847,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s256", name: "入間川上流域", slug: "iruma-river-upstream",
     description: "埼玉県飯能市周辺を流れる入間川の上流域。都心からのアクセスが良く、日帰りで渓流釣りが楽しめる貴重なフィールド。3月〜9月はヤマメ、3月〜11月はニジマスが盛期で、朝マヅメの渓流ルアーが定番。ニジマスは比較的釣りやすく渓流入門にも向く。渓流ルアーやエサ釣りで狙うイワナ、日中の毛針・ウキ釣りで遊べるオイカワと釣りものも多彩。遊漁券は日券1,500円。河川沿いに駐車スペースあり。トイレ・コンビニは近くにないため事前に準備したい。アクセスは西武池袋線飯能駅から車で約30分、圏央道狭山日高ICから約40分。増水時の入渓は絶対に避けること。",
-    latitude: 35.861700, longitude: 139.321200,
+    latitude: 35.85755, longitude: 139.30054,
     address: "〒357-0031 埼玉県飯能市",
     accessInfo: "西武池袋線飯能駅から車で約30分。圏央道狭山日高ICから約40分。",
     region: localRegion("r76"), spotType: "river", difficulty: "intermediate",

@@ -3342,7 +3342,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8187", name: "綾部・上林川", slug: "ayabe-kanbayashigawa-k8",
     description: "綾部市の清流・上林川でアマゴやヤマメの渓流釣りが楽しめる。手つかずの自然が残り、春から秋にかけて美しい渓流魚が狙える。",
-    latitude: 35.310, longitude: 135.248,
+    latitude: 35.35020, longitude: 135.38152,
     address: "〒623-0000 京都府綾部市睦合町",
     accessInfo: "JR綾部駅から車で約30分",
     region: localRegion("rk8031"), spotType: "river", difficulty: "intermediate",

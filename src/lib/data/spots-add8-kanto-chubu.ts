@@ -720,7 +720,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   {
     id: "se8236", name: "荒川（秩父エリア）", slug: "arakawa-chichibu-e8",
     description: "秩父市を流れる荒川上流域で、ヤマメとイワナの渓流釣りが楽しめる。長瀞周辺は特にアクセスが良く、岩畳の景勝地を眺めながらの釣りは格別。",
-    latitude: 36.100, longitude: 139.120,
+    latitude: 36.09721, longitude: 139.11424,
     address: "〒369-1305 埼玉県秩父郡長瀞町長瀞",
     accessInfo: "秩父鉄道長瀞駅から徒歩約10分",
     region: localRegion("re8008"), spotType: "river", difficulty: "intermediate",
@@ -840,7 +840,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   {
     id: "se8243", name: "中津川（秩父）", slug: "nakatsugawa-chichibu-e8",
     description: "秩父市の奥地を流れる渓流で、イワナの天然魚が残る貴重な川。中津峡の紅葉は埼玉屈指の美しさで、秋の渓流釣りは景色とともに格別の体験。",
-    latitude: 35.975, longitude: 138.910,
+    latitude: 35.99289, longitude: 138.78665,
     address: "〒369-1903 埼玉県秩父市中津川",
     accessInfo: "秩父鉄道三峰口駅から車で約30分",
     region: localRegion("re8008"), spotType: "river", difficulty: "advanced",
@@ -856,7 +856,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   {
     id: "se8244", name: "荒川（川越エリア）", slug: "arakawa-kawagoe-e8",
     description: "川越市周辺の荒川で、コイやフナの大物釣りが楽しめる。河川敷が広く整備されており、バーベキューエリアも近いためファミリーレジャーと合わせて楽しめる。",
-    latitude: 35.920, longitude: 139.460,
+    latitude: 35.91466, longitude: 139.54446,
     address: "〒350-0836 埼玉県川越市大字平塚",
     accessInfo: "西武新宿線南大塚駅から車で約10分",
     region: localRegion("re8009"), spotType: "river", difficulty: "beginner",

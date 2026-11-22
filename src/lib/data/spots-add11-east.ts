@@ -602,7 +602,7 @@ export const eastAdd11Spots: FishingSpot[] = [
   {
     id: "ss11232", name: "利根川（加須・北川辺地区）", slug: "tonegawa-kazo-kitagawabe-a11",
     description: "埼玉県加須市の北川辺地区、渡良瀬遊水地にほど近い利根川の広大な河川敷。東北道加須ICから車で約20分で、河川敷の広場に駐車できるため荷物の多い釣行でも動きやすい。4〜10月はブラックバスがメインターゲットで、ワンド状の地形や流れの変化に魚が着きやすく、朝マヅメのルアー釣りに分がある。4〜11月はぶっ込み釣りのコイも有望で、日中にのんびり大物を待つスタイルが楽しめる。足場は広く初心者向きだが、トイレやコンビニは周辺にないため事前準備を忘れずに。増水時は河川敷まで水位が上がるため、天候と河川情報の確認は必須。",
-    latitude: 36.1750, longitude: 139.5950,
+    latitude: 36.16022, longitude: 139.68494,
     address: "〒349-1148 埼玉県加須市北川辺町",
     accessInfo: "東北道加須ICから車で約20分",
     region: localRegion("rs11108"), spotType: "river", difficulty: "beginner",
@@ -634,7 +634,7 @@ export const eastAdd11Spots: FishingSpot[] = [
   {
     id: "ss11234", name: "間瀬湖", slug: "mase-lake-saitama-a11",
     description: "本庄市北部の静かな湖。ヘラブナ釣りの名所で桟橋やボート釣りも可能。紅葉シーズンの景観も美しい。",
-    latitude: 36.2180, longitude: 139.1150,
+    latitude: 36.16212, longitude: 139.10959,
     address: "〒367-0211 埼玉県本庄市児玉町小平",
     accessInfo: "関越道本庄児玉ICから車で約20分",
     region: localRegion("rs11108"), spotType: "river", difficulty: "beginner",
@@ -667,7 +667,7 @@ export const eastAdd11Spots: FishingSpot[] = [
   {
     id: "ss11236", name: "神流湖", slug: "kannako-lake-a11",
     description: "埼玉県神川町と群馬県藤岡市の県境に横たわるダム湖・神流湖の埼玉側エリア。10〜3月は日中のワカサギ釣りが盛期で、冬の手軽なターゲットとして人気が高い。3〜11月は朝のヘラブナ、4〜10月は朝マヅメのルアーで狙うブラックバスと、淡水の定番魚種を季節で釣り分けられる。神川町矢納地区の湖岸からのアプローチが中心で、ダム下に駐車場があり、トイレも利用できる。遊漁料などの料金体系は現地の案内で確認を。関越道本庄児玉ICから約30分と首都圏から日帰りしやすく、難易度も高くないため湖釣りデビューの場としても使いやすい。",
-    latitude: 36.1280, longitude: 139.0350,
+    latitude: 36.12199, longitude: 139.00577,
     address: "〒367-0313 埼玉県児玉郡神川町矢納",
     accessInfo: "関越道本庄児玉ICから車で約30分",
     region: localRegion("rs11108"), spotType: "river", difficulty: "beginner",
@@ -684,7 +684,7 @@ export const eastAdd11Spots: FishingSpot[] = [
   {
     id: "ss11237", name: "新河岸川（ふじみ野地区）", slug: "shingashigawa-fujimino-a11",
     description: "ふじみ野市内を流れる新河岸川。都市河川ながらコイやヘラブナが多く、散歩がてら気軽に竿を出せるポイント。",
-    latitude: 35.8650, longitude: 139.5150,
+    latitude: 35.88222, longitude: 139.52626,
     address: "〒356-0011 埼玉県ふじみ野市福岡",
     accessInfo: "東武東上線ふじみ野駅から徒歩約15分",
     region: localRegion("rs11107"), spotType: "river", difficulty: "beginner",

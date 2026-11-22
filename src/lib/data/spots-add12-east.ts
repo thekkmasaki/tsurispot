@@ -650,7 +650,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   {
     id: "ss12234", name: "入間川（狭山・広瀬河原地区）", slug: "irumagawa-sayama-hirose-a12",
     description: "狭山市を流れる入間川の広瀬河原はスモールマウスバスの実績が高いエリア。コイやオイカワも混じり多魚種を楽しめる。",
-    latitude: 35.8520, longitude: 139.3980,
+    latitude: 35.85596, longitude: 139.39539,
     address: "〒350-1306 埼玉県狭山市富士見",
     accessInfo: "西武新宿線狭山市駅から車で約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "intermediate",
@@ -667,7 +667,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   {
     id: "ss12235", name: "権現堂調節池（幸手市）", slug: "gongendo-chouseichi-satte-a12",
     description: "桜の名所として知られる権現堂の調節池で、ヘラブナ釣りが盛ん。春は花見をしながらの釣りが風情豊かで楽しい。",
-    latitude: 36.0680, longitude: 139.7280,
+    latitude: 36.09345, longitude: 139.72431,
     address: "〒340-0103 埼玉県幸手市内国府間",
     accessInfo: "東武日光線幸手駅から車で約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "beginner",
@@ -715,7 +715,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   {
     id: "ss12238", name: "古利根川（春日部地区）", slug: "furutonego-kasukabe-a12",
     description: "春日部市内を流れる古利根川は、テナガエビやハゼの小物釣りが楽しめる身近な釣り場。夏のテナガエビは特に人気が高い。",
-    latitude: 35.9750, longitude: 139.7520,
+    latitude: 35.98355, longitude: 139.75462,
     address: "〒344-0061 埼玉県春日部市粕壁",
     accessInfo: "東武スカイツリーライン春日部駅から徒歩約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "beginner",
@@ -731,7 +731,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   {
     id: "ss12239", name: "合角ダム湖（秩父・吉田地区）", slug: "kakkaku-dam-chichibu-yoshida-a12",
     description: "秩父の山間にあるダム湖で、ヘラブナとワカサギの好釣り場。静かな環境で集中して釣りを楽しめる穴場スポット。",
-    latitude: 36.0280, longitude: 139.0380,
+    latitude: 36.05756, longitude: 138.96479,
     address: "〒369-1503 埼玉県秩父市上吉田",
     accessInfo: "秩父鉄道秩父駅から車で約30分",
     region: localRegion("rs12108"), spotType: "river", difficulty: "beginner",
@@ -747,7 +747,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   {
     id: "ss12240", name: "新河岸川（川越・東上地区）", slug: "shingashigawa-kawagoe-tojo-a12",
     description: "川越市を流れる新河岸川はコイやヘラブナが手軽に狙える都市河川。小江戸の街並みを楽しみつつ護岸から気軽に竿を出せる。",
-    latitude: 35.9250, longitude: 139.4850,
+    latitude: 35.92550, longitude: 139.48034,
     address: "〒350-0062 埼玉県川越市元町",
     accessInfo: "西武新宿線本川越駅から徒歩約10分",
     region: localRegion("rs12107"), spotType: "river", difficulty: "beginner",

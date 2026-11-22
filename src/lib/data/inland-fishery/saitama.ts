@@ -416,6 +416,7 @@ export const SAITAMA_SPOT_LINKS: Record<string, InlandFisherySpotLink> = {
   // 入間川・名栗湖（入間漁協）
   "iruma-river-upstream": { coopId: "iruma", evidence: IRUMA_LINK },
   "irumagawa-fishing": { coopId: "iruma", evidence: IRUMA_LINK },
+  "iruma-river-hosui-bridge": { coopId: "iruma", evidence: IRUMA_LINK },
   "iruma-gawa-sayama": { coopId: "iruma", evidence: IRUMA_LINK },
   "irumagawa-hanno-iruma": { coopId: "iruma", evidence: IRUMA_LINK },
   "irumagawa-hanno6": { coopId: "iruma", evidence: IRUMA_LINK },

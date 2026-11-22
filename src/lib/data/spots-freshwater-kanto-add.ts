@@ -59,7 +59,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-106", name: "秩父さくら湖（浦山ダム）", slug: "chichibu-sakurako",
     description: "秩父市にある浦山ダムのダム湖。ヤマメ・イワナの放流が行われ、トラウトフィッシングが楽しめる。湖畔は自然豊かで四季折々の景色が美しい。秋の紅葉シーズンは特に人気。",
-    latitude: 35.9522, longitude: 139.0831, address: "〒369-1801 埼玉県秩父市荒川久那4041",
+    latitude: 35.95312, longitude: 139.05367, address: "〒369-1801 埼玉県秩父市荒川久那4041",
     accessInfo: "関越道花園ICから約50分。秩父鉄道浦山口駅から徒歩約20分。",
     region: lr("r732"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券が必要（秩父漁協の漁業権の区域）",
@@ -84,7 +84,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-107", name: "柳瀬川", slug: "yanasegawa-river",
     description: "埼玉県志木市・新座市を流れる荒川水系の支流。東武東上線志木駅から徒歩約15分で、都心から電車で通える手軽な小物釣り場です。主役は4〜11月のオイカワのウキ釣りで、日中に数釣りが楽しめます。3〜11月はタナゴやマブナ、4〜11月はカワムツやウグイも同じ延べ竿仕掛けで交じり、コイは通年で吸い込み釣りの実績あり。清瀬市の金山橋付近は水質が良く人気のポイントです。料金は無料。専用駐車場はないため公共交通機関の利用がおすすめで、近くにコンビニもあります。増水時は川に近づかないよう注意してください。",
-    latitude: 35.7733, longitude: 139.5636, address: "〒352-0011 埼玉県新座市野火止5丁目1",
+    latitude: 35.82993, longitude: 139.55838, address: "〒352-0011 埼玉県新座市野火止5丁目1",
     accessInfo: "東武東上線志木駅から徒歩約15分。関越道所沢ICから約15分。",
     region: lr("r733"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: false, hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
@@ -133,7 +133,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-109", name: "高麗川", slug: "komagawa-river",
     description: "埼玉県日高市・飯能市を流れる清流。圏央道狭山日高ICから約10分、西武線高麗駅から徒歩約15分と都心からのアクセスが良い。曼珠沙華で有名な巾着田周辺が主なポイントで、駐車場（500円/日）やトイレ、コンビニも近く家族連れでも安心。3〜9月はヤマメのエサ釣りが本命で朝マヅメが狙い目。6〜9月はアユの友釣り、4〜11月はウキ釣りのオイカワやカワムツ、エサ釣りのウグイと、身近な川魚の五目釣りが一年の大半で楽しめる。遊漁券は大人800円（1日）。浅く穏やかな流れが多く、渓流釣り入門にも向いた釣り場だ。",
-    latitude: 35.8767, longitude: 139.3281, address: "〒350-1249 埼玉県日高市高麗川",
+    latitude: 35.89886, longitude: 139.32700, address: "〒350-1249 埼玉県日高市高麗川",
     accessInfo: "圏央道狭山日高ICから約10分。西武秩父線高麗駅から徒歩約15分。",
     region: lr("r735"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（埼玉西部漁協の漁業権の区域）",
@@ -531,7 +531,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-125", name: "荒川中流（秋ヶ瀬）", slug: "arakawa-akigase",
     description: "さいたま市桜区の秋ヶ瀬公園周辺の荒川中流域。都心から30分圏内で、バス・コイ・ナマズ・ヘラブナなど多彩な淡水魚が楽しめる。ワンド（入り江）が多く、おかっぱりポイントが豊富。",
-    latitude: 35.8419, longitude: 139.5964, address: "〒353-0008 埼玉県志木市宗岡",
+    latitude: 35.83564, longitude: 139.60695, address: "〒353-0008 埼玉県志木市宗岡",
     accessInfo: "首都高与野ICから約15分。JR中浦和駅から徒歩約20分。",
     region: lr("r757"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（埼玉南部漁協の漁業権の区域）", hasParking: true, parkingDetail: "秋ヶ瀬公園駐車場（無料）",

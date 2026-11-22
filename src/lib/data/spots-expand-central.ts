@@ -752,7 +752,7 @@ const saitamaSpots: FishingSpot[] = [
   {
     id: "exp-c035", name: "名栗湖（有間ダム）", slug: "naguriko-arima-dam",
     description: "名栗湖（有間ダム）は10月から3月のワカサギ釣りが本命。埼玉県飯能市の山間にあるダム湖で、水面が穏やかなためカヌーも楽しめ、秋は紅葉が美しい。ワカサギは日中でも釣れて難易度が低く、初心者や家族連れが最初の一匹に届きやすい。4月から11月は朝マヅメのルアーでブラックバス、3月から11月はヘラブナ釣りも成立する。ダムサイトに無料駐車場とトイレがあり足場も安定している。冬は冷え込むので防寒対策を。飯能駅からバスで約40分。",
-    latitude: 35.8833, longitude: 139.1833,
+    latitude: 35.87276, longitude: 139.17680,
     address: "〒357-0112 埼玉県飯能市下名栗 有間ダム",
     accessInfo: "西武池袋線飯能駅からバスで約40分。圏央道狭山日高ICから約40分。",
     region: localRegion("r4332"), spotType: "river", difficulty: "beginner",
@@ -884,7 +884,7 @@ const saitamaSpots: FishingSpot[] = [
   {
     id: "exp-c042", name: "合角ダム（西秩父桃湖）", slug: "kakkaku-dam",
     description: "秩父市にある合角ダムの湖は、ヘラブナ・ワカサギ釣りのスポット。山深い秩父の自然に囲まれた静かなダム湖で、のんびりと釣りが楽しめる穴場。",
-    latitude: 35.9833, longitude: 139.0167,
+    latitude: 36.05756, longitude: 138.96479,
     address: "〒368-0202 埼玉県秩父市上吉田 合角ダム",
     accessInfo: "秩父鉄道秩父駅から車で約30分。関越自動車道花園ICから約50分。",
     region: localRegion("r4333"), spotType: "river", difficulty: "beginner",

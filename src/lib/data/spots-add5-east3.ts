@@ -693,7 +693,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   {
     id: "se5134", name: "利根川 栗橋エリア", slug: "tonegawa-kurihashi",
     description: "久喜市を流れる利根川中流域。コイやヘラブナが狙え、夏はナマズも楽しめる。河川敷のスケールが大きい。",
-    latitude: 36.1360, longitude: 139.7020,
+    latitude: 36.14046, longitude: 139.70660,
     address: "〒349-1103 埼玉県久喜市栗橋中央",
     accessInfo: "JR栗橋駅から車で約5分。東北自動車道加須ICから約15分。",
     region: localRegion("re5111"), spotType: "river", difficulty: "beginner",
@@ -712,9 +712,9 @@ export const eastAdd5Spots3: FishingSpot[] = [
   {
     id: "se5136", name: "中川 越谷エリア", slug: "nakagawa-koshigaya",
     description: "越谷市を流れる中川。足場の良い護岸からヘラブナやコイが狙える都市型の釣り場。テナガエビ釣りの名所でもある。",
-    latitude: 35.8920, longitude: 139.7810,
-    address: "〒343-0845 埼玉県越谷市南越谷",
-    accessInfo: "JR南越谷駅から徒歩約15分。東京外環道草加ICから約15分。",
+    latitude: 35.88310, longitude: 139.83807,
+    address: "〒343-0826 埼玉県越谷市東町",
+    accessInfo: "JR武蔵野線吉川駅から徒歩約15分。東京外環道三郷西ICから約15分。",
     region: localRegion("re5111"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券が必要（埼玉東部漁協の漁業権の区域）", hasParking: false, parkingDetail: "周辺のコインパーキングを利用",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
@@ -747,7 +747,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   {
     id: "se5138", name: "名栗湖", slug: "naguri-ko",
     description: "飯能市の山間部にあるダム湖。カヌーで有名だがワカサギ釣りやバス釣りも楽しめる。紅葉の季節は特に美しい。",
-    latitude: 35.8690, longitude: 139.1760,
+    latitude: 35.87276, longitude: 139.17680,
     address: "〒357-0112 埼玉県飯能市下名栗",
     accessInfo: "圏央道狭山日高ICから約40分。西武池袋線飯能駅から車で約30分。",
     region: localRegion("re5110"), spotType: "river", difficulty: "beginner",
