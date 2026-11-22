@@ -271,6 +271,11 @@ function getTopFishNames(spot: FishingSpot, count: number = 3): string {
   return spot.catchableFish.slice(0, count).map(cf => cf.fish.name).join("・");
 }
 
+/** 魚種名を重複除去して返す（同じ魚が釣法違いで複数登録されているスポットがあるため） */
+function getUniqueFishNames(spot: FishingSpot): string[] {
+  return [...new Set(spot.catchableFish.map(cf => cf.fish.name))];
+}
+
 function getEasyFish(spot: FishingSpot): CatchableFish[] {
   return spot.catchableFish.filter(cf => cf.catchDifficulty === "easy");
 }
@@ -830,7 +835,10 @@ export function generateSpotSummary(spot: FishingSpot): {
   // 管理釣り場・釣り堀は海向けテンプレ（トイレ×・ベストシーズン等の断定）を使わず、事実のある項目だけ出す
   if (spot.isManagedPond) return buildManagedSummary(spot);
   const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
-  const topFish = getTopFishNames(spot, 3);
+  const fishNames = getUniqueFishNames(spot);
+  const shownFish = fishNames.slice(0, 3);
+  const topFish = shownFish.join("・");
+  const remainingFishCount = fishNames.length - shownFish.length;
   const bestMonths = getBestMonths(spot);
   const methods = getUniqueMethods(spot);
   const typeFeatures = getSpotTypeFeatures(spot);
@@ -847,8 +855,8 @@ export function generateSpotSummary(spot: FishingSpot): {
 
   return {
     oneLineFeature,
-    // 「ほかN種」は表示した3種を除いた数（以前は総数を入れていて、総10種で「ほか10種」になっていた）
-    topFishAndSeason: `狙える魚: ${topFish}${spot.catchableFish.length > 3 ? `ほか${spot.catchableFish.length - 3}種` : ""} /ベストシーズン: ${bestMonths.slice(0, 3).join("・")}`,
+    // 「ほかN種」= 重複除去後の総種数 − 実際に表示した種数（総数をそのまま入れたり、重複登録を数えたりしない）
+    topFishAndSeason: `狙える魚: ${topFish}${remainingFishCount > 0 ? `ほか${remainingFishCount}種` : ""} /ベストシーズン: ${bestMonths.slice(0, 3).join("・")}`,
     recommendedMethod: methods.length > 0 ? `おすすめ釣法: ${methods.slice(0, 3).join("・")}` : "多彩な釣り方に対応",
     facilityOverview: [
       spot.hasParking ? "駐車場○" : "駐車場×",
