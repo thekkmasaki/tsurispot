@@ -88,6 +88,12 @@ export interface FishingSpot {
   rules?: SpotRules;
   /** 現在釣りが禁止されている場合の情報。設定すると警告バナーを出し、釣果投稿を封鎖する */
   fishingBan?: FishingBan;
+  /**
+   * 一部の区域・時間帯・釣法だけが禁止されている場合の条件（ルール欄に表示する）。
+   * rules（SpotRules）が無いスポットにも付けられるよう、rules とは別に持つ。
+   * データは spot-area-conditions.ts の上書き表から spots.ts で付与する。
+   */
+  restrictedAreaConditions?: string[];
   parkingPeakInfo?: ParkingPeakInfo;
   parkingGuide?: ParkingGuide;
   familyInfo?: FamilyInfo;

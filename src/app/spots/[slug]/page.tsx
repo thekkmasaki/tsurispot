@@ -97,7 +97,8 @@ import { SpotEeatFooter } from "@/components/spots/spot-eeat-footer";
 import { SpotBasicDataTable } from "@/components/spots/spot-basic-data-table";
 import { SpotContributionForm } from "@/components/spots/spot-contribution-form";
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
-import { SpotRulesCard } from "@/components/spots/spot-rules";
+import { SpotRulesCard, SpotAreaConditions } from "@/components/spots/spot-rules";
+import { getSpotAreaConditions } from "@/lib/spot-restrictions";
 import { SpotRulesPrefectureFallback } from "@/components/spots/spot-rules-prefecture-fallback";
 import { getFishingRuleByPrefName } from "@/lib/data/fishing-rules-data";
 const SpotPhotoGallery = nextDynamic(
@@ -310,6 +311,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const prefectureRule = getFishingRuleByPrefName(spot.region.prefecture);
   // rules未設定スポット向け: 県レベルの公的釣りルールをフォールバック表示する
   const prefRule = spot.rules ? undefined : prefectureRule;
+  // 一部区域・時間帯・釣法のみ禁止の条件（ルール欄に明記する）
+  const areaConditions = getSpotAreaConditions(spot);
   const initialCommunityPhotos = await getInitialCommunityPhotos(slug);
   // 特許パイプライン: 自動生成ダイアグラム優先、なければ手動データにフォールバック
   // 座標整合ガード: 解析座標がスポット実座標と乖離している場合は表示しない（虚偽表示防止）
@@ -1172,10 +1175,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {!layoutB && facilitySection}
           {/* 釣りルール: 個別データがあれば優先表示。無ければ県レベルの公的ルール（出典付き）をフォールバック。
               推測のスポット固有ルールは誤情報源になるため出さない。 */}
-          {(spot.rules || prefRule || prefectureRule?.seaRules?.chumRegulation) && (
+          {(spot.rules || prefRule || prefectureRule?.seaRules?.chumRegulation || areaConditions.length > 0) && (
           <section>
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
             <div className="space-y-3">
+              {/* 一部区域・時間帯・釣法のみ禁止の条件（2026-11 監査）。rules の有無に関わらず先頭に出す */}
+              <SpotAreaConditions conditions={areaConditions} spotName={spot.name} />
               {spot.rules ? (
                 <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} isFree={spot.isFree} feeDetail={spot.feeDetail} isManagedPond={spot.isManagedPond} />
               ) : prefRule ? (

@@ -54,7 +54,7 @@ export function getForbiddenRuleLabels(spot: Pick<FishingSpot, "rules">): string
  * 優先順: 釣り禁止(全面) → 釣り禁止(一部) → 立入・釣り禁止区域の記載 → 釣法の禁止。
  */
 export function getSpotRestrictionSummary(
-  spot: Pick<FishingSpot, "fishingBan" | "rules">,
+  spot: Pick<FishingSpot, "fishingBan" | "rules" | "restrictedAreaConditions">,
 ): SpotRestrictionSummary | null {
   const ban = spot.fishingBan;
   if (ban) {
@@ -66,7 +66,9 @@ export function getSpotRestrictionSummary(
       confirmedAt: ban.confirmedAt,
     };
   }
-  const areas = spot.rules?.restrictedAreas?.filter((a) => a.trim().length > 0) ?? [];
+  const areas = [...(spot.rules?.restrictedAreas ?? []), ...(spot.restrictedAreaConditions ?? [])].filter(
+    (a) => a.trim().length > 0,
+  );
   if (areas.length > 0) {
     return {
       level: "area",
@@ -84,6 +86,23 @@ export function getSpotRestrictionSummary(
     };
   }
   return null;
+}
+
+/**
+ * ルール欄（「釣りルール・禁止事項」）に出す「一部区域・時間帯・釣法のみ禁止」の条件。
+ * 一部禁止の fishingBan の本文（一次情報つき）と、restrictedAreaConditions を合わせて返す。
+ * rules.restrictedAreas は SpotRulesCard 側で表示するのでここには含めない。
+ * 全面禁止（scope: full）はページ上部の禁止バナーで扱うため含めない。
+ */
+export function getSpotAreaConditions(
+  spot: Pick<FishingSpot, "fishingBan" | "restrictedAreaConditions">,
+): string[] {
+  const conditions: string[] = [];
+  if (spot.fishingBan?.scope === "partial") conditions.push(spot.fishingBan.reason);
+  for (const c of spot.restrictedAreaConditions ?? []) {
+    if (c.trim().length > 0 && !conditions.includes(c)) conditions.push(c);
+  }
+  return conditions;
 }
 
 const MONTH_LABEL = (m: number) => `${m}月`;
