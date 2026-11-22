@@ -100,7 +100,8 @@ const HAKATA_SUZAKI: SpotBanOverride = {
 };
 
 // ── 2026-11-21 一斉監査（全5,610件）の反映分。港湾管理者・県の公式ページで確認できた港だけ ──
-// 監査で禁止と判定されたが公式で裏が取れなかったもの（福浦岸壁・名古屋港ガーデンふ頭・明石海峡大橋下の舞子側護岸）は載せない。
+// 監査で禁止と判定されたが公式で裏が取れなかったもの（名古屋港ガーデンふ頭）は載せない。
+// 福浦岸壁・明石海峡大橋下の舞子側護岸は、運営者の確認（横浜市港湾局・神戸市の公表）を受けて 2026-11-21 に追加した。
 
 /** 全面禁止の港をまとめて登録する。元の本文（釣行を勧める紹介文）は禁止の説明に差し替える */
 function fullBanGroup(
@@ -430,5 +431,35 @@ export const spotBanOverrides: Record<string, SpotBanOverride> = {
   "yaizu-shinko": YAIZU_GYOKO,
   "yaizu-shinko-teibo": YAIZU_GYOKO,
   "tambarako-dam-a12": TAMBARA,
+  // スポット自体が消波ブロックの上なので、注記ではなく本文を差し替える（消波ブロックは全面立入禁止）
+  "hayakawa-kakou-tetra-e8": {
+    fishingBan: { ...ODAWARA.fishingBan, scope: "full" },
+    description:
+      "小田原市・早川河口の消波ブロック（テトラ）帯。神奈川県西部漁港事務所は、小田原漁港（早川港）の消波ブロックの上を全面的に立入禁止としており、このテトラ帯に乗って釣りをすることはできません。立入禁止の場所に入ると軽犯罪法違反になるおそれがあります。早川周辺で釣りをするなら、立入禁止でない岸壁で、現地の掲示に従ってください。",
+  },
+  "fukuura-ganpeki": {
+    fishingBan: {
+      scope: "full",
+      reason:
+        "横浜市港湾局は、市が管理するふ頭の岸壁・防波堤・護岸などの港湾施設について、保安と荷役作業の安全のため一般の立ち入りを制限しており、海づり施設を除いて立ち入り・釣りはできません。横浜港で釣りをするなら、市の本牧・大黒・磯子の海づり施設を利用するよう案内しています。",
+      sourceUrls: YOKOHAMA_PORT_URLS,
+      confirmedAt: CONFIRMED,
+      alternativeSpotSlugs: ["daikoku-fishing-facility", "honmoku-fishing"],
+    },
+    description:
+      "横浜市金沢区福浦の岸壁。かつては八景島シーパラダイスの対岸でタチウオやアジが狙える釣り場として知られたが、横浜市港湾局は、ふ頭の岸壁・防波堤・護岸への一般の立ち入りを海づり施設を除いて制限しており、現在ここで釣りはできません。横浜港で釣りをするなら、市が運営する本牧・大黒・磯子の海づり施設を利用してください。",
+  },
+  "akashi-kaikyo-bridge-shita": {
+    fishingBan: {
+      scope: "full",
+      reason:
+        "神戸市は、神戸港の岸壁・物揚場・護岸・防波堤での魚釣りを禁じており、港の緑地でも魚類の捕獲が禁じられています。神戸港の港湾施設で釣りができるのは、神戸空港島の親水護岸など市が開放している施設だけです。",
+      sourceUrls: KOBE_PORT_FISHING_URLS,
+      confirmedAt: CONFIRMED,
+      alternativeSpotSlugs: ["kobe-airport-gogan"],
+    },
+    description:
+      "明石海峡大橋の下、舞子側（神戸市垂水区）の護岸。潮通しの良い海峡に面し青物の回遊ルートとして知られてきたが、神戸市は神戸港の岸壁・護岸・防波堤での魚釣りを禁じており、現在ここで釣りはできません。神戸周辺で釣りをするなら、市が港湾施設で釣りを認めている神戸空港島の親水護岸や、垂水区の平磯海づり公園を利用してください。",
+  },
   ...Object.fromEntries(TOTTORI_GYOKO_SLUGS.map((slug) => [slug, TOTTORI_GYOKO])),
 };
