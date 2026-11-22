@@ -182,7 +182,7 @@ describe("所在地データの整合性", () => {
   ];
 
   /**
-   * 既知の不一致（2026-08-18 時点で 73 件 → 2026-11-20 に 5 件）。
+   * 既知の不一致（2026-08-18 時点で 73 件 → 2026-11-20 に 5 件 → 2026-11-21 に 0 件）。
    *
    * 修正方向がケースごとに違うため一括では直せない:
    * - 住所が誤り: 「鳥取県阿南市」（阿南市は徳島県）、「石川県魚津市」（魚津市は富山県）
@@ -195,11 +195,10 @@ describe("所在地データの整合性", () => {
    * **このリストは増やしてはいけない。** 新規の不一致は fail する。
    * 解消したものはリストから削除する（残っていると「掃除漏れ」として fail する）。
    */
-  const KNOWN_REGION_MISMATCHES = new Set([
+  const KNOWN_REGION_MISMATCHES = new Set<string>([
     // 2026-11-20: 座標（国土地理院の逆ジオコーダ）と住所の突き合わせで 73 件中 68 件を解消した
-    // （generated/spot-region-overrides.json）。残りは県境の川で判断が要るものと、移す先のエリアが無いもの。
-    "arakawa-iwabuchi-suimon6", "kagoshima-sendaigawa-upper-stream", "sakaiminato-gaiko",
-    "tone-ozeki-gyoda-ora-a12", "tone-river-mouth",
+    // （generated/spot-region-overrides.json）。
+    // 2026-11-21: 残り5件（県境の川・住所誤り）も住所と座標で確認して解消し、既知分はゼロになった。
   ]);
 
   it("address の都道府県と region.prefecture が一致する（既知分を除く）", () => {

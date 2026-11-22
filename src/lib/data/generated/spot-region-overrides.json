@@ -282,6 +282,15 @@
   },
   "note": "上越・谷浜海岸: 新潟・中央(中央値から123km) → 上越・直江津(6km)"
  },
+ "kagoshima-sendaigawa-upper-stream": {
+  "region": {
+   "id": "rmp-miyazaki-kirishima",
+   "prefecture": "宮崎県",
+   "areaName": "霧島・高原",
+   "slug": "miyazaki-kirishima-takaharu-mp"
+  },
+  "note": "川内川上流（えびの市）: 鹿児島県 川内川上流 → 宮崎県 霧島・高原(住所・座標ともに宮崎県えびの市、人手確認)"
+ },
  "kamakitako-tsuri6": {
   "address": "〒350-0456 埼玉県入間郡毛呂山町宿谷"
  },
@@ -777,7 +786,8 @@
    "areaName": "境港・米子",
    "slug": "tottori-sakaiminato-yonago-w6"
   },
-  "note": "境港外港: 境港(中央値から84km) → 境港・米子(1km)"
+  "note": "境港外港: 境港(中央値から84km) → 境港・米子(1km) / 住所「島根県松江市長島境美保関線」は誤り（〒684-0034は鳥取県境港市昭和町）→ 住所を補正",
+  "address": "〒684-0034 鳥取県境港市昭和町"
  },
  "sakaiminato-mihonoseki": {
   "region": {
@@ -980,6 +990,24 @@
    "slug": "nagano-minamishinshu-mp"
   },
   "note": "天竜川（飯田・川路地区）: 上田・千曲川中流(中央値から109km) → 南信州（阿智・平谷・飯田）(12km)"
+ },
+ "tone-ozeki-gyoda-ora-a12": {
+  "region": {
+   "id": "rs11108",
+   "prefecture": "埼玉県",
+   "areaName": "利根川・加須",
+   "slug": "saitama-tonegawa-kazo-s11"
+  },
+  "note": "利根大堰（行田・邑楽地区）: 群馬県 藤岡・神流川下流 → 埼玉県 利根川・加須(7km・住所「埼玉県行田市大字須加」と座標が利根川南岸で一致、人手確認)"
+ },
+ "tone-river-mouth": {
+  "region": {
+   "id": "rs9013",
+   "prefecture": "茨城県",
+   "areaName": "神栖・利根川河口",
+   "slug": "ibaraki-kamisu-tonegawa-s9"
+  },
+  "note": "利根川河口堰周辺: 千葉県 房総半島 → 茨城県 神栖・利根川河口(4km・住所「茨城県神栖市」と座標が利根川北岸の神栖市で一致、人手確認)"
  },
  "tone-watarase-yusuchi": {
   "region": {
