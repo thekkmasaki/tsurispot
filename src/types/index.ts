@@ -96,6 +96,8 @@ export interface FishingSpot {
   googleReviewCount?: number;
   managementInfo?: ManagementInfo;
   officialUrl?: string;
+  /** 施設公式の交通アクセス案内。あれば「ナビで行く」を座標の経路案内ではなくこのURLにする（座標が番地まで合っていない施設向け） */
+  accessUrl?: string;
   /** 構造物カテゴリ（特許: 衛星画像解析による自動分類） */
   structureTypes?: StructureCategory[];
   /** 衛星画像URL */

@@ -35,7 +35,7 @@ export const managedMiyagiSpots: FishingSpot[] = [
   // ============================================================
   // 池型のエリアトラウト・養魚場の釣り堀
   // ============================================================
-  // 座標は大字中心(国土地理院「秋保町長袋」。番地まで当たらず要微調整)
+  // 座標は大字中心(国土地理院「秋保町長袋」。番地まで当たらず要微調整)。「ナビで行く」は施設公式の交通アクセス(accessUrl)に差し替え
   {
     id: "mp-3300",
     name: "秋保フィッシングエリア",
@@ -48,13 +48,14 @@ export const managedMiyagiSpots: FishingSpot[] = [
       "小・中学生料金があり未就学児は無料。夏はニジマスのつかみ取りも行う。持ち帰りは5尾まで(または30cm以上を1尾)。",
     latitude: 38.267185,
     longitude: 140.668427,
-    address: "宮城県仙台市太白区秋保町長袋字中山40",
-    accessInfo: "仙台市太白区秋保町長袋。無料駐車場 約50台。",
+    address: "宮城県仙台市太白区秋保町長袋字山崎40",
+    accessInfo: "〒982-0243 仙台市太白区秋保町長袋字山崎40。地図アプリによって案内先が異なるため、道順は施設公式の交通アクセス案内を確認。無料駐車場 約50台。",
+    accessUrl: "https://akiu-fa.com/access.html",
     region: R_SENDAI_WEST,
     spotType: "pond",
     difficulty: "beginner",
     isFree: false,
-    feeDetail: "大人(高校生以上) 1日4,500円・4時間3,500円・2時間2,500円、小・中学生 1日3,500円・4時間2,500円・2時間2,000円、未就学児無料",
+    feeDetail: "ルアー・フライ 大人1日5,800円(通常料金)。時間券・小中学生料金・エサ釣りプランは公式の料金ページを参照",
     hasParking: true,
     parkingDetail: "無料 約50台",
     hasToilet: false,
@@ -66,14 +67,14 @@ export const managedMiyagiSpots: FishingSpot[] = [
     images: [],
     rating: 3.5,
     reviewCount: 0,
-    officialUrl: "https://akiu-fa.jp/",
+    officialUrl: "https://akiu-fa.com/",
     catchableFish: [
-      cf("nijimasu", 1, 12, true, "easy", "開場直後", "ルアー・フライ", "https://akiu-fa.jp/ (公式)"),
+      cf("nijimasu", 1, 12, true, "easy", "開場直後", "ルアー・フライ", "https://akiu-fa.com/ (公式)"),
     ],
     bestTimes: [
-      { label: "開場直後", timeRange: "7:00〜9:00", rating: "best" },
-      { label: "日中", timeRange: "9:00〜14:00", rating: "good" },
-      { label: "閉場前", timeRange: "14:00〜16:00", rating: "fair" },
+      { label: "開場直後", timeRange: "開場から約2時間", rating: "best" },
+      { label: "日中", timeRange: "昼前後", rating: "good" },
+      { label: "閉場前", timeRange: "閉場前の1〜2時間", rating: "fair" },
     ],
     tackleRecommendations: [],
     rules: {
@@ -88,19 +89,18 @@ export const managedMiyagiSpots: FishingSpot[] = [
     managementInfo: {
       organizationName: "秋保フィッシングエリア",
       contactPhone: "022-399-2191",
-      contactUrl: "https://akiu-fa.jp/",
-      openingHours: "7:00〜16:00(事前相談で早朝・延長可)",
-      closedDays: "営業カレンダーによる",
-      fishingFee: "大人1日4,500円",
+      contactUrl: "https://akiu-fa.com/",
+      openingHours: "曜日・祝日により異なる(公式サイトの料金・営業案内を参照)",
+      closedDays: "公式サイトの料金・営業案内を参照",
+      fishingFee: "ルアー・フライ大人1日5,800円",
       notes: [
-        "確認日 2026-11-17(公式サイト・リニューアル報道)",
+        "確認日 2026-11-22(施設からの修正依頼。料金・営業時間は公式 https://akiu-fa.com/price.html)",
         "2026-11-01 リニューアルオープン。エサ釣りプランも新設(料金は未確認)",
         "持ち帰りは生かし魚籠を持参",
         "ニジマスつかみ取りは夏のみ・要電話予約(5尾3,000円)",
         "BBQ小屋あり(釣り券が必要)",
         "予約はWEB予約ページまたは電話",
         "トイレの有無は未確認",
-        "固定の定休日は未確認",
       ],
     },
   },
