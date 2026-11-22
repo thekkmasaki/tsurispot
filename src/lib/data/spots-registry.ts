@@ -56,6 +56,7 @@ import { chugokuShikokuAdd4Spots } from "./spots-add4-chugoku-shikoku";
 import { kyushuOkinawaAdd4Spots } from "./spots-add4-kyushu-okinawa";
 import { kobeKakogawaAddSpots } from "./spots-kobe-kakogawa-add";
 import { awajiDetailSpots } from "./spots-awaji-detail";
+import { hyogoBookGapSpots } from "./spots-hyogo-book-gap";
 import { himejiHarimaDetailSpots } from "./spots-himeji-harima-detail";
 import { eastAdd5Spots } from "./spots-add5-east";
 import { eastAdd5Spots2 } from "./spots-add5-east2";
@@ -189,6 +190,7 @@ export const allRawSpots: FishingSpot[] = [
   ...kobeKakogawaAddSpots,
   ...himejiHarimaDetailSpots,
   ...awajiDetailSpots,
+  ...hyogoBookGapSpots,
   ...eastAdd5Spots,
   ...eastAdd5Spots2,
   ...eastAdd5Spots3,
