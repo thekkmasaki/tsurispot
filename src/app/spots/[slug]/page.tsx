@@ -913,7 +913,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               Google Mapで見る
             </a>
             <a
-              href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`}
+              href={spot.accessUrl ?? `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-blue-600 px-4 py-2.5 text-sm font-bold text-blue-700 transition-colors hover:bg-blue-50"
@@ -1458,7 +1458,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   <p className="text-sm font-medium">{spot.address}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 min-h-[40px]"><MapPin className="size-4" />Google Mapで場所を確認</a>
-                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100 min-h-[40px]"><Navigation2 className="size-4" />ルート案内</a>
+                    <a href={spot.accessUrl ?? `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100 min-h-[40px]"><Navigation2 className="size-4" />ルート案内</a>
                   </div>
                 </div>
                 <Separator />
@@ -2368,7 +2368,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <CardContent className="p-4">
               <GoTodayButton slug={spot.slug} spotName={spot.name} />
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`}
+                href={spot.accessUrl ?? `https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 flex items-center justify-center gap-2 rounded-xl border-2 border-ocean-mid px-4 py-2.5 text-sm font-bold text-ocean-mid transition-colors hover:bg-ocean-mid/5"
