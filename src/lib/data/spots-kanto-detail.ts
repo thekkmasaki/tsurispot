@@ -893,10 +893,10 @@ export const kantoDetailSpots: FishingSpot[] = [
     id: "s834", name: "入間川（豊水橋付近）", slug: "iruma-river-hosui-bridge",
     description: "埼玉県を流れる入間川の中流域、豊水橋付近は川釣りの好ポイント。スモールマウスバスの聖地として関東のバサーに知られるほか、オイカワ、アユ、コイ、ナマズなども生息。川幅が広く開放的な雰囲気で、都心から約1時間でアクセスできる手軽さが魅力。",
     latitude: 35.85128, longitude: 139.38311,
-    address: "〒350-0846 埼玉県川越市中老袋",
-    accessInfo: "西武新宿線狭山市駅から徒歩約15分。圏央道狭山日高ICから約10分。",
+    address: "〒358-0006 埼玉県入間市春日町",
+    accessInfo: "西武池袋線入間市駅から徒歩約20分。圏央道狭山日高ICから約10分。",
     region: lr("r876"), spotType: "river", difficulty: "intermediate",
-    isFree: true, hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
+    isFree: false, feeDetail: "遊漁券が必要（入間漁協の漁業権の区域）", hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 96,
     catchableFish: [
