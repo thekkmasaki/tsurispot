@@ -2317,7 +2317,8 @@ export const centralAdd6Spots: FishingSpot[] = [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘラウキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
     ],
-    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideLake, mazumeInfo: mazumeInland,
+    // 海山漁協のルール（夜釣り不可）に合わせて「夜」の時間帯を出さない
+    bestTimes: btAllDay.filter((t) => t.label !== "夜"), tackleRecommendations: [], tideAdvice: tideLake, mazumeInfo: mazumeInland,
   },
   {
     id: "sc6113", name: "あわら・北潟湖", slug: "awara-kitagata-ko",
