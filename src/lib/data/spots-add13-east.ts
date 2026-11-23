@@ -1850,7 +1850,8 @@ export const eastAdd13Spots: FishingSpot[] = [
       { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘラウキ釣り" },
     ],
-    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeLake,
+    // 海山漁協のルール（夜釣り不可）に合わせて「夜」の時間帯を出さない
+    bestTimes: btAllDay.filter((t) => t.label !== "夜"), tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeLake,
   },
   {
     id: "ss13305", name: "敦賀・鉢ヶ崎漁港", slug: "tsuruga-hachigasaki-gyokou-a13",
