@@ -5,6 +5,7 @@ import { spotRulesBatch } from "./spots-rules-batch";
 // next.config.ts が spots.ts を import する都合上、@/ エイリアスではなく
 // 相対パスで参照する必要がある (path mapping がビルド時 transpile では効かない)。
 import { generateSpotIntro } from "../utils/spot-content-generator";
+import { mergeDescription } from "./spot-description-enrich";
 import { isSameSpotName } from "./spot-name-normalize";
 import { spotTipsAdd } from "./spot-tips-add";
 import { spotBanOverrides } from "./spot-ban-overrides";
@@ -193,14 +194,16 @@ function applyBatchRules(spots: FishingSpot[]): FishingSpot[] {
 // description が薄い (<100字) スポットを generateSpotIntro で補完する。
 // sitemap.ts の品質フィルタ (description>=100字) を満たすことが目的。
 // 既存の 100字以上の description には触らず、人間が書いた文章を尊重する。
-function enrichDescriptions(spots: FishingSpot[]): FishingSpot[] {
+// 100字未満でも元の紹介文は捨てずに先頭へ残し、自動生成文は既出の文を除いて後ろに足す
+// （丸ごと差し替えると「遊漁券が必要」「遊泳禁止」等の注意書きが消えるため。2026-11 水月湖の件）。
+export function enrichDescriptions(spots: FishingSpot[]): FishingSpot[] {
   return spots.map((spot) => {
     if ((spot.description || "").length >= 100) return spot;
     // 釣り禁止スポットは自動生成の対象外。generateSpotIntro() は
     // 「〜が狙える」「ベストシーズンは〜」と釣行を勧める文を組み立てるため、
     // 禁止スポットに適用すると人手で書いた禁止の説明を上書きしてしまう。
     if (spot.fishingBan) return spot;
-    return { ...spot, description: generateSpotIntro(spot) };
+    return { ...spot, description: mergeDescription(spot.description || "", generateSpotIntro(spot)) };
   });
 }
 
