@@ -454,34 +454,7 @@ export const okinawaSpots: FishingSpot[] = [
   // ========================================
   // 追加スポット (15スポット: s1136-s1150)
   // ========================================
-  {
-    id: "s1136", name: "宮古島平良港", slug: "miyako-hirara-port",
-    description: "宮古島の玄関口・平良港。珊瑚礁に囲まれたエメラルドグリーンの海で、ミーバイ（ハタ類）やカーエー（フエフキダイ）が狙える。港内防波堤からのサビキ釣りは初心者にも手軽で、離島ならではの魚種の豊富さが魅力。",
-    latitude: 24.7940, longitude: 125.2790,
-    address: "〒906-0013 沖縄県宮古島市平良下里",
-    accessInfo: "宮古空港から車で約15分。市街地中心部に位置。",
-    region: localRegion("r187"), spotType: "port", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "港湾周辺に有料駐車場あり",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "釣具レンタル1500円〜（港近くの釣具店）",
-    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 178,
-    catchableFish: [
-      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
-      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
-          { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
-          { fish: fish("shiira"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-          { fish: fish("kamasu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideStandard, mazumeInfo: mazumeOkinawa,
-    gearGuides: [gearSabiki, gearEging],
-    safetyLevel: "safe",
-    safetyNotes: ["フェリー・貨物船の出入りに注意", "台風シーズン（7〜10月）は天候急変に注意"],
-    youtubeLinks: [
-      { label: "宮古島 平良港 釣り", searchQuery: "宮古島 平良港 釣り サビキ ミーバイ", description: "宮古島平良港での釣り動画" },
-    ],
-  },
+  // 2026-11-23 削除: s1136 宮古島平良港(miyako-hirara-port)は同名の重複。本番の正規URL miyakojima-hirara-port（spots-south-kyushu-detail.ts）に統合済みで、spot-redirects.json で転送。残すとテンプレ由来魚種の削除で dedup の勝者が入れ替わり正規URLが変わるため削除
   {
     id: "s1137", name: "宮古島来間大橋下", slug: "miyako-kurima-bridge",
     description: "宮古島と来間島を結ぶ来間大橋の下の釣りスポット。橋の下の岩礁帯は潮通しが良く、GT（ロウニンアジ）やカスミアジの回遊ポイント。透明度抜群の海で大型魚とのファイトが楽しめる上級者向けポイント。",

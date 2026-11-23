@@ -152,28 +152,7 @@ export const additionalSpotsOkinawa: FishingSpot[] = [
     ],
   },
   // ===== 三重追加 (r60 尾鷲) =====// ===== 沖縄追加 (r50 宮古島) =====
-  {
-    id: "s126", name: "宮古島平良港", slug: "miyako-hirara-port",
-    description: "宮古島の中心港。サンゴ礁に囲まれた美しい海。ガーラ（カスミアジ）やタマン（ハマフエフキ）など南国の大型魚が狙える。",
-    latitude: 24.7934, longitude: 125.2812, address: "〒906-0013 沖縄県宮古島市平良下里",
-    accessInfo: "宮古空港から車で約15分。",
-    region: region("r50"), spotType: "port", difficulty: "intermediate",
-    isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", images: [],
-    rating: 4.1, reviewCount: 56, googleRating: 3.8, googleReviewCount: 18,
-    catchableFish: [
-      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-    ],
-    bestTimes: [{ label: "朝マヅメ", timeRange: "06:15〜08:00", rating: "best" }, { label: "夕マヅメ", timeRange: "17:30〜19:30", rating: "best" }],
-    tackleRecommendations: [],
-    tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "リーフ内に魚が入ってくるタイミング。" },
-    mazumeInfo: { springSunrise: "06:20", springSunset: "18:40", summerSunrise: "05:55", summerSunset: "19:25", autumnSunrise: "06:20", autumnSunset: "17:50", winterSunrise: "07:10", winterSunset: "17:40", tip: "南国の魚はパワフル。タックルは強めに。" },
-    gearGuides: [{ targetFish: "アジ", method: "サビキ釣り", difficulty: "beginner", rod: "磯竿3号3.6m", reel: "スピニング3000番", line: "ナイロン4号", hook: "サビキ仕掛け8号", otherItems: ["コマセカゴ", "アミエビ"], tip: "南国の魚は引きが強いのでやや太仕掛けで。" }],
-    safetyLevel: "caution", safetyNotes: ["日焼け対策必須", "サンゴ礁で足を切る恐れあり"],
-    youtubeLinks: [{ label: "宮古島 釣り", searchQuery: "宮古島 釣り 港 ガーラ", description: "宮古島での釣り動画" }],
-  },
+  // 2026-11-23 削除: s126 宮古島平良港(miyako-hirara-port)は同名の重複。本番の正規URL miyakojima-hirara-port（spots-south-kyushu-detail.ts）に統合済みで、spot-redirects.json で転送。残すとテンプレ由来魚種の削除で dedup の勝者が入れ替わり正規URLが変わるため削除
   {
     id: "s184", name: "宮古島来間大橋下", slug: "miyako-kurima-bridge",
     description: "宮古島と来間島を結ぶ橋の下。透明度抜群の海でサンゴ礁に住む熱帯魚やGTが狙える。絶景ポイント。",
