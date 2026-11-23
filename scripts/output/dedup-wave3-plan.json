@@ -1,0 +1,1104 @@
+[
+ {
+  "winner": "gokasho-wan-k8",
+  "wname": "五ヶ所湾",
+  "losers": [
+   {
+    "slug": "minamiise-gokasho-wan",
+    "name": "南伊勢・五ヶ所湾"
+   }
+  ],
+  "pref": "三重県",
+  "issues": []
+ },
+ {
+  "winner": "hikimoto-ko",
+  "wname": "引本港",
+  "losers": [
+   {
+    "slug": "hikimoto-gyokou-a11",
+    "name": "引本漁港"
+   }
+  ],
+  "pref": "三重県",
+  "issues": []
+ },
+ {
+  "winner": "matsusaka-ryoshi-gyokou",
+  "wname": "松阪 猟師漁港",
+  "losers": [
+   {
+    "slug": "ryoushi-gyokou-a11",
+    "name": "猟師漁港"
+   }
+  ],
+  "pref": "三重県",
+  "issues": []
+ },
+ {
+  "winner": "maejima-futo",
+  "wname": "前島埠頭",
+  "losers": [
+   {
+    "slug": "maizuru-maejima-futou-a10",
+    "name": "舞鶴東港前島埠頭"
+   }
+  ],
+  "pref": "京都府",
+  "issues": []
+ },
+ {
+  "winner": "kariya-wan-saga",
+  "wname": "仮屋湾",
+  "losers": [
+   {
+    "slug": "genkai-kariya-wan-a9",
+    "name": "玄海町・仮屋湾"
+   }
+  ],
+  "pref": "佐賀県",
+  "issues": []
+ },
+ {
+  "winner": "nagoya-kou-saga-s8",
+  "wname": "名護屋港",
+  "losers": [
+   {
+    "slug": "nagoya-gyokou-saga",
+    "name": "名護屋漁港"
+   }
+  ],
+  "pref": "佐賀県",
+  "issues": []
+ },
+ {
+  "winner": "iwaya-gyoko",
+  "wname": "岩屋漁港",
+  "losers": [
+   {
+    "slug": "iwaya-kou-a12",
+    "name": "岩屋港"
+   }
+  ],
+  "pref": "兵庫県",
+  "issues": []
+ },
+ {
+  "winner": "kunimi-gyokou",
+  "wname": "国見漁港",
+  "losers": [
+   {
+    "slug": "kunisaki-kunimi-gyokou-a9",
+    "name": "国東・国見漁港"
+   }
+  ],
+  "pref": "大分県",
+  "issues": []
+ },
+ {
+  "winner": "izumiotsu-shiomi",
+  "wname": "泉大津・汐見埠頭",
+  "losers": [
+   {
+    "slug": "shiomi-futo-detail",
+    "name": "汐見埠頭"
+   }
+  ],
+  "pref": "大阪府",
+  "issues": []
+ },
+ {
+  "winner": "sennan-tarui",
+  "wname": "泉南・樽井漁港",
+  "losers": [
+   {
+    "slug": "tarui-gyokou",
+    "name": "樽井漁港"
+   }
+  ],
+  "pref": "大阪府",
+  "issues": []
+ },
+ {
+  "winner": "mangoku-ura6",
+  "wname": "万石浦",
+  "losers": [
+   {
+    "slug": "ishinomaki-mangokuura-e8",
+    "name": "石巻万石浦"
+   }
+  ],
+  "pref": "宮城県",
+  "issues": []
+ },
+ {
+  "winner": "kitakami-kakou-iwate6",
+  "wname": "北上川河口",
+  "losers": [
+   {
+    "slug": "ishinomaki-kitakamigawa-e8",
+    "name": "石巻北上川河口"
+   }
+  ],
+  "pref": "宮城県",
+  "issues": []
+ },
+ {
+  "winner": "ishinomaki-ogatsu-port",
+  "wname": "石巻雄勝漁港",
+  "losers": [
+   {
+    "slug": "ogatsu-gyokou6",
+    "name": "雄勝漁港"
+   }
+  ],
+  "pref": "宮城県",
+  "issues": []
+ },
+ {
+  "winner": "yamamoto-isohama-e8",
+  "wname": "山元磯浜漁港",
+  "losers": [
+   {
+    "slug": "isohama-port-a10",
+    "name": "磯浜漁港"
+   }
+  ],
+  "pref": "宮城県",
+  "issues": []
+ },
+ {
+  "winner": "nichinan-meitsu-kou-s8",
+  "wname": "日南・目井津港",
+  "losers": [
+   {
+    "slug": "meizu-kou",
+    "name": "目井津港"
+   }
+  ],
+  "pref": "宮崎県",
+  "issues": []
+ },
+ {
+  "winner": "obi-kou-nichinan-w6",
+  "wname": "日南・飫肥港",
+  "losers": [
+   {
+    "slug": "obi-kou-a12",
+    "name": "飫肥港"
+   }
+  ],
+  "pref": "宮崎県",
+  "issues": []
+ },
+ {
+  "winner": "yoshimo-gyokou-w6",
+  "wname": "下関・吉母漁港",
+  "losers": [
+   {
+    "slug": "yoshimo-gyokou-a12",
+    "name": "吉母漁港"
+   },
+   {
+    "slug": "shimonoseki-yoshimo-port",
+    "name": "下関市吉母漁港"
+   }
+  ],
+  "pref": "山口県",
+  "issues": []
+ },
+ {
+  "winner": "kasadojima-kudamatsu-w6",
+  "wname": "下松市・笠戸島",
+  "losers": [
+   {
+    "slug": "kudamatsu-kasadojima",
+    "name": "下松・笠戸島"
+   }
+  ],
+  "pref": "山口県",
+  "issues": []
+ },
+ {
+  "winner": "shunan-sukukojima-gyokou",
+  "wname": "周南市・粭島漁港",
+  "losers": [
+   {
+    "slug": "sukushima-gyokou-a13",
+    "name": "粭島漁港"
+   }
+  ],
+  "pref": "山口県",
+  "issues": []
+ },
+ {
+  "winner": "kojima-kotoura-port",
+  "wname": "倉敷市児島琴浦港",
+  "losers": [
+   {
+    "slug": "kojima-kotoura-kou-c8",
+    "name": "児島・琴浦港"
+   }
+  ],
+  "pref": "岡山県",
+  "issues": []
+ },
+ {
+  "winner": "okayama-asahigawa-kakou",
+  "wname": "岡山市旭川河口護岸",
+  "losers": [
+   {
+    "slug": "asahigawa-kakou-gogan-a10",
+    "name": "旭川河口護岸"
+   }
+  ],
+  "pref": "岡山県",
+  "issues": []
+ },
+ {
+  "winner": "hinase-port-okayama",
+  "wname": "日生漁港",
+  "losers": [
+   {
+    "slug": "bizen-hinase-gyokou-a9",
+    "name": "備前・日生漁港"
+   }
+  ],
+  "pref": "岡山県",
+  "issues": []
+ },
+ {
+  "winner": "mushiake-kou-c8",
+  "wname": "虫明港",
+  "losers": [
+   {
+    "slug": "mushiake-gyokou-a13",
+    "name": "虫明漁港"
+   },
+   {
+    "slug": "setouchi-mushiake-port",
+    "name": "瀬戸内市虫明漁港"
+   }
+  ],
+  "pref": "岡山県",
+  "issues": []
+ },
+ {
+  "winner": "yoshihama-gyokou6",
+  "wname": "吉浜漁港",
+  "losers": [
+   {
+    "slug": "ofunato-yoshihama-port-a13",
+    "name": "大船渡市吉浜漁港"
+   }
+  ],
+  "pref": "岩手県",
+  "issues": []
+ },
+ {
+  "winner": "taneichi-gyokou6",
+  "wname": "種市漁港",
+  "losers": [
+   {
+    "slug": "hirono-taneichi-gyoko",
+    "name": "洋野町種市漁港"
+   }
+  ],
+  "pref": "岩手県",
+  "issues": []
+ },
+ {
+  "winner": "kamaishi-ryoishi-gyokou6",
+  "wname": "釜石両石漁港",
+  "losers": [
+   {
+    "slug": "ryoishi-gyokou-e8",
+    "name": "両石漁港"
+   }
+  ],
+  "pref": "岩手県",
+  "issues": []
+ },
+ {
+  "winner": "hakone-kaigan-shimane-w6",
+  "wname": "波根海岸",
+  "losers": [
+   {
+    "slug": "oda-hane-kaigan-w7",
+    "name": "大田・波根海岸"
+   }
+  ],
+  "pref": "島根県",
+  "issues": []
+ },
+ {
+  "winner": "koizu-gyokou-w7",
+  "wname": "小伊津漁港",
+  "losers": [
+   {
+    "slug": "izumo-koizu-port",
+    "name": "出雲市小伊津漁港"
+   }
+  ],
+  "pref": "島根県",
+  "issues": []
+ },
+ {
+  "winner": "oda-nima-port",
+  "wname": "大田市仁摩漁港",
+  "losers": [
+   {
+    "slug": "nima-gyokou-a11",
+    "name": "仁摩漁港"
+   }
+  ],
+  "pref": "島根県",
+  "issues": []
+ },
+ {
+  "winner": "itotake-port",
+  "wname": "大田市五十猛漁港",
+  "losers": [
+   {
+    "slug": "oda-isotak-gyokou",
+    "name": "大田・五十猛漁港"
+   }
+  ],
+  "pref": "島根県",
+  "issues": []
+ },
+ {
+  "winner": "gotsu-hashigo-port",
+  "wname": "江津市波子漁港",
+  "losers": [
+   {
+    "slug": "hashi-gyokou-a12",
+    "name": "波子漁港"
+   }
+  ],
+  "pref": "島根県",
+  "issues": []
+ },
+ {
+  "winner": "masuda-iinoura-port",
+  "wname": "益田市飯浦漁港",
+  "losers": [
+   {
+    "slug": "iinoura-gyokou-a13",
+    "name": "飯浦漁港"
+   }
+  ],
+  "pref": "島根県",
+  "issues": []
+ },
+ {
+  "winner": "hamada-setogashima",
+  "wname": "浜田市瀬戸ヶ島",
+  "losers": [
+   {
+    "slug": "hamada-setogashima-w7",
+    "name": "浜田・瀬戸ヶ島"
+   }
+  ],
+  "pref": "島根県",
+  "issues": []
+ },
+ {
+  "winner": "mukojima-uta-kou-w6",
+  "wname": "向島・歌港",
+  "losers": [
+   {
+    "slug": "onomichi-mukaisima-uta-kou",
+    "name": "尾道・向島歌港"
+   }
+  ],
+  "pref": "広島県",
+  "issues": []
+ },
+ {
+  "winner": "tsubakidomari-kou-w6",
+  "wname": "椿泊港",
+  "losers": [
+   {
+    "slug": "anan-tsubakidomari-c8",
+    "name": "阿南・椿泊港"
+   }
+  ],
+  "pref": "徳島県",
+  "issues": []
+ },
+ {
+  "winner": "satoura-kaigan-w6",
+  "wname": "里浦海岸",
+  "losers": [
+   {
+    "slug": "naruto-satoura-kaigan-a9",
+    "name": "鳴門・里浦海岸"
+   }
+  ],
+  "pref": "徳島県",
+  "issues": []
+ },
+ {
+  "winner": "anan-tsubakidomari",
+  "wname": "阿南市椿泊漁港",
+  "losers": [
+   {
+    "slug": "tsubakidomari-gyokou-tokushima",
+    "name": "椿泊漁港"
+   }
+  ],
+  "pref": "徳島県",
+  "issues": []
+ },
+ {
+  "winner": "nakabayashi-gyokou-w6",
+  "wname": "中林漁港",
+  "losers": [
+   {
+    "slug": "anan-nakabayashi-gyokou",
+    "name": "阿南・中林漁港"
+   }
+  ],
+  "pref": "徳島県",
+  "issues": []
+ },
+ {
+  "winner": "kitanada-gyokou-w6",
+  "wname": "北灘漁港",
+  "losers": [
+   {
+    "slug": "naruto-kitanada-gyokou",
+    "name": "鳴門市・北灘漁港"
+   }
+  ],
+  "pref": "徳島県",
+  "issues": []
+ },
+ {
+  "winner": "tokushima-komatsushima-wadajima-bulk",
+  "wname": "小松島市・和田島漁港",
+  "losers": [
+   {
+    "slug": "wadajima-gyokou-a12",
+    "name": "和田島漁港"
+   }
+  ],
+  "pref": "徳島県",
+  "issues": []
+ },
+ {
+  "winner": "anan-gamoda-cape",
+  "wname": "阿南市蒲生田岬",
+  "losers": [
+   {
+    "slug": "kamoda-misaki-w6",
+    "name": "蒲生田岬"
+   }
+  ],
+  "pref": "徳島県",
+  "issues": []
+ },
+ {
+  "winner": "nyuugawa-kou-w6",
+  "wname": "西条市・壬生川港",
+  "losers": [
+   {
+    "slug": "saijo-nyugawa-kou-c8",
+    "name": "西条・壬生川港"
+   },
+   {
+    "slug": "nyuugawa-kou-a10",
+    "name": "壬生川港"
+   }
+  ],
+  "pref": "愛媛県",
+  "issues": []
+ },
+ {
+  "winner": "saijo-toyo-port",
+  "wname": "西条市東予港",
+  "losers": [
+   {
+    "slug": "toyo-kou-a12",
+    "name": "東予港"
+   }
+  ],
+  "pref": "愛媛県",
+  "issues": []
+ },
+ {
+  "winner": "imabari-hashihama-kou",
+  "wname": "今治市・波止浜港",
+  "losers": [
+   {
+    "slug": "imabari-hashihama-kou-c8",
+    "name": "今治・波止浜港"
+   },
+   {
+    "slug": "hashihama-port",
+    "name": "波止浜港"
+   },
+   {
+    "slug": "hashihama-gyokou-a13",
+    "name": "波止浜漁港"
+   }
+  ],
+  "pref": "愛媛県",
+  "issues": []
+ },
+ {
+  "winner": "utsumi-shinkou",
+  "wname": "内海新港",
+  "losers": [
+   {
+    "slug": "minamichita-utsumi-shinkou-a13",
+    "name": "南知多・内海新港"
+   }
+  ],
+  "pref": "愛知県",
+  "issues": []
+ },
+ {
+  "winner": "nishio-isshiki-gyokou-add5",
+  "wname": "西尾 一色漁港",
+  "losers": [
+   {
+    "slug": "isshiki-gyokou",
+    "name": "一色漁港"
+   }
+  ],
+  "pref": "愛知県",
+  "issues": []
+ },
+ {
+  "winner": "joetsu-tanihama-kaigan-a13",
+  "wname": "上越・谷浜海岸",
+  "losers": [
+   {
+    "slug": "tanihama-kaigan-niigata",
+    "name": "谷浜海岸"
+   },
+   {
+    "slug": "tanihama-kaigan-e8",
+    "name": "上越市・谷浜海岸"
+   }
+  ],
+  "pref": "新潟県",
+  "issues": []
+ },
+ {
+  "winner": "anegawa-kakou-k8",
+  "wname": "姉川河口",
+  "losers": [
+   {
+    "slug": "nagahama-anegawa-kakou",
+    "name": "長浜・姉川河口"
+   }
+  ],
+  "pref": "滋賀県",
+  "issues": []
+ },
+ {
+  "winner": "biwako-yabase-kihanto",
+  "wname": "琵琶湖 南湖 矢橋帰帆島",
+  "losers": [
+   {
+    "slug": "kusatsu-yabase-kihanto",
+    "name": "草津・矢橋帰帆島"
+   }
+  ],
+  "pref": "滋賀県",
+  "issues": []
+ },
+ {
+  "winner": "biwako-kaizu-osaki",
+  "wname": "琵琶湖 北湖 海津大崎",
+  "losers": [
+   {
+    "slug": "kaizu-osaki-k8",
+    "name": "海津大崎"
+   }
+  ],
+  "pref": "滋賀県",
+  "issues": []
+ },
+ {
+  "winner": "sashiki-gyokou-a12",
+  "wname": "佐敷漁港",
+  "losers": [
+   {
+    "slug": "ashikita-sashiki-kou",
+    "name": "芦北町佐敷港"
+   }
+  ],
+  "pref": "熊本県",
+  "issues": []
+ },
+ {
+  "winner": "ooyano-kou-w6",
+  "wname": "上天草・大矢野港",
+  "losers": [
+   {
+    "slug": "oyano-kou-a12",
+    "name": "大矢野港"
+   }
+  ],
+  "pref": "熊本県",
+  "issues": []
+ },
+ {
+  "winner": "ushibuka-gyokou-amakusa",
+  "wname": "天草 牛深漁港",
+  "losers": [
+   {
+    "slug": "ushibuka-gyokou-a10",
+    "name": "牛深漁港"
+   }
+  ],
+  "pref": "熊本県",
+  "issues": []
+ },
+ {
+  "winner": "tanoura-gyokou-ashikita-w6",
+  "wname": "芦北・田浦漁港",
+  "losers": [
+   {
+    "slug": "tanoura-kou",
+    "name": "田浦港"
+   },
+   {
+    "slug": "tanoura-gyokou-a10",
+    "name": "田浦漁港"
+   }
+  ],
+  "pref": "熊本県",
+  "issues": []
+ },
+ {
+  "winner": "ashikita-hakaishi-kou-s8",
+  "wname": "芦北・計石港",
+  "losers": [
+   {
+    "slug": "hakaishi-gyokou-a13",
+    "name": "計石漁港"
+   }
+  ],
+  "pref": "熊本県",
+  "issues": []
+ },
+ {
+  "winner": "kamiamakusa-ryugatake-kou-s8",
+  "wname": "上天草・龍ヶ岳港",
+  "losers": [
+   {
+    "slug": "ryugatake-kou-a11",
+    "name": "龍ヶ岳港"
+   }
+  ],
+  "pref": "熊本県",
+  "issues": []
+ },
+ {
+  "winner": "tedorigawa-kakou-ishikawa",
+  "wname": "手取川河口",
+  "losers": [
+   {
+    "slug": "hakusan-tedorigawa-kakou-a13",
+    "name": "白山市・手取川河口"
+   }
+  ],
+  "pref": "石川県",
+  "issues": []
+ },
+ {
+  "winner": "suzu-takojima-port",
+  "wname": "珠洲市蛸島漁港",
+  "losers": [
+   {
+    "slug": "suzu-takojima-gyokou",
+    "name": "珠洲・蛸島漁港"
+   }
+  ],
+  "pref": "石川県",
+  "issues": []
+ },
+ {
+  "winner": "saigawa-kakou-e8",
+  "wname": "犀川河口",
+  "losers": [
+   {
+    "slug": "kanazawa-saigawa-kakou-a13",
+    "name": "金沢・犀川河口"
+   }
+  ],
+  "pref": "石川県",
+  "issues": []
+ },
+ {
+  "winner": "odawara-hayakawa-port",
+  "wname": "小田原早川港",
+  "losers": [
+   {
+    "slug": "hayakawa-kou",
+    "name": "早川港"
+   }
+  ],
+  "pref": "神奈川県",
+  "issues": [
+   "ban loser: hayakawa-kou=partial winnerBan=partial",
+   "loser refs: hayakawa-kou@spot-ban-overrides.ts"
+  ]
+ },
+ {
+  "winner": "awara-kitagata-ko",
+  "wname": "あわら・北潟湖",
+  "losers": [
+   {
+    "slug": "kitagata-ko",
+    "name": "北潟湖"
+   }
+  ],
+  "pref": "福井県",
+  "issues": []
+ },
+ {
+  "winner": "obama-anou-gyokou-fukui",
+  "wname": "小浜・阿納漁港",
+  "losers": [
+   {
+    "slug": "ano-gyoko",
+    "name": "阿納漁港"
+   }
+  ],
+  "pref": "福井県",
+  "issues": []
+ },
+ {
+  "winner": "wakita-fishing-pier",
+  "wname": "脇田海釣り桟橋",
+  "losers": [
+   {
+    "slug": "wakita-umitsuri-w6",
+    "name": "北九州・脇田海釣り桟橋"
+   }
+  ],
+  "pref": "福岡県",
+  "issues": []
+ },
+ {
+  "winner": "wakamatsu-port",
+  "wname": "若松港",
+  "losers": [
+   {
+    "slug": "wakamatsu-kou-w6",
+    "name": "北九州・若松港"
+   }
+  ],
+  "pref": "福岡県",
+  "issues": []
+ },
+ {
+  "winner": "kitakyushu-moji-port",
+  "wname": "北九州・門司港",
+  "losers": [
+   {
+    "slug": "moji-kou-w5",
+    "name": "門司港"
+   }
+  ],
+  "pref": "福岡県",
+  "issues": []
+ },
+ {
+  "winner": "iwaki-yotsukura-port",
+  "wname": "いわき市四倉漁港",
+  "losers": [
+   {
+    "slug": "yotsukura-gyokou",
+    "name": "四倉漁港"
+   },
+   {
+    "slug": "iwaki-yotsukura-gyokou-e8",
+    "name": "いわき四倉漁港"
+   }
+  ],
+  "pref": "福島県",
+  "issues": []
+ },
+ {
+  "winner": "iwaki-hisanohama-port",
+  "wname": "いわき市久之浜漁港",
+  "losers": [
+   {
+    "slug": "iwaki-hisanohama-e8",
+    "name": "いわき久之浜漁港"
+   }
+  ],
+  "pref": "福島県",
+  "issues": []
+ },
+ {
+  "winner": "tennou-kaigan-surf6",
+  "wname": "天王海岸サーフ",
+  "losers": [
+   {
+    "slug": "katagami-tenno-beach-a13",
+    "name": "潟上市天王海岸サーフ"
+   }
+  ],
+  "pref": "秋田県",
+  "issues": []
+ },
+ {
+  "winner": "nikaho-kisakata-port",
+  "wname": "にかほ市象潟漁港",
+  "losers": [
+   {
+    "slug": "kisakata-gyoko",
+    "name": "象潟漁港"
+   }
+  ],
+  "pref": "秋田県",
+  "issues": []
+ },
+ {
+  "winner": "nishime-gyokou6",
+  "wname": "西目漁港",
+  "losers": [
+   {
+    "slug": "yurihonjo-nishime-e8",
+    "name": "由利本荘西目漁港"
+   }
+  ],
+  "pref": "秋田県",
+  "issues": []
+ },
+ {
+  "winner": "kuchinotsu-kou-w6",
+  "wname": "南島原・口之津港",
+  "losers": [
+   {
+    "slug": "kuchinotsu-kou",
+    "name": "口之津港"
+   }
+  ],
+  "pref": "長崎県",
+  "issues": []
+ },
+ {
+  "winner": "suwako-nagano-add5",
+  "wname": "諏訪湖",
+  "losers": [
+   {
+    "slug": "nagano-suwa-lake",
+    "name": "長野諏訪湖"
+   }
+  ],
+  "pref": "長野県",
+  "issues": []
+ },
+ {
+  "winner": "mutsu-oohata-gyokou6",
+  "wname": "むつ市大畑漁港",
+  "losers": [
+   {
+    "slug": "ohata-gyoko",
+    "name": "大畑漁港"
+   }
+  ],
+  "pref": "青森県",
+  "issues": []
+ },
+ {
+  "winner": "shiranuka-gyoko-aomori",
+  "wname": "白糠漁港",
+  "losers": [
+   {
+    "slug": "higashidori-shiranuka-port-a11",
+    "name": "東通村白糠漁港"
+   }
+  ],
+  "pref": "青森県",
+  "issues": []
+ },
+ {
+  "winner": "hokkawa-gyokou",
+  "wname": "北川漁港",
+  "losers": [
+   {
+    "slug": "hokkawa-port",
+    "name": "北川港"
+   }
+  ],
+  "pref": "静岡県",
+  "issues": []
+ },
+ {
+  "winner": "arari-port",
+  "wname": "安良里港",
+  "losers": [
+   {
+    "slug": "nishiizu-arari-kou-e8",
+    "name": "西伊豆・安良里港"
+   }
+  ],
+  "pref": "静岡県",
+  "issues": []
+ },
+ {
+  "winner": "hiketa-kou-w6",
+  "wname": "東かがわ・引田港",
+  "losers": [
+   {
+    "slug": "hiketa-port-kagawa",
+    "name": "引田港"
+   },
+   {
+    "slug": "hiketa-gyokou-w5",
+    "name": "引田漁港"
+   },
+   {
+    "slug": "higashikagawa-hiketa-port",
+    "name": "東かがわ市引田港"
+   }
+  ],
+  "pref": "香川県",
+  "issues": []
+ },
+ {
+  "winner": "marugame-port-teibo",
+  "wname": "丸亀港堤防",
+  "losers": [
+   {
+    "slug": "marugame-hiroshima-kou",
+    "name": "丸亀市・広島港堤防"
+   }
+  ],
+  "pref": "香川県",
+  "issues": []
+ },
+ {
+  "winner": "shirotori-gyokou-w6",
+  "wname": "白鳥漁港",
+  "losers": [
+   {
+    "slug": "higashikagawa-shiratori-port",
+    "name": "東かがわ市白鳥漁港"
+   }
+  ],
+  "pref": "香川県",
+  "issues": []
+ },
+ {
+  "winner": "tei-kou-w6",
+  "wname": "香南市・手結港",
+  "losers": [
+   {
+    "slug": "tei-kou-a11",
+    "name": "手結港"
+   }
+  ],
+  "pref": "高知県",
+  "issues": []
+ },
+ {
+  "winner": "muroto-sakihama-gyokou",
+  "wname": "室戸市・佐喜浜漁港",
+  "losers": [
+   {
+    "slug": "sakihama-gyokou-a10",
+    "name": "佐喜浜漁港"
+   }
+  ],
+  "pref": "高知県",
+  "issues": []
+ },
+ {
+  "winner": "kochi-tosa-usa-bulk",
+  "wname": "土佐市・宇佐漁港",
+  "losers": [
+   {
+    "slug": "usa-gyokou-a11",
+    "name": "宇佐漁港"
+   }
+  ],
+  "pref": "高知県",
+  "issues": []
+ },
+ {
+  "winner": "daisen-mikuriya-port",
+  "wname": "大山町御来屋漁港",
+  "losers": [
+   {
+    "slug": "mikuriya-gyokou-w6",
+    "name": "御来屋漁港"
+   }
+  ],
+  "pref": "鳥取県",
+  "issues": [
+   "ban loser: mikuriya-gyokou-w6=partial winnerBan=partial",
+   "loser refs: mikuriya-gyokou-w6@spot-ban-overrides.ts"
+  ]
+ },
+ {
+  "winner": "hashizu-port",
+  "wname": "橋津漁港",
+  "losers": [
+   {
+    "slug": "hashizu-kou-c8",
+    "name": "橋津港"
+   }
+  ],
+  "pref": "鳥取県",
+  "issues": []
+ },
+ {
+  "winner": "kushikino-gyokou-w6",
+  "wname": "いちき串木野・串木野漁港",
+  "losers": [
+   {
+    "slug": "kushikino-gyokou",
+    "name": "串木野漁港"
+   }
+  ],
+  "pref": "鹿児島県",
+  "issues": []
+ },
+ {
+  "winner": "sendai-kou-satsumasendai-w6",
+  "wname": "薩摩川内・川内港",
+  "losers": [
+   {
+    "slug": "sendai-kou-kagoshima",
+    "name": "川内港"
+   }
+  ],
+  "pref": "鹿児島県",
+  "issues": []
+ },
+ {
+  "winner": "nejime-kou-w6",
+  "wname": "南大隅・根占港",
+  "losers": [
+   {
+    "slug": "nejime-kou-s8",
+    "name": "根占港"
+   }
+  ],
+  "pref": "鹿児島県",
+  "issues": []
+ },
+ {
+  "winner": "bonotsu-gyokou-w6",
+  "wname": "南さつま・坊津漁港",
+  "losers": [
+   {
+    "slug": "bonotsu-gyokou-a11",
+    "name": "坊津漁港"
+   }
+  ],
+  "pref": "鹿児島県",
+  "issues": []
+ }
+]

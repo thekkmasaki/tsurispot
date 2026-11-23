@@ -256,7 +256,7 @@ const TOTTORI_GYOKO_SLUGS = [
   "daisen-mikuriya-port", "tottori-karo-port", "uradome-ajiro-port", "natsudumari-gyokou-w7", "nakayama-ousaka-port",
   "yodoe-gyokou-w7", "higashihama-port-tottori", "hashizu-port", "aoya-gyokou-w6", "daisen-shiotsu-port",
   "yurihama-tomari-port", "hamamura-port", "iwado-port-tottori", "yonago-kou-w7", "nawa-gyokou-w7", "yura-port-tottori",
-  "sakaiminato-suido", "ajiro-gyokou-tottori", "mikuriya-gyokou-w6", "iwami-hao-gyokou", "tottori-sakatsu-gyokou",
+  "sakaiminato-suido", "ajiro-gyokou-tottori", "iwami-hao-gyokou", "tottori-sakatsu-gyokou",
   "akasaki-gyokou-tottori", "sakatsu-gyokou-tottori-w6", "sotoe-kou-sakaiminato-w6", "funaiso-kou-w6", "igumi-kou-w7",
   "hamamura-kou-w7", "tottori-iwami-makidani-bulk", "tottori-iwami-kugami-bulk", "tottori-aoya-nagawase-bulk",
   "tottori-kotoura-bessho-bulk", "tottorikou-karo-a9", "kotoura-kou-a11", "tohaku-gyokou-a12", "fukube-gyokou-a13",
@@ -403,7 +403,6 @@ export const spotBanOverrides: Record<string, SpotBanOverride> = {
   "odawara-hayakawa-port": ODAWARA,
   "odawara-hayakawa-kou-e8": ODAWARA,
   "odawara-kou-hayakawa-a11": ODAWARA,
-  "hayakawa-kou": ODAWARA,
 
   "umikaze-park": {
     fishingBan: {

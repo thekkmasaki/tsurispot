@@ -41,6 +41,7 @@ import { Separator } from "@/components/ui/separator";
 import { trimDescription, buildSpotTitle } from "@/lib/utils/seo";
 import { buildSpotMetaDescription } from "@/lib/seo/meta-description";
 import { isLowQualitySpot, isSitemapEligible } from "@/lib/seo-quality";
+import { getSpotAliasNames, getVisibleSpotAliases } from "@/lib/data/spot-aliases";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
 import { TrackedSpotLink } from "@/components/spots/tracked-spot-link";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
@@ -216,7 +217,8 @@ export async function generateMetadata({
   return {
     title,
     description,
-    keywords: [spot.name, spot.region.prefecture, spot.region.areaName, "釣り場", "釣りスポット", ...spot.catchableFish.slice(0, 5).map((cf) => cf.fish.name)],
+    // 別名・旧名（src/lib/data/spot-aliases.ts）も検索語として持たせる
+    keywords: [spot.name, ...getSpotAliasNames(spot.slug, spot.name), spot.region.prefecture, spot.region.areaName, "釣り場", "釣りスポット", ...spot.catchableFish.slice(0, 5).map((cf) => cf.fish.name)],
     ...(isLowQuality && {
       robots: { index: false, follow: true },
     }),
@@ -388,11 +390,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // 2026-11: 旧「◯月の釣りシーズン」Event（実在しないイベント＝Googleのイベント要件違反）と、
   // 堤防・浜を LocalBusiness として二重定義していたブロック（Google評価転載の aggregateRating 含む）を削除。
   // speakable は WebPage（spotSpeakableJsonLd）側の1箇所に集約。
+  const spotAliasNames = getSpotAliasNames(spot.slug, spot.name);
+  const visibleAliases = getVisibleSpotAliases(spot.slug, spot.name);
   const jsonLd = {
     "@context": "https://schema.org",
     // 管理釣り場・釣り堀は営業時間・電話・料金を持つ施設型も併記（Google の LocalBusiness 系プロパティが使える）
     "@type": spot.isManagedPond ? ["TouristAttraction", "SportsActivityLocation"] : "TouristAttraction",
     name: spot.name,
+    // 通称・旧名（実クエリ or 公開データに根拠のあるものだけ。src/lib/data/spot-aliases.ts）
+    ...(spotAliasNames.length > 0 && { alternateName: spotAliasNames }),
     description: spot.description,
     url: `https://tsurispot.com/spots/${spot.slug}`,
     address: {
@@ -872,6 +878,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* 説明文（スポット固有の導入文）。テンプレ自動文(generateSpotIntro)の重複描画は
             コアアップデート対策で廃止。実データ(下部の魚種カレンダー/施設/潮汐/釣果)を本体とする。 */}
         <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
+          {/* 別名・旧名: 正式名と違う呼び方で検索して来た人に「同じ場所」だと伝える（正式名に含まれる別名は出さない） */}
+          {visibleAliases && (
+            <p className="text-xs">
+              {visibleAliases.kind === "former" ? "旧名" : "別名・通称"}：
+              {visibleAliases.names.map((n) => `「${n}」`).join("")}
+            </p>
+          )}
           <p>{spot.description}</p>
           {/* 管理釣り場・釣り堀: 料金・営業時間・定休日・魚を1段落で言い切る要約（AI検索・音声が引用しやすい形） */}
           {spot.isManagedPond && (

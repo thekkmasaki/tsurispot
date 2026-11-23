@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fishingSpots } from "@/lib/data/spots";
+import { getSpotAliasNames } from "@/lib/data/spot-aliases";
 import { fishSpecies } from "@/lib/data/fish";
 import { blogPosts } from "@/lib/data/blog";
 
@@ -104,6 +105,9 @@ function getSearchIndex(): IndexItem[] {
         s.region.areaName,
         katakanaToHiragana(s.name),
         (s.address || "").replace(s.region.prefecture, ""),
+        // 別名・旧名（「関電白灯」「竹野大波止」等の通称でも引けるようにする）
+        ...getSpotAliasNames(s.slug, s.name),
+        ...getSpotAliasNames(s.slug, s.name).map(katakanaToHiragana),
         // 地形（水深）: 「深場」「ドン深」「遠浅」等で引けるようにする（海しる等深線による目安）
         terrainWords(s.slug),
       ].join(" ").toLowerCase(),
