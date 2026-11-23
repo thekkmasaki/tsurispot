@@ -28,6 +28,8 @@ import { monthLastModified } from "@/lib/sitemap-dates";
 import { STATION_SLUGS } from "@/lib/tide/station-slugs";
 import { SPOT_FEATURES, getFeaturePrefCombos, MIN_SPOTS_PER_PREF } from "@/lib/data/spot-features";
 import { getSpotsForArea } from "@/lib/data/area-groups";
+import { getIndexableCities } from "@/lib/data/city-origins";
+import { getTrainRegions } from "@/lib/data/train-spots";
 import { getPublishableAccommodations } from "@/lib/data/accommodations";
 import {
   LATEST_CONTENT_DATE,
@@ -231,6 +233,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/fishing-spots/best-saltwater`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/fishing-spots/river-beginner`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/fishing-spots/near-me`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
+    // 都市から近い釣り場（件数・重なりの品質ゲートを通った都市だけ。src/lib/data/city-origins.ts）
+    ...getIndexableCities().map((c) => ({
+      url: `${baseUrl}/fishing-spots/near/${c.slug}`, lastModified: dynamicDate, changeFrequency: "weekly" as const, priority: 0.7,
+    })),
+    // 電車で行ける釣り場（ハブ＋件数の下限を満たす地域）
+    { url: `${baseUrl}/fishing-spots/by-train`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.7 },
+    ...getTrainRegions().map(({ region }) => ({
+      url: `${baseUrl}/fishing-spots/by-train/${region.slug}`, lastModified: dynamicDate, changeFrequency: "weekly" as const, priority: 0.7,
+    })),
     // ガイド（全28ページ）
     { url: `${baseUrl}/guide`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/guide/beginner`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },

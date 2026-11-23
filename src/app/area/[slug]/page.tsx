@@ -17,6 +17,9 @@ import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { getSpotsForArea, getAreaMunicipalityName, getAreaRepSlug, getAllAreaGroups } from "@/lib/data/area-groups";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 import { spotsLatestYmd } from "@/lib/content-dates";
+import { SpotCard } from "@/components/spots/spot-card";
+import { getSpotsNear, getIndexableCities } from "@/lib/data/city-origins";
+import { haversineKm } from "@/lib/geo/distance";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -167,7 +170,7 @@ export async function generateMetadata({
   if (freeCount > 0) facilityParts.push(`無料${freeCount}箇所`);
   const facilityText = facilityParts.length > 0 ? facilityParts.join("、") + "。" : "";
 
-  const titleSuffix = familyCount > 0 ? "子連れ・穴場スポットも紹介" : "穴場スポットも紹介";
+  const titleSuffix = familyCount > 0 ? "近くの穴場・子連れスポットも" : "近くの穴場スポットも紹介";
 
   // スポット0件のみ noindex。実在スポットを1件でも持つエリアは index 対象にして
   // ロングテール（地名×釣り場）の検索流入を取りこぼさない。
@@ -230,6 +233,8 @@ export function generateStaticParams() {
   return regions.map((region) => ({ slug: region.slug }));
 }
 
+const NEARBY_OUTSIDE_KM = 20;
+
 export default async function AreaDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const baseRegion = getRegionBySlug(slug);
@@ -261,6 +266,21 @@ export default async function AreaDetailPage({ params }: PageProps) {
   const avgLng = spotsWithCoords.length > 0
     ? spotsWithCoords.reduce((sum, s) => sum + s.longitude, 0) / spotsWithCoords.length
     : null;
+
+  // 「〇〇 近く 釣り場」向け: 市区町村の外で、エリアの中心から直線20km以内の釣り場（近い順6件）
+  const areaSlugSet = new Set(spots.map((s) => s.slug));
+  const nearbyOutside =
+    avgLat !== null && avgLng !== null
+      ? getSpotsNear(avgLat, avgLng, NEARBY_OUTSIDE_KM).filter((s) => !areaSlugSet.has(s.slug)).slice(0, 6)
+      : [];
+  // 一番近い「〇〇から近い釣り場」都市ページ（60km以内のときだけ）
+  const nearestCity =
+    avgLat !== null && avgLng !== null
+      ? getIndexableCities()
+          .map((c) => ({ c, d: haversineKm(avgLat, avgLng, c.lat, c.lng) }))
+          .filter((x) => x.d <= 60)
+          .sort((a, b) => a.d - b.d)[0]?.c
+      : undefined;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -529,6 +549,28 @@ export default async function AreaDetailPage({ params }: PageProps) {
       </section>
 
       <InArticleAd />
+
+      {/* 市区町村の外の近くの釣り場（距離つき） */}
+      {nearbyOutside.length > 0 && (
+        <section className="mt-8 sm:mt-12">
+          <h2 className="mb-1 text-base font-bold sm:text-lg">{region.areaName}の近くの釣り場（市区町村外）</h2>
+          <p className="mb-3 text-xs text-muted-foreground sm:mb-4">
+            {region.areaName}の釣り場の中心から直線{NEARBY_OUTSIDE_KM}km以内にある、ほかの市区町村の釣り場です（近い順）。
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {nearbyOutside.map((s) => (
+              <SpotCard key={s.id} spot={toListSpot(s)} distance={s.distanceKm} />
+            ))}
+          </div>
+          {nearestCity && (
+            <p className="mt-3 text-right text-sm">
+              <Link prefetch={false} href={`/fishing-spots/near/${nearestCity.slug}`} className="text-primary hover:underline">
+                {nearestCity.name}から近い釣り場をもっと見る →
+              </Link>
+            </p>
+          )}
+        </section>
+      )}
 
       {/* Same prefecture regions for internal linking */}
       {samePreRegions.length > 0 && (

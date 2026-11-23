@@ -10,6 +10,7 @@ import { regionGroupOrder, getPrefecturesByRegionGroup } from "@/lib/data/prefec
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { NearMeClient } from "./near-me-client";
+import { getIndexableCities } from "@/lib/data/city-origins";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const dynamic = "force-static";
@@ -20,6 +21,9 @@ const totalSpotCount = fishingSpots.length;
 const totalSpotLabel = totalSpotCount >= 1000
   ? `${Math.floor(totalSpotCount / 100) * 100}`
   : String(totalSpotCount);
+
+/* ---------- 都市から近い釣り場ページ（北から順） ---------- */
+const nearCities = getIndexableCities();
 
 /* ---------- 地域別TOP5ランキング ---------- */
 function getRegionTopSpots(regionPrefectures: string[], limit = 5) {
@@ -436,6 +440,31 @@ export default function NearMePage() {
         <div className="mt-3 text-right">
           <Link prefetch={false} href="/catchable-now" className="text-sm text-primary hover:underline">
             今釣れる魚をもっと見る →
+          </Link>
+        </div>
+      </section>
+
+      {/* ===== 都市から近い釣り場・電車で行ける釣り場（静的な受け皿ページへの導線） ===== */}
+      <section className="mt-12">
+        <h2 className="mb-4 text-lg font-bold sm:text-xl md:text-2xl">都市から近い釣り場</h2>
+        <p className="mb-4 text-sm text-muted-foreground">
+          主要都市の駅から直線距離で近い釣り場を、都市ごとにまとめています。
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {nearCities.map((c) => (
+            <Link
+              prefetch={false}
+              key={c.slug}
+              href={`/fishing-spots/near/${c.slug}`}
+              className="rounded-full border px-3 py-1.5 text-sm hover:bg-muted"
+            >
+              {c.name}
+            </Link>
+          ))}
+        </div>
+        <div className="mt-3 text-right">
+          <Link prefetch={false} href="/fishing-spots/by-train" className="text-sm text-primary hover:underline">
+            車なしで行ける「電車で行ける釣り場」を見る →
           </Link>
         </div>
       </section>

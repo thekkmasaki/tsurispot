@@ -17,7 +17,7 @@ import {
   getNeighborCities,
   type SpotWithDistance,
 } from "@/lib/data/city-origins";
-import { parseStationWalk, TRAIN_WALK_MAX_MINUTES } from "@/lib/data/station-access";
+import { parseStationWalk, TRAIN_WALK_MAX_MINUTES, type StationWalk } from "@/lib/data/station-access";
 import { composeMetaDescription, joinNames } from "@/lib/seo/meta-description";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 
@@ -44,7 +44,7 @@ function buildPageData(citySlug: string) {
 
   const trainSpots = spots
     .map((s) => ({ spot: s, walk: parseStationWalk(s.accessInfo) }))
-    .filter((x): x is { spot: SpotWithDistance; walk: NonNullable<typeof x.walk> } =>
+    .filter((x): x is { spot: SpotWithDistance; walk: StationWalk } =>
       x.walk !== null && x.walk.minutes <= TRAIN_WALK_MAX_MINUTES,
     )
     .slice(0, TRAIN_LIST_LIMIT);
