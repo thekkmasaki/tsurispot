@@ -290,7 +290,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     latitude: 34.9720, longitude: 139.7825,
     address: "〒294-0308 千葉県館山市坂田421-2",
     accessInfo: "JR館山駅からバスで約20分。富津館山道路富浦ICから約15分。",
-    region: lr("r1052"), spotType: "port", difficulty: "beginner",
+    region: lr("r1052"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "釣り人用の駐車場なし（路上駐車・漁港内への駐車は不可）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/bandakou.webp", imageAttribution: "Photo: Higa4 / Wikimedia Commons (CC0)", images: [], rating: 3.8, reviewCount: 48, googleRating: 4.8, googleReviewCount: 4,
