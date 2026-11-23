@@ -479,4 +479,119 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "houkigawa-shiobara": "shiobara-houkigawa6", // 箒川（塩原渓谷） → 塩原渓谷箒川：同じ区間（那須塩原市塩原）
   "kameyama-dam": "kimitsu-kameyamako-a13", // 亀山ダム → 君津・亀山湖：同じダム湖（同住所 川俣旧川俣）
   "kesennuma-oshima-kameyama-rocky-a13": "kesennuma-oshima-rocky-a10", // 気仙沼市大島亀山展望台下磯 → 気仙沼大島亀山磯：同じ亀山の下の磯
+  // ---- 2026-11-23 追加分（同一市区町村の未判定候補 12 グループ＋保留の館鼻・葉山を判定） ----
+  "uchibo-hota-port": "hota-port", // 内房保田漁港 → 保田港：同住所（鋸南町吉浜99-5）の同じ港
+  "hota-gyoko-banya": "hota-port", // 保田漁港（ばんや） → 保田港：同住所。「ばんや」は港の食堂で別地物ではない
+  "hota-gyoko6": "hota-port", // 保田漁港 → 保田港：同じ港（統合元は座標が約3km南）
+  "amatsu-ko": "amatsu-kou", // 天津港（天津漁港） → 天津港：同住所（鴨川市天津1390）
+  "amatsu-gyoko6": "amatsu-kou", // 天津漁港 → 天津港：同じ港（統合元は座標が約5km西）
+  "kominato-gyoko6": "kominato-port-chiba", // 小湊漁港 → 小湊港：同じ港（統合元は座標が約4km西）
+  "nabakigawa-kakou-shirako-a10": "nabakigawa-kakko6", // 南白亀川河口（白子海岸） → 南白亀川河口：同じ河口（495m）
+  "obitsu-kakou-kisarazu-a12": "obitsu-kakko6", // 小櫃川河口（木更津） → 小櫃川河口：同じ河口（木更津市）
+  "minamiboso-wadaura-gyokou-a13": "wadaura-gyoko6", // 南房総・和田浦漁港 → 和田浦漁港：地名接頭辞違い（1.3km）
+  "shirako-kaigan6": "shirako-kaigan-surf", // 白子海岸 → 白子海岸サーフ：同じ浜（白子町）
+  "iioka-gyoko6": "iioka-port", // 飯岡漁港 → 飯岡港：同じ港（同住所 旭市下永井）
+  "okutama-lake-ogouchi-a10": "okutama-ko6", // 奥多摩湖（小河内貯水池） → 奥多摩湖：同じ湖（小河内貯水池＝奥多摩湖）
+  "tokyo-mizumoto-kouen-a13": "mizumoto-koen6", // 東京・水元公園 → 水元公園：同じ公園（地名接頭辞違い）
+  "hachinohe-tatehana-port": "hachinohe-tatehana-gyokou6", // 八戸館鼻漁港 → 八戸港館鼻漁港：同じ漁港。勝者はGSCで「八戸釣り情報」6.6位のURLを維持
+  "hachinohe-tatehana-wharf": "hachinohe-tatehana-ganpeki", // 八戸館鼻岸壁 → 八戸港館鼻岸壁：同住所の同じ岸壁（漁港と岸壁は decisions-1 で別扱いのまま）
+  "hayama-abuzuri-add2": "hayama-port", // 葉山港（あぶずり港） → 葉山港：同住所（葉山町堀内50）。勝者の説明文に「あぶずり港とも呼ばれ」
+  // ---- 2026-11-23 第3弾: 同一市区町村の保留候補（dedup-wave2-plan.json review）を規則で判定 ----
+  // 判定規則: 地域接頭辞（県・市郡・郡の町村）を除いた名称が一致し、括弧で区画（埠頭・地区・設備）を示していないもの。
+  // 「港」と「漁港」の違いだけのものは住所の大字が一致するか1.5km以内のときのみ。過去に個別理由で保留したものは除外。
+  // 目視で除外: 岩屋漁港/岩屋港（フェリー港と漁港）・丸亀港/広島港（丸亀市広島は島）・北上川河口（新旧で別の河口）・門司港（別地区）
+  "minamiise-gokasho-wan": "gokasho-wan-k8", // 南伊勢・五ヶ所湾 → 五ヶ所湾：同一施設の表記違い（三重県・同一市区町村）
+  "hikimoto-gyokou-a11": "hikimoto-ko", // 引本漁港 → 引本港：同一施設の表記違い（三重県・同一市区町村）
+  "ryoushi-gyokou-a11": "matsusaka-ryoshi-gyokou", // 猟師漁港 → 松阪 猟師漁港：同一施設の表記違い（三重県・同一市区町村）
+  "maizuru-maejima-futou-a10": "maejima-futo", // 舞鶴東港前島埠頭 → 前島埠頭：同一施設の表記違い（京都府・同一市区町村）
+  "genkai-kariya-wan-a9": "kariya-wan-saga", // 玄海町・仮屋湾 → 仮屋湾：同一施設の表記違い（佐賀県・同一市区町村）
+  "nagoya-gyokou-saga": "nagoya-kou-saga-s8", // 名護屋漁港 → 名護屋港：同一施設の表記違い（佐賀県・同一市区町村）
+  "kunisaki-kunimi-gyokou-a9": "kunimi-gyokou", // 国東・国見漁港 → 国見漁港：同一施設の表記違い（大分県・同一市区町村）
+  "shiomi-futo-detail": "izumiotsu-shiomi", // 汐見埠頭 → 泉大津・汐見埠頭：同一施設の表記違い（大阪府・同一市区町村）
+  "tarui-gyokou": "sennan-tarui", // 樽井漁港 → 泉南・樽井漁港：同一施設の表記違い（大阪府・同一市区町村）
+  "ishinomaki-mangokuura-e8": "mangoku-ura6", // 石巻万石浦 → 万石浦：同一施設の表記違い（宮城県・同一市区町村）
+  "ogatsu-gyokou6": "ishinomaki-ogatsu-port", // 雄勝漁港 → 石巻雄勝漁港：同一施設の表記違い（宮城県・同一市区町村）
+  "isohama-port-a10": "yamamoto-isohama-e8", // 磯浜漁港 → 山元磯浜漁港：同一施設の表記違い（宮城県・同一市区町村）
+  "meizu-kou": "nichinan-meitsu-kou-s8", // 目井津港 → 日南・目井津港：同一施設の表記違い（宮崎県・同一市区町村）
+  "obi-kou-a12": "obi-kou-nichinan-w6", // 飫肥港 → 日南・飫肥港：同一施設の表記違い（宮崎県・同一市区町村）
+  "yoshimo-gyokou-a12": "yoshimo-gyokou-w6", // 吉母漁港 → 下関・吉母漁港：同一施設の表記違い（山口県・同一市区町村）
+  "shimonoseki-yoshimo-port": "yoshimo-gyokou-w6", // 下関市吉母漁港 → 下関・吉母漁港：同一施設の表記違い（山口県・同一市区町村）
+  "kudamatsu-kasadojima": "kasadojima-kudamatsu-w6", // 下松・笠戸島 → 下松市・笠戸島：同一施設の表記違い（山口県・同一市区町村）
+  "sukushima-gyokou-a13": "shunan-sukukojima-gyokou", // 粭島漁港 → 周南市・粭島漁港：同一施設の表記違い（山口県・同一市区町村）
+  "kojima-kotoura-kou-c8": "kojima-kotoura-port", // 児島・琴浦港 → 倉敷市児島琴浦港：同一施設の表記違い（岡山県・同一市区町村）
+  "asahigawa-kakou-gogan-a10": "okayama-asahigawa-kakou", // 旭川河口護岸 → 岡山市旭川河口護岸：同一施設の表記違い（岡山県・同一市区町村）
+  "bizen-hinase-gyokou-a9": "hinase-port-okayama", // 備前・日生漁港 → 日生漁港：同一施設の表記違い（岡山県・同一市区町村）
+  "mushiake-gyokou-a13": "mushiake-kou-c8", // 虫明漁港 → 虫明港：同一施設の表記違い（岡山県・同一市区町村）
+  "setouchi-mushiake-port": "mushiake-kou-c8", // 瀬戸内市虫明漁港 → 虫明港：同一施設の表記違い（岡山県・同一市区町村）
+  "ofunato-yoshihama-port-a13": "yoshihama-gyokou6", // 大船渡市吉浜漁港 → 吉浜漁港：同一施設の表記違い（岩手県・同一市区町村）
+  "hirono-taneichi-gyoko": "taneichi-gyokou6", // 洋野町種市漁港 → 種市漁港：同一施設の表記違い（岩手県・同一市区町村）
+  "ryoishi-gyokou-e8": "kamaishi-ryoishi-gyokou6", // 両石漁港 → 釜石両石漁港：同一施設の表記違い（岩手県・同一市区町村）
+  "oda-hane-kaigan-w7": "hakone-kaigan-shimane-w6", // 大田・波根海岸 → 波根海岸：同一施設の表記違い（島根県・同一市区町村）
+  "izumo-koizu-port": "koizu-gyokou-w7", // 出雲市小伊津漁港 → 小伊津漁港：同一施設の表記違い（島根県・同一市区町村）
+  "nima-gyokou-a11": "oda-nima-port", // 仁摩漁港 → 大田市仁摩漁港：同一施設の表記違い（島根県・同一市区町村）
+  "oda-isotak-gyokou": "itotake-port", // 大田・五十猛漁港 → 大田市五十猛漁港：同一施設の表記違い（島根県・同一市区町村）
+  "hashi-gyokou-a12": "gotsu-hashigo-port", // 波子漁港 → 江津市波子漁港：同一施設の表記違い（島根県・同一市区町村）
+  "iinoura-gyokou-a13": "masuda-iinoura-port", // 飯浦漁港 → 益田市飯浦漁港：同一施設の表記違い（島根県・同一市区町村）
+  "hamada-setogashima-w7": "hamada-setogashima", // 浜田・瀬戸ヶ島 → 浜田市瀬戸ヶ島：同一施設の表記違い（島根県・同一市区町村）
+  "onomichi-mukaisima-uta-kou": "mukojima-uta-kou-w6", // 尾道・向島歌港 → 向島・歌港：同一施設の表記違い（広島県・同一市区町村）
+  "anan-tsubakidomari-c8": "tsubakidomari-kou-w6", // 阿南・椿泊港 → 椿泊港：同一施設の表記違い（徳島県・同一市区町村）
+  "naruto-satoura-kaigan-a9": "satoura-kaigan-w6", // 鳴門・里浦海岸 → 里浦海岸：同一施設の表記違い（徳島県・同一市区町村）
+  "tsubakidomari-gyokou-tokushima": "anan-tsubakidomari", // 椿泊漁港 → 阿南市椿泊漁港：同一施設の表記違い（徳島県・同一市区町村）
+  "anan-nakabayashi-gyokou": "nakabayashi-gyokou-w6", // 阿南・中林漁港 → 中林漁港：同一施設の表記違い（徳島県・同一市区町村）
+  "naruto-kitanada-gyokou": "kitanada-gyokou-w6", // 鳴門市・北灘漁港 → 北灘漁港：同一施設の表記違い（徳島県・同一市区町村）
+  "wadajima-gyokou-a12": "tokushima-komatsushima-wadajima-bulk", // 和田島漁港 → 小松島市・和田島漁港：同一施設の表記違い（徳島県・同一市区町村）
+  "kamoda-misaki-w6": "anan-gamoda-cape", // 蒲生田岬 → 阿南市蒲生田岬：同一施設の表記違い（徳島県・同一市区町村）
+  "saijo-nyugawa-kou-c8": "nyuugawa-kou-w6", // 西条・壬生川港 → 西条市・壬生川港：同一施設の表記違い（愛媛県・同一市区町村）
+  "nyuugawa-kou-a10": "nyuugawa-kou-w6", // 壬生川港 → 西条市・壬生川港：同一施設の表記違い（愛媛県・同一市区町村）
+  "toyo-kou-a12": "saijo-toyo-port", // 東予港 → 西条市東予港：同一施設の表記違い（愛媛県・同一市区町村）
+  "imabari-hashihama-kou-c8": "imabari-hashihama-kou", // 今治・波止浜港 → 今治市・波止浜港：同一施設の表記違い（愛媛県・同一市区町村）
+  "hashihama-port": "imabari-hashihama-kou", // 波止浜港 → 今治市・波止浜港：同一施設の表記違い（愛媛県・同一市区町村）
+  "hashihama-gyokou-a13": "imabari-hashihama-kou", // 波止浜漁港 → 今治市・波止浜港：同一施設の表記違い（愛媛県・同一市区町村）
+  "minamichita-utsumi-shinkou-a13": "utsumi-shinkou", // 南知多・内海新港 → 内海新港：同一施設の表記違い（愛知県・同一市区町村）
+  "isshiki-gyokou": "nishio-isshiki-gyokou-add5", // 一色漁港 → 西尾 一色漁港：同一施設の表記違い（愛知県・同一市区町村）
+  "tanihama-kaigan-niigata": "joetsu-tanihama-kaigan-a13", // 谷浜海岸 → 上越・谷浜海岸：同一施設の表記違い（新潟県・同一市区町村）
+  "tanihama-kaigan-e8": "joetsu-tanihama-kaigan-a13", // 上越市・谷浜海岸 → 上越・谷浜海岸：同一施設の表記違い（新潟県・同一市区町村）
+  "nagahama-anegawa-kakou": "anegawa-kakou-k8", // 長浜・姉川河口 → 姉川河口：同一施設の表記違い（滋賀県・同一市区町村）
+  "kusatsu-yabase-kihanto": "biwako-yabase-kihanto", // 草津・矢橋帰帆島 → 琵琶湖 南湖 矢橋帰帆島：同一施設の表記違い（滋賀県・同一市区町村）
+  "kaizu-osaki-k8": "biwako-kaizu-osaki", // 海津大崎 → 琵琶湖 北湖 海津大崎：同一施設の表記違い（滋賀県・同一市区町村）
+  "ashikita-sashiki-kou": "sashiki-gyokou-a12", // 芦北町佐敷港 → 佐敷漁港：同一施設の表記違い（熊本県・同一市区町村）
+  "oyano-kou-a12": "ooyano-kou-w6", // 大矢野港 → 上天草・大矢野港：同一施設の表記違い（熊本県・同一市区町村）
+  "ushibuka-gyokou-a10": "ushibuka-gyokou-amakusa", // 牛深漁港 → 天草 牛深漁港：同一施設の表記違い（熊本県・同一市区町村）
+  "tanoura-kou": "tanoura-gyokou-ashikita-w6", // 田浦港 → 芦北・田浦漁港：同一施設の表記違い（熊本県・同一市区町村）
+  "tanoura-gyokou-a10": "tanoura-gyokou-ashikita-w6", // 田浦漁港 → 芦北・田浦漁港：同一施設の表記違い（熊本県・同一市区町村）
+  "hakaishi-gyokou-a13": "ashikita-hakaishi-kou-s8", // 計石漁港 → 芦北・計石港：同一施設の表記違い（熊本県・同一市区町村）
+  "ryugatake-kou-a11": "kamiamakusa-ryugatake-kou-s8", // 龍ヶ岳港 → 上天草・龍ヶ岳港：同一施設の表記違い（熊本県・同一市区町村）
+  "hakusan-tedorigawa-kakou-a13": "tedorigawa-kakou-ishikawa", // 白山市・手取川河口 → 手取川河口：同一施設の表記違い（石川県・同一市区町村）
+  "suzu-takojima-gyokou": "suzu-takojima-port", // 珠洲・蛸島漁港 → 珠洲市蛸島漁港：同一施設の表記違い（石川県・同一市区町村）
+  "kanazawa-saigawa-kakou-a13": "saigawa-kakou-e8", // 金沢・犀川河口 → 犀川河口：同一施設の表記違い（石川県・同一市区町村）
+  "hayakawa-kou": "odawara-hayakawa-port", // 早川港 → 小田原早川港：同一施設の表記違い（神奈川県・同一市区町村）
+  "kitagata-ko": "awara-kitagata-ko", // 北潟湖 → あわら・北潟湖：同一施設の表記違い（福井県・同一市区町村）
+  "ano-gyoko": "obama-anou-gyokou-fukui", // 阿納漁港 → 小浜・阿納漁港：同一施設の表記違い（福井県・同一市区町村）
+  "wakita-umitsuri-w6": "wakita-fishing-pier", // 北九州・脇田海釣り桟橋 → 脇田海釣り桟橋：同一施設の表記違い（福岡県・同一市区町村）
+  "wakamatsu-kou-w6": "wakamatsu-port", // 北九州・若松港 → 若松港：同一施設の表記違い（福岡県・同一市区町村）
+  "yotsukura-gyokou": "iwaki-yotsukura-port", // 四倉漁港 → いわき市四倉漁港：同一施設の表記違い（福島県・同一市区町村）
+  "iwaki-yotsukura-gyokou-e8": "iwaki-yotsukura-port", // いわき四倉漁港 → いわき市四倉漁港：同一施設の表記違い（福島県・同一市区町村）
+  "iwaki-hisanohama-e8": "iwaki-hisanohama-port", // いわき久之浜漁港 → いわき市久之浜漁港：同一施設の表記違い（福島県・同一市区町村）
+  "katagami-tenno-beach-a13": "tennou-kaigan-surf6", // 潟上市天王海岸サーフ → 天王海岸サーフ：同一施設の表記違い（秋田県・同一市区町村）
+  "kisakata-gyoko": "nikaho-kisakata-port", // 象潟漁港 → にかほ市象潟漁港：同一施設の表記違い（秋田県・同一市区町村）
+  "yurihonjo-nishime-e8": "nishime-gyokou6", // 由利本荘西目漁港 → 西目漁港：同一施設の表記違い（秋田県・同一市区町村）
+  "kuchinotsu-kou": "kuchinotsu-kou-w6", // 口之津港 → 南島原・口之津港：同一施設の表記違い（長崎県・同一市区町村）
+  "nagano-suwa-lake": "suwako-nagano-add5", // 長野諏訪湖 → 諏訪湖：同一施設の表記違い（長野県・同一市区町村）
+  "ohata-gyoko": "mutsu-oohata-gyokou6", // 大畑漁港 → むつ市大畑漁港：同一施設の表記違い（青森県・同一市区町村）
+  "higashidori-shiranuka-port-a11": "shiranuka-gyoko-aomori", // 東通村白糠漁港 → 白糠漁港：同一施設の表記違い（青森県・同一市区町村）
+  "hokkawa-port": "hokkawa-gyokou", // 北川港 → 北川漁港：同一施設の表記違い（静岡県・同一市区町村）
+  "nishiizu-arari-kou-e8": "arari-port", // 西伊豆・安良里港 → 安良里港：同一施設の表記違い（静岡県・同一市区町村）
+  "hiketa-port-kagawa": "hiketa-kou-w6", // 引田港 → 東かがわ・引田港：同一施設の表記違い（香川県・同一市区町村）
+  "hiketa-gyokou-w5": "hiketa-kou-w6", // 引田漁港 → 東かがわ・引田港：同一施設の表記違い（香川県・同一市区町村）
+  "higashikagawa-hiketa-port": "hiketa-kou-w6", // 東かがわ市引田港 → 東かがわ・引田港：同一施設の表記違い（香川県・同一市区町村）
+  "higashikagawa-shiratori-port": "shirotori-gyokou-w6", // 東かがわ市白鳥漁港 → 白鳥漁港：同一施設の表記違い（香川県・同一市区町村）
+  "tei-kou-a11": "tei-kou-w6", // 手結港 → 香南市・手結港：同一施設の表記違い（高知県・同一市区町村）
+  "sakihama-gyokou-a10": "muroto-sakihama-gyokou", // 佐喜浜漁港 → 室戸市・佐喜浜漁港：同一施設の表記違い（高知県・同一市区町村）
+  "usa-gyokou-a11": "kochi-tosa-usa-bulk", // 宇佐漁港 → 土佐市・宇佐漁港：同一施設の表記違い（高知県・同一市区町村）
+  "mikuriya-gyokou-w6": "daisen-mikuriya-port", // 御来屋漁港 → 大山町御来屋漁港：同一施設の表記違い（鳥取県・同一市区町村）
+  "hashizu-kou-c8": "hashizu-port", // 橋津港 → 橋津漁港：同一施設の表記違い（鳥取県・同一市区町村）
+  "kushikino-gyokou": "kushikino-gyokou-w6", // 串木野漁港 → いちき串木野・串木野漁港：同一施設の表記違い（鹿児島県・同一市区町村）
+  "sendai-kou-kagoshima": "sendai-kou-satsumasendai-w6", // 川内港 → 薩摩川内・川内港：同一施設の表記違い（鹿児島県・同一市区町村）
+  "nejime-kou-s8": "nejime-kou-w6", // 根占港 → 南大隅・根占港：同一施設の表記違い（鹿児島県・同一市区町村）
+  "bonotsu-gyokou-a11": "bonotsu-gyokou-w6", // 坊津漁港 → 南さつま・坊津漁港：同一施設の表記違い（鹿児島県・同一市区町村）
 };

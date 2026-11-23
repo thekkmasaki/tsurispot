@@ -90,8 +90,8 @@ describe("生息域外の除外", () => {
     expect(outOfRange.map((s) => `${s.region.prefecture}:${s.slug}`)).toEqual([]);
   });
 
-  it("メバル・スズキ: 沖縄（分布外）のスポットが0件", () => {
-    for (const slug of ["mebaru", "suzuki"]) {
+  it("メバル・スズキ・カサゴ: 沖縄（分布外）のスポットが0件", () => {
+    for (const slug of ["mebaru", "suzuki", "kasago"]) {
       const okinawa = bySlug.get(slug)!.spots.filter((s) => s.region.prefecture === "沖縄県");
       expect(okinawa.map((s) => s.slug), `${slug} が沖縄に掲載`).toEqual([]);
     }

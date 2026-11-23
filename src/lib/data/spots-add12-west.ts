@@ -2620,7 +2620,6 @@ export const westAdd12Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("taman"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっこみ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
     ],
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
@@ -2687,7 +2686,6 @@ export const westAdd12Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("taman"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっこみ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },

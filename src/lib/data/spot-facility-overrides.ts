@@ -32,6 +32,31 @@ export interface SpotFacilityOverride {
 const VERIFIED = "2026-11-21";
 const CHECK_NOTE = "料金・営業時間は変わることがあります。出かける前に公式サイトで確認してください";
 
+// 指示書03（docs/fishing-ban-investigation-03.md）で公式情報を確認した日
+const INVESTIGATION_03 = "2026-11-21";
+
+// 利根川下流（香取市佐原付近〜銚子）。千葉県の内水面遊漁の案内・漁場図・県報の遊漁規則で確認
+const TONEGAWA_LOWER: SpotFacilityOverride = {
+  isFree: false,
+  feeDetail:
+    "漁業権の対象魚種を釣るには遊漁承認証（遊漁券）が必要。佐原漁協（内共第10号）1日200円・1年1,000円、北総・笹川・中利根漁協（内共第11号）1日300円・1年2,000円（千葉県の案内）",
+  managementInfo: {
+    organizationName: "佐原漁業協同組合ほか（利根川 内共第10号・第11号）",
+    fishingFee: "内共第10号 1日200円・1年1,000円／内共第11号 1日300円・1年2,000円",
+    licensingInfo: "漁場の区域内で遊漁をするには、あらかじめ組合の承認を受け、遊漁料を納める必要がある",
+    notes: ["うなぎには採捕できる大きさの制限があります（千葉県）", "区間ごとの漁協と対象魚種は千葉県の漁場図・遊漁規則で確認してください"],
+    verifiedAt: INVESTIGATION_03,
+    sourceUrl: "https://www.pref.chiba.lg.jp/gyoshigen/naisuimen/yuugyo.html",
+  },
+};
+
+const KATSUURA_NOTICE =
+  "2024年4月以降、漁協の掲示で港内の多くの場所（赤灯の波止・墨名堤防の先端など）が立入禁止になったと報じられている（千葉県・勝浦市の公式の公表は未確認）。釣りができる場所と時間は現地の掲示で必ず確認すること";
+const CHOSHI_NOTICE =
+  "銚子市漁協の告知で、外港・黒生地区・夫婦ヶ鼻堤防は関係者以外立入禁止とされている（漁港を管理する千葉県の公式の公表は未確認）。現地の掲示に従うこと";
+const SHIMONOSEKI_NOTICE =
+  "下関漁港（南風泊を含む）は、波止・消波ブロック・外海側の護岸などに立入禁止の場所があると報じられている（管理者の山口県の公式の公表は未確認）。現地の掲示に従うこと";
+
 export const spotFacilityOverrides: Record<string, SpotFacilityOverride> = {
   // 須磨海づり公園: 2024-11-01 に有料施設としてリニューアル開園。掲載は閉鎖中の「跡」の浜のままだった
   "suma-umizuri-koen-ato": {
@@ -338,5 +363,137 @@ export const spotFacilityOverrides: Record<string, SpotFacilityOverride> = {
       verifiedAt: VERIFIED,
       sourceUrl: "https://www.kanagawaparks.com/umibeturi/about.html",
     },
+  },
+
+  // ─────────── 2026-11-23 指示書03（禁止の疑い35件の公式調査、docs/fishing-ban-investigation-03.md）の反映 ───────────
+  // 遊漁券が必要なのに「無料」になっていたもの・料金の根拠がないものを、県が掲載する遊漁規則・遊漁料の値に直す。
+  // 位置の誤りは国土地理院の地名検索・逆ジオコーダで確定した点に直す。
+  // 公式の公表を確認できなかった立入禁止情報は fishingBan にせず、本文と rules.restrictedAreas の注意喚起にとどめる。
+  ...Object.fromEntries(
+    ["tonegawa-lower-unagi", "tonegawa-lower-chiba", "tonegawa-sawara"].map((slug) => [slug, TONEGAWA_LOWER]),
+  ),
+  // 「遊漁券が必要」は根拠なし。岐阜県の資料では、ダム建設で漁業権のない自由漁場になった水域
+  "tokuyama-dam-gifu": {
+    feeDetail: "ダム湖は漁業権のない自由漁場（岐阜県）。ただし湖面は通常立入禁止で、上流の一部は一年中採捕禁止",
+  },
+  "choshigawa-river-mie": {
+    isFree: false,
+    feeDetail: "アユ・アマゴ（あめご）を釣るには銚子川漁協の遊漁承認証（遊漁券）が必要（三重県の案内）。料金は漁協に確認",
+    managementInfo: {
+      organizationName: "銚子川漁業協同組合（三重内共第16号 あゆ漁業・あめご漁業）",
+      licensingInfo: "漁業権の区域で漁業権の対象魚種を釣るには、遊漁料を納めて遊漁承認証を受ける必要がある",
+      notes: ["遊漁料と解禁期間は銚子川漁協に確認してください"],
+      verifiedAt: INVESTIGATION_03,
+      sourceUrl: "https://www.pref.mie.lg.jp/SUISAN/HP/86303033603.htm",
+    },
+  },
+  "miyagi-kamafusa-dam-lake": {
+    isFree: false,
+    feeDetail:
+      "広瀬名取川漁協の遊漁券が必要（いわな・うぐい・うなぎ・おいかわ・こい・にじます・ふな・やまめ・わかさぎ、手釣・竿釣）。一般 1日500円・1年6,000円（宮城県の遊漁料一覧「大倉湖、釜房湖に限る」）",
+    managementInfo: {
+      organizationName: "釜房ダム管理所（国土交通省）／遊漁は広瀬名取川漁業協同組合",
+      fishingFee: "一般 1日500円・1年6,000円（大倉湖・釜房湖に限る区分）",
+      notes: [
+        "冬期間の氷上での魚釣りは危険なため、絶対にしないよう釜房ダム管理所が呼びかけています",
+        "湖面の使用（ボートなど）は、みちのく公園管理センターへの届出が必要。動力船は基本的に使えず、放流施設・取水施設などの通航制限区域には入れません",
+        "湖面の利用者はライフジャケットの着用が必要です（2026年6月15日から）",
+      ],
+      verifiedAt: INVESTIGATION_03,
+      sourceUrl: "https://www.thr.mlit.go.jp/kamafusa/download/komen.html",
+    },
+  },
+  "shiobara-dam-ko6": {
+    // 元の座標（36.973, 139.783）は約9km西の上塩原を指していた。ダム湖に架かるもみじ谷大吊橋の位置にする
+    latitude: 36.9536,
+    longitude: 139.8762,
+    description:
+      "栃木県那須塩原市、箒川をせき止めた塩原ダムのダム湖。湖にはもみじ谷大吊橋が架かる。湖面でボートなどを使うには栃木県への事前の使用届が必要で、6月15日〜10月10日は使用禁止、ダムの堤体から上流約200mは通航禁止水域になっている。箒川は漁業権の区域なので、ヤマメ・ニジマス・イワナなど漁業権の対象魚を釣るには遊漁券が必要。",
+    isFree: false,
+    feeDetail: "箒川は取水堰堤を境に塩原漁協（上流）と那珂川漁連（下流）の漁業権区域。漁業権の対象魚種を釣るには遊漁券が必要（料金は漁協に確認）",
+    managementInfo: {
+      organizationName: "栃木県（矢板土木事務所）／遊漁は塩原漁業協同組合・那珂川漁業協同組合連合会",
+      notes: [
+        "湖面の使用は事前の使用届が必要（当日の届出は受け付けない）。エンジン付きの船は遠慮するよう求められています",
+        "使用禁止期間は6月15日〜10月10日。堤体から上流約200mは通航禁止水域です",
+      ],
+      verifiedAt: INVESTIGATION_03,
+      sourceUrl: "https://www.pref.tochigi.lg.jp/h56/hozenkanri/documents/onegai_shiobara.pdf",
+    },
+  },
+  "hakusui-dam-taketa-w6": {
+    // 元の座標（32.95, 131.45）は白水ダムから約13km離れていた。国土地理院の「白水ダム」の点にする
+    latitude: 32.905,
+    longitude: 131.327,
+    isFree: false,
+    feeDetail: "大野川水系は大野川漁協（大分内共第3号）の漁業権区域。うなぎを除く全魚種 1日2,200円（大分県が掲載する遊漁規則）",
+    managementInfo: {
+      organizationName: "白水ため池（通称 白水ダム）: 富士緒井路土地改良区／遊漁: 大野川漁業協同組合",
+      fishingFee: "うなぎを除く全魚種 1日2,200円",
+      notes: [
+        "白水溜池堰堤は国の重要文化財。毎年11月下旬〜翌年6月中旬は越流を止めて貯水池内で工事をしています（令和9年まで予定）",
+      ],
+      verifiedAt: INVESTIGATION_03,
+      sourceUrl: "https://www.pref.oita.jp/soshiki/11607/hakusui-info.html",
+    },
+  },
+  "akagawa-dam-yaita-a12": {
+    // 赤川ダムは宇都宮市福岡町（栃木県の遊漁規則・国土地理院の地名データ）。元は矢板市長井を指していた
+    name: "赤川ダム（宇都宮市）",
+    address: "栃木県宇都宮市福岡町",
+    latitude: 36.6204,
+    longitude: 139.788,
+    description:
+      "栃木県宇都宮市福岡町、赤川をせき止めた赤川ダムのダム湖。鬼怒川漁協の遊漁規則で、ダムから上流の赤川が「赤川ダム特別漁場」に指定されている。釣りは竿釣・手釣で1人1組まで、組合の設備や組合が指定した船以外の船は使えない。ヘラブナやコイが狙える。",
+    feeDetail: "鬼怒川漁協の赤川ダム特別漁場（料金・釣期は漁協に確認）",
+    managementInfo: {
+      organizationName: "鬼怒川漁業協同組合（赤川ダム特別漁場）",
+      notes: ["竿釣・手釣は1人1組まで。それ以外の漁法と、組合の設備・組合指定以外の船の使用は禁止"],
+      verifiedAt: INVESTIGATION_03,
+      sourceUrl: "https://www.pref.tochigi.lg.jp/g02/suisan/documents/kinugawa323_20241119.pdf",
+    },
+  },
+  "kesennuma-oura-port-a11": {
+    // 元の座標（38.888, 141.558）は上田中を指していた。国土地理院の「気仙沼市大浦」の点にする
+    latitude: 38.9001,
+    longitude: 141.5954,
+    description:
+      "宮城県気仙沼市大浦、気仙沼湾の内湾に面した港。宮城県が管理する気仙沼漁港の大浦地区にあたる。投げ釣りやちょい投げでカレイやハゼが狙える。漁船の出入りや係留があるので、係留ロープや船の航路に注意し、漁業の作業の邪魔にならない場所で竿を出してほしい。",
+  },
+  "oshima-uranohama-beach-a11": {
+    // 元の座標（38.858, 141.628）は海上を指していた。国土地理院の「気仙沼市浦の浜」の点にする
+    latitude: 38.8666,
+    longitude: 141.6175,
+    description:
+      "宮城県気仙沼市の気仙沼大島、浦の浜周辺。浦の浜は大島の玄関口で、宮城県が管理する浦の浜漁港がある。投げ釣りでキスやカレイが狙える。漁港の周辺では漁船の出入りや作業の邪魔にならないようにし、現地の掲示に従ってほしい。",
+  },
+
+  // 立入禁止の情報が漁協の掲示・報道にしかないもの（漁港管理者の公式公表は未確認）
+  "katsuura-port": { rules: { restrictedAreas: [KATSUURA_NOTICE] } },
+  "katsuura-suminawa-breakwater": {
+    description:
+      "千葉県勝浦市の勝浦漁港にある墨名堤防。白灯台が立つ。2024年4月以降、漁協の掲示により勝浦漁港内の多くの場所（赤灯の波止や墨名堤防の先端など）が立入禁止になったと報じられている。漁港を管理する千葉県や勝浦市の公式の公表は確認できていないため、出かける前と現地で掲示を必ず確認し、立入禁止の場所には入らないでほしい。",
+  },
+  "katsuura-kou-e8": {
+    description:
+      "千葉県勝浦市浜勝浦の勝浦漁港。外房を代表する漁港で、カツオやマグロの水揚げで知られる。2024年4月以降、漁協の掲示により港内の多くの場所が立入禁止になり、釣りができる場所と時間が限られたと報じられている（千葉県・勝浦市の公式の公表は未確認）。出かける前と現地で掲示を必ず確認し、立入禁止の場所には入らないでほしい。",
+  },
+  "choshi-gaiko": { rules: { restrictedAreas: [CHOSHI_NOTICE] } },
+  "choshi-kou": {
+    description:
+      "千葉県銚子市の銚子漁港。全国有数の水揚げ量を誇る漁港で、千葉県が管理している。銚子市漁協の告知で、外港・黒生地区・夫婦ヶ鼻堤防などは関係者以外立入禁止とされている（千葉県の公式の公表は未確認）。漁港では水揚げ作業やトラックの出入りが多いので、出かける前と現地で掲示を必ず確認し、立入禁止の場所には入らないでほしい。",
+  },
+  "choshi-soto-boutei-e8": {
+    description:
+      "千葉県銚子市川口町、銚子漁港の外側の堤防。銚子市漁協の告知で、銚子漁港の外港・黒生地区・夫婦ヶ鼻堤防は関係者以外立入禁止とされており、外側の堤防も立入禁止の場所にあたる可能性が高い（漁港を管理する千葉県の公式の公表は未確認）。出かける前と現地で掲示を必ず確認し、立入禁止の場所には入らないでほしい。",
+  },
+  "choshi-marina-teibo": {
+    description:
+      "千葉県銚子市潮見町、名洗港の銚子マリーナに隣接する堤防。名洗港は千葉県が港湾管理者の港で、漁港ではない。マリーナから伸びる長い堤防とマリーナ内は立入禁止になっているとの情報がある（千葉県の公式の公表は未確認）。釣りをするなら立入禁止でない場所を選び、現地の掲示に従ってほしい。アジ・イワシのサビキ、イシモチの投げ釣り、ヒラメやシーバスのルアーが狙える。",
+  },
+  "shimonoseki-port": { rules: { restrictedAreas: [SHIMONOSEKI_NOTICE] } },
+  "hikoshima-hayatomari-w6": {
+    description:
+      "山口県下関市彦島西山町の南風泊港。フグの水揚げで知られ、山口県が管理する下関漁港の一部にあたる。波止や消波ブロック、外海側の護岸などに立入禁止の場所があり、港内の一部でしか釣りができないと報じられている（山口県の公式の公表は未確認）。出かける前と現地で掲示を必ず確認し、立入禁止の場所には入らないでほしい。",
   },
 };

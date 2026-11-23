@@ -9,6 +9,7 @@ import {
   Car,
   Toilet,
   Fish,
+  Gem,
 } from "lucide-react";
 import { SpotCardCompact } from "@/components/spots/spot-card";
 import { cn } from "@/lib/utils";
@@ -32,6 +33,8 @@ interface SpotData {
   isFree: boolean;
   hasRentalRod: boolean;
   mainImageUrl: string;
+  /** 穴場（口コミが少なく混みにくい釣り場。サーバーで判定: lib/quiet-spot.ts） */
+  isQuiet?: boolean;
 }
 
 function getDistanceKm(
@@ -78,6 +81,12 @@ function SpotItem({
       }}
     >
       <div className="flex flex-wrap gap-x-3 gap-y-1 rounded-lg bg-muted px-2.5 py-1.5">
+        {spot.isQuiet && (
+          <span className="inline-flex items-center gap-1 font-bold text-primary">
+            <Gem className="size-3.5" aria-hidden="true" />
+            穴場
+          </span>
+        )}
         {spot.difficulty === "beginner" ? (
           <span className="font-bold text-primary">初心者OK</span>
         ) : (
@@ -110,6 +119,7 @@ function SpotItem({
 const PAGE_SIZE = 30;
 const DISTANCE_OPTIONS = [5, 10, 20, 50, 100] as const;
 const FEATURE_FILTERS = [
+  { key: "quiet", label: "穴場", test: (s: SpotData) => Boolean(s.isQuiet) },
   { key: "beginner", label: "初心者OK", test: (s: SpotData) => s.difficulty === "beginner" || s.difficulty === "all" },
   { key: "free", label: "無料", test: (s: SpotData) => s.isFree },
   { key: "parking", label: "駐車場あり", test: (s: SpotData) => s.hasParking },
@@ -138,6 +148,7 @@ function toSpotData(s: ListSpot): SpotData {
     hasToilet: s.hasToilet,
     isFree: s.isFree,
     hasRentalRod: s.hasRentalRod,
+    isQuiet: Boolean(s.isQuietSpot),
     mainImageUrl: s.mainImageUrl,
   };
 }

@@ -2,7 +2,7 @@
 
 > 勝手に動いている自動化と、SNS投稿の章。何がいつ動いているか、止まったらどう気づくか。
 
-最終更新: 2026-07-07
+最終更新: 2026-11-23
 
 ---
 
@@ -15,7 +15,10 @@
 | X 自動投稿 | Xに毎日投稿 | 毎日（下表） | Discord |
 | Push 週次配信 | Push/LINEで週報配信 | 月曜 12:00 | — |
 | IndexNow 週次 | 全URLを検索エンジンに通知 | 月曜 15:00 | — |
-| Reels 自動投稿 | Instagramリール | 手動のみ（自動停止中） | — |
+| SNS ランキング投稿 | 「◯月に△△が釣れる□□県の釣り場TOP10」動画を Instagramリール / Threads / X に投稿 | 毎日 朝7:30ごろ・夜20:00ごろ | Discord |
+| 釣果週報カルーセル | 週報の釣果まとめを Instagramカルーセル＋X に投稿 | 週報公開時（保険で毎日19:00ごろ判定） | Discord |
+| 単発カルーセル | 作成済みの画像＋キャプションを Instagram に投稿 | 手動のみ | Discord |
+| SNS トークン延長 | Instagram / Threads のトークンを延長 | 毎週 月曜 9:00 | 失敗時 Discord |
 
 ---
 
@@ -40,15 +43,26 @@
 
 ---
 
-## Instagram（自動投稿は現在停止中）
-アカウント：@tsurispotjapan
-- リール自動投稿の仕組みは作ってあるがcron無効＝自動では投稿されていない（手動実行のみ）
-- 過去に手動で12件投稿し、2026年5月から停止
+## Instagram / Threads（自動投稿 稼働中）
+アカウント：Instagram @tsurispotjapan
 
-### 落とし穴：トークンが60日で切れる
-- Instagram（Meta）投稿用の「アクセストークン（鍵）」は約60日で失効
-- 今は自動更新の仕組みがありません → 放置するとトークンが切れて投稿できなくなる
-- 再開するなら、まずトークンの更新か再取得が必要
+| 何を | いつ(JST) | ワークフロー | 生成スクリプト |
+|---|---|---|---|
+| ランキングリール（県×月×魚種TOP10。Threads・X にも同じ動画） | 毎日 7:30ごろ（am）・20:00ごろ（pm） | sns-ranking-reel.yml | scripts/sns/ranking-reel/ |
+| 釣果週報カルーセル（X にも画像4枚＋記事リンク） | 週報公開時。保険で毎日 18:55 以降に未投稿なら投稿 | sns-weekly-carousel.yml | scripts/sns/weekly-carousel/ |
+| 単発カルーセル | 手動のみ（まず dry_run=true で Discord に出して確認） | sns-manual-carousel.yml | scripts/sns/manual-carousel/posts/ |
+
+### 起動のしくみ（GitHub の定時実行は当てにならない）
+- GitHub Actions の cron は数時間遅れたり、そもそも実行されなかったりする
+- **本命**：Cloudflare Worker の Cron（ops/cloudflare/reel-trigger-worker.js）が毎日 7:30（am）と 19:55（pm）にランキング投稿を起動する
+- **予備**：GitHub の毎時 cron。夜の枠が未投稿のときだけ投稿する（Worker が失敗した日の保険）
+- 投稿済みかどうかは「日付×枠」ごとに Redis の台帳で判定するので、二重投稿はしない
+
+### トークン（60日で切れる問題は対策済み）
+- Instagram / Threads のアクセストークンは約60日で失効する
+- 毎週月曜 9:00 に sns-token-refresh.yml が延長し、新しいトークンを Redis に保存する
+- 投稿側は Redis のトークンを優先し、無ければ GitHub Secrets の初期値（INSTAGRAM_ACCESS_TOKEN / THREADS_ACCESS_TOKEN）を使う
+- 延長に失敗したら Discord に「⚠️ SNSトークン延長 失敗あり」が届く → 放置すると投稿が止まるので、Meta でトークンを再発行して Secrets を更新する
 
 ---
 
@@ -67,7 +81,8 @@
 ## 自動投稿が止まったとき
 1. GitHub の Actions タブで赤い失敗のワークフローをクリックしてログを見る
 2. よくある原因：APIキー/トークンの失効（特にX・Instagram・LINE）→ 各サービスで再発行しSecretsを更新
-3. X投稿はDiscordにも通知が来る
+3. X・Instagram・Threads の投稿成否は Discord にも通知が来る
+4. Instagram が止まったら、まず月曜のトークン延長が失敗していないか Discord を確認
 
 ---
 
