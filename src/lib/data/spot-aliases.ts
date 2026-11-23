@@ -8,10 +8,12 @@
  *  - サイト内検索（/api/search）の検索対象
  *
  * 登録ルール（推測で作らない＝虚偽情報・品質低下の防止）:
- *  - 根拠は次のどちらかに限る。source に根拠を書く。
+ *  - 根拠は次のいずれかに限る。source に根拠を書く。
  *    1. サチコ（Search Console）の実クエリ。source は "GSC YYYY-MM: <クエリ>"
  *    2. 公開データ（説明文・notes・正式名）に「通称」「旧名」等として既に書かれている呼び名。
  *       この場合、別名の文字列がそのスポットの公開データに含まれていることをテストで検証する
+ *    3. 外部の出典（自治体・施設公式・釣具店・釣りメディア・釣行記など。tsurispot.com 自身は不可）で、
+ *       その呼び名が同じ場所を指すと確認できたもの。sourceUrls に出典URLを必ず残す（テストで検証）
  *  - 別の公開スポットの正式名に含まれる別名は登録しない（同じ検索語で自サイト内競合になる）。
  *    テストで検出する
  *  - 1スポット 3 個まで（詰め込みはスパムに見える）
@@ -23,8 +25,10 @@ export interface SpotAliasEntry {
   /** alias=通称・別名、former=旧名（施設名の変更前など） */
   kind: SpotAliasKind;
   names: string[];
-  /** 根拠（"GSC YYYY-MM: <クエリ>" または "説明文" / "notes" 等の公開データ） */
+  /** 根拠（"GSC YYYY-MM: <クエリ>"、"説明文" / "notes" 等の公開データ、または "Web調査 YYYY-MM"） */
   source: string;
+  /** 外部の出典で確認した場合の出典URL（tsurispot.com 以外） */
+  sourceUrls?: string[];
 }
 
 export const MAX_ALIASES_PER_SPOT = 3;
@@ -44,6 +48,34 @@ export const spotAliases: Record<string, SpotAliasEntry> = {
   "ibo-port-takasago": { kind: "alias", names: ["関電白灯"], source: "説明文「通称『関電白灯』」" },
   "katsurama-port": { kind: "alias", names: ["勝山漁港"], source: "説明文「勝山漁港とも呼ばれる」" },
   "hayama-port": { kind: "alias", names: ["あぶずり港"], source: "説明文「あぶずり港とも呼ばれ」" },
+  "shizuoka-fujinomiya-fuji-yoson-inokashira": {
+    kind: "alias",
+    names: ["猪之頭公園のニジマス釣り場", "県富士養鱒場の釣り堀"],
+    source: "説明文「…と呼ばれることもある」",
+  },
+
+  // ---- Web調査（2026-11。外部の出典で同じ場所を指すと確認できたもの） ----
+  "kobe-airport-veranda": {
+    kind: "alias",
+    names: ["神戸空港島親水護岸"],
+    source: "Web調査 2026-11: 神戸市「神戸空港島の親水護岸は…アングラーの方からは『ベランダ』の愛称で呼ばれています」",
+    sourceUrls: ["https://www.city.kobe.lg.jp/a42810/business/kowanjigyo/kobekukonishiryokuchi-tsuri.html"],
+  },
+  "shonan-ko-kita-ryokuchi": {
+    kind: "alias",
+    names: ["オリンピック記念公園"],
+    source: "Web調査 2026-11: 釣りメディア2件「『オリンピック記念公園』と呼ばれることもある」「公園(現在は湘南港北緑地公園)」",
+    sourceUrls: [
+      "https://www.jackery.jp/blogs/fishing/enoshima-night-fishing-spots-6-breakwater-rock-parking",
+      "https://tsurihack.com/1162/2",
+    ],
+  },
+  "tateyama-port": {
+    kind: "alias",
+    names: ["館山港多目的観光桟橋"],
+    source: "Web調査 2026-11: 館山夕日桟橋の正式名（国交省資料「多目的桟橋（館山夕日桟橋）」）",
+    sourceUrls: ["https://tabi-mag.jp/ch0403/", "https://www.mlit.go.jp/kankocho/cruise/jp/detail/017/index.html"],
+  },
 
   // ---- 公開データに旧名として書かれているもの（施設名の変更） ----
   "tochigi-nikko-otaki-tsuribori": { kind: "former", names: ["栗山つりセンター"], source: "説明文「旧名は栗山つりセンター」" },
