@@ -100,6 +100,21 @@ describe("fishingBan の整合性", () => {
   });
 });
 
+describe("徳山ダムの釣れる魚・料金が湖面の立入禁止と矛盾しない", () => {
+  it("湖で釣る前提の魚種を載せず、遊漁券が必要と書かない", () => {
+    // 湖面は通常立入禁止・湖は漁業権のない自由漁場（docs/fishing-ban-investigation-03.md #29/#31）。
+    // 残すのは流入河川の渓流魚（イワナ・アマゴ）だけ。
+    const spot = fishingSpots.find((s) => s.slug === "tokuyama-dam-gifu");
+    expect(spot).toBeDefined();
+    const fishSlugs = spot!.catchableFish.map((cf) => cf.fish.slug);
+    for (const lakeFish of ["herabuna", "koi", "blackbass", "mabuna"]) {
+      expect(fishSlugs, lakeFish).not.toContain(lakeFish);
+    }
+    expect(fishSlugs.length).toBeGreaterThan(0);
+    expect(spot!.feeDetail ?? "").not.toMatch(/遊漁券が必要/);
+  });
+});
+
 describe("県のまき餌規制とスポットの突合", () => {
   it("まき餌が原則禁止の県のスポットが chumAllowed: true になっていない", () => {
     const violations: string[] = [];
