@@ -3246,7 +3246,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeOkinawa,
   },
@@ -3280,7 +3279,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeOkinawa,
   },
@@ -3297,7 +3295,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "探り釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeOkinawa,
   },
@@ -3348,7 +3345,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
@@ -3365,7 +3361,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
@@ -3382,7 +3377,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "探り釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeOkinawa,
   },
@@ -3416,7 +3410,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "探り釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeOkinawa,
   },
@@ -3433,7 +3426,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
@@ -3450,7 +3442,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "探り釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeOkinawa,
   },
@@ -3483,7 +3474,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
@@ -3500,13 +3490,12 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
   {
     id: "ss8198", name: "石垣島・川平湾周辺", slug: "ishigaki-kabira-wan-s8",
-    description: "石垣島の景勝地・川平湾近くの磯場。エメラルドグリーンの海を望むロケーションでリーフフィッシングが楽しめる。亜熱帯の石垣島は水温が高く、クロダイのフカセ釣り、アジのウキ釣り、カサゴの探り釣りがいずれも一年中成立するのが本土との大きな違いで、時期を選ばず竿を出せる。時間帯は朝マヅメが有利。料金は無料で、川平公園の有料駐車場とトイレが利用できるため観光と組み合わせた釣行がしやすい。石垣空港から車で約30分。サンゴ礁帯の磯は滑りやすいので、滑りにくい靴を用意し潮位を確認して入りたい中級者向けポイント。",
+    description: "石垣島の景勝地・川平湾近くの磯場。エメラルドグリーンの海を望むロケーションでリーフフィッシングが楽しめる。亜熱帯の石垣島は水温が高く、クロダイのフカセ釣りとアジのウキ釣りがいずれも一年中成立するのが本土との大きな違いで、時期を選ばず竿を出せる。時間帯は朝マヅメが有利。料金は無料で、川平公園の有料駐車場とトイレが利用できるため観光と組み合わせた釣行がしやすい。石垣空港から車で約30分。サンゴ礁帯の磯は滑りやすいので、滑りにくい靴を用意し潮位を確認して入りたい中級者向けポイント。",
     latitude: 24.458, longitude: 124.144,
     address: "〒907-0453 沖縄県石垣市川平",
     accessInfo: "石垣空港から車で約30分",
@@ -3517,7 +3506,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "探り釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeOkinawa,
   },
@@ -3551,7 +3539,6 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },

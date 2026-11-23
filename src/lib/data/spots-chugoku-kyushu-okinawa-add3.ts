@@ -2614,7 +2614,6 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeOkinawa,
@@ -2657,7 +2656,6 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeOkinawa,
