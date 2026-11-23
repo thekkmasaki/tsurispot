@@ -180,6 +180,7 @@
 2. 2つのデータファイルを Node.js（`--experimental-strip-types`）で読み込み、配列をJSON化して件数・`image` フィールドの有無を集計（`affiliateProducts` 37件 / `products` 43件、`image` 設定 0件）。
 3. 各ページのフィルタ呼び出し（`getProductsByMethod` / `getTopProducts` / `getBeginnerEssentials` / ID指定 など）を確認し、B系統の表示ページを算出。
 4. `public/images` 配下に商品画像ディレクトリが存在しないことを確認。
+
 ## 6. 追記（2026-11-23）: SiteStripe 旧形式URLは使用不可
 
 `ws-fe.amazon-adsystem.com/widgets/q?...ID=AsinImage...`（旧 SiteStripe 画像リンク形式）を35件に設定する試みは、**ドメインが DNS で解決できない（`DNS_PROBE_FINISHED_NXDOMAIN`）ため取り消した**。この形式は廃止済みとみなし、今後使わないこと。
