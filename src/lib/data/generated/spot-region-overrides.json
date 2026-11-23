@@ -8,6 +8,15 @@
   },
   "note": "日南市油津港: 日南・串間(中央値から103km) → 日南・南郷(2km)"
  },
+ "akagawa-dam-yaita-a12": {
+  "region": {
+   "id": "rs13103",
+   "prefecture": "栃木県",
+   "areaName": "宇都宮・鹿沼",
+   "slug": "tochigi-utsunomiya-kanuma-s13"
+  },
+  "note": "赤川ダム: 矢板市長井（誤り）→ 宇都宮市福岡町（栃木県の鬼怒川漁協遊漁規則・国土地理院の地名データ、指示書03）"
+ },
  "akigawa-akiruno-e8": {
   "region": {
    "id": "r610",
@@ -34,15 +43,6 @@
    "slug": "iwate-fudai-tanohata-s12"
   },
   "note": "安家川河口: 洋野・種市(中央値から56km) → 普代・田野畑(7km)"
- },
- "amatsu-gyoko6": {
-  "region": {
-   "id": "re5141",
-   "prefecture": "千葉県",
-   "areaName": "勝浦・御宿",
-   "slug": "chiba-katsuura-onjuku"
-  },
-  "note": "天津漁港: 東京都 湾奥・江東 → 千葉県 勝浦・御宿(21km・座標と住所が一致)"
  },
  "anamizu-boramachi-kou-a13": {
   "address": "〒927-0027 石川県穴水町大町"
@@ -179,6 +179,15 @@
   },
   "note": "函館港緑の島: 稚内・宗谷(中央値から178km) → 函館・戸井(20km)"
  },
+ "hakusui-dam-taketa-w6": {
+  "region": {
+   "id": "r5207",
+   "prefecture": "大分県",
+   "areaName": "大野川上流（竹田）",
+   "slug": "oita-onogawa-taketa-detail"
+  },
+  "note": "白水ため池（竹田市）: 別府・大分市（誤り）→ 大野川上流（竹田）（指示書03）"
+ },
  "hamanako-bentenjima": {
   "region": {
    "id": "r1060",
@@ -208,24 +217,6 @@
  },
  "himi-nadaura-kaigan-a13": {
   "address": "〒935-0001 富山県氷見市灘浦"
- },
- "hota-gyoko6": {
-  "region": {
-   "id": "r873",
-   "prefecture": "千葉県",
-   "areaName": "南房総",
-   "slug": "chiba-minamiboso"
-  },
-  "note": "保田漁港: 東京都 湾奥・江東 → 千葉県 南房総(10km・人手確認)"
- },
- "iioka-gyoko6": {
-  "region": {
-   "id": "r4",
-   "prefecture": "千葉県",
-   "areaName": "房総半島",
-   "slug": "chiba-boso"
-  },
-  "note": "飯岡漁港: 東京都 湾奥・江東 → 千葉県 房総半島(11km・座標と住所が一致)"
  },
  "imafuku-kou-matsuura-w6": {
   "region": {
@@ -333,6 +324,15 @@
   },
   "note": "風合瀬漁港: 津軽・西海岸(中央値から57km) → 鯵ヶ沢・岩崎(2km)"
  },
+ "kesennuma-oura-port-a11": {
+  "region": {
+   "id": "r1090",
+   "prefecture": "宮城県",
+   "areaName": "気仙沼",
+   "slug": "miyagi-kesennuma"
+  },
+  "note": "気仙沼市大浦（気仙沼漁港大浦地区）: 南三陸・歌津（誤り）→ 気仙沼（指示書03）"
+ },
  "kinokawa-hashimoto-a9": {
   "region": {
    "id": "r49",
@@ -351,15 +351,6 @@
    "slug": "tokyo-23ku-mp"
   },
   "note": "砧公園内の多摩川: 神奈川県 横浜・川崎 → 東京都 東京23区(市街地)(8km・座標と住所が一致)"
- },
- "kisakata-gyoko": {
-  "region": {
-   "id": "rs13023",
-   "prefecture": "秋田県",
-   "areaName": "にかほ東部",
-   "slug": "akita-nikaho-east-s13"
-  },
-  "note": "象潟漁港: 能代(中央値から64km) → にかほ東部(0km)"
  },
  "kishuku-kou-goto-w6": {
   "region": {
@@ -396,15 +387,6 @@
    "slug": "miyagi-kesennuma-minamisanriku"
   },
   "note": "北上川追波湾: 岩手県 大船渡・陸前高田 → 宮城県 気仙沼・南三陸(10km・座標と住所が一致)"
- },
- "kominato-gyoko6": {
-  "region": {
-   "id": "re5141",
-   "prefecture": "千葉県",
-   "areaName": "勝浦・御宿",
-   "slug": "chiba-katsuura-onjuku"
-  },
-  "note": "小湊漁港: 東京都 湾奥・江東 → 千葉県 勝浦・御宿(15km・人手確認)"
  },
  "kuji-port": {
   "region": {
@@ -498,15 +480,6 @@
    "slug": "wakayama-city"
   },
   "note": "和歌山マリーナシティ釣り公園: 南紀(中央値から58km) → 和歌山市(5km)"
- },
- "meizu-kou": {
-  "region": {
-   "id": "rs77114",
-   "prefecture": "宮崎県",
-   "areaName": "日南・南郷",
-   "slug": "miyazaki-nichinan-nango-bulk"
-  },
-  "note": "目井津港: 日南・串間(中央値から104km) → 日南・南郷(4km)"
  },
  "michidairagawa-dam6": {
   "region": {
@@ -761,6 +734,15 @@
   },
   "note": "大堂津港: 日南・串間(中央値から100km) → 日南・南郷(2km)"
  },
+ "oshima-uranohama-beach-a11": {
+  "region": {
+   "id": "r1090",
+   "prefecture": "宮城県",
+   "areaName": "気仙沼",
+   "slug": "miyagi-kesennuma"
+  },
+  "note": "気仙沼大島・浦の浜: 南三陸・歌津（誤り）→ 気仙沼（指示書03）"
+ },
  "rumoi-minami-gampeki6": {
   "region": {
    "id": "r64",
@@ -854,14 +836,14 @@
  "shinminato-gyokou-e8": {
   "address": "〒934-0023 富山県射水市海王町"
  },
- "shirako-kaigan6": {
+ "shiobara-dam-ko6": {
   "region": {
-   "id": "r1054",
-   "prefecture": "千葉県",
-   "areaName": "九十九里",
-   "slug": "chiba-kujukuri-detail"
+   "id": "r746",
+   "prefecture": "栃木県",
+   "areaName": "箒川",
+   "slug": "tochigi-houkigawa"
   },
-  "note": "白子海岸: 東京都 湾奥・江東 → 千葉県 九十九里(12km・座標と住所が一致)"
+  "note": "塩原ダム湖（那須塩原市・箒川）: 日光・中禅寺湖（誤り）→ 箒川（指示書03）"
  },
  "shiraoi-kou6": {
   "region": {
@@ -1007,15 +989,6 @@
    "slug": "nagasaki-hirado-matsuura"
   },
   "note": "松浦・調川港: 佐賀県 唐津・東松浦 → 長崎県 平戸・松浦(2km・人手確認)"
- },
- "uchibo-hota-port": {
-  "region": {
-   "id": "r872",
-   "prefecture": "千葉県",
-   "areaName": "内房",
-   "slug": "chiba-uchibou"
-  },
-  "note": "内房保田漁港: 房総半島(中央値から113km) → 内房(6km)"
  },
  "uchiumi-kou-miyazaki": {
   "region": {

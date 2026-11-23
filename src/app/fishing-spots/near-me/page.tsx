@@ -10,6 +10,10 @@ import { regionGroupOrder, getPrefecturesByRegionGroup } from "@/lib/data/prefec
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { NearMeClient } from "./near-me-client";
+import { getIndexableCities } from "@/lib/data/city-origins";
+import { isQuietSpot, QUIET_MAX_REVIEWS } from "@/lib/quiet-spot";
+import { SpotCard } from "@/components/spots/spot-card";
+import { toListSpot } from "@/lib/data/list-spot";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 
 export const dynamic = "force-static";
@@ -20,6 +24,25 @@ const totalSpotCount = fishingSpots.length;
 const totalSpotLabel = totalSpotCount >= 1000
   ? `${Math.floor(totalSpotCount / 100) * 100}`
   : String(totalSpotCount);
+
+/* ---------- 穴場（口コミが少なく混みにくい釣り場。lib/quiet-spot.ts） ---------- */
+const quietSpots = fishingSpots.filter(isQuietSpot);
+const quietCount = quietSpots.length;
+// 地域ごとに評価の高い順（同評価なら口コミの少ない順＝より知られていない順）で6件
+const quietByRegion = REGION_GROUPS.map((rg) => ({
+  ...rg,
+  spots: quietSpots
+    .filter((s) => rg.prefectures.includes(s.region.prefecture))
+    .sort(
+      (a, b) =>
+        (b.googleRating ?? b.rating) - (a.googleRating ?? a.rating) ||
+        (a.googleReviewCount ?? 0) - (b.googleReviewCount ?? 0),
+    )
+    .slice(0, 6),
+})).filter((rg) => rg.spots.length > 0);
+
+/* ---------- 都市から近い釣り場ページ（北から順） ---------- */
+const nearCities = getIndexableCities();
 
 /* ---------- 地域別TOP5ランキング ---------- */
 function getRegionTopSpots(regionPrefectures: string[], limit = 5) {
@@ -92,8 +115,8 @@ const monthNames = ["", "1月", "2月", "3月", "4月", "5月", "6月", "7月", 
 
 /* ---------- Metadata ---------- */
 export const metadata: Metadata = {
-  title: `近くの釣り場を探す【2026年最新】全国${totalSpotLabel}箇所以上から検索`,
-  description: `近くの釣り場を現在地GPS検索。全国${totalSpotLabel}箇所以上の釣りスポットから、あなたの近くにある堤防・漁港・磯・河川の釣り場が見つかります。地域別人気ランキング、初心者向け釣り場ガイドも掲載。`,
+  title: `近くの釣り場・穴場を現在地から探す【2026年最新】全国${totalSpotLabel}箇所以上`,
+  description: `近くの釣り場を現在地から近い順に表示。全国${totalSpotLabel}箇所以上の堤防・漁港・磯・河川から、口コミが少なく混みにくい「穴場」${quietCount}か所も絞り込めます。地域別の穴場・人気ランキング、電車で行ける釣り場も掲載。`,
   keywords: [
     "近くの釣り場",
     "近く 釣り場所",
@@ -103,11 +126,13 @@ export const metadata: Metadata = {
     "釣り場 検索",
     "釣りスポット 現在地",
     "近くの釣り場 初心者",
+    "近くの釣り場 穴場",
+    "釣り 穴場 近く",
     "釣り場 おすすめ",
   ],
   openGraph: {
-    title: `近くの釣り場を探す【2026年最新】全国${totalSpotLabel}箇所以上から検索`,
-    description: `近くの釣り場を現在地GPS検索。全国${totalSpotLabel}箇所以上の釣りスポットから最寄りの釣り場を距離順に表示。地域別人気ランキング・初心者ガイド付き。`,
+    title: `近くの釣り場・穴場を現在地から探す【2026年最新】全国${totalSpotLabel}箇所以上`,
+    description: `近くの釣り場を現在地から近い順に表示。口コミが少なく混みにくい「穴場」${quietCount}か所も絞り込めます。`,
     type: "website",
     url: "https://tsurispot.com/fishing-spots/near-me",
     siteName: "ツリスポ",
@@ -144,6 +169,11 @@ const breadcrumbJsonLd = {
 };
 
 const faqItems = [
+  {
+    question: "近くの穴場の釣り場はどうやって探せますか？",
+    answer:
+      `このページで現在地から探したあと「穴場」で絞り込むと、口コミが少なく混みにくい釣り場だけを近い順に表示できます。ツリスポでは、Googleマップの口コミが${QUIET_MAX_REVIEWS}件以下で評価の良い釣り場（大規模な海釣り施設・管理釣り場を除く）を穴場としていて、全国に${quietCount}か所あります。穴場は設備が少ないこともあるので、駐車場・トイレ・立入りのルールを事前に確認してください。`,
+  },
   {
     question: "近くの釣り場はどうやって探せますか？",
     answer:
@@ -255,6 +285,7 @@ export default function NearMePage() {
       isFree: s.isFree,
       hasRentalRod: s.hasRentalRod,
       mainImageUrl: s.mainImageUrl,
+      isQuiet: isQuietSpot(s),
     }));
 
   // 魚種セレクトの選択肢: 掲載スポット数の多い順
@@ -302,7 +333,7 @@ export default function NearMePage() {
       {/* ===== 1. h1 + イントロ ===== */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          近くの釣り場・釣りスポットを探す
+          近くの釣り場・穴場を探す
         </h1>
         <p className="near-me-intro mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
           「近くに釣りができる場所はないかな？」そんなときは位置情報を使って最寄りの釣りスポットを探しましょう。
@@ -310,6 +341,8 @@ export default function NearMePage() {
           ボタンひとつであなたの現在地から近い順に釣り場が表示されるので、
           堤防・漁港・磯・砂浜・河川など様々なタイプの釣りスポットの中から、
           今すぐ行ける近くの釣り場が見つかります。
+          人の少ない釣り場がよければ「穴場」で絞り込むと、口コミが少なく混みにくい釣り場（全国{quietCount}か所）だけを表示できます。
+          位置情報を使わない場合は<a href="#by-city" className="text-primary underline">都市から探す</a>か、下の地域別の穴場・人気ランキングからどうぞ。
           各スポットの釣れる魚・設備情報・難易度・評価も一目でわかるので、初心者の方でも安心して釣り場選びができます。
         </p>
         <div className="mt-4 flex flex-wrap gap-3 text-xs sm:text-sm text-muted-foreground">
@@ -330,6 +363,27 @@ export default function NearMePage() {
 
       {/* ===== 2. NearMeClient（位置情報ツール） ===== */}
       <NearMeClient initialSpots={spotData} totalCount={fishingSpots.length} fishOptions={fishOptions} />
+
+      {/* ===== 地域別の穴場（「近く 釣り 穴場」の検索意図。サーバーで描画しクロール可能にする） ===== */}
+      <section className="mt-12">
+        <h2 className="mb-2 text-lg font-bold sm:text-xl md:text-2xl">地域別 穴場の釣り場</h2>
+        <p className="mb-6 text-sm text-muted-foreground">
+          Googleマップの口コミが{QUIET_MAX_REVIEWS}件以下と少なく、評価の良い釣り場を「穴場」としています（大規模な海釣り施設・管理釣り場は除外）。
+          あまり知られていないぶん混みにくい一方、設備が少ない場所もあるので、駐車場・トイレや立入りのルールは各スポットのページで確認してください。
+        </p>
+        <div className="space-y-8">
+          {quietByRegion.map((rg) => (
+            <div key={rg.slug}>
+              <h3 className="mb-3 text-base font-bold sm:text-lg">{rg.name}の穴場</h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {rg.spots.map((s) => (
+                  <SpotCard key={s.id} spot={toListSpot(s)} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* ===== 3. 地域別人気スポットランキング ===== */}
       <section className="region-ranking-section mt-12">
@@ -436,6 +490,31 @@ export default function NearMePage() {
         <div className="mt-3 text-right">
           <Link prefetch={false} href="/catchable-now" className="text-sm text-primary hover:underline">
             今釣れる魚をもっと見る →
+          </Link>
+        </div>
+      </section>
+
+      {/* ===== 都市から近い釣り場・電車で行ける釣り場（静的な受け皿ページへの導線） ===== */}
+      <section id="by-city" className="mt-12 scroll-mt-20">
+        <h2 className="mb-4 text-lg font-bold sm:text-xl md:text-2xl">都市から近い釣り場</h2>
+        <p className="mb-4 text-sm text-muted-foreground">
+          主要都市の駅から直線距離で近い釣り場を、都市ごとにまとめています。
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {nearCities.map((c) => (
+            <Link
+              prefetch={false}
+              key={c.slug}
+              href={`/fishing-spots/near/${c.slug}`}
+              className="rounded-full border px-3 py-1.5 text-sm hover:bg-muted"
+            >
+              {c.name}
+            </Link>
+          ))}
+        </div>
+        <div className="mt-3 text-right">
+          <Link prefetch={false} href="/fishing-spots/by-train" className="text-sm text-primary hover:underline">
+            車なしで行ける「電車で行ける釣り場」を見る →
           </Link>
         </div>
       </section>

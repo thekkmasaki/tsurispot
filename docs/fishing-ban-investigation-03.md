@@ -225,6 +225,69 @@ CSVは地名のキーワードで根拠文をまとめて付けているとみ�
 | hikoshima-hayatomari-w6 | 彦島・南風泊港 | ok_checked | 下関漁港の分港。#25 と同じく「確認できず」とするのが整合的 |
 | tonegawa-sawara | 利根川下流（佐原） | ok_checked | #20・#22 と同じ区間で、遊漁券が必要（禁止ではない） |
 
+## データへの反映（2026-11-23）
+
+調査結果を、既存の上書き表に反映した。元データの80ファイルは直接書き換えていない。
+- 釣り禁止の情報: `src/lib/data/spot-ban-overrides.ts`
+- 料金・位置・本文: `src/lib/data/spot-facility-overrides.ts`
+- 地域（エリア）: `src/lib/data/generated/spot-region-overrides.json`
+
+反映の方針は `FishingBan` 型の運用ルールに従った。
+- **公式根拠があるものだけ** `fishingBan` を付けた。
+- 漁協の掲示や報道にしかない立入禁止情報は、本文と `rules.restrictedAreas` の注意喚起にとどめた。
+- 位置の誤りは、国土地理院の地名検索・逆ジオコーダで確定した点に直した。
+
+### 釣り禁止（fishingBan: partial）を付けたもの
+| slug | 根拠 |
+|---|---|
+| kagoshima-port / kagoshima-kita-futo-w6 / kagoshima-shinko | 鹿児島県は岸壁を原則関係者以外立入禁止としている。本港区北ふ頭1号岸壁はSOLAS制限区域。本文を「岸壁で釣りはできない」内容に差し替えた |
+| tokuyama-dam-gifu | 岐阜県の委員会指示で、上流の支流は全魚種・周年の採捕禁止（公式）。湖面の立入禁止は現地施設（指定管理者）の告知として本文に記載した |
+
+**徳山ダムの判断**: ダム管理者（水資源機構）のサイトは接続を拒否され、今回も確認できなかった。
+- そのため「全面禁止（full）」にはしなかった。
+- 公式で確認できた上流の採捕禁止を根拠に「partial」とした。
+- 「遊漁券が必要」という記載も削除した。県の資料では漁業権のない自由漁場とされているため。
+
+### 遊漁券・料金を公式値に直したもの
+| slug | 変更 |
+|---|---|
+| tonegawa-lower-unagi / tonegawa-lower-chiba / tonegawa-sawara | 「無料（遊漁券不要区間）」などを改め、遊漁券が必要とした（内共第10号 1日200円、第11号 1日300円） |
+| choshigawa-river-mie | 根拠のない料金（日券1,500円など）を削除し、銚子川漁協の遊漁券が必要とした |
+| miyagi-kamafusa-dam-lake | 無料 → 広瀬名取川漁協の遊漁券（1日500円）。氷上釣りの禁止、湖面使用の届出、ライフジャケット着用を注記 |
+| shiobara-dam-ko6 | 根拠のない「日券800円」を削除し、漁業権区域で遊漁券が必要とした。湖面の使用届と使用禁止期間を注記 |
+| hakusui-dam-taketa-w6 | 無料 → 大野川漁協の遊漁券（1日2,200円）。冬〜春の貯水池内工事を注記 |
+| tokuyama-dam-gifu | 「遊漁券が必要」→ 自由漁場（ただし湖面は立入禁止） |
+
+### 位置・地域・本文の誤りを直したもの
+| slug | 変更 |
+|---|---|
+| akagawa-dam-yaita-a12 | 名称を「赤川ダム（宇都宮市）」に変更。所在地を矢板市長井 → 宇都宮市福岡町（36.6204, 139.788）、地域を宇都宮・鹿沼にした |
+| shiobara-dam-ko6 | 座標を約9km西の上塩原 → もみじ谷大吊橋（36.9536, 139.8762）に変更。地域を日光・中禅寺湖 → 箒川にし、「日光・中禅寺湖の河川」とした誤った本文を差し替えた |
+| hakusui-dam-taketa-w6 | 座標を約13km離れた点 → 白水ダム（32.905, 131.327）に変更。地域を別府・大分市 → 大野川上流（竹田）にした |
+| kesennuma-oura-port-a11 | 座標を上田中 → 大浦に変更。地域・本文の「南三陸・歌津」を気仙沼に直した |
+| oshima-uranohama-beach-a11 | 座標を海上 → 浦の浜に変更。地域・本文の「南三陸・歌津」を気仙沼に直した |
+
+### 立入禁止の注意喚起を加えたもの（公式の公表は未確認のため fishingBan にはしない）
+| slug | 変更 |
+|---|---|
+| katsuura-port / choshi-gaiko / shimonoseki-port | `rules.restrictedAreas` に注意喚起を追加した |
+| katsuura-suminawa-breakwater / katsuura-kou-e8 / choshi-kou / choshi-soto-boutei-e8 / choshi-marina-teibo / hikoshima-hayatomari-w6 | 立入禁止の場所（堤防の先端・外堤防など）を勧めていた本文を、注意喚起を含む本文に差し替えた |
+
+### 既に対応済みだったもの
+- 重複の疑いがあった3件は、既存の重複統合ですでにリダイレクトされていた。
+  - kesennuma-oshima-kameyama-rocky-a13 → kesennuma-oshima-rocky-a10
+  - gifu-tokuyama-dam-lake → tokuyama-dam-gifu
+  - shiobara-damuko-momiji-a13 → shiobara-dam-ko6
+
+### 反映しなかったもの（理由）
+| slug | 理由 |
+|---|---|
+| hase-dam-mahoroba / arakawa-dam-nosen6 | 公式の本文を取得できず、可否を確定できない。荒川ダムが漁業権区域外であることは確認したが、それだけでは釣りの可否を書き換える根拠にならない |
+| kesennuma-oshima-odanohama-a12 | 利用規則が禁じるのは海水浴場開設期間中の「海産物の採捕」（密漁防止）。本文はすでに「海水浴シーズンを外せば」と案内しており、矛盾しない |
+| kesennuma-shishiori-port-a13 | 「鹿折漁港」という管理漁港はない（実態は気仙沼漁港の魚市場付近）。名称の変更はURL・検索への影響が大きいため、別途判断する |
+| shimonoseki-port の座標 | 本港（大和町）と南風泊のどちらを指すスポットか決められないため、注意喚起の追加にとどめた |
+| shiobara-houkigawa6（範囲外） | 地域が「日光・中禅寺湖」になっている同種の誤り。指示書の範囲外のため記録のみ |
+
 ## 未確認事項と再調査の方法
 
 - **漁協サイト**（勝浦漁協、銚子市漁協、塩原漁協、鬼怒川漁協）、**www.water.go.jp**、**奈良県サイト**、**みちのく公園**は今回本文を取得できなかった。
