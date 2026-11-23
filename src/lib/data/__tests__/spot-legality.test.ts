@@ -100,6 +100,17 @@ describe("fishingBan の整合性", () => {
   });
 });
 
+describe("重複統合で消えた立入制限の注記", () => {
+  it("徳山ダムはダム湖の立入禁止と上流支流の採捕禁止を示している", () => {
+    // 統合で負けた gifu-tokuyama-dam-lake の「ダム湖は立入制限がある」が本番から消えていた件の再発防止
+    const spot = fishingSpots.find((s) => s.slug === "tokuyama-dam-gifu");
+    expect(spot).toBeDefined();
+    expect(spot!.fishingBan?.scope).toBe("partial");
+    expect(spot!.description).toContain("立入禁止");
+    expect(spot!.description).not.toMatch(/ヘラブナやコイの釣りが楽しめる/);
+  });
+});
+
 describe("県のまき餌規制とスポットの突合", () => {
   it("まき餌が原則禁止の県のスポットが chumAllowed: true になっていない", () => {
     const violations: string[] = [];
