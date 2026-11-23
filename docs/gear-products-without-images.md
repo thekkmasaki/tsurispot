@@ -199,3 +199,49 @@
 
 - ASIN が同じ商品: `af-harris` と `af-fluorocarbon-line`（同一のデュエル ピンクフロロ 磯ハリス）、`af-mobile-battery` と `af-anker-charger`（同一の Anker モバイルバッテリー）。同じ写真が表示される。
 - 未確認事項: 作業環境からは `ws-fe.amazon-adsystem.com` に接続できず（プロキシ 502）、画像が実際に表示されることは確認できていない。
+
+## 6. 追記（2026-11-23）: SiteStripe 旧形式URLは使用不可
+
+`ws-fe.amazon-adsystem.com/widgets/q?...ID=AsinImage...`（旧 SiteStripe 画像リンク形式）を35件に設定する試みは、**ドメインが DNS で解決できない（`DNS_PROBE_FINISHED_NXDOMAIN`）ため取り消した**。この形式は廃止済みとみなし、今後使わないこと。
+
+参考として、`amzn.to` を展開して取得した ASIN（展開先の商品名とデータの商品名の一致を確認済み）を残す。画像を設定する際の照合用。
+
+| id | ASIN | 備考 |
+|---|---|---|
+| `af-beginner-set` | B0GMZ5P9WH |  |
+| `af-rod-shimano` | B071WL1RZT |  |
+| `af-reel-shimano` | B07W6YLDGH |  |
+| `af-eging-rod` | B0F9Y7WBL2 |  |
+| `af-lifejacket` | B07YWGH228 |  |
+| `af-shimano-polarized-wellington` | B0DRJLQ9LV |  |
+| `af-tackle-box` | B014P7ETAU |  |
+| `af-fishing-bag-large` | B0BC1PW3WB |  |
+| `af-egi-set` | B0CDBHY6CC |  |
+| `af-rod-holder` | B000AR6SOA |  |
+| `af-harris` | B0C7VD8VBP | ハリスとフロロラインが同一商品 |
+| `af-fluorocarbon-line` | B0C7VD8VBP | ハリスとフロロラインが同一商品 |
+| `af-winter-gloves` | B0CBJH3FJP |  |
+| `af-heated-vest` | — | 展開先が Amazon キャンペーンページ（商品ページではない）。リンク見直し推奨 |
+| `af-mobile-battery` | B0CQX67KTW | バッテリー2件が同一商品 |
+| `af-amihime` | B0C8YL9TVW |  |
+| `af-pe-line` | B0027VSG8I |  |
+| `af-nylon-line` | B01LZ454UO |  |
+| `af-anker-charger` | B0CQX67KTW | バッテリー2件が同一商品 |
+| `af-balaclava` | B0FQ5QJSXJ |  |
+| `af-fishing-bag-rakuten` | — | 楽天リンク |
+| `af-polarized-glasses` | B007SQ7GVU |  |
+| `af-fishing-vest` | B08TR3TM6D |  |
+| `af-tako-ball` | B0C4TS4RDP |  |
+| `af-sinker` | B000AR6WPU |  |
+| `af-snap` | B07HVTQHSC |  |
+| `af-rod-stand` | B01GTD4VPG |  |
+| `af-basket` | B09LQ9JJY4 |  |
+| `af-line-recycler` | B00BAKO8ZM |  |
+| `af-water` | B07RWWZT8J |  |
+| `af-sagoshiz` | B083WGX5RR |  |
+| `af-jet-sinker` | B000AQR32M |  |
+| `af-drivemap-osaka-harima` | B09J891N22 |  |
+| `af-drivemap-ise-kito` | B099JV6L55 |  |
+| `af-drivemap-tokyo-boso` | B08C5G6CFD |  |
+| `af-drivemap-tokyo-miura` | B0DG4ZBT73 |  |
+| `af-drivemap-sagami` | B09TDF6PKB |  |
