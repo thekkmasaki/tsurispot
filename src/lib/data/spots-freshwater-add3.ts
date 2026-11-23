@@ -434,7 +434,7 @@ export const freshwaterSpotsAdd3: FishingSpot[] = [
   },
   {
     id: "fw-537", name: "耳川上流（椎葉村）", slug: "miyazaki-mimikawa-shiiba-stream",
-    description: "宮崎県椎葉村を流れる耳川の上流域。日本三大秘境のひとつに数えられる椎葉村は、手付かずの自然が残る渓流天国。ヤマメやイワナが天然で生息し、九州随一の渓流釣りフィールドとして知られる。",
+    description: "宮崎県椎葉村を流れる耳川の上流域。日本三大秘境のひとつに数えられる椎葉村は、手付かずの自然が残る渓流天国。ヤマメが天然で生息し、九州随一の渓流釣りフィールドとして知られる。",
     latitude: 32.4567, longitude: 131.1128, address: "宮崎県東臼杵郡椎葉村下福良",
     accessInfo: "九州自動車道人吉ICから約90分。",
     region: lr("r5133"), spotType: "river", difficulty: "advanced",
@@ -445,7 +445,6 @@ export const freshwaterSpotsAdd3: FishingSpot[] = [
     rating: 4.4, reviewCount: 35,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー・テンカラ" },
-      { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "テンカラ" },
     ],
     bestTimes: [{ label: "朝マヅメ", timeRange: "05:00〜07:30", rating: "best" }, { label: "夕マヅメ", timeRange: "16:00〜18:30", rating: "good" }],
     tackleRecommendations: [],
