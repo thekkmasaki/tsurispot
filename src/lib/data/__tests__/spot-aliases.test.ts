@@ -30,11 +30,23 @@ describe("スポットの別名・旧名（spot-aliases）", () => {
   it("GSC由来でない別名は、そのスポットの公開データに書かれている（推測で作らない）", () => {
     for (const [slug, e] of Object.entries(spotAliases)) {
       if (e.source.startsWith("GSC")) continue;
+      if (e.sourceUrls && e.sourceUrls.length > 0) continue; // 外部出典は下のテストで検証
       const spot = bySlug.get(slug);
       if (!spot) continue;
       const text = [spot.name, spot.description, ...(spot.managementInfo?.notes ?? [])].join("\n");
       for (const n of e.names) {
         expect(text.includes(n), `${slug}: 「${n}」が公開データに無い（根拠を source に書き、データにも残す）`).toBe(true);
+      }
+    }
+  });
+
+  it("外部出典の別名には https の出典URLがあり、自サイト（tsurispot.com）を出典にしていない", () => {
+    for (const [slug, e] of Object.entries(spotAliases)) {
+      if (!e.sourceUrls) continue;
+      expect(e.sourceUrls.length, slug).toBeGreaterThan(0);
+      for (const u of e.sourceUrls) {
+        expect(u, slug).toMatch(/^https?:\/\//);
+        expect(u.includes("tsurispot.com"), `${slug}: 自サイトは出典にできない`).toBe(false);
       }
     }
   });
