@@ -1613,7 +1613,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
     address: "〒410-0101 静岡県沼津市多比",
     accessInfo: "JR沼津駅からバスで約20分。東名沼津ICから約20分。",
     region: localRegion("rk4032"), spotType: "port", difficulty: "intermediate",
-    isFree: true, hasParking: true, parkingDetail: "港内に有料駐車場あり",
+    isFree: true, hasParking: false, parkingDetail: "漁港内への一般車両の駐車は禁止（静岡県沼津土木事務所）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.1, reviewCount: 245,
     catchableFish: [
