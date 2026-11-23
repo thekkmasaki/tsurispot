@@ -263,7 +263,55 @@ const TOTTORI_GYOKO_SLUGS = [
   "watari-gyokou-sakaiminato-a13", "daiei-gyokou-a13", "nakayama-gyokou-daisen-a13",
 ];
 
+// ─────────── 2026-11-23 指示書03（禁止の疑い35件の公式調査、docs/fishing-ban-investigation-03.md）の反映 ───────────
+const INVESTIGATION_03 = "2026-11-21";
+
+// 鹿児島港（港湾管理者: 鹿児島県）。県は港湾の岸壁を原則関係者以外立入禁止とし、
+// 本港区北ふ頭1号岸壁などは国際船舶・港湾保安法の制限区域（立入に許可証が必要）。
+const KAGOSHIMA_PORT_URLS = [
+  "https://www.pref.kagoshima.jp/ak13/chiiki/kagoshima/kiban/documents/miokuri.html",
+  "https://www.pref.kagoshima.jp/ah09/20130305.html",
+  "https://www.city.kagoshima.lg.jp/faq-kankyomachizukuri/kasenkowan/q2.html",
+];
+const KAGOSHIMA_PORT_REASON =
+  "鹿児島港を管理する鹿児島県は、港湾の岸壁について、事故防止などの観点から原則として関係者以外の立入を禁止しています。また本港区北ふ頭1号岸壁などは、国際船舶・港湾保安法に基づく制限区域で、立入には県の許可証が必要です。岸壁で釣りをすることはできないと考えてください。";
+const kagoshimaPort = (description: string): SpotBanOverride => ({
+  fishingBan: { scope: "partial", reason: KAGOSHIMA_PORT_REASON, sourceUrls: KAGOSHIMA_PORT_URLS, confirmedAt: INVESTIGATION_03 },
+  description,
+});
+
+// 徳山ダム（岐阜県揖斐川町）。県の内水面漁場管理委員会指示で、上流の支流は全魚種・周年の採捕禁止。
+// 湖面の立入禁止は徳山会館の指定管理者の告知でのみ確認でき、ダム管理者（水資源機構）の公式ページは
+// 取得できなかったため、fishingBan は公式で確認できた上流の採捕禁止を根拠に partial とする。
+const TOKUYAMA_DAM: SpotBanOverride = {
+  fishingBan: {
+    scope: "partial",
+    reason:
+      "岐阜県内水面漁場管理委員会の指示により、徳山ダムの上流のうち、揖斐川町塚の才谷合流点から上流の揖斐川とその支派川、門入の黒谷合流点から上流の西谷・黒谷とその支派川では、一年中すべての魚の採捕が禁止されています。ダム湖は漁業権のない自由漁場ですが、湖面は通常立入禁止と案内されており（現地の徳山会館の告知）、湖面開放日でも魚釣りは禁止とされています。",
+    sourceUrls: [
+      "https://www.pref.gifu.lg.jp/page/8519.html",
+      "https://www.pref.gifu.lg.jp/uploaded/attachment/35697.pdf",
+      "https://www.pref.gifu.lg.jp/uploaded/attachment/383183.pdf",
+    ],
+    confirmedAt: INVESTIGATION_03,
+  },
+  description:
+    "岐阜県揖斐川町にある日本最大級の貯水量を持つ徳山ダムと、そのダム湖（徳山湖）。湖面は通常立入禁止と案内されており、湖面開放日でも魚釣りは禁止とされている。上流の才谷合流点・黒谷合流点より上の揖斐川や支流も、岐阜県の指示で一年中すべての魚の採捕が禁止されている。ダム湖周辺で釣りをすることはできないので、ダム見学や紅葉ドライブで訪れてほしい。",
+};
+
 export const spotBanOverrides: Record<string, SpotBanOverride> = {
+  // ─────────── 指示書03（2026-11-23） ───────────
+  "kagoshima-port": kagoshimaPort(
+    "鹿児島市本港新町、桜島フェリーターミナルのある鹿児島港本港区。港湾を管理する鹿児島県は、岸壁について事故防止の観点から原則として関係者以外の立入を禁止しており、本港区の一部の岸壁は保安法に基づく制限区域にもなっている。フェリーターミナル周辺の岸壁で釣りをすることはできない。錦江湾で釣りをするなら、釣りが認められた施設や場所を選び、現地の掲示に従ってほしい。"
+  ),
+  "kagoshima-kita-futo-w6": kagoshimaPort(
+    "鹿児島港本港区の北ふ頭。北ふ頭1号岸壁は国際船舶・港湾保安法に基づく制限区域で、立入には鹿児島県の許可証が必要になる。港湾を管理する鹿児島県は、岸壁について原則として関係者以外の立入を禁止しており、北ふ頭で釣りをすることはできない。錦江湾で釣りをするなら、釣りが認められた施設や場所を選び、現地の掲示に従ってほしい。"
+  ),
+  "kagoshima-shinko": kagoshimaPort(
+    "鹿児島市の鹿児島港。港湾を管理する鹿児島県は、岸壁について事故防止の観点から原則として関係者以外の立入を禁止しており、フェリーの見送りでも岸壁には入れないと案内している。港の岸壁で釣りをすることはできない。錦江湾で釣りをするなら、釣りが認められた施設や場所を選び、現地の掲示に従ってほしい。"
+  ),
+  "tokuyama-dam-gifu": TOKUYAMA_DAM,
+
   // ─────────── 全面禁止 ───────────
   "nanko-kita-breakwater": {
     fishingBan: {

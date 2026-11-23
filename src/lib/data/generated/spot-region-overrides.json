@@ -8,6 +8,15 @@
   },
   "note": "日南市油津港: 日南・串間(中央値から103km) → 日南・南郷(2km)"
  },
+ "akagawa-dam-yaita-a12": {
+  "region": {
+   "id": "rs13103",
+   "prefecture": "栃木県",
+   "areaName": "宇都宮・鹿沼",
+   "slug": "tochigi-utsunomiya-kanuma-s13"
+  },
+  "note": "赤川ダム: 矢板市長井（誤り）→ 宇都宮市福岡町（栃木県の鬼怒川漁協遊漁規則・国土地理院の地名データ、指示書03）"
+ },
  "akigawa-akiruno-e8": {
   "region": {
    "id": "r610",
@@ -170,6 +179,15 @@
   },
   "note": "函館港緑の島: 稚内・宗谷(中央値から178km) → 函館・戸井(20km)"
  },
+ "hakusui-dam-taketa-w6": {
+  "region": {
+   "id": "r5207",
+   "prefecture": "大分県",
+   "areaName": "大野川上流（竹田）",
+   "slug": "oita-onogawa-taketa-detail"
+  },
+  "note": "白水ため池（竹田市）: 別府・大分市（誤り）→ 大野川上流（竹田）（指示書03）"
+ },
  "hamanako-bentenjima": {
   "region": {
    "id": "r1060",
@@ -305,6 +323,15 @@
    "slug": "aomori-ajigasawa-iwasaki-s11"
   },
   "note": "風合瀬漁港: 津軽・西海岸(中央値から57km) → 鯵ヶ沢・岩崎(2km)"
+ },
+ "kesennuma-oura-port-a11": {
+  "region": {
+   "id": "r1090",
+   "prefecture": "宮城県",
+   "areaName": "気仙沼",
+   "slug": "miyagi-kesennuma"
+  },
+  "note": "気仙沼市大浦（気仙沼漁港大浦地区）: 南三陸・歌津（誤り）→ 気仙沼（指示書03）"
  },
  "kinokawa-hashimoto-a9": {
   "region": {
@@ -707,6 +734,15 @@
   },
   "note": "大堂津港: 日南・串間(中央値から100km) → 日南・南郷(2km)"
  },
+ "oshima-uranohama-beach-a11": {
+  "region": {
+   "id": "r1090",
+   "prefecture": "宮城県",
+   "areaName": "気仙沼",
+   "slug": "miyagi-kesennuma"
+  },
+  "note": "気仙沼大島・浦の浜: 南三陸・歌津（誤り）→ 気仙沼（指示書03）"
+ },
  "rumoi-minami-gampeki6": {
   "region": {
    "id": "r64",
@@ -799,6 +835,15 @@
  },
  "shinminato-gyokou-e8": {
   "address": "〒934-0023 富山県射水市海王町"
+ },
+ "shiobara-dam-ko6": {
+  "region": {
+   "id": "r746",
+   "prefecture": "栃木県",
+   "areaName": "箒川",
+   "slug": "tochigi-houkigawa"
+  },
+  "note": "塩原ダム湖（那須塩原市・箒川）: 日光・中禅寺湖（誤り）→ 箒川（指示書03）"
  },
  "shiraoi-kou6": {
   "region": {
