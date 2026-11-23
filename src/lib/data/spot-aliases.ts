@@ -54,6 +54,29 @@ export const spotAliases: Record<string, SpotAliasEntry> = {
     source: "説明文「…と呼ばれることもある」",
   },
 
+  // ---- Web調査（2026-11。外部の出典で同じ場所を指すと確認できたもの） ----
+  "kobe-airport-veranda": {
+    kind: "alias",
+    names: ["神戸空港島親水護岸"],
+    source: "Web調査 2026-11: 神戸市「神戸空港島の親水護岸は…アングラーの方からは『ベランダ』の愛称で呼ばれています」",
+    sourceUrls: ["https://www.city.kobe.lg.jp/a42810/business/kowanjigyo/kobekukonishiryokuchi-tsuri.html"],
+  },
+  "shonan-ko-kita-ryokuchi": {
+    kind: "alias",
+    names: ["オリンピック記念公園"],
+    source: "Web調査 2026-11: 釣りメディア2件「『オリンピック記念公園』と呼ばれることもある」「公園(現在は湘南港北緑地公園)」",
+    sourceUrls: [
+      "https://www.jackery.jp/blogs/fishing/enoshima-night-fishing-spots-6-breakwater-rock-parking",
+      "https://tsurihack.com/1162/2",
+    ],
+  },
+  "tateyama-port": {
+    kind: "alias",
+    names: ["館山港多目的観光桟橋"],
+    source: "Web調査 2026-11: 館山夕日桟橋の正式名（国交省資料「多目的桟橋（館山夕日桟橋）」）",
+    sourceUrls: ["https://tabi-mag.jp/ch0403/", "https://www.mlit.go.jp/kankocho/cruise/jp/detail/017/index.html"],
+  },
+
   // ---- 公開データに旧名として書かれているもの（施設名の変更） ----
   "tochigi-nikko-otaki-tsuribori": { kind: "former", names: ["栗山つりセンター"], source: "説明文「旧名は栗山つりセンター」" },
   "fukushima-inawashiro-alpina-fishing-lodge": {
