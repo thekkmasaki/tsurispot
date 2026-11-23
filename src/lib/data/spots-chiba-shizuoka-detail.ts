@@ -276,12 +276,22 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
   },
   {
     id: "scs009", name: "坂田港", slug: "bandakou",
-    description: "坂田港は館山市南部の小規模な漁港の釣り場。釣り人が少なくのんびり竿を出せ、5月〜11月の夕マヅメはサビキでアジ、9月〜12月はエギングでアオリイカが本命。ウキ釣りでクロダイ、通年の穴釣りでカサゴ、11月〜翌4月はメバリングでメバルも狙える。無料の駐車スペースあり。",
+    description: "坂田港（坂田漁港）は館山市南部、房総フラワーライン沿いの小規模な漁港。現地では立入禁止の掲示があるとの情報が寄せられており、港内に釣り人用の駐車場もない。釣行する場合は必ず現地の掲示と漁協・管理者の案内を確認し、立入禁止の場所には入らないこと。釣りが認められている場合、5月〜11月の夕マヅメはサビキでアジ、9月〜12月はエギングでアオリイカ、通年の穴釣りでカサゴなどが狙える。",
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: [
+        "坂田漁港は立入禁止になっているとの情報が寄せられています（2026年11月、利用者からの指摘。公式の一次情報は未確認）。現地の掲示を必ず確認し、立入禁止の場所には絶対に入らないでください。",
+      ],
+      otherRules: ["港内に釣り人用の駐車場はありません。路上駐車や漁業者の作業スペースへの駐車は厳禁です。"],
+    },
     latitude: 34.9720, longitude: 139.7825,
     address: "〒294-0308 千葉県館山市坂田421-2",
     accessInfo: "JR館山駅からバスで約20分。富津館山道路富浦ICから約15分。",
     region: lr("r1052"), spotType: "port", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "港周辺の駐車スペース（無料）",
+    isFree: true, hasParking: false, parkingDetail: "釣り人用の駐車場なし（路上駐車・漁港内への駐車は不可）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/bandakou.webp", imageAttribution: "Photo: Higa4 / Wikimedia Commons (CC0)", images: [], rating: 3.8, reviewCount: 48, googleRating: 4.8, googleReviewCount: 4,
     catchableFish: [
@@ -295,7 +305,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
           { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ], bestTimes: btEvening, tackleRecommendations: [],
     gearGuides: [gearSabiki, gearUki, gearEging, gearRock, gearMebaring, gearKago, gearTakoegi, gearJig],
-    safetyLevel: "safe", safetyNotes: ["小規模漁港のため漁船の出入りに注意"],
+    safetyLevel: "caution", safetyNotes: ["立入禁止の掲示がある場所には入らないこと", "先端付近は波を被りやすくテトラもあるため注意", "小規模漁港のため漁船の出入りに注意"],
     youtubeLinks: [{ label: "坂田港 アジ", searchQuery: "坂田港 サビキ アジ 館山", description: "坂田港でのサビキ釣り動画" }],
   },
   {
