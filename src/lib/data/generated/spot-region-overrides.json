@@ -325,15 +325,6 @@
   },
   "note": "砧公園内の多摩川: 神奈川県 横浜・川崎 → 東京都 東京23区(市街地)(8km・座標と住所が一致)"
  },
- "kisakata-gyoko": {
-  "region": {
-   "id": "rs13023",
-   "prefecture": "秋田県",
-   "areaName": "にかほ東部",
-   "slug": "akita-nikaho-east-s13"
-  },
-  "note": "象潟漁港: 能代(中央値から64km) → にかほ東部(0km)"
- },
  "kishuku-kou-goto-w6": {
   "region": {
    "id": "rs77003",
@@ -462,15 +453,6 @@
    "slug": "wakayama-city"
   },
   "note": "和歌山マリーナシティ釣り公園: 南紀(中央値から58km) → 和歌山市(5km)"
- },
- "meizu-kou": {
-  "region": {
-   "id": "rs77114",
-   "prefecture": "宮崎県",
-   "areaName": "日南・南郷",
-   "slug": "miyazaki-nichinan-nango-bulk"
-  },
-  "note": "目井津港: 日南・串間(中央値から104km) → 日南・南郷(4km)"
  },
  "michidairagawa-dam6": {
   "region": {
