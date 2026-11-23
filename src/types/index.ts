@@ -146,6 +146,8 @@ export interface ListSpot {
   methods: string[];
   /** サーバー事前計算: 穴場判定 */
   isHiddenGem: boolean;
+  /** サーバー事前計算: 口コミが少なく混みにくい釣り場（「近くの穴場」。lib/quiet-spot.ts） */
+  isQuietSpot?: boolean;
   /** サーバー事前計算: 高級魚が釣れるか */
   hasPremiumFish: boolean;
   /**
