@@ -76,6 +76,8 @@ const SNS_EXCLUDE_SLUGS = new Set([
   // 公式未確認の禁止判定
   "fukuura-ganpeki", "nagoya-garden-futo", "nagoya-garden-futou-e8", "akashi-kaikyo-bridge-shita", "yaizu-shinko-teibo",
   "hayakawa-kakou-tetra-e8", "tambarako-dam-a12",
+  // 2026-11-23 アオリイカ千葉TOP10リールに「坂田漁港は立入禁止・駐車場なし」とコメントで指摘（一次情報は未確認）
+  "bandakou",
 ]);
 function snsSafe(s: (typeof fishingSpots)[number]) {
   if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug)) return false;
