@@ -1826,12 +1826,24 @@ export const eastAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13304", name: "三方・水月湖", slug: "mikata-suigetsuko-a13",
-    description: "三方五湖の水月湖は年縞で世界的に有名な湖。コイやフナのほか、ウナギも棲息する自然豊かな環境で釣りが楽しめる。",
+    description: "三方五湖の水月湖は年縞で世界的に有名な湖。コイやフナのほか、ウナギも棲息する自然豊かな環境で釣りが楽しめる。海山漁協の漁場のため遊漁券が必要で、ウナギ釣りは日中のみ（日没後は禁止）。",
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      nightFishing: false,
+      fishingLicenseRequired: true,
+      otherRules: [
+        "水月湖・菅湖は海山漁業協同組合の管理する漁場です。釣りには遊漁券（雑魚券。日券600円・年券6,000円）が必要です。",
+        "ウナギ釣りは日中のみ認められており、日没から日の出までは全面禁止です（海山漁協）。",
+      ],
+      verifiedAt: "2026-11-23",
+    },
     latitude: 35.5680, longitude: 135.8680,
     address: "〒919-1461 福井県三方上中郡若狭町気山",
     accessInfo: "JR気山駅から徒歩約15分",
     region: localRegion("rs13122"), spotType: "lake", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "レインボーライン駐車場利用可",
+    isFree: false, feeDetail: "遊漁券が必要（海山漁協の雑魚券：日券600円・年券6,000円）", hasParking: true, parkingDetail: "レインボーライン駐車場利用可",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
