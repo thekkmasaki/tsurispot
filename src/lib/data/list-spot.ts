@@ -8,6 +8,7 @@
  */
 import type { FishingSpot, ListSpot, MapSpot } from "@/types";
 import { isHiddenGem, getPremiumFishForSpot } from "@/lib/hidden-gem";
+import { isQuietSpot } from "@/lib/quiet-spot";
 import { getSpotCategory, getSpotCategoryDetail } from "@/lib/spot-category";
 import { getSpotDepthKind } from "@/lib/spot-depth-terrain";
 
@@ -52,6 +53,7 @@ export function toListSpot(spot: FishingSpot): ListSpot {
     fishNames,
     methods,
     isHiddenGem: isHiddenGem(spot),
+    isQuietSpot: isQuietSpot(spot),
     hasPremiumFish: getPremiumFishForSpot(spot).length > 0,
     depthTerrain: getSpotDepthKind(spot.slug),
   };
