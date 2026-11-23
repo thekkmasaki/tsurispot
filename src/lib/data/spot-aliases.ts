@@ -43,6 +43,7 @@ export const spotAliases: Record<string, SpotAliasEntry> = {
   "takeno-higashi-bouhatei": { kind: "alias", names: ["竹野大波止"], source: "説明文「通称『竹野大波止』」" },
   "ibo-port-takasago": { kind: "alias", names: ["関電白灯"], source: "説明文「通称『関電白灯』」" },
   "katsurama-port": { kind: "alias", names: ["勝山漁港"], source: "説明文「勝山漁港とも呼ばれる」" },
+  "hayama-port": { kind: "alias", names: ["あぶずり港"], source: "説明文「あぶずり港とも呼ばれ」" },
 
   // ---- 公開データに旧名として書かれているもの（施設名の変更） ----
   "tochigi-nikko-otaki-tsuribori": { kind: "former", names: ["栗山つりセンター"], source: "説明文「旧名は栗山つりセンター」" },

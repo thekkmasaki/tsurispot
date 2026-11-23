@@ -479,4 +479,21 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "houkigawa-shiobara": "shiobara-houkigawa6", // 箒川（塩原渓谷） → 塩原渓谷箒川：同じ区間（那須塩原市塩原）
   "kameyama-dam": "kimitsu-kameyamako-a13", // 亀山ダム → 君津・亀山湖：同じダム湖（同住所 川俣旧川俣）
   "kesennuma-oshima-kameyama-rocky-a13": "kesennuma-oshima-rocky-a10", // 気仙沼市大島亀山展望台下磯 → 気仙沼大島亀山磯：同じ亀山の下の磯
+  // ---- 2026-11-23 追加分（同一市区町村の未判定候補 12 グループ＋保留の館鼻・葉山を判定） ----
+  "uchibo-hota-port": "hota-port", // 内房保田漁港 → 保田港：同住所（鋸南町吉浜99-5）の同じ港
+  "hota-gyoko-banya": "hota-port", // 保田漁港（ばんや） → 保田港：同住所。「ばんや」は港の食堂で別地物ではない
+  "hota-gyoko6": "hota-port", // 保田漁港 → 保田港：同じ港（統合元は座標が約3km南）
+  "amatsu-ko": "amatsu-kou", // 天津港（天津漁港） → 天津港：同住所（鴨川市天津1390）
+  "amatsu-gyoko6": "amatsu-kou", // 天津漁港 → 天津港：同じ港（統合元は座標が約5km西）
+  "kominato-gyoko6": "kominato-port-chiba", // 小湊漁港 → 小湊港：同じ港（統合元は座標が約4km西）
+  "nabakigawa-kakou-shirako-a10": "nabakigawa-kakko6", // 南白亀川河口（白子海岸） → 南白亀川河口：同じ河口（495m）
+  "obitsu-kakou-kisarazu-a12": "obitsu-kakko6", // 小櫃川河口（木更津） → 小櫃川河口：同じ河口（木更津市）
+  "minamiboso-wadaura-gyokou-a13": "wadaura-gyoko6", // 南房総・和田浦漁港 → 和田浦漁港：地名接頭辞違い（1.3km）
+  "shirako-kaigan6": "shirako-kaigan-surf", // 白子海岸 → 白子海岸サーフ：同じ浜（白子町）
+  "iioka-gyoko6": "iioka-port", // 飯岡漁港 → 飯岡港：同じ港（同住所 旭市下永井）
+  "okutama-lake-ogouchi-a10": "okutama-ko6", // 奥多摩湖（小河内貯水池） → 奥多摩湖：同じ湖（小河内貯水池＝奥多摩湖）
+  "tokyo-mizumoto-kouen-a13": "mizumoto-koen6", // 東京・水元公園 → 水元公園：同じ公園（地名接頭辞違い）
+  "hachinohe-tatehana-port": "hachinohe-tatehana-gyokou6", // 八戸館鼻漁港 → 八戸港館鼻漁港：同じ漁港。勝者はGSCで「八戸釣り情報」6.6位のURLを維持
+  "hachinohe-tatehana-wharf": "hachinohe-tatehana-ganpeki", // 八戸館鼻岸壁 → 八戸港館鼻岸壁：同住所の同じ岸壁（漁港と岸壁は decisions-1 で別扱いのまま）
+  "hayama-abuzuri-add2": "hayama-port", // 葉山港（あぶずり港） → 葉山港：同住所（葉山町堀内50）。勝者の説明文に「あぶずり港とも呼ばれ」
 };
