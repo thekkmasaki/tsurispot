@@ -221,7 +221,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
       (a, b) =>
         Number(b.season === monthSeasonJa) - Number(a.season === monthSeasonJa)
     )
-    .slice(0, 4);
+    .slice(0, 12);
 
   const currentMonth = new Date().getMonth() + 1;
   const isCurrentMonth = currentMonth === guide.month;

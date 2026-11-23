@@ -157,11 +157,12 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
     .filter(Boolean);
 
   // おすすめスポットを取得: spotTypeが一致し、対象月にcatchableFishがあるスポットを地方別にrating順
-  const allMatchingSpots = fishingSpots
+  const matchSpots = (targetOnly: boolean) => fishingSpots
     .filter((spot) => {
       const typeMatch = guide.spotTypes.includes(spot.spotType);
       if (!typeMatch) return false;
       const hasFishInSeason = spot.catchableFish.some((cf) => {
+        if (targetOnly && !guide.targetFish.includes(cf.fish.slug)) return false;
         if (!isFishListedAtSpot(spot, cf.fish.slug)) return false; // 釣れる度ゲート
         const cfMonths: number[] = [];
         if (cf.monthStart <= cf.monthEnd) {
@@ -175,6 +176,9 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
       return hasFishInSeason;
     })
     .sort((a, b) => b.rating - a.rating);
+  // 対象魚が旬に釣れるスポットを優先（例: トラウトのガイドにヘラブナの釣り堀を出さない）。無ければ従来どおり
+  const targetSpots = matchSpots(true);
+  const allMatchingSpots = targetSpots.length > 0 ? targetSpots : matchSpots(false);
 
   // 地方別にグループ化
   const REGION_MAP: Record<string, string> = {
