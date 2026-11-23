@@ -180,3 +180,22 @@
 2. 2つのデータファイルを Node.js（`--experimental-strip-types`）で読み込み、配列をJSON化して件数・`image` フィールドの有無を集計（`affiliateProducts` 37件 / `products` 43件、`image` 設定 0件）。
 3. 各ページのフィルタ呼び出し（`getProductsByMethod` / `getTopProducts` / `getBeginnerEssentials` / ID指定 など）を確認し、B系統の表示ページを算出。
 4. `public/images` 配下に商品画像ディレクトリが存在しないことを確認。
+
+## 6. 追記（2026-11-23）: affiliate-products.ts に SiteStripe 形式の画像URLを設定
+
+本レポート作成後、ユーザー指示により A系統 37件のうち **35件** に `image` を設定した（B系統 `products.ts` は型・コンポーネント未対応のため未着手）。
+
+- 方法: 各商品の短縮リンク（`amzn.to`）を展開して ASIN を取得し、SiteStripe「画像」リンクが出力するのと同じ形式の URL を設定。
+  - 形式: `https://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={ASIN}&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=tsurispot-22&language=ja_JP`
+  - 画像のダウンロード・リポジトリへの配置はしていない（規約順守）。
+  - 展開先の Amazon 商品名と、データの商品名が一致することを全35件で目視確認した。
+- 設定後の件数（外部URLも「画像あり」とする基準）: A系統 画像あり **35件** / 画像なし **2件**。全体では画像あり 35件 / 画像なし 45件（B系統 43件を含む）。
+- 設定できなかった2件:
+
+| id | 商品表示名 | 理由 |
+|---|---|---|
+| `af-heated-vest` | 電熱ベスト | `amzn.to` の展開先が商品ページではなく Amazon のキャンペーンページ（`/hz/mobile/mission`）で、ASIN がない。リンク自体の見直しを推奨 |
+| `af-fishing-bag-rakuten` | 釣りバッグ | 楽天リンクのため SiteStripe（Amazon）の画像は使えない |
+
+- ASIN が同じ商品: `af-harris` と `af-fluorocarbon-line`（同一のデュエル ピンクフロロ 磯ハリス）、`af-mobile-battery` と `af-anker-charger`（同一の Anker モバイルバッテリー）。同じ写真が表示される。
+- 未確認事項: 作業環境からは `ws-fe.amazon-adsystem.com` に接続できず（プロキシ 502）、画像が実際に表示されることは確認できていない。
