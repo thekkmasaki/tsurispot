@@ -22,8 +22,9 @@ export interface AffiliateProduct {
   /** 価格帯の目安（表示用） */
   priceRange?: string;
   /**
-   * 商品写真。Amazon SiteStripe「画像」リンクの img src をそのまま入れる
-   * （規約上、画像をダウンロードして自サーバーに置くのは禁止）
+   * 商品写真。public/images/affiliate/ に置いた画像のパス（例: "/images/affiliate/xxx.jpg"）
+   * Amazon の画像は規約上ダウンロードして自サーバーに置けないため使わない。
+   * 現在の画像はメーカー・販売店の商品写真の一時利用。将来アフィリエイト公式画像に差し替える前提。
    */
   image?: string;
   /** 編集部おすすめフラグ（高単価・高品質商品に設定） */
@@ -81,6 +82,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "tackle",
     priceRange: "¥5,000〜8,000",
     isRecommended: true,
+    image: "/images/affiliate/shimano-lurematic-v2.jpg",
   },
   {
     id: "af-reel-shimano",
@@ -92,6 +94,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "tackle",
     priceRange: "¥4,000〜7,000",
     isRecommended: true,
+    image: "/images/affiliate/shimano-reel-nasci-v2.jpg",
   },
   {
     id: "af-eging-rod",
@@ -104,6 +107,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "tackle",
     priceRange: "¥5,000〜10,000",
     isRecommended: true,
+    image: "/images/affiliate/eging-rod-v2.jpg",
   },
   {
     id: "af-lifejacket",
@@ -115,6 +119,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "wear",
     priceRange: "¥3,000〜8,000",
     isRecommended: true,
+    image: "/images/affiliate/life-jacket-v2.jpg",
   },
   {
     id: "af-shimano-polarized-wellington",
@@ -126,6 +131,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "accessory",
     priceRange: "¥5,000〜10,000",
     isRecommended: true,
+    image: "/images/affiliate/shimano-wellington-glass-v2.jpg",
   },
   {
     id: "af-tackle-box",
@@ -157,6 +163,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥1,500〜2,500",
+    image: "/images/affiliate/egi-set-v2.jpg",
   },
   {
     id: "af-rod-holder",
