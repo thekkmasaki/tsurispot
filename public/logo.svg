@@ -1,18 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
   <defs>
-    <linearGradient id="icon-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0369a1"/>
-      <stop offset="100%" stop-color="#0c4a6e"/>
-    </linearGradient>
     <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#0c4a6e"/>
       <stop offset="100%" stop-color="#0369a1"/>
     </linearGradient>
   </defs>
   <!-- Icon background -->
-  <rect x="4" y="4" width="40" height="40" rx="10" ry="10" fill="url(#icon-bg)"/>
+  <rect x="4" y="4" width="40" height="40" rx="9" ry="9" fill="#0060a6"/>
   <!-- Lucide Fish icon (white, centered in 40x40 box at offset 4,4) -->
-  <g transform="translate(12, 12)" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(11.5, 11.5) scale(1.0417)" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/>
     <path d="M18 12v.5"/>
     <path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/>
