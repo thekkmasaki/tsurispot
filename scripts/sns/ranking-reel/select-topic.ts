@@ -176,14 +176,19 @@ const FOCUS_FISH = new Set(["aoriika", "tachiuo", "buri", "sawara", "inada"]);
 
 // 月ごとの重点お題（MONTH_FOCUS がある月は FOCUS_FISH の代わりにこちらを使う）。
 // 2026-11-24 ユーザー判断: 12月以降はアオリイカ・青物は厳しいので出さず、冬に人気の
-// 管理釣り場・釣り堀・海上釣り堀・コブダイ・ワカサギ・カサゴ/メバル（穴釣り・メバリング）・カレイ/ヒラメを回す。
+// 管理釣り場・釣り堀・海上釣り堀・コブダイ・ワカサギ・カサゴ/メバル（穴釣り・メバリング）・マゴチ/ヒラメを回す。
+// 同日、カレイは外してマゴチに差し替え（ユーザー判断）。マゴチは現データでは全スポットの時期が4〜10月のため、
+// 冬のスポットが登録されるまでは候補が出ない（データ上の掲載基準で自動的に判定）。
 // 重点お題どうしは直近 RECENT_FOCUS_WINDOW 本で使ったものを避けて、順番に回す。
-const WINTER_FOCUS = ["managed", "tsuribori", "kaijo", "kobudai", "wakasagi", "kasago", "mebaru", "karei", "hirame"];
+const WINTER_FOCUS = ["managed", "tsuribori", "kaijo", "kobudai", "wakasagi", "kasago", "mebaru", "magochi", "hirame"];
 const MONTH_FOCUS: Record<number, string[]> = { 12: WINTER_FOCUS, 1: WINTER_FOCUS, 2: WINTER_FOCUS };
 const RECENT_FOCUS_WINDOW = 6;
 // 冬は回遊が落ちて釣れにくいので出さない魚
 const WINTER_SKIP = new Set(["aoriika", "buri", "inada", "sawara", "kanpachi", "hiramasa", "shiira", "katsuo"]);
-const MONTH_SKIP: Record<number, Set<string>> = { 12: WINTER_SKIP, 1: WINTER_SKIP, 2: WINTER_SKIP };
+// 釣れても冬のリールには出さない魚（ユーザー判断）
+const WINTER_SKIP_EXTRA = ["karei"];
+const WINTER_SKIP_ALL = new Set([...WINTER_SKIP, ...WINTER_SKIP_EXTRA]);
+const MONTH_SKIP: Record<number, Set<string>> = { 12: WINTER_SKIP_ALL, 1: WINTER_SKIP_ALL, 2: WINTER_SKIP_ALL };
 // 県で6件に満たなくても地方・全国でまとめてお題にする魚（データが少ないが人気のある魚）
 const WIDE_AREA_FISH = new Set(["kobudai"]);
 
