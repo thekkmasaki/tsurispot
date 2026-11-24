@@ -51,7 +51,9 @@ if (!dryRun) {
 
 // 2) お題選定（サイトと同じデータ・同じ掲載基準）
 const selArgs = ["--yes", "tsx@4.23.15", path.join(here, "select-topic.ts"), "--date", date,
-  "--exclude", exclude.join(","), "--recent-fish", recentFish.join(","), "--recent-pref", recentPref.join(",")];
+  "--exclude", exclude.join(","), "--recent-fish", recentFish.join(","), "--recent-pref", recentPref.join(","),
+  // 冬など月ごとの重点お題を均等に回すための使用履歴（新しい順）
+  "--history", ledger.slice(0, 30).map((e) => e.fish).join(",")];
 for (const k of ["pref", "fish", "month"]) if (arg(k)) selArgs.push(`--${k}`, arg(k));
 const topicPath = path.join(outDir, "topic.json");
 fs.writeFileSync(topicPath, execFileSync("npx", selArgs, { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] }));

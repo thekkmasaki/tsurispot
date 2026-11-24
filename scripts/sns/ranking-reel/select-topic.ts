@@ -179,10 +179,13 @@ const FOCUS_FISH = new Set(["aoriika", "tachiuo", "buri", "sawara", "inada"]);
 // 管理釣り場・釣り堀・海上釣り堀・コブダイ・ワカサギ・カサゴ/メバル（穴釣り・メバリング）・マゴチ/ヒラメを回す。
 // 同日、カレイは外してマゴチに差し替え（ユーザー判断）。マゴチは現データでは全スポットの時期が4〜10月のため、
 // 冬のスポットが登録されるまでは候補が出ない（データ上の掲載基準で自動的に判定）。
-// 重点お題どうしは直近 RECENT_FOCUS_WINDOW 本で使ったものを避けて、順番に回す。
-const WINTER_FOCUS = ["managed", "tsuribori", "kaijo", "kobudai", "wakasagi", "kasago", "mebaru", "magochi", "hirame"];
+// 重点お題どうしは「最後に使ってから一番間が空いたもの」を優先して全部を均等に回す（--history の台帳を使う）。
+const WINTER_FOCUS = ["managed", "tsuribori", "kaijo", "kobudai", "wakasagi", "kasago", "mebaru", "magochi", "hirame",
+  // 同日追加: 12月にデータがそろっていて冬に狙える定番（クロダイ・メジナ・シーバス・アイナメ・サヨリ）と、12月が旬で地域需要の強いハタハタ（秋田）
+  "kurodai", "mejina", "suzuki", "ainame", "sayori", "hatahata"];
 const MONTH_FOCUS: Record<number, string[]> = { 12: WINTER_FOCUS, 1: WINTER_FOCUS, 2: WINTER_FOCUS };
-const RECENT_FOCUS_WINDOW = 6;
+// 何本前まで遡って使用履歴を見るか（重点お題の数より十分大きく）
+const FOCUS_HISTORY = 30;
 // 冬は回遊が落ちて釣れにくいので出さない魚
 const WINTER_SKIP = new Set(["aoriika", "buri", "inada", "sawara", "kanpachi", "hiramasa", "shiira", "katsuo"]);
 // 釣れても冬のリールには出さない魚（ユーザー判断）
@@ -231,8 +234,13 @@ const forced = !!(forcedPref || forcedFish);
 const focusList = MONTH_FOCUS[monthNum];
 const focusSet = new Set(focusList ?? []);
 const skipSet = MONTH_SKIP[monthNum] ?? new Set<string>();
-// recentFish は台帳の新しい順
-const recentFocus = new Set([...recentFish].slice(0, RECENT_FOCUS_WINDOW).map(groupOf));
+// 台帳の新しい順の魚（お題キー）。重点お題の順回し用。未指定なら --recent-fish で代用
+const history = (arg("history") ?? arg("recent-fish") ?? "").split(",").map((x) => groupOf(x.trim())).filter(Boolean).slice(0, FOCUS_HISTORY);
+/** 最後に使ってから何本空いたか（使っていなければ FOCUS_HISTORY） */
+const sinceLastUse = (key: string) => {
+  const i = history.indexOf(groupOf(key));
+  return i < 0 ? FOCUS_HISTORY : i;
+};
 
 interface Candidate {
   kind: "fish" | "facility";
@@ -291,9 +299,10 @@ const scored = candidates
     s += demand;
     const g = groupOf(c.key);
     if (focusList) {
-      // 冬など月ごとの重点お題: 直近で使っていない重点お題を最優先し、順番に回す
-      if (focusSet.has(c.key) && !recentFocus.has(g)) s += 100;
-      else if (recentFocus.has(g)) s -= 60;
+      // 冬など月ごとの重点お題: 間が空いているほど高くし、全部を順番に回す
+      // （1本空くごとに +15。人気・件数・需要の差（最大100程度）より順番を優先する）
+      if (focusSet.has(c.key)) s += 100 + sinceLastUse(c.key) * 15 - (sinceLastUse(c.key) < 2 ? 200 : 0);
+      else if (recentFish.has(g)) s -= 60;
     } else {
       // 重点魚種でも直近2本で使った魚は重点扱いしない（旬の重点魚種が1種だけの月に、毎回同じ魚になるのを防ぐ）
       const usedRecently = lastTwoFish.has(g);
