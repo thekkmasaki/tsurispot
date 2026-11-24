@@ -520,7 +520,7 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "sukushima-gyokou-a13": "shunan-sukukojima-gyokou", // 粭島漁港 → 周南市・粭島漁港：同一施設の表記違い（山口県・同一市区町村）
   "kojima-kotoura-kou-c8": "kojima-kotoura-port", // 児島・琴浦港 → 倉敷市児島琴浦港：同一施設の表記違い（岡山県・同一市区町村）
   "asahigawa-kakou-gogan-a10": "okayama-asahigawa-kakou", // 旭川河口護岸 → 岡山市旭川河口護岸：同一施設の表記違い（岡山県・同一市区町村）
-  "bizen-hinase-gyokou-a9": "hinase-port-okayama", // 備前・日生漁港 → 日生漁港：同一施設の表記違い（岡山県・同一市区町村）
+  "bizen-hinase-gyokou-a9": "hinase-port", // 備前・日生漁港 → 日生港：同一施設の表記違い（岡山県・同一市区町村）。日生漁港(hinase-port-okayama)ごと日生港へ統合（2026-11-23）
   "mushiake-gyokou-a13": "mushiake-kou-c8", // 虫明漁港 → 虫明港：同一施設の表記違い（岡山県・同一市区町村）
   "setouchi-mushiake-port": "mushiake-kou-c8", // 瀬戸内市虫明漁港 → 虫明港：同一施設の表記違い（岡山県・同一市区町村）
   "ofunato-yoshihama-port-a13": "yoshihama-gyokou6", // 大船渡市吉浜漁港 → 吉浜漁港：同一施設の表記違い（岩手県・同一市区町村）
@@ -594,4 +594,9 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "sendai-kou-kagoshima": "sendai-kou-satsumasendai-w6", // 川内港 → 薩摩川内・川内港：同一施設の表記違い（鹿児島県・同一市区町村）
   "nejime-kou-s8": "nejime-kou-w6", // 根占港 → 南大隅・根占港：同一施設の表記違い（鹿児島県・同一市区町村）
   "bonotsu-gyokou-a11": "bonotsu-gyokou-w6", // 坊津漁港 → 南さつま・坊津漁港：同一施設の表記違い（鹿児島県・同一市区町村）
+  // 2026-11-23: spot-redirects.json で 2026-04/06 に転送を登録済みだったが、名前が違うため重複排除をすり抜け
+  // 両ページが公開されていた3件（勝者は JSON の転送先）
+  "hinase-port-okayama": "hinase-port", // 日生漁港 → 日生港：同じ備前市日生町の港（0.56km）
+  "choshi-kou": "choshi-port", // 銚子港 → 銚子漁港：銚子港の本文自体が「銚子漁港」の説明（0.9km）。立入禁止注記は spot-facility-overrides.ts で勝者へ移した
+  "yunotsu-gyokou-shimane": "yunotsu-port", // 温泉津漁港 → 温泉津港：同じ大田市温泉津町の港（0.94km）
 };
