@@ -18,6 +18,20 @@ fs.mkdirSync(outDir, { recursive: true });
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const LV = { beginner: ["初心者◎", ""], all: ["初心者◎", ""], intermediate: ["中級", "lv"], advanced: ["上級", "lv"] };
 const n = t.spots.length;
+// お題の種類で文言を切り替える（魚種ランキング / 施設ランキング（管理釣り場・釣り堀・海上釣り堀））
+const isFacility = t.kind === "facility";
+const isWide = t.pref.scope === "region" || t.pref.scope === "national"; // 地方・全国ランキング
+const isSea = (t.fish.category ?? "sea") !== "freshwater";
+const FACILITY_COPY = {
+  managed: { lead: "冬こそ楽しい", bubble: "冬はマスの<br>ハイシーズン！", tags: ["#管理釣り場", "#エリアトラウト", "#トラウト", "#ニジマス"] },
+  tsuribori: { lead: "手軽に釣り体験", bubble: "家族で気軽に<br>釣りデビュー！", tags: ["#釣り堀", "#釣り堀デビュー", "#子連れ釣り", "#家族でお出かけ"] },
+  kaijo: { lead: "大物を手軽に", bubble: "放流魚を<br>手軽に狙えるよ！", tags: ["#海上釣り堀", "#釣り堀", "#マダイ釣り", "#海釣り"] },
+};
+const fc = isFacility ? FACILITY_COPY[t.fish.slug] ?? FACILITY_COPY.managed : null;
+// 見出し・キャプションの1行目
+const title = isFacility
+  ? `【${t.month.name}】${t.pref.name}の${t.fish.name}おすすめTOP${n}🎣`
+  : `【${t.month.name}】${t.pref.name}で${t.fish.name}が釣れる釣り場TOP${n}🎣`;
 const bigSize = t.fish.name.length <= 4 ? 150 : t.fish.name.length <= 5 ? 130 : t.fish.name.length <= 6 ? 110 : 90;
 
 const photoHtml = (s) => {
@@ -30,28 +44,31 @@ const cards = t.spots.map((s, i) => {
   const cls = s.name.length > 11 ? "xl" : s.name.length > 9 ? "long" : "";
   return `<div class="card"><div class="no n${i < 3 ? i + 1 : 0}">${i + 1}</div>${photoHtml(s)}
   <div class="tx"><b class="${cls}">${esc(s.name)}</b><em>${esc(s.city)}｜${esc(s.type)}</em>
-  <p>${lv ? `<span class="${lvCls}">${lv}</span>` : ""}${s.others.length ? "一緒に: " + esc(s.others.join("・")) : ""}</p></div></div>`;
+  <p>${lv ? `<span class="${lvCls}">${lv}</span>` : ""}${esc(s.note ?? (s.others.length ? "一緒に: " + s.others.join("・") : ""))}</p></div></div>`;
 }).join("");
 
 const shortTip = (arr) => [...arr].sort((a, b) => a.length - b.length).slice(0, 2);
 const tipsHtml = t.method
   ? `<li><b>釣り方</b>${esc(t.method.name)}</li>${shortTip(t.method.tips).map((x) => `<li><b>コツ</b>${esc(x.length > 25 ? x.slice(0, 24) + "…" : x)}</li>`).join("")}`
   : "";
-const bubble = t.fish.isPeakMonth ? `${t.month.name}は<br>${t.fish.name}のシーズン中！` : `${t.month.name}も<br>しっかり狙えるよ！`;
+const bubble = fc ? fc.bubble : t.fish.isPeakMonth ? `${t.month.name}は<br>${t.fish.name}のシーズン中！` : `${t.month.name}も<br>しっかり狙えるよ！`;
 const hasPhotoCredit = t.spots.some((s) => s.photo);
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="file://${here}/post.css">
 <script src="file://${here}/mascot.js"></script><script src="file://${here}/scenes.js"></script></head>
 <body style="--big:${bigSize}px">
 <header><div class="chip">${t.month.name}｜${esc(t.pref.name)}</div>
-<h1><span class="s">${t.fish.isPeakMonth ? "今が狙い時！" : "今月狙える"}</span><span class="big">${esc(t.fish.name)}</span><span class="s2">が釣れる${esc(t.pref.short)}の釣り場 <span class="top">TOP${n}</span></span></h1>
-<p class="sub">ツリスポ掲載${t.totalSpots}か所から「釣れる度」順に厳選</p>
+${fc
+  ? `<h1><span class="s">${fc.lead}</span><span class="big">${esc(t.fish.name)}</span><span class="s2">${esc(t.pref.short)}のおすすめ <span class="top">TOP${n}</span></span></h1>
+<p class="sub">ツリスポ掲載${t.totalSpots}か所から評価順に厳選</p>`
+  : `<h1><span class="s">${t.fish.isPeakMonth ? "今が狙い時！" : "今月狙える"}</span><span class="big">${esc(t.fish.name)}</span><span class="s2">が釣れる${esc(t.pref.short)}の釣り場 <span class="top">TOP${n}</span></span></h1>
+<p class="sub">ツリスポ掲載${t.totalSpots}か所から「釣れる度」順に厳選</p>`}
 <div class="mas" id="m1"></div><div class="bub">${bubble}</div></header>
 <main>${cards}</main>
-${tipsHtml ? `<section class="tips"><div class="mas2" id="m2"></div><div><h2>${esc(t.fish.name)}を釣るコツ</h2><ul>${tipsHtml}</ul></div></section>` : ""}
+${tipsHtml ? `<section class="tips"><div class="mas2" id="m2"></div><div><h2>${esc(t.fish.name)}${fc ? "を楽しむコツ" : "を釣るコツ"}</h2><ul>${tipsHtml}</ul></div></section>` : ""}
 <footer><div class="brand"><span class="logo" id="lg"></span>ツリスポ<small>全国5,000か所超の釣り場ガイド</small></div>
 <div class="cta">🔖 保存して釣行前にチェック<br><small>駐車場・釣果・詳しい情報はプロフのリンクから</small></div>
-<p class="note">※立入禁止・釣り禁止の場所では釣りをしないでください。ライフジャケット着用を。${hasPhotoCredit ? "写真出典はキャプションに記載。" : ""}</p></footer>
+<p class="note">${fc ? "※料金・営業日は変わることがあります。出かける前に各施設の公式情報を確認してください。" : `※立入禁止・釣り禁止の場所では釣りをしないでください。${isSea ? "ライフジャケット着用を。" : "氷上・湖畔では安全確認を。"}`}${hasPhotoCredit ? "写真出典はキャプションに記載。" : ""}</p></footer>
 <script>
 m1.innerHTML=sakanacchi("wow",{point:true}); if(window.m2) m2.innerHTML=sakanacchi("wink",{cap:true}); lg.innerHTML=sakanacchi("smile");
 document.querySelectorAll('.ph[data-scene]').forEach(el=>{el.innerHTML=scene(el.dataset.scene)+'<i>'+el.dataset.scene+'</i>'});
@@ -68,38 +85,46 @@ await page.waitForTimeout(500);
 const check = await page.evaluate(() => {
   const r = (q) => document.querySelector(q)?.getBoundingClientRect();
   const tips = r(".tips") ?? r("main"), foot = r("footer");
-  return { overlap: tips.bottom > foot.top, h1Overflow: document.querySelector("h1").scrollWidth > 1080 - 56 };
+  const cardOverflow = [...document.querySelectorAll(".card")].some((c) => c.getBoundingClientRect().right > 1080);
+  return { overlap: tips.bottom > foot.top, h1Overflow: document.querySelector("h1").scrollWidth > 1080 - 56, cardOverflow };
 });
 await page.screenshot({ path: path.join(outDir, "post.png") });
 await browser.close();
-if (check.overlap || check.h1Overflow) { console.error("レイアウト崩れ:", check); process.exit(3); }
+if (check.overlap || check.h1Overflow || check.cardOverflow) { console.error("レイアウト崩れ:", check); process.exit(3); }
 
 // ── キャプション ──
 const lines = t.spots.map((s, i) => `${i + 1}. ${s.name}（${s.city}）`).join("\n");
 const credits = t.spots.filter((s) => s.photo).map((s) => `・${s.name}: ${s.photo.credit}`).join("\n");
 const tag = (x) => "#" + x.replace(/[\s・（）()]/g, "");
-const hashtags = [tag(t.fish.name), tag(t.fish.name + "釣り"), tag(t.pref.short + "釣り"), tag(t.pref.short + "釣り場"), "#釣り", "#釣り場", "#釣り初心者", "#海釣り", "#堤防釣り", "#ツリスポ"].join(" ");
-const igCaption = `【${t.month.name}】${t.pref.name}で${t.fish.name}が釣れる釣り場TOP${n}🎣
+const areaTags = isWide ? [] : [tag(t.pref.short + "釣り"), tag(t.pref.short + "釣り場")];
+const hashtags = (fc
+  ? [...fc.tags, ...areaTags, "#釣り", "#釣り初心者", "#冬のお出かけ", "#ツリスポ"]
+  : [tag(t.fish.name), tag(t.fish.name + "釣り"), ...areaTags, "#釣り", "#釣り場", "#釣り初心者",
+    ...(isSea ? ["#海釣り", "#堤防釣り"] : ["#湖釣り", "#冬の釣り"]), "#ツリスポ"]).join(" ");
+const intro = fc
+  ? `ツリスポに掲載している${t.pref.short}の${t.fish.name}${t.totalSpots}か所から、評価の高い順に選びました。`
+  : `${t.fish.isPeakMonth ? `${t.month.name}は${t.fish.name}のシーズン中！` : `${t.month.name}も${t.fish.name}が狙えます。`}ツリスポに掲載している${t.pref.short}の${t.totalSpots}か所から、釣れる度の高い順に選びました。`;
+const igCaption = `${title}
 
-${t.fish.isPeakMonth ? `${t.month.name}は${t.fish.name}のシーズン中！` : `${t.month.name}も${t.fish.name}が狙えます。`}ツリスポに掲載している${t.pref.short}の${t.totalSpots}か所から、釣れる度の高い順に選びました。
+${intro}
 
 ${lines}
 
-📍 駐車場・トイレ・最新の釣果など詳しい情報は、プロフィールのリンクから「ツリスポ」で見られます。
+${fc ? "📍 料金・営業時間・釣れる魚など詳しい情報は、プロフィールのリンクから「ツリスポ」で見られます。" : "📍 駐車場・トイレ・最新の釣果など詳しい情報は、プロフィールのリンクから「ツリスポ」で見られます。"}
 🔖 保存して釣行前にチェック！
 
-⚠️ 立入禁止区域・釣り禁止エリアでは釣りをしないでください。
+${fc ? "⚠️ 料金・営業日は変わることがあります。出かける前に各施設の公式情報を確認してください。" : "⚠️ 立入禁止区域・釣り禁止エリアでは釣りをしないでください。"}
 ${credits ? `\n📷 写真\n${credits}\n` : ""}
 ${hashtags}`;
-const threadsText = `【${t.month.name}】${t.pref.name}で${t.fish.name}が釣れる釣り場TOP${n}🎣\n\n${t.spots.slice(0, 5).map((s, i) => `${i + 1}. ${s.name}`).join("\n")}\n…6位以下と駐車場・釣果情報はこちら👇\n${t.url}?utm_source=threads&utm_medium=social&utm_campaign=ranking`;
+const threadsText = `${title}\n\n${t.spots.slice(0, 5).map((s, i) => `${i + 1}. ${s.name}`).join("\n")}\n…6位以下と${fc ? "料金・営業時間" : "駐車場・釣果情報"}はこちら👇\n${t.url}?utm_source=threads&utm_medium=social&utm_campaign=ranking`;
 // X: 本文に URL を入れない（外部リンク付きは表示が絞られやすく、API 料金も約13倍）。
 // 文字数は X の重み付き（全角2・半角1）で 280 以内。写真の出典は投稿への返信で別に出す（caption-x-credits.txt）
 const xLen = (s) => [...s].reduce((a, c) => a + (c.codePointAt(0) <= 0x10ff ? 1 : 2), 0);
-const xTags = `#${t.fish.name} #${t.pref.short}釣り #釣り`;
+const xTags = fc ? `${fc.tags[0]} ${isWide ? "#冬のお出かけ" : `#${t.pref.short}釣り`} #釣り` : `#${t.fish.name} ${isWide ? `#${t.fish.name}釣り` : `#${t.pref.short}釣り`} #釣り`;
 let xTop = 5;
 let xText;
 do {
-  xText = `【${t.month.name}】${t.pref.name}で${t.fish.name}が釣れる釣り場TOP${n}🎣\n\n${t.spots.slice(0, xTop).map((s, i) => `${i + 1}. ${s.name}`).join("\n")}\n…${xTop + 1}位以下は動画で\n\n${xTags}`;
+  xText = `${title}\n\n${t.spots.slice(0, xTop).map((s, i) => `${i + 1}. ${s.name}`).join("\n")}\n…${xTop + 1}位以下は動画で\n\n${xTags}`;
 } while (xLen(xText) > 280 && --xTop > 0);
 const xCredits = credits ? `📷 写真\n${credits}` : "";
 fs.writeFileSync(path.join(outDir, "caption-instagram.txt"), igCaption);

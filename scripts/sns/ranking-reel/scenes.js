@@ -18,6 +18,14 @@ function scene(type) {
     case "桟橋": case "海釣り公園": case "桟橋・海釣り公園": return base(`<rect y="80" width="160" height="60" fill="${SEA}"/>${wave(110)}
       <rect x="-4" y="76" width="130" height="10" fill="#C9A36B" stroke="${N}" stroke-width="3"/>${[20,50,80,110].map(x=>`<rect x="${x}" y="86" width="6" height="30" fill="#8A6A45" stroke="${N}" stroke-width="2"/>`).join("")}
       <line x1="40" y1="60" x2="40" y2="76" stroke="${N}" stroke-width="3"/><line x1="96" y1="60" x2="96" y2="76" stroke="${N}" stroke-width="3"/><line x1="36" y1="62" x2="100" y2="62" stroke="${N}" stroke-width="3"/>`);
+    case "湖沼": return base(`<path d="M0 66 L40 44 L70 60 L104 38 L160 64 L160 140 L0 140Z" fill="#9CCB7B" stroke="${N}" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse cx="80" cy="108" rx="74" ry="24" fill="${SEA}" stroke="${N}" stroke-width="3"/><path d="M50 106 q8 -4 16 0 M92 114 q8 -4 16 0" stroke="#fff" stroke-width="3" fill="none"/>`);
+    case "管理釣り場": case "釣り堀": case "管理釣り場（ポンド）": return base(`<rect y="70" width="160" height="70" fill="#9CCB7B"/>
+      <rect x="18" y="86" width="124" height="44" rx="10" fill="${SEA}" stroke="${N}" stroke-width="3"/><path d="M44 106 q8 -4 16 0 M96 112 q8 -4 16 0" stroke="#fff" stroke-width="3" fill="none"/>
+      ${[24,56,88,120].map(x=>`<rect x="${x}" y="74" width="16" height="10" fill="#C9A36B" stroke="${N}" stroke-width="2"/>`).join("")}`);
+    case "海上釣り堀": return base(`<rect y="76" width="160" height="64" fill="${SEA}"/>${wave(96)}${wave(126)}
+      <rect x="30" y="92" width="100" height="30" fill="none" stroke="#C9A36B" stroke-width="7"/><rect x="30" y="92" width="100" height="30" fill="none" stroke="${N}" stroke-width="2"/>
+      <path d="M58 82 L102 82 L96 92 L64 92Z" fill="#fff" stroke="${N}" stroke-width="3"/>`);
     default: return base(`<rect y="84" width="160" height="56" fill="${SEA}"/>${wave(104)}${wave(124)}`);
   }
 }

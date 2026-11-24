@@ -29,11 +29,11 @@ const platforms = new Set((arg("platforms") ?? "instagram,threads,x").split(",")
 const outDir = path.resolve(arg("out") ?? `out/sns-ranking/${date}-${slot}`);
 fs.mkdirSync(outDir, { recursive: true });
 
-// 1) 台帳から重複回避条件を作る: 同じ県×魚は60日空ける / 直近4本の魚種・直近2本の県は避ける
+// 1) 台帳から重複回避条件を作る: 同じ県×魚は60日空ける / 直近6本の魚種（冬の重点お題の順回し用）・直近2本の県は避ける
 const ledger = await readLedger(90).catch((e) => { console.warn("台帳読込失敗（重複回避なしで続行）:", e.message); return []; });
 const since = Date.parse(date) - 60 * 864e5;
 const exclude = ledger.filter((e) => Date.parse(e.date) >= since).map((e) => `${e.pref}/${e.fish}`);
-const recentFish = ledger.slice(0, 4).map((e) => e.fish);
+const recentFish = ledger.slice(0, 6).map((e) => e.fish);
 const recentPref = ledger.slice(0, 2).map((e) => e.pref);
 if (!dryRun && ledger.some((e) => e.date === date && slotOf(e) === slot && e.ok)) {
   console.log(`${date} ${slot} は投稿済みのためスキップ`);
