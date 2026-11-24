@@ -79,6 +79,9 @@ const SNS_EXCLUDE_SLUGS = new Set([
   "hayakawa-kakou-tetra-e8", "tambarako-dam-a12",
   // 2026-11-23 アオリイカ千葉TOP10リールに「坂田漁港は立入禁止・駐車場なし」とコメントで指摘（一次情報は未確認）
   "bandakou",
+  // 2026-11-24 サワラ千葉TOP10リールに「片貝漁港は釣り禁止」とコメントが2件。民間サイトで右岸約200m・北堤防・
+  // 新堤防先端の立入禁止が複数報告されているが、九十九里町・漁協の公式発表は未確認のため fishingBan は付けない
+  "katakai-gyoko", "kujukuri-katakai-shinteibu-a13",
 ]);
 function snsSafe(s: (typeof fishingSpots)[number]) {
   if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug)) return false;
