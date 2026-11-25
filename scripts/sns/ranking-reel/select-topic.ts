@@ -19,6 +19,7 @@ import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { facilityLabel, feeShortText, openingHoursText } from "@/lib/managed-pond";
+import banAudit from "./ban-audit.json";
 
 const TOP_N = 10;
 const MIN_FOR_POST = 6; // これ未満の組合せはランキングとして薄いので投稿しない
@@ -83,8 +84,15 @@ const SNS_EXCLUDE_SLUGS = new Set([
   // 新堤防先端の立入禁止が複数報告されているが、九十九里町・漁協の公式発表は未確認のため fishingBan は付けない
   "katakai-gyoko", "kujukuri-katakai-shinteibu-a13",
 ]);
+// 2026-11-25 個別調査（掲載候補を1件ずつ WebSearch。二次情報も含む）で禁止・立入禁止の指摘が見つかった所。
+// 一部禁止でも「〇〇港」と載せると全体で釣れるように見えるので除く（禁止が解除済み＝lifted は除かない）
+const BAN_AUDIT_EXCLUDE = new Set(
+  Object.entries((banAudit as { entries: Record<string, { verdict: string }> }).entries)
+    .filter(([, e]) => e.verdict !== "lifted")
+    .map(([slug]) => slug)
+);
 function snsSafe(s: (typeof fishingSpots)[number]) {
-  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug)) return false;
+  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug) || BAN_AUDIT_EXCLUDE.has(s.slug)) return false;
   return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
 }
 
