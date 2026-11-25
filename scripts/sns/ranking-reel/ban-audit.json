@@ -300,6 +300,16 @@
     "https://www.kanaloco.jp/news/social/entry-70807.html"
    ]
   },
+  "hiroshima-kannon-marina": {
+   "name": "広島観音マリーナ",
+   "pref": "広島県",
+   "verdict": "official_partial",
+   "summary": "広島県の公式ページで、観音マリーナ海浜公園での魚釣りは禁止、マリーナ側・手前のNo.1浮防波堤での釣りも禁止とされ、釣りは観音東防波堤（開放日・時間限定、投げ釣り・撒き餌・だんご釣り禁止）のみ可。",
+   "officialUrls": [
+    "https://www.pref.hiroshima.lg.jp/soshiki/221/park-park03.html"
+   ],
+   "secondaryUrls": []
+  },
   "hiroshima-kannon-marina-gokan": {
    "name": "広島観音マリーナ護岸",
    "pref": "広島県",
@@ -798,6 +808,17 @@
    ],
    "secondaryUrls": []
   },
+  "nankou-ferry-terminal-k8": {
+   "name": "南港フェリーターミナル",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "大阪市港湾局の資料で、南港北防波堤などが条例による立入禁止区域に指定され、凡例外でも船舶係留・荷役を行う港湾施設は関係者以外立入禁止とされている。フェリーターミナル岸壁が該当する可能性が高いが、ターミナル名指しの記述は未確認。",
+   "officialUrls": [
+    "https://www.city.osaka.lg.jp/hodoshiryo/cmsfiles/contents/0000624/624406/01.pdf",
+    "https://www.city.osaka.lg.jp/port/cmsfiles/contents/0000062/62374/R808itizu.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "naoetsu-port": {
    "name": "直江津港",
    "pref": "新潟県",
@@ -851,6 +872,16 @@
    "officialUrls": [],
    "secondaryUrls": [
     "https://ascii.jp/elem/000/004/213/4213533/"
+   ]
+  },
+  "nojima-kouen-gogan": {
+   "name": "野島公園護岸",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "民間釣りサイト（ツリハック）で、野島公園の海水浴場側は釣り禁止とされている（公園側の砂浜・護岸は釣り可）。横浜市の公式ページでは確認できず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1169/3"
    ]
   },
   "nou-gyoko": {
@@ -990,6 +1021,17 @@
    ],
    "secondaryUrls": []
   },
+  "onahama-west-breakwater-a11": {
+   "name": "いわき市小名浜港西堤防",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県の小名浜港釣りマップで、港内で釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所だけとされ、それ以外に立入禁止・釣り禁止区域がある。西堤防は釣り可能エリアに含まれない（県情報）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
+   ],
+   "secondaryUrls": []
+  },
   "onahama-yongo-wharf-a13": {
    "name": "いわき市小名浜港4号埠頭",
    "pref": "福島県",
@@ -1053,6 +1095,17 @@
    ],
    "secondaryUrls": []
   },
+  "sakaihama-seaside-k8": {
+   "name": "堺浜シーサイドステージ",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "堺浜一帯の堺市施設では、海とのふれあい広場（匠町）は『海釣りテラス以外での釣りはできません』、堺浜自然再生ふれあいビーチは釣り禁止と堺市が明示。シーサイドステージ前面そのものの規定は検索で確認できず、要現地確認。",
+   "officialUrls": [
+    "https://www.city.sakai.lg.jp/shisei/toshi/rinkai/umifureai/umizuriterasu.html",
+    "https://www.city.sakai.lg.jp/shisei/toshi/rinkai/hureaibi-ti.html"
+   ],
+   "secondaryUrls": []
+  },
   "seaside-cosmo": {
    "name": "シーサイドコスモ（魚釣り開放区域）",
    "pref": "大阪府",
@@ -1075,6 +1128,17 @@
    ],
    "secondaryUrls": [
     "https://niigata-kankou.or.jp/experience/11907"
+   ]
+  },
+  "shibayama-gyokou-hyogo": {
+   "name": "柴山漁港",
+   "pref": "兵庫県",
+   "verdict": "lifted",
+   "summary": "2021年9月に但馬漁協柴山支所が『港内での釣り全面禁止』の張り紙を出したが、港湾管理者の県新温泉土木事務所が公共岸壁は釣り人も利用可と判断し10月に撤回、適正利用を求める連名の張り紙に替えた（神戸新聞）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.kobe-np.co.jp/news/tajima/202110/0014758404.shtml",
+    "https://www.kobe-np.co.jp/news/tajima/202110/sp/0014758404.shtml?pg=amp"
    ]
   },
   "shichigahama-gyokou6": {
