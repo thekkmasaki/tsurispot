@@ -283,7 +283,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "日吉ダム周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amanjakuko-hiyoshi-dam.webp", imageAttribution: "Photo: 経済特区 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/amanjakuko-hiyoshi-dam.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.6, reviewCount: 78, googleRating: 4.1, googleReviewCount: 529,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },

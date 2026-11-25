@@ -374,7 +374,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1009"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "フェリーターミナル駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nagashima-kuranomoto-port.webp", imageAttribution: "Photo: success from Kagoshima, Japan / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 4.2, reviewCount: 94, googleRating: 3.6, googleReviewCount: 218,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 94, googleRating: 3.6, googleReviewCount: 218,
     catchableFish: [
       { fish: fish("buri"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("kanpachi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -613,7 +613,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1021"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/irabu-nagayama-port.webp", imageAttribution: "Photo: 690 Noda / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.3, reviewCount: 134, googleRating: 3, googleReviewCount: 1,
+    mainImageUrl: "", images: [], rating: 4.3, reviewCount: 134, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -660,7 +660,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1020"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyako-takano-port.webp", imageAttribution: "Photo: 690 Noda / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.0, reviewCount: 62, googleRating: 4.1, googleReviewCount: 8,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 62, googleRating: 4.1, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -684,7 +684,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1022"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湾岸道路沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ishigaki-nagura-bay.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: [], rating: 4.2, reviewCount: 98, googleRating: 4.5, googleReviewCount: 34,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 98, googleRating: 4.5, googleReviewCount: 34,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],

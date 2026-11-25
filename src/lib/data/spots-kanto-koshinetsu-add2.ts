@@ -331,7 +331,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
     region: localRegion("r2363"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "周辺にコインパーキング多数",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sumidagawa-terrace-tsukuda.webp", imageAttribution: "Photo: Fumihiko Ueno / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 95, googleRating: 4.5, googleReviewCount: 2,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 95, googleRating: 4.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -1040,7 +1040,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
     region: localRegion("r2401"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "堤防付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kashima-ko-nantei.webp", imageAttribution: "Photo: Kaz Ish / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 178, googleRating: 5, googleReviewCount: 5,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 178, googleRating: 5, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("inada"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },

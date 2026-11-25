@@ -74,7 +74,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: region("r17"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港湾周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/naha-shinko.webp", imageAttribution: "Photo: Hyppolyte de Saint-Rambert / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.8, reviewCount: 132, googleRating: 2.7, googleReviewCount: 7,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 132, googleRating: 2.7, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
@@ -757,7 +757,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r187"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyako-karimata-port.webp", imageAttribution: "Photo: Raita Futo from Tokyo, Japan / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.8, reviewCount: 46, googleRating: 4, googleReviewCount: 1,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 46, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },

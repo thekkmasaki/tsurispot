@@ -35,7 +35,7 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Shin_chitose_20210811090636_%2851821920944%29.jpg/960px-Shin_chitose_20210811090636_%2851821920944%29.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)",
+    mainImageUrl: "",
     images: [],
     rating: 3.8,
     reviewCount: 134, googleRating: 3.8, googleReviewCount: 1275,

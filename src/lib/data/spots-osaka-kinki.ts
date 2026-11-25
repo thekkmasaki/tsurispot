@@ -415,7 +415,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     region: region("r135"), spotType: "pier", difficulty: "beginner",
     isFree: false, feeDetail: "大人1000円、小中学生500円",
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "竿レンタル500円/日",
-    mainImageUrl: "/images/spots/wikimedia/amagasaki-fishing-park.webp", imageAttribution: "Photo: Uziuzi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 345, googleRating: 3.9, googleReviewCount: 682,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 345, googleRating: 3.9, googleReviewCount: 682,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "サビキ釣り" },

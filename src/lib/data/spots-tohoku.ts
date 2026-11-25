@@ -782,7 +782,7 @@ export const tohokuSpots: FishingSpot[] = [
     region: region("r36"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり（30台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/funakawa-port.webp", imageAttribution: "Photo: らんで / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 95, googleRating: 3.5, googleReviewCount: 6,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 95, googleRating: 3.5, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },

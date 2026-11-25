@@ -171,7 +171,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に車は不要。熱海港に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hatsushima-breakwater.webp", imageAttribution: "Photo: yangkee / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 87, googleRating: 3.7, googleReviewCount: 30,
+    mainImageUrl: "", images: [], rating: 4.3, reviewCount: 87, googleRating: 3.7, googleReviewCount: 30,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ・カゴ釣り" },
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り・フカセ釣り" },
@@ -335,7 +335,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "汐吹公園駐車場（無料・数台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shiobuki-zaki.webp", imageAttribution: "Photo: Cassiopeia sweet / Wikimedia Commons (Public domain)", images: [], rating: 4.1, reviewCount: 42, googleRating: 4.2, googleReviewCount: 6,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 42, googleRating: 4.2, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り・探り釣り" },
@@ -759,7 +759,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toji-coast.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [], rating: 3.8, reviewCount: 34, googleRating: 4.1, googleReviewCount: 221,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 34, googleRating: 4.1, googleReviewCount: 221,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中〜夜", method: "穴釣り・探り釣り" },

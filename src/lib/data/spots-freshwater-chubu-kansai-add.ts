@@ -528,7 +528,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sasa-no-taki.jpg/960px-Sasa-no-taki.jpg", imageAttribution: "Photo: S Shinohal / Wikimedia Commons (CC BY-SA 3.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 98, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -552,7 +552,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/27/2010-4-25_-_panoramio_-_ys1979_%2810%29.jpg", imageAttribution: "Photo: ys1979 / Wikimedia Commons (CC BY 3.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 89, googleRating: 3.9, googleReviewCount: 33,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },

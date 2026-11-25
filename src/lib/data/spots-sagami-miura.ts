@@ -280,7 +280,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "周辺に路肩駐車スペース（数台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nusubito-gari.webp", imageAttribution: "Photo: Aimaimyi / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 38, googleRating: 4.1, googleReviewCount: 155,
+    mainImageUrl: "", images: [], rating: 4.3, reviewCount: 38, googleRating: 4.1, googleReviewCount: 155,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
@@ -352,7 +352,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "浜辺近くに有料駐車場（夏季1,000円、他季無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mito-hama.webp", imageAttribution: "Photo: Osumi Akari / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 72, googleRating: 4.1, googleReviewCount: 313,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 72, googleRating: 4.1, googleReviewCount: 313,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("kawahagi"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "胴突き仕掛け" },
@@ -1032,7 +1032,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "毘沙門港周辺に駐車スペースあり（無料、数台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/bishamon-kaigan.webp", imageAttribution: "Photo: Aimaimyi / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 35, googleRating: 3.9, googleReviewCount: 119,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 35, googleRating: 3.9, googleReviewCount: 119,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },

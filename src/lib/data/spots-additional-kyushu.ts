@@ -224,8 +224,8 @@ export const additionalSpotsKyushu: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amakusa-shimoda-port.webp", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/amakusa-shimoda-port.webp"],
+    mainImageUrl: "",
+    images: [],
     rating: 4.1,
     reviewCount: 56, googleRating: 5, googleReviewCount: 2,
     catchableFish: [
@@ -509,7 +509,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
     region: region("r56"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/DSC00276_-_panoramio.jpg/960px-DSC00276_-_panoramio.jpg", imageAttribution: "Photo: Makoto Kaneda / Wikimedia Commons (CC BY 3.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.4, reviewCount: 34, googleRating: 3.6, googleReviewCount: 31,
     catchableFish: [
       { fish: fish("inada"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -722,7 +722,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
     region: region("r15"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Naganogawa_river_near_Kamiarihashi_Bridge.jpg/960px-Naganogawa_river_near_Kamiarihashi_Bridge.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 78, googleRating: 4.1, googleReviewCount: 95,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },

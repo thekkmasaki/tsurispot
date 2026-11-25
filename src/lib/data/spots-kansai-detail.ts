@@ -156,7 +156,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     region: lr("r880"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車スペースあり（台数限定）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/izumiotsu-jinkoutou.webp", imageAttribution: "Photo: lienyuan lee / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 245,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 245,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -742,7 +742,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     region: lr("r886"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "土生港に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nushima.webp", imageAttribution: "Photo: YOSHIFUMI OGISO / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.4, reviewCount: 76, googleRating: 4.3, googleReviewCount: 79,
+    mainImageUrl: "", images: [], rating: 4.4, reviewCount: 76, googleRating: 4.3, googleReviewCount: 79,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
       { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },

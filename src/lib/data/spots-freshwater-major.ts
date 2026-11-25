@@ -241,7 +241,7 @@ export const freshwaterSpotsMajor: FishingSpot[] = [
     region: lr("r4050"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "ダムサイト駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sameura-dam.webp", imageAttribution: "Photo: ball banban / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/sameura-dam.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 87, googleRating: 4.0, googleReviewCount: 890,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -700,7 +700,7 @@ export const freshwaterSpotsMajor: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券（日券）大人1,500円",
     hasParking: true, parkingDetail: "入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amorigawa-kirishima.webp", imageAttribution: "Photo: NMaia / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/amorigawa-kirishima.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 56, googleRating: 3.8, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },

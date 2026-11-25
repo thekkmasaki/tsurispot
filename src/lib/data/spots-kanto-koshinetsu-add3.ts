@@ -347,7 +347,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3101"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takahagi-kou.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.3, reviewCount: 55, googleRating: 4.5, googleReviewCount: 462,
+    mainImageUrl: "", images: [], rating: 3.3, reviewCount: 55, googleRating: 4.5, googleReviewCount: 462,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
@@ -418,7 +418,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3101"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kawarago-gyokou.webp", imageAttribution: "Photo: ptrktn / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.4, reviewCount: 78, googleRating: 4.1, googleReviewCount: 8,
+    mainImageUrl: "", images: [], rating: 3.4, reviewCount: 78, googleRating: 4.1, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
@@ -583,7 +583,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3111"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "磯周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sunosaki.webp", imageAttribution: "Photo: ChiefHira / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 110,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 110,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -693,7 +693,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3112"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kisarazu-kou.webp", imageAttribution: "Photo: mrhayata / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.7, reviewCount: 195,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 195,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
@@ -759,7 +759,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3111"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shirahama-flower-iso.webp", imageAttribution: "Photo: ゆりのき橋 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 85, googleRating: 3.6, googleReviewCount: 78,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 85, googleRating: 3.6, googleReviewCount: 78,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },

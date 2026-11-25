@@ -89,7 +89,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yoshinogawa-nara.webp", imageAttribution: "Photo: ys1979 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yoshinogawa-nara.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 89, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },

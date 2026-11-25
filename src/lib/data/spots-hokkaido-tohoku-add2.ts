@@ -839,7 +839,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     region: localRegion("r2030"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "埠頭周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hachinohe-chuo-futo.webp", imageAttribution: "Photo: 青霞堂写真舘発行 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 134, googleRating: 4, googleReviewCount: 8,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 134, googleRating: 4, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("karei"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
@@ -1009,7 +1009,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     region: localRegion("r2034"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に駐車スペースあり（無料）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/noheji-gyoko.webp", imageAttribution: "Photo: Coffee1000mg / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.5, reviewCount: 67, googleRating: 3.8, googleReviewCount: 16,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 67, googleRating: 3.8, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("karei"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り", source: "アングラーズ 野辺地湾" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -1564,7 +1564,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     region: localRegion("r2044"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり（無料）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tanohata-shimakoshi-gyoko.webp", imageAttribution: "Photo: Satoh Junpei / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 36, googleRating: 4.2, googleReviewCount: 23,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 36, googleRating: 4.2, googleReviewCount: 23,
     catchableFish: [
       { fish: fish("ainame"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
       { fish: fish("kurosoi"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
@@ -1735,7 +1735,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     region: localRegion("r2040"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/taro-shin-bohatei.webp", imageAttribution: "Photo: Kihkyef / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 56, googleRating: 3.8, googleReviewCount: 23,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 56, googleRating: 3.8, googleReviewCount: 23,
     catchableFish: [
       { fish: fish("karei"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },

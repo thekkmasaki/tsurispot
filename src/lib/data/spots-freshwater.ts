@@ -343,7 +343,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "日原集落に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nipparagawa-okutama.webp", imageAttribution: "Photo: TMC48 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/nipparagawa-okutama.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 98, googleRating: 4.6, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ミャク釣り" },
@@ -516,7 +516,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "入漁料(へら鮒陸釣り)放流カードあり600円・なし800円・現場売り1,500円。桟橋 1日2,100円・半日(11時から)1,100円・女性と高校生まで800円。ボート へら2,600円(カードなし2,800円)、わかさぎ 1人2,600円・2人3,500円(ボートは入漁料込み)",
     hasParking: true, parkingDetail: "湖畔に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tsurutako-herabuna.webp", imageAttribution: "Photo: tak1701d / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/tsurutako-herabuna.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 98, googleRating: 3.8, googleReviewCount: 325,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝の釣り始め", method: "へら竿(桟橋・ボート)", source: "https://yorii-kanko.jp/tuburatako.html" },
@@ -647,7 +647,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,100円（日券）",
     hasParking: true, parkingDetail: "河川敷に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sagamigawa-ayu.webp", imageAttribution: "Photo: おにく / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/sagamigawa-ayu.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 145,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -1051,7 +1051,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shibakawa-keiryu.webp", imageAttribution: "Photo: Shift / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shibakawa-keiryu.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 67, googleRating: 4, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1101,7 +1101,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nagurigawa-keiryu.webp", imageAttribution: "Photo: wakanmuri / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/nagurigawa-keiryu.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.7, reviewCount: 78, googleRating: 4, googleReviewCount: 82,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ミャク釣り" },

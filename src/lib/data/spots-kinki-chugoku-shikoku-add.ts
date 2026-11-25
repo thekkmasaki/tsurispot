@@ -1157,7 +1157,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kamagari-daijizo-port.webp", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/kamagari-daijizo-port.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 134, googleRating: 3.6, googleReviewCount: 74,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
