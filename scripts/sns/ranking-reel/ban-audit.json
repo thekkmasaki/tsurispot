@@ -60,6 +60,18 @@
    ],
    "secondaryUrls": []
   },
+  "aomori-chuo-futo-e8": {
+   "name": "青森港中央ふ頭",
+   "pref": "青森県",
+   "verdict": "official_full",
+   "summary": "青森港管理所（青森県）のFAQで、高潮等の危険があるとして港での釣りを禁止し、岸壁は関係者以外立入禁止としている。釣り開放されているのは浜町緑地・北防波堤のみで、中央ふ頭は含まれない。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+    "https://www.mlit.go.jp/kowan/content/001361025.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "aomori-kita-breakwater": {
    "name": "青森港北防波堤",
    "pref": "青森県",
@@ -169,6 +181,17 @@
     "https://tsurihack.com/908/2"
    ]
   },
+  "heda-gyokou": {
+   "name": "戸田漁港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（tsurihack）の戸田港記事に「釣り禁止エリア」の見出しがあり、港内に立入禁止・釣り禁止の場所があると注意している。具体的な範囲は検索結果では読めず、公式情報は見つからなかった。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/2741",
+    "https://tsurihack.com/2741/2"
+   ]
+  },
   "heda-ko-teibo": {
    "name": "戸田港堤防",
    "pref": "静岡県",
@@ -179,6 +202,26 @@
     "https://tsurihack.com/2741",
     "https://tsurihack.com/2741/2"
    ]
+  },
+  "hekinan-fishing-park": {
+   "name": "碧南海釣り広場",
+   "pref": "愛知県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（2022年記事）に、碧南海釣り広場周辺には立入禁止や釣り禁止の場所もあるので現地ルールに従うよう記載がある（広場全体の閉鎖情報はなし）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/3196"
+   ]
+  },
+  "hiagari-kou-s8": {
+   "name": "小倉北区日明港",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "北九州市港湾空港局は、岸壁・防波堤等の港湾施設での釣りを日明海峡海釣り公園など一部施設を除き禁止していると回答している。日明港も同市管理の港湾施設のため、釣り公園以外の岸壁は対象となる可能性が高い。",
+   "officialUrls": [
+    "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
+   ],
+   "secondaryUrls": []
   },
   "himi-gyokou-toyama": {
    "name": "氷見漁港",
@@ -261,6 +304,16 @@
    ],
    "secondaryUrls": []
   },
+  "joetsu-kaiyou-fishing-center": {
+   "name": "上越海洋フィッシングセンター",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "上越市の資料で、市直営の海洋フィッシングセンターは老朽化のため令和6年4月から休止中とされている（民間活用をサウンディング中）。現在は施設として利用できない。",
+   "officialUrls": [
+    "https://www.city.joetsu.niigata.jp/uploaded/attachment/254137.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "joetsu-port": {
    "name": "上越港",
    "pref": "新潟県",
@@ -296,6 +349,16 @@
     "https://tsurihack.com/1417"
    ]
   },
+  "kanmon-kaikyo-moji-kou": {
+   "name": "関門海峡・門司港",
+   "pref": "福岡県",
+   "verdict": "official_full",
+   "summary": "北九州市港湾空港局は、岸壁・防波堤等の港湾施設での釣りを日明海峡海釣り公園など一部を除き禁止しており、門司11号岸壁での釣りも禁止と回答している。",
+   "officialUrls": [
+    "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "karatsu-kou-w6": {
    "name": "唐津港",
    "pref": "佐賀県",
@@ -315,6 +378,17 @@
     "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
    ],
    "secondaryUrls": []
+  },
+  "kushiro-nishi-ko": {
+   "name": "釧路西港",
+   "pref": "北海道",
+   "verdict": "official_full",
+   "summary": "釧路市の条例で港湾施設での釣り行為が禁止され、釧路港は安全面から釣り目的の立ち入りを原則禁止。振興局・市が秋サケ釣りの自粛を呼びかけ合同パトロール（北海道新聞が報道）。西港区限定の条文は未確認",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/article/1369395/",
+    "https://www.hokkaido-np.co.jp/article/1371015/"
+   ]
   },
   "kushiro-nishikouku6": {
    "name": "釧路港西港区",
@@ -401,6 +475,19 @@
     "https://www.pa.skr.mlit.go.jp/kouchi/C/pdf/r04/mr-tsuri03.pdf"
    ],
    "secondaryUrls": []
+  },
+  "nadachi-gyokou": {
+   "name": "名立漁港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は県管理漁港の防波堤（離岸堤・沖防波堤含む）への立入を原則禁止としており、名立漁港は県管理漁港として掲載。釣りサイト（tsurihack）でも堤防にフェンスが設置され内湾・テトラ帯のみ釣りが可能とされる。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html",
+    "https://www.pref.niigata.lg.jp/site/gyoko/1227124912056.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/856/2"
+   ]
   },
   "nadachi-kou-niigata": {
    "name": "名立港",
@@ -817,6 +904,16 @@
    ],
    "secondaryUrls": []
   },
+  "sukematsu-wharf": {
+   "name": "助松埠頭",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "大阪府の告示で、泉大津市小津島町の助松地区の複数岸壁が港湾保安上の立入制限区域に指定されている（釣りへの言及は未確認）。",
+   "officialUrls": [
+    "https://www.pref.osaka.lg.jp/houbun/reiki/reiki_honbun/k201RG00001270.html"
+   ],
+   "secondaryUrls": []
+  },
   "suo-oshima-katazoe": {
    "name": "周防大島・片添ヶ浜",
    "pref": "山口県",
@@ -827,6 +924,26 @@
     "https://www.walkerplus.com/spot/ar0835s14502/data.html",
     "https://summer.walkerplus.com/odekake/detail/ar0835s14502/data.html"
    ]
+  },
+  "takamatsu-kou-w6": {
+   "name": "高松港",
+   "pref": "香川県",
+   "verdict": "official_partial",
+   "summary": "香川県高松港管理事務所のページで、サンポート高松には船舶の安全確保のため釣りを禁止する区域が設けられている（範囲は図で表示）。禁止区域外でもマナー順守を求めている。",
+   "officialUrls": [
+    "https://www.pref.kagawa.lg.jp/takamatsukokanri/port_takamatsu/kisou2nd3rd.html"
+   ],
+   "secondaryUrls": []
+  },
+  "takamatsu-tamamo-breakwater": {
+   "name": "高松港玉藻防波堤",
+   "pref": "香川県",
+   "verdict": "official_partial",
+   "summary": "香川県高松港管理事務所のページで、サンポート高松に船舶の安全確保のための釣り禁止区域が設けられている（範囲は図示）。玉藻防波堤は注意報・警報発令時にゲートが閉鎖され立入不可。",
+   "officialUrls": [
+    "https://www.pref.kagawa.lg.jp/takamatsukokanri/port_takamatsu/kisou2nd3rd.html"
+   ],
+   "secondaryUrls": []
   },
   "teradomari-kou-niigata": {
    "name": "寺泊港",
@@ -859,6 +976,16 @@
    ],
    "secondaryUrls": []
   },
+  "urari-mae": {
+   "name": "うらり前岸壁",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイトで三崎港には立入禁止・釣り禁止のエリアがあると書かれ、隣接の北条湾奥の船溜まりでは船の周りが釣り禁止とされる（うらり前岸壁自体の禁止記述は未確認）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/894/2"
+   ]
+  },
   "wakasu-kaihin-add2": {
    "name": "東京湾奥（若洲海浜公園周辺）",
    "pref": "東京都",
@@ -879,6 +1006,17 @@
     "https://www.kouwan.metro.tokyo.lg.jp/kanko/11_kaijokouen_kwakasu_202404.pdf"
    ],
    "secondaryUrls": []
+  },
+  "yomitan-port": {
+   "name": "読谷漁港",
+   "pref": "沖縄県",
+   "verdict": "official_full",
+   "summary": "読谷村漁協が都屋漁港の入口ゲートに『釣り禁止』の看板を10年以上前から設置し、ごみ・盗難被害の増加で看板を増やしたと琉球新報が報道。漁協組合員も『釣りは禁止にせざるを得ない』と話している。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-945273.html",
+    "https://ryukyushimpo.jp/tag/都屋漁港"
+   ]
   },
   "yuriage-port": {
    "name": "閖上港",
