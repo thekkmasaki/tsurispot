@@ -235,6 +235,10 @@ const TOPIC_SKIP = new Set([
   "iwate/saba", "miyagi/saba", "fukushima/saba", "ibaraki/saba", "chiba/saba",
   "hokkaido/madara", "okinawa/sujiara", "mie/shimaaji", "tottori/yariika", "shimane/yariika",
   "okinawa/kurodai", "okinawa/hata", "okinawa/haze",
+  // 豪雪地の管理釣り場・釣り堀・海上釣り堀は冬に休業する所が多く、冬季営業を確認できた所が少ない（2026-11-25 施設の個別調査。
+  // 東北の open 26件中、冬の営業を確認できたのは3件）。施設のお題は12〜2月の重点お題なので、これらの県・地方は外す
+  ...["hokkaido", "aomori", "iwate", "akita", "yamagata", "miyagi", "fukushima", "niigata", "toyama", "ishikawa", "fukui", "nagano",
+    "region-hokkaido", "region-tohoku"].flatMap((p) => [`${p}/managed`, `${p}/tsuribori`, `${p}/kaijo`]),
 ]);
 // 県で6件に満たなくても地方・全国でまとめてお題にする魚（データが少ないが人気のある魚）
 const WIDE_AREA_FISH = new Set(["kobudai"]);
