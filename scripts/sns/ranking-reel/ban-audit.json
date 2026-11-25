@@ -202,6 +202,17 @@
     "https://mobile.wbsj.org/nature/hogo/others/iba/search/sites/kyusyu/imgs/JP143.pdf"
    ]
   },
+  "enoshima6": {
+   "name": "江の島",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（釣りハック）に、江の島の湘南港（湘南大堤防側）でヨットハーバー内は釣り禁止との記載。稚児ヶ淵の磯は荒天・高波時に立入禁止になるとの観光サイト情報もある。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1162/2",
+    "https://www.minnacamera.com/spots/1072"
+   ]
+  },
   "hachinohe-niida-river-a13": {
    "name": "八戸港沖堤防（新井田川河口）",
    "pref": "青森県",
@@ -326,6 +337,16 @@
    "summary": "北九州市港湾空港局は、岸壁・防波堤等の港湾施設での釣りを日明海峡海釣り公園など一部施設を除き禁止していると回答している。日明港も同市管理の港湾施設のため、釣り公園以外の岸壁は対象となる可能性が高い。",
    "officialUrls": [
     "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "hiburijima-kiro-a11": {
+   "name": "日振島・喜路港",
+   "pref": "愛媛県",
+   "verdict": "official_partial",
+   "summary": "愛媛県の資料で、愛媛海区漁業調整委員会指示により陸からのまき餌釣りが禁止される区域の図に日振島が含まれる（具体的な磯の範囲は未確認）。登録のフカセ釣り（まき餌使用）に影響する可能性。",
+   "officialUrls": [
+    "https://www.pref.ehime.jp/uploaded/attachment/11329.pdf"
    ],
    "secondaryUrls": []
   },
@@ -460,6 +481,18 @@
    "officialUrls": [
     "https://www.pref.toyama.jp/documents/6155/tsuribasho2025.pdf",
     "https://www.pref.toyama.jp/documents/6155/01202639.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ishigaki-kabira-iso": {
+   "name": "石垣島・川平湾周辺磯",
+   "pref": "沖縄県",
+   "verdict": "official_partial",
+   "summary": "川平湾内に沖縄県指定の「川平保護水面」があり、魚類・タコ類・イカ類・ヒトエグサ以外の水産動植物の採捕が禁止（沖縄県）。魚・イカの釣り自体は禁止されていない。",
+   "officialUrls": [
+    "https://www.pref.okinawa.jp/fish/kenkyu/kankobutu/ohanasi-data/201604.pdf",
+    "https://www.pref.okinawa.jp/shigoto/suisangyo/1011050/1011225.html",
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/011/225/hogosuimennituite.pdf"
    ],
    "secondaryUrls": []
   },
@@ -1130,6 +1163,17 @@
     "https://tsurihack.com/1120"
    ]
   },
+  "oiso-terugasaki": {
+   "name": "大磯海岸（照ヶ崎）",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "撮影スポット情報サイトに、隣接する大磯港の東防波堤は立入禁止、西防波堤は時間外進入・柵越え・テトラ立入不可との記載。照ヶ崎の岩礁は県天然記念物のアオバト飛来地で、岩礁へ近づかないよう呼びかけ（釣り禁止の明記はなし）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.minnacamera.com/spots/1020",
+    "https://news.mynavi.jp/article/shonanlife-21/"
+   ]
+  },
   "okayama-shinko": {
    "name": "岡山市岡山港（新岡山港）",
    "pref": "岡山県",
@@ -1319,6 +1363,16 @@
     "https://tsurihack.com/1242"
    ]
   },
+  "rokkosaki-iso-e8": {
+   "name": "禄剛埼灯台下磯",
+   "pref": "石川県",
+   "verdict": "secondary_partial",
+   "summary": "観光サイト（旅行メディア）に、狼煙〜高屋の海岸は能登半島国定公園の特別保護区に指定されているとの記載。磯は保護区扱いのため禁止相当として計上（釣り禁止の明記はなし）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.nap-camp.com/mag/spot/107671"
+   ]
+  },
   "sado-ogi-port": {
    "name": "佐渡小木港",
    "pref": "新潟県",
@@ -1487,6 +1541,17 @@
    "officialUrls": [
     "https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html",
     "https://www.pref.miyagi.jp/documents/21675/tsurirule.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shiraho-kaigan-a11": {
+   "name": "白保海岸",
+   "pref": "沖縄県",
+   "verdict": "official_partial",
+   "summary": "環境省資料で白保地先海域は西表石垣国立公園の海域公園（海中公園）地区に指定され、チョウチョウウオ科など熱帯性魚類の捕獲・殺傷が規制されている。海中公園のため禁止として計上（釣り全面禁止の明記はなし）。",
+   "officialUrls": [
+    "https://www.env.go.jp/press/files/jp/9913.pdf",
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/004/312/shiraho3.pdf"
    ],
    "secondaryUrls": []
   },
@@ -1765,6 +1830,16 @@
     "https://www.fuku-e.com/en/attractions/detail_1456.html"
    ]
   },
+  "tsurumi-hantou-saiki-w6": {
+   "name": "佐伯・鶴見半島",
+   "pref": "大分県",
+   "verdict": "official_partial",
+   "summary": "大分海区漁業調整委員会告示で、佐伯市鶴見の梶寄大碆から米水津との境界まで（沖磯含む）は、いそ釣りでのアミ（オキアミ含む）まきえの使用が禁止。鶴見の先ノ瀬灯台周辺も県規則でまきえ釣禁止区域（大分県資料）。釣り自体の禁止ではなく、まきえを使うフカセ釣りが規制対象。",
+   "officialUrls": [
+    "https://pref.oita.jp/uploaded/life/2279718_4367470_misc.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "tsutsuishi-kou-niigata": {
    "name": "筒石港",
    "pref": "新潟県",
@@ -1777,6 +1852,17 @@
    "secondaryUrls": [
     "https://tsurihack.com/809"
    ]
+  },
+  "uradome-kaigan-w5": {
+   "name": "浦富海岸",
+   "pref": "鳥取県",
+   "verdict": "official_partial",
+   "summary": "環境省資料で浦富海岸は山陰海岸国立公園の海域公園地区に指定され、全域が動植物の採捕規制区域（連続海域31haの拡張案も）。海中公園相当のため禁止として計上。",
+   "officialUrls": [
+    "https://www.env.go.jp/press/files/jp/23853.pdf",
+    "https://www.env.go.jp/park/sanin/intro/"
+   ],
+   "secondaryUrls": []
   },
   "urari-mae": {
    "name": "うらり前岸壁",
