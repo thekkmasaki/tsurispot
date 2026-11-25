@@ -271,6 +271,17 @@
     "https://tsurihack.com/1156"
    ]
   },
+  "atsumi-irago-port": {
+   "name": "渥美半島伊良湖港",
+   "pref": "愛知県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト・釣具店（イシグロ 2022年再確認、2025年の釣り場レポート）によると、伊良湖港の赤灯堤防は陥没のため立入禁止が続いている。係留桟橋・フェリー乗り場付近も釣り禁止。釣りができるのは白灯台側の堤防。2026-11 愛知アオリイカTOP10リールに「伊良湖港堤防は立ち入り禁止」とコメント。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.ishiguro-gr.com/enjoy/fishing-post/detail.php?id=43",
+    "https://jpcmap.com/fishing/map/aichi/mikawawan/irago-port"
+   ]
+  },
   "azure-maiko": {
    "name": "アジュール舞子",
    "pref": "兵庫県",
@@ -667,6 +678,28 @@
     "https://www.pref.toyama.jp/documents/6155/01202639.pdf"
    ],
    "secondaryUrls": []
+  },
+  "irago-ko-add3": {
+   "name": "伊良湖港",
+   "pref": "愛知県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト・釣具店（イシグロ 2022年再確認、2025年の釣り場レポート）によると、伊良湖港の赤灯堤防は陥没のため立入禁止が続いている。係留桟橋・フェリー乗り場付近も釣り禁止。釣りができるのは白灯台側の堤防。2026-11 愛知アオリイカTOP10リールに「伊良湖港堤防は立ち入り禁止」とコメント。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.ishiguro-gr.com/enjoy/fishing-post/detail.php?id=43",
+    "https://jpcmap.com/fishing/map/aichi/mikawawan/irago-port"
+   ]
+  },
+  "irago-ko-teibo": {
+   "name": "伊良湖港堤防",
+   "pref": "愛知県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト・釣具店（イシグロ 2022年再確認、2025年の釣り場レポート）によると、伊良湖港の赤灯堤防は陥没のため立入禁止が続いている。係留桟橋・フェリー乗り場付近も釣り禁止。釣りができるのは白灯台側の堤防。2026-11 愛知アオリイカTOP10リールに「伊良湖港堤防は立ち入り禁止」とコメント。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.ishiguro-gr.com/enjoy/fishing-post/detail.php?id=43",
+    "https://jpcmap.com/fishing/map/aichi/mikawawan/irago-port"
+   ]
   },
   "ishigaki-kabira-iso": {
    "name": "石垣島・川平湾周辺磯",

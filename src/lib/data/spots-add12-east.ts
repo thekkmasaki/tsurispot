@@ -2472,7 +2472,7 @@ export const eastAdd12Spots: FishingSpot[] = [
     region: localRegion("rs12131"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "恋路ヶ浜駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
+    mainImageUrl: "/images/spots/wikimedia/irago-misaki-koijigahama.webp", imageAttribution: "Photo: jun72 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
