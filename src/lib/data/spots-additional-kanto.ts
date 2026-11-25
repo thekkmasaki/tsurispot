@@ -178,7 +178,7 @@ export const additionalSpotsKanto: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Under_construction_%289044452375%29.jpg/960px-Under_construction_%289044452375%29.jpg", imageAttribution: "Photo: Takashi Hososhima from Tokyo, Japan / Wikimedia Commons (CC BY-SA 2.0)",
+    mainImageUrl: "",
     images: [],
     rating: 4.0,
     reviewCount: 112, googleRating: 3.8, googleReviewCount: 14,

@@ -274,7 +274,7 @@ export const kantoDetailSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "葉山港駐車場（有料、1時間310円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hayama-port.webp", imageAttribution: "Photo: Yamaguchi Yoshiaki from Japan / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.8, reviewCount: 108, googleRating: 4.2, googleReviewCount: 198,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 108, googleRating: 4.2, googleReviewCount: 198,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "上州屋" },

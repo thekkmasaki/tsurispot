@@ -210,7 +210,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "漁港内駐車禁止。周辺コインパーキング利用（1日600〜1000円程度）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Sigma_Mark-I_01.jpg/960px-Sigma_Mark-I_01.jpg", imageAttribution: "Photo: halfrain / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.8, reviewCount: 234, googleRating: 4.4, googleReviewCount: 5,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 234, googleRating: 4.4, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("anago"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "ぶっこみ釣り", source: "フィッシングマックス" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "穴釣り", source: "フィッシングマックス" },

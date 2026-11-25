@@ -130,7 +130,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: lr("r821"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺路肩スペース（無料）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mochimune-ko-teibo.webp", imageAttribution: "Photo: Kosugi Taichirou / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 76, googleRating: 3.8, googleReviewCount: 29,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 76, googleRating: 3.8, googleReviewCount: 29,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング・サビキ" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
@@ -178,7 +178,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: lr("r821"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oigawa-ko-teibo.webp", imageAttribution: "Photo: kizitora / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 84, googleRating: 4, googleReviewCount: 12,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 84, googleRating: 4, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ・ヘチ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー" },
@@ -539,7 +539,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: lr("r826"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "内海海水浴場駐車場利用（夏季有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/utumi-ko-teibo.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 76, googleRating: 4, googleReviewCount: 22,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 76, googleRating: 4, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },

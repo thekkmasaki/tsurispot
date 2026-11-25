@@ -344,7 +344,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r153"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/katsurahama-tanezaki.webp", imageAttribution: "Photo: r18 INO (PACHIMO) / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 82, googleRating: 5, googleReviewCount: 2,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 82, googleRating: 5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -507,7 +507,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r155"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sadamisaki-misaki-port.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 62, googleRating: 4, googleReviewCount: 492,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 62, googleRating: 4, googleReviewCount: 492,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("buri"), monthStart: 10, monthEnd: 1, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },

@@ -310,7 +310,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     region: lr("r502"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港横に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/koura-gyoko-wakayama.webp", imageAttribution: "Photo: Masakiokamoto / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.5, reviewCount: 89, googleRating: 3.2, googleReviewCount: 9,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 89, googleRating: 3.2, googleReviewCount: 9,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "穴釣り" },
@@ -570,7 +570,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     region: lr("r511"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "堤防付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nihon-kokan-tottei-tsu.webp", imageAttribution: "Photo: かわむっちゃん / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 423, googleRating: 5, googleReviewCount: 2,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 423, googleRating: 5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },

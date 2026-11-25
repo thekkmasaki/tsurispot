@@ -375,7 +375,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3003"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/taiki-gyoko.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.4, reviewCount: 32, googleRating: 3.4, googleReviewCount: 35,
+    mainImageUrl: "", images: [], rating: 3.4, reviewCount: 32, googleRating: 3.4, googleReviewCount: 35,
     catchableFish: [
       { fish: fish("karei"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
     ],
@@ -1099,7 +1099,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3021"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 38,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 38,
     catchableFish: [
       { fish: fish("karei"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
@@ -1508,7 +1508,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3043"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kesennuma-oshima-seto.webp", imageAttribution: "Photo: Satoh Junpei / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 72, googleRating: 4, googleReviewCount: 13,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 72, googleRating: 4, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kurosoi"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
@@ -1748,7 +1748,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3052"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oga-tsubaki-gyoko.webp", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 105, googleRating: 3.6, googleReviewCount: 23,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 105, googleRating: 3.6, googleReviewCount: 23,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキフカセ" },
       { fish: fish("mejina"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキフカセ" },

@@ -311,7 +311,7 @@ export const saninSpots: FishingSpot[] = [
     region: localRegion("r195"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/masuda-port.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 78,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 78,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -404,7 +404,7 @@ export const saninSpots: FishingSpot[] = [
     region: localRegion("r197"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "砂丘周辺に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hokuei-hojo-dune.webp", imageAttribution: "Photo: soumusoumu / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 52, googleRating: 4, googleReviewCount: 4,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 52, googleRating: 4, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },

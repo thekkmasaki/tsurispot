@@ -1062,7 +1062,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
     region: region("r47"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "ケープ真鶴駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/manazuru-misaki-mitsuishi.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 110, googleRating: 4.3, googleReviewCount: 426,
+    mainImageUrl: "", images: [], rating: 4.3, reviewCount: 110, googleRating: 4.3, googleReviewCount: 426,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },

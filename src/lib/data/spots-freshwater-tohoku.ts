@@ -75,7 +75,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "各入渓ポイントに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shiribetsugawa-trout.webp", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/shiribetsugawa-trout.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.5, reviewCount: 112, googleRating: 3.9, googleReviewCount: 75,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -175,7 +175,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/iwakigawa-ayu.webp", imageAttribution: "Photo: A_CUVE / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/iwakigawa-ayu.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 73, googleRating: 3.8, googleReviewCount: 92,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },

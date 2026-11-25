@@ -570,7 +570,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
     region: localRegion("r174"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/CruiseShip-SUN_PRINCESS_%282815661754%29.jpg/960px-CruiseShip-SUN_PRINCESS_%282815661754%29.jpg", imageAttribution: "Photo: Suzumiya Haruka / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.8, reviewCount: 119,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 119,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "メバリング" },
@@ -1165,7 +1165,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
     region: localRegion("r168"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kirishima-hayato-port.webp", imageAttribution: "Photo: Kashiwagi Akihiro *ja:柏木 明博 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 72, googleRating: 3.1, googleReviewCount: 7,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 72, googleRating: 3.1, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("aji"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },

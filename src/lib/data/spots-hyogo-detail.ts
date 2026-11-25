@@ -584,7 +584,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     region: lr("r403"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/higashi-futami-gyoko.webp", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 167, googleRating: 3.8, googleReviewCount: 13,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 167, googleRating: 3.8, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "東二見漁港サビキ実績" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "東二見漁港サビキ実績" },
@@ -689,7 +689,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     region: lr("r404"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakoshi-gyoko.webp", imageAttribution: "Photo: Aimaimyi / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 98, googleRating: 4, googleReviewCount: 68,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 98, googleRating: 4, googleReviewCount: 68,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り", source: "赤穂釣りナビ" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング", source: "赤穂釣りナビ" },
@@ -862,7 +862,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     region: lr("r405"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takiguchi-gyoko.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [], rating: 4.1, reviewCount: 267, googleRating: 3.7, googleReviewCount: 205,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 267, googleRating: 3.7, googleReviewCount: 205,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "複数サイト一致" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー", source: "関西のつりweb" },
@@ -1156,7 +1156,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     region: lr("r408"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "岸壁に車横付け可能",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kojima-ganpeki-toyooka.webp", imageAttribution: "Photo: 笠浪貴大 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.5, reviewCount: 89,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 89,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "釣り広場" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り", source: "釣り広場" },
@@ -1216,7 +1216,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     region: lr("r409"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/moroyose-gyoko.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [], rating: 3.5, reviewCount: 78, googleRating: 3.7, googleReviewCount: 19,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 78, googleRating: 3.7, googleReviewCount: 19,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "釣り広場" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ", source: "釣り広場" },

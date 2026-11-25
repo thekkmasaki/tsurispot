@@ -446,7 +446,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
     region: localRegion("r842"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "護岸沿いに無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tenno-shore.webp", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 78, googleRating: 3.8, googleReviewCount: 343,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 78, googleRating: 3.8, googleReviewCount: 343,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -568,7 +568,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
     region: localRegion("r843"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車場あり（30台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takehara-port-breakwater.webp", imageAttribution: "Photo: iloverjoa / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 87, googleRating: 3.8, googleReviewCount: 59,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 87, googleRating: 3.8, googleReviewCount: 59,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -761,7 +761,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
     region: region("r28"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "大浜海岸駐車場あり（無料・夏季は混雑）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tsunoshima-ohama-beach.webp", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: [], rating: 4.4, reviewCount: 168, googleRating: 4.4, googleReviewCount: 261,
+    mainImageUrl: "", images: [], rating: 4.4, reviewCount: 168, googleRating: 4.4, googleReviewCount: 261,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },

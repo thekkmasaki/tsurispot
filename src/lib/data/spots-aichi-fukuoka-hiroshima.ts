@@ -477,7 +477,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     hasParking: true, parkingDetail: "有料（普通車300円/回・二輪100円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     rentalDetail: "竿・リールセット600円。サビキ仕掛け600円・アミエサ600円も販売",
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Imazu_Mudflat_20180418-13.jpg/960px-Imazu_Mudflat_20180418-13.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.4, reviewCount: 398, googleRating: 3.9, googleReviewCount: 886,
+    mainImageUrl: "", images: [], rating: 4.4, reviewCount: 398, googleRating: 3.9, googleReviewCount: 886,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "ポイント" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "ポイント" },
@@ -672,7 +672,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r55"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "マリーナ駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/PilotBoat_at_KanmonStraits_Shimonoseki_Yamaguchi_Japan_AUG2012_1.jpg/960px-PilotBoat_at_KanmonStraits_Shimonoseki_Yamaguchi_Japan_AUG2012_1.jpg", imageAttribution: "Photo: Ka23 13 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 112, googleRating: 3.9, googleReviewCount: 122,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 112, googleRating: 3.9, googleReviewCount: 122,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング・サビキ", source: "ポイント" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り", source: "ポイント" },
@@ -875,7 +875,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r13"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "マリノポリス駐車場（無料・50台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/aga-marinopolis-gokan.webp", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 234, googleRating: 3.5, googleReviewCount: 104,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 234, googleRating: 3.5, googleReviewCount: 104,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキ釣り・テンヤ", source: "かめや釣具" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "かめや釣具" },
@@ -978,7 +978,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r906"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "波止手前に駐車スペース（10台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Utsumi_%28Hiroshima%29_-01.jpg/960px-Utsumi_%28Hiroshima%29_-01.jpg", imageAttribution: "Photo: Aimaimyi / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 82, googleRating: 4.6, googleReviewCount: 5,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 82, googleRating: 4.6, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "かめや釣具" },
       { fish: fish("konoshiro"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "かめや釣具" },

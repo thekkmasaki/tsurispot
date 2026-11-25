@@ -163,7 +163,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3252"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり（50台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/%E5%A4%8F%E7%A9%BA%E3%80%81%E6%AD%A9%E9%81%93%E6%A9%8B_-_panoramio.jpg/960px-%E5%A4%8F%E7%A9%BA%E3%80%81%E6%AD%A9%E9%81%93%E6%A9%8B_-_panoramio.jpg", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 234, googleRating: 3.8, googleReviewCount: 303,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 234, googleRating: 3.8, googleReviewCount: 303,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
@@ -602,7 +602,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: region("r90"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり（300円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/20130727200552_DSC_3411.JPG/960px-20130727200552_DSC_3411.JPG", imageAttribution: "Photo: Krmt / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 267, googleRating: 3.4, googleReviewCount: 10,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 267, googleRating: 3.4, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kamasu"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー", source: "アングラーズ 沼津港" },
@@ -1636,7 +1636,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3290"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Akashi_Kaiky%C5%8D_Bridge_-_%E6%98%8E%E7%9F%B3%E6%B5%B7%E5%B3%A1%E5%A4%A7%E6%A9%8B_-_panoramio_%281%29.jpg/960px-Akashi_Kaiky%C5%8D_Bridge_-_%E6%98%8E%E7%9F%B3%E6%B5%B7%E5%B3%A1%E5%A4%A7%E6%A9%8B_-_panoramio_%281%29.jpg", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 105,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 105,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -1994,7 +1994,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3310"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/arida-ko-add3.webp", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 85, googleRating: 4, googleReviewCount: 2575,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 85, googleRating: 4, googleReviewCount: 2575,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -2217,7 +2217,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3254"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: false, parkingDetail: "河和港または師崎港に駐車して渡船",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/%E5%B8%AB%E5%B4%8E_-_panoramio_-_Yobito_KAYANUMA.jpg/960px-%E5%B8%AB%E5%B4%8E_-_panoramio_-_Yobito_KAYANUMA.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 85, googleRating: 4, googleReviewCount: 1,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 85, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -2239,7 +2239,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3254"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: false, parkingDetail: "河和港または師崎港に駐車して渡船",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Toyohama%2C_Minamichita%2C_Chita_District%2C_Aichi_Prefecture_470-3412%2C_Japan_-_panoramio.jpg/960px-Toyohama%2C_Minamichita%2C_Chita_District%2C_Aichi_Prefecture_470-3412%2C_Japan_-_panoramio.jpg", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.0, reviewCount: 90, googleRating: 3.8, googleReviewCount: 55,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 90, googleRating: 3.8, googleReviewCount: 55,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },

@@ -176,7 +176,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r147"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sado-ogi-port.webp", imageAttribution: "Photo: Yoshiyuki Ito / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 68, googleRating: 3.7, googleReviewCount: 122,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 68, googleRating: 3.7, googleReviewCount: 122,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -871,7 +871,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r148"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kaga-hashitate-port.webp", imageAttribution: "Photo: Unknown authorUnknown author / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 72, googleRating: 4, googleReviewCount: 142,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 72, googleRating: 4, googleReviewCount: 142,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
