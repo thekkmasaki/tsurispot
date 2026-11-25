@@ -60,6 +60,18 @@
    ],
    "secondaryUrls": []
   },
+  "aomori-kita-breakwater": {
+   "name": "青森港北防波堤",
+   "pref": "青森県",
+   "verdict": "official_full",
+   "summary": "青森県青森港管理所のFAQで、青森港では高潮等の危険があるため釣りを禁止し、防波堤は関係者以外の出入りを制限と明記。北防波堤は「釣り文化振興モデル港」の限定開放対象だったが、R2以降は浜町緑地のみ／中止と国交省資料にある。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+    "https://www.mlit.go.jp/kowan/content/001361025.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "aomori-port": {
    "name": "青森港",
    "pref": "青森県",
@@ -208,6 +220,26 @@
    ],
    "secondaryUrls": []
   },
+  "hitachinaka-kou": {
+   "name": "常陸那珂港",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県の資料で、常陸那珂港区の国際港湾施設の岸壁とその前面水域は県港湾施設管理条例により正当な目的のない立入りが禁止（フェンス・センサー等で出入管理）。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html"
+   ],
+   "secondaryUrls": []
+  },
+  "imabetsu-gyokou6": {
+   "name": "今別漁港",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県の海区漁業調整委員会指示で、今別町今別地先・浜名地先などの一部区域で遊漁のまき餌釣りが禁止（釣り全体の禁止ではない）。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/suisan_yugyo_makie.html"
+   ],
+   "secondaryUrls": []
+  },
   "izu-nishina-gyokou-a13": {
    "name": "伊豆・仁科漁港",
    "pref": "静岡県",
@@ -217,6 +249,17 @@
    "secondaryUrls": [
     "https://ascii.jp/elem/000/004/213/4213533/"
    ]
+  },
+  "izumozaki-kou-niigata": {
+   "name": "出雲崎港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は防波堤（離岸堤・沖防波堤含む）への立入りを原則禁止とし、出雲崎漁港では離岸堤を町管理の開放釣り場として4/1〜11/30・日の出〜日没に限り開放。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
   },
   "joetsu-port": {
    "name": "上越港",
@@ -272,6 +315,17 @@
     "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
    ],
    "secondaryUrls": []
+  },
+  "kushiro-nishikouku6": {
+   "name": "釧路港西港区",
+   "pref": "北海道",
+   "verdict": "official_full",
+   "summary": "北海道新聞によると、釧路港は釧路市の条例で港湾施設での釣りが禁止され、安全面から釣り目的の立入り自体を原則禁止としている（振興局・市・警察が自粛呼びかけ・パトロール）。西港区も釧路港の一部。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/article/1369395/",
+    "https://www.hokkaido-np.co.jp/article/1371015/"
+   ]
   },
   "kushiro-port": {
    "name": "釧路港",
@@ -381,6 +435,17 @@
     "https://ryukyushimpo.jp/economics/entry-3501322.html",
     "https://ryukyushimpo.jp/tag/%e9%82%a3%e8%a6%87%e4%b8%80%e6%96%87%e5%ad%97"
    ]
+  },
+  "nanao-ko-fuchu-futo": {
+   "name": "七尾港 府中埠頭",
+   "pref": "石川県",
+   "verdict": "official_partial",
+   "summary": "国交省の「七尾港立入禁止施設（大田地区～府中地区）」図（令和6年2月時点、能登半島地震による被災）で府中地区の施設が立入禁止とされ、府中物揚場は利用不可とされていた。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/kowan/content/001726618.pdf",
+    "https://www.mlit.go.jp/kowan/content/001726608.pdf"
+   ],
+   "secondaryUrls": []
   },
   "nanao-port": {
    "name": "七尾港",
@@ -506,6 +571,17 @@
    ],
    "secondaryUrls": []
   },
+  "onahama-east-breakwater-a12": {
+   "name": "いわき市小名浜港東堤防",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県の小名浜港釣りマップで、港内で釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所のみとされ、港内には立入制限・立入禁止・釣り禁止区域がある。東堤防は釣り可能場所に含まれない。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
+   ],
+   "secondaryUrls": []
+  },
   "onahama-ichigou-futou6": {
    "name": "小名浜港1号埠頭",
    "pref": "福島県",
@@ -526,6 +602,18 @@
    "officialUrls": [
     "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
     "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-nigo-wharf-a12": {
+   "name": "いわき市小名浜港2号埠頭",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の釣りマップで2号埠頭先端部は小名浜港の釣り指定区域（国交省の釣り文化振興モデル港）だが、県は「2号ふ頭釣り禁止区域」も掲示し、2025年12月から2号ふ頭3・4号バースへの関係者以外の車両進入を禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/syaryoutaisaku.html",
+    "https://www.mlit.go.jp/kowan/content/001361026.pdf"
    ],
    "secondaryUrls": []
   },
@@ -611,6 +699,26 @@
     "https://www.city.shizuoka.lg.jp/s2431/s004730.html"
    ],
    "secondaryUrls": []
+  },
+  "shingu-port-breakwater": {
+   "name": "新宮漁港堤防",
+   "pref": "福岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、3本ある堤防のうち北側の堤防は立入禁止区域と紹介されている。公式の告知は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1385"
+   ]
+  },
+  "shingu-port-fukuoka": {
+   "name": "新宮漁港",
+   "pref": "福岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）で、新宮漁港の3本の堤防のうち北側の堤防は立入禁止区域と注意喚起。ほかの堤防・岸壁・テトラ帯は釣り可と紹介。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1385"
+   ]
   },
   "shiogama-kitahama-bouhatei-e8": {
    "name": "塩釜北浜防波堤",
