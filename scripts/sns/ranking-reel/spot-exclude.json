@@ -2380,6 +2380,16 @@
    "status": "seasonal_closed_winter",
    "summary": "4月上旬〜10月下旬の日曜・祝日のみ営業と掲載されており、冬季は営業しない。"
   },
+  "shinmaiko-marine-park": {
+   "fish": [
+    "aoriika"
+   ],
+   "manual": true,
+   "name": "新舞子マリンパーク釣り施設",
+   "pref": "愛知県",
+   "status": "weak_evidence",
+   "summary": "伊勢湾奥の人工島。アオリイカの岸の釣果は日付不明のブログ1件と春の新子程度。2026-11 愛知アオリイカTOP10リールに「新舞子イカ釣れる?!」とコメント"
+  },
   "shizuoka-fuji-fuji-fish-center-tadehara": {
    "name": "富士フィッシュセンター 蓼原釣り堀",
    "pref": "静岡県",

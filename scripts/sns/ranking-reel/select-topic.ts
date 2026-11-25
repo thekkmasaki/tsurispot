@@ -96,10 +96,12 @@ const BAN_AUDIT_EXCLUDE = new Set(
 );
 // 2026-11-25 冬のお題（管理釣り場・釣り堀・海上釣り堀・ワカサギ）の個別調査で見つかった、閉業・名称変更・実在不明・冬季休業・禁漁/不漁の所。
 // months があればその月だけ除外（冬季休業など）、無ければ常に除外
-const SPOT_EXCLUDE = (spotExclude as { entries: Record<string, { months?: number[] }> }).entries;
-const spotExcluded = (slug: string) => {
+// fish があればその魚のお題のときだけ除外（例: 新舞子のアオリイカ）
+const SPOT_EXCLUDE = (spotExclude as { entries: Record<string, { months?: number[]; fish?: string[] }> }).entries;
+const spotExcluded = (slug: string, fishKey?: string) => {
   const e = SPOT_EXCLUDE[slug];
-  return !!e && (!e.months || e.months.includes(monthNum));
+  if (!e || (e.months && !e.months.includes(monthNum))) return false;
+  return !e.fish || (fishKey !== undefined && e.fish.includes(fishKey));
 };
 function snsSafe(s: (typeof fishingSpots)[number]) {
   if (spotExcluded(s.slug)) return false;
@@ -140,7 +142,7 @@ function areaGroups(spots: Spot[], national: boolean): { area: Area; count: numb
 
 function matchingSpots(area: Area, fishSlug: string) {
   return fishingSpots
-    .filter((s) => area.prefNames.has(s.region.prefecture) && snsSafe(s) && isFishListedAtSpot(s, fishSlug))
+    .filter((s) => area.prefNames.has(s.region.prefecture) && snsSafe(s) && !spotExcluded(s.slug, fishSlug) && isFishListedAtSpot(s, fishSlug))
     .map((spot) => {
       const cfs = spot.catchableFish.filter(
         (cf) => cf.fish.slug === fishSlug && isMonthInRange(monthNum, cf.monthStart, cf.monthEnd)

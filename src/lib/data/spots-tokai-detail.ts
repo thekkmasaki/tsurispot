@@ -707,7 +707,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: region("r10"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "伊良湖岬駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/irago-ko-teibo.webp", imageAttribution: "Photo: jun72 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.4, reviewCount: 223, googleRating: 3.8, googleReviewCount: 303,
+    mainImageUrl: "", images: [] /* 2026-11-25 旧写真は恋路ヶ浜だったため irago-misaki-koijigahama-a12 へ移動 */, rating: 4.4, reviewCount: 223, googleRating: 3.8, googleReviewCount: 303,
     catchableFish: [
       { fish: fish("inada"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("buri"), monthStart: 10, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
