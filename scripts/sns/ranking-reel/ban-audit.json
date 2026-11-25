@@ -427,6 +427,16 @@
     "https://www.excite.co.jp/news/article/FishingJapan_009159/"
    ]
   },
+  "hinogawa-kakou-w7": {
+   "name": "日野川河口",
+   "pref": "鳥取県",
+   "verdict": "official_partial",
+   "summary": "鳥取県漁業調整規則第41条により、日野川河口付近は3/1〜5/31の間、水産動植物の採捕禁止（アユ遡上保護）。川尻の禁止区域（河口両岸から各100m・沖合80mの海域）も設定（鳥取県）。",
+   "officialUrls": [
+    "https://www.pref.tottori.lg.jp/305500.htm"
+   ],
+   "secondaryUrls": []
+  },
   "hinomisaki-kou-c8": {
    "name": "日御碕港",
    "pref": "島根県",
@@ -496,6 +506,16 @@
    "officialUrls": [
     "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html",
     "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hitotsuba-kaigan-w6": {
+   "name": "宮崎・一ツ葉海岸",
+   "pref": "宮崎県",
+   "verdict": "official_partial",
+   "summary": "国交省宮崎河川国道事務所が2024年4月、宮崎海岸の突堤と養浜箇所を転倒事故の恐れから立入禁止にしている（一ツ葉PA付近に杭・ロープで区域表示）。砂浜全体の釣り禁止ではない。",
+   "officialUrls": [
+    "https://www.qsr.mlit.go.jp/miyazaki/newstopics_files/20240426/r6annzennriyou.pdf"
    ],
    "secondaryUrls": []
   },
@@ -575,6 +595,27 @@
     "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/011/225/hogosuimennituite.pdf"
    ],
    "secondaryUrls": []
+  },
+  "ishigaki-nagura-bay": {
+   "name": "石垣島名蔵湾",
+   "pref": "沖縄県",
+   "verdict": "official_full",
+   "summary": "沖縄県は名蔵湾に「名蔵保護水面」を指定し、管理計画で全ての水産動植物の採捕を周年禁止している（標柱設置、違反は罰則あり）。釣りもできない。",
+   "officialUrls": [
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/011/225/nagura_keikaku.pdf",
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/011/225/hogosuimennituite.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ishikari-hama-surf-a13": {
+   "name": "石狩浜海水浴場周辺サーフ",
+   "pref": "北海道",
+   "verdict": "secondary_partial",
+   "summary": "石狩浜海水浴場（あそびーち石狩）の禁止事項として「決められたエリア外での…つり」が挙げられている（Walkerplusの海水浴場情報）。海水浴期間（2026年は7/11〜8/23）中の利用に制限がある可能性。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0101s14430/data.html"
+   ]
   },
   "ishinomaki-ogatsu-breakwater-a12": {
    "name": "石巻市雄勝港堤防",
@@ -1004,6 +1045,28 @@
     "https://www.hokkaido-np.co.jp/article/1371015/"
    ]
   },
+  "kyu-edogawa-mouth": {
+   "name": "旧江戸川河口",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（TSURI HACK）が、旧江戸川には立入禁止・釣り禁止の区間が設けられているとして現地確認を促している（具体的な範囲は不明）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1828"
+   ]
+  },
+  "makuhari-no-hama6": {
+   "name": "幕張の浜",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "旅行情報サイトによると海岸部の浸食で立入禁止の場所が増えている（管理は千葉県企業庁）。平成12年以降は遊泳禁止。釣り自体の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.pref.chiba.lg.jp/kyouiku/anzen/documents/kaihinjikoboushi.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tabi-mag.jp/ch0430/"
+   ]
+  },
   "mashike-port": {
    "name": "増毛港",
    "pref": "北海道",
@@ -1224,6 +1287,16 @@
     "https://ryukyushimpo.jp/tag/%e9%82%a3%e8%a6%87%e4%b8%80%e6%96%87%e5%ad%97"
    ]
   },
+  "nakagawa-kakou-ibaraki6": {
+   "name": "那珂川河口",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県が那珂川河口付近（大洗町祝町砲台跡の標柱から半径1,000m以内の海域）を5/1〜12/31のサケ・マス採捕禁止区域に指定。サケは全河川で採捕禁止。他魚種の釣りを禁じる記述はなし。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/nourinsuisan/gyosei/chosei/leasure/sake.html"
+   ],
+   "secondaryUrls": []
+  },
   "nakatsu-kou-w6": {
    "name": "中津・中津港",
    "pref": "大分県",
@@ -1330,6 +1403,27 @@
    ],
    "secondaryUrls": []
   },
+  "natorigawa-kakou6": {
+   "name": "名取川河口",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "宮城県が閖上漁港の南導流堤・南防波堤の侵入防止柵より先を転落事故防止のため立入禁止区域としている（名取川河口部の導流堤）。河岸からの釣りを禁じる記述はなし。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
+   ],
+   "secondaryUrls": []
+  },
+  "natsuigawa-kakou-e8": {
+   "name": "夏井川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県がコアジサシ営巣地保護のため夏井川河口の約12haを毎年5/1〜8/31立入規制区域に指定（無許可立入は罰則）。また河口中央から半径550m以内の海面で9/1〜翌5/31のサケ採捕禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/16035b/kisei-natsuigawa.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
   "niigata-hiyoriyama-hama-a13": {
    "name": "新潟・日和山浜（突堤）",
    "pref": "新潟県",
@@ -1363,6 +1457,16 @@
    "secondaryUrls": [
     "https://ascii.jp/elem/000/004/213/4213533/"
    ]
+  },
+  "nishio-terabe-kaigan-a13": {
+   "name": "西尾・寺部海岸",
+   "pref": "愛知県",
+   "verdict": "official_partial",
+   "summary": "愛知県公式観光サイトの寺部海水浴場ページに「海水浴場内は遊泳以外禁止（7月から8月中）」とあり、海水浴期間中は海水浴場内での釣りもできないと読める。BBQ・SUPも禁止。",
+   "officialUrls": [
+    "https://aichinow.pref.aichi.jp/spots/detail/1375/"
+   ],
+   "secondaryUrls": []
   },
   "nishizaki-gyokou-a13": {
    "name": "西崎漁港",
@@ -2028,6 +2132,17 @@
    ],
    "secondaryUrls": []
   },
+  "suma-kaigan-k8": {
+   "name": "須磨海岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "神戸市（港湾管理者）が須磨海岸の防波堤・離岸堤への立入りを禁止し、瀬渡しも禁止している。砂浜での釣り自体の禁止はない。",
+   "officialUrls": [
+    "https://www.city.kobe.lg.jp/documents/37319/kisei2.pdf",
+    "https://www.city.kobe.lg.jp/a46366/kanko/leisure/suma_beach/sumakouhou/suma_ordinance.html"
+   ],
+   "secondaryUrls": []
+  },
   "suo-oshima-katazoe": {
    "name": "周防大島・片添ヶ浜",
    "pref": "山口県",
@@ -2126,6 +2241,17 @@
     "https://tabi-mag.jp/kn0782/"
    ]
   },
+  "tenjingawa-kakou": {
+   "name": "天神川河口",
+   "pref": "鳥取県",
+   "verdict": "official_partial",
+   "summary": "鳥取県漁業調整規則第41条により、天神川河口付近は3/1〜5/31の間、水産動植物の採捕禁止（アユ遡上保護）。川尻の禁止区域（河口両岸から各100m・沖合80mの海域）も設定（鳥取県）。",
+   "officialUrls": [
+    "https://www.pref.tottori.lg.jp/305500.htm",
+    "https://www.pref.tottori.lg.jp/secure/1333357/tenjinyuugyoR90101.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "teradomari-kou-niigata": {
    "name": "寺泊港",
    "pref": "新潟県",
@@ -2209,6 +2335,16 @@
    "summary": "大分海区漁業調整委員会告示で、佐伯市鶴見の梶寄大碆から米水津との境界まで（沖磯含む）は、いそ釣りでのアミ（オキアミ含む）まきえの使用が禁止。鶴見の先ノ瀬灯台周辺も県規則でまきえ釣禁止区域（大分県資料）。釣り自体の禁止ではなく、まきえを使うフカセ釣りが規制対象。",
    "officialUrls": [
     "https://pref.oita.jp/uploaded/life/2279718_4367470_misc.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tsurumigawa-kakko6": {
+   "name": "鶴見川河口",
+   "pref": "神奈川県",
+   "verdict": "official_partial",
+   "summary": "横浜市が港内のふ頭・防波堤での釣りは（海づり施設を除き）禁止とし、大黒ふ頭内に港湾関係者以外立入禁止の場所があると案内。住所の大黒町側の岸壁・ふ頭部分は該当しうる。河川護岸部分の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/umizuri.html"
    ],
    "secondaryUrls": []
   },
@@ -2298,6 +2434,17 @@
     "https://ryukyushimpo.jp/news/entry-945273.html",
     "https://ryukyushimpo.jp/tag/都屋漁港"
    ]
+  },
+  "yoshinogawa-kakou-w6": {
+   "name": "吉野川河口",
+   "pref": "徳島県",
+   "verdict": "official_partial",
+   "summary": "徳島県資料で、第十堰・旧吉野川河口堰・今切川河口堰などの堰の上流50m・下流150m以内と、各橋梁上での魚釣りが禁止。河口一帯の護岸自体は国交省が釣りの好ポイントとして紹介。",
+   "officialUrls": [
+    "https://www.pref.tokushima.lg.jp/file/attachment/1031782.pdf",
+    "https://www.skr.mlit.go.jp/tokushima/kouhoushi/matome/fishing/PDF/f-26.pdf"
+   ],
+   "secondaryUrls": []
   },
   "yui-gyokou-shizuoka": {
    "name": "由比漁港",
