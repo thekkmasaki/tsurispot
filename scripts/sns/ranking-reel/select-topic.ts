@@ -208,7 +208,10 @@ const MONTH_SKIP: Record<number, Set<string>> = { 12: WINTER_SKIP_ALL, 1: WINTER
 // 釣具店ブログ・釣果投稿でも数年前から香川の岸にほぼ入らない年が続いている（サイト側も出典なしの香川のタチウオは削除済み）
 // 同日、同じ瀬戸内中部の岡山（地元ブログ「ここ数年は岡山近海まで入ってこない」）・広島（中国新聞: 県の漁獲量が2010年962t→2018年179t、
 // 呉の中心漁協はほぼゼロ）も確認して追加。愛媛は南予（宇和海）の堤防で2025年も釣果があるので外さない
-const TOPIC_SKIP = new Set(["kagawa/tachiuo", "okayama/tachiuo", "hiroshima/tachiuo"]);
+// 同日、全国のタチウオを確認。大分（県の漁獲は1996年5,562t→2015年789t、大分市の港内に群れが入るのは年に数日）と
+// 山口（防波堤からは難しいとの記述、周防大島の釣果集計も低調）も岸のランキングには向かないので外す。
+// サイトのデータは「年に数日は釣れる」ため削除しない（香川・岡山・広島は「何年も岸に入っていない」ため削除済み）
+const TOPIC_SKIP = new Set(["kagawa/tachiuo", "okayama/tachiuo", "hiroshima/tachiuo", "oita/tachiuo", "yamaguchi/tachiuo"]);
 // 県で6件に満たなくても地方・全国でまとめてお題にする魚（データが少ないが人気のある魚）
 const WIDE_AREA_FISH = new Set(["kobudai"]);
 
