@@ -11,6 +11,16 @@
     "https://summer.walkerplus.com/odekake/detail/ar0314s12824/data.html"
    ]
   },
+  "ajigasawa-akaishigawa-river-a12": {
+   "name": "鰺ヶ沢町赤石川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県西部海区の資料に、赤石川など河口付近で9/20〜12/20に竿釣り・手釣りを含む採捕制限の記載（サケ保護）。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kaiku/files/wsake.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "akashi-nakasaki-beranda": {
    "name": "明石市役所裏ベランダ（中崎展望広場）",
    "pref": "兵庫県",
@@ -69,6 +79,16 @@
    "officialUrls": [
     "https://www.pa.thr.mlit.go.jp/akita/090/210701_01.pdf",
     "https://www.pa.thr.mlit.go.jp/akita/100/CONT000000000000006267.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "akita-omono-right-a13": {
+   "name": "秋田市雄物川河口右岸",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、雄物川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
    ],
    "secondaryUrls": []
   },
@@ -182,6 +202,26 @@
    ],
    "secondaryUrls": []
   },
+  "aomori-tsutsumigawa-kakou6": {
+   "name": "青森港堤川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森港管理所（青森県）のFAQで、青森港の港湾施設では高潮等の危険から釣りを禁止しており、岸壁・物揚場・防波堤も関係者以外立入禁止としている。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html"
+   ],
+   "secondaryUrls": []
+  },
+  "arakawa-kakou-kasai": {
+   "name": "荒川河口（葛西臨海公園付近）",
+   "pref": "東京都",
+   "verdict": "official_partial",
+   "summary": "東京都港湾局の案内で、隣接する葛西海浜公園の砂浜と葛西渚橋では釣り不可、東なぎさは立入禁止。荒川河口側の護岸自体の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.kouwan.metro.tokyo.lg.jp/documents/d/kouwan/27276_kasaikaihinkouen"
+   ],
+   "secondaryUrls": []
+  },
   "ashiya-gyoko-teibo-fukuoka": {
    "name": "芦屋漁港堤防",
    "pref": "福岡県",
@@ -203,6 +243,17 @@
     "https://www.town.ashiya.lg.jp/uploaded/attachment/8170.pdf",
     "https://www.pref.fukuoka.lg.jp/contents/ashiyaboatpark.html",
     "https://www.pref.fukuoka.lg.jp/uploaded/attachment/301160.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ashiya-kou-fukuoka": {
+   "name": "芦屋港",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "芦屋町の計画資料で、従来の釣り場だった芦屋港東防波堤はボートパークの動線となり使用できなくなるとされ、代わりに新設波除堤に魚釣施設を設ける（福岡県発表で2026年11月22日開設予定、無料）。",
+   "officialUrls": [
+    "https://www.town.ashiya.lg.jp/uploaded/attachment/9564.pdf",
+    "https://www.pref.fukuoka.lg.jp/contents/ashiyaboatpark.html"
    ],
    "secondaryUrls": []
   },
@@ -256,6 +307,17 @@
     "https://www.minnacamera.com/spots/1072"
    ]
   },
+  "fujikawa-kakou": {
+   "name": "富士川河口",
+   "pref": "静岡県",
+   "verdict": "official_partial",
+   "summary": "富士市の「富士川で釣りをする皆様へ」で、東海道本線鉄橋上流端から富士川河口までの区域は毎年10月11日〜11月15日に全魚種の採捕禁止（静岡県規則、罰則あり）。",
+   "officialUrls": [
+    "https://www.city.fuji.shizuoka.jp/documents/4652/fujikawadeturiwosuruminasamahe.pdf",
+    "https://www.city.fuji.shizuoka.jp/documents/4652/fmervo0000009bmr.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "fureyu-ura-gogan": {
    "name": "ふれーゆ裏護岸",
    "pref": "神奈川県",
@@ -276,6 +338,17 @@
    "officialUrls": [
     "https://www.pref.aomori.lg.jp:443/soshiki/kaiku/files/esake.pdf",
     "https://www.pref.aomori.lg.jp/soshiki/kaiku/r8-kaiku-iinnkaisiji00.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hachinohe-niidagawa-kakou": {
+   "name": "八戸新井田川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県東部海区の指示（サケ関係）で、新井田川河口付近は10月1日〜12月31日に竿釣り・手釣りを含む操業が制限される。八戸港の白銀町・湊町・新湊等の地先は遊漁のまき餌釣り禁止区域。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp:443/soshiki/kaiku/files/esake.pdf",
+    "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/suisan_yugyo_makie.html"
    ],
    "secondaryUrls": []
   },
@@ -311,6 +384,17 @@
     "https://www.daiwa.com/jp/partner/fishingmap/fishingfacility/list/wakasukaihinkoen_2",
     "https://tsurihack.com/1237/2"
    ]
+  },
+  "haneda-tamagawa-kakou-a13": {
+   "name": "羽田空港周辺・多摩川河口",
+   "pref": "東京都",
+   "verdict": "official_partial",
+   "summary": "大田区の案内で河川敷の表示された立入禁止区域への立入禁止、羽田空港周辺海域は空港管理規則の制限区域（京浜河川事務所）。本羽田のヨシ原に進入防止柵。",
+   "officialUrls": [
+    "https://www.city.ota.tokyo.jp/seikatsu/sumaimachinami/haneda_airport/hgw/waterside/takashioteibou.html",
+    "https://www.ktr.mlit.go.jp/ktr_content/content/000654711.pdf"
+   ],
+   "secondaryUrls": []
   },
   "harakama-obama-gyokou6": {
    "name": "原釜尾浜漁港",
@@ -671,6 +755,28 @@
    ],
    "secondaryUrls": []
   },
+  "iwaki-natsuigawa-left-a12": {
+   "name": "いわき市夏井川河口左岸",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県がコアジサシ営巣地保護のため夏井川河口の約12ha（磐城海岸県立自然公園）を毎年5/1〜8/31知事許可なしの立入禁止に指定（罰則あり）。左岸（下神谷）の釣り場が区域に含まれるかは未確認。河口半径550mの海面で9/1〜5/31サケ採捕禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/16035b/kisei-natsuigawa.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-natsuigawa-right-a13": {
+   "name": "いわき市夏井川河口右岸",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県: 夏井川河口の海浜部約12haは県立自然公園条例でコアジサシ営巣地として5/1〜8/31立入禁止。また河口中央から半径550m以内の海面は9/1〜翌5/31に水産動植物の採捕禁止（県漁業調整規則）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/16035b/kisei-natsuigawa.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html"
+   ],
+   "secondaryUrls": []
+  },
   "iwaki-onahama-aquamarine-back-a13": {
    "name": "いわき市小名浜港アクアマリン裏堤防",
    "pref": "福島県",
@@ -827,6 +933,16 @@
     "https://tsurihack.com/1417"
    ]
   },
+  "kamaishi-unosumai-river-a12": {
+   "name": "釜石市鵜住居川河口",
+   "pref": "岩手県",
+   "verdict": "official_partial",
+   "summary": "岩手県の鵜住居川遊漁規則（鵜住居川漁協）で、日ノ神橋下流端から下流の区域は9月1日〜12月31日が禁止期間とされている（サケ遡上期）。",
+   "officialUrls": [
+    "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/008/532/0901unosumaikisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "kaminokae-kou-w6": {
    "name": "中土佐・上ノ加江港",
    "pref": "高知県",
@@ -980,6 +1096,26 @@
     "https://tsurihack.com/2752"
    ]
   },
+  "koyoshigawa-river-a11": {
+   "name": "子吉川河口",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、子吉川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kuji-osanai-river-a13": {
+   "name": "久慈市長内川河口",
+   "pref": "岩手県",
+   "verdict": "official_partial",
+   "summary": "岩手県掲載の遊漁規則（鵜住居川等の規則PDF）で、長内川長内橋下流端から下流の免許区域が区域制限の対象として挙がっている。",
+   "officialUrls": [
+    "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/008/532/0901unosumaikisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "kumihama-wan-kyoto": {
    "name": "久美浜湾",
    "pref": "京都府",
@@ -1086,6 +1222,28 @@
    "secondaryUrls": [
     "https://tsurihack.com/653"
    ]
+  },
+  "matsukawa-ura6": {
+   "name": "松川浦",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が2020年に松川浦漁港・相馬港等に釣り禁止区域周知看板を設置。防波堤など立入禁止場所あり。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "matsushige-kyuyoshinogawa-w6": {
+   "name": "松茂・旧吉野川河口",
+   "pref": "徳島県",
+   "verdict": "official_partial",
+   "summary": "国交省徳島河川国道事務所の資料で、旧吉野川河口堰・今切川河口堰の上流50m・下流150m以内と各橋梁上での釣りは禁止。河口一帯の護岸は釣り場として紹介。",
+   "officialUrls": [
+    "https://www.skr.mlit.go.jp/tokushima/river/event/yoshikouza/no15/text15-7-2.pdf",
+    "https://www.skr.mlit.go.jp/tokushima/kouhoushi/matome/fishing/PDF/f-26.pdf"
+   ],
+   "secondaryUrls": []
   },
   "matsuzaki-gyokou": {
    "name": "松崎漁港",
@@ -1194,6 +1352,26 @@
    "summary": "下地島空港管理事務所（沖縄県）が17エンド側の管理用通路を車両通行止めにしている。釣り禁止の記述はない。",
    "officialUrls": [
     "https://www.pref.okinawa.jp/machizukuri/kowankuko/1012617/1012639/1023024.html"
+   ],
+   "secondaryUrls": []
+  },
+  "miyako-tsugaruishigawa-kakou": {
+   "name": "宮古市津軽石川河口",
+   "pref": "岩手県",
+   "verdict": "official_partial",
+   "summary": "岩手県の津軽石川遊漁規則（宮古漁協）で、河口から旧稲荷橋上流端の230m上流までの区間が11月1日〜2月末日の禁止区間とされている（サケ遡上期）。",
+   "officialUrls": [
+    "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/008/532/0901tugaruishigawakisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "mukogawa-kakou": {
+   "name": "武庫川河口",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "尼崎西宮芦屋港の管理者（兵庫県尼崎港管理事務所）が、武庫川河口西宮側の西宮内防波堤への立入りを禁止している（手すり・救命具がなく越波・津波退避の危険）。",
+   "officialUrls": [
+    "https://web.pref.hyogo.lg.jp/org/amagasakikokanri/documents/nishinomiya.pdf"
    ],
    "secondaryUrls": []
   },
@@ -1306,6 +1484,17 @@
    "secondaryUrls": [
     "https://tsurihack.com/1367"
    ]
+  },
+  "namie-ukedo-river-a11": {
+   "name": "浪江町請戸川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、請戸川の河口中央から半径550m以内の海面で9/1〜翌5/31は水産動植物の採捕禁止。県ページの河川内禁止区域表に『請戸橋の橋脚上流端から下流部全域』の記載あり（期間未確認）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
   },
   "nanao-ko-fuchu-futo": {
    "name": "七尾港 府中埠頭",
@@ -1478,6 +1667,17 @@
     "https://ryukyushimpo.jp/news/entry-4479916.html"
    ]
   },
+  "nittakawa-kakou-e8": {
+   "name": "新田川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、新田川の河口中央から半径550m以内の海面で9/1〜翌5/31はサケを含む水産動植物の採捕禁止（県水産事務所）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
   "nojima-kouen-gogan": {
    "name": "野島公園護岸",
    "pref": "神奈川県",
@@ -1487,6 +1687,16 @@
    "secondaryUrls": [
     "https://tsurihack.com/1169/3"
    ]
+  },
+  "noshiro-yoneshiro-right-a12": {
+   "name": "能代市米代川河口右岸",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、米代川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。米代川水系サクラマス協議会区域のサクラマス釣り可能期間は4/1〜7/31。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
+   ],
+   "secondaryUrls": []
   },
   "nou-gyoko": {
    "name": "能生漁港",
@@ -1509,6 +1719,17 @@
     "https://www.gltjp.com/ja/article/item/20312/",
     "https://tabi-mag.jp/tk0023/"
    ]
+  },
+  "oirasegawa-kakou": {
+   "name": "奥入瀬川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県東部海区の指示（サケ関係）で、奥入瀬川河口付近は10月1日〜12月31日に竿釣り・手釣りを含む操業が制限される。県の2026年告示にも河口から上流1,000m（開運橋上流端まで）の区域がさくらます関係の区域として挙がる。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp:443/soshiki/kaiku/files/esake.pdf",
+    "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/files/20260520kouji.pdf"
+   ],
+   "secondaryUrls": []
   },
   "oiso-fishing-port": {
    "name": "大磯港",
@@ -1577,6 +1798,16 @@
    "secondaryUrls": [
     "https://tsurihack.com/1351"
    ]
+  },
+  "omonogawa-kakou6": {
+   "name": "雄物川河口",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、雄物川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
+   ],
+   "secondaryUrls": []
   },
   "onahama-aquamarine-e8": {
    "name": "小名浜港アクアマリン前",
@@ -1776,6 +2007,16 @@
    ],
    "secondaryUrls": []
   },
+  "saga-kasegawa-kakou-s8": {
+   "name": "佐賀市・嘉瀬川河口",
+   "pref": "佐賀県",
+   "verdict": "official_partial",
+   "summary": "登録住所の佐賀市大和町大字川上は、佐賀県内水面漁場管理委員会指示第68号で川上頭首工（魚道含む）〜惣座橋の区域が全水産動物の採捕禁止（R6.1.1〜R10.12.31）とされる区域にあたる。嘉瀬川河口（有明海側）自体の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.pref.saga.lg.jp/kiji003120415/3_120415_up_jakkoii3.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "sakaihama-seaside-k8": {
    "name": "堺浜シーサイドステージ",
    "pref": "大阪府",
@@ -1784,6 +2025,28 @@
    "officialUrls": [
     "https://www.city.sakai.lg.jp/shisei/toshi/rinkai/umifureai/umizuriterasu.html",
     "https://www.city.sakai.lg.jp/shisei/toshi/rinkai/hureaibi-ti.html"
+   ],
+   "secondaryUrls": []
+  },
+  "sakawagawa-river": {
+   "name": "酒匂川",
+   "pref": "神奈川県",
+   "verdict": "official_partial",
+   "summary": "神奈川県: 酒匂川の飯泉取水えん堤上流120m〜東海道本線鉄橋間、栢山頭首工えん堤上流10mは周年禁漁。アユ漁期は6/1〜10/14と12月のみ。",
+   "officialUrls": [
+    "https://www.pref.kanagawa.jp/docs/m2g/cnt/f417344/p431491.html",
+    "https://www.pref.kanagawa.jp/documents/31525/20240601sakawagawakisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "samegawa-kakou6": {
+   "name": "鮫川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、鮫川の河口中央から半径550m以内の海面で9/1〜翌5/31は水産動植物の採捕禁止（県水産事務所）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
    ],
    "secondaryUrls": []
   },
@@ -2229,6 +2492,17 @@
    ],
    "secondaryUrls": []
   },
+  "tamagawa-kakko6": {
+   "name": "多摩川河口",
+   "pref": "東京都",
+   "verdict": "official_partial",
+   "summary": "大田区の高潮堤防の案内で、現地表示の立入禁止区域への立入禁止を呼びかけている。羽田空港側の水域は空港管理規則の制限区域で一般船舶は立入不可（国交省資料）。",
+   "officialUrls": [
+    "https://www.city.ota.tokyo.jp/seikatsu/sumaimachinami/haneda_airport/hgw/waterside/takashioteibou.html",
+    "https://www.ktr.mlit.go.jp/ktr_content/content/000654711.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "tenjin-jima": {
    "name": "天神島",
    "pref": "神奈川県",
@@ -2424,6 +2698,16 @@
    ],
    "secondaryUrls": []
   },
+  "yanagawa-okibata-suitengu-s8": {
+   "name": "柳川・沖端水天宮周辺",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "福岡県内水面漁場管理委員会の指示で、沖端川の出ノ橋下流端から昭南町・吉富町を結ぶ線までの区域が、モクズガニ・テナガエビ・アユ・コイ・ウナギ等の魚種別採捕禁止区域に挙がっている（令和7年4月〜令和10年3月）。",
+   "officialUrls": [
+    "https://www.pref.fukuoka.lg.jp/uploaded/attachment/252558.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "yomitan-port": {
    "name": "読谷漁港",
    "pref": "沖縄県",
@@ -2434,6 +2718,27 @@
     "https://ryukyushimpo.jp/news/entry-945273.html",
     "https://ryukyushimpo.jp/tag/都屋漁港"
    ]
+  },
+  "yorogawa-kakko6": {
+   "name": "養老川河口",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトによると、養老川河口の海づり公園の対岸は立入禁止で釣りができず、五井堤防（赤灯）も立入禁止エリアがあり陸から行けない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/937/2"
+   ]
+  },
+  "yoshinogawa-kakou-itano-a11": {
+   "name": "吉野川河口・板野側",
+   "pref": "徳島県",
+   "verdict": "official_partial",
+   "summary": "国交省徳島河川国道事務所の資料で、第十堰・旧吉野川河口堰・今切川河口堰の上流50m・下流150m以内および各橋梁上での釣りが禁止とされている。河口一帯の護岸自体は釣り場として紹介。",
+   "officialUrls": [
+    "https://www.skr.mlit.go.jp/tokushima/kouhoushi/matome/fishing/PDF/f-26.pdf",
+    "https://www.skr.mlit.go.jp/tokushima/river/event/yoshikouza/no15/text15-7-2.pdf"
+   ],
+   "secondaryUrls": []
   },
   "yoshinogawa-kakou-w6": {
    "name": "吉野川河口",
