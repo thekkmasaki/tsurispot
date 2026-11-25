@@ -189,6 +189,19 @@
     "https://tsurihack.com/1089"
    ]
   },
+  "danjo-gunto": {
+   "name": "男女群島",
+   "pref": "長崎県",
+   "verdict": "official_full",
+   "summary": "男女群島は群島全体が国の天然記念物で、許可なく上陸できない（環境省資料・日本野鳥の会）。国指定鳥獣保護区の特別保護地区（2013〜2033年）でもあり、女島には立入禁止看板がある。",
+   "officialUrls": [
+    "https://www.env.go.jp/houdou/gazou/17001/03/2.pdf",
+    "https://www.rinya.maff.go.jp/kyusyu/keikaku/hogorin/shinrin_seibutsu/dannjyogunntou.html"
+   ],
+   "secondaryUrls": [
+    "https://mobile.wbsj.org/nature/hogo/others/iba/search/sites/kyusyu/imgs/JP143.pdf"
+   ]
+  },
   "hachinohe-niida-river-a13": {
    "name": "八戸港沖堤防（新井田川河口）",
    "pref": "青森県",
@@ -325,6 +338,17 @@
    "secondaryUrls": [
     "https://www.excite.co.jp/news/article/FishingJapan_009159/"
    ]
+  },
+  "hinomisaki-kou-c8": {
+   "name": "日御碕港",
+   "pref": "島根県",
+   "verdict": "official_partial",
+   "summary": "日御碕港の目の前の経島（ふみしま）は日御碕神社の神域でウミネコ繁殖地として国の天然記念物に指定され、一般の立入りは認められていない（島根県・国交省資料）。港や周辺の磯自体の釣り禁止記述はない。",
+   "officialUrls": [
+    "https://www.pref.shimane.lg.jp/industry/suisan/gyokou/shiryo/02fumishima.html",
+    "https://www.mlit.go.jp/tagengo-db/en/R1-02635.html"
+   ],
+   "secondaryUrls": []
   },
   "hiratsuka-shinko": {
    "name": "平塚新港（ひらつかタマ三郎漁港）",
@@ -649,6 +673,16 @@
    ],
    "secondaryUrls": []
   },
+  "kasaoka-shiraishijima-port": {
+   "name": "笠岡市白石島漁港",
+   "pref": "岡山県",
+   "verdict": "official_partial",
+   "summary": "岡山海区漁業調整委員会指示（2021年）で、白石島北東端や弁天島周辺を含む笠岡地区海洋牧場海域では水産動植物の採捕（釣り含む）が禁止。漁港内全体の禁止ではない。",
+   "officialUrls": [
+    "https://www.pref.okayama.jp/uploaded/attachment/260893.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "katsuura-kou-tsukiji": {
    "name": "勝浦港・築地",
    "pref": "和歌山県",
@@ -688,6 +722,17 @@
    "officialUrls": [],
    "secondaryUrls": [
     "https://kankou-kushimoto.jp/wp-content/uploads/2023/10/3de1f30ac45330154e27f22fed1a6f6a.pdf"
+   ]
+  },
+  "kushiro-higashi-koku": {
+   "name": "釧路港東港区",
+   "pref": "北海道",
+   "verdict": "official_full",
+   "summary": "北海道新聞によれば、釧路港は釧路市の条例で港湾施設での釣り行為が禁止され、安全面から釣り目的の立入も原則禁止。振興局・市・漁業者が合同パトロールで自粛を呼びかけている（東港区も対象の港全体）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/article/1371015/",
+    "https://www.hokkaido-np.co.jp/article/1369395/"
    ]
   },
   "kushiro-nishi-ko": {
@@ -731,6 +776,16 @@
    "officialUrls": [],
    "secondaryUrls": [
     "https://crexgroup.com/ja/aga/self-care/mashike-port-fishing-ban-area/"
+   ]
+  },
+  "matsubu-gyokou": {
+   "name": "松部漁港",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（ツリハック）で、松部港は人気釣り場だが南側の堤防は立入禁止と紹介されている。公式の告知は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/653"
    ]
   },
   "matsuzaki-gyokou": {
@@ -1074,6 +1129,17 @@
     "https://tsurihack.com/1120/2",
     "https://tsurihack.com/1120"
    ]
+  },
+  "okayama-shinko": {
+   "name": "岡山市岡山港（新岡山港）",
+   "pref": "岡山県",
+   "verdict": "official_partial",
+   "summary": "岡山県は岡山港を含む県管理港の公共埠頭（外航船岸壁・野積場等）をSOLAS制限区域とし、遊漁目的の立入不可と案内。新岡山港内の具体的範囲は未確認。",
+   "officialUrls": [
+    "https://www.pref.okayama.jp/page/detail-43514.html",
+    "https://www.pref.okayama.jp/page/detail-2855.html"
+   ],
+   "secondaryUrls": []
   },
   "okinawa-itoman-port-bulk": {
    "name": "糸満漁港（西崎町）",
@@ -1611,6 +1677,28 @@
    ],
    "secondaryUrls": []
   },
+  "takehara-tadanoumi-port": {
+   "name": "竹原市忠海港",
+   "pref": "広島県",
+   "verdict": "official_partial",
+   "summary": "広島海区漁業調整委員会指示で、忠海港の防波堤突端と陸岸・防波堤で囲まれた海域が陸岸・防波堤からのまきえ釣り禁止区域とされている（2007〜2011年の指示書で確認、最新版は未確認）。釣り自体の全面禁止ではない。",
+   "officialUrls": [
+    "https://www.pref.hiroshima.lg.jp/soumu/soumu/kenpo/pdf22/09gatsu/077/20100930350001.pdf",
+    "https://www.pref.hiroshima.lg.jp/soumu/soumu/kenpo/pdf23/09gatsu/076/20110922350001.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "takonohana-shimane-w6": {
+   "name": "多古鼻",
+   "pref": "島根県",
+   "verdict": "official_partial",
+   "summary": "島根県の漁場計画で松江市島根町多古・多古鼻地先に定置漁業の漁場があり、県は定置網周辺の保護区域（本土側は漁具から200m以内目安）での釣りを禁止している。",
+   "officialUrls": [
+    "https://www.pref.shimane.lg.jp/industry/suisan/kanri/iji/awabi_sazae.data/HP_teichiami-hogokuiki.pdf",
+    "https://www.pref.shimane.lg.jp/industry/suisan/kanri/iji/20030901gyojyoukeikaku.data/shimanekaikukeikaku20230901.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "teradomari-kou-niigata": {
    "name": "寺泊港",
    "pref": "新潟県",
@@ -1729,6 +1817,16 @@
    "officialUrls": [
     "https://www.thr.mlit.go.jp/Sendai/jimusyo/syu/kaigan/info/pdf/vol.123.pdf",
     "https://www.thr.mlit.go.jp/Sendai/jimusyo/syu/kaigan/info/pdf/vol.121.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "yamamoto-isohama-port-a13": {
+   "name": "山元町磯浜漁港堤防",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "国交省仙台河川国道事務所の案内で、山元海岸の坂元川南側から磯浜漁港までの区域が工事のため堤防から海側を当面立入禁止とされている（発行年不明・現在も有効か未確認）。漁港内の釣り禁止記述はなし。",
+   "officialUrls": [
+    "https://www.thr.mlit.go.jp/Sendai/jimusyo/syu/kaigan/info/pdf/vol.123.pdf"
    ],
    "secondaryUrls": []
   },
