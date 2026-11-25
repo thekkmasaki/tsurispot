@@ -15,7 +15,7 @@ import { execFileSync } from "child_process";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { readLedger, appendLedger, getToken, discord, uploadPublic, removePublic } from "./lib.mjs";
+import { readLedger, appendLedger, getToken, discord, uploadPublic, removePublic, redis, APPROVED_KEY } from "./lib.mjs";
 import { postInstagramReel, postThreadsImage, postXVideo, xConfigured } from "./platforms.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -49,12 +49,43 @@ if (!dryRun) {
   }
 }
 
+// 1.5) 週次の事前チェック（PRECHECK.md）の承認を読む。
+// 承認があれば、そのお題と除外スポットで作る。承認の無い枠は投稿しない（SNS_REQUIRE_APPROVAL=false で従来どおり自動選定）。
+// 手動で --pref/--fish を指定した実行は人が判断したものとして承認不要。dry-run も承認不要（プレビューだけなので）。
+const manual = !!(arg("pref") || arg("fish"));
+let approval = null;
+if (!manual) {
+  try { approval = JSON.parse((await redis(["HGET", APPROVED_KEY, `${date}-${slot}`])) ?? "null"); }
+  catch (e) { console.warn("承認の読込失敗:", e.message); }
+}
+if (approval?.skip && !dryRun) {
+  console.log(`${date} ${slot} は事前チェックで「投稿しない」と判断済み: ${approval.note}`);
+  await discord(`⏭️ **SNSランキング** ${date} ${slot} は事前チェックで投稿しないと判断済みのためスキップ（${approval.note || "理由なし"}）`);
+  process.exit(0);
+}
+// 承認データが1件も無い間（事前チェックの導入前）は従来どおり自動選定で投稿する
+const precheckActive = !approval && !manual && !dryRun && process.env.SNS_REQUIRE_APPROVAL !== "false"
+  ? Number((await redis(["HLEN", APPROVED_KEY]).catch(() => 0)) ?? 0) > 0
+  : false;
+if (precheckActive) {
+  console.log(`${date} ${slot} は事前チェックの承認が無いため投稿しない`);
+  // 予備の毎時起動で何度も通知しないよう、1枠1回だけ知らせる
+  const first = await redis(["SET", `sns:ranking:noapproval:${date}-${slot}`, "1", "NX", "EX", "172800"]).catch(() => "OK");
+  if (first === "OK") await discord(`⚠️ **SNSランキング** ${date} ${slot} は事前チェックの承認が無いため投稿しませんでした。週次の事前チェック（scripts/sns/ranking-reel/PRECHECK.md）が動いたか確認してください。`);
+  process.exit(0);
+}
+
 // 2) お題選定（サイトと同じデータ・同じ掲載基準）
 const selArgs = ["--yes", "tsx@4.23.15", path.join(here, "select-topic.ts"), "--date", date,
   "--exclude", exclude.join(","), "--recent-fish", recentFish.join(","), "--recent-pref", recentPref.join(","),
   // 冬など月ごとの重点お題を均等に回すための使用履歴（新しい順）
   "--history", ledger.slice(0, 30).map((e) => e.fish).join(",")];
 for (const k of ["pref", "fish", "month"]) if (arg(k)) selArgs.push(`--${k}`, arg(k));
+if (approval && !approval.skip) {
+  selArgs.push("--pref", approval.pref, "--fish", approval.fish);
+  if (approval.excludeSpots?.length) selArgs.push("--exclude-spots", approval.excludeSpots.join(","));
+  console.log(`事前チェック承認済み: ${approval.pref}×${approval.fish}（除外 ${approval.excludeSpots?.length ?? 0} 件）`);
+}
 const topicPath = path.join(outDir, "topic.json");
 fs.writeFileSync(topicPath, execFileSync("npx", selArgs, { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] }));
 const topic = JSON.parse(fs.readFileSync(topicPath, "utf8"));

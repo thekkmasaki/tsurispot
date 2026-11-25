@@ -1,0 +1,2786 @@
+{
+ "_comment": "2026-11 SNSリール掲載候補スポットの釣り禁止 個別調査（WebSearchのみ・1件ずつ）。verdict が lifted 以外は select-topic.ts でリールから除外する。サイト表示には影響しない（公式根拠のあるものは別途 spot-ban-overrides.ts に反映）。",
+ "entries": {
+  "aburatsubo6": {
+   "name": "油壷",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "油壺の荒井浜海水浴場では遊泳期間中（7月中旬〜8月末）の禁止事項に釣りが含まれるとの掲載（ウォーカープラス）。磯全体の禁止記述はない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0314s12824/data.html"
+   ]
+  },
+  "ajigasawa-akaishigawa-river-a12": {
+   "name": "鰺ヶ沢町赤石川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県西部海区の資料に、赤石川など河口付近で9/20〜12/20に竿釣り・手釣りを含む採捕制限の記載（サケ保護）。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kaiku/files/wsake.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "akashi-nakasaki-beranda": {
+   "name": "明石市役所裏ベランダ（中崎展望広場）",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "国交省姫路河川国道事務所が護岸の空洞発見を受け、2024年11月12日から「大蔵海岸公園西側（明石市中崎町1）」の岸壁を立入制限。2025年4月にケーソン部は解除、コンクリート床版部は制限継続、2025年10月時点でも点検・対策検討中。",
+   "officialUrls": [
+    "https://www-2.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001fz6-att/cekddo0000002p7t.pdf",
+    "https://www.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001gws-att/cekddo0000001wxv.pdf",
+    "https://www.kkr.mlit.go.jp/himeji/kisya/2025/rirsjh00000069ov-att/20250423kisyahappyou.pdf",
+    "https://www.kkr.mlit.go.jp/himeji/kisya/2025/rirsjh00000095b2-att/251020_kisyahappyou.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1351/2"
+   ]
+  },
+  "akashi-okura-coast": {
+   "name": "明石大蔵海岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "国交省姫路河川国道事務所が2024年11月12日から、大蔵海水浴場・大蔵海岸公園の東西岸壁など東播海岸の海岸保全施設への立入を点検完了まで制限（砂浜は対象外）。現在も継続かは未確認。",
+   "officialUrls": [
+    "https://www-2.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001fz6-att/cekddo0000002p7t.pdf",
+    "https://www.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001gws-att/cekddo0000001wxv.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1351"
+   ]
+  },
+  "akatsuki-futo-park": {
+   "name": "暁ふ頭公園",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトによると、管理する東京港埠頭株式会社のルールで投げ釣りとルアー（ハゼのルアー釣り）が禁止、フェンス外は立入禁止。釣り自体は東京都港湾局の海上公園案内でも可能とされている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1160",
+    "https://tsurihack.com/1160/2"
+   ]
+  },
+  "akita-gaikou-bouhatei-e8": {
+   "name": "秋田港外港防波堤",
+   "pref": "秋田県",
+   "verdict": "lifted",
+   "summary": "秋田港外港地区北防波堤は昭和40年代の転落事故以降立入禁止だったが、2020年8月から有料釣り開放事業として土日祝中心に開放（国交省秋田港湾事務所）。他の防波堤の扱いは未確認。",
+   "officialUrls": [
+    "https://www.pa.thr.mlit.go.jp/akita/090/210701_01.pdf",
+    "https://www.mlit.go.jp/report/press/content/001355963.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "akita-north-breakwater-a13": {
+   "name": "秋田港北堤防",
+   "pref": "秋田県",
+   "verdict": "lifted",
+   "summary": "秋田港北防波堤は昭和40年代の転落事故以降、柵を設けて立入禁止だったが、2020年8月から国交省・秋田港有効利活用協会による有料釣り開放（主に4〜11月の土日祝、時間限定、監視員常駐）が行われている。開放日以外は立入不可とみられる。",
+   "officialUrls": [
+    "https://www.pa.thr.mlit.go.jp/akita/090/210701_01.pdf",
+    "https://www.pa.thr.mlit.go.jp/akita/100/CONT000000000000006267.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "akita-omono-right-a13": {
+   "name": "秋田市雄物川河口右岸",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、雄物川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "akita-port": {
+   "name": "秋田港",
+   "pref": "秋田県",
+   "verdict": "lifted",
+   "summary": "秋田港外港地区の北防波堤は昭和40年代から立入禁止だったが、国交省資料によると2020年8月から土日祝に有料（大人1回1,000円）で釣り開放され、2020年度から本格開放とされている。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/common/001225663.pdf",
+    "https://www.pa.thr.mlit.go.jp/akita/100/CONT000000000000006267.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "akita-tsuchizaki-wharf-a12": {
+   "name": "秋田港土崎港湾",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田港湾事務所（国交省）の資料で、秋田港外港地区の北防波堤は昭和40年代の転落事故以来柵で立入禁止とされ、令和2年度から土日祝の有料釣り開放事業として限定的に開放されている。",
+   "officialUrls": [
+    "https://www.pa.thr.mlit.go.jp/akita/090/210701_01.pdf",
+    "https://www.pa.thr.mlit.go.jp/akita/100/CONT000000000000006267.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "amanohashidate-asokai": {
+   "name": "天橋立阿蘇海",
+   "pref": "京都府",
+   "verdict": "secondary_full",
+   "summary": "シマノの釣行記（2026年5月）に『天橋立は基本的に釣りOKだが、裏側の阿蘇海のみ釣り禁止』と記載。京都府の海面利用ルール等の公式資料では釣り禁止は確認できず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://fish.shimano.com/ja-JP/content/fishingstyle/article/nagetsuri_world/2026/260507/index.html"
+   ]
+  },
+  "amanohashidate-k8": {
+   "name": "天橋立",
+   "pref": "京都府",
+   "verdict": "secondary_partial",
+   "summary": "シマノの釣行記事（2026年5月）で、天橋立は基本的に釣りOKだが裏側の阿蘇海側のみ釣り禁止と注意されている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://fish.shimano.com/ja-JP/content/fishingstyle/article/nagetsuri_world/2026/260507/index.html"
+   ]
+  },
+  "amanohashidate-monju-a11": {
+   "name": "天橋立文珠側護岸",
+   "pref": "京都府",
+   "verdict": "secondary_partial",
+   "summary": "シマノの釣行記事で、天橋立は基本的に釣りOKだが裏側の阿蘇海のみ釣り禁止と紹介されている。公式の禁止告示は見つからなかった。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://fish.shimano.com/ja-JP/content/fishingstyle/article/nagetsuri_world/2026/260507/index.html"
+   ]
+  },
+  "amanohashidate-nishi-gogan-a9": {
+   "name": "天橋立西側護岸",
+   "pref": "京都府",
+   "verdict": "secondary_full",
+   "summary": "シマノの釣行記（2026年）に「天橋立は基本釣りOKだが、裏側の阿蘇海のみ釣り禁止」と書かれている。天橋立の西側は阿蘇海側にあたるため、このスポット（西側護岸）が該当する可能性が高い。公式の禁止根拠は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://fish.shimano.com/ja-JP/content/fishingstyle/article/nagetsuri_world/2026/260507/index.html"
+   ]
+  },
+  "aomori-chuo-futo-e8": {
+   "name": "青森港中央ふ頭",
+   "pref": "青森県",
+   "verdict": "official_full",
+   "summary": "青森港管理所（青森県）のFAQで、高潮等の危険があるとして港での釣りを禁止し、岸壁は関係者以外立入禁止としている。釣り開放されているのは浜町緑地・北防波堤のみで、中央ふ頭は含まれない。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+    "https://www.mlit.go.jp/kowan/content/001361025.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "aomori-kita-breakwater": {
+   "name": "青森港北防波堤",
+   "pref": "青森県",
+   "verdict": "official_full",
+   "summary": "青森県青森港管理所のFAQで、青森港では高潮等の危険があるため釣りを禁止し、防波堤は関係者以外の出入りを制限と明記。北防波堤は「釣り文化振興モデル港」の限定開放対象だったが、R2以降は浜町緑地のみ／中止と国交省資料にある。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+    "https://www.mlit.go.jp/kowan/content/001361025.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "aomori-okidate-futo": {
+   "name": "青森港沖館ふ頭",
+   "pref": "青森県",
+   "verdict": "official_full",
+   "summary": "青森県青森港管理所が港湾施設での釣りを禁止しており、沖館ふ頭の岸壁は国際埠頭として関係者以外立入制限区域。釣りの限定開放は浜町緑地・北防波堤のみで沖館ふ頭は対象外。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+    "https://www.mlit.go.jp/kowan/content/001361025.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "aomori-port": {
+   "name": "青森港",
+   "pref": "青森県",
+   "verdict": "official_full",
+   "summary": "青森県青森港管理所のFAQで、高潮等の危険から港湾での「釣り」を禁止し、港湾施設は原則関係者以外立入禁止としている。国際埠頭3か所は保安上の立入制限区域。一方、2019年に釣り文化振興モデル港に指定され浜町緑地などで限定開放が行われている。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+    "https://www.pa.thr.mlit.go.jp/aomori/160/R1/20190518.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "aomori-tsutsumigawa-kakou6": {
+   "name": "青森港堤川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森港管理所（青森県）のFAQで、青森港の港湾施設では高潮等の危険から釣りを禁止しており、岸壁・物揚場・防波堤も関係者以外立入禁止としている。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html"
+   ],
+   "secondaryUrls": []
+  },
+  "arakawa-kakou-kasai": {
+   "name": "荒川河口（葛西臨海公園付近）",
+   "pref": "東京都",
+   "verdict": "official_partial",
+   "summary": "東京都港湾局の案内で、隣接する葛西海浜公園の砂浜と葛西渚橋では釣り不可、東なぎさは立入禁止。荒川河口側の護岸自体の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.kouwan.metro.tokyo.lg.jp/documents/d/kouwan/27276_kasaikaihinkouen"
+   ],
+   "secondaryUrls": []
+  },
+  "ashiya-gyoko-teibo-fukuoka": {
+   "name": "芦屋漁港堤防",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "芦屋港は東防波堤を海釣施設として開放（管理者:福岡県、2019年指定）しており、芦屋町の利用ルールで利用エリア以外での釣りと立入禁止区域への立入が禁止されている。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/kowan/content/001361690.pdf",
+    "https://www.town.ashiya.lg.jp/uploaded/attachment/8170.pdf",
+    "https://www.town.ashiya.lg.jp/uploaded/attachment/7691.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ashiya-gyokou-fukuoka-w6": {
+   "name": "芦屋漁港",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "芦屋町の芦屋港活性化資料に、港内は『釣り禁止』が一般的な対応で一部釣り客が禁止区域に無断侵入している、漁協から船揚場にフェンスを設置して釣り人の区域を明確にしてほしいとの意見がある、と記載。一方、県営芦屋港の新設波除堤に無料の魚釣施設が2026年11月22日供用開始予定（福岡県）。",
+   "officialUrls": [
+    "https://www.town.ashiya.lg.jp/uploaded/attachment/8170.pdf",
+    "https://www.pref.fukuoka.lg.jp/contents/ashiyaboatpark.html",
+    "https://www.pref.fukuoka.lg.jp/uploaded/attachment/301160.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ashiya-kou-fukuoka": {
+   "name": "芦屋港",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "芦屋町の計画資料で、従来の釣り場だった芦屋港東防波堤はボートパークの動線となり使用できなくなるとされ、代わりに新設波除堤に魚釣施設を設ける（福岡県発表で2026年11月22日開設予定、無料）。",
+   "officialUrls": [
+    "https://www.town.ashiya.lg.jp/uploaded/attachment/9564.pdf",
+    "https://www.pref.fukuoka.lg.jp/contents/ashiyaboatpark.html"
+   ],
+   "secondaryUrls": []
+  },
+  "ashiyahama-k8": {
+   "name": "芦屋浜",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "芦屋市・兵庫県・地元自治会の協議で、南芦屋浜南護岸付近は2023年8月から釣りができるエリアとできないエリアに区分（開放は8〜20時）。2024年7月に南護岸の全面禁止要望が出され、県・市は8月からの禁止を決めたが一旦延期（芦屋市議会資料）。",
+   "officialUrls": [
+    "https://www.city.ashiya.lg.jp/gairoju/documents/minamigoganeria.pdf",
+    "https://www.city.ashiya.lg.jp/shigi/documents/060903_minamiasiyahama.pdf",
+    "https://web.pref.hyogo.lg.jp/org/amagasakikokanri/documents/keii.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1156"
+   ]
+  },
+  "azure-maiko": {
+   "name": "アジュール舞子",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "国交省姫路河川国道事務所が2024年11月、垂水区海岸通12地先（アジュール舞子東側・西側）の海岸保全施設で空洞が見つかったため、安全確認まで立入を制限すると発表。",
+   "officialUrls": [
+    "https://www.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001h6o-att/cekddo0000001vi2.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1089"
+   ]
+  },
+  "danjo-gunto": {
+   "name": "男女群島",
+   "pref": "長崎県",
+   "verdict": "official_full",
+   "summary": "男女群島は群島全体が国の天然記念物で、許可なく上陸できない（環境省資料・日本野鳥の会）。国指定鳥獣保護区の特別保護地区（2013〜2033年）でもあり、女島には立入禁止看板がある。",
+   "officialUrls": [
+    "https://www.env.go.jp/houdou/gazou/17001/03/2.pdf",
+    "https://www.rinya.maff.go.jp/kyusyu/keikaku/hogorin/shinrin_seibutsu/dannjyogunntou.html"
+   ],
+   "secondaryUrls": [
+    "https://mobile.wbsj.org/nature/hogo/others/iba/search/sites/kyusyu/imgs/JP143.pdf"
+   ]
+  },
+  "enoshima6": {
+   "name": "江の島",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（釣りハック）に、江の島の湘南港（湘南大堤防側）でヨットハーバー内は釣り禁止との記載。稚児ヶ淵の磯は荒天・高波時に立入禁止になるとの観光サイト情報もある。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1162/2",
+    "https://www.minnacamera.com/spots/1072"
+   ]
+  },
+  "fujikawa-kakou": {
+   "name": "富士川河口",
+   "pref": "静岡県",
+   "verdict": "official_partial",
+   "summary": "富士市の「富士川で釣りをする皆様へ」で、東海道本線鉄橋上流端から富士川河口までの区域は毎年10月11日〜11月15日に全魚種の採捕禁止（静岡県規則、罰則あり）。",
+   "officialUrls": [
+    "https://www.city.fuji.shizuoka.jp/documents/4652/fujikawadeturiwosuruminasamahe.pdf",
+    "https://www.city.fuji.shizuoka.jp/documents/4652/fmervo0000009bmr.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "fureyu-ura-gogan": {
+   "name": "ふれーゆ裏護岸",
+   "pref": "神奈川県",
+   "verdict": "official_partial",
+   "summary": "横浜市港湾局の末広水際線プロムナード（ふれーゆ裏）の禁止行為に、振りかぶる投げ釣り（周囲に危険を及ぼす釣り方）が挙げられている。釣り自体は可で下投げは可とする釣りサイトあり。",
+   "officialUrls": [
+    "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/promenade/suehiro.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/2098"
+   ]
+  },
+  "hachinohe-niida-river-a13": {
+   "name": "八戸港沖堤防（新井田川河口）",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県東部海区漁業調整委員会指示（サケ繁殖保護）で、新井田川・馬淵川の河口付近（八太郎北防波堤突端〜白銀北防波堤東端〜蕪島の線と両河口に囲まれた区域）では毎年10月1日〜12月31日のさお釣り・手釣りが禁止。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp:443/soshiki/kaiku/files/esake.pdf",
+    "https://www.pref.aomori.lg.jp/soshiki/kaiku/r8-kaiku-iinnkaisiji00.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hachinohe-niidagawa-kakou": {
+   "name": "八戸新井田川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県東部海区の指示（サケ関係）で、新井田川河口付近は10月1日〜12月31日に竿釣り・手釣りを含む操業が制限される。八戸港の白銀町・湊町・新湊等の地先は遊漁のまき餌釣り禁止区域。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp:443/soshiki/kaiku/files/esake.pdf",
+    "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/suisan_yugyo_makie.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hachinohe-shirogane-breakwater-a10": {
+   "name": "八戸港白銀堤防",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県東部海区漁業調整委員会指示（サケ繁殖保護）で、八太郎北防波堤突端〜白銀北防波堤東端〜蕪島の線と新井田川・馬淵川河口に囲まれた区域では毎年10月1日〜12月31日のさお釣り・手釣りが禁止。白銀北防波堤が区域の境界。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp:443/soshiki/kaiku/files/esake.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "hamada-port": {
+   "name": "浜田港",
+   "pref": "島根県",
+   "verdict": "official_partial",
+   "summary": "島根県の公式ページによると、浜田港の福井地区1・3・4号岸壁と長浜地区1・2号岸壁はSOLAS条約に基づく立入制限区域でフェンス・ゲートで管理され、立入禁止の看板がある。釣り禁止の明記はないが、該当岸壁には入れない。",
+   "officialUrls": [
+    "https://www.pref.shimane.lg.jp/infra/port/kikan/hamadakou/solas.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hamasaka-higashi-bouhatei": {
+   "name": "浜坂漁港東防波堤",
+   "pref": "兵庫県",
+   "verdict": "secondary_partial",
+   "summary": "ダイワの釣り場マップで、浜坂漁港東防波堤（全長672m）は釣り施設として整備されているが先端部は立入禁止とされる（釣り可能は約570m）。",
+   "officialUrls": [
+    "https://web.pref.hyogo.lg.jp/nk16/gyokousyoukai/hamasaka.html"
+   ],
+   "secondaryUrls": [
+    "https://www.daiwa.com/jp/partner/fishingmap/fishingfacility/list/wakasukaihinkoen_2",
+    "https://tsurihack.com/1237/2"
+   ]
+  },
+  "haneda-tamagawa-kakou-a13": {
+   "name": "羽田空港周辺・多摩川河口",
+   "pref": "東京都",
+   "verdict": "official_partial",
+   "summary": "大田区の案内で河川敷の表示された立入禁止区域への立入禁止、羽田空港周辺海域は空港管理規則の制限区域（京浜河川事務所）。本羽田のヨシ原に進入防止柵。",
+   "officialUrls": [
+    "https://www.city.ota.tokyo.jp/seikatsu/sumaimachinami/haneda_airport/hgw/waterside/takashioteibou.html",
+    "https://www.ktr.mlit.go.jp/ktr_content/content/000654711.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "harakama-obama-gyokou6": {
+   "name": "原釜尾浜漁港",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が相馬港・松川浦漁港（原釜地区を含む）の立入禁止区域と釣りマップを公開し、2020年に釣り禁止区域の周知看板を設置している。具体的な区域（どの防波堤か）は検索結果では未確認。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hasaki-gyokou6": {
+   "name": "波崎漁港",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県（港湾課）が、鹿島港と波崎漁港では立入禁止の防波堤に入った釣り人の転落事故が続いているとして、立入禁止区域への侵入をしないよう呼びかけている。防波堤など一部区域が立入禁止。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hasaki-shinkou": {
+   "name": "波崎新港",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県港湾課の公式ページが「鹿島港及び波崎漁港では立入禁止の防波堤等へ進入した釣り人の転落事故が後を絶たない」と明記し、防波堤等への立入りをしないよう呼びかけている。波崎漁港の防波堤は立入禁止区域。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hatsushima-breakwater": {
+   "name": "初島堤防",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、初島南側のフィッシャリーナ周辺は禁漁区になっていると注意喚起されている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/908/2"
+   ]
+  },
+  "hatsushima-kou": {
+   "name": "初島港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りハックに、初島の島の南側・フィッシャリーナ周辺は禁漁区間との記載（初島港自体ではメジナ狙いのカゴ・フカセ釣りが行われている）。静岡県の推奨ルールで初島海域のまき餌・集魚灯（共第2号共同漁業権漁場内の遊漁）にもルールあり。",
+   "officialUrls": [
+    "https://www.pref.shizuoka.jp/sangyoshigoto/suisan/suisanshigen/1047550/1028117.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/738"
+   ]
+  },
+  "heda-gyokou": {
+   "name": "戸田漁港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（tsurihack）の戸田港記事に「釣り禁止エリア」の見出しがあり、港内に立入禁止・釣り禁止の場所があると注意している。具体的な範囲は検索結果では読めず、公式情報は見つからなかった。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/2741",
+    "https://tsurihack.com/2741/2"
+   ]
+  },
+  "heda-ko-teibo": {
+   "name": "戸田港堤防",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "TSURI HACKの記事で、戸田港は漁協前から製氷所前までの堤防が釣り禁止エリアとされ、工事・作業で一時的に釣りができない場所もあるとされている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/2741",
+    "https://tsurihack.com/2741/2"
+   ]
+  },
+  "hekinan-fishing-park": {
+   "name": "碧南海釣り広場",
+   "pref": "愛知県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（2022年記事）に、碧南海釣り広場周辺には立入禁止や釣り禁止の場所もあるので現地ルールに従うよう記載がある（広場全体の閉鎖情報はなし）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/3196"
+   ]
+  },
+  "hiagari-kou-s8": {
+   "name": "小倉北区日明港",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "北九州市港湾空港局は、岸壁・防波堤等の港湾施設での釣りを日明海峡海釣り公園など一部施設を除き禁止していると回答している。日明港も同市管理の港湾施設のため、釣り公園以外の岸壁は対象となる可能性が高い。",
+   "officialUrls": [
+    "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "hiburijima-kiro-a11": {
+   "name": "日振島・喜路港",
+   "pref": "愛媛県",
+   "verdict": "official_partial",
+   "summary": "愛媛県の資料で、愛媛海区漁業調整委員会指示により陸からのまき餌釣りが禁止される区域の図に日振島が含まれる（具体的な磯の範囲は未確認）。登録のフカセ釣り（まき餌使用）に影響する可能性。",
+   "officialUrls": [
+    "https://www.pref.ehime.jp/uploaded/attachment/11329.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "himi-gyokou-toyama": {
+   "name": "氷見漁港",
+   "pref": "富山県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報記事で、氷見漁港には立ち入り禁止の場所が設けられているので入らないよう注意喚起されている（具体的な範囲は不明）。公式情報は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.excite.co.jp/news/article/FishingJapan_009159/"
+   ]
+  },
+  "hinogawa-kakou-w7": {
+   "name": "日野川河口",
+   "pref": "鳥取県",
+   "verdict": "official_partial",
+   "summary": "鳥取県漁業調整規則第41条により、日野川河口付近は3/1〜5/31の間、水産動植物の採捕禁止（アユ遡上保護）。川尻の禁止区域（河口両岸から各100m・沖合80mの海域）も設定（鳥取県）。",
+   "officialUrls": [
+    "https://www.pref.tottori.lg.jp/305500.htm"
+   ],
+   "secondaryUrls": []
+  },
+  "hinomisaki-kou-c8": {
+   "name": "日御碕港",
+   "pref": "島根県",
+   "verdict": "official_partial",
+   "summary": "日御碕港の目の前の経島（ふみしま）は日御碕神社の神域でウミネコ繁殖地として国の天然記念物に指定され、一般の立入りは認められていない（島根県・国交省資料）。港や周辺の磯自体の釣り禁止記述はない。",
+   "officialUrls": [
+    "https://www.pref.shimane.lg.jp/industry/suisan/gyokou/shiryo/02fumishima.html",
+    "https://www.mlit.go.jp/tagengo-db/en/R1-02635.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hiratsuka-shinko": {
+   "name": "平塚新港（ひらつかタマ三郎漁港）",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "神奈川新聞（2016年）によると、平塚市が平塚新港の防波堤・桟橋に夜間立入禁止区域を設け、午後5時に門扉を閉鎖。侵入した釣り人が軽犯罪法違反容疑で多数書類送検された。昼間（8:30〜17:00）は一部を除き立入可。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.kanaloco.jp/news/social/entry-70807.html"
+   ]
+  },
+  "hiratsuka-shinko6": {
+   "name": "平塚新港",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "平塚市が門扉を設けた禁止区域（3カ所）を午後5時以降閉鎖し夜間立入不可、禁止区域への侵入で書類送検もあったと神奈川新聞（2016年）が報道。日中は防波堤・桟橋の一部を除き利用可。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.kanaloco.jp/news/social/entry-70807.html"
+   ]
+  },
+  "hiroshima-kannon-marina": {
+   "name": "広島観音マリーナ",
+   "pref": "広島県",
+   "verdict": "official_partial",
+   "summary": "広島県の公式ページで、観音マリーナ海浜公園での魚釣りは禁止、マリーナ側・手前のNo.1浮防波堤での釣りも禁止とされ、釣りは観音東防波堤（開放日・時間限定、投げ釣り・撒き餌・だんご釣り禁止）のみ可。",
+   "officialUrls": [
+    "https://www.pref.hiroshima.lg.jp/soshiki/221/park-park03.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hiroshima-kannon-marina-gokan": {
+   "name": "広島観音マリーナ護岸",
+   "pref": "広島県",
+   "verdict": "official_full",
+   "summary": "広島県の公式ページで「観音マリーナ海浜公園での魚釣りは禁止」と明記。代わりに観音東防波堤が期間・時間限定で一般開放され、そこでもマリーナ側での釣り・投げ釣り・撒き餌釣り・No.1浮防波堤での釣りは不可。",
+   "officialUrls": [
+    "https://www.pref.hiroshima.lg.jp/soshiki/221/park-park03.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hitachinaka-kou": {
+   "name": "常陸那珂港",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県の資料で、常陸那珂港区の国際港湾施設の岸壁とその前面水域は県港湾施設管理条例により正当な目的のない立入りが禁止（フェンス・センサー等で出入管理）。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hitachinaka-minami-bohatei-a12": {
+   "name": "常陸那珂港区南防波堤",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県の港湾ページで、常陸那珂港区の国際港湾施設は県港湾施設管理条例により正当な目的のない立入が禁止とされる。南防波堤そのものの釣り可否は明記なし。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html",
+    "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hitotsuba-kaigan-w6": {
+   "name": "宮崎・一ツ葉海岸",
+   "pref": "宮崎県",
+   "verdict": "official_partial",
+   "summary": "国交省宮崎河川国道事務所が2024年4月、宮崎海岸の突堤と養浜箇所を転倒事故の恐れから立入禁止にしている（一ツ葉PA付近に杭・ロープで区域表示）。砂浜全体の釣り禁止ではない。",
+   "officialUrls": [
+    "https://www.qsr.mlit.go.jp/miyazaki/newstopics_files/20240426/r6annzennriyou.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "hiyoriyama-kaigan-k8": {
+   "name": "日和山海岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "日和山海岸がある豊岡市瀬戸地先は山陰海岸国立公園の豊岡海域公園地区（海中公園）で、環境省が全域を動植物の採捕規制区域とし約10haの拡張案を示している（規制対象は指定17種）。",
+   "officialUrls": [
+    "https://www.env.go.jp/press/files/jp/23853.pdf",
+    "https://www.env.go.jp/park/content/000305055.pdf"
+   ],
+   "secondaryUrls": [
+    "https://www.yukoyuko.net/onsen/spot/s0000564"
+   ]
+  },
+  "hizen-kariya-wan-w6": {
+   "name": "肥前町・仮屋湾",
+   "pref": "佐賀県",
+   "verdict": "official_partial",
+   "summary": "佐賀県の資料で、松浦海区漁業調整委員会指示により仮屋湾内の三島神社前周辺岸壁がまき餌釣り禁止区域に指定されていた（期間は平成28年2月〜平成31年2月）。",
+   "officialUrls": [
+    "https://www.pref.saga.lg.jp/kiji00345316/3_45316_1_2016216133840.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ibaraki-kou-hitachinaka-a10": {
+   "name": "茨城港常陸那珂区",
+   "pref": "茨城県",
+   "verdict": "official_full",
+   "summary": "茨城県（茨城港湾事務所）によると、茨城港（大洗・常陸那珂・日立港区）の港区内の岸壁・防波堤での魚釣りは県港湾施設管理条例第4条7項により禁止。常陸那珂港区の国際港湾施設と前面水域は正当目的のない立入も禁止とされている。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/ibako/okoku/index.html",
+    "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html"
+   ],
+   "secondaryUrls": []
+  },
+  "ikuho-gyoko": {
+   "name": "生穂漁港",
+   "pref": "兵庫県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報ブログ（Jackery）が、隣接する生穂新島の堤防のうち津名港側の突堤は夜間立入禁止と紹介。公式情報は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.jackery.jp/blogs/fishing/awajishima-fishing-spots"
+   ]
+  },
+  "imabetsu-gyokou6": {
+   "name": "今別漁港",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県の海区漁業調整委員会指示で、今別町今別地先・浜名地先などの一部区域で遊漁のまき餌釣りが禁止（釣り全体の禁止ではない）。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/suisan_yugyo_makie.html"
+   ],
+   "secondaryUrls": []
+  },
+  "imizu-kairyu-marine-toyama": {
+   "name": "射水・海竜マリンパーク",
+   "pref": "富山県",
+   "verdict": "official_partial",
+   "summary": "富山県の資料（2025年版）で富山新港で釣りができるのは南水路緑地・東水路先端緑地・開港記念碑緑地広場・東港口護岸・西波除堤の5か所のみとされ、それ以外に釣り禁止区域・ソーラス区域が設定されている。海竜マリンパーク（新湊マリーナ）は釣り可能5か所に含まれていない。",
+   "officialUrls": [
+    "https://www.pref.toyama.jp/documents/6155/tsuribasho2025.pdf",
+    "https://www.pref.toyama.jp/documents/6155/01202639.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ishigaki-kabira-iso": {
+   "name": "石垣島・川平湾周辺磯",
+   "pref": "沖縄県",
+   "verdict": "official_partial",
+   "summary": "川平湾内に沖縄県指定の「川平保護水面」があり、魚類・タコ類・イカ類・ヒトエグサ以外の水産動植物の採捕が禁止（沖縄県）。魚・イカの釣り自体は禁止されていない。",
+   "officialUrls": [
+    "https://www.pref.okinawa.jp/fish/kenkyu/kankobutu/ohanasi-data/201604.pdf",
+    "https://www.pref.okinawa.jp/shigoto/suisangyo/1011050/1011225.html",
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/011/225/hogosuimennituite.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ishigaki-nagura-bay": {
+   "name": "石垣島名蔵湾",
+   "pref": "沖縄県",
+   "verdict": "official_full",
+   "summary": "沖縄県は名蔵湾に「名蔵保護水面」を指定し、管理計画で全ての水産動植物の採捕を周年禁止している（標柱設置、違反は罰則あり）。釣りもできない。",
+   "officialUrls": [
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/011/225/nagura_keikaku.pdf",
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/011/225/hogosuimennituite.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "ishikari-hama-surf-a13": {
+   "name": "石狩浜海水浴場周辺サーフ",
+   "pref": "北海道",
+   "verdict": "secondary_partial",
+   "summary": "石狩浜海水浴場（あそびーち石狩）の禁止事項として「決められたエリア外での…つり」が挙げられている（Walkerplusの海水浴場情報）。海水浴期間（2026年は7/11〜8/23）中の利用に制限がある可能性。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0101s14430/data.html"
+   ]
+  },
+  "ishinomaki-ogatsu-breakwater-a12": {
+   "name": "石巻市雄勝港堤防",
+   "pref": "宮城県",
+   "verdict": "lifted",
+   "summary": "宮城県が雄勝漁港の船揚場を遊漁者の迷惑行為を理由に2024年11月7日から関係者以外使用禁止としたが、2025年2月1日に解除（再発時は告知なく再禁止とする）。堤防の釣り禁止の記述はなし。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/et-sgsin-sg/ogatsu1029.html"
+   ],
+   "secondaryUrls": []
+  },
+  "isonoura-beach-k8": {
+   "name": "磯ノ浦海水浴場",
+   "pref": "和歌山県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（るるぶ）で磯の浦海水浴場（遊泳期間6〜9月）の禁止事項に『魚釣り』が明記されている。和歌山市・管理者の公式規則は検索で見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80031968/beach"
+   ]
+  },
+  "itoigawa-port": {
+   "name": "糸魚川港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県糸魚川地域振興局地域整備部が、港湾内・漁港内は関係者以外立入禁止で港内での魚釣りも禁止と案内。侵入防止柵・看板・パトロールで周知している（姫川港は入口ゲート設置）。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/itoigawa_seibi/1356783520787.html",
+    "https://www.pref.niigata.lg.jp/sec/itoigawa_seibi/1193069759055.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwafune-port-murakami": {
+   "name": "岩船港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県村上地域整備部の岩船港関連ページで「港内及び漁港内での魚釣りは立入禁止」とされている（検索結果の要約による。原文の確認は未了）。県の漁港方針としても防波堤は立入禁止。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/murakami_seibi/12003300503571.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-misaki-port-a11": {
+   "name": "いわき市三崎漁港",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の釣りマップでは、三崎地区に隣接する小名浜港で釣りができるのは2号埠頭先端部とサンマリーナ釣り桟橋の2か所だけで、港内には立入禁止・釣り禁止区域がある（福島県・国交省）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.mlit.go.jp/kowan/content/001361026.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-natsuigawa-left-a12": {
+   "name": "いわき市夏井川河口左岸",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県がコアジサシ営巣地保護のため夏井川河口の約12ha（磐城海岸県立自然公園）を毎年5/1〜8/31知事許可なしの立入禁止に指定（罰則あり）。左岸（下神谷）の釣り場が区域に含まれるかは未確認。河口半径550mの海面で9/1〜5/31サケ採捕禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/16035b/kisei-natsuigawa.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-natsuigawa-right-a13": {
+   "name": "いわき市夏井川河口右岸",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県: 夏井川河口の海浜部約12haは県立自然公園条例でコアジサシ営巣地として5/1〜8/31立入禁止。また河口中央から半径550m以内の海面は9/1〜翌5/31に水産動植物の採捕禁止（県漁業調整規則）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/16035b/kisei-natsuigawa.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-onahama-aquamarine-back-a13": {
+   "name": "いわき市小名浜港アクアマリン裏堤防",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の小名浜港釣りマップで、釣りができるのは2号埠頭先端部（アクアマリンパーク）といわきサンマリーナ釣り桟橋のみで、それ以外は釣り禁止・立入禁止区域を含む。「裏堤防」が指定区域の外なら禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/facilities-amp.html"
+   ],
+   "secondaryUrls": [
+    "https://jafmate.jp/drive/sp_20240717.html"
+   ]
+  },
+  "iwaki-onahama-uoichiba-e8": {
+   "name": "いわき小名浜魚市場前",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県の管理施設ルールで、小名浜港では釣り指定区域（2号埠頭先端部・サンマリーナ釣り桟橋）以外での釣りが禁止。魚市場前は指定区域に含まれない。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-samegawa-surf-a12": {
+   "name": "いわき市鮫川河口サーフ",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、鮫川の河口中央から半径550m以内の海面で毎年9月1日〜翌5月31日は水産動植物の採捕禁止（県水産事務所）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-shinmaiko6": {
+   "name": "いわき新舞子海岸",
+   "pref": "福島県",
+   "verdict": "secondary_partial",
+   "summary": "撮影情報サイト（みんカメ）に、5月1日〜8月31日は夏井川河口のコアジサシ営巣地が立入規制されるとの記載。新舞子浜の一部（河口部）で期間限定の立入制限。",
+   "officialUrls": [
+    "https://www.env.go.jp/nature/biodic/kaiyo-hozen/kaiiki/engan/11903.html"
+   ],
+   "secondaryUrls": [
+    "https://www.minnacamera.com/spots/539"
+   ]
+  },
+  "iwaki-sunmarina": {
+   "name": "いわきサンマリーナ",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の小名浜港釣りマップでは、小名浜港で釣りができるのは2号埠頭先端部と「いわきサンマリーナ釣り桟橋」の2か所のみ。サンマリーナは釣り桟橋（釣り指定区域）以外では釣り不可。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+    "https://www.mlit.go.jp/kowan/content/001361026.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "iwasehama-toyama": {
+   "name": "岩瀬浜",
+   "pref": "富山県",
+   "verdict": "secondary_partial",
+   "summary": "るるぶの岩瀬浜海水浴場情報で禁止事項として『テトラポットに登る』が挙げられており、テトラ上での釣りは不可と読める。浜での釣り自体の禁止記述はない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80015732/beach"
+   ]
+  },
+  "izu-nishina-gyokou-a13": {
+   "name": "伊豆・仁科漁港",
+   "pref": "静岡県",
+   "verdict": "lifted",
+   "summary": "仁科漁港の防波堤は以前は原則釣り禁止だったが、伊豆漁協仁科支所が予約制有料釣り場「海釣りGO」として2024年に開放。湾奥の船溜まりは引き続き釣り禁止（報道記事による）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ascii.jp/elem/000/004/213/4213533/"
+   ]
+  },
+  "izumozaki-gyoko": {
+   "name": "出雲崎漁港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は県営漁港の防波堤（離岸堤・沖防波堤含む）を立入禁止としており、出雲崎漁港では離岸堤の一部のみを釣り場として開放（4/1〜11/30、日の出〜日没、出雲崎町が管理）。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/1356904273863.html"
+   ],
+   "secondaryUrls": []
+  },
+  "izumozaki-kou-niigata": {
+   "name": "出雲崎港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は防波堤（離岸堤・沖防波堤含む）への立入りを原則禁止とし、出雲崎漁港では離岸堤を町管理の開放釣り場として4/1〜11/30・日の出〜日没に限り開放。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
+  "joetsu-kaiyou-fishing-center": {
+   "name": "上越海洋フィッシングセンター",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "上越市の資料で、市直営の海洋フィッシングセンターは老朽化のため令和6年4月から休止中とされている（民間活用をサウンディング中）。現在は施設として利用できない。",
+   "officialUrls": [
+    "https://www.city.joetsu.niigata.jp/uploaded/attachment/254137.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "joetsu-port": {
+   "name": "上越港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県直江津港湾事務所が、テロ対策・事故防止のため釣り目的の港内立入を禁止（開放釣り場の第3東防波堤を除く）と告知している。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/jouetsu_naoetsu/1356811949543.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/801"
+   ]
+  },
+  "jonanjima-seaside-park": {
+   "name": "城南島海浜公園",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報記事（TSURINEWS/Excite）では、釣りができるのは第一航路側のみなと広場前のみとされ、園内の他区域（つばさ浜など）では釣り不可と読める。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.excite.co.jp/news/article/Tsurinews_tsurinews262992",
+    "https://tsurihack.com/1209"
+   ]
+  },
+  "kabira-shuhen-gogan-a10": {
+   "name": "川平湾周辺護岸",
+   "pref": "沖縄県",
+   "verdict": "official_partial",
+   "summary": "沖縄県は川平湾の一部を漁業調整規則に基づく「保護水面」に指定し、区域内での水産動植物の採捕を禁止している（違反には罰則）。湾全体の釣り禁止ではないが、護岸が保護水面に面する場合は釣りもできない。",
+   "officialUrls": [
+    "https://www.pref.okinawa.jp/shigoto/suisangyo/1011050/1011225.html",
+    "https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/011/225/kabira_keikaku.pdf",
+    "https://www.pref.okinawa.jp/fish/kenkyu/kankobutu/ohanasi-data/201604.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kaizuka-artificial-island": {
+   "name": "貝塚人工島",
+   "pref": "大阪府",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報記事で、北波止は進入禁止、北波止の付け根から東へ続く岸にも立入禁止の看板があるとされる。人工島の一部が釣り用に開放されている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.excite.co.jp/news/article/FishingJapan_009718/",
+    "https://tsurihack.com/1417"
+   ]
+  },
+  "kamaishi-unosumai-river-a12": {
+   "name": "釜石市鵜住居川河口",
+   "pref": "岩手県",
+   "verdict": "official_partial",
+   "summary": "岩手県の鵜住居川遊漁規則（鵜住居川漁協）で、日ノ神橋下流端から下流の区域は9月1日〜12月31日が禁止期間とされている（サケ遡上期）。",
+   "officialUrls": [
+    "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/008/532/0901unosumaikisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kaminokae-kou-w6": {
+   "name": "中土佐・上ノ加江港",
+   "pref": "高知県",
+   "verdict": "official_partial",
+   "summary": "高知県漁協上ノ加江支所の取り組み資料で、漁港前の湾を漁業体験専用の漁場として禁漁区にしたとされる（2003年〜）。一般の釣りへの適用範囲は検索結果からは不明。",
+   "officialUrls": [
+    "https://www.jfa.maff.go.jp/j/keikaku/attach/pdf/umigyo_kyougikai-5.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kamisu-nikkawahama6": {
+   "name": "神栖市日川浜",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県が鹿島灘海岸（神栖海岸のヘッドランドNo.1,2,5含む）のヘッドランド周辺への立入を禁止・注意喚起（水難事故多発）。浜自体は観光情報で遊泳区域外の釣り可とされる。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf"
+   ],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80006355"
+   ]
+  },
+  "kamoike-kou": {
+   "name": "鴨池港",
+   "pref": "鹿児島県",
+   "verdict": "official_partial",
+   "summary": "鹿児島県は鹿児島港の岸壁を事故防止のため原則関係者以外立入禁止としている。鴨池港区で釣りができる鴨池海づり公園（市管理）も所定場所以外の釣り・立入、投げ釣り、まき餌（アミカゴ除く）を禁止。",
+   "officialUrls": [
+    "https://www.pref.kagoshima.jp/ak13/chiiki/kagoshima/kiban/documents/miokuri.html",
+    "https://www.city.kagoshima.lg.jp/seisanryutu/shisetsu/kanko/017.html"
+   ],
+   "secondaryUrls": []
+  },
+  "kanazawa-hakkei-nojima-a11": {
+   "name": "金沢八景・野島公園",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "TSURI HACKで野島公園周辺の海水浴場側は釣り禁止、公園側の砂浜では釣り可と紹介。隣接の海の公園は公園区域内が基本的に釣り禁止（横浜市）。",
+   "officialUrls": [
+    "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/umizuri.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1169/3"
+   ]
+  },
+  "kanmon-kaikyo-moji-kou": {
+   "name": "関門海峡・門司港",
+   "pref": "福岡県",
+   "verdict": "official_full",
+   "summary": "北九州市港湾空港局は、岸壁・防波堤等の港湾施設での釣りを日明海峡海釣り公園など一部を除き禁止しており、門司11号岸壁での釣りも禁止と回答している。",
+   "officialUrls": [
+    "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "karatsu-kou-w6": {
+   "name": "唐津港",
+   "pref": "佐賀県",
+   "verdict": "official_partial",
+   "summary": "佐賀県告示で唐津港に国際港湾施設の保安のための制限区域（SOLAS）が設定され、正当な理由のない立入りは警告等の対象。釣り自体の禁止記述は見つからず。",
+   "officialUrls": [
+    "https://www.pref.saga.lg.jp/kiji00327239/3_27239_32_240518-7.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kasaoka-shiraishijima-port": {
+   "name": "笠岡市白石島漁港",
+   "pref": "岡山県",
+   "verdict": "official_partial",
+   "summary": "岡山海区漁業調整委員会指示（2021年）で、白石島北東端や弁天島周辺を含む笠岡地区海洋牧場海域では水産動植物の採捕（釣り含む）が禁止。漁港内全体の禁止ではない。",
+   "officialUrls": [
+    "https://www.pref.okayama.jp/uploaded/attachment/260893.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kashima-surf-e8": {
+   "name": "鹿島サーフ",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県河川課が鹿島灘海岸のヘッドランド周辺は水難事故多発のため絶対に立ち入らないよう求めており、立入禁止リーフレットを公開。サーフ本体の釣り禁止記述はない。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kashimanada-headland6": {
+   "name": "鹿島灘ヘッドランド",
+   "pref": "茨城県",
+   "verdict": "official_full",
+   "summary": "茨城県河川課は鹿島灘海岸のヘッドランド周辺を水難事故多発の危険箇所として『絶対に立ち入らないで』と呼びかけ、立入禁止リーフレットを公開。スポット名がヘッドランドそのもので、釣り座として紹介すると禁止区域に該当。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf",
+    "https://www.pref.ibaraki.jp:443/doboku/kasen/coast/documents/headland.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kashimanada-surf": {
+   "name": "鹿島灘サーフ",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県が鹿島灘海岸のヘッドランド周辺への立入を禁止（水難事故多発）。サーフ本体の釣り禁止記述はない。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "katsuura-kou-tsukiji": {
+   "name": "勝浦港・築地",
+   "pref": "和歌山県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）で、勝浦港の赤灯・白灯のある堤防と湾内の小突堤は釣り禁止と書かれている。公式情報は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/653"
+   ]
+  },
+  "kinuura-ko-takahama": {
+   "name": "衣浦港 高浜エリア",
+   "pref": "愛知県",
+   "verdict": "official_partial",
+   "summary": "愛知県衣浦港務所によると、高浜ふ頭2号岸壁（高浜市碧海町）などはSOLAS（国際港湾保安法）の制限区域でフェンスで囲まれ、許可者以外立入禁止。",
+   "officialUrls": [
+    "https://www.pref.aichi.jp/soshiki/kinuura-komu/0000017710.html",
+    "https://www.pref.aichi.jp/soshiki/kowan/hoantaisaku.html"
+   ],
+   "secondaryUrls": []
+  },
+  "kitakyushu-mojiko-breakwater": {
+   "name": "北九州門司港堤防",
+   "pref": "福岡県",
+   "verdict": "official_full",
+   "summary": "北九州市港湾空港局の質疑回答で、岸壁・防波堤等の港湾施設での釣りは日明海峡海釣り公園など一部施設を除き禁止とされ、門司11号岸壁での釣り禁止も明記。",
+   "officialUrls": [
+    "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kobe-airport-gogan": {
+   "name": "神戸空港親水護岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "神戸市公式ページで親水護岸は神戸港で唯一釣りが認められた開放エリア。ただし黄色の通路部分での釣り、航路近くへの遠投、立入禁止エリアへの侵入・手すり越えは禁止。迷惑行為があれば閉鎖の可能性あり。",
+   "officialUrls": [
+    "https://www.city.kobe.lg.jp/a42810/business/kowanjigyo/kobekukonishiryokuchi-tsuri.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/2752"
+   ]
+  },
+  "koyoshigawa-river-a11": {
+   "name": "子吉川河口",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、子吉川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kuji-osanai-river-a13": {
+   "name": "久慈市長内川河口",
+   "pref": "岩手県",
+   "verdict": "official_partial",
+   "summary": "岩手県掲載の遊漁規則（鵜住居川等の規則PDF）で、長内川長内橋下流端から下流の免許区域が区域制限の対象として挙がっている。",
+   "officialUrls": [
+    "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/008/532/0901unosumaikisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kumihama-wan-kyoto": {
+   "name": "久美浜湾",
+   "pref": "京都府",
+   "verdict": "official_partial",
+   "summary": "京都府水産事務所が、久美浜湾の湾口で水産動植物を採ると罰則（6月以下の懲役等）があるとして採捕しないよう呼びかけ（湾口の範囲は府の啓発チラシ）。湾内全体の釣り禁止ではない。",
+   "officialUrls": [
+    "https://www.pref.kyoto.jp/suiji/isoasobirule.html",
+    "https://www.pref.kyoto.jp/suiji/documents/060720leaf.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kushimoto-ko-add5": {
+   "name": "串本港",
+   "pref": "和歌山県",
+   "verdict": "secondary_partial",
+   "summary": "串本町観光協会のエギング大会用漁港マップ（2023年10月）で、串本新港の左側赤灯台突堤・工事中の一部区域・全浮桟橋が立入禁止とされている。県・町の公式告示は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://kankou-kushimoto.jp/wp-content/uploads/2023/10/3de1f30ac45330154e27f22fed1a6f6a.pdf"
+   ]
+  },
+  "kushiro-higashi-koku": {
+   "name": "釧路港東港区",
+   "pref": "北海道",
+   "verdict": "official_full",
+   "summary": "北海道新聞によれば、釧路港は釧路市の条例で港湾施設での釣り行為が禁止され、安全面から釣り目的の立入も原則禁止。振興局・市・漁業者が合同パトロールで自粛を呼びかけている（東港区も対象の港全体）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/article/1371015/",
+    "https://www.hokkaido-np.co.jp/article/1369395/"
+   ]
+  },
+  "kushiro-nishi-ko": {
+   "name": "釧路西港",
+   "pref": "北海道",
+   "verdict": "official_full",
+   "summary": "釧路市の条例で港湾施設での釣り行為が禁止され、釧路港は安全面から釣り目的の立ち入りを原則禁止。振興局・市が秋サケ釣りの自粛を呼びかけ合同パトロール（北海道新聞が報道）。西港区限定の条文は未確認",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/article/1369395/",
+    "https://www.hokkaido-np.co.jp/article/1371015/"
+   ]
+  },
+  "kushiro-nishikouku6": {
+   "name": "釧路港西港区",
+   "pref": "北海道",
+   "verdict": "official_full",
+   "summary": "北海道新聞によると、釧路港は釧路市の条例で港湾施設での釣りが禁止され、安全面から釣り目的の立入り自体を原則禁止としている（振興局・市・警察が自粛呼びかけ・パトロール）。西港区も釧路港の一部。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/article/1369395/",
+    "https://www.hokkaido-np.co.jp/article/1371015/"
+   ]
+  },
+  "kushiro-port": {
+   "name": "釧路港",
+   "pref": "北海道",
+   "verdict": "official_full",
+   "summary": "釧路市の条例で港湾施設での釣り行為が禁止され、釣り目的の立入りが原則禁止。秋サケ期は振興局・市・漁業者が合同パトロールで自粛を呼びかけ（北海道新聞報道）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/article/1369395/",
+    "https://www.hokkaido-np.co.jp/article/1371015/"
+   ]
+  },
+  "kyu-edogawa-mouth": {
+   "name": "旧江戸川河口",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（TSURI HACK）が、旧江戸川には立入禁止・釣り禁止の区間が設けられているとして現地確認を促している（具体的な範囲は不明）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1828"
+   ]
+  },
+  "makuhari-no-hama6": {
+   "name": "幕張の浜",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "旅行情報サイトによると海岸部の浸食で立入禁止の場所が増えている（管理は千葉県企業庁）。平成12年以降は遊泳禁止。釣り自体の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.pref.chiba.lg.jp/kyouiku/anzen/documents/kaihinjikoboushi.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tabi-mag.jp/ch0430/"
+   ]
+  },
+  "mashike-port": {
+   "name": "増毛港",
+   "pref": "北海道",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイトによると、増毛漁港は全面禁止ではないが2023年頃から安全上の理由とマナー問題で主要な防波堤を含む一部区域が立入禁止になった。公式告知は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://crexgroup.com/ja/aga/self-care/mashike-port-fishing-ban-area/"
+   ]
+  },
+  "matsubu-gyokou": {
+   "name": "松部漁港",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（ツリハック）で、松部港は人気釣り場だが南側の堤防は立入禁止と紹介されている。公式の告知は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/653"
+   ]
+  },
+  "matsukawa-ura6": {
+   "name": "松川浦",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が2020年に松川浦漁港・相馬港等に釣り禁止区域周知看板を設置。防波堤など立入禁止場所あり。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "matsushige-kyuyoshinogawa-w6": {
+   "name": "松茂・旧吉野川河口",
+   "pref": "徳島県",
+   "verdict": "official_partial",
+   "summary": "国交省徳島河川国道事務所の資料で、旧吉野川河口堰・今切川河口堰の上流50m・下流150m以内と各橋梁上での釣りは禁止。河口一帯の護岸は釣り場として紹介。",
+   "officialUrls": [
+    "https://www.skr.mlit.go.jp/tokushima/river/event/yoshikouza/no15/text15-7-2.pdf",
+    "https://www.skr.mlit.go.jp/tokushima/kouhoushi/matome/fishing/PDF/f-26.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "matsuzaki-gyokou": {
+   "name": "松崎漁港",
+   "pref": "静岡県",
+   "verdict": "official_partial",
+   "summary": "静岡県（港湾管理者）が松崎新港の堤防に侵入防止柵を設置し、2010年の供用後まもなく立入禁止に。2025年度に釣り利用トライアル、2026年9月に観光協会主催の期間・人数限定開放イベントがあったが、通常は立入禁止。",
+   "officialUrls": [
+    "https://www.pref.shizuoka.jp/machizukuri/kowan/1003579/1029646.html"
+   ],
+   "secondaryUrls": [
+    "https://bunshun.jp/articles/-/83083",
+    "https://prtimes.jp/main/html/rd/p/000000001.000190204.html"
+   ]
+  },
+  "matsuzaki-port": {
+   "name": "松崎港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "松崎新港の沖に伸びる大堤防は、マナー悪化で県（港湾管理者）が侵入防止柵を設置し約14〜15年立入禁止。2025年度から観光協会・伊豆漁協松崎支所主催でUMIGOアプリ予約制の期間・人数限定開放が行われている（文春オンライン、松崎町観光協会プレスリリース）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://bunshun.jp/articles/-/83083",
+    "https://prtimes.jp/main/html/rd/p/000000001.000190204.html"
+   ]
+  },
+  "maze-kou-niigata": {
+   "name": "間瀬港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "間瀬漁港は新潟県管理の第2種漁港で、県漁港課は県営漁港の防波堤（離岸堤・沖防波堤含む）を高波・転落の危険から立入禁止としている。釣り場として開放されている県営漁港の一覧（姫津・出雲崎等）に間瀬は含まれない。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/1356904273863.html",
+    "https://www.pref.niigata.lg.jp/uploaded/attachment/399245.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "miho-todai-shita": {
+   "name": "三保灯台下護岸",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）の三保の釣り場解説で、立入禁止のポイントや桟橋付近では釣りが禁止されていると注意書きあり（具体的な場所の特定はなし）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/668"
+   ]
+  },
+  "mikuni-ko-sunset-beach": {
+   "name": "三国港（サンセットビーチ前）",
+   "pref": "福井県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（ウォーカープラス・るるぶ）の三国サンセットビーチの掲載情報で、ビーチからの投げ釣りが禁止事項に挙げられている。三国港突堤（エッセル堤）の釣り規制は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0518s53736/data.html",
+    "https://rurubu.jp/andmore/spot/80017544/beach"
+   ]
+  },
+  "mikuni-sunset-beach": {
+   "name": "三国サンセットビーチ周辺",
+   "pref": "福井県",
+   "verdict": "secondary_partial",
+   "summary": "るるぶ（2026年版）・ウォーカープラス（2025年版）の海水浴場情報で禁止事項に『ビーチ（から）の投げ釣り』が挙がっている。全面禁止ではないが、登録の『キス 投げ釣り』はビーチでは不可と読める。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80017544/beach",
+    "https://summer.walkerplus.com/odekake/detail/ar0518s53736/data.html"
+   ]
+  },
+  "mikuni-sunset-beach-a10": {
+   "name": "三国サンセットビーチ",
+   "pref": "福井県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（ウォーカープラス・るるぶ）の海水浴場データで「ビーチからの投げ釣り」が禁止事項として記載。海水浴期間（7月上旬〜8月下旬）限定か通年かは不明。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0518s53736/data.html",
+    "https://rurubu.jp/andmore/spot/80017544/beach"
+   ]
+  },
+  "misaki-fishing-port": {
+   "name": "三崎港",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）が、三崎港には立入禁止・釣り禁止エリアがあり、北条湾奥の漁船の船溜まり周辺は釣り禁止と記載。2020年にはコロナ対策で花暮岸壁が立入禁止になった（神奈川新聞）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/894/2",
+    "https://www.kanaloco.jp/news/social/entry-352385.html"
+   ]
+  },
+  "misakikou-hanagure-a9": {
+   "name": "三崎港・花暮岸壁",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）が三崎港には立入禁止・釣り禁止のエリアがあると注意している。花暮岸壁自体は釣り場として紹介。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/894"
+   ]
+  },
+  "miyako-shimoji-airport": {
+   "name": "宮古島・下地島空港周辺",
+   "pref": "沖縄県",
+   "verdict": "official_partial",
+   "summary": "下地島空港管理事務所（沖縄県）が17エンド側の管理用通路を車両通行止めにしている。釣り禁止の記述はない。",
+   "officialUrls": [
+    "https://www.pref.okinawa.jp/machizukuri/kowankuko/1012617/1012639/1023024.html"
+   ],
+   "secondaryUrls": []
+  },
+  "miyako-tsugaruishigawa-kakou": {
+   "name": "宮古市津軽石川河口",
+   "pref": "岩手県",
+   "verdict": "official_partial",
+   "summary": "岩手県の津軽石川遊漁規則（宮古漁協）で、河口から旧稲荷橋上流端の230m上流までの区間が11月1日〜2月末日の禁止区間とされている（サケ遡上期）。",
+   "officialUrls": [
+    "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/008/532/0901tugaruishigawakisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "mukogawa-kakou": {
+   "name": "武庫川河口",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "尼崎西宮芦屋港の管理者（兵庫県尼崎港管理事務所）が、武庫川河口西宮側の西宮内防波堤への立入りを禁止している（手すり・救命具がなく越波・津波退避の危険）。",
+   "officialUrls": [
+    "https://web.pref.hyogo.lg.jp/org/amagasakikokanri/documents/nishinomiya.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "murakami-neya-port": {
+   "name": "村上市寝屋漁港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県漁港課は県の漁港の防波堤（離岸堤・沖防波堤含む）を転落の危険から立入禁止としており、釣り場として開放している漁港の一覧に寝屋漁港は含まれない。寝屋漁港個別の禁止記載は見つからず。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
+  "muroran-sakimori-futo": {
+   "name": "室蘭崎守ふ頭",
+   "pref": "北海道",
+   "verdict": "official_partial",
+   "summary": "崎守ふ頭の第3・4・6・7バース等はSOLAS条約に基づく国際航海船舶の保安制限区域で、北海道開発局が立入りを控えるよう案内している。室蘭港の釣り場開放計画（釣り文化振興モデル港）は祝津・絵鞆地区が対象で、崎守は含まれない。",
+   "officialUrls": [
+    "https://www.hkd.mlit.go.jp/mr/release/a00ihh000000debg-att/a00ihh000000dxg0.pdf",
+    "https://www.mlit.go.jp/kowan/content/001757364.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "murotsu-kou-kochi-w6": {
+   "name": "室戸・室津港",
+   "pref": "高知県",
+   "verdict": "official_partial",
+   "summary": "国交省高知港湾・空港整備事務所の資料によると、室津港の作業ヤード岸壁は普段は工事関係者以外立入禁止で、室戸市観光協会主催の釣り大会（2020年〜毎年）の時だけ開放されている。",
+   "officialUrls": [
+    "https://www.pa.skr.mlit.go.jp/kouchi/C/pdf/r02/mr-tsuri01.pdf",
+    "https://www.pa.skr.mlit.go.jp/kouchi/C/pdf/r04/mr-tsuri03.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "nadachi-gyokou": {
+   "name": "名立漁港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は県管理漁港の防波堤（離岸堤・沖防波堤含む）への立入を原則禁止としており、名立漁港は県管理漁港として掲載。釣りサイト（tsurihack）でも堤防にフェンスが設置され内湾・テトラ帯のみ釣りが可能とされる。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html",
+    "https://www.pref.niigata.lg.jp/site/gyoko/1227124912056.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/856/2"
+   ]
+  },
+  "nadachi-kou-niigata": {
+   "name": "名立港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県漁港課は漁港の防波堤（離岸堤・沖防波堤含む）を一律立入禁止としており、釣りサイトでも名立港の堤防はフェンスが設置され内湾・テトラ帯のみ釣りができると紹介されている。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/1356904273863.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/856/2"
+   ]
+  },
+  "nagai-gyokou": {
+   "name": "長井漁港",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "口コミサイト（wanderlog）に長井港の湾内は事故が多いため釣り禁止、対岸では釣り可との投稿。公式情報は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://wanderlog.com/place/details/11276648/nagai-port"
+   ]
+  },
+  "nago-gyoko": {
+   "name": "名護漁港",
+   "pref": "沖縄県",
+   "verdict": "secondary_partial",
+   "summary": "琉球新報の記事によると、名護漁港は釣り禁止を明示したうえで釣り人用の釣り場（名護テラス等3カ所）を設けており、禁止区域で釣りをする人が問題になっている。漁協関係者の話を報じた報道で、公式の区域図は未確認。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-945273.html",
+    "https://ryukyushimpo.jp/news/entry-950779.html"
+   ]
+  },
+  "naha-ichimonji": {
+   "name": "那覇一文字",
+   "pref": "沖縄県",
+   "verdict": "official_full",
+   "summary": "那覇一文字（沖防波堤）は港湾管理者により立入禁止で、黙認されていた渡船も遊漁船業法改正で2024年10月から禁止となり事実上釣り不可（琉球新報の報道）。那覇港管理組合議会で再開の陳情が継続審査中。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/economics/entry-3501322.html",
+    "https://ryukyushimpo.jp/tag/%e9%82%a3%e8%a6%87%e4%b8%80%e6%96%87%e5%ad%97"
+   ]
+  },
+  "nakagawa-kakou-ibaraki6": {
+   "name": "那珂川河口",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県が那珂川河口付近（大洗町祝町砲台跡の標柱から半径1,000m以内の海域）を5/1〜12/31のサケ・マス採捕禁止区域に指定。サケは全河川で採捕禁止。他魚種の釣りを禁じる記述はなし。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/nourinsuisan/gyosei/chosei/leasure/sake.html"
+   ],
+   "secondaryUrls": []
+  },
+  "nakatsu-kou-w6": {
+   "name": "中津・中津港",
+   "pref": "大分県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（TSURI HACK）で中津港東側の埋立地は立入禁止エリアと紹介。西側の長い波止は釣り場として紹介されている。公式の告示は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1367"
+   ]
+  },
+  "namie-ukedo-river-a11": {
+   "name": "浪江町請戸川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、請戸川の河口中央から半径550m以内の海面で9/1〜翌5/31は水産動植物の採捕禁止。県ページの河川内禁止区域表に『請戸橋の橋脚上流端から下流部全域』の記載あり（期間未確認）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
+  "nanao-ko-fuchu-futo": {
+   "name": "七尾港 府中埠頭",
+   "pref": "石川県",
+   "verdict": "official_partial",
+   "summary": "国交省の「七尾港立入禁止施設（大田地区～府中地区）」図（令和6年2月時点、能登半島地震による被災）で府中地区の施設が立入禁止とされ、府中物揚場は利用不可とされていた。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/kowan/content/001726618.pdf",
+    "https://www.mlit.go.jp/kowan/content/001726608.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "nanao-port": {
+   "name": "七尾港",
+   "pref": "石川県",
+   "verdict": "official_partial",
+   "summary": "国交省資料に七尾港の大田・万行・矢田新・府中地区ごとの立入禁止施設図があり、矢田新地区にも立入禁止の防波堤等がある（令和6年2月時点）。標識のある防波堤も立入禁止。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/kowan/content/001726618.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "nanao-yatashin-wharf": {
+   "name": "七尾港矢田新埠頭",
+   "pref": "石川県",
+   "verdict": "official_partial",
+   "summary": "国土交通省の資料で、能登半島地震後に七尾港矢田新地区の一部施設が立入禁止施設として示されている（2024年2月時点）。2025年12月時点でも矢田新桟橋・第二東岸壁は利用不可で、復旧目標は2026年3月頃。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/kowan/content/001726618.pdf",
+    "https://www.notofukkousuishin.pa.hrr.mlit.go.jp/storage/002/202512/plan_nanao_251223.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "nankou-ferry-terminal-k8": {
+   "name": "南港フェリーターミナル",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "大阪市港湾局の資料で、南港北防波堤などが条例による立入禁止区域に指定され、凡例外でも船舶係留・荷役を行う港湾施設は関係者以外立入禁止とされている。フェリーターミナル岸壁が該当する可能性が高いが、ターミナル名指しの記述は未確認。",
+   "officialUrls": [
+    "https://www.city.osaka.lg.jp/hodoshiryo/cmsfiles/contents/0000624/624406/01.pdf",
+    "https://www.city.osaka.lg.jp/port/cmsfiles/contents/0000062/62374/R808itizu.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "naoetsu-port": {
+   "name": "直江津港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県直江津港湾事務所が、テロ対策・事故防止等のため釣り目的での港内立入を禁止（開放釣り場を除く）。第3東防波堤のみ釣り場として開放されている。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/jouetsu_naoetsu/1356811949543.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/801"
+   ]
+  },
+  "nata-kaigan-w6": {
+   "name": "博多湾・奈多海岸",
+   "pref": "福岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトによると隣接する奈多漁港の東側防波堤に釣り禁止エリアがある。東側サーフは夏に海水浴場となるため日中の釣りは控えるよう推奨。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1329"
+   ]
+  },
+  "nata-port-fukuoka": {
+   "name": "奈多漁港",
+   "pref": "福岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）が奈多漁港の港内外の一部に釣り禁止エリアがあると記載（範囲は不明）。東側サーフは夏季海水浴場のため日中の釣りは控えるよう記載。公式情報では確認できず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1329"
+   ]
+  },
+  "natori-yuriage-gyokou-e8": {
+   "name": "名取閖上漁港",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "宮城県（仙台地方振興事務所水産漁港部）の案内で、閖上漁港は転落事故防止のため防波堤への立入を禁止し、南導流堤と南防波堤の侵入防止柵より先を立入禁止区域としている（2024年1月掲載）。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
+   ],
+   "secondaryUrls": []
+  },
+  "natori-yuriage-south-breakwater-a13": {
+   "name": "名取市閖上港南堤防",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県（仙台地方振興事務所）は閖上漁港の南導流堤・南防波堤について、侵入防止柵から先を転落事故防止のため立入禁止区域としている。スポットの南堤防はほぼ立入不可。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
+   ],
+   "secondaryUrls": []
+  },
+  "natorigawa-kakou6": {
+   "name": "名取川河口",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "宮城県が閖上漁港の南導流堤・南防波堤の侵入防止柵より先を転落事故防止のため立入禁止区域としている（名取川河口部の導流堤）。河岸からの釣りを禁じる記述はなし。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
+   ],
+   "secondaryUrls": []
+  },
+  "natsuigawa-kakou-e8": {
+   "name": "夏井川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県がコアジサシ営巣地保護のため夏井川河口の約12haを毎年5/1〜8/31立入規制区域に指定（無許可立入は罰則）。また河口中央から半径550m以内の海面で9/1〜翌5/31のサケ採捕禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/16035b/kisei-natsuigawa.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
+  "niigata-hiyoriyama-hama-a13": {
+   "name": "新潟・日和山浜（突堤）",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "国（北陸地整・新潟港湾空港整備事務所）の発表で、新潟港海岸（西海岸地区）の第1〜第4突堤は冬期（12月〜4月下旬）立入禁止、開放期間中も第1〜第5突堤は夜間立入禁止。第5突堤は海岸工事で立入禁止とされた時期もある。",
+   "officialUrls": [
+    "https://www.hrr.mlit.go.jp/press/2019/04/190426niigatakouwan.pdf",
+    "https://www.niigata.pa.hrr.mlit.go.jp/file/content/7214afdc.pdf",
+    "https://www.city.niigata.lg.jp/chuo/kohoshi/index2011/r04/chuo_0703/pdf/366_1.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "niigata-kou-nishi-tottei": {
+   "name": "新潟港西突堤",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県新潟港湾事務所は新潟西港区の防波堤等の港湾管理施設への釣り目的の立入を禁止している。新潟西海岸の第1〜5突堤は例年4月下旬〜11月末のみ開放（夜間・冬期は立入禁止）。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/niigata_kouwan/1356894878931.html",
+    "https://www.pref.niigata.lg.jp/site/niigata-kouwan/westbeach-2024open.html",
+    "https://www.niigata.pa.hrr.mlit.go.jp/file/content/7214afdc.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "nishina-gyokou": {
+   "name": "仁科漁港",
+   "pref": "静岡県",
+   "verdict": "lifted",
+   "summary": "仁科漁港の防波堤は以前は原則釣り禁止だったが、伊豆漁協仁科支所が予約制有料釣り場「海釣りGO」として2024年に開放。ただし湾奥の船溜まりは引き続き釣り禁止（報道記事による）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ascii.jp/elem/000/004/213/4213533/"
+   ]
+  },
+  "nishio-terabe-kaigan-a13": {
+   "name": "西尾・寺部海岸",
+   "pref": "愛知県",
+   "verdict": "official_partial",
+   "summary": "愛知県公式観光サイトの寺部海水浴場ページに「海水浴場内は遊泳以外禁止（7月から8月中）」とあり、海水浴期間中は海水浴場内での釣りもできないと読める。BBQ・SUPも禁止。",
+   "officialUrls": [
+    "https://aichinow.pref.aichi.jp/spots/detail/1375/"
+   ],
+   "secondaryUrls": []
+  },
+  "nishizaki-gyokou-a13": {
+   "name": "西崎漁港",
+   "pref": "沖縄県",
+   "verdict": "secondary_partial",
+   "summary": "琉球新報の釣り記事で、西崎一文字（沖の防波堤）への渡船が禁止になったと記述。港内の釣り筏（糸満釣り筏）や通称なべ堤では釣りが行われている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-4479916.html"
+   ]
+  },
+  "nittakawa-kakou-e8": {
+   "name": "新田川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、新田川の河口中央から半径550m以内の海面で9/1〜翌5/31はサケを含む水産動植物の採捕禁止（県水産事務所）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
+  "nojima-kouen-gogan": {
+   "name": "野島公園護岸",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "民間釣りサイト（ツリハック）で、野島公園の海水浴場側は釣り禁止とされている（公園側の砂浜・護岸は釣り可）。横浜市の公式ページでは確認できず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1169/3"
+   ]
+  },
+  "noshiro-yoneshiro-right-a12": {
+   "name": "能代市米代川河口右岸",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、米代川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。米代川水系サクラマス協議会区域のサクラマス釣り可能期間は4/1〜7/31。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "nou-gyoko": {
+   "name": "能生漁港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県糸魚川地域振興局地域整備部が、管内の港湾内・漁港内は関係者以外立入禁止で港内での釣りも禁止と案内。能生漁港では2013年に防波堤で転落死亡事故があり、西護岸に立入禁止柵がある。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/itoigawa_seibi/1356783520787.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
+  "odaiba-seaside-park": {
+   "name": "お台場海浜公園",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "お台場海浜公園の人工砂浜（おだいばビーチ）は釣り禁止で、釣りができるのは自由の女神像裏の人工磯のみと観光・旅行サイトが紹介（管理は東京都港湾局）。スポット種別がbeachのため、掲載内容（砂浜のキス・カレイ等）と食い違う。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.gltjp.com/ja/article/item/20312/",
+    "https://tabi-mag.jp/tk0023/"
+   ]
+  },
+  "oirasegawa-kakou": {
+   "name": "奥入瀬川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "青森県東部海区の指示（サケ関係）で、奥入瀬川河口付近は10月1日〜12月31日に竿釣り・手釣りを含む操業が制限される。県の2026年告示にも河口から上流1,000m（開運橋上流端まで）の区域がさくらます関係の区域として挙がる。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp:443/soshiki/kaiku/files/esake.pdf",
+    "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/files/20260520kouji.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "oiso-fishing-port": {
+   "name": "大磯港",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、コの字型の東堤防の先端側は立入禁止と紹介されている。西防波堤の遊歩道は大磯町の資料で利用時間外の立入禁止・荒天時閉鎖とされる。",
+   "officialUrls": [
+    "https://www.town.oiso.kanagawa.jp/material/files/group/22/yuuhodou.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1120/2",
+    "https://tsurihack.com/1120"
+   ]
+  },
+  "oiso-terugasaki": {
+   "name": "大磯海岸（照ヶ崎）",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "撮影スポット情報サイトに、隣接する大磯港の東防波堤は立入禁止、西防波堤は時間外進入・柵越え・テトラ立入不可との記載。照ヶ崎の岩礁は県天然記念物のアオバト飛来地で、岩礁へ近づかないよう呼びかけ（釣り禁止の明記はなし）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.minnacamera.com/spots/1020",
+    "https://news.mynavi.jp/article/shonanlife-21/"
+   ]
+  },
+  "okayama-shinko": {
+   "name": "岡山市岡山港（新岡山港）",
+   "pref": "岡山県",
+   "verdict": "official_partial",
+   "summary": "岡山県は岡山港を含む県管理港の公共埠頭（外航船岸壁・野積場等）をSOLAS制限区域とし、遊漁目的の立入不可と案内。新岡山港内の具体的範囲は未確認。",
+   "officialUrls": [
+    "https://www.pref.okayama.jp/page/detail-43514.html",
+    "https://www.pref.okayama.jp/page/detail-2855.html"
+   ],
+   "secondaryUrls": []
+  },
+  "okinawa-itoman-port-bulk": {
+   "name": "糸満漁港（西崎町）",
+   "pref": "沖縄県",
+   "verdict": "secondary_partial",
+   "summary": "琉球新報の釣り記事で、西崎一文字（沖堤防）への渡船が禁止になったと紹介。港内の糸満釣り筏（2010年設置）は2025年7月時点で営業中。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-4479916.html"
+   ]
+  },
+  "okinawa-nago-port-bulk": {
+   "name": "名護漁港（城・テラス）",
+   "pref": "沖縄県",
+   "verdict": "secondary_partial",
+   "summary": "琉球新報によると名護漁港は釣り禁止を明示しつつ、防波堤外側の「名護テラス」など3カ所を釣り場として設けている。テラス以外の禁止区域での釣りが問題視されている（報道、公式区域図は未確認）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-945273.html"
+   ]
+  },
+  "okura-kaigan-gogan-a12": {
+   "name": "大蔵海岸護岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "国交省姫路河川国道事務所が2024年11月12日から大蔵海岸・舞子海岸の護岸（計6区域）を空洞点検のため立入制限。2025年4月にケーソン部は解除されたが、背後のコンクリート床版部は制限継続（砂浜は対象外）。",
+   "officialUrls": [
+    "https://www-2.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001fz6-att/cekddo0000002p7t.pdf",
+    "https://www.kkr.mlit.go.jp/himeji/kisya/2025/rirsjh00000069ov-att/20250423kisyahappyou.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1351"
+   ]
+  },
+  "omonogawa-kakou6": {
+   "name": "雄物川河口",
+   "pref": "秋田県",
+   "verdict": "official_partial",
+   "summary": "秋田県『秋田川釣りガイド』に、雄物川河口中央から半径1,000m以内の海面で3/1〜5/31に「ます」の採捕禁止の記載。",
+   "officialUrls": [
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000066119_00/秋田川釣りガイド.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-aquamarine-e8": {
+   "name": "小名浜港アクアマリン前",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の釣りエリアマップによると、小名浜港には立入制限・立入禁止・釣り禁止区域があり、釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2箇所だけ。アクアマリン前では2号ふ頭先端の「釣り開放エリア」以外は釣り不可。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/facilities-amp.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-aquamarine-park6": {
+   "name": "小名浜港アクアマリンパーク",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の小名浜港釣りマップ（2026年5月更新）で、小名浜港で釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所のみで、ほかに立入制限・立入禁止・釣り禁止区域があるとされる。アクアマリンパーク内でも釣りは2号ふ頭先端の開放エリアに限られる。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/facilities-amp.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-bouhatei-e8": {
+   "name": "小名浜港防波堤",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県（小名浜港湾建設事務所）の釣りマップでは、小名浜港で釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2箇所のみで、港内には立入禁止・釣り禁止区域が設定されている。防波堤は釣り可能エリアに含まれていない。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/syaryoutaisaku.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-east-breakwater-a12": {
+   "name": "いわき市小名浜港東堤防",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県の小名浜港釣りマップで、港内で釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所のみとされ、港内には立入制限・立入禁止・釣り禁止区域がある。東堤防は釣り可能場所に含まれない。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-ichigou-futou6": {
+   "name": "小名浜港1号埠頭",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県の小名浜港釣りエリアマップ（2026年5月更新）では、釣り可能なのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所のみで、1号埠頭は含まれない。港内には立入禁止・釣り禁止区域が設定されている。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+    "https://www.mlit.go.jp/kowan/content/001361026.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-ko": {
+   "name": "小名浜港",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県小名浜港湾建設事務所の釣りマップで、釣り可能エリアは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所のみとされ、港内のそれ以外は立入制限・立入禁止・釣り禁止区域とされている。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-nigo-wharf-a12": {
+   "name": "いわき市小名浜港2号埠頭",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の釣りマップで2号埠頭先端部は小名浜港の釣り指定区域（国交省の釣り文化振興モデル港）だが、県は「2号ふ頭釣り禁止区域」も掲示し、2025年12月から2号ふ頭3・4号バースへの関係者以外の車両進入を禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/syaryoutaisaku.html",
+    "https://www.mlit.go.jp/kowan/content/001361026.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-sango-wharf-a11": {
+   "name": "小名浜港3号埠頭",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県は小名浜港での釣りを指定区域（2号埠頭先端部・いわきサンマリーナ釣り桟橋）のみ可とし、指定区域外の釣りを禁止行為としている。3号埠頭は指定区域に含まれない（福島県）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/facilities-3wharf.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-west-breakwater-a11": {
+   "name": "いわき市小名浜港西堤防",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県の小名浜港釣りマップで、港内で釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所だけとされ、それ以外に立入禁止・釣り禁止区域がある。西堤防は釣り可能エリアに含まれない（県情報）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-yongo-wharf-a13": {
+   "name": "いわき市小名浜港4号埠頭",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県（小名浜港湾建設事務所）の釣りマップで小名浜港の釣り可能エリアは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所のみとされ、県の利用ルールで釣り指定区域以外の釣りは禁止行為。4号埠頭は指定区域外（セメント・化学薬品サイロのある埠頭）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
+   ],
+   "secondaryUrls": []
+  },
+  "ooi-futo-chuo6": {
+   "name": "大井ふ頭中央海浜公園",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "大井ふ頭中央海浜公園（なぎさの森）では釣りは可能エリア（夕やけなぎさ等）に限られ、そのエリアでもルアー釣りは禁止と紹介されている（るるぶキッズ）。",
+   "officialUrls": [
+    "https://www.kouwan.metro.tokyo.lg.jp/kanko/14_kaijokouen_oi_202404.pdf"
+   ],
+   "secondaryUrls": [
+    "https://kids.rurubu.jp/article/68824/"
+   ]
+  },
+  "otaru-port": {
+   "name": "小樽港",
+   "pref": "北海道",
+   "verdict": "official_partial",
+   "summary": "小樽市の資料で、色内埠頭公園のネットフェンスより海側（小樽港側）は立入禁止とされている。港全体の釣り禁止の記述はなし。",
+   "officialUrls": [
+    "https://www.city.otaru.lg.jp/docs/2020111600331/file_contents/ironai.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "owase-ko-teibo": {
+   "name": "尾鷲港堤防",
+   "pref": "三重県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、天満浦埠頭は夜釣り禁止と書かれている（昼の釣りは可）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1242/2"
+   ]
+  },
+  "owase-kou-k8": {
+   "name": "尾鷲港",
+   "pref": "三重県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、尾鷲港の天満浦埠頭は夜釣り禁止とされている。港全体の禁止や公式の告示は見つからなかった。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1242/2",
+    "https://tsurihack.com/1242"
+   ]
+  },
+  "rokkosaki-iso-e8": {
+   "name": "禄剛埼灯台下磯",
+   "pref": "石川県",
+   "verdict": "secondary_partial",
+   "summary": "観光サイト（旅行メディア）に、狼煙〜高屋の海岸は能登半島国定公園の特別保護区に指定されているとの記載。磯は保護区扱いのため禁止相当として計上（釣り禁止の明記はなし）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.nap-camp.com/mag/spot/107671"
+   ]
+  },
+  "rumoi-kogane-misaki-a13": {
+   "name": "留萌市黄金岬",
+   "pref": "北海道",
+   "verdict": "secondary_partial",
+   "summary": "高波による死亡事故を受け、岩礁へ渡る桟橋に波の高い日はチェーンをかけて立入禁止にする措置がとられている（北海道新聞報道、2009年）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/hokkaido/area_rumoi/rumoi/31/"
+   ]
+  },
+  "sado-ogi-port": {
+   "name": "佐渡小木港",
+   "pref": "新潟県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）によると、小木港の長堤防はフェンスが設けられ立入禁止になっている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/807"
+   ]
+  },
+  "sado-washizaki-gyokou": {
+   "name": "佐渡・鷲崎漁港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県漁港課は県管理漁港の防波堤を転落事故防止のため立入禁止としている（佐渡で開放は姫津漁港西防波堤のみ）。鷲崎漁港個別の記載は見つからず。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html"
+   ],
+   "secondaryUrls": []
+  },
+  "saga-kasegawa-kakou-s8": {
+   "name": "佐賀市・嘉瀬川河口",
+   "pref": "佐賀県",
+   "verdict": "official_partial",
+   "summary": "登録住所の佐賀市大和町大字川上は、佐賀県内水面漁場管理委員会指示第68号で川上頭首工（魚道含む）〜惣座橋の区域が全水産動物の採捕禁止（R6.1.1〜R10.12.31）とされる区域にあたる。嘉瀬川河口（有明海側）自体の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.pref.saga.lg.jp/kiji003120415/3_120415_up_jakkoii3.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "sakaihama-seaside-k8": {
+   "name": "堺浜シーサイドステージ",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "堺浜一帯の堺市施設では、海とのふれあい広場（匠町）は『海釣りテラス以外での釣りはできません』、堺浜自然再生ふれあいビーチは釣り禁止と堺市が明示。シーサイドステージ前面そのものの規定は検索で確認できず、要現地確認。",
+   "officialUrls": [
+    "https://www.city.sakai.lg.jp/shisei/toshi/rinkai/umifureai/umizuriterasu.html",
+    "https://www.city.sakai.lg.jp/shisei/toshi/rinkai/hureaibi-ti.html"
+   ],
+   "secondaryUrls": []
+  },
+  "sakawagawa-river": {
+   "name": "酒匂川",
+   "pref": "神奈川県",
+   "verdict": "official_partial",
+   "summary": "神奈川県: 酒匂川の飯泉取水えん堤上流120m〜東海道本線鉄橋間、栢山頭首工えん堤上流10mは周年禁漁。アユ漁期は6/1〜10/14と12月のみ。",
+   "officialUrls": [
+    "https://www.pref.kanagawa.jp/docs/m2g/cnt/f417344/p431491.html",
+    "https://www.pref.kanagawa.jp/documents/31525/20240601sakawagawakisoku.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "samegawa-kakou6": {
+   "name": "鮫川河口",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、鮫川の河口中央から半径550m以内の海面で9/1〜翌5/31は水産動植物の採捕禁止（県水産事務所）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou04.html",
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
+   ],
+   "secondaryUrls": []
+  },
+  "seaside-cosmo": {
+   "name": "シーサイドコスモ（魚釣り開放区域）",
+   "pref": "大阪府",
+   "verdict": "secondary_partial",
+   "summary": "シーサイドコスモ（コスモスクエア海浜緑地）で釣りができるのは東端の一部区域のみで、投げ釣り・撒き餌は禁止と施設案内・釣り場紹介サイトに記載。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0727s77161/data.html",
+    "https://www.jackery.jp/blogs/fishing/2osaka-fishing-spots"
+   ]
+  },
+  "seiro-shibata-higashi-kou-a11": {
+   "name": "聖籠・新発田東港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は新潟港（西港区・東港区）の防波堤等で魚釣りはできないとしており、港湾施設への釣り目的の立入も禁止。例外として新潟東港第2東防波堤がNPO法人ハッピーフィッシング運営の有料管理釣り場（3/1〜10/31）として開放されている。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/niigata_kouwan/1356894878931.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html"
+   ],
+   "secondaryUrls": [
+    "https://niigata-kankou.or.jp/experience/11907"
+   ]
+  },
+  "sendai-shinko": {
+   "name": "仙台新港",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県仙台塩釜港湾事務所によると仙台塩釜港内は全面釣り禁止で、釣り可能なのはNX仙台港パーク内『海の広場』のみ。各ふ頭は関係者以外立入禁止、防波堤・テトラも立ち入らないよう要請。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html",
+    "https://www.pref.miyagi.jp/documents/21675/tsurirule.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shibayama-gyokou-hyogo": {
+   "name": "柴山漁港",
+   "pref": "兵庫県",
+   "verdict": "lifted",
+   "summary": "2021年9月に但馬漁協柴山支所が『港内での釣り全面禁止』の張り紙を出したが、港湾管理者の県新温泉土木事務所が公共岸壁は釣り人も利用可と判断し10月に撤回、適正利用を求める連名の張り紙に替えた（神戸新聞）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.kobe-np.co.jp/news/tajima/202110/0014758404.shtml",
+    "https://www.kobe-np.co.jp/news/tajima/202110/sp/0014758404.shtml?pg=amp"
+   ]
+  },
+  "shichigahama-gyokou6": {
+   "name": "七ヶ浜漁港",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "宮城県は仙台塩釜港内を全面釣り禁止としており（県公式）、花渕浜は塩釜港区の港湾区域に含まれるとする県資料がある。花渕浜漁港の該当範囲は未確認。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html",
+    "https://www.pref.miyagi.jp/soshiki/kouwan/kouwankuiki.html"
+   ],
+   "secondaryUrls": []
+  },
+  "shimizu-kou-miho": {
+   "name": "清水港（三保半島）",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトで、清水港のドリームプラザ前は立入禁止のポイントや桟橋付近での釣りが禁止と注意喚起されている。三保側での禁止記述は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/668"
+   ]
+  },
+  "shimizu-port": {
+   "name": "清水港",
+   "pref": "静岡県",
+   "verdict": "official_partial",
+   "summary": "静岡市の案内で、清水港の日の出埠頭岸壁は普段は保安上立入禁止で、釣りフェスタ等で定期的に一部のみ釣り場として開放されている。新港町周辺の禁止記述は見つからず。",
+   "officialUrls": [
+    "https://www.city.shizuoka.lg.jp/s2431/s004730.html"
+   ],
+   "secondaryUrls": []
+  },
+  "shingu-port-breakwater": {
+   "name": "新宮漁港堤防",
+   "pref": "福岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、3本ある堤防のうち北側の堤防は立入禁止区域と紹介されている。公式の告知は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1385"
+   ]
+  },
+  "shingu-port-fukuoka": {
+   "name": "新宮漁港",
+   "pref": "福岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）で、新宮漁港の3本の堤防のうち北側の堤防は立入禁止区域と注意喚起。ほかの堤防・岸壁・テトラ帯は釣り可と紹介。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1385"
+   ]
+  },
+  "shinminato-gyokou-e8": {
+   "name": "射水市・新湊漁港",
+   "pref": "富山県",
+   "verdict": "official_partial",
+   "summary": "住所の射水市海王町は富山新港（伏木富山港新湊地区）側で、富山県の資料では富山新港で釣りができるのは地図で指定された4〜5か所のみで、それ以外は釣り禁止区域。新湊漁港の西波除堤も3〜10月の土日祝のみ開放（県）。",
+   "officialUrls": [
+    "https://www.pref.toyama.jp/documents/6155/tsuribasho2025.pdf",
+    "https://www.pref.toyama.jp/documents/6155/01202639.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shinojima-tsuri": {
+   "name": "篠島",
+   "pref": "愛知県",
+   "verdict": "secondary_partial",
+   "summary": "るるぶの掲載情報で、7月〜8月末の海水浴期間は前浜海水浴場での釣りが禁止とされている。島全体の釣り禁止情報はない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80024360"
+   ]
+  },
+  "shiogama-kitahama-bouhatei-e8": {
+   "name": "塩釜北浜防波堤",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県の公式ページで「仙台塩釜港内は全面釣り禁止」で釣り可能なのはNX仙台港パーク内海の広場のみとされ、防波堤・テトラへの立入りもしないよう呼びかけている。海保も立入禁止場所での釣りをしないよう注意喚起。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html",
+    "https://www.pref.miyagi.jp/documents/21675/tsurirule.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shiogama-kitahama-breakwater": {
+   "name": "塩竈市北浜防波堤",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県の公式ページが『仙台塩釜港内は全面釣り禁止』とし、港内で釣りができるのは仙台港のNX仙台港パーク海の広場のみと案内。防波堤・テトラへの立入もしないよう呼びかけている。北浜は塩釜港区内。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html"
+   ],
+   "secondaryUrls": []
+  },
+  "shiogama-marinegate-pier-a13": {
+   "name": "塩釜市マリンゲート桟橋",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県（仙台塩釜港湾事務所）が「仙台塩釜港内は全面釣り禁止」と明記し、港内で釣りができるのはNX仙台港パーク内海の広場のみとしている。マリンゲート塩釜は同港塩釜港区の旅客ターミナルで、桟橋は全面禁止の範囲に含まれる。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html",
+    "https://www.pref.miyagi.jp/documents/21675/tsurirule.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shiogama-urato-katsurashima-rocky-a13": {
+   "name": "塩釜市浦戸桂島磯",
+   "pref": "宮城県",
+   "verdict": "secondary_partial",
+   "summary": "釣り人の投稿（anglers.jp）で、浦戸の人気アジングポイントがマナー違反（ゴミ・駐車・焚き火等）を理由に釣り禁止になると伝えられている。桂島の磯が該当するかは不明。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://anglers.jp//catches/6335553"
+   ]
+  },
+  "shiraho-kaigan-a11": {
+   "name": "白保海岸",
+   "pref": "沖縄県",
+   "verdict": "official_partial",
+   "summary": "環境省資料で白保地先海域は西表石垣国立公園の海域公園（海中公園）地区に指定され、チョウチョウウオ科など熱帯性魚類の捕獲・殺傷が規制されている。海中公園のため禁止として計上（釣り全面禁止の明記はなし）。",
+   "officialUrls": [
+    "https://www.env.go.jp/press/files/jp/9913.pdf",
+    "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/004/312/shiraho3.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shiraishijima-okayama-w6": {
+   "name": "白石島",
+   "pref": "岡山県",
+   "verdict": "official_partial",
+   "summary": "岡山県の文書で白石島の一部海域（影平ヨコゾワ突端の標識等で区切った区域）が保護区域とされ、水産動植物の採捕が禁止されている。メバル・カサゴ・マダイ・クロダイ・キジハタに全長制限もある。",
+   "officialUrls": [
+    "https://www.pref.okayama.jp/uploaded/attachment/260893.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shonan-enoshima-breakwater": {
+   "name": "湘南江の島堤防",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトで江の島ヨットハーバー内は釣り禁止と注記（湘南大堤防は釣り可として紹介）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1162/2",
+    "https://www.jackery.jp/blogs/fishing/enoshima-fishing-spots-10-breakwater-rock-rental"
+   ]
+  },
+  "shonan-ko-kita-ryokuchi": {
+   "name": "湘南港北緑地広場",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、北緑地岸壁は釣り場として紹介される一方、ヨットハーバー内は釣り禁止と注記されている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1162/2"
+   ]
+  },
+  "shonan-kou-enoshima-yacht-a12": {
+   "name": "湘南港（江の島ヨットハーバー）",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトでは江の島ヨットハーバー（湘南港）の内側は釣り禁止とされ、釣りは湘南大堤防などで行うと紹介されている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1162/2"
+   ]
+  },
+  "soma-harakama-north-breakwater-a13": {
+   "name": "相馬市原釜港北堤防",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が「相馬港・各漁港の立入禁止区域」と釣りマップを公開し、2020年に相馬港・松川浦漁港（原釜地区を含む）で釣り禁止区域の周知看板を設置。県は港湾・漁港防波堤の立入禁止マップも公開している。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-harakama-outer-a12": {
+   "name": "相馬市原釜漁港外堤防",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が「相馬港・各漁港の立入禁止区域」を公表し、相馬港・松川浦漁港等に釣り禁止区域の周知看板を設置（2020年）。防波堤への立入禁止も呼びかけているが、原釜の外堤防が区域に含まれるかは検索結果では未確認。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-haranokama-e8": {
+   "name": "相馬原釜漁港",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が「相馬港・各漁港の立入禁止区域」を公開し、相馬港・松川浦漁港等に釣り禁止区域の周知看板を設置している。原釜地区の具体的な禁止範囲は検索では確認できず。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-ko-matsukawa": {
+   "name": "相馬港・松川浦",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が相馬港・各漁港の立入禁止区域と『相馬港・松川浦漁港周辺釣りマップ』を公表し、2020年に相馬港・松川浦漁港等で釣り禁止区域の周知看板を設置。防波堤等の立入禁止場所への立入を禁じている（区域の詳細は未確認）",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-kou-5gou-futou": {
+   "name": "相馬港5号埠頭",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "相馬港5号ふ頭防波堤は新地町海釣り公園として決められた区画で釣りが認められている（国交省資料・施設案内）。一方、福島県相馬港湾建設事務所は相馬港の釣り禁止区域に周知看板を設置し、立入禁止区域を公開しており、公園外は釣り禁止区域がある。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/kowan/content/001372306.pdf",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": [
+    "https://iko-yo.net/facilities/52881"
+   ]
+  },
+  "soma-matsukawa-oosu-beach-a13": {
+   "name": "相馬市松川浦大州海岸",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が2020年8月に「相馬港、松川浦漁港等における釣り禁止区域」の周知看板を設置。大洲海岸が対象範囲に含まれるかは検索結果では不明。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-obama-breakwater-a10": {
+   "name": "相馬港尾浜堤防",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が「相馬港・各漁港の立入禁止区域」を公表し、2020年に相馬港・松川浦漁港等へ釣り禁止区域周知看板を設置。尾浜の堤防が該当するかは検索結果では未確認。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-outer-breakwater-a11": {
+   "name": "相馬港外堤防",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が相馬港の立入禁止区域・釣り禁止区域を公表（2020年に看板設置）。県は港湾・漁港防波堤立入禁止マップも掲載しており、外堤防が該当する可能性が高いが検索結果では明記を確認できず。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-port": {
+   "name": "相馬港",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が相馬港・松川浦漁港等に釣り禁止区域の周知看板を設置（2020年8月）し、『相馬港・各漁港の立入禁止区域』を公表。防波堤など立入禁止場所に入らないよう呼びかけている。原釜地区の具体的範囲は未確認。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "suisho-hama-e8": {
+   "name": "水晶浜海水浴場",
+   "pref": "福井県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（るるぶ）で海水浴場の禁止事項に『遊泳区域内での遊泳以外の行為』が挙がっており、開設期間中は遊泳区域での釣りができない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80017646/beach"
+   ]
+  },
+  "sukematsu-wharf": {
+   "name": "助松埠頭",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "大阪府の告示で、泉大津市小津島町の助松地区の複数岸壁が港湾保安上の立入制限区域に指定されている（釣りへの言及は未確認）。",
+   "officialUrls": [
+    "https://www.pref.osaka.lg.jp/houbun/reiki/reiki_honbun/k201RG00001270.html"
+   ],
+   "secondaryUrls": []
+  },
+  "sukenatsu-futou-gogan-a12": {
+   "name": "助松埠頭護岸",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "大阪府告示で堺泉北港助松地区の助松2号岸壁と関連港湾施設がSOLAS立入制限区域に指定されている（埠頭の一部）。護岸全体の釣り禁止の記述は見つからず。",
+   "officialUrls": [
+    "https://www.pref.osaka.lg.jp/houbun/reiki/reiki_honbun/k201RG00001270.html"
+   ],
+   "secondaryUrls": []
+  },
+  "suma-kaigan-k8": {
+   "name": "須磨海岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "神戸市（港湾管理者）が須磨海岸の防波堤・離岸堤への立入りを禁止し、瀬渡しも禁止している。砂浜での釣り自体の禁止はない。",
+   "officialUrls": [
+    "https://www.city.kobe.lg.jp/documents/37319/kisei2.pdf",
+    "https://www.city.kobe.lg.jp/a46366/kanko/leisure/suma_beach/sumakouhou/suma_ordinance.html"
+   ],
+   "secondaryUrls": []
+  },
+  "suo-oshima-katazoe": {
+   "name": "周防大島・片添ヶ浜",
+   "pref": "山口県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（ウォーカープラス）の片添ヶ浜海水浴場の禁止事項に「魚釣り禁止」が挙げられている（海水浴場区域内、主に営業期間中）。隣接の海浜公園では釣りができると県観光サイトで紹介。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.walkerplus.com/spot/ar0835s14502/data.html",
+    "https://summer.walkerplus.com/odekake/detail/ar0835s14502/data.html"
+   ]
+  },
+  "tago-gyokou": {
+   "name": "田子漁港",
+   "pref": "静岡県",
+   "verdict": "lifted",
+   "summary": "田子漁港（西伊豆町）は2022年7月から釣り禁止になったが、2023年7月末から予約アプリ「海釣りGO」による予約制・有料（1時間300円）の釣り場として再開。侵入禁止エリアあり（水産庁資料・TSURI HACK等）。",
+   "officialUrls": [
+    "https://www.jfa.maff.go.jp/j/keikaku/attach/pdf/230718-89.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/8980",
+    "https://dxmagazine.jp/?p=19042"
+   ]
+  },
+  "takamatsu-kou-w6": {
+   "name": "高松港",
+   "pref": "香川県",
+   "verdict": "official_partial",
+   "summary": "香川県高松港管理事務所のページで、サンポート高松には船舶の安全確保のため釣りを禁止する区域が設けられている（範囲は図で表示）。禁止区域外でもマナー順守を求めている。",
+   "officialUrls": [
+    "https://www.pref.kagawa.lg.jp/takamatsukokanri/port_takamatsu/kisou2nd3rd.html"
+   ],
+   "secondaryUrls": []
+  },
+  "takamatsu-omatoba-kaigan": {
+   "name": "高松市・大的場海岸護岸",
+   "pref": "香川県",
+   "verdict": "official_partial",
+   "summary": "香川県（高松港管理）がサンポート高松に船舶の安全確保のための釣り禁止区域を設定。登録住所の浜ノ町はサンポート地区で大的場はその西側だが、大的場が禁止区域に含まれるかは検索結果では未確認。",
+   "officialUrls": [
+    "https://www.pref.kagawa.lg.jp/takamatsukokanri/port_takamatsu/kisou2nd3rd.html"
+   ],
+   "secondaryUrls": []
+  },
+  "takamatsu-tamamo-breakwater": {
+   "name": "高松港玉藻防波堤",
+   "pref": "香川県",
+   "verdict": "official_partial",
+   "summary": "香川県高松港管理事務所のページで、サンポート高松に船舶の安全確保のための釣り禁止区域が設けられている（範囲は図示）。玉藻防波堤は注意報・警報発令時にゲートが閉鎖され立入不可。",
+   "officialUrls": [
+    "https://www.pref.kagawa.lg.jp/takamatsukokanri/port_takamatsu/kisou2nd3rd.html"
+   ],
+   "secondaryUrls": []
+  },
+  "takasegawa-kakou-misawa": {
+   "name": "高瀬川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "国交省の高瀬川河川整備資料で、河口部右岸側は米軍射爆練習場のため立入りできないと記載。左岸側は釣り利用が主体（利用の約7割が釣り）。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/river/basic_info/jigyo_keikaku/gaiyou/seibi/pdf/takase-4.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "takehara-tadanoumi-port": {
+   "name": "竹原市忠海港",
+   "pref": "広島県",
+   "verdict": "official_partial",
+   "summary": "広島海区漁業調整委員会指示で、忠海港の防波堤突端と陸岸・防波堤で囲まれた海域が陸岸・防波堤からのまきえ釣り禁止区域とされている（2007〜2011年の指示書で確認、最新版は未確認）。釣り自体の全面禁止ではない。",
+   "officialUrls": [
+    "https://www.pref.hiroshima.lg.jp/soumu/soumu/kenpo/pdf22/09gatsu/077/20100930350001.pdf",
+    "https://www.pref.hiroshima.lg.jp/soumu/soumu/kenpo/pdf23/09gatsu/076/20110922350001.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "takonohana-shimane-w6": {
+   "name": "多古鼻",
+   "pref": "島根県",
+   "verdict": "official_partial",
+   "summary": "島根県の漁場計画で松江市島根町多古・多古鼻地先に定置漁業の漁場があり、県は定置網周辺の保護区域（本土側は漁具から200m以内目安）での釣りを禁止している。",
+   "officialUrls": [
+    "https://www.pref.shimane.lg.jp/industry/suisan/kanri/iji/awabi_sazae.data/HP_teichiami-hogokuiki.pdf",
+    "https://www.pref.shimane.lg.jp/industry/suisan/kanri/iji/20030901gyojyoukeikaku.data/shimanekaikukeikaku20230901.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tamagawa-kakko6": {
+   "name": "多摩川河口",
+   "pref": "東京都",
+   "verdict": "official_partial",
+   "summary": "大田区の高潮堤防の案内で、現地表示の立入禁止区域への立入禁止を呼びかけている。羽田空港側の水域は空港管理規則の制限区域で一般船舶は立入不可（国交省資料）。",
+   "officialUrls": [
+    "https://www.city.ota.tokyo.jp/seikatsu/sumaimachinami/haneda_airport/hgw/waterside/takashioteibou.html",
+    "https://www.ktr.mlit.go.jp/ktr_content/content/000654711.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tenjin-jima": {
+   "name": "天神島",
+   "pref": "神奈川県",
+   "verdict": "secondary_full",
+   "summary": "天神島は横須賀市の臨海自然教育園で、周辺水域とも県の天然記念物・名勝に指定。旅行メディアが『磯での遊泳・素潜り・釣りは厳禁』と記載（沖の笠島は立入禁止）。",
+   "officialUrls": [
+    "https://online.bunka.go.jp/db/heritages/detail/591946"
+   ],
+   "secondaryUrls": [
+    "https://tabi-mag.jp/kn0782/"
+   ]
+  },
+  "tenjingawa-kakou": {
+   "name": "天神川河口",
+   "pref": "鳥取県",
+   "verdict": "official_partial",
+   "summary": "鳥取県漁業調整規則第41条により、天神川河口付近は3/1〜5/31の間、水産動植物の採捕禁止（アユ遡上保護）。川尻の禁止区域（河口両岸から各100m・沖合80mの海域）も設定（鳥取県）。",
+   "officialUrls": [
+    "https://www.pref.tottori.lg.jp/305500.htm",
+    "https://www.pref.tottori.lg.jp/secure/1333357/tenjinyuugyoR90101.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "teradomari-kou-niigata": {
+   "name": "寺泊港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は県管理の港の防波堤（離岸堤・沖防波堤含む）を転落の危険から一律立入禁止としており、釣り場として開放している施設の一覧に寺泊港は含まれない。寺泊港個別の釣り禁止記載は見つからず。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/1356904273863.html"
+   ],
+   "secondaryUrls": []
+  },
+  "tokyo-ko-yacho6": {
+   "name": "東京港野鳥公園",
+   "pref": "東京都",
+   "verdict": "secondary_full",
+   "summary": "東京港野鳥公園は野鳥の生息地保護を目的とした公園で、保護区内は立入禁止。釣りが可能という情報はなく、園内での釣りは実質不可と考えられる（公式に「釣り禁止」の明記は検索結果では未確認）。",
+   "officialUrls": [
+    "https://www.kouwan.metro.tokyo.lg.jp/kanko/13_kaijokouen_yatyou.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tottori-kou-nishi-bouhatei-w7": {
+   "name": "鳥取港西防波堤",
+   "pref": "鳥取県",
+   "verdict": "official_full",
+   "summary": "土木学会誌の立入禁止特集（2021年）で鳥取県の港湾管理者側が、西防波堤は立入禁止で入口門扉を2013年に増設・2017年に高い門扉へ交換し、看板設置や合同パトロールをしても釣り人の侵入が続くと説明。第2東防波堤は釣り場として開放とのこと。",
+   "officialUrls": [
+    "https://www.jsce.or.jp/journal/student/tachiirikinshi/202105.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tsuruga-ko": {
+   "name": "敦賀港",
+   "pref": "福井県",
+   "verdict": "lifted",
+   "summary": "国交省敦賀港湾事務所が護岸リフレッシュ工事のため護岸・駐車場への立入を禁止していた（2023年7月〜）が、2025年4月1日に入場規制を解除。",
+   "officialUrls": [
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/topic/2024/88ee89f9.pdf",
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/67e32afd.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tsuruga-mariyama-park-a10": {
+   "name": "敦賀港・鞠山海釣り公園",
+   "pref": "福井県",
+   "verdict": "lifted",
+   "summary": "鞠山海遊パーク周辺の護岸は護岸工事のため2023年7月から一般立入禁止だったが、敦賀港湾事務所の資料によると2025年4月1日に入場規制が解除された。",
+   "officialUrls": [
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/topic/2024/88ee89f9.pdf"
+   ],
+   "secondaryUrls": [
+    "https://www.fuku-e.com/en/attractions/detail_1456.html"
+   ]
+  },
+  "tsuruga-nago-kou": {
+   "name": "敦賀・名子港",
+   "pref": "福井県",
+   "verdict": "lifted",
+   "summary": "国交省敦賀港湾事務所の資料で、名子地区の護岸リフレッシュ工事に伴う護岸・駐車場の立入禁止が令和7年4月1日に解除されたと案内されている。",
+   "officialUrls": [
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/topic/2024/88ee89f9.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tsuruga-shinkou-mariyama-e8": {
+   "name": "敦賀新港（鞠山海遊パーク）",
+   "pref": "福井県",
+   "verdict": "lifted",
+   "summary": "鞠山海遊パークの護岸は2023年7月から護岸工事のため一般の立入りが制限されていたが、国交省敦賀港湾事務所の資料で令和7年4月1日に入場規制が解除されたとされる。",
+   "officialUrls": [
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/topic/2024/88ee89f9.pdf"
+   ],
+   "secondaryUrls": [
+    "https://www.fuku-e.com/en/attractions/detail_1456.html"
+   ]
+  },
+  "tsurumi-hantou-saiki-w6": {
+   "name": "佐伯・鶴見半島",
+   "pref": "大分県",
+   "verdict": "official_partial",
+   "summary": "大分海区漁業調整委員会告示で、佐伯市鶴見の梶寄大碆から米水津との境界まで（沖磯含む）は、いそ釣りでのアミ（オキアミ含む）まきえの使用が禁止。鶴見の先ノ瀬灯台周辺も県規則でまきえ釣禁止区域（大分県資料）。釣り自体の禁止ではなく、まきえを使うフカセ釣りが規制対象。",
+   "officialUrls": [
+    "https://pref.oita.jp/uploaded/life/2279718_4367470_misc.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "tsurumigawa-kakko6": {
+   "name": "鶴見川河口",
+   "pref": "神奈川県",
+   "verdict": "official_partial",
+   "summary": "横浜市が港内のふ頭・防波堤での釣りは（海づり施設を除き）禁止とし、大黒ふ頭内に港湾関係者以外立入禁止の場所があると案内。住所の大黒町側の岸壁・ふ頭部分は該当しうる。河川護岸部分の禁止記述はなし。",
+   "officialUrls": [
+    "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/umizuri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "tsutsuishi-kou-niigata": {
+   "name": "筒石港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県糸魚川地域振興局が「港内での魚釣りは禁止です」と案内し、港湾内・漁港内は関係者以外立入禁止としている。筒石漁港は同振興局管理の県管理漁港4港の一つ。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/itoigawa_seibi/1356783520787.html",
+    "https://www.pref.niigata.lg.jp/site/itoigawa-seibi/tutuishi.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/809"
+   ]
+  },
+  "uradome-kaigan-w5": {
+   "name": "浦富海岸",
+   "pref": "鳥取県",
+   "verdict": "official_partial",
+   "summary": "環境省資料で浦富海岸は山陰海岸国立公園の海域公園地区に指定され、全域が動植物の採捕規制区域（連続海域31haの拡張案も）。海中公園相当のため禁止として計上。",
+   "officialUrls": [
+    "https://www.env.go.jp/press/files/jp/23853.pdf",
+    "https://www.env.go.jp/park/sanin/intro/"
+   ],
+   "secondaryUrls": []
+  },
+  "urari-mae": {
+   "name": "うらり前岸壁",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイトで三崎港には立入禁止・釣り禁止のエリアがあると書かれ、隣接の北条湾奥の船溜まりでは船の周りが釣り禁止とされる（うらり前岸壁自体の禁止記述は未確認）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/894/2"
+   ]
+  },
+  "wakasu-kaihin-add2": {
+   "name": "東京湾奥（若洲海浜公園周辺）",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトの記事で、若洲海浜公園の東岸は釣り禁止エリアに指定されていると紹介。釣りは海釣り施設（6〜21時）と人工磯で可能。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.excite.co.jp/news/article/FishingJapan_011732/"
+   ]
+  },
+  "wakasu-seaside-park": {
+   "name": "若洲海浜公園",
+   "pref": "東京都",
+   "verdict": "official_partial",
+   "summary": "東京都港湾局の海上公園案内で、釣りは指定エリア（海釣り施設・人工磯）のみ可能で、それ以外や東京ゲートブリッジ側での釣りは禁止とされている。",
+   "officialUrls": [
+    "https://www.kouwan.metro.tokyo.lg.jp/kanko/13_kaijokouen_wakasu_202304.pdf",
+    "https://www.kouwan.metro.tokyo.lg.jp/kanko/11_kaijokouen_kwakasu_202404.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "yamamoto-isohama-e8": {
+   "name": "山元磯浜漁港",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "国交省仙台河川国道事務所の山元海岸工事だより（2021年）で、坂元川の南側から磯浜漁港までの海岸区域（防潮堤から海側）がヘッドランド工事のため立入禁止とされている。漁港内そのものの規制ではない。",
+   "officialUrls": [
+    "https://www.thr.mlit.go.jp/Sendai/jimusyo/syu/kaigan/info/pdf/vol.123.pdf",
+    "https://www.thr.mlit.go.jp/Sendai/jimusyo/syu/kaigan/info/pdf/vol.121.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "yamamoto-isohama-port-a13": {
+   "name": "山元町磯浜漁港堤防",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "国交省仙台河川国道事務所の案内で、山元海岸の坂元川南側から磯浜漁港までの区域が工事のため堤防から海側を当面立入禁止とされている（発行年不明・現在も有効か未確認）。漁港内の釣り禁止記述はなし。",
+   "officialUrls": [
+    "https://www.thr.mlit.go.jp/Sendai/jimusyo/syu/kaigan/info/pdf/vol.123.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "yanagawa-okibata-suitengu-s8": {
+   "name": "柳川・沖端水天宮周辺",
+   "pref": "福岡県",
+   "verdict": "official_partial",
+   "summary": "福岡県内水面漁場管理委員会の指示で、沖端川の出ノ橋下流端から昭南町・吉富町を結ぶ線までの区域が、モクズガニ・テナガエビ・アユ・コイ・ウナギ等の魚種別採捕禁止区域に挙がっている（令和7年4月〜令和10年3月）。",
+   "officialUrls": [
+    "https://www.pref.fukuoka.lg.jp/uploaded/attachment/252558.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "yomitan-port": {
+   "name": "読谷漁港",
+   "pref": "沖縄県",
+   "verdict": "official_full",
+   "summary": "読谷村漁協が都屋漁港の入口ゲートに『釣り禁止』の看板を10年以上前から設置し、ごみ・盗難被害の増加で看板を増やしたと琉球新報が報道。漁協組合員も『釣りは禁止にせざるを得ない』と話している。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-945273.html",
+    "https://ryukyushimpo.jp/tag/都屋漁港"
+   ]
+  },
+  "yorogawa-kakko6": {
+   "name": "養老川河口",
+   "pref": "千葉県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトによると、養老川河口の海づり公園の対岸は立入禁止で釣りができず、五井堤防（赤灯）も立入禁止エリアがあり陸から行けない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/937/2"
+   ]
+  },
+  "yoshinogawa-kakou-itano-a11": {
+   "name": "吉野川河口・板野側",
+   "pref": "徳島県",
+   "verdict": "official_partial",
+   "summary": "国交省徳島河川国道事務所の資料で、第十堰・旧吉野川河口堰・今切川河口堰の上流50m・下流150m以内および各橋梁上での釣りが禁止とされている。河口一帯の護岸自体は釣り場として紹介。",
+   "officialUrls": [
+    "https://www.skr.mlit.go.jp/tokushima/kouhoushi/matome/fishing/PDF/f-26.pdf",
+    "https://www.skr.mlit.go.jp/tokushima/river/event/yoshikouza/no15/text15-7-2.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "yoshinogawa-kakou-w6": {
+   "name": "吉野川河口",
+   "pref": "徳島県",
+   "verdict": "official_partial",
+   "summary": "徳島県資料で、第十堰・旧吉野川河口堰・今切川河口堰などの堰の上流50m・下流150m以内と、各橋梁上での魚釣りが禁止。河口一帯の護岸自体は国交省が釣りの好ポイントとして紹介。",
+   "officialUrls": [
+    "https://www.pref.tokushima.lg.jp/file/attachment/1031782.pdf",
+    "https://www.skr.mlit.go.jp/tokushima/kouhoushi/matome/fishing/PDF/f-26.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "yui-gyokou-shizuoka": {
+   "name": "由比漁港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（TSURI HACK）によると、由比港の新堤防の高くなった部分は釣り人の立入禁止区域で、堤防は港内側のみ釣りが許されている。マナー悪化で一時全面禁止になり交渉で再開された経緯もあるとされる。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/2581",
+    "https://tsurihack.com/2581/2"
+   ]
+  },
+  "yuriage-breakwater-a10": {
+   "name": "閖上漁港防波堤",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県（仙台地方振興事務所水産漁港部）が転落事故防止のため閖上漁港の防波堤への立入を禁止しており、南導流堤・南防波堤の侵入防止柵から先が立入禁止区域（2024年1月掲載）。スポット名が防波堤そのもの。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
+   ],
+   "secondaryUrls": []
+  },
+  "yuriage-port": {
+   "name": "閖上港",
+   "pref": "宮城県",
+   "verdict": "official_partial",
+   "summary": "宮城県（仙台地方振興事務所）が転落事故防止のため、閖上漁港の南導流堤・南防波堤の侵入防止柵より先を立入禁止としている。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
+   ],
+   "secondaryUrls": []
+  }
+ }
+}

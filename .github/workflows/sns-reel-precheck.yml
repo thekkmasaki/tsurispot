@@ -1,0 +1,63 @@
+name: SNSランキング 事前チェック（向こう1週間の投稿予定 / 承認の保存）
+
+# 手順は scripts/sns/ranking-reel/PRECHECK.md。
+# 週1回（水曜の週報の後）、Claude の定期タスクがこのワークフローを2回起動する:
+#   1) mode=plan  … 台帳から本番と同じ条件で向こう7日（14枠）の投稿予定を作り、ログと成果物に出す
+#   2) mode=apply … Claude が釣り禁止・近年の釣況・生息域を確認した結果（承認・除外スポット）を Redis に保存する
+# 投稿（sns-ranking-reel.yml / run.mjs）は承認のある枠だけ投稿する。
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'plan（予定を作る）または apply（承認を保存する）'
+        type: choice
+        options: [plan, apply]
+        default: plan
+      from:
+        description: 'plan: 開始日 YYYY-MM-DD（空なら明日）'
+        required: false
+      days:
+        description: 'plan: 日数'
+        default: '7'
+      decisions:
+        description: 'apply: 承認のJSON配列（PRECHECK.md の形式）'
+        required: false
+
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: 依存インストール
+        if: inputs.mode == 'plan'
+        run: npm ci
+      - name: 投稿予定を作る
+        if: inputs.mode == 'plan'
+        env:
+          FROM: ${{ inputs.from }}
+          DAYS: ${{ inputs.days }}
+        run: |
+          ARGS=(plan --days "${DAYS:-7}")
+          [ -n "$FROM" ] && ARGS+=(--from "$FROM")
+          node scripts/sns/ranking-reel/plan-week.mjs "${ARGS[@]}"
+      - name: 承認を保存する
+        if: inputs.mode == 'apply'
+        env:
+          PRECHECK_DECISIONS: ${{ inputs.decisions }}
+        run: node scripts/sns/ranking-reel/plan-week.mjs apply
+      - name: 予定を保存（確認用・14日）
+        if: inputs.mode == 'plan'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sns-precheck-plan-${{ github.run_id }}
+          path: out/sns-precheck/
+          retention-days: 14

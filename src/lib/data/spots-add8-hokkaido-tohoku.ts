@@ -226,7 +226,6 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
       { fish: fish("kurosoi"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
-      { fish: fish("kasago"), monthStart: 9, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("hirame"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeHokkaido,

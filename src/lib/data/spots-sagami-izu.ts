@@ -183,7 +183,6 @@ export const sagamiIzuSpots: FishingSpot[] = [
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
-          { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: [
       { label: "朝マヅメ", timeRange: "05:00〜07:30", rating: "best" },
@@ -204,7 +203,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   },
   {
     id: "si4", name: "長浜海岸", slug: "nagahama-beach-atami",
-    description: "熱海市下多賀にある、砂浜と磯が混在する海岸。5月〜10月は朝マヅメの投げ釣りでキスが本命となり、上げ潮で砂浜に魚が寄りやすい。磯場では通年のカサゴ、11月〜4月のメバルと根魚も狙え、9月〜12月はエギングでアオリイカ、6月〜10月はタコエギでマダコ、8月〜11月はショアジギングでサワラの回遊もある。春はカゴ釣りでマダイの実績も。JR網代駅から徒歩約15分、海岸沿いに駐車場とトイレがある。夏季は海水浴場になるため釣りの制限に注意したい。",
+    description: "熱海市下多賀にある、砂浜と磯が混在する海岸。5月〜10月は朝マヅメの投げ釣りでキスが本命となり、上げ潮で砂浜に魚が寄りやすい。磯場では通年のカサゴ、11月〜4月のメバルと根魚も狙え、9月〜12月はエギングでアオリイカ、6月〜10月はタコエギでマダコも狙える。春はカゴ釣りでマダイの実績も。JR網代駅から徒歩約15分、海岸沿いに駐車場とトイレがある。夏季は海水浴場になるため釣りの制限に注意したい。",
     latitude: 35.0830, longitude: 139.0890, address: "〒413-0102 静岡県熱海市下多賀",
     accessInfo: "JR網代駅から徒歩約15分。国道135号沿い。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
@@ -218,7 +217,6 @@ export const sagamiIzuSpots: FishingSpot[] = [
           { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
-          { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: [
       { label: "朝マヅメ", timeRange: "05:00〜07:00", rating: "best" },
@@ -647,7 +645,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   },
   {
     id: "si18", name: "白浜海岸", slug: "shirahama-coast-shimoda",
-    description: "白浜海岸は静岡県下田市のサーフで、キスの投げ釣りやヒラメが狙える。伊豆随一の透明度を誇る白砂の浜です。白浜大浜海岸でワラサ（イナダ）狙いの釣果を探す方に向くポイントで、8〜11月はショアジギングでイナダなどブリ系の青物が回遊し、同時期にはサワラもショアジギングで期待できます。初夏から秋（5〜10月）は投げ釣りでキスが手堅く、秋から冬（10〜3月）はサーフルアーでヒラメも。秋のアオリイカのエギングや、根周りのカサゴ・メバルも楽しめます。砂浜で足場がよく初心者にもおすすめ。無料で釣行でき、駐車場・トイレ・コンビニが近く、夏は海水浴場として賑わいます。離岸流には注意してください。",
+    description: "白浜海岸は静岡県下田市のサーフで、キスの投げ釣りやヒラメが狙える。伊豆随一の透明度を誇る白砂の浜です。白浜大浜海岸でワラサ（イナダ）狙いの釣果を探す方に向くポイントで、8〜11月はショアジギングでイナダなどブリ系の青物が回遊します。初夏から秋（5〜10月）は投げ釣りでキスが手堅く、秋から冬（10〜3月）はサーフルアーでヒラメも。秋のアオリイカのエギングや、根周りのカサゴ・メバルも楽しめます。砂浜で足場がよく初心者にもおすすめ。無料で釣行でき、駐車場・トイレ・コンビニが近く、夏は海水浴場として賑わいます。離岸流には注意してください。",
     latitude: 34.6650, longitude: 138.9780, address: "〒415-0012 静岡県下田市白浜",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約10分。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
@@ -661,9 +659,6 @@ export const sagamiIzuSpots: FishingSpot[] = [
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
           { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
-          { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
-          { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
-          { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: [
       { label: "朝マヅメ", timeRange: "05:00〜07:00", rating: "best" },
@@ -697,7 +692,6 @@ export const sagamiIzuSpots: FishingSpot[] = [
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
-          { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: [
       { label: "朝マヅメ", timeRange: "05:00〜07:00", rating: "best" },
@@ -940,7 +934,6 @@ export const sagamiIzuSpots: FishingSpot[] = [
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
-          { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: [
       { label: "朝マヅメ", timeRange: "05:00〜07:00", rating: "good" },
@@ -1014,7 +1007,6 @@ export const sagamiIzuSpots: FishingSpot[] = [
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
-          { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: [
       { label: "朝マヅメ", timeRange: "05:00〜07:00", rating: "best" },

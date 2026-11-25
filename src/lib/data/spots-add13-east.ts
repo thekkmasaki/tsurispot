@@ -135,7 +135,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13204", name: "小美玉・霞ヶ浦南岸", slug: "omitama-kasumigaura-south-a13",
-    description: "霞ヶ浦の南側護岸はバス釣りの穴場で、ウィードが豊富なシャローエリアが長く続く。4〜11月は朝マヅメのルアーでブラックバス、秋から冬は接岸するワカサギがターゲットになる。霞ヶ浦・北浦は茨城県霞ケ浦北浦海区漁業調整規則によりまき餌釣りが全面禁止されているため、ワカサギも寄せエサを使わず、アカムシなどの刺しエサだけのウキ釣りで狙うことになる。",
+    description: "霞ヶ浦の南側護岸はバス釣りの穴場で、ウィードが豊富なシャローエリアが長く続く。4〜11月は朝マヅメのルアーでブラックバスがターゲットになる。霞ヶ浦・北浦は茨城県霞ケ浦北浦海区漁業調整規則によりまき餌釣りが全面禁止されているので注意したい。",
     latitude: 36.0210, longitude: 140.3450,
     address: "〒311-3422 茨城県小美玉市下馬場",
     accessInfo: "常磐道千代田石岡ICから車で約20分",
@@ -145,7 +145,6 @@ export const eastAdd13Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
     ],
     rules: {
       castingAllowed: true,
@@ -244,7 +243,6 @@ export const eastAdd13Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeLake,
   },
@@ -2501,7 +2499,6 @@ export const eastAdd13Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
     ],
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },

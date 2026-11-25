@@ -102,7 +102,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12202", name: "霞ヶ浦・歩崎公園前", slug: "kasumigaura-ayumizaki-a12",
-    description: "霞ヶ浦南岸・歩崎公園前に広がる遠浅の湖岸ポイント。4〜10月は朝マヅメのルアーでブラックバス、10〜3月は日中のワカサギ仕掛けでワカサギが狙え、夏と冬で異なる釣りものを楽しめるのが特長。どちらも最盛期がはっきりしており、季節を選べば初心者でも釣果を出しやすい。歩崎公園の無料駐車場とトイレが利用できるファミリー向きの環境で、常磐道土浦北ICから車で約20分とアクセスも良好。無料で釣りができる。",
+    description: "霞ヶ浦南岸・歩崎公園前に広がる遠浅の湖岸ポイント。4〜10月は朝マヅメのルアーでブラックバスが狙える。霞ヶ浦のワカサギは近年ほとんど獲れなくなっている。どちらも最盛期がはっきりしており、季節を選べば初心者でも釣果を出しやすい。歩崎公園の無料駐車場とトイレが利用できるファミリー向きの環境で、常磐道土浦北ICから車で約20分とアクセスも良好。無料で釣りができる。",
     latitude: 36.0350, longitude: 140.2420,
     address: "〒300-0214 茨城県かすみがうら市坪井",
     accessInfo: "常磐道土浦北ICから車で約20分",
@@ -112,7 +112,6 @@ export const eastAdd12Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ仕掛け" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeLake,
   },
@@ -2561,7 +2560,6 @@ export const eastAdd12Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ仕掛け" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeLake,
   },

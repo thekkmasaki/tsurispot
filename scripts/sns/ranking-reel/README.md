@@ -19,6 +19,12 @@
    - S3 の一時ファイルを削除する
    - Redis の台帳に記録し、Discord に通知する
 
+## 事前チェック（週1回・Claude）
+
+投稿前に Claude が向こう1週間の予定を1件ずつ確認し、承認（お題と除外スポット）を Redis `sns:ranking:approved` に保存する。
+run.mjs は承認のある枠はそのお題・除外で作り、承認の無い枠は投稿しない（承認データが1件も無い間は従来どおり自動選定）。
+手順は [PRECHECK.md](./PRECHECK.md)、ワークフローは `sns-reel-precheck.yml`。
+
 ## 手動実行
 
 ```bash

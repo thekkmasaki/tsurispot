@@ -317,7 +317,6 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
       { fish: fish("karei"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("ainame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
-      { fish: fish("kasago"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeHokkaido,
@@ -379,7 +378,6 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/wikimedia/taiki-gyoko.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.4, reviewCount: 32, googleRating: 3.4, googleReviewCount: 35,
     catchableFish: [
       { fish: fish("karei"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("kasago"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeHokkaido,
@@ -743,7 +741,6 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 43, googleRating: 3.5, googleReviewCount: 128,
     catchableFish: [
       { fish: fish("karei"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("kasago"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeHokkaido,

@@ -19,6 +19,7 @@ import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { facilityLabel, feeShortText, openingHoursText } from "@/lib/managed-pond";
+import banAudit from "./ban-audit.json";
 
 const TOP_N = 10;
 const MIN_FOR_POST = 6; // これ未満の組合せはランキングとして薄いので投稿しない
@@ -34,6 +35,8 @@ const dateStr = arg("date") ?? new Date(Date.now() + 9 * 3600e3).toISOString().s
 const monthNum = Number(arg("month") ?? Number(dateStr.slice(5, 7)));
 const month = MONTHS.find((m) => m.num === monthNum)!;
 const exclude = list(arg("exclude"));
+// 週次の事前チェック（PRECHECK.md）で外したスポット。run.mjs が承認データから渡す
+const excludeSpots = list(arg("exclude-spots"));
 const recentFish = list(arg("recent-fish"));
 const recentPref = list(arg("recent-pref"));
 // 出世魚は同じ魚として扱う（ブリの直後にイナダ、のような実質同じお題の連続を避ける）
@@ -79,9 +82,19 @@ const SNS_EXCLUDE_SLUGS = new Set([
   "hayakawa-kakou-tetra-e8", "tambarako-dam-a12",
   // 2026-11-23 アオリイカ千葉TOP10リールに「坂田漁港は立入禁止・駐車場なし」とコメントで指摘（一次情報は未確認）
   "bandakou",
+  // 2026-11-24 サワラ千葉TOP10リールに「片貝漁港は釣り禁止」とコメントが2件。民間サイトで右岸約200m・北堤防・
+  // 新堤防先端の立入禁止が複数報告されているが、九十九里町・漁協の公式発表は未確認のため fishingBan は付けない
+  "katakai-gyoko", "kujukuri-katakai-shinteibu-a13",
 ]);
+// 2026-11-25 個別調査（掲載候補を1件ずつ WebSearch。二次情報も含む）で禁止・立入禁止の指摘が見つかった所。
+// 一部禁止でも「〇〇港」と載せると全体で釣れるように見えるので除く（禁止が解除済み＝lifted は除かない）
+const BAN_AUDIT_EXCLUDE = new Set(
+  Object.entries((banAudit as { entries: Record<string, { verdict: string }> }).entries)
+    .filter(([, e]) => e.verdict !== "lifted")
+    .map(([slug]) => slug)
+);
 function snsSafe(s: (typeof fishingSpots)[number]) {
-  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug)) return false;
+  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug) || BAN_AUDIT_EXCLUDE.has(s.slug) || excludeSpots.has(s.slug)) return false;
   return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
 }
 
@@ -192,6 +205,28 @@ const WINTER_SKIP = new Set(["aoriika", "buri", "inada", "sawara", "kanpachi", "
 const WINTER_SKIP_EXTRA = ["karei"];
 const WINTER_SKIP_ALL = new Set([...WINTER_SKIP, ...WINTER_SKIP_EXTRA]);
 const MONTH_SKIP: Record<number, Set<string>> = { 12: WINTER_SKIP_ALL, 1: WINTER_SKIP_ALL, 2: WINTER_SKIP_ALL };
+// 岸から釣れなくなっていて、ランキングにすると「情報が古い」と受け取られる 県/魚 のお題（--pref/--fish で強制した場合は出す）。
+// 2026-11-25 香川タチウオTOP10に「香川で釣れてたのはもう何年も前」「今はどこにも接岸してない」とコメント2件。
+// 釣具店ブログ・釣果投稿でも数年前から香川の岸にほぼ入らない年が続いている（サイト側も出典なしの香川のタチウオは削除済み）
+// 同日、同じ瀬戸内中部の岡山（地元ブログ「ここ数年は岡山近海まで入ってこない」）・広島（中国新聞: 県の漁獲量が2010年962t→2018年179t、
+// 呉の中心漁協はほぼゼロ）も確認して追加。愛媛は南予（宇和海）の堤防で2025年も釣果があるので外さない
+// 同日、全国のタチウオを確認。大分（県の漁獲は1996年5,562t→2015年789t、大分市の港内に群れが入るのは年に数日）と
+// 山口（防波堤からは難しいとの記述、周防大島の釣果集計も低調）も岸のランキングには向かないので外す。
+// サイトのデータは「年に数日は釣れる」ため削除しない（香川・岡山・広島は「何年も岸に入っていない」ため削除済み）
+// 2026-11-25 タチウオ以外の全魚種（県×魚 639組）も確認して追加（docs/sns-spot-audit-2026-11-25.md）。
+// - 激減: 秋田ハタハタ（2023年110t・2025年は接岸群ほぼなし／秋田魁新報・県）、霞ヶ浦北浦ワカサギ（2019年以降1t未満／県水試）、
+//   余呉湖ワカサギ（2025年記録的不漁）、東京湾のマコガレイ（年1000t超→10〜20t、千葉R5評価「低位」）、茨城のカレイ（県評価「低位・減少」）、
+//   千葉のキス（主要漁協 2000年185t→2024年12t）、太平洋北部のサバ（マサバ太平洋系群が2019年以降減少・2024漁期は10年で最大の不漁）
+// - 船が主で岸の釣果がほぼ無い: 北海道マダラ、沖縄スジアラ、三重シマアジ、鳥取・島根ヤリイカ
+// - 種の当て方が不正確: 沖縄のクロダイ（実際はミナミクロダイ等）、沖縄のキジハタ・ハゼ（サイトのデータも削除済み）
+const TOPIC_SKIP = new Set([
+  "kagawa/tachiuo", "okayama/tachiuo", "hiroshima/tachiuo", "oita/tachiuo", "yamaguchi/tachiuo",
+  "akita/hatahata", "ibaraki/wakasagi", "shiga/wakasagi",
+  "tokyo/karei", "kanagawa/karei", "chiba/karei", "ibaraki/karei", "chiba/kisu",
+  "iwate/saba", "miyagi/saba", "fukushima/saba", "ibaraki/saba", "chiba/saba",
+  "hokkaido/madara", "okinawa/sujiara", "mie/shimaaji", "tottori/yariika", "shimane/yariika",
+  "okinawa/kurodai", "okinawa/hata", "okinawa/haze",
+]);
 // 県で6件に満たなくても地方・全国でまとめてお題にする魚（データが少ないが人気のある魚）
 const WIDE_AREA_FISH = new Set(["kobudai"]);
 
@@ -289,6 +324,7 @@ const scored = candidates
   .map((c) => {
     if (!forced && exclude.has(`${c.area.slug}/${c.key}`)) return null;
     if (!forced && skipSet.has(c.key)) return null;
+    if (!forced && TOPIC_SKIP.has(`${c.area.slug}/${c.key}`)) return null;
     let s = 0;
     s += Math.max(0, 40 - c.popularity); // 人気魚種ほど高い（popularity は小さいほど人気）
     s += c.isPeakMonth ? 25 : 0; // 旬の月
@@ -323,6 +359,8 @@ if (scored.length === 0) {
 
 // ランキング母集団（スコア順）。同じ場所の言い換えを除いて6件に満たなければ次点のお題にする
 type Ranked = { spot: Spot; isPeak: boolean };
+// 直近に作ったランキングの母集団（上位20件）。事前チェックで予備候補も確認するために出力する
+let lastPool: Ranked[] = [];
 function buildRanking(c: Candidate): Ranked[] {
   let ordered: Ranked[];
   if (c.kind === "facility" && isFacilityKey(c.key)) {
@@ -347,6 +385,7 @@ function buildRanking(c: Candidate): Ranked[] {
     .slice(0, TOP_N * 2);
   const withPhoto = pool.filter((x) => usablePhoto(x.spot));
   const chosen = new Set([...new Set([...withPhoto, ...pool])].slice(0, TOP_N));
+  lastPool = pool;
   return pool.filter((x) => chosen.has(x));
 }
 
@@ -411,6 +450,8 @@ const out = {
       photo: usablePhoto(spot),
     };
   }),
+  // 母集団（上位20件）。事前チェックでは除外が出たときの繰り上がり候補も確認する
+  pool: lastPool.map(({ spot }) => ({ slug: spot.slug, name: spot.name, city: cityOf(spot), type: SPOT_TYPE_LABELS[spot.spotType] ?? "" })),
   alternatives: scored.filter((_, i) => i !== pickIndex).slice(0, 5).map((x) => `${x.c.area.slug}/${x.c.key}`),
 };
 console.log(JSON.stringify(out, null, 2));

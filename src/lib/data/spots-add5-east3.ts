@@ -780,7 +780,6 @@ export const eastAdd5Spots3: FishingSpot[] = [
     catchableFish: [
       { fish: fish("karei"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "投げ釣り" },
       { fish: fish("hokke"), monthStart: 3, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeNorth,
@@ -800,7 +799,6 @@ export const eastAdd5Spots3: FishingSpot[] = [
       { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
       { fish: fish("karei"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "投げ釣り" },
       { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeNorth,
   },
@@ -928,11 +926,9 @@ export const eastAdd5Spots3: FishingSpot[] = [
       { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
       { fish: fish("kurosoi"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "ワーム" },
       { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeNorth,
   },
-
   // =========================================
   // 青森県（10スポット: se5151〜se5160）
   // =========================================
