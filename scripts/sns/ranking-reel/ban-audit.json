@@ -94,6 +94,18 @@
    ],
    "secondaryUrls": []
   },
+  "aomori-okidate-futo": {
+   "name": "青森港沖館ふ頭",
+   "pref": "青森県",
+   "verdict": "official_full",
+   "summary": "青森県青森港管理所が港湾施設での釣りを禁止しており、沖館ふ頭の岸壁は国際埠頭として関係者以外立入制限区域。釣りの限定開放は浜町緑地・北防波堤のみで沖館ふ頭は対象外。",
+   "officialUrls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+    "https://www.mlit.go.jp/kowan/content/001361025.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "aomori-port": {
    "name": "青森港",
    "pref": "青森県",
@@ -292,6 +304,17 @@
    "summary": "茨城県の資料で、常陸那珂港区の国際港湾施設の岸壁とその前面水域は県港湾施設管理条例により正当な目的のない立入りが禁止（フェンス・センサー等で出入管理）。",
    "officialUrls": [
     "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html"
+   ],
+   "secondaryUrls": []
+  },
+  "hitachinaka-minami-bohatei-a12": {
+   "name": "常陸那珂港区南防波堤",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県の港湾ページで、常陸那珂港区の国際港湾施設は県港湾施設管理条例により正当な目的のない立入が禁止とされる。南防波堤そのものの釣り可否は明記なし。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html",
+    "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"
    ],
    "secondaryUrls": []
   },
@@ -567,6 +590,17 @@
     "https://wanderlog.com/place/details/11276648/nagai-port"
    ]
   },
+  "nago-gyoko": {
+   "name": "名護漁港",
+   "pref": "沖縄県",
+   "verdict": "secondary_partial",
+   "summary": "琉球新報の記事によると、名護漁港は釣り禁止を明示したうえで釣り人用の釣り場（名護テラス等3カ所）を設けており、禁止区域で釣りをする人が問題になっている。漁協関係者の話を報じた報道で、公式の区域図は未確認。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-945273.html",
+    "https://ryukyushimpo.jp/news/entry-950779.html"
+   ]
+  },
   "naha-ichimonji": {
    "name": "那覇一文字",
    "pref": "沖縄県",
@@ -596,6 +630,17 @@
    "summary": "国交省資料に七尾港の大田・万行・矢田新・府中地区ごとの立入禁止施設図があり、矢田新地区にも立入禁止の防波堤等がある（令和6年2月時点）。標識のある防波堤も立入禁止。",
    "officialUrls": [
     "https://www.mlit.go.jp/kowan/content/001726618.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "nanao-yatashin-wharf": {
+   "name": "七尾港矢田新埠頭",
+   "pref": "石川県",
+   "verdict": "official_partial",
+   "summary": "国土交通省の資料で、能登半島地震後に七尾港矢田新地区の一部施設が立入禁止施設として示されている（2024年2月時点）。2025年12月時点でも矢田新桟橋・第二東岸壁は利用不可で、復旧目標は2026年3月頃。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/kowan/content/001726618.pdf",
+    "https://www.notofukkousuishin.pa.hrr.mlit.go.jp/storage/002/202512/plan_nanao_251223.pdf"
    ],
    "secondaryUrls": []
   },
@@ -654,6 +699,17 @@
     "https://ascii.jp/elem/000/004/213/4213533/"
    ]
   },
+  "nou-gyoko": {
+   "name": "能生漁港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県糸魚川地域振興局地域整備部が、管内の港湾内・漁港内は関係者以外立入禁止で港内での釣りも禁止と案内。能生漁港では2013年に防波堤で転落死亡事故があり、西護岸に立入禁止柵がある。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/itoigawa_seibi/1356783520787.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
   "oiso-fishing-port": {
    "name": "大磯港",
    "pref": "神奈川県",
@@ -677,6 +733,16 @@
     "https://ryukyushimpo.jp/news/entry-4479916.html"
    ]
   },
+  "okinawa-nago-port-bulk": {
+   "name": "名護漁港（城・テラス）",
+   "pref": "沖縄県",
+   "verdict": "secondary_partial",
+   "summary": "琉球新報によると名護漁港は釣り禁止を明示しつつ、防波堤外側の「名護テラス」など3カ所を釣り場として設けている。テラス以外の禁止区域での釣りが問題視されている（報道、公式区域図は未確認）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://ryukyushimpo.jp/news/entry-945273.html"
+   ]
+  },
   "okura-kaigan-gogan-a12": {
    "name": "大蔵海岸護岸",
    "pref": "兵庫県",
@@ -695,6 +761,17 @@
    "pref": "福島県",
    "verdict": "official_partial",
    "summary": "福島県の釣りエリアマップによると、小名浜港には立入制限・立入禁止・釣り禁止区域があり、釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2箇所だけ。アクアマリン前では2号ふ頭先端の「釣り開放エリア」以外は釣り不可。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/facilities-amp.html"
+   ],
+   "secondaryUrls": []
+  },
+  "onahama-aquamarine-park6": {
+   "name": "小名浜港アクアマリンパーク",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の小名浜港釣りマップ（2026年5月更新）で、小名浜港で釣りができるのは2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所のみで、ほかに立入制限・立入禁止・釣り禁止区域があるとされる。アクアマリンパーク内でも釣りは2号ふ頭先端の開放エリアに限られる。",
    "officialUrls": [
     "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
     "https://www.pref.fukushima.lg.jp/sec/41400a/facilities-amp.html"
@@ -886,6 +963,17 @@
     "https://tsurihack.com/1385"
    ]
   },
+  "shinminato-gyokou-e8": {
+   "name": "射水市・新湊漁港",
+   "pref": "富山県",
+   "verdict": "official_partial",
+   "summary": "住所の射水市海王町は富山新港（伏木富山港新湊地区）側で、富山県の資料では富山新港で釣りができるのは地図で指定された4〜5か所のみで、それ以外は釣り禁止区域。新湊漁港の西波除堤も3〜10月の土日祝のみ開放（県）。",
+   "officialUrls": [
+    "https://www.pref.toyama.jp/documents/6155/tsuribasho2025.pdf",
+    "https://www.pref.toyama.jp/documents/6155/01202639.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "shiogama-kitahama-bouhatei-e8": {
    "name": "塩釜北浜防波堤",
    "pref": "宮城県",
@@ -944,6 +1032,18 @@
    "verdict": "official_partial",
    "summary": "福島県相馬港湾建設事務所が「相馬港・各漁港の立入禁止区域」と釣りマップを公開し、2020年に相馬港・松川浦漁港（原釜地区を含む）で釣り禁止区域の周知看板を設置。県は港湾・漁港防波堤の立入禁止マップも公開している。",
    "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
+  "soma-harakama-outer-a12": {
+   "name": "相馬市原釜漁港外堤防",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が「相馬港・各漁港の立入禁止区域」を公表し、相馬港・松川浦漁港等に釣り禁止区域の周知看板を設置（2020年）。防波堤への立入禁止も呼びかけているが、原釜の外堤防が区域に含まれるかは検索結果では未確認。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/",
     "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
     "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
    ],
@@ -1129,6 +1229,16 @@
     "https://ryukyushimpo.jp/news/entry-945273.html",
     "https://ryukyushimpo.jp/tag/都屋漁港"
    ]
+  },
+  "yuriage-breakwater-a10": {
+   "name": "閖上漁港防波堤",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県（仙台地方振興事務所水産漁港部）が転落事故防止のため閖上漁港の防波堤への立入を禁止しており、南導流堤・南防波堤の侵入防止柵から先が立入禁止区域（2024年1月掲載）。スポット名が防波堤そのもの。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
+   ],
+   "secondaryUrls": []
   },
   "yuriage-port": {
    "name": "閖上港",
