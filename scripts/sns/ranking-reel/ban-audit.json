@@ -185,6 +185,19 @@
    ],
    "secondaryUrls": []
   },
+  "hamasaka-higashi-bouhatei": {
+   "name": "浜坂漁港東防波堤",
+   "pref": "兵庫県",
+   "verdict": "secondary_partial",
+   "summary": "ダイワの釣り場マップで、浜坂漁港東防波堤（全長672m）は釣り施設として整備されているが先端部は立入禁止とされる（釣り可能は約570m）。",
+   "officialUrls": [
+    "https://web.pref.hyogo.lg.jp/nk16/gyokousyoukai/hamasaka.html"
+   ],
+   "secondaryUrls": [
+    "https://www.daiwa.com/jp/partner/fishingmap/fishingfacility/list/wakasukaihinkoen_2",
+    "https://tsurihack.com/1237/2"
+   ]
+  },
   "hasaki-gyokou6": {
    "name": "波崎漁港",
    "pref": "茨城県",
@@ -340,6 +353,53 @@
    ],
    "secondaryUrls": []
   },
+  "iwafune-port-murakami": {
+   "name": "岩船港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県村上地域整備部の岩船港関連ページで「港内及び漁港内での魚釣りは立入禁止」とされている（検索結果の要約による。原文の確認は未了）。県の漁港方針としても防波堤は立入禁止。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/murakami_seibi/12003300503571.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-onahama-aquamarine-back-a13": {
+   "name": "いわき市小名浜港アクアマリン裏堤防",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の小名浜港釣りマップで、釣りができるのは2号埠頭先端部（アクアマリンパーク）といわきサンマリーナ釣り桟橋のみで、それ以外は釣り禁止・立入禁止区域を含む。「裏堤防」が指定区域の外なら禁止。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/facilities-amp.html"
+   ],
+   "secondaryUrls": [
+    "https://jafmate.jp/drive/sp_20240717.html"
+   ]
+  },
+  "iwaki-onahama-uoichiba-e8": {
+   "name": "いわき小名浜魚市場前",
+   "pref": "福島県",
+   "verdict": "official_full",
+   "summary": "福島県の管理施設ルールで、小名浜港では釣り指定区域（2号埠頭先端部・サンマリーナ釣り桟橋）以外での釣りが禁止。魚市場前は指定区域に含まれない。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-sunmarina": {
+   "name": "いわきサンマリーナ",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の小名浜港釣りマップでは、小名浜港で釣りができるのは2号埠頭先端部と「いわきサンマリーナ釣り桟橋」の2か所のみ。サンマリーナは釣り桟橋（釣り指定区域）以外では釣り不可。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+    "https://www.mlit.go.jp/kowan/content/001361026.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "izu-nishina-gyokou-a13": {
    "name": "伊豆・仁科漁港",
    "pref": "静岡県",
@@ -426,6 +486,16 @@
    ],
    "secondaryUrls": []
   },
+  "katsuura-kou-tsukiji": {
+   "name": "勝浦港・築地",
+   "pref": "和歌山県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（ツリハック）で、勝浦港の赤灯・白灯のある堤防と湾内の小突堤は釣り禁止と書かれている。公式情報は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/653"
+   ]
+  },
   "kitakyushu-mojiko-breakwater": {
    "name": "北九州門司港堤防",
    "pref": "福岡県",
@@ -435,6 +505,16 @@
     "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
    ],
    "secondaryUrls": []
+  },
+  "kushimoto-ko-add5": {
+   "name": "串本港",
+   "pref": "和歌山県",
+   "verdict": "secondary_partial",
+   "summary": "串本町観光協会のエギング大会用漁港マップ（2023年10月）で、串本新港の左側赤灯台突堤・工事中の一部区域・全浮桟橋が立入禁止とされている。県・町の公式告示は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://kankou-kushimoto.jp/wp-content/uploads/2023/10/3de1f30ac45330154e27f22fed1a6f6a.pdf"
+   ]
   },
   "kushiro-nishi-ko": {
    "name": "釧路西港",
@@ -867,6 +947,17 @@
     "https://tsurihack.com/1242/2"
    ]
   },
+  "owase-kou-k8": {
+   "name": "尾鷲港",
+   "pref": "三重県",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報サイト（TSURI HACK）で、尾鷲港の天満浦埠頭は夜釣り禁止とされている。港全体の禁止や公式の告示は見つからなかった。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1242/2",
+    "https://tsurihack.com/1242"
+   ]
+  },
   "sado-ogi-port": {
    "name": "佐渡小木港",
    "pref": "新潟県",
@@ -1166,6 +1257,17 @@
    ],
    "secondaryUrls": []
   },
+  "tsuruga-ko": {
+   "name": "敦賀港",
+   "pref": "福井県",
+   "verdict": "lifted",
+   "summary": "国交省敦賀港湾事務所が護岸リフレッシュ工事のため護岸・駐車場への立入を禁止していた（2023年7月〜）が、2025年4月1日に入場規制を解除。",
+   "officialUrls": [
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/topic/2024/88ee89f9.pdf",
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/67e32afd.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "tsuruga-nago-kou": {
    "name": "敦賀・名子港",
    "pref": "福井県",
@@ -1228,6 +1330,17 @@
    "secondaryUrls": [
     "https://ryukyushimpo.jp/news/entry-945273.html",
     "https://ryukyushimpo.jp/tag/都屋漁港"
+   ]
+  },
+  "yui-gyokou-shizuoka": {
+   "name": "由比漁港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（TSURI HACK）によると、由比港の新堤防の高くなった部分は釣り人の立入禁止区域で、堤防は港内側のみ釣りが許されている。マナー悪化で一時全面禁止になり交渉で再開された経緯もあるとされる。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/2581",
+    "https://tsurihack.com/2581/2"
    ]
   },
   "yuriage-breakwater-a10": {
