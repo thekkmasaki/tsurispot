@@ -1,6 +1,16 @@
 {
  "_comment": "2026-11 SNSリール掲載候補スポットの釣り禁止 個別調査（WebSearchのみ・1件ずつ）。verdict が lifted 以外は select-topic.ts でリールから除外する。サイト表示には影響しない（公式根拠のあるものは別途 spot-ban-overrides.ts に反映）。",
  "entries": {
+  "aburatsubo6": {
+   "name": "油壷",
+   "pref": "神奈川県",
+   "verdict": "secondary_partial",
+   "summary": "油壺の荒井浜海水浴場では遊泳期間中（7月中旬〜8月末）の禁止事項に釣りが含まれるとの掲載（ウォーカープラス）。磯全体の禁止記述はない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0314s12824/data.html"
+   ]
+  },
   "akashi-nakasaki-beranda": {
    "name": "明石市役所裏ベランダ（中崎展望広場）",
    "pref": "兵庫県",
@@ -70,6 +80,16 @@
     "https://www.pa.thr.mlit.go.jp/akita/100/CONT000000000000006267.pdf"
    ],
    "secondaryUrls": []
+  },
+  "amanohashidate-k8": {
+   "name": "天橋立",
+   "pref": "京都府",
+   "verdict": "secondary_partial",
+   "summary": "シマノの釣行記事（2026年5月）で、天橋立は基本的に釣りOKだが裏側の阿蘇海側のみ釣り禁止と注意されている。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://fish.shimano.com/ja-JP/content/fishingstyle/article/nagetsuri_world/2026/260507/index.html"
+   ]
   },
   "amanohashidate-monju-a11": {
    "name": "天橋立文珠側護岸",
@@ -298,6 +318,18 @@
     "https://tsurihack.com/908/2"
    ]
   },
+  "hatsushima-kou": {
+   "name": "初島港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りハックに、初島の島の南側・フィッシャリーナ周辺は禁漁区間との記載（初島港自体ではメジナ狙いのカゴ・フカセ釣りが行われている）。静岡県の推奨ルールで初島海域のまき餌・集魚灯（共第2号共同漁業権漁場内の遊漁）にもルールあり。",
+   "officialUrls": [
+    "https://www.pref.shizuoka.jp/sangyoshigoto/suisan/suisanshigen/1047550/1028117.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/738"
+   ]
+  },
   "heda-gyokou": {
    "name": "戸田漁港",
    "pref": "静岡県",
@@ -431,6 +463,19 @@
     "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"
    ],
    "secondaryUrls": []
+  },
+  "hiyoriyama-kaigan-k8": {
+   "name": "日和山海岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "日和山海岸がある豊岡市瀬戸地先は山陰海岸国立公園の豊岡海域公園地区（海中公園）で、環境省が全域を動植物の採捕規制区域とし約10haの拡張案を示している（規制対象は指定17種）。",
+   "officialUrls": [
+    "https://www.env.go.jp/press/files/jp/23853.pdf",
+    "https://www.env.go.jp/park/content/000305055.pdf"
+   ],
+   "secondaryUrls": [
+    "https://www.yukoyuko.net/onsen/spot/s0000564"
+   ]
   },
   "hizen-kariya-wan-w6": {
    "name": "肥前町・仮屋湾",
@@ -576,6 +621,16 @@
    ],
    "secondaryUrls": []
   },
+  "iwasehama-toyama": {
+   "name": "岩瀬浜",
+   "pref": "富山県",
+   "verdict": "secondary_partial",
+   "summary": "るるぶの岩瀬浜海水浴場情報で禁止事項として『テトラポットに登る』が挙げられており、テトラ上での釣りは不可と読める。浜での釣り自体の禁止記述はない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80015732/beach"
+   ]
+  },
   "izu-nishina-gyokou-a13": {
    "name": "伊豆・仁科漁港",
    "pref": "静岡県",
@@ -630,6 +685,17 @@
     "https://tsurihack.com/801"
    ]
   },
+  "jonanjima-seaside-park": {
+   "name": "城南島海浜公園",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "釣り情報記事（TSURINEWS/Excite）では、釣りができるのは第一航路側のみなと広場前のみとされ、園内の他区域（つばさ浜など）では釣り不可と読める。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.excite.co.jp/news/article/Tsurinews_tsurinews262992",
+    "https://tsurihack.com/1209"
+   ]
+  },
   "kabira-shuhen-gogan-a10": {
    "name": "川平湾周辺護岸",
    "pref": "沖縄県",
@@ -662,6 +728,19 @@
     "https://www.jfa.maff.go.jp/j/keikaku/attach/pdf/umigyo_kyougikai-5.pdf"
    ],
    "secondaryUrls": []
+  },
+  "kamisu-nikkawahama6": {
+   "name": "神栖市日川浜",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県が鹿島灘海岸（神栖海岸のヘッドランドNo.1,2,5含む）のヘッドランド周辺への立入を禁止・注意喚起（水難事故多発）。浜自体は観光情報で遊泳区域外の釣り可とされる。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf"
+   ],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80006355"
+   ]
   },
   "kamoike-kou": {
    "name": "鴨池港",
@@ -713,6 +792,40 @@
    "summary": "岡山海区漁業調整委員会指示（2021年）で、白石島北東端や弁天島周辺を含む笠岡地区海洋牧場海域では水産動植物の採捕（釣り含む）が禁止。漁港内全体の禁止ではない。",
    "officialUrls": [
     "https://www.pref.okayama.jp/uploaded/attachment/260893.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kashima-surf-e8": {
+   "name": "鹿島サーフ",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県河川課が鹿島灘海岸のヘッドランド周辺は水難事故多発のため絶対に立ち入らないよう求めており、立入禁止リーフレットを公開。サーフ本体の釣り禁止記述はない。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kashimanada-headland6": {
+   "name": "鹿島灘ヘッドランド",
+   "pref": "茨城県",
+   "verdict": "official_full",
+   "summary": "茨城県河川課は鹿島灘海岸のヘッドランド周辺を水難事故多発の危険箇所として『絶対に立ち入らないで』と呼びかけ、立入禁止リーフレットを公開。スポット名がヘッドランドそのもので、釣り座として紹介すると禁止区域に該当。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf",
+    "https://www.pref.ibaraki.jp:443/doboku/kasen/coast/documents/headland.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kashimanada-surf": {
+   "name": "鹿島灘サーフ",
+   "pref": "茨城県",
+   "verdict": "official_partial",
+   "summary": "茨城県が鹿島灘海岸のヘッドランド周辺への立入を禁止（水難事故多発）。サーフ本体の釣り禁止記述はない。",
+   "officialUrls": [
+    "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+    "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf"
    ],
    "secondaryUrls": []
   },
@@ -878,6 +991,17 @@
     "https://rurubu.jp/andmore/spot/80017544/beach"
    ]
   },
+  "mikuni-sunset-beach": {
+   "name": "三国サンセットビーチ周辺",
+   "pref": "福井県",
+   "verdict": "secondary_partial",
+   "summary": "るるぶ（2026年版）・ウォーカープラス（2025年版）の海水浴場情報で禁止事項に『ビーチ（から）の投げ釣り』が挙がっている。全面禁止ではないが、登録の『キス 投げ釣り』はビーチでは不可と読める。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80017544/beach",
+    "https://summer.walkerplus.com/odekake/detail/ar0518s53736/data.html"
+   ]
+  },
   "misaki-fishing-port": {
    "name": "三崎港",
    "pref": "神奈川県",
@@ -898,6 +1022,16 @@
    "secondaryUrls": [
     "https://tsurihack.com/894"
    ]
+  },
+  "miyako-shimoji-airport": {
+   "name": "宮古島・下地島空港周辺",
+   "pref": "沖縄県",
+   "verdict": "official_partial",
+   "summary": "下地島空港管理事務所（沖縄県）が17エンド側の管理用通路を車両通行止めにしている。釣り禁止の記述はない。",
+   "officialUrls": [
+    "https://www.pref.okinawa.jp/machizukuri/kowankuko/1012617/1012639/1023024.html"
+   ],
+   "secondaryUrls": []
   },
   "murakami-neya-port": {
    "name": "村上市寝屋漁港",
@@ -1373,6 +1507,16 @@
     "https://www.nap-camp.com/mag/spot/107671"
    ]
   },
+  "rumoi-kogane-misaki-a13": {
+   "name": "留萌市黄金岬",
+   "pref": "北海道",
+   "verdict": "secondary_partial",
+   "summary": "高波による死亡事故を受け、岩礁へ渡る桟橋に波の高い日はチェーンをかけて立入禁止にする措置がとられている（北海道新聞報道、2009年）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.hokkaido-np.co.jp/hokkaido/area_rumoi/rumoi/31/"
+   ]
+  },
   "sado-ogi-port": {
    "name": "佐渡小木港",
    "pref": "新潟県",
@@ -1428,6 +1572,17 @@
    "secondaryUrls": [
     "https://niigata-kankou.or.jp/experience/11907"
    ]
+  },
+  "sendai-shinko": {
+   "name": "仙台新港",
+   "pref": "宮城県",
+   "verdict": "official_full",
+   "summary": "宮城県仙台塩釜港湾事務所によると仙台塩釜港内は全面釣り禁止で、釣り可能なのはNX仙台港パーク内『海の広場』のみ。各ふ頭は関係者以外立入禁止、防波堤・テトラも立ち入らないよう要請。",
+   "officialUrls": [
+    "https://www.pref.miyagi.jp/soshiki/sdsgkown/fishing.html",
+    "https://www.pref.miyagi.jp/documents/21675/tsurirule.pdf"
+   ],
+   "secondaryUrls": []
   },
   "shibayama-gyokou-hyogo": {
    "name": "柴山漁港",
@@ -1544,6 +1699,16 @@
    ],
    "secondaryUrls": []
   },
+  "shiogama-urato-katsurashima-rocky-a13": {
+   "name": "塩釜市浦戸桂島磯",
+   "pref": "宮城県",
+   "verdict": "secondary_partial",
+   "summary": "釣り人の投稿（anglers.jp）で、浦戸の人気アジングポイントがマナー違反（ゴミ・駐車・焚き火等）を理由に釣り禁止になると伝えられている。桂島の磯が該当するかは不明。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://anglers.jp//catches/6335553"
+   ]
+  },
   "shiraho-kaigan-a11": {
    "name": "白保海岸",
    "pref": "沖縄県",
@@ -1552,6 +1717,16 @@
    "officialUrls": [
     "https://www.env.go.jp/press/files/jp/9913.pdf",
     "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/004/312/shiraho3.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "shiraishijima-okayama-w6": {
+   "name": "白石島",
+   "pref": "岡山県",
+   "verdict": "official_partial",
+   "summary": "岡山県の文書で白石島の一部海域（影平ヨコゾワ突端の標識等で区切った区域）が保護区域とされ、水産動植物の採捕が禁止されている。メバル・カサゴ・マダイ・クロダイ・キジハタに全長制限もある。",
+   "officialUrls": [
+    "https://www.pref.okayama.jp/uploaded/attachment/260893.pdf"
    ],
    "secondaryUrls": []
   },
@@ -1742,6 +1917,16 @@
    ],
    "secondaryUrls": []
   },
+  "takasegawa-kakou-misawa": {
+   "name": "高瀬川河口",
+   "pref": "青森県",
+   "verdict": "official_partial",
+   "summary": "国交省の高瀬川河川整備資料で、河口部右岸側は米軍射爆練習場のため立入りできないと記載。左岸側は釣り利用が主体（利用の約7割が釣り）。",
+   "officialUrls": [
+    "https://www.mlit.go.jp/river/basic_info/jigyo_keikaku/gaiyou/seibi/pdf/takase-4.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "takehara-tadanoumi-port": {
    "name": "竹原市忠海港",
    "pref": "広島県",
@@ -1763,6 +1948,18 @@
     "https://www.pref.shimane.lg.jp/industry/suisan/kanri/iji/20030901gyojyoukeikaku.data/shimanekaikukeikaku20230901.pdf"
    ],
    "secondaryUrls": []
+  },
+  "tenjin-jima": {
+   "name": "天神島",
+   "pref": "神奈川県",
+   "verdict": "secondary_full",
+   "summary": "天神島は横須賀市の臨海自然教育園で、周辺水域とも県の天然記念物・名勝に指定。旅行メディアが『磯での遊泳・素潜り・釣りは厳禁』と記載（沖の笠島は立入禁止）。",
+   "officialUrls": [
+    "https://online.bunka.go.jp/db/heritages/detail/591946"
+   ],
+   "secondaryUrls": [
+    "https://tabi-mag.jp/kn0782/"
+   ]
   },
   "teradomari-kou-niigata": {
    "name": "寺泊港",
