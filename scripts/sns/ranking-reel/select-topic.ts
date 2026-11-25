@@ -206,7 +206,9 @@ const MONTH_SKIP: Record<number, Set<string>> = { 12: WINTER_SKIP_ALL, 1: WINTER
 // 岸から釣れなくなっていて、ランキングにすると「情報が古い」と受け取られる 県/魚 のお題（--pref/--fish で強制した場合は出す）。
 // 2026-11-25 香川タチウオTOP10に「香川で釣れてたのはもう何年も前」「今はどこにも接岸してない」とコメント2件。
 // 釣具店ブログ・釣果投稿でも数年前から香川の岸にほぼ入らない年が続いている（サイト側も出典なしの香川のタチウオは削除済み）
-const TOPIC_SKIP = new Set(["kagawa/tachiuo"]);
+// 同日、同じ瀬戸内中部の岡山（地元ブログ「ここ数年は岡山近海まで入ってこない」）・広島（中国新聞: 県の漁獲量が2010年962t→2018年179t、
+// 呉の中心漁協はほぼゼロ）も確認して追加。愛媛は南予（宇和海）の堤防で2025年も釣果があるので外さない
+const TOPIC_SKIP = new Set(["kagawa/tachiuo", "okayama/tachiuo", "hiroshima/tachiuo"]);
 // 県で6件に満たなくても地方・全国でまとめてお題にする魚（データが少ないが人気のある魚）
 const WIDE_AREA_FISH = new Set(["kobudai"]);
 

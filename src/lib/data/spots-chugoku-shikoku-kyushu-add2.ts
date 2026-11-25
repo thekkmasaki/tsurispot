@@ -1330,7 +1330,7 @@ export const chugokuShikokuKyushuAdd2Spots: FishingSpot[] = [
   },
   {
     id: "s2858", name: "倉敷市児島琴浦港", slug: "kojima-kotoura-port",
-    description: "瀬戸大橋のたもと、倉敷市児島に位置する琴浦港。橋脚周りは潮流が複雑で魚影が濃く、チヌ（クロダイ）のウキフカセ釣りのメッカとして県内外から釣り人が集まる。3〜12月はクロダイ、11〜5月は夜のメバリングでメバル、8〜11月にはタチウオも狙える。5〜11月はサビキでアジ、春先にはマダイのカゴ釣りも実績あり。約15台分の駐車スペースと近隣コンビニがあり、児島ICから約5分。入場無料で一年を通して狙える魚種が豊富な岡山県の港。",
+    description: "瀬戸大橋のたもと、倉敷市児島に位置する琴浦港。橋脚周りは潮流が複雑で魚影が濃く、チヌ（クロダイ）のウキフカセ釣りのメッカとして県内外から釣り人が集まる。3〜12月はクロダイ、11〜5月は夜のメバリングでメバルも狙える。5〜11月はサビキでアジ、春先にはマダイのカゴ釣りも実績あり。約15台分の駐車スペースと近隣コンビニがあり、児島ICから約5分。入場無料で一年を通して狙える魚種が豊富な岡山県の港。",
     latitude: 34.4180, longitude: 133.7820,
     address: "〒711-0921 岡山県倉敷市児島駅前3丁目",
     accessInfo: "JR瀬戸大橋線児島駅から車で約10分。瀬戸中央自動車道児島ICから約5分。",
@@ -1343,7 +1343,6 @@ export const chugokuShikokuKyushuAdd2Spots: FishingSpot[] = [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeChugoku,
@@ -1430,7 +1429,6 @@ export const chugokuShikokuKyushuAdd2Spots: FishingSpot[] = [
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
     ],
     bestTimes: btNight, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeChugoku,
@@ -1729,7 +1727,6 @@ export const chugokuShikokuKyushuAdd2Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeChugoku,
