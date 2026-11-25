@@ -612,6 +612,17 @@
     "https://crexgroup.com/ja/aga/self-care/mashike-port-fishing-ban-area/"
    ]
   },
+  "matsuzaki-port": {
+   "name": "松崎港",
+   "pref": "静岡県",
+   "verdict": "secondary_partial",
+   "summary": "松崎新港の沖に伸びる大堤防は、マナー悪化で県（港湾管理者）が侵入防止柵を設置し約14〜15年立入禁止。2025年度から観光協会・伊豆漁協松崎支所主催でUMIGOアプリ予約制の期間・人数限定開放が行われている（文春オンライン、松崎町観光協会プレスリリース）。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://bunshun.jp/articles/-/83083",
+    "https://prtimes.jp/main/html/rd/p/000000001.000190204.html"
+   ]
+  },
   "maze-kou-niigata": {
    "name": "間瀬港",
    "pref": "新潟県",
@@ -743,6 +754,16 @@
    "secondaryUrls": [
     "https://ryukyushimpo.jp/economics/entry-3501322.html",
     "https://ryukyushimpo.jp/tag/%e9%82%a3%e8%a6%87%e4%b8%80%e6%96%87%e5%ad%97"
+   ]
+  },
+  "nakatsu-kou-w6": {
+   "name": "中津・中津港",
+   "pref": "大分県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイト（TSURI HACK）で中津港東側の埋立地は立入禁止エリアと紹介。西側の長い波止は釣り場として紹介されている。公式の告示は見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1367"
    ]
   },
   "nanao-ko-fuchu-futo": {
@@ -1253,6 +1274,16 @@
    "pref": "大阪府",
    "verdict": "official_partial",
    "summary": "大阪府の告示で、泉大津市小津島町の助松地区の複数岸壁が港湾保安上の立入制限区域に指定されている（釣りへの言及は未確認）。",
+   "officialUrls": [
+    "https://www.pref.osaka.lg.jp/houbun/reiki/reiki_honbun/k201RG00001270.html"
+   ],
+   "secondaryUrls": []
+  },
+  "sukenatsu-futou-gogan-a12": {
+   "name": "助松埠頭護岸",
+   "pref": "大阪府",
+   "verdict": "official_partial",
+   "summary": "大阪府告示で堺泉北港助松地区の助松2号岸壁と関連港湾施設がSOLAS立入制限区域に指定されている（埠頭の一部）。護岸全体の釣り禁止の記述は見つからず。",
    "officialUrls": [
     "https://www.pref.osaka.lg.jp/houbun/reiki/reiki_honbun/k201RG00001270.html"
    ],
