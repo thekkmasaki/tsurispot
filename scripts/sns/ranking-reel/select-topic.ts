@@ -20,6 +20,7 @@ import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { facilityLabel, feeShortText, openingHoursText } from "@/lib/managed-pond";
 import banAudit from "./ban-audit.json";
+import spotExclude from "./spot-exclude.json";
 
 const TOP_N = 10;
 const MIN_FOR_POST = 6; // これ未満の組合せはランキングとして薄いので投稿しない
@@ -93,7 +94,15 @@ const BAN_AUDIT_EXCLUDE = new Set(
     .filter(([, e]) => e.verdict !== "lifted")
     .map(([slug]) => slug)
 );
+// 2026-11-25 冬のお題（管理釣り場・釣り堀・海上釣り堀・ワカサギ）の個別調査で見つかった、閉業・名称変更・実在不明・冬季休業・禁漁/不漁の所。
+// months があればその月だけ除外（冬季休業など）、無ければ常に除外
+const SPOT_EXCLUDE = (spotExclude as { entries: Record<string, { months?: number[] }> }).entries;
+const spotExcluded = (slug: string) => {
+  const e = SPOT_EXCLUDE[slug];
+  return !!e && (!e.months || e.months.includes(monthNum));
+};
 function snsSafe(s: (typeof fishingSpots)[number]) {
+  if (spotExcluded(s.slug)) return false;
   if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug) || BAN_AUDIT_EXCLUDE.has(s.slug) || excludeSpots.has(s.slug)) return false;
   return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
 }

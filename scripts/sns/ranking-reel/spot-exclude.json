@@ -1,0 +1,1487 @@
+{
+ "_comment": "2026-11-25 冬のSNSリール候補（管理釣り場・釣り堀・海上釣り堀・ワカサギ）の個別調査（WebSearch）。閉業・名称変更・実在不明（施設のunknown）は常に除外、冬季休業・禁漁/不漁/氷上中止は months の月だけ除外。サイト表示には影響しない。",
+ "entries": {
+  "aichi-chita-okada-shinike-fpct": {
+   "name": "F・P・C・T 岡田新池",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「F・P・C・T 岡田新池」の情報が検索で見つからず（実在要確認）。"
+  },
+  "aichi-okazaki-kuragari-keikoku-masu-tsuri": {
+   "name": "くらがり渓谷 マス釣り・マスつかみ",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "くらがり渓谷のマス釣り営業期間の情報が検索で見つからず。"
+  },
+  "aichi-okazaki-trout-pond": {
+   "name": "岡崎トラウトポンド",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「岡崎トラウトポンド」という施設は検索で確認できず（実在要確認）。"
+  },
+  "aichi-shitara-dandoko-lure-fly": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "段戸湖ルアー・フライ管理釣り場",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "愛知県公式観光サイトで冬季（12月中旬〜3月中旬）は定休と案内。"
+  },
+  "aichi-shitara-togami-no-ike": {
+   "name": "F&L FISHING AREA 戸神の池",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「戸神の池」の情報が検索で見つからず（近隣の段戸湖と混同の可能性、実在要確認）。"
+  },
+  "aichi-shitara-tsugu-kogen-green-park-tsuribori": {
+   "name": "つぐ高原グリーンパーク 釣り堀",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "つぐ高原グリーンパークにニジマス釣り堀ありと紹介（CAMP HACK、年不明）。高原キャンプ場のため冬季営業は未確認。"
+  },
+  "aichi-toyota-kamikoshi-keikoku-masu-tsuriba": {
+   "name": "神越渓谷ます釣り場",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "神越渓谷マス釣り場の存在は紅葉・撮影ガイドで確認できるが、2024年以降の営業情報・冬季営業は未確認。"
+  },
+  "aichi-toyota-noharagawa-kanko-center": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "野原川観光センター",
+   "pref": "愛知県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "愛知県公式観光サイトでマス釣りは2026年4月12日〜と案内され、冬季の営業は示されていない。"
+  },
+  "akagisan-oonuma-tochigi6": {
+   "name": "赤城山大沼",
+   "pref": "栃木県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "住所が日光市中宮祠（中禅寺湖畔）で群馬県の赤城大沼と不一致、データ要確認（群馬の赤城大沼自体は2026年1月氷上解禁でok）。"
+  },
+  "annaka-usui-ko-a13": {
+   "name": "安中・碓氷湖",
+   "pref": "群馬県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "碓氷湖のワカサギ釣りの情報は見つからず。ワカサギ釣り場としての実在要確認。"
+  },
+  "aomori-aomori-gossawa-yogyojo": {
+   "name": "合子沢養魚場",
+   "pref": "青森県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「合子沢養魚場」の釣り情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "aomori-hirakawa-forest-park-hirakawa": {
+   "name": "フォレストパークひらかわ",
+   "pref": "青森県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "フォレストパークひらかわの釣り情報は検索で見つからず、営業状況不明（山間施設のため冬季休業の可能性大）。"
+  },
+  "aomori-hirosaki-oinosawa-masu-tsuriba": {
+   "name": "追の沢マス釣場",
+   "pref": "青森県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "tenki.jp・ナビタイムに9〜16時・1,300円で5匹・不定休と掲載があるが更新時期不明で、冬季（岩木山麓の積雪期）の営業は確認できず。"
+  },
+  "aomori-hirosaki-somagawa-aiuchi-tokusetsu": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "相馬川藍内地区特設釣り場(岩木川漁協)",
+   "pref": "青森県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "岩木川漁協の遊漁規則・2026年公告で相馬川の規制区間は確認できるが「藍内特設釣り場」は確認できず。渓流のため冬季は禁漁期・営業期間外と推定。"
+  },
+  "aomori-owani-masuya-shimoyama-yogyojo": {
+   "name": "ますや下山養魚場",
+   "pref": "青森県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「ますや下山養魚場」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "aomori-shingo-ukiukiland": {
+   "name": "フィッシングエリア ウキウキランド",
+   "pref": "青森県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「フィッシングエリア ウキウキランド」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "arakawa-dam-nosen6": {
+   "name": "荒川ダム（能泉湖）",
+   "pref": "山梨県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "荒川ダム（能泉湖）でワカサギ釣りが可能との情報は見つからず（観光情報のみ）。釣り可否・遊漁券の実在要確認。"
+  },
+  "asaseishigawa-keiryu": {
+   "name": "浅瀬石川",
+   "pref": "青森県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "浅瀬石川（渓流）でのワカサギ釣りの情報は見つからず。ワカサギ釣り場としての実在要確認（浅瀬石川ダム湖の可能性）。"
+  },
+  "chiba-chiba-wakaba-trout-pond-noike": {
+   "name": "トラウトポンド NOIKE",
+   "pref": "千葉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「トラウトポンドNOIKE」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "chiba-ichihara-ys-garden": {
+   "name": "Y's garden(ワイズガーデン)",
+   "pref": "千葉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「Y's garden（ワイズガーデン）」の釣り場情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "chino-tateshinako-kogen-a13": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "茅野・蓼科湖（蓼科高原）",
+   "pref": "長野県",
+   "kind": "ワカサギ",
+   "status": "closed",
+   "summary": "蓼科湖のワカサギ釣りは4〜11月の桟橋釣りとして紹介されており、冬（12〜2月）は期間外とみられる。"
+  },
+  "daimon-dam6": {
+   "name": "大門ダム（清里湖）",
+   "pref": "山梨県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "大門ダム（清里湖）でのワカサギ釣りの情報は見つからず（上水道用ダム）。釣り可否の実在要確認。"
+  },
+  "fish-on-ozenji": {
+   "name": "管理釣り場フィッシュオン王禅寺",
+   "pref": "神奈川県",
+   "kind": "管理釣り場",
+   "status": "renamed_moved",
+   "summary": "同住所（王禅寺1227-2）の施設が「Berry Garden王禅寺」（旧ベリーパーク in フィッシュ・オン!王禅寺、釣り・BBQ・ドッグラン、年中無休）としていこーよに掲載されており名称変更の可能性が高い（変更時期・釣り営業継続は公式で要確認）。"
+  },
+  "fukui-katsuyama-fishing-yokokura": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "フィッシングよこくら",
+   "pref": "福井県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "ナビタイムに9:00〜17:00営業・定休日「冬期」と掲載されており、冬は休業。"
+  },
+  "fukui-ooi-hachigamine-kazoku-ryokomura": {
+   "name": "八ヶ峰家族旅行村",
+   "pref": "福井県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "八ヶ峰家族旅行村の釣り・冬季営業の情報は検索で見つからず（山間のキャンプ施設のため冬季休業の可能性あり）。"
+  },
+  "gifu-gero-kunogawa-catch-and-release": {
+   "name": "久野川キャッチ＆リリース釣り場",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "久野川のC&R区間の情報が検索で見つからず。"
+  },
+  "gifu-gero-ogurogawa-tsuriba": {
+   "name": "小黒川釣場",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「小黒川釣場」の情報が見つからず（近隣に小坂町淡水魚養殖組合の「小坂なリバーベース」あり、実在要確認）。"
+  },
+  "gifu-gujo-fishing-motai": {
+   "name": "フィッシング母袋",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「フィッシング母袋」の情報が見つからず。母袋地区はスキー場エリアで周辺店舗は冬季休業が多い。"
+  },
+  "gifu-gujo-village-fishing": {
+   "name": "VILLAGE FISHING",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「VILLAGE FISHING」（郡上市美並町）の情報が検索で見つからず（実在要確認）。"
+  },
+  "gifu-ibigawa-neogawa-kanri-tsuriba": {
+   "name": "NEOGAWA 根尾川管理釣り場",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「NEOGAWA 根尾川管理釣り場」の情報が検索で見つからず（実在要確認）。"
+  },
+  "gifu-mino-tsukimigahara-fishing-center": {
+   "name": "月見ヶ原フィッシングセンター",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "closed",
+   "summary": "岐阜県資料で長良川中央漁協が2024年2月1日に開設した河川敷の管理釣り場はニジマス流出で営業中止・施設撤去、今後設置しない方針。月見ヶ原（美濃市横越・長良川河川敷）はこれに該当する可能性が高い（名称一致は未確認）。"
+  },
+  "gifu-mizunami-tsuriland-tsuriri": {
+   "name": "釣りランド つりり瑞浪",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「釣りランド つりり瑞浪」は検索で確認できず（実在要確認）。"
+  },
+  "gifu-sakahogi-nihon-line-masu-tsuriba": {
+   "name": "日本ラインます釣り場",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "坂祝町の「日本ラインます釣り場」の営業情報が検索で見つからず。"
+  },
+  "gifu-seki-sakananosato-sugishima": {
+   "name": "さかなのさと すぎしま",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「さかなのさと すぎしま」の情報が検索で見つからず（実在要確認）。"
+  },
+  "gifu-shirakawa-quore-aqua-parco": {
+   "name": "クオーレふれあいの里 マス釣り場「アクア・パルコ」",
+   "pref": "岐阜県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "クオーレふれあいの里のマス釣り場「アクア・パルコ」の情報が検索で見つからず。"
+  },
+  "gunma-fujioka-ayukawa-gyoen": {
+   "name": "鮎川魚苑",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "gunma-kiryu-tsuriba-ebisu": {
+   "name": "釣り場 恵比寿",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "gunma-maebashi-gunma-fishing-center-nakanosawa": {
+   "name": "群馬フィッシングセンター中之沢",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "gunma-maebashi-seiryu-no-sato": {
+   "name": "清流の里",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "renamed_moved",
+   "summary": "前橋市資料（2014年）に「清流の里 三夜沢町415」とあるが、同住所・同電話（027-283-0801）は現在「アングラーズエリアフック」として掲載されており名称変更の可能性（要確認）。"
+  },
+  "gunma-ota-tosando-koen-fishing-area": {
+   "name": "東山道公園フィッシングエリア",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "gunma-shibukawa-bando-komochi-toki-tsuriba": {
+   "name": "阪東・子持冬期釣り場",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "阪東漁協管内の利根川は大型ヤマメ・ニジマスの釣り場として紹介されるが、2025-26冬期釣り場の設置情報は見つからず（漁協に要確認）。"
+  },
+  "gunma-takasaki-haruna-kogen-tsuribori-center": {
+   "name": "榛名高原つり堀センター",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "NAVITIMEに住所・電話のみ掲載、営業状況の情報は見つからず（要確認）。"
+  },
+  "gunma-tsumagoi-baragiko-fishing": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "バラギ湖フィッシング",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "バラギ湖フィッシングエリアの営業期間は4月下旬〜11月上旬で冬季は営業外（ツリハック等）。"
+  },
+  "harunako-tsuri6": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "榛名湖",
+   "pref": "群馬県",
+   "kind": "ワカサギ",
+   "status": "icefishing_cancelled",
+   "summary": "榛名湖は2025-26シーズンも暖冬で氷上ワカサギ釣り中止と発表（ボート釣りは2026年10月も釣行記ありで可）。"
+  },
+  "hase-dam-mahoroba": {
+   "name": "初瀬ダム（まほろば湖）",
+   "pref": "奈良県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "初瀬ダム（まほろば湖）のワカサギ釣りの情報は見つからず。ワカサギ釣り場としての実在要確認。"
+  },
+  "hokkaido-akaigawa-tomo-fishing-pond": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "アカイガワTOMOフィッシングポンド",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "北海道新聞によるとフィッシングポンドは5月から土日祝のみ営業し営業期間は11月3日まで、冬季営業の情報なし。"
+  },
+  "hokkaido-biratori-niseuen": {
+   "name": "仁世宇園(ニセウ園)",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "ニセウ川沿いのヤマベ釣り・料理施設として2021年10月の記事で紹介されるが、2024年以降の営業や冬季営業は確認できず。"
+  },
+  "hokkaido-nanae-junsainuma-wakasagi": {
+   "name": "じゅんさい沼ワカサギ釣り場",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "じゅんさい沼の近年シーズンのワカサギ釣り情報は検索で見つからず（近隣大沼の太公園は1月初旬から氷上釣り実施）。"
+  },
+  "hokkaido-niseko-salmon-tsuriba": {
+   "name": "ニセコサーモン釣場",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「ニセコサーモン釣場」の情報は検索で見つからず、営業状況不明（実在要確認。ニセコの釣りは主に夏〜初秋）。"
+  },
+  "hokkaido-obihiro-arakawa-tsuribori": {
+   "name": "荒川釣堀(荒川農園 虹マス釣り)",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "荒川農園のニジマス釣り堀として口コミサイトに掲載はあるが、営業時間・期間・近年の営業状況は確認できず（冬季営業は考えにくい）。"
+  },
+  "hokkaido-pippu-nijimasu-kobo-tsuribori": {
+   "name": "にじます工房 ぴっぷのつりぼり",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "北海道新聞記事で「ぴっぷのつりぼり」（ニジマス・イトウ等）が紹介されているが、記事年・冬季営業の有無は確認できず。"
+  },
+  "hokkaido-sapporo-bankei-tsuribori": {
+   "name": "ばんけいのつり堀",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "さっぽろばんけい（スキー場）の釣り堀情報は検索で見つからず、営業状況・期間不明（スキー場のため冬季は営業していない可能性大）。"
+  },
+  "hokkaido-sarabetsu-family-park": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "ファミリーパークさらべつ",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "釣り堀・フライルアー池は冬季（12月〜4月上旬頃）休業と案内されている（木曜定休）。"
+  },
+  "hokkaido-shikaoi-great-fishing-shikaribetsuko": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "グレートフィッシング然別湖",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "2026年度は夏季（5/27〜6/28、9/18〜10/4）の特別解禁で、冬季遊漁は3月開始・1日10人限定のため12〜2月は釣りできない。"
+  },
+  "hokkaido-shikaoi-yamabeen": {
+   "name": "鹿追やまべ園",
+   "pref": "北海道",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "料理店（然別サーモン・オショロコマ等）として利用したブログはあるが、釣り堀の営業内容・冬季営業は確認できず。"
+  },
+  "hyogo-inagawa-kitatawara-masu": {
+   "name": "北田原マス釣り場",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「北田原マス釣り場」の情報が検索で見つからず（実在要確認）。"
+  },
+  "hyogo-kami-yatagawa-fishing-center": {
+   "name": "矢田川フィッシングセンター",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "Yahoo!マップ・食べログに掲載（7〜18時、不定休）されているが、2024年以降の営業根拠は未確認。"
+  },
+  "hyogo-kamikawa-trout-river-ichikawa": {
+   "name": "トラウトリバー市川 神河C&Rエリア",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「神河C&Rエリア」の公式LINE（住所:神河町高朝田）は存在するが、「トラウトリバー市川」の名称・現行状況は未確認。"
+  },
+  "hyogo-kamikawa-yodel-no-mori": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "神崎農村公園 ヨーデルの森 つりぼり",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "ヨーデルの森の釣りは春休み〜5月の土日祝のみと案内（2026年1月以前取材）。冬季は釣り営業なし。"
+  },
+  "hyogo-shiso-hanse-lure-fly-area": {
+   "name": "繁盛ルアーフライエリア",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「繁盛ルアーフライエリア」の情報が検索で見つからず（実在要確認）。"
+  },
+  "hyogo-shiso-rakusui-fishing-center": {
+   "name": "楽水フィッシングセンター",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "兵庫県内の管理釣り場として紹介記事はあるが、所在地・2024年以降の営業情報は未確認。"
+  },
+  "hyogo-tamba-amagomura": {
+   "name": "あまご村(ニジマス釣り)",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "食べログ口コミ（2020年）でニジマス釣りの記載はあるが、2024年以降の営業情報は未確認。"
+  },
+  "hyogo-tamba-nagatani-oike": {
+   "name": "長谷大池釣り池センター",
+   "pref": "兵庫県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "長谷大池釣り池センター（丹波市）の情報はWeb検索で見つからず。実在要確認。"
+  },
+  "hyogo-toyooka-jugo-nijimasu": {
+   "name": "十戸虹鱒川釣り場",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「十戸虹鱒川釣り場」（豊岡市日高町）の情報が検索で見つからず（実在要確認）。"
+  },
+  "hyogo-yabu-ayu-park-tsuremasu": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "あゆ公園 釣れマスつり場",
+   "pref": "兵庫県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "観光情報で「春と秋にニジマス釣りができる」と案内されており、冬季の釣り営業は無い模様（要確認）。"
+  },
+  "ibaraki-hitachiota-kitazawa-nijimasu-center": {
+   "name": "北沢ニジマスセンター",
+   "pref": "茨城県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「北沢ニジマスセンター」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "ibaraki-ishioka-fishing-park-tsukubaen": {
+   "name": "フィッシングパーク つくば園",
+   "pref": "茨城県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "なっぷ記事・じゃらんにトラウト管理釣り場として掲載はあるが、2024年以降の営業情報・料金は確認できず。"
+  },
+  "ibaraki-ishioka-midcreek-fishing-area": {
+   "name": "ミッドクリークフィッシングエリア",
+   "pref": "茨城県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "じゃらんにポンド5面・カフェ併設の口コミ掲載はあるが、2024年以降の営業情報は確認できず。"
+  },
+  "ibaraki-kasama-leisure-park-kasama": {
+   "name": "レジャーパークかさま",
+   "pref": "茨城県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「レジャーパークかさま」の釣り堀情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "ibaraki-kasumigaura-fishing-dodoo": {
+   "name": "フィッシングDoDoo",
+   "pref": "茨城県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「フィッシングDoDoo」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "ibaraki-tsuchiura-fishing-area-j": {
+   "name": "フィッシングエリアJ",
+   "pref": "茨城県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「フィッシングエリアJ」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "kanagawa-hadano-minoge-masu-center": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "みのげマス釣りセンター",
+   "pref": "神奈川県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "いこーよ・tenki.jpの施設情報で冬季（12月〜3月中旬頃）は休業と記載。"
+  },
+  "kanagawa-yamakita-nishitanzawa-keiryu": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "西丹沢渓流釣場",
+   "pref": "神奈川県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "いこーよ掲載の営業時間が3〜11月のみ（4〜9月8-17時、3・10・11月8-16時）で、12〜2月は営業記載なし＝冬季休業の可能性が高い（要電話確認）。"
+  },
+  "kinugawa-jouryuu6": {
+   "name": "鬼怒川上流域",
+   "pref": "栃木県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "鬼怒川上流域（川治温泉周辺の河川）でのワカサギ釣りの情報は見つからず。実在要確認。"
+  },
+  "kyoto-ayabe-otomi-keiryuso": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "乙味渓流荘",
+   "pref": "京都府",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "観光情報で冬季は休業（11月も魚減少で休業）と案内されており、12〜2月は営業していない。"
+  },
+  "kyoto-kyotamba-shizushi-shonyudo-koen": {
+   "name": "質志鐘乳洞公園(ニジマス釣り)",
+   "pref": "京都府",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "質志鐘乳洞公園の釣り堀は紹介記事で確認できるが、2024年以降の営業や冬季営業の有無は確認できず（公園は冬季休業の可能性あり）。"
+  },
+  "kyoto-nantan-miyama-sasari-fly-lure-tokubetsuku": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "佐々里Fly&Lure特別区",
+   "pref": "京都府",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "美山漁協の佐々里ます類特別区（ルアー・毛針限定）は府の遊漁規則（R7資料あり）で存続しているが、渓流のます類は冬季禁漁期に当たる。"
+  },
+  "kyoto-nantan-miyama-suginamidanigawa-tokubetsuku": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "杉波谷川特別区(美山漁協)",
+   "pref": "京都府",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "美山漁協の杉波谷ます類特別区は府の遊漁規則（R7資料あり）で存続しているが、渓流のます類は冬季禁漁期に当たる。"
+  },
+  "kyoto-ukyo-arashiyama-fishing-area": {
+   "name": "嵐山フィッシングエリア",
+   "pref": "京都府",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "嵐山-高雄パークウエイは2026年3月時点で通年営業の掲載があり周辺にフィッシングエリアがあると紹介されるが、釣り場単体の営業状況は確認できず。"
+  },
+  "mie-komono-asake-keigyoen-iwana": {
+   "name": "朝明渓魚苑キャンプ場 イワナ釣り堀",
+   "pref": "三重県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "朝明キャンプ場内のイワナ釣り堀としてなっぷ口コミ・県観光サイトに掲載はあるが、営業期間（冬季営業有無）は確認できず（山間キャンプ場のため冬季休業の可能性大）。"
+  },
+  "mie-matsusaka-isedera-seiryu-amago": {
+   "name": "清流あまごセンター",
+   "pref": "三重県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「清流あまごセンター」（松阪市伊勢寺）の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "mie-odai-okuise-forestpia-tsuribori": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "奥伊勢フォレストピア 釣り堀",
+   "pref": "三重県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "魚釣り体験は3/20〜11/30の日曜祝日実施（2025年版案内）で、冬季は通常営業していない（平日は3日前予約制）。"
+  },
+  "mie-tsu-misugi-daikichi-amago": {
+   "name": "大吉あまごセンター",
+   "pref": "三重県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「大吉あまごセンター」は三重県観光連盟に英語ページ（spot/372）が存在するが、営業状況の詳細は確認できず。"
+  },
+  "nagano-achi-aokiya-tsuribori": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "青木屋(お食事処・釣り堀)",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "青木屋は12月1日〜3月上旬まで休業と案内。"
+  },
+  "nagano-achi-jibuzaka-tsuribori": {
+   "name": "治部坂高原スキー場 釣り堀",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "治部坂高原の釣り堀は検索で確認できず（阿智村の釣り堀は青木屋のみヒット）。"
+  },
+  "nagano-hiraya-iwana-no-sato": {
+   "name": "岩魚の里",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "平谷村の「岩魚の里」という名称の釣り場は検索で確認できず（実在要確認）。"
+  },
+  "nagano-iida-tsuribori-sawasho": {
+   "name": "つり堀澤庄",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「つり堀澤庄」の情報が検索で見つからず（実在要確認）。"
+  },
+  "nagano-ina-ogurogawa-camp-tsuribori": {
+   "name": "小黒川渓谷キャンプ場 釣り堀",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "小黒川渓谷キャンプ場に釣り堀ありと口コミで確認できるが、冬季（12〜2月）の営業は未確認（キャンプ場は冬季休業の可能性）。"
+  },
+  "nagano-komoro-matsui-farm-tsuribori": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "松井農園 つりぼり",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "松井農園は1〜3月休業と案内（ふるさと納税のニジマス釣り体験チケットあり）。"
+  },
+  "nagano-matsumoto-nagawa-fishing-area": {
+   "name": "ながわフィッシングエリア",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「ながわフィッシングエリア」の営業情報が見つからず（高地のため冬季休業の可能性、要確認）。"
+  },
+  "nagano-nagawa-kadoya-shizenen": {
+   "name": "かどや自然園",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「かどや自然園」の釣り情報が検索で見つからず（実在要確認）。"
+  },
+  "nagano-nagawa-tsuribori-bbq-seiryu": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "つりぼり&BBQガーデン 清流",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "姫木平（標高約1,300m）の釣り堀で、11月〜4月中旬は冬季休業と案内。"
+  },
+  "nagano-shinano-hotel-wakatsuki-tsuribori": {
+   "name": "ホテル若月ファミリー釣り堀",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "ホテル若月の目の前に岩魚・ニジマス釣り堀ありと紹介（いこーよ）だが、黒姫高原の積雪期（12〜2月）の営業可否は未確認。"
+  },
+  "nagano-ueda-sugurikeikoku-tsuribori": {
+   "name": "巣栗渓谷 緑の広場 武石観光センター 釣堀",
+   "pref": "長野県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "巣栗渓谷・武石観光センターの釣堀情報が検索で見つからず。"
+  },
+  "nakatsunako-nagano": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "中綱湖",
+   "pref": "長野県",
+   "kind": "ワカサギ",
+   "status": "icefishing_cancelled",
+   "summary": "中綱湖の氷上穴釣りは2023・2024・2025年と解禁されず（2022年のみ解禁）。ボートでのワカサギ釣りは可。"
+  },
+  "nakatunako-fishing-a11": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "仁科三湖・中綱湖",
+   "pref": "長野県",
+   "kind": "ワカサギ",
+   "status": "icefishing_cancelled",
+   "summary": "中綱湖の氷上穴釣りは2023・2024・2025年と解禁されず（2022年のみ解禁）、2026年2月時点でも未解禁。ボート釣りは可。"
+  },
+  "nara-kamikitayama-wasamata-keiryu": {
+   "name": "和佐又渓流釣り場",
+   "pref": "奈良県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "和佐又渓流釣り場の専用情報は見つからず、和佐又ヒュッテ（ロッジ）は休業中・営業未定の掲載あり。実在・営業要確認。"
+  },
+  "nara-kawakami-ihika-no-sato": {
+   "name": "井氷鹿の里・もりもり館",
+   "pref": "奈良県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "井氷鹿の里・もりもり館の釣り情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "nara-kawakami-nakai-keikoku-shizenjuku": {
+   "name": "中井渓谷自然塾",
+   "pref": "奈良県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "中井渓谷自然塾の釣り情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "nara-kawakami-tocotoco-no-mori": {
+   "name": "TocoTocoの森",
+   "pref": "奈良県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "TocoTocoの森の釣り施設情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "nara-nosegawa-kitaimanishi-amago": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "北今西あまご放流釣り場",
+   "pref": "奈良県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "野迫川村の北股組合はあまご解禁資料（R5〜R8）に掲載あるが、渓流アマゴの放流釣りは春解禁で冬は禁漁期。北今西・かわらび荘の個別情報は確認できず。"
+  },
+  "niigata-itoigawa-hisuikyo-fishing-park": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "ヒスイ峡フィッシングパーク",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "営業は4月下旬〜10月下旬の土日祝（GW・夏休みは毎日）と案内されており、冬季は営業していない。"
+  },
+  "niigata-kashiwazaki-fishing-spot-pastime": {
+   "name": "Fishing Spot Pastime(フィッシングスポット パスタイム)",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「パスタイム」名義の情報は見つからず、柏崎市田屋水梨子に池2つの釣り場がYahoo地図に掲載されるのみ（同一施設か・営業状況は要確認）。"
+  },
+  "niigata-kashiwazaki-yane-nijimasu-tsuribori": {
+   "name": "谷根にじます釣堀",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "県観光協会ブログで谷根のバス停近くに「にじますつりぼり」の看板があると紹介されるのみで、営業状況は確認できず。"
+  },
+  "niigata-minamiuonuma-hakkai-fishing-space": {
+   "name": "八海フィッシングスペース",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「八海フィッシングスペース」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "niigata-minamiuonuma-noborikawa-fishing-park": {
+   "name": "登川フィッシングパーク",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「登川フィッシングパーク」の情報は検索で見つからず（近隣の湯沢フィッシングパークのみヒット）、実在要確認。豪雪地のため冬季営業も考えにくい。"
+  },
+  "niigata-nagaoka-tochio-fishing-park": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "栃尾フィッシングパーク(刈谷田川漁協)",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "刈谷田川を利用した天然渓流の釣り場で、県観光サイトに令和7年の営業時間掲載あり（営業中）。渓流・積雪地のため冬季は営業期間外と推定。"
+  },
+  "niigata-sanjo-yoshigahira-fishing-park": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "吉ヶ平フィッシングパーク(五十嵐川漁協)",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "守門川約1kmを使う渓流の管理釣り場で、山間豪雪地の吉ヶ平は冬季閉鎖（渓流シーズン外）と推定。冬季営業の情報なし。"
+  },
+  "niigata-tainai-fishing-park": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "胎内フィッシングパーク",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "2026年シーズンは4月18日オープン、営業は4月中旬〜11月初旬と案内されており冬季は休業。"
+  },
+  "niigata-tokamachi-nakauonuma-tsuribori": {
+   "name": "中魚沼漁協 釣り堀(清津川)",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "中魚沼漁協は清津川さかなまつり（毎年8月14日）を開催しているが、常設釣り堀の営業状況は確認できず（豪雪地のため冬季営業は考えにくい）。"
+  },
+  "niigata-tsunan-muji-camp-fishing-area": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "無印良品津南キャンプ場 フィッシングエリア",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "なっぷにルアー&フライエリア（レインボー放流）の宿泊者向けプランが掲載中だが、豪雪地のキャンプ場で冬季は休業期間（グリーンシーズンのみ）と推定。"
+  },
+  "niigata-tsunan-new-greenpia-tsuribori": {
+   "name": "ニュー・グリーンピア津南 釣り堀",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "ワンデープラン対象施設に釣り堀（2匹まで）が掲載され営業中だが、冬季はスキー場営業で釣り堀の冬季営業は確認できず（冬季休業の可能性大）。"
+  },
+  "niigata-yuzawa-fishing-park": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "湯沢フィッシングパーク",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "営業は4月下旬（2026年は4/18）〜11月上旬で、11月下旬〜4月下旬は休業と案内されている。"
+  },
+  "niigata-yuzawa-iwanosawa-iwana-tsuribori": {
+   "name": "イワナつりぼり 岩ノ沢養魚",
+   "pref": "新潟県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "Wanderlogに利用者の口コミはあるが、2024年以降の営業情報や冬季（豪雪地）の営業有無は確認できず。"
+  },
+  "ochigawa-keiryuu-tsuriba": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "大血川渓流観光釣場",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "営業は3/1〜11/30、12/1〜2月下旬は休業（いこーよ・Mapple）。"
+  },
+  "ogawarako-bass": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "小川原湖",
+   "pref": "青森県",
+   "kind": "ワカサギ",
+   "status": "poor",
+   "summary": "小川原湖のワカサギ漁獲量は2024年に41.0t（前年比39%）で1995年以降最低、2023年級群に続き不漁（氷上釣りの2025-26実施状況は未確認）。"
+  },
+  "okutone-fishing-park": {
+   "name": "奥利根フィッシングパーク",
+   "pref": "群馬県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で営業状況・冬季営業の情報が見つからず（要確認）。"
+  },
+  "osaka-ibaraki-aigawa-masu-amago": {
+   "name": "安威川上流漁協 マス・アマゴ釣り場",
+   "pref": "大阪府",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "安威川上流漁協のマス釣り場の情報が検索で見つからず。"
+  },
+  "osaka-kaizuka-okumizuma-athletic": {
+   "name": "奥水間アスレチックスポーツ(ニジマス釣り)",
+   "pref": "大阪府",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "奥水間アスレチックスポーツのニジマス釣りの情報が検索で見つからず。"
+  },
+  "osaka-sakai-fishing-land-hamadera": {
+   "name": "FISHING LAND 浜寺公園",
+   "pref": "大阪府",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "浜寺公園プールでの釣り営業「FISHING LAND」の情報は検索で確認できず（実在要確認）。"
+  },
+  "saiko-arakawa": {
+   "name": "彩湖（荒川調節池）",
+   "pref": "埼玉県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "彩湖（荒川調節池）でのワカサギ釣りの情報は見つからず。ワカサギ釣り場としての実在要確認。"
+  },
+  "saitama-chichibu-fly-field": {
+   "name": "秩父フライフィールド",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "saitama-chichibu-okuchichibu-nakatsugawa-keiryu-tsuriba": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "奥秩父源流中津川渓流釣場",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "渓流釣りの期間は毎年3月末〜11月末で冬季は営業外（なっぷマガジン等）。"
+  },
+  "saitama-chichibu-urayama-keiryu-fishing-center": {
+   "name": "浦山渓流フィッシングセンター",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "NAVITIMEに住所・電話のみ掲載、営業状況や近年の情報は見つからず（要確認）。"
+  },
+  "saitama-honjo-genda-yosonjo": {
+   "name": "元田養鱒場",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "saitama-ogose-kuroyamaen-masu-tsuriba": {
+   "name": "黒山園",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "黒山三滝周辺にマス釣り場がある旨の口コミはあるが「黒山園」としての情報は見つからず（実在・名称要確認）。"
+  },
+  "saitama-yokoze-ashigakubo-keikoku-kokusai-tsuriba": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "あしがくぼ渓谷国際釣場",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "旅色・たびまがで「冬季は休業」と記載、BE-PAL等で紹介され施設自体は営業中。"
+  },
+  "saitama-yokoze-karugome-masu-tsuriba": {
+   "name": "刈米マス釣り場",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "saitama-yorii-yorii-fishing": {
+   "name": "寄居フィッシング",
+   "pref": "埼玉県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認、近隣の吉羽園等との混同の可能性）。"
+  },
+  "setagawa-k8": {
+   "name": "瀬田川",
+   "pref": "滋賀県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "瀬田川でのワカサギ釣りの情報は見つからず。ワカサギ釣り場としての実在要確認。"
+  },
+  "shiga-koka-tsuchiyama-kurotaki-yugyojo": {
+   "name": "黒滝遊漁場(土山漁協)",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "土山漁協は2023-24年の県調査に名前があるが、「黒滝遊漁場」の情報は見つからず。"
+  },
+  "shiga-otsu-aqua-heaven": {
+   "name": "釣堀りアクア.ヘヴン",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「釣堀りアクア.ヘヴン」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "shiga-otsu-katsuragawa-gyokyo-tsuribori": {
+   "name": "葛川漁協 釣り堀",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "葛川漁協の釣り堀の情報が検索で見つからず。"
+  },
+  "shiga-otsu-setagawa-base": {
+   "name": "勢多川ベース(勢多川漁協)",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「勢多川ベース（勢多川漁協）」の情報が検索で見つからず。"
+  },
+  "shiga-takashima-gulliver-fishing-garden": {
+   "name": "ガリバーフィッシングガーデン",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「ガリバーフィッシングガーデン」の情報は検索で見つからず（高島市内の管理釣り場はフィッシングパーク高島の泉のみヒット）、実在要確認。"
+  },
+  "shiga-takashima-kutsuki-kogawa-keiryu-center": {
+   "name": "朽木こがわ渓流センター",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "renamed_moved",
+   "summary": "朽木小川の「朽木渓流魚センター」は閉館し、新旭町藁園の「フィッシングパーク高島の泉」に移転（2021年9月リニューアルオープン）。高島の泉は別スポットで登録済みのため重複に注意。"
+  },
+  "shiga-takashima-omi-amagonosato": {
+   "name": "近江あまごの里",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「近江あまごの里」は宿泊施設としての掲載のみで、釣り場としての営業情報は見つからず。"
+  },
+  "shiga-takashima-riverruns-tsunokawa": {
+   "name": "リバーランズ角川",
+   "pref": "滋賀県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「リバーランズ角川」の情報が検索で見つからず（実在要確認）。"
+  },
+  "shizuoka-hamamatsu-tenryu-yonezawa-ike": {
+   "name": "米沢池(天竜川漁協 ニジマス釣り池)",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "天竜川漁協（浜松市天竜区米沢）の施設は存在するが、「米沢池」の釣り営業情報は見つからず。"
+  },
+  "shizuoka-hamamatsu-tenryugawa-winter-lure-fly-area": {
+   "name": "天竜川 ルアー・フライ・テンカラ専用区(冬季)",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "天竜川漁協の冬季ニジマス放流は2024・2026年も実施（浜北大橋付近）だが、ルアー・フライ専用区の現行設定は未確認。"
+  },
+  "shizuoka-izu-nakaizu-fish-farm": {
+   "name": "中伊豆フィッシュファーム マス釣り場(ひふみ総合水産)",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「中伊豆フィッシュファーム」で情報が見つからず（実在要確認）。"
+  },
+  "shizuoka-nishiizu-nature-village-otaki-tsuribori": {
+   "name": "ネイチャービレッジおおたき(かざはなの谷キャンプ場) 釣り堀",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「ネイチャービレッジおおたき」「かざはなの谷」の釣り堀情報が見つからず（実在要確認）。"
+  },
+  "shizuoka-oyama-ayuzawagawa-winter-catch-and-release": {
+   "name": "鮎沢川 冬季キャッチ&リリース区間(鮎沢川漁協)",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "鮎沢川の冬季C&R区間について2024年以降の実施情報が検索で見つからなかった。"
+  },
+  "shizuoka-oyama-sukawa-fishing-park": {
+   "name": "須川フィッシングパーク(金太郎おさかな本舗)",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「須川フィッシングパーク」「金太郎おさかな本舗」で情報が見つからず（実在要確認）。"
+  },
+  "shizuoka-shimada-yamamedaira": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "やまめ平",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "営業期間は3月〜11月末または12月中旬までと案内（2026年は3/1〜12/13）で、冬季は休業。"
+  },
+  "shizuoka-shizuoka-aimata-tsuri-no-eki": {
+   "name": "相俣漁業センター「つりの駅」(安倍藁科川漁協)",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "安倍藁科川漁協は存続（2026年市ページ）だが相俣「つりの駅」の情報は見つからず。"
+  },
+  "shizuoka-shizuoka-kitazawa-tsuribori": {
+   "name": "北沢釣り堀(北沢やまめ釣堀センター)",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「北沢釣り堀／北沢やまめ釣堀センター」の情報が検索で見つからず（実在要確認）。"
+  },
+  "shizuoka-susono-fishing-park": {
+   "name": "すそのフィッシングパーク",
+   "pref": "静岡県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "いこーよに施設ページはあるが詳細・近年の営業情報は確認できず（要確認）。"
+  },
+  "tadamigawa-tsuri6": {
+   "name": "只見川",
+   "pref": "福島県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "只見川（只見町）でのワカサギ釣りの情報は見つからず。ワカサギ釣り場としての実在要確認。"
+  },
+  "tazawako-tsuri6": {
+   "name": "田沢湖",
+   "pref": "秋田県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "田沢湖でのワカサギ釣りの情報は見つからず（酸性水の影響で魚類が少ない湖）。ワカサギ釣り場としての実在要確認。"
+  },
+  "tochigi-nikko-miyori-keiryu-tsuriba": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "三依渓流つり場",
+   "pref": "栃木県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "栃ナビ（2026年4月更新）に掲載され営業中だが、口コミに「今シーズン最終営業日」とあり季節営業。冬季（12〜2月）は営業外の可能性が高い（期間は要電話確認）。"
+  },
+  "tochigi-oashigawa-fc-village": {
+   "name": "大芦川F&Cフィールドビレッジ",
+   "pref": "栃木県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で営業状況・冬季営業の情報が見つからず（要確認）。"
+  },
+  "tochigi-shioya-higashigoyako": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "東古屋湖",
+   "pref": "栃木県",
+   "kind": "ワカサギ",
+   "status": "closed",
+   "summary": "東古屋湖のワカサギ釣りは6月解禁〜10月いっぱい（2024・2025年釣行記）の夏秋釣り場で、冬（12〜2月）は期間外。"
+  },
+  "tochigi-utsunomiya-kumamoto-fish-farm": {
+   "name": "熊本養魚場",
+   "pref": "栃木県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "なっぷの宇都宮釣り堀記事に見出しのみ確認できたが、所在地・営業状況の詳細は2024年以降の情報で確認できず。"
+  },
+  "tochigi-yaita-kikuchi-yougyojo": {
+   "name": "菊地養魚場(宮川清流)",
+   "pref": "栃木県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で「菊地養魚場（宮川清流）」の施設情報が見つからず、営業状況不明（実在要確認）。"
+  },
+  "tokyo-hachioji-kitaasakawa-ongata-masu-tsuriba": {
+   "name": "北浅川恩方ます釣場",
+   "pref": "東京都",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "NAVITIMEに「Kita-Asakawa River Ongata Trout Fishing Pond」の掲載はあるが、近年の営業情報は見つからず（恩方国際釣堀と混同されやすい、要確認）。"
+  },
+  "tokyo-hinode-shizen-kyuyomura-sakanaen": {
+   "name": "日の出町自然休養村 さかな園",
+   "pref": "東京都",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "2回検索しても該当施設の情報が見つからない（実在要確認）。"
+  },
+  "tokyo-okutama-hikawa-kokusai-masu-tsuriba": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "氷川国際ます釣場",
+   "pref": "東京都",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "いこーよ掲載の営業期間が3月〜11月で、冬季（12〜2月）は休業。"
+  },
+  "tokyo-okutama-minedanigawa-keiryu-tsuriba": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "峰谷川渓流釣場",
+   "pref": "東京都",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "営業は3月1日〜11月末（ニジマス）の土日月で12〜2月は営業期間外。都の遊漁規則に冬季ニジマス釣場の規定はあるが設置有無は年により異なり要確認。"
+  },
+  "tokyo-ome-mitake-yamame-no-bokujo": {
+   "name": "御岳やまめの牧場",
+   "pref": "東京都",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "2回検索しても該当施設の情報が見つからない（実在要確認）。"
+  },
+  "tokyo-ome-takamizusan-genryu-tsuribori": {
+   "name": "高水山源流の釣り堀",
+   "pref": "東京都",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "2回検索しても該当施設の情報が見つからない（実在要確認）。"
+  },
+  "toyama-nanto-iwana-no-sato-otanigawa": {
+   "name": "いわなの里 太谷川",
+   "pref": "富山県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「いわなの里 太谷川」の情報は検索で見つからず、営業状況不明（実在要確認。山間豪雪地で冬季営業は考えにくい）。"
+  },
+  "toyama-toyama-wariyama-tenkomori": {
+   "name": "割山森林公園 天湖森",
+   "pref": "富山県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "割山森林公園天湖森に釣り池（土田池）がある旨の掲載はあるが、釣り堀としての営業・冬季の可否は確認できず。"
+  },
+  "urayama-dam-sakurako6": {
+   "name": "浦山ダム秩父さくら湖",
+   "pref": "埼玉県",
+   "kind": "ワカサギ",
+   "status": "unknown",
+   "summary": "浦山ダム（秩父さくら湖）でのワカサギ釣りの情報は見つからず。ワカサギ釣り場としての実在要確認。"
+  },
+  "wakayama-hidakagawa-washinokawa-amago": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "鷲の川渓流アマゴ釣り",
+   "pref": "和歌山県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "営業期間は4月1日〜8月末（矢筈老人クラブ運営）と案内されており、冬季は営業していない。"
+  },
+  "wakayama-nachikatsuura-fishing-house-katsumika": {
+   "name": "フィッシングハウス かつみか",
+   "pref": "和歌山県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "「フィッシングハウス かつみか」の情報は検索で見つからず、営業状況不明（実在要確認）。"
+  },
+  "yamanashi-kofu-ryugaike-fishing-park": {
+   "name": "フィッシングパーク竜華池",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で該当施設の情報が見つからない（実在要確認）。"
+  },
+  "yamanashi-kofu-terakawa-green-park-tsuriike": {
+   "name": "寺川グリーン公園 釣り池",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "公園（甲府市古関町）の存在は確認できたが釣り池・釣り営業の情報は見つからず（実在要確認）。"
+  },
+  "yamanashi-kosuge-fishing-village": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "小菅フィッシングヴィレッジ(小菅村村営第1釣場)",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "釣り情報サイト掲載の営業期間は3月〜11月で冬季は営業期間外。"
+  },
+  "yamanashi-kosuge-kosugegawa-winter-nijimasu": {
+   "name": "小菅川冬季ニジマス釣り場(小菅村漁協)",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "検索で2025-26冬季の設置・営業情報が見つからず（県観光サイトの小菅川釣り場記事は2020年更新）。小菅村漁協に要確認。"
+  },
+  "yamanashi-nanbu-sansui-tokuma-nijimasu": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "山水徳間の里 ニジマス釣り",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "釣りは4月〜11月（県観光サイト）、なっぷでも「春から秋にかけてニジマス釣り」と案内（2024年8月にトレーラーハウス新設＝施設は営業中）。"
+  },
+  "yamanashi-otsuki-kananomori-maki-keiryu": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "金の森山荘(真木川渓流釣場)",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "県資料で真木川渓流釣場の営業期間は3〜9月とされ冬季は営業外。県観光サイトの釣り情報は2015年更新で古く、現況は要確認。"
+  },
+  "yamanashi-uenohara-katsuragawa-fly-lure": {
+   "name": "桂川フライ・ルアー釣場(桂川漁協)",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "unknown",
+   "summary": "桂川漁協関連では上野原市特設釣場（鶴川、4〜10月）が確認できたが、フライ・ルアー専用釣場としての情報・冬季営業は見つからず（要確認）。"
+  },
+  "yamanashi-yamanashi-mt-kentoku-fish-lodge": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "Mt.Kentoku Fish & Lodge",
+   "pref": "山梨県",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "いこーよ掲載で営業期間は4月〜11月（冬季休業）、なっぷに口コミあり。"
+  },
+  "yogoko-lake": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "余呉湖",
+   "pref": "滋賀県",
+   "kind": "ワカサギ",
+   "status": "poor",
+   "summary": "余呉湖は令和7年シーズン（2025年11月〜2026年3月）にワカサギが記録的不漁となり、滋賀県が原因調査中（2026年7月資料）。"
+  },
+  "yozawa-kebari-senyo": {
+   "months": [
+    12,
+    1,
+    2
+   ],
+   "name": "養沢毛鉤専用釣場",
+   "pref": "東京都",
+   "kind": "管理釣り場",
+   "status": "seasonal_closed_winter",
+   "summary": "営業期間は3月1日〜10月31日（ヤマメは9/30まで）で冬季は休場（ツリハック・いこーよ）。"
+  },
+  "yunoko-tsuri6": {
+   "months": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "name": "湯ノ湖",
+   "pref": "栃木県",
+   "kind": "ワカサギ",
+   "status": "closed",
+   "summary": "湯ノ湖の釣り期間は5月1日〜9月30日（2023年日光市資料）で、冬季は期間外。ワカサギ釣り場としての実績も見つからず。"
+  }
+ }
+}
