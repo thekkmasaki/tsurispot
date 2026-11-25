@@ -47,7 +47,6 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
           { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
           { fish: fish("kurosoi"), monthStart: 10, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム", source: "魚速報 苫小牧西港" },
           { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
-          { fish: fish("kasago"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
     ],
     bestTimes: [
@@ -73,7 +72,7 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
     id: "s34",
     name: "室蘭港",
     slug: "muroran-port",
-    description: "夜景を眺めながらの夜釣りも人気の水深のある工業港。春はウキ釣りのホッケ、夏から秋はサビキ釣りのアジ、晩秋から冬は投げ釣りのカレイと穴釣りのカサゴが本命で、夜はワームのクロソイやメバリングも楽しめる通年型の釣り場。水深があり大型の回遊魚も期待できる。カレイは下げ潮で潮目ができる時間帯が好機。JR室蘭駅から徒歩約15分、無料駐車スペースとトイレがありコンビニも近い。岸壁に柵がないため夜間は足元に注意し、冬季は路面凍結への備えも忘れずに。",
+    description: "夜景を眺めながらの夜釣りも人気の水深のある工業港。春はウキ釣りのホッケ、夏から秋はサビキ釣りのアジ、晩秋から冬は投げ釣りのカレイが本命で、夜はワームのクロソイやメバリングも楽しめる通年型の釣り場。水深があり大型の回遊魚も期待できる。カレイは下げ潮で潮目ができる時間帯が好機。JR室蘭駅から徒歩約15分、無料駐車スペースとトイレがありコンビニも近い。岸壁に柵がないため夜間は足元に注意し、冬季は路面凍結への備えも忘れずに。",
     latitude: 42.3439,
     longitude: 140.9504,
     address: "〒051-0023 北海道室蘭市入江町",
@@ -95,7 +94,6 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
           { fish: fish("kurosoi"), monthStart: 10, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム", source: "アングラーズ 北海道" },
           { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ", source: "アングラーズ 室蘭港" },

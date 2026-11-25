@@ -1061,7 +1061,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   },
   {
     id: "s2243", name: "北浦（潮来周辺）", slug: "kitaura-itako",
-    description: "北浦（霞ヶ浦水系）はブラックバス釣りの人気ポイント。潮来市や鹿嶋市に面する広大な湖で、護岸やアシ際でのバス釣りが盛ん。50cmオーバーのランカーバスの実績も多い。冬場はワカサギ釣りやブルーギルも楽しめ、周辺には貸しボート店も点在。",
+    description: "北浦（霞ヶ浦水系）はブラックバス釣りの人気ポイント。潮来市や鹿嶋市に面する広大な湖で、護岸やアシ際でのバス釣りが盛ん。50cmオーバーのランカーバスの実績も多い。冬場はブルーギルも狙え、周辺には貸しボート店も点在。",
     latitude: 35.9810, longitude: 140.5240,
     address: "〒311-2436 茨城県潮来市牛堀8-3",
     accessInfo: "JR鹿島線潮来駅から車で約10分。東関東自動車道潮来ICから約10分。",
@@ -1072,7 +1072,6 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
-      { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
     mazumeInfo: mazumeKanto,
@@ -1082,7 +1081,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   },
   {
     id: "s2244", name: "霞ヶ浦（土浦周辺）", slug: "kasumigaura-tsuchiura",
-    description: "日本で2番目に大きい湖・霞ヶ浦のうち土浦市側の湖岸一帯。バス釣りの聖地として知られ、ブラックバスは4〜11月に護岸やアシ際、流入河川まわりを朝マヅメのルアーで狙うのが定番。春はスポーニング絡みの大型に期待が持てる。3〜11月はヘラブナ、4〜11月はコイのぶっこみ釣り、11〜3月は冬のワカサギ釣りと季節ごとに対象魚が入れ替わる多彩なフィールド。釣り場は無料で湖岸各所に駐車スペースがあり、トイレも整備済み。周辺にコンビニ・釣具店が揃い長時間の釣行でも安心。JR土浦駅から車で約10分、常磐道土浦北ICから約10分とアクセスも良好。護岸は足場が良いが、ウェーディングは泥底に注意。",
+    description: "日本で2番目に大きい湖・霞ヶ浦のうち土浦市側の湖岸一帯。バス釣りの聖地として知られ、ブラックバスは4〜11月に護岸やアシ際、流入河川まわりを朝マヅメのルアーで狙うのが定番。春はスポーニング絡みの大型に期待が持てる。3〜11月はヘラブナ、4〜11月はコイのぶっこみ釣りが楽しめるフィールド。霞ヶ浦のワカサギは近年ほとんど獲れなくなっている。釣り場は無料で湖岸各所に駐車スペースがあり、トイレも整備済み。周辺にコンビニ・釣具店が揃い長時間の釣行でも安心。JR土浦駅から車で約10分、常磐道土浦北ICから約10分とアクセスも良好。護岸は足場が良いが、ウェーディングは泥底に注意。",
     latitude: 36.0710, longitude: 140.2030,
     address: "〒300-0033 茨城県土浦市川口2丁目",
     accessInfo: "JR常磐線土浦駅から車で約10分。常磐自動車道土浦北ICから約10分。",
@@ -1094,7 +1093,6 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝〜日中", method: "ヘラブナ釣り" },
       { fish: fish("koi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ぶっこみ釣り" },
-      { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
     mazumeInfo: mazumeKanto,

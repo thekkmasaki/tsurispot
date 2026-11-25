@@ -211,7 +211,20 @@ const MONTH_SKIP: Record<number, Set<string>> = { 12: WINTER_SKIP_ALL, 1: WINTER
 // 同日、全国のタチウオを確認。大分（県の漁獲は1996年5,562t→2015年789t、大分市の港内に群れが入るのは年に数日）と
 // 山口（防波堤からは難しいとの記述、周防大島の釣果集計も低調）も岸のランキングには向かないので外す。
 // サイトのデータは「年に数日は釣れる」ため削除しない（香川・岡山・広島は「何年も岸に入っていない」ため削除済み）
-const TOPIC_SKIP = new Set(["kagawa/tachiuo", "okayama/tachiuo", "hiroshima/tachiuo", "oita/tachiuo", "yamaguchi/tachiuo"]);
+// 2026-11-25 タチウオ以外の全魚種（県×魚 639組）も確認して追加（docs/sns-spot-audit-2026-11-25.md）。
+// - 激減: 秋田ハタハタ（2023年110t・2025年は接岸群ほぼなし／秋田魁新報・県）、霞ヶ浦北浦ワカサギ（2019年以降1t未満／県水試）、
+//   余呉湖ワカサギ（2025年記録的不漁）、東京湾のマコガレイ（年1000t超→10〜20t、千葉R5評価「低位」）、茨城のカレイ（県評価「低位・減少」）、
+//   千葉のキス（主要漁協 2000年185t→2024年12t）、太平洋北部のサバ（マサバ太平洋系群が2019年以降減少・2024漁期は10年で最大の不漁）
+// - 船が主で岸の釣果がほぼ無い: 北海道マダラ、沖縄スジアラ、三重シマアジ、鳥取・島根ヤリイカ
+// - 種の当て方が不正確: 沖縄のクロダイ（実際はミナミクロダイ等）、沖縄のキジハタ・ハゼ（サイトのデータも削除済み）
+const TOPIC_SKIP = new Set([
+  "kagawa/tachiuo", "okayama/tachiuo", "hiroshima/tachiuo", "oita/tachiuo", "yamaguchi/tachiuo",
+  "akita/hatahata", "ibaraki/wakasagi", "shiga/wakasagi",
+  "tokyo/karei", "kanagawa/karei", "chiba/karei", "ibaraki/karei", "chiba/kisu",
+  "iwate/saba", "miyagi/saba", "fukushima/saba", "ibaraki/saba", "chiba/saba",
+  "hokkaido/madara", "okinawa/sujiara", "mie/shimaaji", "tottori/yariika", "shimane/yariika",
+  "okinawa/kurodai", "okinawa/hata", "okinawa/haze",
+]);
 // 県で6件に満たなくても地方・全国でまとめてお題にする魚（データが少ないが人気のある魚）
 const WIDE_AREA_FISH = new Set(["kobudai"]);
 

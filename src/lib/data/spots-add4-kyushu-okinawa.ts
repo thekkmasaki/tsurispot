@@ -1739,7 +1739,6 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       // ハゼは重複レコード sw5153(awase-gyokou-okinawa) と同じ記述。重複排除は魚種数で勝者を決めるため、
       // 魚種数が sw5153 を下回るとこちら(正規URL・spot-redirects.json の転送先)が負けて URL が入れ替わる。
-      { fish: fish("haze"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
     tideAdvice: tideReef, mazumeInfo: mazumeOkinawa,

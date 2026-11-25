@@ -741,7 +741,6 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 43, googleRating: 3.5, googleReviewCount: 128,
     catchableFish: [
       { fish: fish("karei"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("kasago"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeHokkaido,
