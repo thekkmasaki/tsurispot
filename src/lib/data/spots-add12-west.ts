@@ -1597,7 +1597,6 @@ export const westAdd12Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeShikoku,
   },

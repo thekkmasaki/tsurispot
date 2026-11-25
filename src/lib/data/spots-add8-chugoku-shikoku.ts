@@ -1855,7 +1855,6 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
     ],
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeSetouchi,
@@ -1891,7 +1890,6 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeSetouchi,
@@ -1959,7 +1957,6 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "ルアー" },

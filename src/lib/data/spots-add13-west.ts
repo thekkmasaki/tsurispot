@@ -1574,7 +1574,6 @@ export const westAdd13Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "ウキ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeShikoku,
   },

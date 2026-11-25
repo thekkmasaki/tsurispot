@@ -143,7 +143,6 @@ export const expandWestSpots: FishingSpot[] = [
     mainImageUrl: "", images: [], rating: 3.6, reviewCount: 95,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "引き釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ダンゴ釣り" },
     ],
     bestTimes: btNight, tackleRecommendations: [],
@@ -164,7 +163,6 @@ export const expandWestSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "引き釣り" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -246,7 +244,6 @@ export const expandWestSpots: FishingSpot[] = [
     mainImageUrl: "", images: [], rating: 3.6, reviewCount: 70,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "引き釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -537,7 +534,6 @@ export const expandWestSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "引き釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "落とし込み" },
     ],
     bestTimes: btNight, tackleRecommendations: [],
