@@ -94,6 +94,16 @@
    ],
    "secondaryUrls": []
   },
+  "amanohashidate-asokai": {
+   "name": "天橋立阿蘇海",
+   "pref": "京都府",
+   "verdict": "secondary_full",
+   "summary": "シマノの釣行記（2026年5月）に『天橋立は基本的に釣りOKだが、裏側の阿蘇海のみ釣り禁止』と記載。京都府の海面利用ルール等の公式資料では釣り禁止は確認できず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://fish.shimano.com/ja-JP/content/fishingstyle/article/nagetsuri_world/2026/260507/index.html"
+   ]
+  },
   "amanohashidate-k8": {
    "name": "天橋立",
    "pref": "京都府",
@@ -576,6 +586,16 @@
    ],
    "secondaryUrls": []
   },
+  "isonoura-beach-k8": {
+   "name": "磯ノ浦海水浴場",
+   "pref": "和歌山県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（るるぶ）で磯の浦海水浴場（遊泳期間6〜9月）の禁止事項に『魚釣り』が明記されている。和歌山市・管理者の公式規則は検索で見つからず。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80031968/beach"
+   ]
+  },
   "itoigawa-port": {
    "name": "糸魚川港",
    "pref": "新潟県",
@@ -631,6 +651,16 @@
    "officialUrls": [
     "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
     "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-samegawa-surf-a12": {
+   "name": "いわき市鮫川河口サーフ",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県漁業調整規則により、鮫川の河口中央から半径550m以内の海面で毎年9月1日〜翌5月31日は水産動植物の採捕禁止（県水産事務所）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/36490a/gyogyoukisoku47.html"
    ],
    "secondaryUrls": []
   },
@@ -897,6 +927,18 @@
    ],
    "secondaryUrls": []
   },
+  "kobe-airport-gogan": {
+   "name": "神戸空港親水護岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "神戸市公式ページで親水護岸は神戸港で唯一釣りが認められた開放エリア。ただし黄色の通路部分での釣り、航路近くへの遠投、立入禁止エリアへの侵入・手すり越えは禁止。迷惑行為があれば閉鎖の可能性あり。",
+   "officialUrls": [
+    "https://www.city.kobe.lg.jp/a42810/business/kowanjigyo/kobekukonishiryokuchi-tsuri.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/2752"
+   ]
+  },
   "kumihama-wan-kyoto": {
    "name": "久美浜湾",
    "pref": "京都府",
@@ -1048,6 +1090,17 @@
    "secondaryUrls": [
     "https://rurubu.jp/andmore/spot/80017544/beach",
     "https://summer.walkerplus.com/odekake/detail/ar0518s53736/data.html"
+   ]
+  },
+  "mikuni-sunset-beach-a10": {
+   "name": "三国サンセットビーチ",
+   "pref": "福井県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（ウォーカープラス・るるぶ）の海水浴場データで「ビーチからの投げ釣り」が禁止事項として記載。海水浴期間（7月上旬〜8月下旬）限定か通年かは不明。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://summer.walkerplus.com/odekake/detail/ar0518s53736/data.html",
+    "https://rurubu.jp/andmore/spot/80017544/beach"
    ]
   },
   "misaki-fishing-port": {
@@ -1235,6 +1288,16 @@
    ],
    "secondaryUrls": [
     "https://tsurihack.com/801"
+   ]
+  },
+  "nata-kaigan-w6": {
+   "name": "博多湾・奈多海岸",
+   "pref": "福岡県",
+   "verdict": "secondary_partial",
+   "summary": "釣りサイトによると隣接する奈多漁港の東側防波堤に釣り禁止エリアがある。東側サーフは夏に海水浴場となるため日中の釣りは控えるよう推奨。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://tsurihack.com/1329"
    ]
   },
   "nata-port-fukuoka": {
@@ -1891,6 +1954,17 @@
     "https://iko-yo.net/facilities/52881"
    ]
   },
+  "soma-matsukawa-oosu-beach-a13": {
+   "name": "相馬市松川浦大州海岸",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県相馬港湾建設事務所が2020年8月に「相馬港、松川浦漁港等における釣り禁止区域」の周知看板を設置。大洲海岸が対象範囲に含まれるかは検索結果では不明。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41390a/soma-port-osirase.html",
+    "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
+   ],
+   "secondaryUrls": []
+  },
   "soma-obama-breakwater-a10": {
    "name": "相馬港尾浜堤防",
    "pref": "福島県",
@@ -1923,6 +1997,16 @@
     "https://www.pref.fukushima.lg.jp/sec/41390a/umituri.html"
    ],
    "secondaryUrls": []
+  },
+  "suisho-hama-e8": {
+   "name": "水晶浜海水浴場",
+   "pref": "福井県",
+   "verdict": "secondary_partial",
+   "summary": "観光情報サイト（るるぶ）で海水浴場の禁止事項に『遊泳区域内での遊泳以外の行為』が挙がっており、開設期間中は遊泳区域での釣りができない。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://rurubu.jp/andmore/spot/80017646/beach"
+   ]
   },
   "sukematsu-wharf": {
    "name": "助松埠頭",
@@ -1973,6 +2057,16 @@
    "pref": "香川県",
    "verdict": "official_partial",
    "summary": "香川県高松港管理事務所のページで、サンポート高松には船舶の安全確保のため釣りを禁止する区域が設けられている（範囲は図で表示）。禁止区域外でもマナー順守を求めている。",
+   "officialUrls": [
+    "https://www.pref.kagawa.lg.jp/takamatsukokanri/port_takamatsu/kisou2nd3rd.html"
+   ],
+   "secondaryUrls": []
+  },
+  "takamatsu-omatoba-kaigan": {
+   "name": "高松市・大的場海岸護岸",
+   "pref": "香川県",
+   "verdict": "official_partial",
+   "summary": "香川県（高松港管理）がサンポート高松に船舶の安全確保のための釣り禁止区域を設定。登録住所の浜ノ町はサンポート地区で大的場はその西側だが、大的場が禁止区域に含まれるかは検索結果では未確認。",
    "officialUrls": [
     "https://www.pref.kagawa.lg.jp/takamatsukokanri/port_takamatsu/kisou2nd3rd.html"
    ],
@@ -2040,6 +2134,16 @@
    "officialUrls": [
     "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html",
     "https://www.pref.niigata.lg.jp/sec/gyoko/1356904273863.html"
+   ],
+   "secondaryUrls": []
+  },
+  "tokyo-ko-yacho6": {
+   "name": "東京港野鳥公園",
+   "pref": "東京都",
+   "verdict": "secondary_full",
+   "summary": "東京港野鳥公園は野鳥の生息地保護を目的とした公園で、保護区内は立入禁止。釣りが可能という情報はなく、園内での釣りは実質不可と考えられる（公式に「釣り禁止」の明記は検索結果では未確認）。",
+   "officialUrls": [
+    "https://www.kouwan.metro.tokyo.lg.jp/kanko/13_kaijokouen_yatyou.pdf"
    ],
    "secondaryUrls": []
   },
