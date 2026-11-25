@@ -653,7 +653,6 @@ export const additionalSpotsTohoku: FishingSpot[] = [
           { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
           { fish: fish("kurosoi"), monthStart: 10, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
           { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-          { fish: fish("ishimochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ちょい投げ" },
     ],
     bestTimes: [{ label: "朝マヅメ", timeRange: "04:50〜07:00", rating: "best" }, { label: "夕マヅメ", timeRange: "16:30〜18:30", rating: "best" }],
     tackleRecommendations: [],

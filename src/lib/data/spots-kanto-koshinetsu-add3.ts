@@ -2492,7 +2492,6 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/wikimedia/shibata-shiunji-kaigan.webp", imageAttribution: "Photo: Torameko / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.5, reviewCount: 95, googleRating: 4.3, googleReviewCount: 24,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
-      { fish: fish("sawara"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],

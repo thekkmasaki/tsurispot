@@ -131,7 +131,6 @@ export const okinawaSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/tomigusuku-senaga-island.webp", imageAttribution: "Photo: hideflex / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 142, googleRating: 4.5, googleReviewCount: 214,
     catchableFish: [
-      { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "泳がせ釣り・ルアー" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
@@ -190,7 +189,6 @@ export const okinawaSpots: FishingSpot[] = [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
-          { fish: fish("shiira"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
           { fish: fish("kamasu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -409,7 +407,6 @@ export const okinawaSpots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 82, googleRating: 3.8, googleReviewCount: 32,
     catchableFish: [
-      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
     ],
@@ -468,7 +465,6 @@ export const okinawaSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "日中", method: "石鯛釣り" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
           { fish: fish("shiira"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
           { fish: fish("kamasu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -495,7 +491,6 @@ export const okinawaSpots: FishingSpot[] = [
     mainImageUrl: "", images: [], rating: 4.1, reviewCount: 92, googleRating: 3.8, googleReviewCount: 19,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
@@ -578,7 +573,6 @@ export const okinawaSpots: FishingSpot[] = [
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
-          { fish: fish("shiira"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
           { fish: fish("kamasu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -651,7 +645,6 @@ export const okinawaSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/nanjo-chinen-ocean.webp", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 68, googleRating: 4.2, googleReviewCount: 210,
     catchableFish: [
-      { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
@@ -707,7 +700,6 @@ export const okinawaSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ釣り" },
-      { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "日中", method: "石鯛釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
           { fish: fish("shiira"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -801,7 +793,7 @@ export const okinawaSpots: FishingSpot[] = [
   },
   {
     id: "s1150", name: "那覇市三重城港", slug: "naha-miegusuku-port",
-    description: "琉球王国時代の三重城（みえぐすく）跡に隣接する防波堤。サビキ釣りのアジとカワハギは年間を通じて狙え、7〜12月は夜のテンヤでタチウオも上がる。ウキフカセのタマンなど沖縄らしい魚種も多彩。ゆいレール旭橋駅から車で約5分と那覇市中心部から近く、周辺に有料駐車場（500円〜）とトイレ、コンビニも揃うので観光の合間の短時間釣行にも向く。ダイビング船の発着があるため係留エリアでは竿出しを控えたい。",
+    description: "琉球王国時代の三重城（みえぐすく）跡に隣接する防波堤。サビキ釣りのアジは年間を通じて狙え、7〜12月は夜のテンヤでタチウオも上がる。ウキフカセのタマンなど沖縄らしい魚種も多彩。ゆいレール旭橋駅から車で約5分と那覇市中心部から近く、周辺に有料駐車場（500円〜）とトイレ、コンビニも揃うので観光の合間の短時間釣行にも向く。ダイビング船の発着があるため係留エリアでは竿出しを控えたい。",
     latitude: 26.2180, longitude: 127.6680,
     address: "〒900-0036 沖縄県那覇市 西3丁目20",
     accessInfo: "ゆいレール旭橋駅から車で約5分。国道58号から泊港方面。",
@@ -811,7 +803,6 @@ export const okinawaSpots: FishingSpot[] = [
     mainImageUrl: "", images: [], rating: 3.7, reviewCount: 108, googleRating: 3.7, googleReviewCount: 37,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("kawahagi"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "カワハギ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
           { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ" },
           { fish: fish("shiira"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },

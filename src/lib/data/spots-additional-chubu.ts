@@ -858,7 +858,6 @@ export const additionalSpotsChubu: FishingSpot[] = [
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
-          { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: [{ label: "夕マヅメ", timeRange: "16:30〜18:30", rating: "best" }, { label: "夜", timeRange: "19:00〜22:00", rating: "good" }],
     tackleRecommendations: [],

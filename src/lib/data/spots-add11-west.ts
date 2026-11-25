@@ -2617,7 +2617,6 @@ export const westAdd11Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("taman"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっこみ釣り" },
-      { fish: fish("shiira"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー" },
     ],
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeOkinawa,
   },

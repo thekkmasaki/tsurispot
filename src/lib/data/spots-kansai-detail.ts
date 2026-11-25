@@ -164,7 +164,6 @@ export const kansaiDetailSpots: FishingSpot[] = [
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "穴釣り" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
-          { fish: fish("isaki"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("buri"), monthStart: 9, monthEnd: 1, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
           { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },

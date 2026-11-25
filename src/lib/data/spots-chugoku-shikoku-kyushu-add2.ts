@@ -1053,7 +1053,6 @@ export const chugokuShikokuKyushuAdd2Spots: FishingSpot[] = [
     mainImageUrl: "", images: [], rating: 4.3, reviewCount: 72, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("hiramasa"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("mebaru"), monthStart: 10, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 7, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },

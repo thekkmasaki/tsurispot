@@ -172,7 +172,7 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
     id: "s36",
     name: "釧路港",
     slug: "kushiro-port",
-    description: "夏から秋はサビキ釣りのサバが回遊する道東最大の港。太平洋に面して水深が深く、10月から3月は投げ釣りの大型カレイが本命で、満潮前後に岸壁際へ寄るタイミングが狙い目。秋から春は穴釣りのカサゴも手堅い。サバは朝マヅメが好機で、道東は日の出が早く夏は未明から竿を出せる。無料駐車スペースとトイレがあり、周辺にコンビニや釣具店も揃うので装備を整えやすい。岸壁に柵がなく霧も発生しやすいため足元に注意し、冬季は極寒のため防寒装備を万全に。",
+    description: "夏から秋はサビキ釣りのサバが回遊する道東最大の港。太平洋に面して水深が深く、10月から3月は投げ釣りの大型カレイが本命で、満潮前後に岸壁際へ寄るタイミングが狙い目。サバは朝マヅメが好機で、道東は日の出が早く夏は未明から竿を出せる。無料駐車スペースとトイレがあり、周辺にコンビニや釣具店も揃うので装備を整えやすい。岸壁に柵がなく霧も発生しやすいため足元に注意し、冬季は極寒のため防寒装備を万全に。",
     latitude: 42.9988,
     longitude: 144.3551,
     address: "〒085-0014 北海道釧路市末広町2丁目26 末広館ビル 2階",
@@ -193,7 +193,6 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
     reviewCount: 76, googleRating: 4.1, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
     ],
     bestTimes: [
