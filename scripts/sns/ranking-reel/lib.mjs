@@ -2,6 +2,8 @@
 import fs from "fs";
 
 export const LEDGER_KEY = "sns:ranking:ledger";
+// 週次の事前チェック（PRECHECK.md）で承認したお題。ハッシュ: フィールド "YYYY-MM-DD-am|pm" → JSON
+export const APPROVED_KEY = "sns:ranking:approved";
 export const TOKEN_KEYS = { instagram: "sns:token:instagram", threads: "sns:token:threads" };
 
 // ── Upstash Redis (REST) ──

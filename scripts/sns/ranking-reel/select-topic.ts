@@ -35,6 +35,8 @@ const dateStr = arg("date") ?? new Date(Date.now() + 9 * 3600e3).toISOString().s
 const monthNum = Number(arg("month") ?? Number(dateStr.slice(5, 7)));
 const month = MONTHS.find((m) => m.num === monthNum)!;
 const exclude = list(arg("exclude"));
+// 週次の事前チェック（PRECHECK.md）で外したスポット。run.mjs が承認データから渡す
+const excludeSpots = list(arg("exclude-spots"));
 const recentFish = list(arg("recent-fish"));
 const recentPref = list(arg("recent-pref"));
 // 出世魚は同じ魚として扱う（ブリの直後にイナダ、のような実質同じお題の連続を避ける）
@@ -92,7 +94,7 @@ const BAN_AUDIT_EXCLUDE = new Set(
     .map(([slug]) => slug)
 );
 function snsSafe(s: (typeof fishingSpots)[number]) {
-  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug) || BAN_AUDIT_EXCLUDE.has(s.slug)) return false;
+  if (s.fishingBan || SNS_EXCLUDE_NAME.test(s.name) || SNS_EXCLUDE_SLUGS.has(s.slug) || BAN_AUDIT_EXCLUDE.has(s.slug) || excludeSpots.has(s.slug)) return false;
   return !BAN_HINT.test(JSON.stringify({ ...s, catchableFish: undefined }));
 }
 
@@ -357,6 +359,8 @@ if (scored.length === 0) {
 
 // ランキング母集団（スコア順）。同じ場所の言い換えを除いて6件に満たなければ次点のお題にする
 type Ranked = { spot: Spot; isPeak: boolean };
+// 直近に作ったランキングの母集団（上位20件）。事前チェックで予備候補も確認するために出力する
+let lastPool: Ranked[] = [];
 function buildRanking(c: Candidate): Ranked[] {
   let ordered: Ranked[];
   if (c.kind === "facility" && isFacilityKey(c.key)) {
@@ -381,6 +385,7 @@ function buildRanking(c: Candidate): Ranked[] {
     .slice(0, TOP_N * 2);
   const withPhoto = pool.filter((x) => usablePhoto(x.spot));
   const chosen = new Set([...new Set([...withPhoto, ...pool])].slice(0, TOP_N));
+  lastPool = pool;
   return pool.filter((x) => chosen.has(x));
 }
 
@@ -445,6 +450,8 @@ const out = {
       photo: usablePhoto(spot),
     };
   }),
+  // 母集団（上位20件）。事前チェックでは除外が出たときの繰り上がり候補も確認する
+  pool: lastPool.map(({ spot }) => ({ slug: spot.slug, name: spot.name, city: cityOf(spot), type: SPOT_TYPE_LABELS[spot.spotType] ?? "" })),
   alternatives: scored.filter((_, i) => i !== pickIndex).slice(0, 5).map((x) => `${x.c.area.slug}/${x.c.key}`),
 };
 console.log(JSON.stringify(out, null, 2));
