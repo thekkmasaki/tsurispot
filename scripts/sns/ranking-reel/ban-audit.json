@@ -331,6 +331,16 @@
    ],
    "secondaryUrls": []
   },
+  "hizen-kariya-wan-w6": {
+   "name": "肥前町・仮屋湾",
+   "pref": "佐賀県",
+   "verdict": "official_partial",
+   "summary": "佐賀県の資料で、松浦海区漁業調整委員会指示により仮屋湾内の三島神社前周辺岸壁がまき餌釣り禁止区域に指定されていた（期間は平成28年2月〜平成31年2月）。",
+   "officialUrls": [
+    "https://www.pref.saga.lg.jp/kiji00345316/3_45316_1_2016216133840.pdf"
+   ],
+   "secondaryUrls": []
+  },
   "imabetsu-gyokou6": {
    "name": "今別漁港",
    "pref": "青森県",
@@ -361,6 +371,17 @@
    "officialUrls": [
     "https://www.pref.niigata.lg.jp/sec/murakami_seibi/12003300503571.html",
     "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html"
+   ],
+   "secondaryUrls": []
+  },
+  "iwaki-misaki-port-a11": {
+   "name": "いわき市三崎漁港",
+   "pref": "福島県",
+   "verdict": "official_partial",
+   "summary": "福島県の釣りマップでは、三崎地区に隣接する小名浜港で釣りができるのは2号埠頭先端部とサンマリーナ釣り桟橋の2か所だけで、港内には立入禁止・釣り禁止区域がある（福島県・国交省）。",
+   "officialUrls": [
+    "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+    "https://www.mlit.go.jp/kowan/content/001361026.pdf"
    ],
    "secondaryUrls": []
   },
@@ -409,6 +430,17 @@
    "secondaryUrls": [
     "https://ascii.jp/elem/000/004/213/4213533/"
    ]
+  },
+  "izumozaki-gyoko": {
+   "name": "出雲崎漁港",
+   "pref": "新潟県",
+   "verdict": "official_partial",
+   "summary": "新潟県は県営漁港の防波堤（離岸堤・沖防波堤含む）を立入禁止としており、出雲崎漁港では離岸堤の一部のみを釣り場として開放（4/1〜11/30、日の出〜日没、出雲崎町が管理）。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html",
+    "https://www.pref.niigata.lg.jp/sec/gyoko/1356904273863.html"
+   ],
+   "secondaryUrls": []
   },
   "izumozaki-kou-niigata": {
    "name": "出雲崎港",
@@ -465,6 +497,27 @@
     "https://www.excite.co.jp/news/article/FishingJapan_009718/",
     "https://tsurihack.com/1417"
    ]
+  },
+  "kaminokae-kou-w6": {
+   "name": "中土佐・上ノ加江港",
+   "pref": "高知県",
+   "verdict": "official_partial",
+   "summary": "高知県漁協上ノ加江支所の取り組み資料で、漁港前の湾を漁業体験専用の漁場として禁漁区にしたとされる（2003年〜）。一般の釣りへの適用範囲は検索結果からは不明。",
+   "officialUrls": [
+    "https://www.jfa.maff.go.jp/j/keikaku/attach/pdf/umigyo_kyougikai-5.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kamoike-kou": {
+   "name": "鴨池港",
+   "pref": "鹿児島県",
+   "verdict": "official_partial",
+   "summary": "鹿児島県は鹿児島港の岸壁を事故防止のため原則関係者以外立入禁止としている。鴨池港区で釣りができる鴨池海づり公園（市管理）も所定場所以外の釣り・立入、投げ釣り、まき餌（アミカゴ除く）を禁止。",
+   "officialUrls": [
+    "https://www.pref.kagoshima.jp/ak13/chiiki/kagoshima/kiban/documents/miokuri.html",
+    "https://www.city.kagoshima.lg.jp/seisanryutu/shisetsu/kanko/017.html"
+   ],
+   "secondaryUrls": []
   },
   "kanmon-kaikyo-moji-kou": {
    "name": "関門海峡・門司港",
@@ -1268,6 +1321,18 @@
    ],
    "secondaryUrls": []
   },
+  "tsuruga-mariyama-park-a10": {
+   "name": "敦賀港・鞠山海釣り公園",
+   "pref": "福井県",
+   "verdict": "lifted",
+   "summary": "鞠山海遊パーク周辺の護岸は護岸工事のため2023年7月から一般立入禁止だったが、敦賀港湾事務所の資料によると2025年4月1日に入場規制が解除された。",
+   "officialUrls": [
+    "https://www.tsuruga.pa.hrr.mlit.go.jp/file/topic/2024/88ee89f9.pdf"
+   ],
+   "secondaryUrls": [
+    "https://www.fuku-e.com/en/attractions/detail_1456.html"
+   ]
+  },
   "tsuruga-nago-kou": {
    "name": "敦賀・名子港",
    "pref": "福井県",
@@ -1288,6 +1353,19 @@
    ],
    "secondaryUrls": [
     "https://www.fuku-e.com/en/attractions/detail_1456.html"
+   ]
+  },
+  "tsutsuishi-kou-niigata": {
+   "name": "筒石港",
+   "pref": "新潟県",
+   "verdict": "official_full",
+   "summary": "新潟県糸魚川地域振興局が「港内での魚釣りは禁止です」と案内し、港湾内・漁港内は関係者以外立入禁止としている。筒石漁港は同振興局管理の県管理漁港4港の一つ。",
+   "officialUrls": [
+    "https://www.pref.niigata.lg.jp/sec/itoigawa_seibi/1356783520787.html",
+    "https://www.pref.niigata.lg.jp/site/itoigawa-seibi/tutuishi.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/809"
    ]
   },
   "urari-mae": {
