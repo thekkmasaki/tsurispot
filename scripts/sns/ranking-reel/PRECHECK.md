@@ -10,13 +10,19 @@
 
 ## 手順
 
-### 1. 予定を作る
-GitHub MCP の `actions_run_trigger` で `thekkmasaki/tsurispot` のワークフロー `sns-reel-precheck.yml` を
-`ref: master`, inputs `{ "mode": "plan", "days": "7" }` で起動する。
-完了まで5〜10分。`actions_list`（list_workflow_runs）で状態を見て待つ（ポーリングは数分おき。Monitor ツールが使えるなら使う）。
+### 1. 予定を作る（セッションから Redis を直接読む）
+Claude の GitHub 連携はワークフローを起動できない（2026-11-25 に 403 を確認）ため、予定作成も承認の保存もセッション内で行う。
+Upstash の REST トークンは、この環境のネットワークシークレットとして保存されていて、通信の経路で自動付与される（値は見えない）。
+
+```bash
+export UPSTASH_REDIS_REST_URL="https://<Upstash の REST ホスト>"   # 環境変数に保存済みなら不要
+export UPSTASH_REDIS_REST_TOKEN=dummy   # 実際のトークンは通信経路で差し替わる
+node scripts/sns/ranking-reel/plan-week.mjs plan --days 7
+```
+Redis に届かない（401/403・`no rule allows host`）ときは、何も変えずにその旨を報告して終える（トークンが未設定）。
 
 ### 2. 予定を読む
-完了した run のジョブログ（`get_job_logs`）から `===PLAN-JSON===` と `===PLAN-JSON-END===` の間の JSON を取り出す。
+`out/sns-precheck/plan.json`（標準出力の `===PLAN-JSON===` 〜 `===PLAN-JSON-END===` も同じ）を読む。
 各枠: `date, slot, pref, fish, prefName, fishName, spots[10], pool[最大20], alternatives`。spots / pool は `slug|名前|市区町村|種別`。
 
 ### 3. 確認する（枠ごと）
@@ -35,12 +41,13 @@ GitHub MCP の `actions_run_trigger` で `thekkmasaki/tsurispot` のワークフ
 同じ週に同じ魚・同じ県が続かないようにする（朝夜で同じ魚は避ける）。適当なものが無ければ `"skip": true`（その枠は投稿しない）。
 
 ### 5. 承認を保存
-次の形の JSON 配列を作り、`actions_run_trigger` で `sns-reel-precheck.yml` を inputs `{ "mode": "apply", "decisions": "<JSON文字列>" }` で起動する。
+次の形の JSON 配列を作り、1 と同じ環境変数で `PRECHECK_DECISIONS="$(cat decisions.json)" node scripts/sns/ranking-reel/plan-week.mjs apply` を実行する。
+（GitHub Actions の `sns-reel-precheck.yml` を mode=apply で起動しても同じ。Actions を起動できる人が手動で行う場合用）
 ```json
 [{"date":"2026-12-03","slot":"am","pref":"hyogo","fish":"kasago","excludeSpots":["slug-a"],"note":"slug-aは立入禁止の指摘(釣りサイト)"},
  {"date":"2026-12-03","slot":"pm","skip":true,"note":"代わりのお題なし"}]
 ```
-14枠すべて入れる（入っていない枠は投稿されない）。完了すると Discord に要約が届く。
+14枠すべて入れる（入っていない枠は投稿されない）。
 
 ### 6. 恒久的な修正
 - 新しく見つかった禁止の指摘は `scripts/sns/ranking-reel/ban-audit.json` に追記し、県×魚の問題は `TOPIC_SKIP`、データの誤りは該当スポット（`src/lib/data/`）を直す。
