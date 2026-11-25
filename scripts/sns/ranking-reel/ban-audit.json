@@ -26,6 +26,19 @@
     "https://tsurihack.com/1351/2"
    ]
   },
+  "akashi-okura-coast": {
+   "name": "明石大蔵海岸",
+   "pref": "兵庫県",
+   "verdict": "official_partial",
+   "summary": "国交省姫路河川国道事務所が2024年11月12日から、大蔵海水浴場・大蔵海岸公園の東西岸壁など東播海岸の海岸保全施設への立入を点検完了まで制限（砂浜は対象外）。現在も継続かは未確認。",
+   "officialUrls": [
+    "https://www-2.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001fz6-att/cekddo0000002p7t.pdf",
+    "https://www.kkr.mlit.go.jp/himeji/kisya/2024/v2r7vf0000001gws-att/cekddo0000001wxv.pdf"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/1351"
+   ]
+  },
   "akatsuki-futo-park": {
    "name": "暁ふ頭公園",
    "pref": "東京都",
@@ -231,6 +244,18 @@
    "secondaryUrls": [
     "https://tsurihack.com/1162/2",
     "https://www.minnacamera.com/spots/1072"
+   ]
+  },
+  "fureyu-ura-gogan": {
+   "name": "ふれーゆ裏護岸",
+   "pref": "神奈川県",
+   "verdict": "official_partial",
+   "summary": "横浜市港湾局の末広水際線プロムナード（ふれーゆ裏）の禁止行為に、振りかぶる投げ釣り（周囲に危険を及ぼす釣り方）が挙げられている。釣り自体は可で下投げは可とする釣りサイトあり。",
+   "officialUrls": [
+    "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/promenade/suehiro.html"
+   ],
+   "secondaryUrls": [
+    "https://tsurihack.com/2098"
    ]
   },
   "hachinohe-niida-river-a13": {
@@ -609,6 +634,18 @@
    ],
    "secondaryUrls": []
   },
+  "iwaki-shinmaiko6": {
+   "name": "いわき新舞子海岸",
+   "pref": "福島県",
+   "verdict": "secondary_partial",
+   "summary": "撮影情報サイト（みんカメ）に、5月1日〜8月31日は夏井川河口のコアジサシ営巣地が立入規制されるとの記載。新舞子浜の一部（河口部）で期間限定の立入制限。",
+   "officialUrls": [
+    "https://www.env.go.jp/nature/biodic/kaiyo-hozen/kaiiki/engan/11903.html"
+   ],
+   "secondaryUrls": [
+    "https://www.minnacamera.com/spots/539"
+   ]
+  },
   "iwaki-sunmarina": {
    "name": "いわきサンマリーナ",
    "pref": "福島県",
@@ -857,6 +894,17 @@
    "summary": "北九州市港湾空港局の質疑回答で、岸壁・防波堤等の港湾施設での釣りは日明海峡海釣り公園など一部施設を除き禁止とされ、門司11号岸壁での釣り禁止も明記。",
    "officialUrls": [
     "https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"
+   ],
+   "secondaryUrls": []
+  },
+  "kumihama-wan-kyoto": {
+   "name": "久美浜湾",
+   "pref": "京都府",
+   "verdict": "official_partial",
+   "summary": "京都府水産事務所が、久美浜湾の湾口で水産動植物を採ると罰則（6月以下の懲役等）があるとして採捕しないよう呼びかけ（湾口の範囲は府の啓発チラシ）。湾内全体の釣り禁止ではない。",
+   "officialUrls": [
+    "https://www.pref.kyoto.jp/suiji/isoasobirule.html",
+    "https://www.pref.kyoto.jp/suiji/documents/060720leaf.pdf"
    ],
    "secondaryUrls": []
   },
@@ -1284,6 +1332,17 @@
    ],
    "secondaryUrls": []
   },
+  "odaiba-seaside-park": {
+   "name": "お台場海浜公園",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "お台場海浜公園の人工砂浜（おだいばビーチ）は釣り禁止で、釣りができるのは自由の女神像裏の人工磯のみと観光・旅行サイトが紹介（管理は東京都港湾局）。スポット種別がbeachのため、掲載内容（砂浜のキス・カレイ等）と食い違う。",
+   "officialUrls": [],
+   "secondaryUrls": [
+    "https://www.gltjp.com/ja/article/item/20312/",
+    "https://tabi-mag.jp/tk0023/"
+   ]
+  },
   "oiso-fishing-port": {
    "name": "大磯港",
    "pref": "神奈川県",
@@ -1465,6 +1524,18 @@
     "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html"
    ],
    "secondaryUrls": []
+  },
+  "ooi-futo-chuo6": {
+   "name": "大井ふ頭中央海浜公園",
+   "pref": "東京都",
+   "verdict": "secondary_partial",
+   "summary": "大井ふ頭中央海浜公園（なぎさの森）では釣りは可能エリア（夕やけなぎさ等）に限られ、そのエリアでもルアー釣りは禁止と紹介されている（るるぶキッズ）。",
+   "officialUrls": [
+    "https://www.kouwan.metro.tokyo.lg.jp/kanko/14_kaijokouen_oi_202404.pdf"
+   ],
+   "secondaryUrls": [
+    "https://kids.rurubu.jp/article/68824/"
+   ]
   },
   "otaru-port": {
    "name": "小樽港",
