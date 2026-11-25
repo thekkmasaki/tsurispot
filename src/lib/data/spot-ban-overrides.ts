@@ -125,6 +125,11 @@ const SENDAI_SHIOGAMA_FULL = fullBanGroup(
     "ishinomaki-ko": "石巻港",
     "shiogama-higashi-bouhatei": "塩釜港東防波堤",
     "shiogama-kou": "塩竈港",
+    // 2026-11-25 個別調査で追加（同じ仙台塩釜港内）
+    "shiogama-kitahama-bouhatei-e8": "塩釜北浜防波堤",
+    "shiogama-kitahama-breakwater": "塩竈市北浜防波堤",
+    "shiogama-marinegate-pier-a13": "塩釜市マリンゲート桟橋",
+    "sendai-shinko": "仙台新港",
     "sendai-takasago-futou6": "仙台港高砂埠頭",
     "shiogama-marinegate-e8": "塩釜港マリンゲート",
     "sendai-nakano-wharf-a10": "仙台港中野埠頭",
@@ -297,6 +302,167 @@ const TOKUYAMA_DAM: SpotBanOverride = {
   },
   description:
     "岐阜県揖斐川町にある日本最大級の貯水量を持つ徳山ダムと、そのダム湖（徳山湖）。湖面は通常立入禁止と案内されており、湖面開放日でも魚釣りは禁止とされている。上流の才谷合流点・黒谷合流点より上の揖斐川や支流も、岐阜県の指示で一年中すべての魚の採捕が禁止されている。ダム湖周辺で釣りをすることはできないので、ダム見学や紅葉ドライブで訪れてほしい。",
+};
+
+// ─────────── 2026-11-25 SNSリール掲載候補の個別調査（3,149件を1件ずつ WebSearch）の反映 ───────────
+// 公式（県・市・国）の案内で、スポットそのものが釣り禁止・立入禁止とされたものだけを載せる。
+// 報道だけが根拠のもの（釧路港・那覇一文字・読谷漁港）や範囲が特定できないものは載せず、SNSリールからの除外にとどめる
+// （scripts/sns/ranking-reel/ban-audit.json）。この環境では公式ページの本文を直接取得できず、検索結果で確認した。
+const AUDIT_1125 = "2026-11-25";
+
+// 新潟県（上越地域振興局・糸魚川地域振興局）。港湾内・漁港内は関係者以外立入禁止で、港内での釣りは禁止
+const NIIGATA_JOETSU_URLS = [
+  "https://www.pref.niigata.lg.jp/sec/jouetsu_naoetsu/1356811949543.html",
+  "https://www.pref.niigata.lg.jp/sec/gyoko/kaihouturiba.html",
+];
+const NIIGATA_JOETSU_FULL = fullBanGroup(
+  { "naoetsu-port": "直江津港", "joetsu-port": "上越港（直江津港地区）" },
+  {
+    scope: "full",
+    reason:
+      "新潟県直江津港湾事務所は、テロ対策と事故防止のため、釣りを目的に直江津港の港内へ立ち入ることを禁止しています。港内で釣りができるのは、釣り場として開放されている第3東防波堤（有料の管理釣り場）だけです。",
+    sourceUrls: NIIGATA_JOETSU_URLS,
+    confirmedAt: AUDIT_1125,
+  },
+  "新潟県直江津港湾事務所は、釣り目的での港内への立入を禁止しており、岸壁や防波堤では釣りができません。直江津港で釣りをするなら、開放されている第3東防波堤の管理釣り場を利用してください。"
+);
+const NIIGATA_ITOIGAWA_URLS = [
+  "https://www.pref.niigata.lg.jp/sec/itoigawa_seibi/1356783520787.html",
+  "https://www.pref.niigata.lg.jp/sec/gyoko/turi-raihousya.html",
+];
+const NIIGATA_ITOIGAWA_FULL = fullBanGroup(
+  { "itoigawa-port": "糸魚川港", "nou-gyoko": "能生漁港", "tsutsuishi-kou-niigata": "筒石港" },
+  {
+    scope: "full",
+    reason:
+      "新潟県糸魚川地域振興局は、管内の港湾と漁港は関係者以外立入禁止で、港内での魚釣りも禁止していると案内しています。柵や看板の設置、パトロールで周知しています。",
+    sourceUrls: NIIGATA_ITOIGAWA_URLS,
+    confirmedAt: AUDIT_1125,
+  },
+  "新潟県糸魚川地域振興局は、管内の港湾・漁港を関係者以外立入禁止とし、港内での魚釣りを禁止しています。ここでは釣りができません。"
+);
+
+// 小名浜港（福島県小名浜港湾建設事務所）。釣りができるのは指定の2か所だけ
+const ONAHAMA_URLS = [
+  "https://www.pref.fukushima.lg.jp/sec/41400a/turieriamap.html",
+  "https://www.pref.fukushima.lg.jp/sec/41400a/port-rule.html",
+];
+const ONAHAMA_FULL = fullBanGroup(
+  {
+    "onahama-ko": "小名浜港",
+    "onahama-bouhatei-e8": "小名浜港防波堤",
+    "onahama-ichigou-futou6": "小名浜港1号埠頭",
+    "onahama-sango-wharf-a11": "小名浜港3号埠頭",
+    "onahama-yongo-wharf-a13": "小名浜港4号埠頭",
+    "onahama-east-breakwater-a12": "小名浜港東堤防",
+    "onahama-west-breakwater-a11": "小名浜港西堤防",
+    "iwaki-onahama-uoichiba-e8": "小名浜魚市場前",
+  },
+  {
+    scope: "full",
+    reason:
+      "福島県小名浜港湾建設事務所は、小名浜港で釣りができる場所を「2号埠頭先端部」と「いわきサンマリーナ釣り桟橋」の2か所に限っています。港内のそれ以外の場所には立入禁止区域・釣り禁止区域が設けられており、指定場所以外での釣りは禁止されています。",
+    sourceUrls: ONAHAMA_URLS,
+    confirmedAt: AUDIT_1125,
+  },
+  "福島県は、小名浜港で釣りができる場所を2号埠頭先端部といわきサンマリーナ釣り桟橋の2か所に限っており、ここでは釣りができません。小名浜港で釣りをするなら、この2か所を利用してください。"
+);
+
+// 青森港（青森県青森港管理所）。港湾での釣りは禁止。浜町緑地などで限定開放あり
+const AOMORI_PORT_URLS = [
+  "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-FAQ.html",
+  "https://www.pref.aomori.lg.jp/soshiki/kendo/ao-kokan/port-08-seigen2014-2.html",
+];
+const AOMORI_PORT_BAN: FishingBan = {
+  scope: "full",
+  reason:
+    "青森県青森港管理所は、高潮などの危険があるため港湾での釣りを禁止し、港湾施設は原則として関係者以外立入禁止としています。国際埠頭は保安上の立入制限区域です。釣りが限定的に開放されているのは浜町緑地などの指定場所だけです。",
+  sourceUrls: AOMORI_PORT_URLS,
+  confirmedAt: AUDIT_1125,
+};
+const AOMORI_FULL = fullBanGroup(
+  { "aomori-chuo-futo-e8": "青森港中央ふ頭", "aomori-okidate-futo": "青森港沖館ふ頭" },
+  AOMORI_PORT_BAN,
+  "青森県は港湾での釣りを禁止しており、ふ頭の岸壁は関係者以外立入禁止です。ここでは釣りができません。青森港で釣りをするなら、県が限定開放している浜町緑地などの指定場所を利用してください。"
+);
+const AOMORI_PARTIAL: SpotBanOverride = {
+  fishingBan: { ...AOMORI_PORT_BAN, scope: "partial" },
+  notice:
+    "※青森県は青森港の港湾での釣りを禁止しており、岸壁・防波堤は原則として関係者以外立入禁止です（青森港管理所）。釣りができるのは浜町緑地など限定開放されている指定場所だけです。",
+};
+
+// 閖上漁港（宮城県仙台地方振興事務所）。南導流堤・南防波堤は柵から先が立入禁止
+const YURIAGE_FULL = fullBanGroup(
+  { "yuriage-breakwater-a10": "閖上漁港防波堤", "natori-yuriage-south-breakwater-a13": "閖上港南堤防" },
+  {
+    scope: "full",
+    reason:
+      "宮城県は転落事故を防ぐため、閖上漁港の防波堤への立入を禁止しており、南導流堤と南防波堤は侵入防止柵から先が立入禁止区域です。",
+    sourceUrls: ["https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"],
+    confirmedAt: AUDIT_1125,
+  },
+  "宮城県は閖上漁港の防波堤への立入を禁止しており、南導流堤と南防波堤は柵から先が立入禁止です。防波堤の上では釣りができません。"
+);
+
+// 北九州港（北九州市港湾空港局）。海釣り公園など一部を除き、岸壁・防波堤での釣りは禁止
+const KITAKYUSHU_FULL = fullBanGroup(
+  { "kitakyushu-mojiko-breakwater": "北九州門司港堤防", "kanmon-kaikyo-moji-kou": "関門海峡・門司港" },
+  {
+    scope: "full",
+    reason:
+      "北九州市港湾空港局は、日明海峡海釣り公園などの一部の施設を除き、北九州港の岸壁・防波堤での釣りを禁止しています。門司港の岸壁も釣り禁止とされています。",
+    sourceUrls: ["https://ssl.city.kitakyushu.lg.jp/files/001154850.pdf"],
+    confirmedAt: AUDIT_1125,
+    alternativeSpotSlugs: ["kokura-hiagari-tsuri-kouen"],
+  },
+  "北九州市は、海釣り公園などを除いて北九州港の岸壁・防波堤での釣りを禁止しており、門司港の岸壁や堤防では釣りができません。関門海峡で釣りをするなら、市の日明海峡海釣り公園を利用してください。"
+);
+
+const AUDIT_1125_OVERRIDES: Record<string, SpotBanOverride> = {
+  ...NIIGATA_JOETSU_FULL,
+  ...NIIGATA_ITOIGAWA_FULL,
+  ...ONAHAMA_FULL,
+  ...AOMORI_FULL,
+  "aomori-port": AOMORI_PARTIAL,
+  "aomori-kita-breakwater": AOMORI_PARTIAL,
+  ...YURIAGE_FULL,
+  ...KITAKYUSHU_FULL,
+  "hiroshima-kannon-marina-gokan": {
+    fishingBan: {
+      scope: "full",
+      reason:
+        "広島県は、観音マリーナ海浜公園での魚釣りを禁止しています。近くで釣りができるのは、期間と時間を決めて開放されている観音東防波堤だけで、そこでもマリーナ側での釣り、投げ釣り、まき餌釣りは禁止です。",
+      sourceUrls: ["https://www.pref.hiroshima.lg.jp/soshiki/221/park-park03.html"],
+      confirmedAt: AUDIT_1125,
+    },
+    description:
+      "広島観音マリーナ護岸。広島県は観音マリーナ海浜公園での魚釣りを禁止しており、ここでは釣りができません。近くで釣りをするなら、期間・時間を限って開放されている観音東防波堤を利用してください（マリーナ側での釣り・投げ釣り・まき餌釣りは禁止）。",
+  },
+  "ibaraki-kou-hitachinaka-a10": {
+    fishingBan: {
+      scope: "full",
+      reason:
+        "茨城県は、茨城港の港区内の岸壁・防波堤などでの魚釣りを港湾施設管理条例で禁止しています。常陸那珂港区の国際港湾施設は、正当な目的のない立入も禁止されています。",
+      sourceUrls: ["https://www.pref.ibaraki.jp/doboku/ibako/okoku/index.html", "https://www.pref.ibaraki.jp/doboku/ibako/hoanntaisaku.html"],
+      confirmedAt: AUDIT_1125,
+    },
+    description:
+      "茨城港常陸那珂港区。茨城県は茨城港の港区内の岸壁・防波堤などでの魚釣りを条例で禁止しており、国際港湾施設は正当な目的のない立入も禁止です。ここでは釣りができません。",
+  },
+  "kashimanada-headland6": {
+    fishingBan: {
+      scope: "full",
+      reason:
+        "茨城県は、鹿島灘の海岸に設けたヘッドランド（人工の突堤）とその周辺は離岸流が発生しやすく危険なため、立ち入らないよう求め、立入禁止としています。",
+      sourceUrls: [
+        "https://www.pref.ibaraki.jp/doboku/kasen/kanri/kaiganpato.html",
+        "https://www.pref.ibaraki.jp/doboku/kasen/coast/documents/headland_pamphlet.pdf",
+      ],
+      confirmedAt: AUDIT_1125,
+    },
+    description:
+      "鹿島灘のヘッドランド。茨城県はヘッドランドとその周辺を、離岸流が発生しやすく危険なため立入禁止としており、ヘッドランドの上やそのすぐ周りでは釣りができません。鹿島灘で釣りをするなら、ヘッドランドから離れた砂浜で、現地の掲示に従ってください。",
+  },
 };
 
 export const spotBanOverrides: Record<string, SpotBanOverride> = {
@@ -509,4 +675,5 @@ export const spotBanOverrides: Record<string, SpotBanOverride> = {
       "明石海峡大橋の下、舞子側（神戸市垂水区）の護岸。潮通しの良い海峡に面し青物の回遊ルートとして知られてきたが、神戸市は神戸港の岸壁・護岸・防波堤での魚釣りを禁じており、現在ここで釣りはできません。神戸周辺で釣りをするなら、市が港湾施設で釣りを認めている神戸空港島の親水護岸や、垂水区の平磯海づり公園を利用してください。",
   },
   ...Object.fromEntries(TOTTORI_GYOKO_SLUGS.map((slug) => [slug, TOTTORI_GYOKO])),
+  ...AUDIT_1125_OVERRIDES,
 };
