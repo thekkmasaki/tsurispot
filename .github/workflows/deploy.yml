@@ -441,11 +441,13 @@ jobs:
       # /spots/:slug はエッジ7日キャッシュで上の限定purgeの対象外のため、データを直しても個別ページだけ
       # 最大1週間古いまま残り、県×魚の一覧やSNSリールと食い違っていた（千葉イナダTOP9の監査で発覚）。
       # 全件purge（同期冷生成→502の再発）は避け、このデプロイで変わったスポットだけ prefix purge する。
-      # .github/cf-purge-spots-base がこの push で新しく追加された場合は、そのコミットを起点にする（取りこぼしの一括回収用）。
+      # .github/cf-purge-spots-base がこの push で追加・変更された場合は、その1行目のコミットを起点にする（取りこぼしの一括回収用）。
+      # Cloudflare の purge API は回数制限（エラー1134）があるため、当たったら60秒待って再送する（2026-11-26 の一括回収で29バッチ失敗）。
       # 非致命（失敗してもデプロイは成功扱い。取りこぼしは TTL/SWR で解消）。
       - name: Cloudflare purge（データが変わったスポット詳細）
         if: success() && github.ref == 'refs/heads/master'
         continue-on-error: true
+        timeout-minutes: 45
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
@@ -453,8 +455,8 @@ jobs:
         run: |
           if [ -z "$CF_API_TOKEN" ] || [ -z "$CF_ZONE_ID" ]; then echo "CF 未設定のため skip"; exit 0; fi
           base="$BEFORE"
-          if [ -f .github/cf-purge-spots-base ] && ! git cat-file -e "${BEFORE}:.github/cf-purge-spots-base" 2>/dev/null; then
-            base=$(tr -d '[:space:]' < .github/cf-purge-spots-base)
+          if [ -f .github/cf-purge-spots-base ] && ! git diff --quiet "$BEFORE" HEAD -- .github/cf-purge-spots-base 2>/dev/null; then
+            base=$(head -1 .github/cf-purge-spots-base | tr -d '[:space:]')
             echo "一括回収: 起点 ${base}"
           fi
           if [ -z "$base" ] || ! git cat-file -e "${base}^{commit}" 2>/dev/null; then echo "起点コミットが無いため skip"; exit 0; fi
@@ -468,10 +470,16 @@ jobs:
           split -l 30 /tmp/changed-spots.txt /tmp/spots-batch-
           for f in /tmp/spots-batch-*; do
             body=$(awk 'BEGIN{printf "{\"prefixes\":["} {printf "%s\"tsurispot.com/spots/%s\"", (NR>1?",":""), $0} END{printf "]}"}' "$f")
-            resp=$(curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
-              -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data "$body")
-            if echo "$resp" | grep -q '"success":true'; then ok=$((ok+1)); else ng=$((ng+1)); echo "$resp" | head -c 300; echo; fi
-            sleep 1
+            done_one=0
+            for try in 1 2 3 4 5 6 7 8 9 10; do
+              resp=$(curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+                -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data "$body")
+              if echo "$resp" | grep -q '"success":true'; then done_one=1; break; fi
+              if echo "$resp" | grep -q '"code":1134'; then echo "回数制限 → 60秒待って再送（${try}回目）"; sleep 60; continue; fi
+              echo "$resp" | head -c 300; echo; break
+            done
+            if [ "$done_one" = 1 ]; then ok=$((ok+1)); else ng=$((ng+1)); fi
+            sleep 2
           done
           echo "purge: 成功 ${ok} バッチ / 失敗 ${ng} バッチ"
 
