@@ -8,7 +8,7 @@ import { generateSpotIntro } from "../utils/spot-content-generator";
 import { isSameSpotName } from "./spot-name-normalize";
 import { spotTipsAdd } from "./spot-tips-add";
 import { spotBanOverrides } from "./spot-ban-overrides";
-import { spotMergeMap } from "./spot-merge-map";
+import { spotMergeMap, spotMergeNoFishInherit } from "./spot-merge-map";
 import { spotFacilityOverrides } from "./spot-facility-overrides";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
@@ -168,7 +168,9 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
 // 施設の有無など食い違い得る事実は勝者側を維持し、ここでは上書きしない。
 function mergeSpotData(winner: FishingSpot, loser: FishingSpot): FishingSpot {
   const have = new Set(winner.catchableFish.map((cf) => cf.fish.slug));
-  const extraFish = loser.catchableFish.filter((cf) => !have.has(cf.fish.slug));
+  const extraFish = spotMergeNoFishInherit.has(loser.slug)
+    ? []
+    : loser.catchableFish.filter((cf) => !have.has(cf.fish.slug));
   const winnerHasRules = !!winner.rules || !!spotRulesBatch[winner.slug];
   const loserRules = loser.rules ?? spotRulesBatch[loser.slug];
   return {

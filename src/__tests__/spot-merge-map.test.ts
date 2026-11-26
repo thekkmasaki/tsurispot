@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { fishingSpots, dedupRedirects } from "@/lib/data/spots";
 import { allRawSpots } from "@/lib/data/spots-registry";
-import { spotMergeMap } from "@/lib/data/spot-merge-map";
+import { spotMergeMap, spotMergeNoFishInherit } from "@/lib/data/spot-merge-map";
 
 /**
  * 同一施設の重複ページ統合（spot-merge-map.ts / deduplicateSpots Pass5）の回帰テスト。
@@ -33,6 +33,7 @@ describe("spot-merge-map（同一施設の重複統合）", () => {
     const rawDefs = new Map<string, typeof allRawSpots>();
     for (const s of allRawSpots) rawDefs.set(s.slug, [...(rawDefs.get(s.slug) ?? []), s]);
     for (const [loser, winner] of entries) {
+      if (spotMergeNoFishInherit.has(loser)) continue; // 出典の無い魚種を意図的に引き継がない統合
       const defs = rawDefs.get(loser);
       expect(defs, `${loser} の生データが無い`).toBeDefined();
       const winnerFish = new Set(live.get(winner)!.catchableFish.map((cf) => cf.fish.slug));
@@ -41,6 +42,21 @@ describe("spot-merge-map（同一施設の重複統合）", () => {
         missing.some((m) => m.length === 0),
         `${winner} に ${loser} の魚種が無い: ${missing.map((m) => m.join(",")).join(" / ")}`,
       ).toBe(true);
+    }
+  });
+
+  it("魚種を引き継がない例外は統合表の敗者で、勝者の魚種は勝者自身のものだけ", () => {
+    for (const loser of spotMergeNoFishInherit) {
+      const winner = spotMergeMap[loser];
+      expect(winner, `${loser} が統合表に無い`).toBeDefined();
+      const own = new Set(allRawSpots.filter((s) => s.slug === winner).flatMap((s) => s.catchableFish.map((cf) => cf.fish.slug)));
+      for (const cf of live.get(winner)!.catchableFish) {
+        if (own.has(cf.fish.slug)) continue;
+        // ほかの敗者から引き継いだ魚は可。この敗者だけが持つ魚が混ざっていないこと
+        const fromThis = allRawSpots.filter((s) => s.slug === loser).some((s) => s.catchableFish.some((x) => x.fish.slug === cf.fish.slug));
+        const fromOther = entries.some(([l, w]) => w === winner && l !== loser && !spotMergeNoFishInherit.has(l) && allRawSpots.some((s) => s.slug === l && s.catchableFish.some((x) => x.fish.slug === cf.fish.slug)));
+        expect(fromThis && !fromOther, `${winner} に ${loser} の ${cf.fish.slug} が混ざっている`).toBe(false);
+      }
     }
   });
 
