@@ -60,9 +60,9 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><link rel="styles
 <header><div class="chip">${t.month.name}｜${esc(t.pref.name)}</div>
 ${fc
   ? `<h1><span class="s">${fc.lead}</span><span class="big">${esc(t.fish.name)}</span><span class="s2">${esc(t.pref.short)}のおすすめ <span class="top">TOP${n}</span></span></h1>
-<p class="sub">ツリスポ掲載${t.totalSpots}か所から評価順に厳選</p>`
+<p class="sub">ツリスポ掲載の施設から評価順に厳選</p>`
   : `<h1><span class="s">${t.fish.isPeakMonth ? "今が狙い時！" : "今月狙える"}</span><span class="big">${esc(t.fish.name)}</span><span class="s2">が釣れる${esc(t.pref.short)}の釣り場 <span class="top">TOP${n}</span></span></h1>
-<p class="sub">ツリスポ掲載${t.totalSpots}か所から「釣れる度」順に厳選</p>`}
+<p class="sub">ツリスポ掲載の釣り場から「釣れる度」順に厳選</p>`}
 <div class="mas" id="m1"></div><div class="bub">${bubble}</div></header>
 <main>${cards}</main>
 ${tipsHtml ? `<section class="tips"><div class="mas2" id="m2"></div><div><h2>${esc(t.fish.name)}${fc ? "を楽しむコツ" : "を釣るコツ"}</h2><ul>${tipsHtml}</ul></div></section>` : ""}
@@ -102,8 +102,8 @@ const hashtags = (fc
   : [tag(t.fish.name), tag(t.fish.name + "釣り"), ...areaTags, "#釣り", "#釣り場", "#釣り初心者",
     ...(isSea ? ["#海釣り", "#堤防釣り"] : ["#湖釣り", "#冬の釣り"]), "#ツリスポ"]).join(" ");
 const intro = fc
-  ? `ツリスポに掲載している${t.pref.short}の${t.fish.name}${t.totalSpots}か所から、評価の高い順に選びました。`
-  : `${t.fish.isPeakMonth ? `${t.month.name}は${t.fish.name}のシーズン中！` : `${t.month.name}も${t.fish.name}が狙えます。`}ツリスポに掲載している${t.pref.short}の${t.totalSpots}か所から、釣れる度の高い順に選びました。`;
+  ? `ツリスポに掲載している${t.pref.short}の${t.fish.name}から、評価の高い順に選びました。`
+  : `${t.fish.isPeakMonth ? `${t.month.name}は${t.fish.name}のシーズン中！` : `${t.month.name}も${t.fish.name}が狙えます。`}ツリスポに掲載している${t.pref.short}の釣り場から、釣れる度の高い順に選びました。`;
 const igCaption = `${title}
 
 ${intro}

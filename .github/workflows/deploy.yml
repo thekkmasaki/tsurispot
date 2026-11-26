@@ -437,6 +437,44 @@ jobs:
           fi
           echo "Cloudflare cache purged (targeted hub prefixes)."
 
+      # データが変わったスポット詳細だけを purge する（2026-11-26 追加）。
+      # /spots/:slug はエッジ7日キャッシュで上の限定purgeの対象外のため、データを直しても個別ページだけ
+      # 最大1週間古いまま残り、県×魚の一覧やSNSリールと食い違っていた（千葉イナダTOP9の監査で発覚）。
+      # 全件purge（同期冷生成→502の再発）は避け、このデプロイで変わったスポットだけ prefix purge する。
+      # .github/cf-purge-spots-base がこの push で新しく追加された場合は、そのコミットを起点にする（取りこぼしの一括回収用）。
+      # 非致命（失敗してもデプロイは成功扱い。取りこぼしは TTL/SWR で解消）。
+      - name: Cloudflare purge（データが変わったスポット詳細）
+        if: success() && github.ref == 'refs/heads/master'
+        continue-on-error: true
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ -z "$CF_API_TOKEN" ] || [ -z "$CF_ZONE_ID" ]; then echo "CF 未設定のため skip"; exit 0; fi
+          base="$BEFORE"
+          if [ -f .github/cf-purge-spots-base ] && ! git cat-file -e "${BEFORE}:.github/cf-purge-spots-base" 2>/dev/null; then
+            base=$(tr -d '[:space:]' < .github/cf-purge-spots-base)
+            echo "一括回収: 起点 ${base}"
+          fi
+          if [ -z "$base" ] || ! git cat-file -e "${base}^{commit}" 2>/dev/null; then echo "起点コミットが無いため skip"; exit 0; fi
+          node scripts/changed-spot-slugs.mjs "$base" HEAD > /tmp/changed-spots.txt
+          n=$(grep -c . /tmp/changed-spots.txt || true)
+          echo "データが変わったスポット: ${n}件"
+          [ "$n" -eq 0 ] && exit 0
+          if [ "$n" -gt 2500 ]; then echo "::warning::${n}件は多すぎるため自動purgeしません（cf-purge.yml を夜間に手動実行）"; exit 0; fi
+          ok=0; ng=0
+          # Cloudflare の prefix purge は1リクエスト30件まで
+          split -l 30 /tmp/changed-spots.txt /tmp/spots-batch-
+          for f in /tmp/spots-batch-*; do
+            body=$(awk 'BEGIN{printf "{\"prefixes\":["} {printf "%s\"tsurispot.com/spots/%s\"", (NR>1?",":""), $0} END{printf "]}"}' "$f")
+            resp=$(curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+              -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data "$body")
+            if echo "$resp" | grep -q '"success":true'; then ok=$((ok+1)); else ng=$((ng+1)); echo "$resp" | head -c 300; echo; fi
+            sleep 1
+          done
+          echo "purge: 成功 ${ok} バッチ / 失敗 ${ng} バッチ"
+
       # AI クローラー向けテキスト資産(.txt/.xml)をエッジキャッシュ対象に昇格する Cache Rule を冪等適用。
       # Cloudflare の既定キャッシュ拡張子に .txt/.xml は含まれず、オリジンが s-maxage を返しても
       # cf-cache-status: DYNAMIC のまま毎回オリジンに届く（llms-full.txt は約900KB）。
