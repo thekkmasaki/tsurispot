@@ -599,4 +599,16 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "hinase-port-okayama": "hinase-port", // 日生漁港 → 日生港：同じ備前市日生町の港（0.56km）
   "choshi-kou": "choshi-port", // 銚子港 → 銚子漁港：銚子港の本文自体が「銚子漁港」の説明（0.9km）。立入禁止注記は spot-facility-overrides.ts で勝者へ移した
   "yunotsu-gyokou-shimane": "yunotsu-port", // 温泉津漁港 → 温泉津港：同じ大田市温泉津町の港（0.94km）
+
+  // 2026-11-26 高知アオリイカのリール（42件）とサイト（44件）の差の調査。水産庁の漁港一覧で
+  // 宇佐漁港（土佐市）・安芸漁港（安芸市）はいずれも県内に1港のみ → 同じ港の重複ページ。
+  // 勝者は出典付き魚種のある側／住所・エリアが正しい側。敗者の魚は裏付けが無いため引き継がない（下の表）。
+  "tosa-usa-port": "kochi-tosa-usa-bulk", // 土佐市宇佐港 → 土佐市・宇佐漁港：同じ宇佐町宇佐の港（1.41km）。敗者はエリアが「桂浜」の誤り
+  "aki-gyokou-w6": "aki-aki-gyokou", // 安芸漁港 → 安芸市・安芸漁港：同じ安芸市の漁港（2.05km）。敗者はエリアが「高知市・浦戸湾」の誤り
 };
+
+// 敗者の釣れる魚を勝者へ引き継がない統合（敗者の魚種に出典が無く、勝者に無い魚を足すと裏付けの無い魚が増えるもの）。
+export const spotMergeNoFishInherit: ReadonlySet<string> = new Set([
+  "tosa-usa-port", // カマス・マダイ・イサキ・メバル・ブリ・カンパチ（出典なし）
+  "aki-gyokou-w6", // ハゼ（出典なし）
+]);

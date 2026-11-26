@@ -1088,5 +1088,23 @@
    "slug": "tokyo-23ku-mp"
   },
   "note": "善福寺川: 神奈川県 横浜・川崎 → 東京都 東京23区(市街地)(3km・座標と住所が一致)"
+ },
+ "murotsu-kou-kochi-w6": {
+  "region": {
+   "id": "rs77334",
+   "prefecture": "高知県",
+   "areaName": "室戸・東洋",
+   "slug": "kochi-muroto-bulk"
+  },
+  "note": "室戸市室津・室津港: 高知市・浦戸湾 → 室戸・東洋（2026-11-26 高知アオリイカ調査）"
+ },
+ "nahari-kou-w6": {
+  "region": {
+   "id": "rcs4071",
+   "prefecture": "高知県",
+   "areaName": "室戸・安芸",
+   "slug": "kochi-muroto-aki"
+  },
+  "note": "奈半利町・奈半利港: 高知市・浦戸湾 → 室戸・安芸（2026-11-26 高知アオリイカ調査）"
  }
 }
