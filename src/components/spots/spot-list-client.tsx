@@ -67,6 +67,9 @@ function parseTerrain(v: string | null): DepthTerrainKind | "" {
   return isDepthTerrainKind(v) ? v : "";
 }
 
+/** 「対象魚」ボタンを既定で並べる数（残りは「すべて表示」で開く） */
+const FISH_CHIP_LIMIT = 24;
+
 type FacilityKey = "hasParking" | "hasToilet" | "hasConvenienceStore" | "hasFishingShop" | "hasRentalRod";
 
 const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
@@ -134,6 +137,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
   const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
   const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
   const [selectedFishNames, setSelectedFishNames] = useState<string[]>([]);
+  const [showAllFish, setShowAllFish] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(() => {
     const p = Number.parseInt(searchParams.get("page") ?? "", 10);
@@ -288,15 +292,24 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
     return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([m]) => m);
   }, [spots]);
 
-  const topFishNames = useMemo(() => {
+  // 魚種の候補は全種（スポット数の多い順）。以前は上位20種で切っていたため、
+  // 323件あるタチウオ（22位）が「釣りたい魚」に出なかった（2026-11 UX監査）。
+  const allFishNames = useMemo(() => {
     const counts = new Map<string, number>();
     for (const spot of spots) {
       for (const name of spot.fishNames) {
         counts.set(name, (counts.get(name) || 0) + 1);
       }
     }
-    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).map(([n]) => n);
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([n]) => n);
   }, [spots]);
+  // ボタン一覧は既定で上位だけ並べ、選択中の魚は上位外でも必ず見せる
+  const fishChipNames = useMemo(() => {
+    if (showAllFish) return allFishNames;
+    const top = allFishNames.slice(0, FISH_CHIP_LIMIT);
+    const extra = selectedFishNames.filter((n) => !top.includes(n));
+    return [...top, ...extra];
+  }, [allFishNames, showAllFish, selectedFishNames]);
 
   const hasFilters = searchText || selectedRegion || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedTerrain || selectedFacilities.length > 0 || selectedFree || selectedMethods.length > 0 || selectedFishNames.length > 0;
   const activeFilterCount = [selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedTerrain, selectedFree].filter(Boolean).length + selectedFacilities.length + selectedMethods.length + selectedFishNames.length;
@@ -457,7 +470,7 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
             className="h-11 rounded-lg border bg-background px-2 text-sm font-normal text-foreground"
           >
             <option value="">すべて</option>
-            {topFishNames.map((name) => (
+            {allFishNames.map((name) => (
               <option key={name} value={name}>{name}</option>
             ))}
           </select>
@@ -723,11 +736,11 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
         )}
 
         {/* 対象魚フィルタ */}
-        {topFishNames.length > 0 && (
+        {allFishNames.length > 0 && (
           <div>
             <p className="mb-2 text-sm font-medium text-muted-foreground">対象魚</p>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {topFishNames.map((fishName) => {
+              {fishChipNames.map((fishName) => {
                 const active = selectedFishNames.includes(fishName);
                 return (
                   <Button
@@ -746,6 +759,17 @@ export function SpotListClient({ initialSpots, totalCount }: { initialSpots: Lis
                   </Button>
                 );
               })}
+              {allFishNames.length > FISH_CHIP_LIMIT && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  aria-expanded={showAllFish}
+                  onClick={() => setShowAllFish((v) => !v)}
+                  className="min-h-[40px] text-xs text-primary sm:text-sm"
+                >
+                  {showAllFish ? "主な魚だけ表示" : `すべて表示（${allFishNames.length}種）`}
+                </Button>
+              )}
             </div>
           </div>
         )}

@@ -6,6 +6,8 @@ import { MapPin, Search, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { SpotCard } from "@/components/spots/spot-card";
 import type { ListSpot } from "@/types";
+import { normalizeForSearch } from "@/lib/search/normalize";
+import { fishNameMatches } from "@/lib/search/fish-terms";
 
 interface RegionInfo {
   id: string;
@@ -45,6 +47,8 @@ export function SpotSearchFilter({
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const normalizedQuery = query.trim().toLowerCase();
+  // 魚名は正式名なら完全一致（「アジ」でシマアジを拾わない）・別名（チヌ等）にも対応
+  const fishQuery = normalizeForSearch(query.trim());
 
   const filteredRegionGroups = useMemo(() => {
     if (!normalizedQuery) return regionGroups;
@@ -55,28 +59,24 @@ export function SpotSearchFilter({
         const filtered = spots.filter(
           (s) =>
             s.name.toLowerCase().includes(normalizedQuery) ||
-            s.fishNames.some((n) =>
-              n.toLowerCase().includes(normalizedQuery)
-            ) ||
+            s.fishNames.some((n) => fishNameMatches(fishQuery, n)) ||
             (s.address && s.address.toLowerCase().includes(normalizedQuery))
         );
         if (filtered.length === 0) return null;
         return { region, spots: filtered };
       })
       .filter(Boolean) as RegionGroup[];
-  }, [regionGroups, normalizedQuery]);
+  }, [regionGroups, normalizedQuery, fishQuery]);
 
   const filteredUngrouped = useMemo(() => {
     if (!normalizedQuery) return ungroupedSpots;
     return ungroupedSpots.filter(
       (s) =>
         s.name.toLowerCase().includes(normalizedQuery) ||
-        s.fishNames.some((n) =>
-          n.toLowerCase().includes(normalizedQuery)
-        ) ||
+        s.fishNames.some((n) => fishNameMatches(fishQuery, n)) ||
         (s.address && s.address.toLowerCase().includes(normalizedQuery))
     );
-  }, [ungroupedSpots, normalizedQuery]);
+  }, [ungroupedSpots, normalizedQuery, fishQuery]);
 
   const filteredSpotCount = useMemo(() => {
     const groupCount = filteredRegionGroups.reduce(
