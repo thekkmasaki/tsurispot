@@ -5,6 +5,7 @@ import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
 import { getTideInfoForDate } from "@/lib/tide/tide-info";
 import { fetchSpotForecast } from "@/lib/weather/open-meteo";
 import { calcFishingIndex, weatherLabel } from "@/lib/weather/fishing-index";
+import { isSpotClosedOn } from "@/lib/spot-closed-days";
 import {
   type ToolDef,
   ToolError,
@@ -112,14 +113,21 @@ export async function getFishingForecast(args: Record<string, unknown>) {
 
   const tideCode = getTideDisplayMode(spot) === "full" ? (getTideStationForSpot(spot)?.code ?? null) : null;
   const index = calcFishingIndex(getTideInfoForDate(tideCode, day.date), day);
-  const week = forecast.days.map((d) => ({
-    date: d.date,
-    score: calcFishingIndex(getTideInfoForDate(tideCode, d.date), d).score,
-  }));
+  // 休園日（定休・季節休業）は指数とおすすめ時間を出さない（サイトの「今日の釣行指数」と同じ扱い）
+  const closed = isSpotClosedOn(spot, date);
+  const closedNote = spot.managementInfo?.closedDays;
+  const week = forecast.days.map((d) =>
+    isSpotClosedOn(spot, d.date)
+      ? { date: d.date, score: null, closed: true as const }
+      : { date: d.date, score: calcFishingIndex(getTideInfoForDate(tideCode, d.date), d).score },
+  );
 
   return {
     spot: spot.name,
     date,
+    ...(closed
+      ? { closed: { reason: `${date} はこの施設の休園日です`, closedDays: closedNote } }
+      : {}),
     weather: {
       summary: weatherLabel(day.weatherCode),
       tempMaxC: round1(day.tempMax),
@@ -136,14 +144,16 @@ export async function getFishingForecast(args: Record<string, unknown>) {
       lowTides: index.tide.lowTides,
       note: tideCode ? undefined : "このスポットは満干時刻を表示しない種類（湖・池・河川など）のため潮回りのみ",
     },
-    fishingIndex: {
-      score: index.score,
-      label: index.label,
-      breakdown: index.breakdown.map((b) => ({ item: b.label, points: `${b.value}/${b.max}`, reason: b.reason })),
-      bestTime: index.best
-        ? { from: `${index.best.startHour}:00`, to: `${index.best.endHour}:00`, reason: index.best.detail }
-        : undefined,
-    },
+    fishingIndex: closed
+      ? undefined
+      : {
+          score: index.score,
+          label: index.label,
+          breakdown: index.breakdown.map((b) => ({ item: b.label, points: `${b.value}/${b.max}`, reason: b.reason })),
+          bestTime: index.best
+            ? { from: `${index.best.startHour}:00`, to: `${index.best.endHour}:00`, reason: index.best.detail }
+            : undefined,
+        },
     weekOutlook: week,
     source: "天気: Open-Meteo（予報）／潮: 気象庁 潮位表（推算値）／釣行指数: ツリスポ独自（潮35・マヅメ25・風20・天気15・水温5点）",
     url: siteUrl(`/spots/${spot.slug}`),
