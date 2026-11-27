@@ -95,6 +95,18 @@ const featuredArticles = [
     iconColor: "text-amber-600",
     bgColor: "bg-amber-50/50 border-amber-200",
   },
+  {
+    href: "/gear/compare/shore-jigging-rod",
+    title: "ショアジギングロッド比較表",
+    subtitle: "ジグの重さと予算で絞り込み",
+    description:
+      "入門向けショアジギングロッドを、メーカー公式スペック（全長・ルアー重量・PE号数・自重・価格）の横並び表で比較。",
+    icon: Ruler,
+    badge: "比較表",
+    badgeColor: "bg-sky-100 text-sky-700",
+    iconColor: "text-sky-600",
+    bgColor: "bg-sky-50/50 border-sky-200",
+  },
 ];
 
 export default function GearPage() {

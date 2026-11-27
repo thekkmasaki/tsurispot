@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { GEAR_COMPARE_CATEGORIES } from "@/lib/data/gear-compare/categories";
 import { unstable_cache } from "next/cache";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
@@ -281,6 +282,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/gear/sabiki`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/gear/rod-beginner`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/gear/tackle-box`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
+    // 機種データが入ったカテゴリだけ（空のカテゴリは noindex のため載せない）
+    ...GEAR_COMPARE_CATEGORIES.filter((c) => c.models.length > 0).map((c) => ({
+      url: `${baseUrl}/gear/compare/${c.slug}`,
+      lastModified: contentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    })),
     // 釣り方別
     { url: `${baseUrl}/methods`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/methods/sabiki`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
