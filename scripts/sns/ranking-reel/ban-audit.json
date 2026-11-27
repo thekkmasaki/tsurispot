@@ -2818,8 +2818,13 @@
   "nishiura-gyoko-teibo-fukuoka": {
    "name": "西浦漁港堤防",
    "pref": "福岡県",
-   "verdict": "comment_unverified",
-   "summary": "2026-11-27 リールに「今や釣りができなくなっているとか」とコメント。検索（福岡市・福岡県の資料、釣りサイト）では禁止の告示・報道は見つからず。福岡市漁協西浦支所等で確認できるまでリールから除外。"
+   "verdict": "secondary_partial",
+   "summary": "2026年8月ごろから防波堤（波止）と荷捌き所が工事に伴い関係者以外立入禁止（地元釣具店 maru_koumaru のInstagram告知「福岡市との協議の結果」、fishhook-line.com 2026-08-19、fukuoka-leapup.jp 2026-10追記で南堤防にフェンス）。福岡市の公式発表は未確認。2026-11-27 リールのコメントで指摘。",
+   "sources": [
+    "https://fishhook-line.com/2026/08/19/",
+    "https://fukuoka-leapup.jp/city/202507.59018",
+    "https://fishcast.jp/restrictions/fukuoka"
+   ]
   }
  }
 }
