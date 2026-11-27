@@ -15,6 +15,8 @@ import { splitFishNames } from "@/lib/spot-catch-summary";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { LineChoukaCta } from "@/components/line/line-chouka-cta";
+import { ChoukaGearRecommend } from "@/components/affiliate/chouka-gear-recommend";
+import { getLatestWeeklyCatches } from "@/lib/data/weekly-report-latest";
 import { safeJsonLd } from "@/lib/safe-json-ld";
 
 // エリアごとに「常に最新週の釣果」を出すページ。週報記事は毎週別URLで増えるため、
@@ -59,7 +61,9 @@ async function load(areaSlug: string) {
       fishNames: [...new Set(rows.flatMap((r) => splitFishNames(r.fish)))].slice(0, 4),
     }))
     .sort((a, b) => b.latest.localeCompare(a.latest) || a.name.localeCompare(b.name, "ja"));
-  return { area, posts, latest, recentSpots };
+  // 道具提案枠用: このエリアの最新週報（14日以内）の釣果行
+  const catchRows = (await getLatestWeeklyCatches()).filter((r) => r.areaSlug === area.slug);
+  return { area, posts, latest, recentSpots, catchRows };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -85,7 +89,8 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
   const { area: areaSlug } = await params;
   const data = await load(areaSlug);
   if (!data) notFound();
-  const { area, posts, latest, recentSpots } = data;
+  const { area, posts, latest, recentSpots, catchRows } = data;
+  const catchFishNames = [...new Set(catchRows.flatMap((r) => splitFishNames(r.fish)))];
   const digest = latest ? extractWeeklyDigest(latest.content) : { intro: "", picks: "", table: "" };
   const past = posts.slice(1, PAST_LIMIT + 1);
 
@@ -185,6 +190,10 @@ export default async function WeeklyAreaHubPage({ params }: Props) {
             ))}
           </ul>
         </section>
+      )}
+
+      {catchRows.length > 0 && (
+        <ChoukaGearRecommend subject={area.label} rows={catchRows} fishNames={catchFishNames} className="mt-8" />
       )}
 
       <LineChoukaCta className="mt-8" />
