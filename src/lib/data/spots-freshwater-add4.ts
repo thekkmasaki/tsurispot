@@ -152,7 +152,7 @@ export const freshwaterSpotsAdd4: FishingSpot[] = [
     latitude: 35.2922, longitude: 135.5903, address: "京都府南丹市美山町北",
     accessInfo: "京都縦貫自動車道園部ICから約30分。",
     region: lr("r5206"), spotType: "river", difficulty: "intermediate",
-    isFree: false, feeDetail: "遊漁券 大人2,500円（日券）",
+    isFree: false, feeDetail: "美山漁協の遊漁券（2026年）: アユ日券4,000円・アマゴ日券3,000円（現場料金は割増）",
     hasParking: true, parkingDetail: "かやぶきの里駐車場あり（有料500円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [],
@@ -166,7 +166,7 @@ export const freshwaterSpotsAdd4: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:15", winterSunrise: "06:55", winterSunset: "16:50", tip: "美山のかやぶきの里と合わせて観光釣行がおすすめ。民宿の食事も美味。" },
-    safetyLevel: "caution", safetyNotes: ["遊漁券必要（由良川漁協）", "増水時は危険"],
+    safetyLevel: "caution", safetyNotes: ["遊漁券必要（美山漁協）", "増水時は危険"],
   },
   {
     id: "fw-545", name: "大野川上流（竹田市）", slug: "oita-onogawa-taketa-stream",

@@ -7,6 +7,7 @@ import {
   type PrefectureFishingRule,
 } from "@/lib/data/fishing-rules-data";
 import { getPrefectureRestrictedSpots } from "@/lib/data/prefecture-restricted-spots";
+import { getSpotInlandFishery } from "@/lib/data/inland-fishery";
 import { type ToolDef, ToolInputError, RULES_NOTICE, str, findSpot, siteUrl } from "./shared";
 
 const FRESHWATER_TYPES = new Set<FishingSpot["spotType"]>(["river", "lake", "pond"]);
@@ -53,6 +54,33 @@ function prefRuleSummary(rule: PrefectureFishingRule, scope: "sea" | "inland" | 
 
 const COMMON = [COMMON_RULES.fishingRights, COMMON_RULES.sizeLimit, COMMON_RULES.penalty];
 
+/** 河川・湖の管轄漁協（一次情報で確認したものだけ）。管理釣り場・海は対象外 */
+function inlandFisherySummary(spot: FishingSpot) {
+  if ((spot.spotType !== "river" && spot.spotType !== "lake") || spot.isManagedPond) return undefined;
+  const f = getSpotInlandFishery(spot.slug);
+  if (!f) {
+    return { status: "unconfirmed", note: "管轄の漁協はツリスポで未確認です。川・湖の多くは遊漁券が必要なので、現地の看板か県の漁業権の案内で確認してください" };
+  }
+  if (f.kind === "outside") {
+    return { status: "outside_fishery_right", detail: f.link.reason.text, source: f.link.reason.source };
+  }
+  const c = f.coop;
+  return {
+    status: "confirmed",
+    licenseRequired: true,
+    coop: c.name,
+    officialUrl: c.officialUrl,
+    jurisdiction: c.jurisdiction.text,
+    seasonYear: c.seasonYear,
+    fees: c.fees.map((x) => ({ label: x.label, price: x.price, note: x.note })),
+    openSeasons: c.seasons.map((x) => ({ fish: x.fish, period: x.period })),
+    rules: c.rules.map((x) => x.text),
+    note: f.link.note,
+    verifiedAt: c.verifiedAt,
+    caution: "料金・解禁日は毎年変わります。釣行前に漁協の最新情報を確認してください",
+  };
+}
+
 export function checkFishingRules(args: Record<string, unknown>) {
   const slug = str(args.slug, 200);
   if (slug) {
@@ -88,6 +116,7 @@ export function checkFishingRules(args: Record<string, unknown>) {
             other: r.otherRules?.slice(0, 5),
           }
         : undefined,
+      inlandFishery: inlandFisherySummary(spot),
       prefectureRules: rule ? prefRuleSummary(rule, freshwater ? "inland" : "sea") : undefined,
       commonRules: freshwater ? [...COMMON, COMMON_RULES.yugyoken, COMMON_RULES.closedSeason] : COMMON,
       url: siteUrl(`/spots/${spot.slug}`),
