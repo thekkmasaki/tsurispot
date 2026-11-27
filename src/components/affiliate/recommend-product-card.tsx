@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import { BookOpen, ChevronRight, Fish, Package, Shirt, Shrimp, Star } from "lucide-react";
 import type { AffiliateProduct } from "@/lib/data/affiliate-products";
 import { getRakutenUrl, trackAffiliateClick, type PageType } from "@/lib/affiliate-config";
@@ -44,6 +45,13 @@ export function RecommendProductCard({
   const primaryPlatform = primaryIsRakuten ? "rakuten" : "amazon";
   const visual = CATEGORY_VISUAL[product.category];
   const Icon = visual.icon;
+  // 画像の読み込みに失敗したら（リンク切れ・ブロック等）アイコン帯に戻す
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = Boolean(product.image) && !imageFailed;
+  // ハイドレーション前に読み込みが失敗していると onError が発火しないため、マウント時にも確認する
+  const checkImage = useCallback((img: HTMLImageElement | null) => {
+    if (img && img.complete && img.naturalWidth === 0) setImageFailed(true);
+  }, []);
 
   const track = (platform: "amazon" | "rakuten") =>
     trackAffiliateClick({
@@ -64,16 +72,18 @@ export function RecommendProductCard({
         tabIndex={-1}
         aria-hidden="true"
       >
-        {product.image ? (
+        {showImage ? (
           // PC の3列でも大きくなりすぎないよう高さを固定（商品写真は白背景が多いので contain で収める）
           <div className="flex h-36 items-center justify-center bg-white p-3 sm:h-44">
 
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              ref={checkImage}
               src={product.image}
-              alt=""
+              alt={product.name}
               loading="lazy"
               decoding="async"
+              onError={() => setImageFailed(true)}
               className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </div>
