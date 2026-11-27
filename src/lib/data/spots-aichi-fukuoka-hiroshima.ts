@@ -536,7 +536,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   },
   {
     id: "s1038", name: "西浦漁港堤防", slug: "nishiura-gyoko-teibo-fukuoka",
-    description: "メバル・カサゴの根魚ポイントとして定評があり、投げ釣りではキスやカレイも狙える。福岡市西区の西浦漁港は博多湾と玄界灘の境界に位置する好漁場。サビキ釣りでのアジも好調で、糸島ドライブと合わせて楽しめる。",
+    description: "※2026年8月ごろから、西浦漁港の防波堤（波止）と荷捌き所は工事に伴い関係者以外立入禁止になっているとの情報があります（地元釣具店の告知・釣りブログ。福岡市の公式発表は未確認）。フェンスの先には入らず、現地の掲示に従ってください。メバル・カサゴの根魚ポイントとして定評があり、投げ釣りではキスやカレイも狙える。福岡市西区の西浦漁港は博多湾と玄界灘の境界に位置する好漁場。サビキ釣りでのアジも好調で、糸島ドライブと合わせて楽しめる。",
     latitude: 33.6290, longitude: 130.2420,
     address: "〒819-0202 福岡県福岡市西区西浦1158",
     accessInfo: "福岡市営地下鉄姪浜駅から車で約25分。福岡前原道路今宿ICから約15分。",
@@ -557,7 +557,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [],
     tideAdvice: tideRock, mazumeInfo: mazumeFukuoka,
     gearGuides: [gearRock, gearNage],
-    safetyLevel: "caution", safetyNotes: ["テトラ周りは足場注意", "夜釣り時はヘッドライト必携"],
+    safetyLevel: "caution", safetyNotes: ["防波堤と荷捌き所は2026年8月ごろから関係者以外立入禁止との情報あり（現地の掲示に従う）", "テトラ周りは足場注意", "夜釣り時はヘッドライト必携"],
     youtubeLinks: [{ label: "西浦漁港 メバリング", searchQuery: "西浦漁港 メバリング 福岡 根魚", description: "西浦漁港でのメバリング動画" }],
   },
   {
