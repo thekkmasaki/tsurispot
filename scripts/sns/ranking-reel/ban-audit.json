@@ -2814,6 +2814,12 @@
     "https://www.pref.miyagi.jp/soshiki/sdsgsin-sg/suyuriage.html"
    ],
    "secondaryUrls": []
+  },
+  "nishiura-gyoko-teibo-fukuoka": {
+   "name": "西浦漁港堤防",
+   "pref": "福岡県",
+   "verdict": "comment_unverified",
+   "summary": "2026-11-27 リールに「今や釣りができなくなっているとか」とコメント。検索（福岡市・福岡県の資料、釣りサイト）では禁止の告示・報道は見つからず。福岡市漁協西浦支所等で確認できるまでリールから除外。"
   }
  }
 }

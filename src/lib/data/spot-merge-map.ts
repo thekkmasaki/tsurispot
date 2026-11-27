@@ -356,7 +356,7 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   "umeura-gyokou-echizen-a9": "echizen-umeura-gyokou", // 梅浦漁港 → 越前海岸 梅浦漁港：同一市区町村の同名施設（2.959km離れて登録）
   "kanezaki-gyokou-w6": "kanezaki-gyokou", // 宗像・鐘崎漁港 → 鐘崎漁港：同一市区町村の同名施設（4.954km離れて登録）
   "munakata-kanezaki-port": "kanezaki-gyokou", // 宗像・鐘崎港 → 鐘崎漁港：同一市区町村の同名施設（4.954km離れて登録）
-  "nishiura-gyokou-fukuoka": "nishiura-gyokou-itoshima-w6", // 西浦漁港 → 糸島・西浦漁港：同一市区町村の同名施設（5.402km離れて登録）
+  "nishiura-gyokou-fukuoka": "nishiura-gyoko-teibo-fukuoka", // 西浦漁港 → 西浦漁港堤防：西浦漁港は福岡市西区西浦の1港のみ。「糸島市志摩西浦」は存在しない住所（2026-11-27 リールのコメントで判明）
   "minoshima-gyokou-fukuoka-a10": "minoshima-gyokou-w6", // 蓑島漁港 → 行橋・蓑島漁港：同一市区町村の同名施設（2.224km離れて登録）
   "nokita-gyokou-a10": "nogi-gyokou-itoshima-w6", // 野北漁港 → 糸島野北漁港：同一市区町村の同名施設（5.087km離れて登録）
   "soma-isobe-port-a13": "soma-isobe-gyokou-e8", // 相馬市磯部漁港 → 相馬磯部漁港：同一市区町村の同名施設（2.545km離れて登録）
@@ -605,10 +605,15 @@ export const spotMergeMap: Readonly<Record<string, string>> = {
   // 勝者は出典付き魚種のある側／住所・エリアが正しい側。敗者の魚は裏付けが無いため引き継がない（下の表）。
   "tosa-usa-port": "kochi-tosa-usa-bulk", // 土佐市宇佐港 → 土佐市・宇佐漁港：同じ宇佐町宇佐の港（1.41km）。敗者はエリアが「桂浜」の誤り
   "aki-gyokou-w6": "aki-aki-gyokou", // 安芸漁港 → 安芸市・安芸漁港：同じ安芸市の漁港（2.05km）。敗者はエリアが「高知市・浦戸湾」の誤り
+  // 2026-11-27 福岡アオリイカのリールに「西浦は福岡市西区ですが？」とコメント。糸島・西浦漁港は
+  // 住所「糸島市西浦」・座標とも誤り（実在の西浦漁港は福岡市西区西浦の1港のみ）→ 正しい住所のページへ統合。
+  "nishiura-gyokou-itoshima-w6": "nishiura-gyoko-teibo-fukuoka", // 糸島・西浦漁港 → 西浦漁港堤防
 };
 
 // 敗者の釣れる魚を勝者へ引き継がない統合（敗者の魚種に出典が無く、勝者に無い魚を足すと裏付けの無い魚が増えるもの）。
 export const spotMergeNoFishInherit: ReadonlySet<string> = new Set([
   "tosa-usa-port", // カマス・マダイ・イサキ・メバル・ブリ・カンパチ（出典なし）
   "aki-gyokou-w6", // ハゼ（出典なし）
+  "nishiura-gyokou-fukuoka", // 位置が誤り・出典なし（クロダイ・ヒラメ）
+  "nishiura-gyokou-itoshima-w6", // 位置が誤り・出典なし（クロダイ・ヒラメ）
 ]);
